@@ -1,0 +1,24 @@
+{
+	"name": "phpbb/boardrules",
+	"type": "phpbb3-extension",
+	"description": "Board Rules Extension",
+	"homepage": "https://phpbb.com",
+	"version": "1.0.0-dev",
+	"time": "2013-09-12 00:00:00",
+	"licence": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Nathan Guse",
+			"username": "EXreaction",
+			"email": "nathaniel.guse@gmail.com",
+			"role": "Extensions Development Team Lead"
+		}
+	],
+	"require": {
+		"php": ">=5.3",
+		"phpbb": ">=3.1.0-dev"
+	},
+	"extra": {
+		"display-name": "Board Rules Extension"
+	}
+}
