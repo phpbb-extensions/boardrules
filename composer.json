@@ -1,10 +1,9 @@
 {
-	"name": "phpbb/boardrules",
-	"type": "phpbb3-extension",
-	"description": "Board Rules Extension",
+	"name": "phpbb/board-rules",
+	"type": "phpbb-extension",
+	"description": "An extension which allows you to create a set of rules for your phpBB forum",
 	"homepage": "https://phpbb.com",
-	"version": "1.0.0-dev",
-	"time": "2013-09-12 00:00:00",
+	"keywords": ["phpbb", "extension", "rules"],
 	"licence": "GPL-2.0",
 	"authors": [
 		{
@@ -12,13 +11,22 @@
 			"username": "EXreaction",
 			"email": "nathaniel.guse@gmail.com",
 			"role": "Extensions Development Team Lead"
+		},
+		{
+			"name": "Michael Cullum",
+			"homepage": "http://michaelcullum.com",
+			"email": "michael@phpbb.com",
+			"role": "Extensions Team Consultant"
 		}
 	],
 	"require": {
-		"php": ">=5.3",
-		"phpbb": ">=3.1.0-dev"
+		"php": ">=5.3.3",
+		"phpbb": "3.1.*@dev"
 	},
 	"extra": {
-		"display-name": "Board Rules Extension"
+		"display-name": "Board Rules",
+        	"branch-alias": {
+        		"dev-master": "1.0-dev"
+        	}
 	}
 }
