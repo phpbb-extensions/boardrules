@@ -7,9 +7,11 @@
 *
 */
 
+namespace phpbb\boardrules;
+
 /**
 * Extension class for custom enable/disable/purge actions
 */
-class phpbb_ext_phpbb_boardrules_ext extends phpbb_extension_base
+class ext extends \phpbb\extension\base
 {
 }
