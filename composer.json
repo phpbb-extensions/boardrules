@@ -1,8 +1,9 @@
 {
-	"name": "phpbb/board-rules",
+	"name": "phpbb/boardrules",
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to create a set of rules for your phpBB forum",
 	"homepage": "https://phpbb.com",
+	"version": "0.0.1-dev",
 	"keywords": ["phpbb", "extension", "rules"],
 	"licence": "GPL-2.0",
 	"authors": [
@@ -25,8 +26,8 @@
 	},
 	"extra": {
 		"display-name": "Board Rules",
-        	"branch-alias": {
-        		"dev-master": "1.0-dev"
-        	}
+		"branch-alias": {
+			"dev-master": "1.0-dev"
+		}
 	}
 }
