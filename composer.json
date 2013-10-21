@@ -18,6 +18,11 @@
 			"homepage": "http://michaelcullum.com",
 			"email": "michael@phpbb.com",
 			"role": "Extensions Team Consultant"
+		},
+		{
+			"name": "Matt Friedman",
+			"homepage": "http://mattfriedman.me",
+			"role": "Extensions Development Team"
 		}
 	],
 	"require": {
