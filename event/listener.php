@@ -31,6 +31,7 @@ class listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'	=> 'load_language_on_setup',
+			'core.page_header'	=> 'add_page_header_link',
 		);
 	}
 
@@ -43,6 +44,16 @@ class listener implements EventSubscriberInterface
 			'lang_set' => 'boardrules',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
+	}
+
+	// Create a URL to the board rules controller file for the header linklist
+	public function add_page_header_link($event)
+	{
+		global $template, $phpbb_container;
+
+		$template->assign_vars(array(
+			'U_BOARDRULES' => $phpbb_container->get('controller.helper')->url('board-rules'),
+		));
 	}
 
 }
