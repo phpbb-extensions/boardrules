@@ -27,6 +27,9 @@ class listener implements EventSubscriberInterface
 {
 	/**
 	* Assign functions defined in this class to event listeners in the core
+	*
+	* @return array
+	* @access public
 	*/
 	static public function getSubscribedEvents()
 	{
@@ -38,6 +41,10 @@ class listener implements EventSubscriberInterface
 
 	/**
 	* Load common board rules language files during user setup
+	*
+	* @param Event $event
+	* @return array event
+	* @access public
 	*/
 	public function load_language_on_setup($event)
 	{
@@ -51,6 +58,10 @@ class listener implements EventSubscriberInterface
 
 	/**
 	* Create a URL to the board rules controller file for the header linklist
+	*
+	* @param Event $event
+	* @return null
+	* @access public
 	*/
 	public function add_page_header_link($event)
 	{
