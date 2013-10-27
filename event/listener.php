@@ -43,7 +43,7 @@ class listener implements EventSubscriberInterface
 	* Load common board rules language files during user setup
 	*
 	* @param Event $event Event object
-	* @return Event $event Event object
+	* @return null
 	* @access public
 	*/
 	public function load_language_on_setup($event)
