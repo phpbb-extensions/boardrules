@@ -29,7 +29,7 @@ class listener implements EventSubscriberInterface
 	* Assign functions defined in this class to event listeners in the core
 	*
 	* @return array
-	* @access public
+	* @static
 	*/
 	static public function getSubscribedEvents()
 	{
@@ -42,7 +42,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Load common board rules language files during user setup
 	*
-	* @param Event $event Event object
+	* @param object $event The event object
 	* @return null
 	* @access public
 	*/
@@ -59,7 +59,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Create a URL to the board rules controller file for the header linklist
 	*
-	* @param Event $event Event object
+	* @param object $event The event object
 	* @return null
 	* @access public
 	*/
