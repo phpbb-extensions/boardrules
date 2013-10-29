@@ -30,6 +30,7 @@ class listener implements EventSubscriberInterface
 	*
 	* @return array
 	* @static
+	* @access public
 	*/
 	static public function getSubscribedEvents()
 	{
