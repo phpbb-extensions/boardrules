@@ -1,0 +1,11 @@
+.icon-boardrules {
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	padding: 1px 0 0 17px;
+	background-image: url("./images/icon_boardrules.gif");
+}
+
+.rtl .icon-boardrules {
+	background-position: 100% 50%;
+	padding: 1px 17px 0 0;
+}
