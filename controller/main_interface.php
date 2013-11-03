@@ -14,6 +14,13 @@ namespace phpbb\boardrules\controller;
 *
 * This describes all of the methods we'll use for the front-end of this extension
 */
-class main_interface
+interface main_interface
 {
+	/**
+	* Display the rules page
+	*
+	* @return null
+	* @access public
+	*/
+	public function display();
 }
