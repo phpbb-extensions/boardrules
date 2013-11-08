@@ -30,7 +30,7 @@ interface rule_interface
 	/**
 	* Add a rule
 	*
-	* @param string $language Language selection; default Board Default Language
+	* @param string $language Language selection; default: Board Default Language
 	* @param int $parent_id Category to display rules from; default: 0
 	* @param array $rule_data Rule data to add
 	* 								rule_anchor
