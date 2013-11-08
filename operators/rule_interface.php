@@ -7,10 +7,10 @@
 *
 */
 
-namespace phpbb\boardrules\model;
+namespace phpbb\boardrules\operators;
 
 /**
-* Interface for our rule model
+* Interface for our rule operator
 *
 * This describes all of the methods we'll have for working with a set of rules
 */
@@ -19,7 +19,7 @@ interface rule_interface
 	/**
 	* Get the rules
 	*
-	* @param string $language Language selection; default Board Default Language
+	* @param string $language Language selection; default: Board Default Language
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return array Array of rule_interface
 	* @access public

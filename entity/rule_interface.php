@@ -7,7 +7,7 @@
 *
 */
 
-namespace phpbb\boardrules\model\entity;
+namespace phpbb\boardrules\entity;
 
 /**
 * Interface for a single rule
@@ -53,7 +53,7 @@ interface rule_interface
 	public function insert($language = '', $left_id = 0, $right_id = 0);
 
 	/**
-	* Store the current settings to the database
+	* Save the current settings to the database
 	*
 	* This must be called before closing or any changes will not be saved!
 	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
@@ -170,7 +170,7 @@ interface rule_interface
 	public function get_left_id();
 
 	/**
-	* Get the left identifier (for the tree)
+	* Get the right identifier (for the tree)
 	*
 	* @return int left identifier
 	* @access public
