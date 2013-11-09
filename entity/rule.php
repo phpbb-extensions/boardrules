@@ -10,9 +10,7 @@
 namespace phpbb\boardrules\entity;
 
 /**
-* Interface for a single rule
-*
-* This describes all of the methods we'll have for a single rule
+* Entity for a single rule
 *
 * Schema:
 *	rule_id
