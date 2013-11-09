@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<table name="phpbb_boardrules">
+		<column>rule_id</column>
+		<column>rule_title</column>
+		<row>
+			<value>1</value>
+			<value>title_1</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>title_2</value>
+		</row>
+		<row>
+			<value>3</value>
+			<value>title_3</value>
+		</row>
+	</table>
+</dataset>
