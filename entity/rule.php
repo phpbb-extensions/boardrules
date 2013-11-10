@@ -39,7 +39,9 @@ class rule implements rule_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver $db
+	* @param string $rules_table
 	* @return \phpbb\boardrules\entity\rule
+	* @access public
 	*/
 	public function __construct(\phpbb\db\driver $db, $rules_table)
 	{
@@ -48,7 +50,12 @@ class rule implements rule_interface
 	}
 
 	/**
-	* {@inheritdoc}
+	* Load the data from the database for this rule
+	*
+	* @param int $id Rule identifier
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function load($id)
 	{
@@ -74,7 +81,10 @@ class rule implements rule_interface
 	}
 
 	/**
-	* {@inheritdoc}
+	* Get title
+	*
+	* @return string
+	* @access public
 	*/
 	public function get_title()
 	{
