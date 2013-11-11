@@ -32,7 +32,7 @@ class rule implements rule_interface
 	/**
 	* Get title
 	*
-	* @return string
+	* @return string Title
 	* @access public
 	*/
 	public function get_title()
