@@ -11,6 +11,11 @@ namespace phpbb\boardrules\tests\entity;
 
 class rule_entity_title_test extends rule_entity_base
 {
+	/**
+	* Test data for the test_title() function
+	*
+	* @return array Array of test data
+	*/
 	public function test_title_data()
 	{
 		return array(
@@ -21,8 +26,8 @@ class rule_entity_title_test extends rule_entity_base
 
 			// Maximum length
 			array(
-				'12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890',
-				'12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890',
+				str_repeat('a', 200),
+				str_repeat('a', 200),
 			),
 		);
 	}
@@ -47,6 +52,11 @@ class rule_entity_title_test extends rule_entity_base
 		$this->assertSame($title, $entity->get_title());
 	}
 
+	/**
+	* Test data for the test_title() function
+	*
+	* @return array Array of test data
+	*/
 	public function test_title_fails_data()
 	{
 		return array(
@@ -54,7 +64,7 @@ class rule_entity_title_test extends rule_entity_base
 
 			// One character more than maximum length
 			array(
-				'123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901',
+				str_repeat('a', 201),
 			),
 		);
 	}
