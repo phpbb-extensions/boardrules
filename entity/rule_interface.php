@@ -13,18 +13,6 @@ namespace phpbb\boardrules\entity;
 * Interface for a single rule
 *
 * This describes all of the methods we'll have for a single rule
-*
-* Schema:
-*	rule_id
-*	rule_language
-*	rule_left_id
-*	rule_right_id
-*	rule_anchor
-*	rule_title
-*	rule_message
-*	rule_message_bbcode_uid
-*	rule_message_bbcode_bitfield
-*	rule_message_bbcode_options
 */
 interface rule_interface
 {
