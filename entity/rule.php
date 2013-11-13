@@ -11,22 +11,25 @@ namespace phpbb\boardrules\entity;
 
 /**
 * Entity for a single rule
-*
-* Schema:
-*	rule_id
-*	rule_language
-*	rule_left_id
-*	rule_right_id
-*	rule_anchor
-*	rule_title
-*	rule_message
-*	rule_message_bbcode_uid
-*	rule_message_bbcode_bitfield
-*	rule_message_bbcode_options
 */
 class rule implements rule_interface
 {
-	/** @var array Data for this entity */
+	/**
+	* Data for this entity
+	*
+	* @var array
+	*	rule_id
+	*	rule_language
+	*	rule_left_id
+	*	rule_right_id
+	*	rule_anchor
+	*	rule_title
+	*	rule_message
+	*	rule_message_bbcode_uid
+	*	rule_message_bbcode_bitfield
+	*	rule_message_bbcode_options
+	* @access protected
+	*/
 	protected $data;
 
 	/**
