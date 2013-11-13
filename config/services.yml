@@ -2,7 +2,7 @@ services:
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
         arguments:
-            - @template
             - @controller.helper
+            - @template
         tags:
             - { name: event.listener }
