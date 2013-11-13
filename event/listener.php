@@ -16,6 +16,26 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class listener implements EventSubscriberInterface
 {
+	/* @var \phpbb\controller\helper */
+	protected $controller_helper;
+
+	/** @var \phpbb\template\template */
+	protected $template;
+
+	/**
+	* Constructor
+	* 
+	* @param \phpbb\controller\helper    $controller_helper  Controller helper object
+	* @param \phpbb\template\template    $template           Template object
+	* @return \phpbb\boardrules\event\listener
+	* @access public
+	*/
+	public function __construct(\phpbb\controller\helper $controller_helper, \phpbb\template\template $template)
+	{
+		$this->controller_helper = $controller_helper;
+		$this->template = $template;
+	}
+
 	/**
 	* Assign functions defined in this class to event listeners in the core
 	*
@@ -57,10 +77,8 @@ class listener implements EventSubscriberInterface
 	*/
 	public function add_page_header_link($event)
 	{
-		global $template, $phpbb_container;
-
-		$template->assign_vars(array(
-			'U_BOARDRULES' => $phpbb_container->get('controller.helper')->url('board-rules'),
+		$this->template->assign_vars(array(
+			'U_BOARDRULES' => $this->controller_helper->url('board-rules'),
 		));
 	}
 }
