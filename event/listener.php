@@ -27,7 +27,7 @@ class listener implements EventSubscriberInterface
 	* 
 	* @param \phpbb\controller\helper    $controller_helper  Controller helper object
 	* @param \phpbb\template\template    $template           Template object
-	* @return object class
+	* @return \phpbb\boardrules\event\listener
 	* @access public
 	*/
 	public function __construct(\phpbb\controller\helper $controller_helper, \phpbb\template\template $template)
