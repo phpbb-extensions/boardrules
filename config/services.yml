@@ -1,5 +1,8 @@
 services:
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
+        arguments:
+            - @template
+            - @service_container
         tags:
             - { name: event.listener }
