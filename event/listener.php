@@ -19,19 +19,19 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var ContainerBuilder */
-	protected $phpbb_container;
+	/* @var \phpbb\controller\helper */
+	protected $helper;
 
 	/**
 	* Constructor
 	* 
-	* @param ContainerBuilder $phpbb_container
-	* @param \phpbb\template\template $teamplate
+	* @param \phpbb\template\template    $template    Template object
+	* @param \phpbb\controller\helper    $helper      Controller helper object
 	*/
-	public function __construct(\phpbb\template\template $template, $phpbb_container)
+	public function __construct(\phpbb\template\template $template, \phpbb\controller\helper $helper)
 	{
 		$this->template = $template;
-		$this->phpbb_container = $phpbb_container;
+		$this->helper = $helper;
 	}
 
 	/**
@@ -76,7 +76,7 @@ class listener implements EventSubscriberInterface
 	public function add_page_header_link($event)
 	{
 		$this->template->assign_vars(array(
-			'U_BOARDRULES' => $this->phpbb_container->get('controller.helper')->url('board-rules'),
+			'U_BOARDRULES' => $this->helper->url('board-rules'),
 		));
 	}
 }

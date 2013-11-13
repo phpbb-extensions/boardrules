@@ -3,6 +3,6 @@ services:
         class: phpbb\boardrules\event\listener
         arguments:
             - @template
-            - @service_container
+            - @controller.helper
         tags:
             - { name: event.listener }
