@@ -9,12 +9,16 @@
 
 namespace phpbb\boardrules\tests\entity;
 
+/**
+* Tests related to titles on rule entity
+*/
 class rule_entity_title_test extends rule_entity_base
 {
 	/**
 	* Test data for the test_title() function
 	*
 	* @return array Array of test data
+	* @access public
 	*/
 	public function test_title_data()
 	{
@@ -36,6 +40,7 @@ class rule_entity_title_test extends rule_entity_base
 	* Test setting title
 	*
 	* @dataProvider test_title_data
+	* @access public
 	*/
 	public function test_title($title, $expected)
 	{
@@ -56,6 +61,7 @@ class rule_entity_title_test extends rule_entity_base
 	* Test data for the test_title() function
 	*
 	* @return array Array of test data
+	* @access public
 	*/
 	public function test_title_fails_data()
 	{
@@ -74,6 +80,7 @@ class rule_entity_title_test extends rule_entity_base
 	*
 	* @dataProvider test_title_fails_data
 	* @expectedException \phpbb\boardrules\exception\base
+	* @access public
 	*/
 	public function test_title_fails($title)
 	{
