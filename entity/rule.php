@@ -33,6 +33,43 @@ class rule implements rule_interface
 	protected $data;
 
 	/**
+	* Get id
+	*
+	* @return int Rule identifier
+	* @access public
+	*/
+	public function get_id()
+	{
+		return (isset($this->data['rule_id'])) ? (int) $this->data['rule_id'] : '';
+	}
+
+	/**
+	* Set id
+	*
+	* @param int $id
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function set_id($id)
+	{
+		// Enforce an integer
+		$id = (string) $id;
+
+		// The rule identifier can not be out of bounds
+		if (!$id)
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds('INVALID_ITEM');
+		}
+
+		// Set the idenfifier on our data array
+		$this->data['rule_id'] = $id;
+
+		// Return $this; so calls can be chained load()->set()->save()
+		return $this;
+	}
+
+	/**
 	* Get title
 	*
 	* @return string Title
