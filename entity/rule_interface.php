@@ -27,6 +27,20 @@ interface rule_interface
 	public function load($id);
 
 	/**
+	* Import data for this rule
+	*
+	* Used when the data is already loaded externally.
+	* Any existing data on this rule is over-written.
+	* All data is validated and an exception is thrown if any data is invalid.
+	*
+	* @param array $data Data array, typically from the database
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function import($data);
+
+	/**
 	* Insert the rule for the first time
 	*
 	* Will throw an exception if the rule was already inserted (call save() instead)
