@@ -40,7 +40,7 @@ class rule implements rule_interface
 	*/
 	public function get_id()
 	{
-		return (isset($this->data['rule_id'])) ? (int) $this->data['rule_id'] : '';
+		return (int) $this->data['rule_id'];
 	}
 
 	/**
