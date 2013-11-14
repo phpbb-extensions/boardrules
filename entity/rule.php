@@ -54,7 +54,7 @@ class rule implements rule_interface
 	public function set_id($id)
 	{
 		// Enforce an integer
-		$id = (string) $id;
+		$id = (int) $id;
 
 		// The rule identifier can not be out of bounds
 		if (!$id)
