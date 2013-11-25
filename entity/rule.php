@@ -103,6 +103,66 @@ class rule implements rule_interface
 	*/
 	public function insert($language = '', $left_id = 0, $right_id = 0)
 	{
+		$rule_data = array(
+			'rule_language'					=> $this->data['rule_language'],
+			'rule_left_id'					=> $left_id,
+			'rule_right_id'					=> $right_id,
+			'rule_anchor'					=> $this->data['rule_anchor'],
+			'rule_title'					=> $this->data['rule_title'],
+			'rule_message'					=> $this->data['rule_message'],
+			'rule_message_bbcode_uid'		=> $this->data['rule_message_bbcode_uid'],
+			'rule_message_bbcode_bitfield'	=> $this->data['rule_message_bbcode_bitfield'],
+			'rule_message_bbcode_options'	=> $this->data['rule_message_bbcode_options'],
+		);
+
+		$sql = 'UPDATE ' . $this->board_rules_table . '
+			SET ' . $db->sql_build_array('UPDATE', $rule_data) . "
+			WHERE rule_language = " . $language . "
+			 AND rule_id = " . $this->data['rule_id'];
+		$result = $db->sql_query($sql);
+
+		if (!$result)
+		{
+			$this->save();
+
+			// Rule no existed
+			throw new \phpbb\boardrules\exception\base('RULE_NO_EXISTED');
+		}
+		$db->sql_freeresult($result);
+	}
+
+	/**
+	* Save the current settings to the database
+	*
+	* This must be called before closing or any changes will not be saved!
+	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
+	*
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function save()
+	{
+		$rule_data = array(
+			'rule_language'					=> $this->data['rule_language'],
+			'rule_left_id'					=> $this->data['rule_left_id'],
+			'rule_right_id'					=> $this->data['rule_right_id'],
+			'rule_anchor'					=> $this->data['rule_anchor'],
+			'rule_title'					=> $this->data['rule_title'],
+			'rule_message'					=> $this->data['rule_message'],
+			'rule_message_bbcode_uid'		=> $this->data['rule_message_bbcode_uid'],
+			'rule_message_bbcode_bitfield'	=> $this->data['rule_message_bbcode_bitfield'],
+			'rule_message_bbcode_options'	=> $this->data['rule_message_bbcode_options'],
+		);
+
+		$sql = 'INSERT INTO ' . $this->board_rules_table . ' ' . $db->sql_build_array('INSERT', $rule_data);
+		$result = $db->sql_query($sql);
+
+		if (!$result)
+		{
+			// Rule existed
+			throw new \phpbb\boardrules\exception\base('RULE_EXISTED');
+		}
 	}
 
 	/**
