@@ -60,7 +60,7 @@ class rule implements rule_interface
 	{
 		$this->db = $db;
 		$this->user = $user;
-		$this->board_rules_table = $board_rules_table
+		$this->board_rules_table = $board_rules_table;
 	}
 
 	/**
