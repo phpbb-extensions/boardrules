@@ -33,6 +33,99 @@ class rule implements rule_interface
 	protected $data;
 
 	/**
+	* Database object
+	* @var \phpbb\db\driver\driver
+	*/
+	protected $db;
+
+	/**
+	* User object
+	* @var \phpbb\user
+	*/
+	protected $user;
+
+	/**
+	* Board rules table
+	* @string
+	*/
+	protected $board_rules_table;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\db\driver\driver	$db		Database object
+	* @param \phpbb\user			$user	User object
+	*/
+	public function __construct(\phpbb\db\driver\driver $db, \phpbb\user $user, $board_rules_table)
+	{
+		$this->db = $db;
+		$this->user = $user;
+		$this->board_rules_table = $board_rules_table
+	}
+
+	/**
+	* Load the data from the database for this rule
+	*
+	* @param int $id Rule identifier
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function load($id)
+	{
+		$sql = 'SELECT *
+			FROM ' . $this->board_rules_table . '
+			WHERE rule_id = ' . (int) $id;
+		$result = $this->db->sql_query($sql);
+		$data = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		if ($data === false)
+		{
+			// Rule not found
+			throw new \phpbb\boardrules\exception\out_of_bounds('NO_RULE');
+		}
+
+		return $this->data = $data;
+	}
+
+	/**
+	* Insert the rule for the first time
+	*
+	* Will throw an exception if the rule was already inserted (call save() instead)
+	*
+	* @param string $language The language
+	* @param int $left_id The left id for the tree
+	* @param int $right_id The right id for the tree
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function insert($language = '', $left_id = 0, $right_id = 0)
+	{
+	}
+
+	/**
+	* Delete this rule
+	*
+	* @return null
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function delete()
+	{
+		$sql = 'DELETE FROM ' . $this->board_rules_table . '
+			WHERE rule_id = ' . $this->data['rule_id'];
+		$this->db->sql_query($sql);
+
+		if (!$this->db->sql_affectedrows())
+		{
+			// Rule not found
+			throw new \phpbb\boardrules\exception\base('NO_RULE');
+		}
+	}
+
+	/**
 	* Get id
 	*
 	* @return int Rule identifier
