@@ -116,10 +116,10 @@ class rule implements rule_interface
 		);
 
 		$sql = 'UPDATE ' . $this->board_rules_table . '
-			SET ' . $db->sql_build_array('UPDATE', $rule_data) . "
+			SET ' . $this->db->sql_build_array('UPDATE', $rule_data) . "
 			WHERE rule_language = " . $language . "
 			 AND rule_id = " . $this->data['rule_id'];
-		$result = $db->sql_query($sql);
+		$result = $this->db->sql_query($sql);
 
 		if (!$result)
 		{
@@ -155,8 +155,8 @@ class rule implements rule_interface
 			'rule_message_bbcode_options'	=> $this->data['rule_message_bbcode_options'],
 		);
 
-		$sql = 'INSERT INTO ' . $this->board_rules_table . ' ' . $db->sql_build_array('INSERT', $rule_data);
-		$result = $db->sql_query($sql);
+		$sql = 'INSERT INTO ' . $this->board_rules_table . ' ' . $this->db->sql_build_array('INSERT', $rule_data);
+		$result = $this->db->sql_query($sql);
 
 		if (!$result)
 		{
