@@ -116,9 +116,8 @@ class rule implements rule_interface
 	{
 		$sql = 'DELETE FROM ' . $this->board_rules_table . '
 			WHERE rule_id = ' . $this->data['rule_id'];
-		$this->db->sql_query($sql);
 
-		if (!$this->db->sql_affectedrows())
+		if ($this->db->sql_query($sql))
 		{
 			// Rule not found
 			throw new \phpbb\boardrules\exception\base('NO_RULE');
