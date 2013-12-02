@@ -33,6 +33,39 @@ class rule implements rule_interface
 	protected $data;
 
 	/**
+	* @var \phpbb\db\driver\driver
+	*/
+	protected $db;
+
+	/**
+	* @var \phpbb\user
+	*/
+	protected $user;
+
+	/**
+	* Board Rules Table Name
+	*
+	* Name of the database table the rule will be stored in
+	*
+	* @var string
+	*/
+	protected $board_rules_table;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\db\driver\driver $db Database object
+	* @param \phpbb\user $user User object
+	* @return null
+	* @access public
+	*/
+	public function __construct(\phpbb\db\driver\driver $db, \phpbb\user $user, $board_rules_table)
+	{
+		$this->db = $db;
+		$this->user = $user;
+		$this->board_rules_table = $board_rules_table;
+	}
+	/**
 	* Get title
 	*
 	* @return string Title
