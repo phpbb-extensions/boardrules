@@ -65,6 +65,7 @@ class rule implements rule_interface
 		$this->user = $user;
 		$this->board_rules_table = $board_rules_table;
 	}
+
 	/**
 	* Get title
 	*
