@@ -33,6 +33,32 @@ class rule implements rule_interface
 	protected $data;
 
 	/**
+	* Load the data from the database for this rule
+	*
+	* @param int $id Rule identifier
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function load($id)
+	{
+		$sql = 'SELECT *
+			FROM ' . $this->board_rules_table . '
+			WHERE rule_id = ' . (int) $id;
+		$result = $this->db->sql_query($sql);
+		$data = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		if ($data === false)
+		{
+			// Rule not found
+			throw new \phpbb\boardrules\exception\out_of_bounds('RULE_NON_EXIST');
+		}
+
+		return $this;
+	}
+
+	/**
 	* Get title
 	*
 	* @return string Title
