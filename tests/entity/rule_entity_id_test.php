@@ -38,7 +38,7 @@ class rule_entity_id_test extends rule_entity_base
 	public function test_id($id, $expected)
 	{
 		// Setup the entity class
-		$entity = $this->get_rule_entity();
+		$entity = $this->get_rule_entity($this->data['rule_id'], $id);
 
 		// Get id
 		$result = $entity->get_id();
