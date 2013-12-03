@@ -46,13 +46,13 @@ class rule implements rule_interface
 			FROM ' . $this->board_rules_table . '
 			WHERE rule_id = ' . (int) $id;
 		$result = $this->db->sql_query($sql);
-		$data = $this->db->sql_fetchrow($result);
+		$this->data = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 
-		if ($data === false)
+		if ($this->data === false)
 		{
-			// Rule not found
-			throw new \phpbb\boardrules\exception\out_of_bounds('RULE_NON_EXIST');
+			// A rule does not exist
+			throw new \phpbb\boardrules\exception\out_of_bounds('RULE_NOT_EXIST');
 		}
 
 		return $this;
