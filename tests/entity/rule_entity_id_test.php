@@ -23,9 +23,24 @@ class rule_entity_id_test extends rule_entity_base
 	public function test_id_data()
 	{
 		return array(
-			array(1, 1),
-			array(2, 2),
-			array(null, 0),
+			array(
+				array(
+					'rule_id' => 1,
+				),
+				1,
+			),
+			array(
+				array(
+					'rule_id' => 2,
+				),
+				2,
+			),
+			array(
+				array(
+					'rule_id' => null,
+				),
+				0,
+			),
 		);
 	}
 
@@ -35,15 +50,15 @@ class rule_entity_id_test extends rule_entity_base
 	* @dataProvider test_id_data
 	* @access public
 	*/
-	public function test_id($id, $expected)
+	public function test_id($data, $expected)
 	{
 		// Setup the entity class
-		$entity = $this->get_rule_entity($this->data['rule_id'], $id);
+		$entity = $this->get_rule_entity();
 
-		// Get id
-		$result = $entity->get_id();
+		// Set the data
+		$entity->import($data);
 
-		// Match expected id with the result
-		$this->assertEquals($expected, $result);
+		// Assert that the id matches what is expected
+		$this->assertEquals($expected, $entity->get_id());
 	}
 }
