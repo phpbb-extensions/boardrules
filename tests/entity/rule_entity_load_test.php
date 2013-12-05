@@ -86,7 +86,7 @@ class entity_test extends \phpbb_database_test_case
 		$entity = $this->get_rule_entity();
 
 		// Assert that the data matches what's expected
-		$this->assertEquals($data, $entity->load($id););
+		$this->assertEquals($data, $entity->load($id));
 	}
 
 	public function test_load_fails_data()
