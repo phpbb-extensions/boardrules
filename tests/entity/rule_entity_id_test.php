@@ -41,6 +41,10 @@ class rule_entity_id_test extends rule_entity_base
 				),
 				0,
 			),
+			array(
+				array(),
+				0,
+			),
 		);
 	}
 
