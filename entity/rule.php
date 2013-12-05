@@ -38,11 +38,6 @@ class rule implements rule_interface
 	protected $db;
 
 	/**
-	* @var \phpbb\user
-	*/
-	protected $user;
-
-	/**
 	* Board Rules Table Name
 	*
 	* Name of the database table the rule will be stored in
@@ -55,14 +50,12 @@ class rule implements rule_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver $db Database object
-	* @param \phpbb\user $user User object
 	* @return null
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver $db, \phpbb\user $user, $board_rules_table)
+	public function __construct(\phpbb\db\driver\driver $db, $board_rules_table)
 	{
 		$this->db = $db;
-		$this->user = $user;
 		$this->board_rules_table = $board_rules_table;
 	}
 
