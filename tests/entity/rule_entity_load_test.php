@@ -80,16 +80,13 @@ class entity_test extends \phpbb_database_test_case
 	*
 	* @dataProvider test_load_data
 	*/
-	public function test_load($id, $data = false)
+	public function test_load($id, $data)
 	{
 		// Setup the entity class
-		$entity = new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
+		$entity = $this->get_rule_entity();
 
-		// Load the entity
-		$entity->load($id);
-
-		// Assert that the title matches what's expected
-		$this->assertEquals($title, $entity->get_title());
+		// Assert that the data matches what's expected
+		$this->assertEquals($data, $entity->load($id););
 	}
 
 	public function test_load_fails_data()
@@ -110,7 +107,7 @@ class entity_test extends \phpbb_database_test_case
 	public function test_load_fails($id)
 	{
 		// Setup the entity class
-		$entity = new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
+		$entity = $this->get_rule_entity();
 
 		// Load the entity
 		$entity->load($id);
