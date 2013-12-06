@@ -9,7 +9,7 @@
 
 namespace phpbb\boardrules\tests\entity;
 
-class entity_test extends \phpbb_database_test_case
+class entity_test extends rule_entity_base
 {
 	public function getDataSet()
 	{
@@ -23,6 +23,12 @@ class entity_test extends \phpbb_database_test_case
 		$this->db = $this->new_dbal();
 	}
 
+	/**
+	* Test data for the test_load() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
 	public function test_load_data()
 	{
 		return array(
@@ -89,6 +95,12 @@ class entity_test extends \phpbb_database_test_case
 		$this->assertEquals($data, $entity->load($id));
 	}
 
+	/**
+	* Test data for the test_load() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
 	public function test_load_fails_data()
 	{
 		return array(
