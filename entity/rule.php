@@ -59,6 +59,17 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Get id
+	*
+	* @return int Rule identifier
+	* @access public
+	*/
+	public function get_id()
+	{
+		return (isset($this->data['rule_id'])) ? (int) $this->data['rule_id'] : 0;
+	}
+
+	/**
 	* Get title
 	*
 	* @return string Title
