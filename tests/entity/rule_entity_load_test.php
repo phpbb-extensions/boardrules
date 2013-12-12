@@ -9,8 +9,26 @@
 
 namespace phpbb\boardrules\tests\entity;
 
-class entity_test extends rule_entity_base
+class entity_test extends \phpbb_database_test_case
 {
+	/**
+	* @var string Base rule entity class
+	*/
+	protected $entity;
+
+	/**
+	* Constructor
+	*
+	* @param null
+	* @return null
+	* @access public
+	*/
+	public function __construct()
+	{
+		// Setup the entity class
+		$this->entity = new \phpbb\boardrules\entity\rule();
+	}
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/rule.xml');
@@ -88,11 +106,8 @@ class entity_test extends rule_entity_base
 	*/
 	public function test_load($id, $data)
 	{
-		// Setup the entity class
-		$entity = $this->get_rule_entity();
-
 		// Assert that the data matches what's expected
-		$this->assertEquals($data, $entity->load($id));
+		$this->assertEquals($data, $this->entity->load($id));
 	}
 
 	/**
@@ -118,10 +133,7 @@ class entity_test extends rule_entity_base
 	*/
 	public function test_load_fails($id)
 	{
-		// Setup the entity class
-		$entity = $this->get_rule_entity();
-
 		// Load the entity
-		$entity->load($id);
+		$this->entity->load($id);
 	}
 }
