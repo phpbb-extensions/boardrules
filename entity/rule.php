@@ -161,7 +161,7 @@ class rule implements rule_interface
 	*/
 	public function message_enable_bbcode()
 	{
-		$this->data['rule_message_bbcode_options'] = $this->set_option($this->data['rule_message_bbcode_options'], OPTION_FLAG_BBCODE);
+		$this->set_message_option(OPTION_FLAG_BBCODE);
 	}
 
 	/**
@@ -172,7 +172,7 @@ class rule implements rule_interface
 	*/
 	public function message_disable_bbcode()
 	{
-		$this->data['rule_message_bbcode_options'] = $this->set_option($this->data['rule_message_bbcode_options'], OPTION_FLAG_BBCODE, true);
+		$this->set_message_option(OPTION_FLAG_BBCODE, true);
 	}
 
 	/**
@@ -194,7 +194,7 @@ class rule implements rule_interface
 	*/
 	public function message_enable_magic_url()
 	{
-		$this->data['rule_message_bbcode_options'] = $this->set_option($this->data['rule_message_bbcode_options'], OPTION_FLAG_LINKS);
+		$this->set_message_option(OPTION_FLAG_LINKS);
 	}
 
 	/**
@@ -205,7 +205,7 @@ class rule implements rule_interface
 	*/
 	public function message_disable_magic_url()
 	{
-		$this->data['rule_message_bbcode_options'] = $this->set_option($this->data['rule_message_bbcode_options'], OPTION_FLAG_LINKS, true);
+		$this->set_message_option(OPTION_FLAG_LINKS, true);
 	}
 
 	/**
@@ -227,7 +227,7 @@ class rule implements rule_interface
 	*/
 	public function message_enable_smilies()
 	{
-		$this->data['rule_message_bbcode_options'] = $this->set_option($this->data['rule_message_bbcode_options'], OPTION_FLAG_SMILIES);
+		$this->set_message_option(OPTION_FLAG_SMILIES);
 	}
 
 	/**
@@ -238,35 +238,38 @@ class rule implements rule_interface
 	*/
 	public function message_disable_smilies()
 	{
-		$this->data['rule_message_bbcode_options'] = $this->set_option($this->data['rule_message_bbcode_options'], OPTION_FLAG_SMILIES, true);
+		$this->set_message_option(OPTION_FLAG_SMILIES, true);
 	}
 
 	/**
 	* Set option helper
 	*
-	* @param int $options Current options setting
 	* @param int $option_value Value of the option
 	* @param bool $negate Negate (unset) option (Default: False)
-	* @return int new options with value set
+	* @param bool $reparse_message Reparse the message after setting option (Default: True)
+	* @return null
 	* @access protected
 	*/
-	protected function set_option($options, $option_value, $negate = false)
+	protected function set_message_option($option_value, $negate = false, $reparse_message = true)
 	{
 		// If we're setting the option and the option is not already set
-		if (!$negate && !($option_field & $option_value))
+		if (!$negate && !($this->data['rule_message_bbcode_options'] & $option_value))
 		{
 			// Add the option to the options
-			$options += $option_value;
+			$this->data['rule_message_bbcode_options'] += $option_value;
 		}
 
 		// If we're unsetting the option and the option is already set
-		if ($negate && $option_field & $option_value)
+		if ($negate && $this->data['rule_message_bbcode_options'] & $option_value)
 		{
 			// Subtract the option from the options
-			$options -= $option_value;
+			$this->data['rule_message_bbcode_options'] -= $option_value;
 		}
 
-		// Return the new options
-		return $options;
+		// Reparse the message
+		if ($reparse_message && !empty($this->data['rule_message']))
+		{
+			$this->set_message($this->data['rule_message']);
+		}
 	}
 }
