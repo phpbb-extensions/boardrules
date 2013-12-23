@@ -89,12 +89,12 @@ class rule implements rule_interface
 	public function get_message_for_edit()
 	{
 		// If these haven't been set yet; use defaults
-		$text = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
+		$message = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
 		$uid = (isset($this->data['rule_message_bbcode_uid'])) ? $this->data['rule_message_bbcode_uid'] : '';
 		$options = (isset($this->data['rule_message_bbcode_options'])) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for edit
-		$message_data = generate_text_for_edit($text, $uid, $options);
+		$message_data = generate_text_for_edit($message, $uid, $options);
 
 		return $message_data['text'];
 	}
@@ -109,13 +109,13 @@ class rule implements rule_interface
 	public function get_message_for_display($censor_text = true)
 	{
 		// If these haven't been set yet; use defaults
-		$text = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
+		$message = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
 		$uid = (isset($this->data['rule_message_bbcode_uid'])) ? $this->data['rule_message_bbcode_uid'] : '';
 		$bitfield = (isset($this->data['rule_message_bbcode_bitfield'])) ? $this->data['rule_message_bbcode_bitfield'] : '';
 		$options = (isset($this->data['rule_message_bbcode_options'])) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for display
-		return generate_text_for_display($text, $uid, $bitfield, $options, $censor_text);
+		return generate_text_for_display($message, $uid, $bitfield, $options, $censor_text);
 	}
 
 	/**
