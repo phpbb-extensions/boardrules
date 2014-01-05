@@ -7,7 +7,7 @@
 *
 */
 
-namespace phpbb\boardrules\migrations;
+namespace phpbb\boardrules\migrations\v10x;
 
 /**
 * Migration data
@@ -34,7 +34,7 @@ class m2_initial_data extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\boardrules\migrations\m1_initial_schema');
+		return array('\phpbb\boardrules\migrations\v10x\m1_initial_schema');
 	}
 
 	/**

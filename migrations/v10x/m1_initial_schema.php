@@ -7,7 +7,7 @@
 *
 */
 
-namespace phpbb\boardrules\migrations;
+namespace phpbb\boardrules\migrations\v10x;
 
 /**
 * Migration data
