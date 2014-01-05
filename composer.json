@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to create a set of rules for your phpBB forum",
 	"homepage": "https://phpbb.com",
-	"version": "0.0.1-dev",
+	"version": "1.0.0-dev",
 	"keywords": ["phpbb", "extension", "rules"],
 	"licence": "GPL-2.0",
 	"authors": [
