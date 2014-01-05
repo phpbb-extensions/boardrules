@@ -38,7 +38,7 @@ class v_0_0_1_dev extends \phpbb\db\migration\migration
 	}
 
 	/**
-	* Add the rules table schema to the database:
+	* Add the boardrules table schema to the database:
 	*    boardrules:
 	*        rule_id Rule identifier
 	*        rule_language Language selection
@@ -91,7 +91,7 @@ class v_0_0_1_dev extends \phpbb\db\migration\migration
 	}
 
 	/**
-	* Drop the rules table from the database
+	* Drop the boardrules table schema from the database
 	*
 	* @return array Array of table schema
 	* @access public
