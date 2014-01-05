@@ -2,7 +2,7 @@
 /**
 *
 * @package Board Rules Extension
-* @copyright (c) 2013 phpBB Group
+* @copyright (c) 2014 phpBB Group
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -12,7 +12,7 @@ namespace phpbb\boardrules\migrations;
 /**
 * Migration data
 */
-class v_0_0_1_dev extends \phpbb\db\migration\migration
+class m1_initial_schema extends \phpbb\db\migration\migration
 {
 	/**
 	* Check if this migration data has already been installed
@@ -48,14 +48,6 @@ class v_0_0_1_dev extends \phpbb\db\migration\migration
 	*        rule_anchor Anchor text
 	*        rule_title Rule title
 	*        rule_message Rule message
-	*        rule_message_bbcode_uid Rule bbcode uid
-	*        rule_message_bbcode_bitfield Rule bbcode bitfield
-	*        rule_message_bbcode_options Rule bbcode options
-	*
-	*    boardrules_categories:
-	*        category_id Category identifier
-	*        category_title Category title
-	*
 	* @return array Array of table schema
 	* @access public
 	*/
@@ -73,18 +65,8 @@ class v_0_0_1_dev extends \phpbb\db\migration\migration
 						'rule_anchor'					=> array('VCHAR:255', ''),
 						'rule_title'					=> array('VCHAR:200', ''),
 						'rule_message'					=> array('TEXT_UNI', ''),
-						'rule_message_bbcode_uid'		=> array('VCHAR:8', ''),
-						'rule_message_bbcode_bitfield'	=> array('VCHAR:255', ''),
-						'rule_message_bbcode_options'	=> array('UINT:11', 7),
 					),
 					'PRIMARY_KEY'	=> 'rule_id',
-				),
-				$this->table_prefix . 'boardrules_categories'	=> array(
-					'COLUMNS'	=> array(
-						'category_id'					=> array('UINT', null, 'auto_increment'),
-						'category_title'				=> array('VCHAR:200', ''),
-					),
-					'PRIMARY_KEY'	=> 'category_id',
 				),
 			),
 		);
@@ -101,21 +83,7 @@ class v_0_0_1_dev extends \phpbb\db\migration\migration
 		return array(
 			'drop_tables'	=> array(
 				$this->table_prefix . 'boardrules',
-				$this->table_prefix . 'boardrules_categories',
 			),
-		);
-	}
-
-	/**
-	* Add or update data in the database
-	*
-	* @return array Array of table data
-	* @access public
-	*/
-	public function update_data()
-	{
-		return array(
-			array('config.add', array('boardrules_version', '0.0.1-dev')),
 		);
 	}
 }
