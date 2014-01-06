@@ -10,7 +10,7 @@
 namespace phpbb\boardrules\migrations\v10x;
 
 /**
-* Migration data
+* Migration stage 1: Initial schema
 */
 class m1_initial_schema extends \phpbb\db\migration\migration
 {
