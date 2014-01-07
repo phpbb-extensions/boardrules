@@ -88,7 +88,7 @@ class rule implements rule_interface
 	*/
 	public function get_message_for_edit()
 	{
-		// If these haven't been set yet; use defaults
+		// Use defaults if these haven't been set yet
 		$message = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
 		$uid = (isset($this->data['rule_message_bbcode_uid'])) ? $this->data['rule_message_bbcode_uid'] : '';
 		$options = (isset($this->data['rule_message_bbcode_options'])) ? (int) $this->data['rule_message_bbcode_options'] : 0;
@@ -102,7 +102,7 @@ class rule implements rule_interface
 	/**
 	* Get message for display
 	*
-	* @param bool $censor_text True to censor the text (Defaut: true)
+	* @param bool $censor_text True to censor the text (Default: true)
 	* @return string
 	* @access public
 	*/

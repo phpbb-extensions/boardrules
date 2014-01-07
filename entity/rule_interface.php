@@ -122,11 +122,11 @@ interface rule_interface
 	/**
 	* Get message for display
 	*
-	* @param bool $censor_text True to censor the text (Defaut: true)
+	* @param bool $censor_text True to censor the text (Default: true)
 	* @return string
 	* @access public
 	*/
-	public function get_message_for_display();
+	public function get_message_for_display($censor_text = true);
 
 	/**
 	* Set message
