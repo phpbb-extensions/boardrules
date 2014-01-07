@@ -231,7 +231,7 @@ interface rule_interface
 	/**
 	* Get the language identifier
 	*
-	* @return string language identifier
+	* @return int language identifier
 	* @access public
 	*/
 	public function get_language();

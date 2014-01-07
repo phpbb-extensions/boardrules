@@ -242,6 +242,17 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Get the language identifier
+	*
+	* @return int language identifier
+	* @access public
+	*/
+	public function get_language()
+	{
+		return (isset($this->data['rule_language'])) ? (int) $this->data['rule_language'] : 0;
+	}
+
+	/**
 	* Set option helper
 	*
 	* @param int $option_value Value of the option
