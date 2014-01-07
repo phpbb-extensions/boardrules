@@ -15,17 +15,6 @@ namespace phpbb\boardrules\migrations\v10x;
 class m2_initial_data extends \phpbb\db\migration\migration
 {
 	/**
-	* Check if this migration data has already been installed
-	*
-	* @return bool Is boardrules_version >= 1.0.0-dev ?
-	* @access public
-	*/
-	public function effectively_installed()
-	{
-		return version_compare($this->config['boardrules_version'], '1.0.0-dev', '>=');
-	}
-
-	/**
 	* Assign migration file dependencies for this migration
 	*
 	* @return array Array of migration files

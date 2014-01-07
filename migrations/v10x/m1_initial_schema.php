@@ -15,17 +15,6 @@ namespace phpbb\boardrules\migrations\v10x;
 class m1_initial_schema extends \phpbb\db\migration\migration
 {
 	/**
-	* Check if this migration data has already been installed
-	*
-	* @return bool Does table 'boardrules' exist?
-	* @access public
-	*/
-	public function effectively_installed()
-	{
-		return $this->db_tools->sql_table_exists($this->table_prefix . 'boardrules');
-	}
-
-	/**
 	* Assign migration file dependencies for this migration
 	*
 	* @return array Array of migration files
