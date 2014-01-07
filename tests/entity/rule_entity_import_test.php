@@ -26,7 +26,10 @@ class rule_entity_import_test extends rule_entity_base
 		$entity = $this->get_rule_entity();
 
 		// Set the data
-		$entity->import($data);
+		$result = $entity->import($data);
+
+		// Assert the returned value is what we expect
+		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Map the fields to the getters
 		$map = array(

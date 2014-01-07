@@ -115,6 +115,9 @@ class rule implements rule_interface
 				throw new \phpbb\boardrules\exception\out_of_bounds($field, $this->data[$field]);
 			}
 		}
+
+		// Return $this; so calls can be chained load()->set()->save()
+		return $this;
 	}
 
 	/**
