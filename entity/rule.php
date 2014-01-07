@@ -44,6 +44,80 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Import data for this rule
+	*
+	* Used when the data is already loaded externally.
+	* Any existing data on this rule is over-written.
+	* All data is validated and an exception is thrown if any data is invalid.
+	*
+	* @param array $data Data array, typically from the database
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function import($data)
+	{
+		// Clear out any saved data
+		$this->data = array();
+
+		// All of our fields
+		$fields = array(
+			// column							=> data type (see settype())
+			'rule_id'							=> 'integer',
+			'rule_language'						=> 'integer',
+			'rule_left_id'						=> 'integer',
+			'rule_right_id'						=> 'integer',
+			'rule_anchor'						=> 'set_anchor', // call set_anchor()
+			'rule_title'						=> 'set_title', // call set_title()
+
+			// We do not pass to set_message() as generate_text_for_storage would run twice
+			'rule_message'						=> 'string',
+			'rule_message_bbcode_uid'			=> 'string',
+			'rule_message_bbcode_bitfield'		=> 'string',
+			'rule_message_bbcode_options'		=> 'integer',
+		);
+
+		// Go through the basic fields and set them to our data array
+		foreach ($fields as $field => $type)
+		{
+			// If the data wasn't sent to us, throw an exception
+			if (!isset($data[$field]))
+			{
+				throw new \phpbb\boardrules\exception\invalid_argument('MISSING_FIELD', $field);
+			}
+
+			// If the type is a method on this class, call it
+			if (method_exists($this, $type))
+			{
+				$this->$type($data[$field]);
+			}
+			else
+			{
+				// We're using settype to enforce data types
+				$this->data = settype($data[$field], $type);
+			}
+		}
+
+		// Some fields must be unsigned (>= 0)
+		$validate_unsigned = array(
+			'rule_id',
+			'rule_language',
+			'rule_left_id',
+			'rule_right_id',
+			'rule_message_bbcode_options',
+		);
+
+		foreach ($validate_unsigned as $field)
+		{
+			// If the data is less than 0, it's not unsigned and we'll throw an exception
+			if ($this->data[$field] < 0)
+			{
+				throw new \phpbb\boardrules\exception\out_of_bounds($field, $this->data[$field]);
+			}
+		}
+	}
+
+	/**
 	* Get title
 	*
 	* @return string Title
