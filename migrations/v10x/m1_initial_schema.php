@@ -48,6 +48,10 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 	*        rule_anchor Anchor text
 	*        rule_title Rule title
 	*        rule_message Rule message
+	*        rule_message_bbcode_uid Rule bbcode uid
+	*        rule_message_bbcode_bitfield Rule bbcode bitfield
+	*        rule_message_bbcode_options Rule bbcode options
+	*
 	* @return array Array of table schema
 	* @access public
 	*/
@@ -65,6 +69,9 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 						'rule_anchor'					=> array('VCHAR:255', ''),
 						'rule_title'					=> array('VCHAR:200', ''),
 						'rule_message'					=> array('TEXT_UNI', ''),
+						'rule_message_bbcode_uid'		=> array('VCHAR:8', ''),
+						'rule_message_bbcode_bitfield'	=> array('VCHAR:255', ''),
+						'rule_message_bbcode_options'	=> array('UINT:11', 7),
 					),
 					'PRIMARY_KEY'	=> 'rule_id',
 				),
