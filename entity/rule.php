@@ -52,7 +52,7 @@ class rule implements rule_interface
 		if ($this->data === false)
 		{
 			// A rule does not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds('RULE_NOT_EXIST');
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 
 		return $this;
