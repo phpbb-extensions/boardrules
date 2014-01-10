@@ -94,7 +94,9 @@ class rule implements rule_interface
 			else
 			{
 				// We're using settype to enforce data types
-				$this->data = settype($data[$field], $type);
+				settype($data[$field], $type);
+
+				$this->data[$field] = $data[$field];
 			}
 		}
 
