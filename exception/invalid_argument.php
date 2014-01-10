@@ -14,4 +14,15 @@ namespace phpbb\boardrules\exception;
 */
 class invalid_argument extends base
 {
+	/**
+	* Translate this exception
+	*
+	* @param \phpbb\user $user
+	* @return string
+	* @access public
+	*/
+	public function get_message(\phpbb\user $user)
+	{
+		return $this->translate_portions($user, $this->getMessage(), 'EXCEPTION_INVALID_ARGUMENT');
+	}
 }
