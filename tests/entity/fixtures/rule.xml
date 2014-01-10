@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<table name="phpbb_boardrules">
+		<column>rule_id</column>
+		<column>rule_language</column>
+		<column>rule_left_id</column>
+		<column>rule_right_id</column>
+		<column>rule_anchor</column>
+		<column>rule_title</column>
+		<column>rule_message</column>
+		<column>rule_message_bbcode_uid</column>
+		<column>rule_message_bbcode_bitfield</column>
+		<column>rule_message_bbcode_options</column>
+		<row>
+			<value>1</value>
+			<value>en</value>
+			<value>1</value>
+			<value>2</value>
+			<value>#</value>
+			<value>title_1</value>
+			<value>message_1</value>
+			<value></value>
+			<value></value>
+			<value></value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>en</value>
+			<value>3</value>
+			<value>4</value>
+			<value>#</value>
+			<value>title_2</value>
+			<value>message_2</value>
+			<value></value>
+			<value></value>
+			<value></value>
+		</row>
+		<row>
+			<value>3</value>
+			<value>en</value>
+			<value>5</value>
+			<value>6</value>
+			<value>#</value>
+			<value>title_3</value>
+			<value>message_3</value>
+			<value></value>
+			<value></value>
+			<value></value>
+		</row>
+	</table>
+</dataset>
