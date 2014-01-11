@@ -32,9 +32,7 @@ class rule implements rule_interface
 	*/
 	protected $data;
 
-	/**
-	* @var \phpbb\db\driver\driver
-	*/
+	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
 	/**
@@ -50,6 +48,7 @@ class rule implements rule_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver $db Database object
+	* @param $board_rules_table Board Rules Table
 	* @return null
 	* @access public
 	*/
