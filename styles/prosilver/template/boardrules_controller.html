@@ -1,0 +1,40 @@
+<!-- INCLUDE overall_header.html -->
+
+<div id="boardrules-categories">
+	<div class="mini-panel">
+		<div class="inner">
+			<h3>{L_BOARDRULES_CATEGORIES}</h3>
+			<ul class="menu">
+				<!-- BEGIN categories -->
+					<li<!-- IF categories.S_LAST_ROW --> class="last"<!-- ENDIF -->><a href="#{categories.U_RULE_CATEGORY}">{categories.RULE_CATEGORY}</a></li>
+				<!-- END categories -->
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="container">
+
+	<h2 class="boardrules_header">{L_BOARDRULES_HEADER}</h2>
+	<p class="boardrules_explain">{BOARDRULES_EXPLAIN}</p>
+
+	<div id="main">
+		<ol id="rules">
+			<!-- BEGIN categories -->
+				<li id="{categories.U_RULE_CATEGORY}"<!-- IF not categories.S_LAST_ROW --> class="bottom"<!-- ENDIF -->>
+					<h3>{categories.RULE_CATEGORY}</h3>
+					<ol>
+						<!-- BEGIN rules -->
+							<li class="rule-item" id="{categories.rules.ANCHOR}">
+								{categories.rules.RULE_MESSAGE} <a class="rule-anchor" href="#{categories.rules.ANCHOR}">#</a>
+							</li>
+						<!-- END rules -->
+					</ol>
+				</li>
+			 <!-- END categories -->
+		</ol>
+	</div>
+
+</div>
+
+<!-- INCLUDE overall_footer.html -->
