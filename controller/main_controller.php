@@ -36,7 +36,7 @@ class main_controller implements main_interface
 	* @param \phpbb\controller\helper    $helper             Controller helper object
 	* @param \phpbb\template\template    $template           Template object
 	* @param \phpbb\user                 $user               User object
-	* @param string                      $$boardrules_table  Name of the table used to store boardrules data
+	* @param string                      $boardrules_table   Name of the table used to store boardrules data
 	* @return \phpbb\boardrules\controller\main_controller
 	* @access public
 	*/
