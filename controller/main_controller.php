@@ -26,7 +26,7 @@ class main_controller implements main_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var string phpEx */
+	/** @var string boardrules table */
 	protected $boardrules_table;
 
 	/**
@@ -52,7 +52,7 @@ class main_controller implements main_interface
 	/**
 	* Display the rules page
 	*
-	* @return null
+	* @return Symfony\Component\HttpFoundation\Response A Symfony Response object
 	* @access public
 	*/
 	public function display()
