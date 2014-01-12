@@ -8,12 +8,13 @@
 	position: relative;
 }
 
-#main, #main h3 { font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif; }
+#main { font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif; }
 
 #main h3 {
-	font-size: 1em;
-	text-transform: none;
 	color: #d21a4e;
+	font-size: 1em;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	text-transform: none;
 	border-bottom: none;
 	margin-top: 5px;
 }
@@ -29,17 +30,17 @@
 #main a { text-decoration: underline; }
 
 /* rules header */
-.boardrules_header {
+.boardrules-header {
 	color: #4f84ad;
 	font-size: 2.8em;
 	font-weight: 900;
 	font-family: "Helvetica", Arial, sans-serif;	
 }
 
-.boardrules_explain {
+.boardrules-explain {
+	font-size: 1.2em;
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	margin-bottom: 1em;
-	font-size: 1.2em;
 }
 
 /* rules */
@@ -65,9 +66,9 @@
 }
 
 .mini-panel h3 {
+	color: #333333;
 	font-family: Verdana, Helvetica, Arial, sans-serif;
 	margin: 5px 0 0 0;
-	color: #333333;
 }
 
 ul.menu {
@@ -76,17 +77,17 @@ ul.menu {
 }
 
 ul.menu li {
+	margin: 0;
 	padding: 5px 0 4px 0;
 	border-bottom: 1px solid #CCCCCC;
-	margin: 0;
 }
 
 ul.menu li.last { border-bottom: none; }
 
 /* rule highlighting */
 .highlight {
-	padding: 3px 6px 0 6px;
-	background-color: #ECD5D8;
 	color: #BC2A4D;
 	font-weight: bold;
+	background-color: #ECD5D8;
+	padding: 3px 6px 0 6px;
 }
