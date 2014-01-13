@@ -6,7 +6,7 @@
 			<h3>{L_BOARDRULES_CATEGORIES}</h3>
 			<ul class="menu">
 				<!-- BEGIN categories -->
-					<li><a href="#{categories.U_RULE_CATEGORY}">{categories.RULE_CATEGORY}</a></li>
+					<li><a href="#section-{categories.U_RULE_CATEGORY}">{categories.RULE_CATEGORY}</a></li>
 				<!-- END categories -->
 			</ul>
 		</div>
@@ -21,12 +21,12 @@
 	<div id="main">
 		<ol id="rules">
 			<!-- BEGIN categories -->
-				<li id="{categories.U_RULE_CATEGORY}">
+				<li id="section-{categories.U_RULE_CATEGORY}">
 					<h3>{categories.RULE_CATEGORY}</h3>
 					<ol>
 						<!-- BEGIN rules -->
-							<li class="rule-item" id="{categories.rules.ANCHOR}">
-								{categories.rules.RULE_MESSAGE} <a class="rule-anchor" href="#{categories.rules.ANCHOR}">#</a>
+							<li class="rule-item" id="rule-{categories.rules.U_ANCHOR}">
+								{categories.rules.RULE_MESSAGE} <a class="rule-anchor" href="#rule-{categories.rules.U_ANCHOR}">#</a>
 							</li>
 						<!-- END rules -->
 					</ol>
