@@ -69,7 +69,7 @@ class rule implements rule_interface
 	public function load($id)
 	{
 		$sql = 'SELECT *
-			FROM ' . $this->board_rules_table . '
+			FROM ' . $this->boardrules_table . '
 			WHERE rule_id = ' . (int) $id;
 		$result = $this->db->sql_query($sql);
 		$this->data = $this->db->sql_fetchrow($result);
