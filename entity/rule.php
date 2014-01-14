@@ -48,7 +48,7 @@ class rule implements rule_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver    $db                 Database object
-	* @param string                     $boardrules_table   ame of the table used to store boardrules data
+	* @param string                     $boardrules_table   Name of the table used to store board rules data
 	* @return null
 	* @access public
 	*/
