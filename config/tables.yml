@@ -1,0 +1,2 @@
+parameters:
+    tables.boardrules: %core.table_prefix%boardrules

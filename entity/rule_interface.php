@@ -122,10 +122,11 @@ interface rule_interface
 	/**
 	* Get message for display
 	*
+	* @param bool $censor_text True to censor the text (Default: true)
 	* @return string
 	* @access public
 	*/
-	public function get_message_for_display();
+	public function get_message_for_display($censor_text = true);
 
 	/**
 	* Set message
@@ -136,6 +137,78 @@ interface rule_interface
 	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function set_message($message);
+
+	/**
+	* Check if bbcode is enabled on the message
+	*
+	* @return bool
+	* @access public
+	*/
+	public function message_bbcode_enabled();
+
+	/**
+	* Enable bbcode on the message
+	*
+	* @return null
+	* @access public
+	*/
+	public function message_enable_bbcode();
+
+	/**
+	* Disable bbcode on the message
+	*
+	* @return null
+	* @access public
+	*/
+	public function message_disable_bbcode();
+
+	/**
+	* Check if magic_url is enabled on the message
+	*
+	* @return bool
+	* @access public
+	*/
+	public function message_magic_url_enabled();
+
+	/**
+	* Enable magic url on the message
+	*
+	* @return null
+	* @access public
+	*/
+	public function message_enable_magic_url();
+
+	/**
+	* Disable magic url on the message
+	*
+	* @return null
+	* @access public
+	*/
+	public function message_disable_magic_url();
+
+	/**
+	* Check if smilies are enabled on the message
+	*
+	* @return bool
+	* @access public
+	*/
+	public function message_smilies_enabled();
+
+	/**
+	* Enable smilies on the message
+	*
+	* @return null
+	* @access public
+	*/
+	public function message_enable_smilies();
+
+	/**
+	* Disable smilies on the message
+	*
+	* @return null
+	* @access public
+	*/
+	public function message_disable_smilies();
 
 	/**
 	* Get anchor
