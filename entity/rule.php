@@ -36,9 +36,7 @@ class rule implements rule_interface
 	protected $db;
 
 	/**
-	* Board Rules Table Name
-	*
-	* Name of the database table the rules will be stored in
+	* The database table the rules are stored in
 	*
 	* @var string
 	*/
