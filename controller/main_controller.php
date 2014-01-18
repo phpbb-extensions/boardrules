@@ -62,10 +62,10 @@ class main_controller implements main_interface
 
 		$this->template->assign_vars(array(
 			'S_BOARDRULES'			=> true,
-			'BOARDRULES_EXPLAIN'	=> sprintf($this->user->lang['BOARDRULES_EXPLAIN'], $this->config['sitename']),
+			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 
 		// Send data to the template fle
-		return $this->helper->render('boardrules_controller.html', $this->user->lang['BOARDRULES']);
+		return $this->helper->render('boardrules_controller.html', $this->user->lang('BOARDRULES'));
 	}
 }
