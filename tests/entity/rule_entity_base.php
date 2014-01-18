@@ -22,7 +22,11 @@ class rule_entity_base extends \phpbb_database_test_case
 	*/
 	protected function get_rule_entity()
 	{
-		return new \phpbb\boardrules\entity\rule();
+		global $db;
+
+		$db = $this->new_dbal();
+
+		return new \phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
 	}
 
 	public function getDataSet()
