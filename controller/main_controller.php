@@ -29,7 +29,7 @@ class main_controller implements main_interface
 	/**
 	* The database table the rules are stored in
 	*
-	* @var string boardrules table
+	* @var string
 	*/
 	protected $boardrules_table;
 
