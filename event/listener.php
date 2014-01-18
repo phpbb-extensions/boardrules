@@ -63,7 +63,7 @@ class listener implements EventSubscriberInterface
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
 			'ext_name' => 'phpbb/boardrules',
-			'lang_set' => 'boardrules',
+			'lang_set' => 'boardrules_common',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
@@ -78,7 +78,7 @@ class listener implements EventSubscriberInterface
 	public function add_page_header_link($event)
 	{
 		$this->template->assign_vars(array(
-			'U_BOARDRULES' => $this->controller_helper->url('board-rules'),
+			'U_BOARDRULES' => $this->controller_helper->url('rules'),
 		));
 	}
 }

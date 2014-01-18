@@ -2,6 +2,14 @@ imports:
     - { resource: tables.yml }
 
 services:
+    phpbb.boardrules.controller:
+        class: phpbb\boardrules\controller\main_controller
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - %tables.boardrules%
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
         arguments:
