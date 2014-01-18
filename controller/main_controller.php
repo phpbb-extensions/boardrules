@@ -26,7 +26,11 @@ class main_controller implements main_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var string boardrules table */
+	/**
+	* The database table the rules are stored in
+	*
+	* @var string boardrules table
+	*/
 	protected $boardrules_table;
 
 	/**
