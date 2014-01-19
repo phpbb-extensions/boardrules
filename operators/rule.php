@@ -14,24 +14,6 @@ namespace phpbb\boardrules\operators;
 */
 class rule implements rule_interface
 {
-	/**
-	* Data for this operator
-	*
-	* @var array
-	*        rule_id
-	*        rule_language
-	*        rule_left_id
-	*        rule_right_id
-	*        rule_anchor
-	*        rule_title
-	*        rule_message
-	*        rule_message_bbcode_uid
-	*        rule_message_bbcode_bitfield
-	*        rule_message_bbcode_options
-	* @access protected
-	*/
-	protected $data;
-
 	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
@@ -67,23 +49,28 @@ class rule implements rule_interface
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
+		$data = array();
+		
 		$sql = 'SELECT *
 			FROM ' . $this->boardrules_table . '
 			WHERE rule_language = ' . (int) $language . '
 			ORDER BY left_id';
 		$result = $this->db->sql_query($sql);
+		
+		$entity = new \phpbb\boardrules\entity\rule();
+		
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$this->data[] = $row;
+			$data[] = $entity->import($row);
 		}
 		$this->db->sql_freeresult($result);
 
-		if ($this->data === false)
+		if (empty($data)
 		{
 			// A language does not exist
 			throw new \phpbb\boardrules\exception\out_of_bounds('rule_language');
 		}
 
-		return $this;
+		return $data;
 	}
 }
