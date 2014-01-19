@@ -67,7 +67,7 @@ class rule implements rule_interface
 
 		if (empty($data)
 		{
-			// A language does not exist
+			// Rules for the language do not exist
 			throw new \phpbb\boardrules\exception\out_of_bounds('rule_language');
 		}
 
