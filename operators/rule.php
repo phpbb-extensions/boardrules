@@ -59,7 +59,7 @@ class rule implements rule_interface
 	/**
 	* Get the rules
 	*
-	* @param int $language Language selection; default: 0
+	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return array Array of rule_interface
 	* @access public
