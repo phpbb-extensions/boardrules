@@ -55,7 +55,7 @@ class rule implements rule_interface
 		
 		$sql = 'SELECT *
 			FROM ' . $this->boardrules_table . '
-			WHERE rule_language = ' . (int) $language . '
+			WHERE rule_language = ' . (int) $language . ' AND rule_parent_id = ' . (int) $parent_id . '
 			ORDER BY rule_left_id';
 		$result = $this->db->sql_query($sql);
 		
