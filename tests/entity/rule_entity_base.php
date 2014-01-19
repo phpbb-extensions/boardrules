@@ -14,20 +14,7 @@ namespace phpbb\boardrules\tests\entity;
 */
 class rule_entity_base extends \phpbb_database_test_case
 {
-	/**
-	* Get the rule entity
-	*
-	* @return \phpbb\boardrules\entity\rule
-	* @access protected
-	*/
-	protected function get_rule_entity()
-	{
-		global $db;
-
-		$db = $this->new_dbal();
-
-		return new \phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
-	}
+	protected $db;
 
 	public function getDataSet()
 	{
@@ -39,5 +26,16 @@ class rule_entity_base extends \phpbb_database_test_case
 		parent::setUp();
 
 		$this->db = $this->new_dbal();
+	}
+
+	/**
+	* Get the rule entity
+	*
+	* @return \phpbb\boardrules\entity\rule
+	* @access protected
+	*/
+	protected function get_rule_entity()
+	{
+		return new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
 	}
 }
