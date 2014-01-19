@@ -49,6 +49,8 @@ class rule implements rule_interface
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
+		global $phpbb_container;
+		
 		$data = array();
 		
 		$sql = 'SELECT *
@@ -57,11 +59,9 @@ class rule implements rule_interface
 			ORDER BY left_id';
 		$result = $this->db->sql_query($sql);
 		
-		$entity = new \phpbb\boardrules\entity\rule();
-		
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$data[] = $entity->import($row);
+			$data[] = $phpbb_container->get('phpbb.boardrules.entity')->import($row);
 		}
 		$this->db->sql_freeresult($result);
 
