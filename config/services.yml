@@ -17,3 +17,9 @@ services:
             - @template
         tags:
             - { name: event.listener }
+
+    phpbb.boardrules.operator:
+        class: phpbb\boardrules\operators\rule
+        arguments:
+            - @dbal.conn
+            - %tables.boardrules%
