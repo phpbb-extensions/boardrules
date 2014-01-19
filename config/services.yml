@@ -21,5 +21,5 @@ services:
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
         arguments:
-            - @db
+            - @dbal.conn
             - %tables.boardrules%
