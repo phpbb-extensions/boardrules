@@ -1,0 +1,115 @@
+<?php
+/**
+*
+* @package testing
+* @copyright (c) 2014 phpBB Group
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+*
+*/
+
+namespace phpbb\boardrules\tests\operators;
+
+class rule_operator_get_rules_test extends rule_operator_base
+{
+	/**
+	* Test data for the test_get_rules() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
+	public function test_get_rules_data()
+	{
+		return array(
+			// language id to search, data which should match
+			array(
+				1,
+				array(
+					'rule_id' => 1,
+					'rule_language' => 1,
+					'rule_left_id' => 1,
+					'rule_right_id' => 2,
+					'rule_anchor' => '#',
+					'rule_title' => 'title_1',
+					'rule_message' => 'message_1',
+					'rule_message_bbcode_uid' => '',
+					'rule_message_bbcode_bitfield' => '',
+					'rule_message_bbcode_options' => '',
+				),
+			),
+			array(
+				1,
+				array(
+					'rule_id' => 2,
+					'rule_language' => 1,
+					'rule_left_id' => 3,
+					'rule_right_id' => 4,
+					'rule_anchor' => '#',
+					'rule_title' => 'title_2',
+					'rule_message' => 'message_2',
+					'rule_message_bbcode_uid' => '',
+					'rule_message_bbcode_bitfield' => '',
+					'rule_message_bbcode_options' => '',
+				),
+			),
+			array(
+				1,
+				array(
+					'rule_id' => 3,
+					'rule_language' => 1,
+					'rule_left_id' => 5,
+					'rule_right_id' => 6,
+					'rule_anchor' => '#',
+					'rule_title' => 'title_3',
+					'rule_message' => 'message_3',
+					'rule_message_bbcode_uid' => '',
+					'rule_message_bbcode_bitfield' => '',
+					'rule_message_bbcode_options' => '',
+				),
+			),
+		);
+	}
+
+	/**
+	* Test getting rules from the database
+	*
+	* @dataProvider test_get_rules_data
+	*/
+	public function test_get_rules($langauge, $data)
+	{
+		// Setup the operator class
+		$operator = $this->get_rule_operator();
+
+		// Assert that the data matches what's expected
+		$this->assertEquals($data, $operator->get_rules($language));
+	}
+
+	/**
+	* Test data for the test_get_rules() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
+	public function test_get_rules_fails_data()
+	{
+		return array(
+			// language to search
+			array(0),
+			array(4),
+		);
+	}
+
+	/**
+	* Test getting (non-existant) rules from the database
+	*
+	* @dataProvider test_get_rules_fails_data
+	* @expectedException \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function test_get_rules_fails($language)
+	{
+		// Setup the operator class
+		$operator = $this->get_rule_operator();
+
+		// Load the operator
+		$operator->get_rules($language);
+	}
+}
