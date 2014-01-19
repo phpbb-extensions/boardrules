@@ -46,7 +46,7 @@ interface admin_interface
 	/**
 	* Display the rules
 	*
-	* @param id $language Language selection identifier; default: 0
+	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return null
 	* @access public
