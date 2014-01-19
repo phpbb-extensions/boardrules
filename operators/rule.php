@@ -65,7 +65,7 @@ class rule implements rule_interface
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function get_rules($language = 0, $parent_id = 0);
+	public function get_rules($language = 0, $parent_id = 0)
 	{
 		$sql = 'SELECT *
 			FROM ' . $this->boardrules_table . '
