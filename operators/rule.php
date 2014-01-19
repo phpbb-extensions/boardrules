@@ -65,7 +65,7 @@ class rule implements rule_interface
 		}
 		$this->db->sql_freeresult($result);
 
-		if (empty($data)
+		if (empty($data))
 		{
 			// Rules for the language do not exist
 			throw new \phpbb\boardrules\exception\out_of_bounds('rule_language');
