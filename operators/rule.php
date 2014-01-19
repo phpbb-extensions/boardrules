@@ -56,7 +56,7 @@ class rule implements rule_interface
 		$sql = 'SELECT *
 			FROM ' . $this->boardrules_table . '
 			WHERE rule_language = ' . (int) $language . '
-			ORDER BY left_id';
+			ORDER BY rule_left_id';
 		$result = $this->db->sql_query($sql);
 		
 		while ($row = $this->db->sql_fetchrow($result))

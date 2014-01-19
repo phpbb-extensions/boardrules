@@ -40,7 +40,7 @@ interface rule_interface
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
-	public function add_rule($language = '', $parent_id = 0, $rule_data);
+//	public function add_rule($language = '', $parent_id = 0, $rule_data);
 
 	/**
 	* Edit a rule
@@ -54,7 +54,7 @@ interface rule_interface
 	* @access public
 	* @throws \phpbb\boardrules\exception\runtime
 	*/
-	public function edit_rule($rule_id, $rule_data);
+//	public function edit_rule($rule_id, $rule_data);
 
 	/**
 	* Delete a rule
@@ -64,7 +64,7 @@ interface rule_interface
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
-	public function delete_rule($rule_id);
+//	public function delete_rule($rule_id);
 
 	/**
 	* Move a rule up/down
