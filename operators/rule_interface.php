@@ -19,18 +19,18 @@ interface rule_interface
 	/**
 	* Get the rules
 	*
-	* @param string $language Language selection; default: Board Default Language
+	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return array Array of rule_interface
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function get_rules($language = '', $parent_id = 0);
+	public function get_rules($language = 0, $parent_id = 0);
 
 	/**
 	* Add a rule
 	*
-	* @param string $language Language selection; default: Board Default Language
+	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @param array $rule_data Rule data to add
 	* 								rule_anchor
@@ -40,7 +40,7 @@ interface rule_interface
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
-	public function add_rule($language = '', $parent_id = 0, $rule_data);
+	public function add_rule($language = 0, $parent_id = 0, $rule_data);
 
 	/**
 	* Edit a rule
