@@ -74,7 +74,7 @@ class rule implements rule_interface
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$this->data = $row;
+			$this->data[] = $row;
 		}
 		$this->db->sql_freeresult($result);
 
