@@ -14,6 +14,7 @@ namespace phpbb\boardrules\tests\entity;
 */
 class rule_entity_base extends \phpbb_database_test_case
 {
+	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
 	public function getDataSet()
