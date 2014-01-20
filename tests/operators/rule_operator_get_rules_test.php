@@ -14,7 +14,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 	/**
 	* Test data for the test_get_rules() function
 	*
-	* @return array Array of test data
+	* @return array Array of test rule entities
 	* @access public
 	*/
 	public function test_get_rules_data()
