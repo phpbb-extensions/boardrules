@@ -25,7 +25,7 @@ class entity_test extends rule_entity_base
 				1,
 				array(
 					'rule_id' => 1,
-					'rule_language' => 'en',
+					'rule_language' => 1,
 					'rule_left_id' => 1,
 					'rule_right_id' => 2,
 					'rule_anchor' => '#',
@@ -40,7 +40,7 @@ class entity_test extends rule_entity_base
 				2,
 				array(
 					'rule_id' => 2,
-					'rule_language' => 'en',
+					'rule_language' => 1,
 					'rule_left_id' => 3,
 					'rule_right_id' => 4,
 					'rule_anchor' => '#',
@@ -55,7 +55,7 @@ class entity_test extends rule_entity_base
 				3,
 				array(
 					'rule_id' => 3,
-					'rule_language' => 'en',
+					'rule_language' => 1,
 					'rule_left_id' => 5,
 					'rule_right_id' => 6,
 					'rule_anchor' => '#',
