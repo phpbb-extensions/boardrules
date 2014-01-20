@@ -74,6 +74,7 @@ class rule implements rule_interface
 */
 
 		$rules_data = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, $this->boardrules_table, $language);
+		$rules_data->set_language($language);
 		$rowset = $rules_data->get_path_and_subtree_data($parent_id);
 		foreach ($rowset as $row)
 		{

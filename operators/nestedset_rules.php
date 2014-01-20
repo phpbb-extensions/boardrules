@@ -17,16 +17,18 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	* @param \phpbb\db\driver\driver	$db		Database connection
 	* @param \phpbb\lock\db		$lock	Lock class used to lock the table when moving forums around
 	* @param string				$table_name		Table name
-	* @param int				$language		The language selection identifier
+	* @param int				$language		The language selection identifier; default: 0
 	*/
-	public function __construct(\phpbb\db\driver\driver $db, \phpbb\lock\db $lock, $table_name, $language)
+	public function __construct(\phpbb\db\driver\driver $db, \phpbb\lock\db $lock, $table_name, $language = 0)
 	{
+		$this->language = $language;
+		
 		parent::__construct(
 			$db,
 			$lock,
 			$table_name,
 			'RULES_NESTEDSET_',
-			'i1.rule_language = ' . (int) $language,
+			'i1.rule_language = ' . $this->language,
 			array(
 				'rule_id',
 				'rule_language',
@@ -39,5 +41,10 @@ class nestedset_rules extends \phpbb\tree\nestedset
 				'right_id'		=> 'rule_right_id',
 			)
 		);
+	}
+
+	public function set_language($language)
+	{
+		$this->language = (int) $language;
 	}
 }
