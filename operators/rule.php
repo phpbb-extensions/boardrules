@@ -66,7 +66,9 @@ class rule implements rule_interface
 		
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$data[] = $phpbb_container->get('phpbb.boardrules.entity')->import($row);
+			$data[] = $phpbb_container
+				->get('phpbb.boardrules.entity')
+				->import($row);
 		}
 		$this->db->sql_freeresult($result);
 */
@@ -75,7 +77,9 @@ class rule implements rule_interface
 		$rowset = $rules_data->get_path_and_subtree_data($parent_id);
 		foreach ($rowset as $row)
 		{
-			$data[] = $phpbb_container->get('phpbb.boardrules.entity')->import($row);
+			$data[] = $phpbb_container
+				->get('phpbb.boardrules.entity')
+				->import($row);
 		}
 
 		if (empty($data))
