@@ -17,6 +17,9 @@ class rule implements rule_interface
 	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
+	/** @var \phpbb\lock\db */
+	protected $lock;
+
 	/**
 	* The database table the rules are stored in
 	*
@@ -28,13 +31,15 @@ class rule implements rule_interface
 	* Constructor
 	*
 	* @param \phpbb\db\driver\driver    $db                 Database object
+	* @param \phpbb\lock\db             $lock               Lock class used to lock the table when moving rules around
 	* @param string                     $boardrules_table   Name of the table used to store board rules data
 	* @return null
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver $db, $boardrules_table)
+	public function __construct(\phpbb\db\driver\driver $db, \phpbb\lock\db $lock, $boardrules_table)
 	{
 		$this->db = $db;
+		$this->lock = $lock;
 		$this->boardrules_table = $boardrules_table;
 	}
 
@@ -52,7 +57,7 @@ class rule implements rule_interface
 		global $phpbb_container;
 		
 		$data = array();
-		
+/*		
 		$sql = 'SELECT *
 			FROM ' . $this->boardrules_table . '
 			WHERE rule_language = ' . (int) $language . ' AND rule_parent_id = ' . (int) $parent_id . '
@@ -64,6 +69,14 @@ class rule implements rule_interface
 			$data[] = $phpbb_container->get('phpbb.boardrules.entity')->import($row);
 		}
 		$this->db->sql_freeresult($result);
+*/
+
+		$rules_data = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, $this->boardrules_table, $language);
+		$rowset = $rules_data->get_path_and_subtree_data($parent_id);
+		foreach ($rowset as $row)
+		{
+			$data[] = $phpbb_container->get('phpbb.boardrules.entity')->import($row);
+		}
 
 		if (empty($data))
 		{

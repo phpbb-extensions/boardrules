@@ -22,4 +22,5 @@ services:
         class: phpbb\boardrules\operators\rule
         arguments:
             - @dbal.conn
+            - @cron.lock_db
             - %tables.boardrules%
