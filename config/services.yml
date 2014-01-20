@@ -22,5 +22,11 @@ services:
         class: phpbb\boardrules\operators\rule
         arguments:
             - @dbal.conn
+            - %tables.boardrules%
+
+    phpbb.boardrules.nestedset:
+        class: phpbb\boardrules\operators\nestedset_rules
+        arguments:
+            - @dbal.conn
             - @cron.lock_db
             - %tables.boardrules%

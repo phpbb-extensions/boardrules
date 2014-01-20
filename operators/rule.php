@@ -36,10 +36,9 @@ class rule implements rule_interface
 	* @return null
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver $db, \phpbb\lock\db $lock, $boardrules_table)
+	public function __construct(\phpbb\db\driver\driver $db, $boardrules_table)
 	{
 		$this->db = $db;
-		$this->lock = $lock;
 		$this->boardrules_table = $boardrules_table;
 	}
 
@@ -72,10 +71,7 @@ class rule implements rule_interface
 		}
 		$this->db->sql_freeresult($result);
 */
-
-		$rules_data = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, $this->boardrules_table, $language);
-		$rules_data->set_language($language);
-		$rowset = $rules_data->get_path_and_subtree_data($parent_id);
+		$rowset = $phpbb_container->get('phpbb.boardrules.nestedset')->set_language($language)->get_path_and_subtree_data($parent_id);
 		foreach ($rowset as $row)
 		{
 			$data[] = $phpbb_container
