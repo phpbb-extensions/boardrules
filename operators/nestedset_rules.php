@@ -39,7 +39,7 @@ class nestedset_rules extends \phpbb\tree\nestedset
 		);
 	}
 
-	public function set_language($language)
+	public function use_language($language)
 	{
 		$this->language = (int) $language;
 		return $this;

@@ -22,9 +22,10 @@ services:
         class: phpbb\boardrules\operators\rule
         arguments:
             - @dbal.conn
+            - @phpbb.boardrules.nestedset_rules
             - %tables.boardrules%
 
-    phpbb.boardrules.nestedset:
+    phpbb.boardrules.nestedset_rules:
         class: phpbb\boardrules\operators\nestedset_rules
         arguments:
             - @dbal.conn
