@@ -17,8 +17,19 @@ class rule implements rule_interface
 	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
-	/** @var \phpbb\lock\db */
-	protected $lock;
+	/**
+	* Entity for a single rule
+	*
+	* @var \phpbb\boardrules\entity\rule
+	*/
+	protected $entity;
+
+	/**
+	* Nestedset for board rules
+	*
+	* @var \phpbb\boardrules\operators\nestedset_rules
+	*/
+	protected $nestedset_rules;
 
 	/**
 	* The database table the rules are stored in
@@ -36,9 +47,10 @@ class rule implements rule_interface
 	* @return null
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver $db, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
+	public function __construct(\phpbb\db\driver\driver $db, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
 	{
 		$this->db = $db;
+		$this->entity = $entity;
 		$this->nestedset_rules = $nestedset_rules;
 		$this->boardrules_table = $boardrules_table;
 	}
@@ -54,8 +66,6 @@ class rule implements rule_interface
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
-		global $phpbb_container;
-		
 		$data = array();
 /*		
 		$sql = 'SELECT *
@@ -78,9 +88,7 @@ class rule implements rule_interface
 
 		foreach ($rowset as $row)
 		{
-			$data[] = $phpbb_container
-				->get('phpbb.boardrules.entity')
-				->import($row);
+			$data[] = $this->entity->import($row);
 		}
 
 		if (empty($data))
