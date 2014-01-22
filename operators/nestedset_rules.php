@@ -42,15 +42,17 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	}
 
 	/**
-	* Assign the language id to the sql_where statement
+	* Set additional sql where restrictions
 	*
 	* @param int					$language		The language selection identifier; default: 0
-	* @return nestedset_interface	$this
+	* @return string                Returns additional where statements to narrow down the tree,
+	*                                                prefixed with operator and prepended column_prefix to column names
 	* @access public
 	*/
 	public function use_language($language)
 	{
 		$this->sql_where = '%srule_language = ' . (int) $language;
+
 		return $this;
 	}
 }
