@@ -70,7 +70,7 @@ class rule implements rule_interface
 
 		$rowset = $this->nestedset_rules
 			->use_language($language)
-			->get_path_and_subtree_data($parent_id);
+			->get_rules_data($parent_id);
 
 		foreach ($rowset as $row)
 		{
