@@ -60,28 +60,14 @@ class rule implements rule_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return array Array of rule_interface
+	* @return array Array of all rules data from the database
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
 		$data = array();
-/*		
-		$sql = 'SELECT *
-			FROM ' . $this->boardrules_table . '
-			WHERE rule_language = ' . (int) $language . ' AND rule_parent_id = ' . (int) $parent_id . '
-			ORDER BY rule_left_id';
-		$result = $this->db->sql_query($sql);
-		
-		while ($row = $this->db->sql_fetchrow($result))
-		{
-			$data[] = $phpbb_container
-				->get('phpbb.boardrules.entity')
-				->import($row);
-		}
-		$this->db->sql_freeresult($result);
-*/
+
 		$rowset = $this->nestedset_rules
 			->use_language($language)
 			->get_path_and_subtree_data($parent_id);
