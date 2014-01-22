@@ -85,4 +85,20 @@ class rule implements rule_interface
 
 		return $data;
 	}
+
+	/**
+	* Move a rule up/down
+	*
+	* @param int $rule_id The rule identifier to move
+	* @param string $direction The direction (up|down)
+	* @param int $amount The number of places to move the rule
+	* @return null
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function move($rule_id, $direction = 'up', $amount = 1)
+	{
+		$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
+	}
+
 }
