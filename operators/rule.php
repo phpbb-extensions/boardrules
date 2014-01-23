@@ -87,6 +87,42 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Edit a rule
+	*
+	* @param int $rule_id The rule identifier to edit
+	* @param array $rule_data Rule data to edit
+	* 								rule_anchor
+	* 								rule_title
+	* 								rule_message
+	* @return rule_interface Edited rule entity
+	* @access public
+	* @throws \phpbb\boardrules\exception\runtime
+	*/
+	public function edit_rule($rule_id, $rule_data)
+	{
+		$rule_id = (int) $rule_id;
+		if (!$rule_id)
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds('INVALID_ITEM');
+		}
+
+		if (empty($rule_data))
+		{
+			// Rule data is missing
+			throw new \phpbb\boardrules\exception\out_of_bounds('MISSING_DATA');
+		}
+
+		$sql = 'UPDATE ' . $this->boardrules_table . '
+			SET ' . $this->db->sql_build_array('UPDATE', $rule_data) . '
+			WHERE ' . $this->db->sql_in_set('rule_id', $rule_id);
+		$this->db->sql_query($sql);
+
+		$rule_data_edited = $this->nestedset_rules->get_subtree_data($rule_id);
+
+		return $this->entity->import($rule_data_edited[$rule_id]);
+	}
+
+	/**
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
