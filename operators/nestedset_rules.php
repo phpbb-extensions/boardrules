@@ -60,14 +60,12 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Get the rules data from the database
 	*
-	* @param int		$parent_id		Category to display rules from
+	* @param int		$parent_id		Category to display rules from, 0  for all
 	* @return array 	Array of rules data from the database
 	* @access public
 	*/
 	public function get_rules_data($parent_id)
 	{
-		$this->column_item_id = 'rule_parent_id';
-
-		return $this->get_tree_data($parent_id);
+		return ($parent_id) ? $this->get_subtree_data($parent_id) : $this->get_tree_data();
 	}
 }
