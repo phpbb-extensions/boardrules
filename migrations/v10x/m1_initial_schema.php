@@ -22,6 +22,7 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 	*        rule_left_id The left id for the tree
 	*        rule_right_id The right id for the tree
 	*        rule_parent_id Category to display rules from
+	*        rule_parents Basic rule data is serialzed and cached here
 	*        rule_anchor Anchor text
 	*        rule_title Rule title
 	*        rule_message Rule message
@@ -43,6 +44,7 @@ class m1_initial_schema extends \phpbb\db\migration\migration
 						'rule_left_id'					=> array('UINT', 0),
 						'rule_right_id'					=> array('UINT', 0),
 						'rule_parent_id'				=> array('UINT', 0),
+						'rule_parents'					=> array('MTEXT_UNI', ''),
 						'rule_anchor'					=> array('VCHAR:255', ''),
 						'rule_title'					=> array('VCHAR:200', ''),
 						'rule_message'					=> array('TEXT_UNI', ''),

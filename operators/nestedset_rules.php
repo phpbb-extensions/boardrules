@@ -37,6 +37,7 @@ class nestedset_rules extends \phpbb\tree\nestedset
 				'parent_id'		=> 'rule_parent_id',
 				'left_id'		=> 'rule_left_id',
 				'right_id'		=> 'rule_right_id',
+				'item_parents'	=> 'rule_parents',
 			)
 		);
 	}
