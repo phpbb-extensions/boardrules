@@ -113,11 +113,16 @@ class rule implements rule_interface
 	* @param int $amount The number of places to move the rule
 	* @return null
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function move($rule_id, $direction = 'up', $amount = 1)
 	{
+		$rule_id = (int) $rule_id;
+		if (!$rule_id)
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds('INVALID_ITEM');
+		}
+
 		$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
 	}
-
 }
