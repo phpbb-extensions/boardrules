@@ -87,6 +87,42 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Add a rule
+	*
+	* @param int $language Language selection identifier; default: 0
+	* @param int $parent_id Category to display rules from; default: 0
+	* @param array $rule_data Rule data to add
+	* 								rule_anchor
+	* 								rule_title
+	* 								rule_message
+	* @return rule_interface Added rule entity
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function add_rule($language = 0, $parent_id = 0, $rule_data)
+	{
+		if (empty($data))
+		{
+			// Rule data is missing
+			throw new \phpbb\boardrules\exception\out_of_bounds('MISSING_DATA');
+		}
+
+		// Add language id to the rule_data array
+		$rule_data['rule_language'] = $language;
+		
+		// insert the rule_data into the database
+		$rule_data_inserted = $this->nestedset_rules->insert($rule_data);
+		
+		// Non-categories need to have a parent id
+		if ($rule_data_inserted['rule_parent_id'] !== $parent_id)
+		{
+			$this->nestedset_rules->change_parent($rule_data_inserted['rule_id'], $parent_id);
+		}
+		
+		return $this->entity->import($rule_data_inserted);
+	}
+
+	/**
 	* Edit a rule
 	*
 	* @param int $rule_id The rule identifier to edit
