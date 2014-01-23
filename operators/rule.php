@@ -87,6 +87,25 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Delete a rule
+	*
+	* @param int $rule_id The rule identifier to delete
+	* @return null
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function delete_rule($rule_id)
+	{
+		$rule_id = (int) $rule_id;
+		if (!$rule_id)
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds('INVALID_ITEM');
+		}
+
+		$this->nestedset_rules->delete($rule_id);
+	}
+
+	/**
 	* Move a rule up/down
 	*
 	* @param int $rule_id The rule identifier to move
