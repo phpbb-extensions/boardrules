@@ -22,7 +22,7 @@ class rule_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_rule_operator()
 	{
-		return new \phpbb\boardrules\operators\rule(\phpbb\db\driver\driver $db, $boardrules_table);
+		return new \phpbb\boardrules\operators\rule(\phpbb\db\driver\driver $db, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table);
 	}
 
 	public function getDataSet()
