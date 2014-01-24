@@ -41,10 +41,11 @@ class rule implements rule_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\db\driver\driver    $db                 Database object
-	* @param \phpbb\lock\db             $lock               Lock class used to lock the table when moving rules around
-	* @param string                     $boardrules_table   Name of the table used to store board rules data
-	* @return null
+	* @param \phpbb\db\driver\driver $db Database object
+	* @param \phpbb\boardrules\entity\rule $entity Entity object for a single rule
+	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
+	* @param string $boardrules_table The database table the rules are stored in
+	* @return \phpbb\boardrules\operators\rule
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver $db, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
@@ -66,7 +67,7 @@ class rule implements rule_interface
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
-		$data = array();
+		$rule_data = array();
 
 		$rowset = $this->nestedset_rules
 			->use_language($language)
@@ -74,16 +75,16 @@ class rule implements rule_interface
 
 		foreach ($rowset as $row)
 		{
-			$data[] = $this->entity->import($row);
+			$rule_data[] = $this->entity->import($row);
 		}
 
-		if (empty($data))
+		// If no rule data for the given language exists, throw an exception
+		if (empty($rule_data))
 		{
-			// Rules for the language do not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds('RULE_LANGUAGE');
+			throw new \phpbb\boardrules\exception\out_of_bounds('MISSING_DATA');
 		}
 
-		return $data;
+		return $rule_data;
 	}
 
 	/**
@@ -101,24 +102,24 @@ class rule implements rule_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0, $rule_data)
 	{
-		if (empty($data))
+		// If no rule data was sent to us, throw an exception
+		if (empty($rule_data))
 		{
-			// Rule data is missing
-			throw new \phpbb\boardrules\exception\out_of_bounds('MISSING_DATA');
+			throw new \phpbb\boardrules\exception\base('MISSING_DATA');
 		}
 
 		// Add language id to the rule_data array
 		$rule_data['rule_language'] = $language;
-		
+
 		// insert the rule_data into the database
 		$rule_data_inserted = $this->nestedset_rules->insert($rule_data);
-		
+
 		// Non-categories need to have a parent id
 		if ($rule_data_inserted['rule_parent_id'] !== $parent_id)
 		{
 			$this->nestedset_rules->change_parent($rule_data_inserted['rule_id'], $parent_id);
 		}
-		
+
 		return $rule_data_inserted;
 	}
 
@@ -139,13 +140,13 @@ class rule implements rule_interface
 		$rule_id = (int) $rule_id;
 		if (!$rule_id)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('INVALID_ITEM');
+			throw new \phpbb\boardrules\exception\runtime('INVALID_ITEM');
 		}
 
+		// If no rule data was sent to us, throw an exception
 		if (empty($rule_data))
 		{
-			// Rule data is missing
-			throw new \phpbb\boardrules\exception\out_of_bounds('MISSING_DATA');
+			throw new \phpbb\boardrules\exception\runtime('MISSING_DATA');
 		}
 
 		$sql = 'UPDATE ' . $this->boardrules_table . '
