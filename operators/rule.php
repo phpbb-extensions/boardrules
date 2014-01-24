@@ -119,7 +119,7 @@ class rule implements rule_interface
 			$this->nestedset_rules->change_parent($rule_data_inserted['rule_id'], $parent_id);
 		}
 		
-		return $this->entity->import($rule_data_inserted);
+		return $rule_data_inserted;
 	}
 
 	/**
