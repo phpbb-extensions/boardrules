@@ -14,16 +14,22 @@ namespace phpbb\boardrules\tests\operators;
 */
 class rule_operator_base extends \phpbb_database_test_case
 {
+	/** @var \phpbb\db\driver\driver */
+	protected $db;
+
 	/**
-	* Get the rule operator
+	* Entity for a single rule
 	*
-	* @return \phpbb\boardrules\operators\rule
-	* @access protected
+	* @var \phpbb\boardrules\entity\rule
 	*/
-	protected function get_rule_operator()
-	{
-		return new \phpbb\boardrules\operators\rule(\phpbb\db\driver\driver $db, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table);
-	}
+	protected $entity;
+
+	/**
+	* Nestedset for board rules
+	*
+	* @var \phpbb\boardrules\operators\nestedset_rules
+	*/
+	protected $nestedset_rules;
 
 	public function getDataSet()
 	{
@@ -35,5 +41,27 @@ class rule_operator_base extends \phpbb_database_test_case
 		parent::setUp();
 
 		$this->db = $this->new_dbal();
+
+		global $config;
+
+		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
+		set_config(null, null, null, $this->config);
+
+		$this->lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
+		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, 'phpbb_boardrules');
+
+		$this->entity = new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
 	}
+
+	/**
+	* Get the rule operator
+	*
+	* @return \phpbb\boardrules\operators\rule
+	* @access protected
+	*/
+	protected function get_rule_operator()
+	{
+		return new \phpbb\boardrules\operators\rule($this->db, $this->entity, $this->nestedset_rules, 'phpbb_boardrules');
+	}
+
 }
