@@ -68,4 +68,31 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	{
 		return ($parent_id) ? $this->get_subtree_data($parent_id) : $this->get_tree_data();
 	}
+
+	/**
+	* Get all items from a tree in the database
+	*
+	* @param bool		$order_asc		Order the items ascending by their left_id
+	* @return array		Array of items (containing all columns from the item table)
+	*						ID => Item data
+	* @access public
+	*/
+	public function get_tree_data($order_asc = true)
+	{
+		$rows = array();
+
+		$sql = 'SELECT ' . implode(', ', $this->item_basic_data) . '
+			FROM ' . $this->table_name . ' ' .
+			$this->get_sql_where('WHERE') . '
+			ORDER BY ' . $this->column_left_id . ' ' . ($order_asc ? 'ASC' : 'DESC');
+		$result = $this->db->sql_query($sql);
+
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$rows[(int) $row[$this->column_item_id]] = $row;
+		}
+		$this->db->sql_freeresult($result);
+
+		return $rows;
+	}
 }
