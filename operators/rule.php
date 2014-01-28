@@ -95,7 +95,7 @@ class rule implements rule_interface
 		$rule_data['rule_language'] = $language;
 
 		// Validate and insert the rule_data using our entity class
-		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity');
+		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity')
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
@@ -134,7 +134,7 @@ class rule implements rule_interface
 		}
 
 		// Validate the rule_data using our entity class
-		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity');
+		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity')
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
