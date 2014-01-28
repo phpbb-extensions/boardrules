@@ -140,10 +140,10 @@ class rule implements rule_interface
 			->set_message($rule_data['rule_message'])
 			->save();
 
-		$sql = 'UPDATE ' . $this->boardrules_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $rule_data) . '
-			WHERE ' . $this->db->sql_in_set('rule_id', $rule_id);
-		$this->db->sql_query($sql);
+// 		$sql = 'UPDATE ' . $this->boardrules_table . '
+// 			SET ' . $this->db->sql_build_array('UPDATE', $rule_data) . '
+// 			WHERE ' . $this->db->sql_in_set('rule_id', $rule_id);
+// 		$this->db->sql_query($sql);
 
 		$rule_data_edited = $this->nestedset_rules->get_subtree_data($rule_id);
 
