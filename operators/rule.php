@@ -70,7 +70,8 @@ class rule implements rule_interface
 
 		foreach ($rowset as $row)
 		{
-			$rule_data[] = $this->phpbb_container->get('phpbb.boardrules.entity')->import($row);
+			$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->import($row);
+			$rule_data[] = $entity->data;
 		}
 
 		return $rule_data;
