@@ -91,7 +91,8 @@ class rule implements rule_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0, $rule_data)
 	{
-		$this->phpbb_container->get('phpbb.boardrules.entity');
+		// Validate the rule_data using our entity class
+		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity');
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
@@ -132,7 +133,8 @@ class rule implements rule_interface
 			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
 		}
 
-		$this->phpbb_container->get('phpbb.boardrules.entity');
+		// Validate the rule_data using our entity class
+		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity');
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
