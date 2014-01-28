@@ -70,7 +70,10 @@ class rule implements rule_interface
 
 		foreach ($rowset as $row)
 		{
-			$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->import($row);
+			$entity = $this->phpbb_container
+				->get('phpbb.boardrules.entity')
+				->import($row);
+
 			$rule_data[] = $entity->data;
 		}
 
@@ -148,7 +151,9 @@ class rule implements rule_interface
 
 		$rule_data_edited = $this->nestedset_rules->get_subtree_data($rule_id);
 
-		return $this->phpbb_container->get('phpbb.boardrules.entity')->import($rule_data_edited[$rule_id]);
+		return $this->phpbb_container
+			->get('phpbb.boardrules.entity')
+			->import($rule_data_edited[$rule_id]);
 	}
 
 	/**
