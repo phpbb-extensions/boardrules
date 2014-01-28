@@ -99,14 +99,15 @@ class rule implements rule_interface
 		$rule_data['rule_language'] = $language;
 
 		// Validate and insert the rule_data using our entity class
-		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity')
+		$entity = $this->phpbb_container
+			->get('phpbb.boardrules.entity')
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
 			->insert();
 
 		// Update the tree for rule_data in the database
-		$rule_data = $this->nestedset_rules->insert_rule($rule_data);
+		$rule_data = $this->nestedset_rules->insert_rule($entity->data);
 
 		// Non-categories need to have a parent id
 		if ($rule_data['rule_parent_id'] !== $parent_id)
@@ -138,7 +139,8 @@ class rule implements rule_interface
 		}
 
 		// Validate the rule_data using our entity class
-		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity')
+		$entity = $this->phpbb_container
+			->get('phpbb.boardrules.entity')
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
