@@ -63,7 +63,6 @@ class rule implements rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return array Array of all rules data from the database
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
@@ -76,12 +75,6 @@ class rule implements rule_interface
 		foreach ($rowset as $row)
 		{
 			$rule_data[] = $this->entity->import($row);
-		}
-
-		// If no rule data for the given language exists, throw an exception
-		if (empty($rule_data))
-		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('MISSING_DATA');
 		}
 
 		return $rule_data;
