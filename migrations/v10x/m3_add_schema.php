@@ -10,7 +10,7 @@
 namespace phpbb\boardrules\migrations\v10x;
 
 /**
-* Migration stage 1: Initial schema
+* Migration stage 3: Additional schema
 */
 class m3_add_schema extends \phpbb\db\migration\migration
 {
@@ -23,7 +23,7 @@ class m3_add_schema extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\boardrules\migrations\v10x\m3_add_schema');
+		return array('\phpbb\boardrules\migrations\v10x\m2_initial_data');
 	}
 
 	/**
