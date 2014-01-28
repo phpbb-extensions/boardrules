@@ -189,6 +189,12 @@ class rule implements rule_interface
 			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
 		}
 
+		$amount = (int) $amount;
+		if (!$amount)
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds(array('amount', 'INVALID_ITEM'));
+		}
+
 		$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
 	}
 }
