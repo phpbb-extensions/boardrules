@@ -21,6 +21,7 @@ services:
     phpbb.boardrules.operator:
         class: phpbb\boardrules\operators\rule
         arguments:
+            - @service_container
             - @dbal.conn
             - @phpbb.boardrules.nestedset_rules
             - %tables.boardrules%
