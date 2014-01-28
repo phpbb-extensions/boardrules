@@ -165,7 +165,7 @@ class rule implements rule_interface
 		$rule_id = (int) $rule_id;
 		if (!$rule_id)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('INVALID_ITEM');
+			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
 		}
 
 		$this->nestedset_rules->delete($rule_id);
@@ -186,7 +186,7 @@ class rule implements rule_interface
 		$rule_id = (int) $rule_id;
 		if (!$rule_id)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('INVALID_ITEM');
+			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
 		}
 
 		$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
