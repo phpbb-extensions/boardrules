@@ -91,26 +91,26 @@ class rule implements rule_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0, $rule_data)
 	{
-		// Validate the rule_data using our entity class
+		// Add language id to the rule_data array
+		$rule_data['rule_language'] = $language;
+
+		// Validate and insert the rule_data using our entity class
 		$rule_data = $this->phpbb_container->get('phpbb.boardrules.entity');
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
-			->save();
+			->insert();
 
-		// Add language id to the rule_data array
-		$rule_data['rule_language'] = $language;
-
-		// insert the rule_data into the database
-		$rule_data_inserted = $this->nestedset_rules->insert($rule_data);
+		// Update the tree for rule_data in the database
+		$rule_data = $this->nestedset_rules->insert_rule($rule_data);
 
 		// Non-categories need to have a parent id
-		if ($rule_data_inserted['rule_parent_id'] !== $parent_id)
+		if ($rule_data['rule_parent_id'] !== $parent_id)
 		{
-			$this->nestedset_rules->change_parent($rule_data_inserted['rule_id'], $parent_id);
+			$this->nestedset_rules->change_parent($rule_data['rule_id'], $parent_id);
 		}
 
-		return $rule_data_inserted;
+		return $rule_data;
 	}
 
 	/**

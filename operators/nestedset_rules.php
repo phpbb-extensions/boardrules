@@ -95,4 +95,23 @@ class nestedset_rules extends \phpbb\tree\nestedset
 
 		return $rows;
 	}
+
+	/**
+	* Update the tree for an item inserted in the database
+	*
+	* @param bool		$additional_data		Data of the item inserted
+	* @return array		Array of updated column data for the inserted item
+	* @access public
+	*/
+	public function insert_rule(array $additional_data)
+	{
+		$item_data = $this->reset_nestedset_values($additional_data);
+
+		//$sql = 'INSERT INTO ' . $this->table_name . ' ' . $this->db->sql_build_array('INSERT', $item_data);
+		//$this->db->sql_query($sql);
+
+		$item_data[$this->column_item_id] = (int) $this->db->sql_nextid();
+
+		return array_merge($item_data, $this->add_item_to_nestedset($item_data[$this->column_item_id]));
+	}
 }
