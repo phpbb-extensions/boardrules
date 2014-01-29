@@ -54,7 +54,7 @@ class rule_entity_anchor_test extends rule_entity_base
 		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that the anchor matches what's expected
-		$this->assertSame($anchor, $entity->get_anchor());
+		$this->assertSame($expected, $entity->get_anchor($anchor));
 	}
 
 	/**
