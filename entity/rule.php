@@ -268,6 +268,49 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Get anchor
+	*
+	* @return string anchor
+	* @access public
+	*/
+	public function get_anchor()
+	{
+		return (isset($this->data['rule_anchor'])) ? (string) $this->data['rule_anchor'] : '';
+	}
+
+	/**
+	* Set anchor
+	*
+	* @param string $anchor Anchor text
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function set_anchor($anchor)
+	{
+		// Enforce a string
+		$anchor = (string) $anchor;
+
+		// Anchor should start with a letter to be a valid HTML id attribute
+		if (!preg_match('/^[a-z]/i', $anchor) && $anchor != '')
+		{
+			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'INVALID_CHARACTERS'));
+		}
+
+		// We limit the anchor length to 255 characters
+		if (truncate_string($anchor, 255) != $anchor)
+		{
+			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
+		}
+
+		// Set the anchor on our data array
+		$this->data['rule_anchor'] = $anchor;
+
+		// Return $this; so calls can be chained load()->set()->save()
+		return $this;
+	}
+
+	/**
 	* Set option helper
 	*
 	* @param int $option_value Value of the option
