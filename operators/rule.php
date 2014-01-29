@@ -95,16 +95,13 @@ class rule implements rule_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0, $rule_data)
 	{
-		// Add language id to the rule_data array
-		$rule_data['rule_language'] = $language;
-
 		// Validate and insert the rule_data using our entity class
 		$entity = $this->phpbb_container
 			->get('phpbb.boardrules.entity')
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
-			->insert();
+			->insert($language);
 
 		// Update the tree for rule_data in the database
 		$rule_data = $this->nestedset_rules->insert_rule($entity->data);
@@ -145,11 +142,6 @@ class rule implements rule_interface
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
 			->save();
-
-// 		$sql = 'UPDATE ' . $this->boardrules_table . '
-// 			SET ' . $this->db->sql_build_array('UPDATE', $rule_data) . '
-// 			WHERE ' . $this->db->sql_in_set('rule_id', $rule_id);
-// 		$this->db->sql_query($sql);
 
 		$rule_data_edited = $this->nestedset_rules->get_subtree_data($rule_id);
 
