@@ -30,7 +30,7 @@ class rule implements rule_interface
 	*	rule_message_bbcode_options
 	* @access protected
 	*/
-	protected $data;
+	public $data;
 
 	/**
 	* Load the data from the database for this rule
