@@ -65,8 +65,7 @@ class rule implements rule_interface
 
 		foreach ($rowset as $row)
 		{
-			$entity = $this->phpbb_container
-				->get('phpbb.boardrules.entity')
+			$entity = $this->phpbb_container->get('phpbb.boardrules.entity')
 				->import($row);
 
 			$rule_data[] = $entity->data;
@@ -91,8 +90,7 @@ class rule implements rule_interface
 	public function add_rule($language = 0, $parent_id = 0, $rule_data)
 	{
 		// Validate and insert the rule_data using our entity class
-		$entity = $this->phpbb_container
-			->get('phpbb.boardrules.entity')
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
 			->set_message($rule_data['rule_message'])
@@ -131,8 +129,7 @@ class rule implements rule_interface
 		}
 
 		// Validate the rule_data using our entity class and save
-		$this->phpbb_container
-			->get('phpbb.boardrules.entity')
+		$this->phpbb_container->get('phpbb.boardrules.entity')
 			->load($rule_id)
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
