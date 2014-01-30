@@ -17,9 +17,6 @@ class rule implements rule_interface
 	/** @var ContainerBuilder */
 	protected $phpbb_container;
 
-	/** @var \phpbb\db\driver\driver */
-	protected $db;
-
 	/**
 	* Nestedset for board rules
 	*
@@ -38,16 +35,14 @@ class rule implements rule_interface
 	* Constructor
 	*
 	* @param ContainerBuilder $phpbb_container
-	* @param \phpbb\db\driver\driver $db Database object
 	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
 	* @param string $boardrules_table The database table the rules are stored in
 	* @return \phpbb\boardrules\operators\rule
 	* @access public
 	*/
-	public function __construct($phpbb_container, \phpbb\db\driver\driver $db, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
+	public function __construct($phpbb_container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
 	{
 		$this->phpbb_container = $phpbb_container;
-		$this->db = $db;
 		$this->nestedset_rules = $nestedset_rules;
 		$this->boardrules_table = $boardrules_table;
 	}

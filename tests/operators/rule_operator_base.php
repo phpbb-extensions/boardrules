@@ -46,6 +46,6 @@ class rule_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_rule_operator()
 	{
-		return new \phpbb\boardrules\operators\rule($this->container, $this->db, $this->nestedset_rules, 'phpbb_boardrules');
+		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules, 'phpbb_boardrules');
 	}
 }
