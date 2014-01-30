@@ -112,7 +112,7 @@ class rule implements rule_interface
 			$this->nestedset_rules->change_parent($rule_data['rule_id'], $parent_id);
 		}
 
-		return $rule_data;
+		return $entity->import($rule_data);
 	}
 
 	/**
@@ -144,11 +144,7 @@ class rule implements rule_interface
 			->set_message($rule_data['rule_message'])
 			->save();
 
-		$rule_data_edited = $this->nestedset_rules->get_subtree_data($rule_id);
-
-		return $this->phpbb_container
-			->get('phpbb.boardrules.entity')
-			->import($rule_data_edited[$rule_id]);
+		return $entity;
 	}
 
 	/**
