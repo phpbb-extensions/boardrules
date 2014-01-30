@@ -129,7 +129,7 @@ class rule implements rule_interface
 		}
 
 		// Validate the rule_data using our entity class and save
-		$this->phpbb_container->get('phpbb.boardrules.entity')
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')
 			->load($rule_id)
 			->set_title($rule_data['rule_title'])
 			->set_anchor($rule_data['rule_anchor'])
