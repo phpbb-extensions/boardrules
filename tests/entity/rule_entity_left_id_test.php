@@ -25,19 +25,19 @@ class rule_entity_left_id_test extends rule_entity_base
 		return array(
 			array(
 				array(
-					'rule_id' => 1,
+					'rule_left_id' => 1,
 				),
 				1,
 			),
 			array(
 				array(
-					'rule_id' => 3,
+					'rule_left_id' => 3,
 				),
 				3,
 			),
 			array(
 				array(
-					'rule_id' => null,
+					'rule_left_id' => null,
 				),
 				0,
 			),

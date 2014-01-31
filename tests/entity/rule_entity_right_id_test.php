@@ -25,19 +25,19 @@ class rule_entity_right_id_test extends rule_entity_base
 		return array(
 			array(
 				array(
-					'rule_id' => 2,
+					'rule_right_id' => 2,
 				),
 				2,
 			),
 			array(
 				array(
-					'rule_id' => 4,
+					'rule_right_id' => 4,
 				),
 				4,
 			),
 			array(
 				array(
-					'rule_id' => null,
+					'rule_right_id' => null,
 				),
 				0,
 			),
