@@ -95,7 +95,7 @@ class rule implements rule_interface
 			->insert($language);
 
 		// Update the tree for rule_data in the database
-		$rule_data = $this->nestedset_rules->insert_rule($entity->data);
+		$rule_data = $this->nestedset_rules->add_to_nestedset($entity->data);
 
 		// Non-categories need to have a parent id
 		if ($rule_data['rule_parent_id'] !== $parent_id)
