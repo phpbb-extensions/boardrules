@@ -7,6 +7,7 @@ services:
         arguments:
             - @config
             - @controller.helper
+            - @phpbb.boardrules.operator
             - @template
             - @user
             - %tables.boardrules%
