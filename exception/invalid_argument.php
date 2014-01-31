@@ -2,7 +2,7 @@
 /**
 *
 * @package Board Rules Extension
-* @copyright (c) 2013 phpBB Group
+* @copyright (c) 2014 phpBB Group
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -10,9 +10,9 @@
 namespace phpbb\boardrules\exception;
 
 /**
-* OutOfBounds exception
+* InvalidArgument exception
 */
-class out_of_bounds extends base
+class invalid_argument extends base
 {
 	/**
 	* Translate this exception
@@ -23,6 +23,6 @@ class out_of_bounds extends base
 	*/
 	public function get_message(\phpbb\user $user)
 	{
-		return $this->translate_portions($user, $this->getMessage(), 'EXCEPTION_OUT_OF_BOUNDS');
+		return $this->translate_portions($user, $this->getMessage(), 'EXCEPTION_INVALID_ARGUMENT');
 	}
 }

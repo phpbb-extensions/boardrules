@@ -70,6 +70,85 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Import data for this rule
+	*
+	* Used when the data is already loaded externally.
+	* Any existing data on this rule is over-written.
+	* All data is validated and an exception is thrown if any data is invalid.
+	*
+	* @param array $data Data array, typically from the database
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function import($data)
+	{
+		// Clear out any saved data
+		$this->data = array();
+
+		// All of our fields
+		$fields = array(
+			// column							=> data type (see settype())
+			'rule_id'							=> 'integer',
+			'rule_language'						=> 'integer',
+			'rule_left_id'						=> 'integer',
+			'rule_right_id'						=> 'integer',
+			'rule_anchor'						=> 'set_anchor', // call set_anchor()
+			'rule_title'						=> 'set_title', // call set_title()
+
+			// We do not pass to set_message() as generate_text_for_storage would run twice
+			'rule_message'						=> 'string',
+			'rule_message_bbcode_uid'			=> 'string',
+			'rule_message_bbcode_bitfield'		=> 'string',
+			'rule_message_bbcode_options'		=> 'integer',
+		);
+
+		// Go through the basic fields and set them to our data array
+		foreach ($fields as $field => $type)
+		{
+			// If the data wasn't sent to us, throw an exception
+			if (!isset($data[$field]))
+			{
+				throw new \phpbb\boardrules\exception\invalid_argument(array($field, 'FIELD_MISSING'));
+			}
+
+			// If the type is a method on this class, call it
+			if (method_exists($this, $type))
+			{
+				$this->$type($data[$field]);
+			}
+			else
+			{
+				// We're using settype to enforce data types
+				settype($data[$field], $type);
+
+				$this->data[$field] = $data[$field];
+			}
+		}
+
+		// Some fields must be unsigned (>= 0)
+		$validate_unsigned = array(
+			'rule_id',
+			'rule_language',
+			'rule_left_id',
+			'rule_right_id',
+			'rule_message_bbcode_options',
+		);
+
+		foreach ($validate_unsigned as $field)
+		{
+			// If the data is less than 0, it's not unsigned and we'll throw an exception
+			if ($this->data[$field] < 0)
+			{
+				throw new \phpbb\boardrules\exception\out_of_bounds($field);
+			}
+		}
+
+		// Return $this; so calls can be chained load()->set()->save()
+		return $this;
+	}
+
+	/**
 	* Get title
 	*
 	* @return string Title
@@ -96,7 +175,7 @@ class rule implements rule_interface
 		// We limit the title length to 200 characters
 		if (truncate_string($title, 200) != $title)
 		{
-			throw new \phpbb\boardrules\exception\unexpected_value('TITLE_TOO_LONG');
+			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
 
 		// Set the title on our data array
@@ -265,6 +344,60 @@ class rule implements rule_interface
 	public function message_disable_smilies()
 	{
 		$this->set_message_option(OPTION_FLAG_SMILIES, true);
+	}
+
+	/**
+	* Get anchor
+	*
+	* @return string anchor
+	* @access public
+	*/
+	public function get_anchor()
+	{
+		return (isset($this->data['rule_anchor'])) ? (string) $this->data['rule_anchor'] : '';
+	}
+
+	/**
+	* Set anchor
+	*
+	* @param string $anchor Anchor text
+	* @return rule_interface $this
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function set_anchor($anchor)
+	{
+		// Enforce a string
+		$anchor = (string) $anchor;
+
+		// Anchor should start with a letter to be a valid HTML id attribute
+		if (!preg_match('/^[a-z]/i', $anchor) && $anchor != '')
+		{
+			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'INVALID_CHARACTERS'));
+		}
+
+		// We limit the anchor length to 255 characters
+		if (truncate_string($anchor, 255) != $anchor)
+		{
+			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
+		}
+
+		// Set the anchor on our data array
+		$this->data['rule_anchor'] = $anchor;
+
+		// Return $this; so calls can be chained load()->set()->save()
+		return $this;
+	}
+
+	/**
+	* Get the language identifier
+	*
+	* @return int language identifier
+	* @access public
+	*/
+	public function get_language()
+	{
+		return (isset($this->data['rule_language'])) ? (int) $this->data['rule_language'] : 0;
 	}
 
 	/**
