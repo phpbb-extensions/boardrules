@@ -70,7 +70,7 @@ class rule implements rule_interface
 	*/
 	public function insert($language = 0)
 	{		
-		if (!empty($this->get_id()))
+		if (!empty($this->data['rule_id']))
 		{
 			// The rule already exists
 			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'ITEM_EXISTS'));
@@ -105,7 +105,7 @@ class rule implements rule_interface
 	*/
 	public function save()
 	{
-		if ($this->get_id() === 0)
+		if (empty($this->data['rule_id']))
 		{
 			// The rule does not exist
 			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
