@@ -49,6 +49,8 @@
 #rules ol { list-style: lower-alpha; }
 #rules ol li { margin-bottom: 5px; }
 #rules ol li.rule-item { padding-bottom: 5px; }
+#rules ol li.rule-item ul,
+#rules ol li.rule-item ol { margin: 1em 0 1em 3em; }
 
 /* rules sections mini panel */
 #boardrules-categories {
