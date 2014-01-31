@@ -113,7 +113,7 @@ class rule implements rule_interface
 
 		$sql = 'UPDATE ' . $this->boardrules_table . '
 			SET ' . $this->db->sql_build_array('UPDATE', $this->data) . '
-			WHERE rule_id = ' . (int) $this->data['rule_id'];
+			WHERE rule_id = ' . $this->get_id();
 		$this->db->sql_query($sql);
 
 		return $this;
