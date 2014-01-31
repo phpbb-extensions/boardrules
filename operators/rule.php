@@ -57,7 +57,7 @@ class rule implements rule_interface
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
-		$rule_data = array();
+		$entities = array();
 
 		$rowset = $this->nestedset_rules
 			->use_language($language)
@@ -65,13 +65,11 @@ class rule implements rule_interface
 
 		foreach ($rowset as $row)
 		{
-			$entity = $this->phpbb_container->get('phpbb.boardrules.entity')
+			$entities[] = $this->phpbb_container->get('phpbb.boardrules.entity')
 				->import($row);
-
-			$rule_data[] = $entity->data;
 		}
 
-		return $rule_data;
+		return $entities;
 	}
 
 	/**
