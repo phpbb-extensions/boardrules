@@ -90,6 +90,8 @@ class rule implements rule_interface
 		$sql = 'INSERT INTO ' . $this->boardrules_table . ' ' . $this->db->sql_build_array('INSERT', $this->data);
 		$this->db->sql_query($sql);
 
+		$this->data['rule_id'] = (int) $this->db->sql_nextid();
+
 		return $this;
 	}
 
