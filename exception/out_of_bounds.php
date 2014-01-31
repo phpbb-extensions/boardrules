@@ -14,4 +14,15 @@ namespace phpbb\boardrules\exception;
 */
 class out_of_bounds extends base
 {
+	/**
+	* Translate this exception
+	*
+	* @param \phpbb\user $user
+	* @return string
+	* @access public
+	*/
+	public function get_message(\phpbb\user $user)
+	{
+		return $this->translate_portions($user, $this->getMessage(), 'EXCEPTION_OUT_OF_BOUNDS');
+	}
 }

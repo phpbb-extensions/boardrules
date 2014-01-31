@@ -109,7 +109,7 @@ class rule implements rule_interface
 			// If the data wasn't sent to us, throw an exception
 			if (!isset($data[$field]))
 			{
-				throw new \phpbb\boardrules\exception\invalid_argument('MISSING_FIELD', $field);
+				throw new \phpbb\boardrules\exception\invalid_argument(array($field, 'FIELD_MISSING'));
 			}
 
 			// If the type is a method on this class, call it
@@ -140,7 +140,7 @@ class rule implements rule_interface
 			// If the data is less than 0, it's not unsigned and we'll throw an exception
 			if ($this->data[$field] < 0)
 			{
-				throw new \phpbb\boardrules\exception\out_of_bounds($field, $this->data[$field]);
+				throw new \phpbb\boardrules\exception\out_of_bounds($field);
 			}
 		}
 
@@ -175,7 +175,7 @@ class rule implements rule_interface
 		// We limit the title length to 200 characters
 		if (truncate_string($title, 200) != $title)
 		{
-			throw new \phpbb\boardrules\exception\unexpected_value('TITLE_TOO_LONG');
+			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
 
 		// Set the title on our data array
