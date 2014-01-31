@@ -67,15 +67,6 @@ interface rule_interface
 	public function save();
 
 	/**
-	* Delete this rule
-	*
-	* @return null
-	* @access public
-	* @throws \phpbb\boardrules\exception\base
-	*/
-	public function delete();
-
-	/**
 	* Get id
 	*
 	* @return int Rule identifier
