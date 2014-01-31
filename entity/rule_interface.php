@@ -84,16 +84,6 @@ interface rule_interface
 	public function get_id();
 
 	/**
-	* Set id
-	*
-	* @param int $id Rule identifier
-	* @return rule_interface $this
-	* @access public
-	* @throws \phpbb\boardrules\exception\base
-	*/
-	public function set_id($id);
-
-	/**
 	* Get title
 	*
 	* @return string

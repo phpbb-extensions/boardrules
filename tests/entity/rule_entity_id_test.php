@@ -22,28 +22,24 @@ class rule_entity_id_test extends rule_entity_base
 	*/
 	public function test_id_data()
 	{
+		$import_data = $this->get_import_data();
+
 		return array(
 			array(
-				array(
-					'rule_id' => 1,
-				),
+				$import_data[1],
 				1,
 			),
 			array(
-				array(
-					'rule_id' => 2,
-				),
+				$import_data[2],
 				2,
 			),
 			array(
-				array(
-					'rule_id' => null,
-				),
-				0,
+				$import_data[3],
+				3,
 			),
 			array(
-				array(),
-				0,
+				$import_data[4],
+				4,
 			),
 		);
 	}
