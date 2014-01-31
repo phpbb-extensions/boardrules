@@ -1,0 +1,42 @@
+<!-- INCLUDE overall_header.html -->
+
+<div id="boardrules-categories">
+	<div class="mini-panel">
+		<div class="inner">
+			<h3>{L_BOARDRULES_CATEGORIES}</h3>
+			<ul class="menu">
+				<!-- BEGIN categories -->
+					<li><a href="#section-{categories.U_RULE_CATEGORY}">{categories.RULE_CATEGORY}</a></li>
+				<!-- END categories -->
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="container">
+
+	<h2 class="boardrules-header">{L_BOARDRULES_HEADER}</h2>
+	<p class="boardrules-explain">{BOARDRULES_EXPLAIN}</p>
+
+	<div id="main">
+		<ol id="rules">
+			<!-- BEGIN categories -->
+				<li id="section-{categories.U_RULE_CATEGORY}">
+					<h3>{categories.RULE_CATEGORY}</h3>
+					<ol>
+						<!-- BEGIN rules -->
+							<li class="rule-item" id="rule-{categories.rules.U_ANCHOR}">
+								{categories.rules.RULE_MESSAGE} <a class="rule-anchor" href="#rule-{categories.rules.U_ANCHOR}">#</a>
+							</li>
+						<!-- END rules -->
+					</ol>
+				</li>
+			<!-- END categories -->
+		</ol>
+	</div>
+
+</div>
+
+<!-- INCLUDEJS @phpbb_boardrules/boardrules_controller.js -->
+
+<!-- INCLUDE overall_footer.html -->
