@@ -69,6 +69,7 @@ class main_controller implements main_interface
 		// Add boardrules controller language file
 		$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_controller');
 
+		$cat_last_row = $rule_last_row = 0;
 		$cat_counter = 1; // Numeric counter used for categories
 		$rule_counter = 'a'; // Alpha counter used for rules
 
@@ -77,27 +78,34 @@ class main_controller implements main_interface
 
 		foreach ($entities as $entity)
 		{
-			// Rule categories
 			if ($entity->get_right_id() - $entity->get_left_id() > 1)
 			{
-				$this->template->assign_block_vars('categories', array(
-					'TITLE'		=> $entity->get_title(),
-					'U_ANCHOR'	=> $entity->get_anchor() ?: $this->user->lang('BOARDRULES_CATEGORY_ANCHOR', $cat_counter),
-				));
+				// Rule categories
+				$is_category = true;
+				$cat_last_row = $entity->get_right_id();
+				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_CATEGORY_ANCHOR', $cat_counter);
 
 				$cat_counter++;
 				$rule_counter = 'a';
+			}
+			else
+			{
+				// Rules
+				$is_category = false;
+				$rule_last_row = $entity->get_right_id();
+				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_RULE_ANCHOR', (($cat_counter - 1) . $rule_counter));
 
-				continue;
+				$rule_counter++;
 			}
 
 			// Rules
-			$this->template->assign_block_vars('categories.rules', array(
-				'MESSAGE'	=> $entity->get_message_for_display(),
-				'U_ANCHOR'	=> $entity->get_anchor() ?: $this->user->lang('BOARDRULES_RULE_ANCHOR', (($cat_counter - 1) . $rule_counter)),
+			$this->template->assign_block_vars('rules', array(
+				'TITLE'			=> $entity->get_title(),
+				'MESSAGE'		=> $entity->get_message_for_display(),
+				'U_ANCHOR'		=> $anchor,
+ 				'S_CATEGORY'	=> $is_category,
+ 				'S_LAST_RULE'	=> ($cat_last_row - $rule_last_row == 1) ? true : false,
 			));
-			
-			$rule_counter++;
 		}
 
 		$this->template->assign_vars(array(
