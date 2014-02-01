@@ -401,6 +401,28 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Get the left identifier (for the tree)
+	*
+	* @return int left identifier
+	* @access public
+	*/
+	public function get_left_id()
+	{
+		return (isset($this->data['rule_left_id'])) ? (int) $this->data['rule_left_id'] : 0;
+	}
+
+	/**
+	* Get the right identifier (for the tree)
+	*
+	* @return int right identifier
+	* @access public
+	*/
+	public function get_right_id()
+	{
+		return (isset($this->data['rule_right_id'])) ? (int) $this->data['rule_right_id'] : 0;
+	}
+
+	/**
 	* Set option helper
 	*
 	* @param int $option_value Value of the option
