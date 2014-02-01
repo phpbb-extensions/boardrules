@@ -414,7 +414,7 @@ class rule implements rule_interface
 	/**
 	* Get the right identifier (for the tree)
 	*
-	* @return int left identifier
+	* @return int right identifier
 	* @access public
 	*/
 	public function get_right_id()
