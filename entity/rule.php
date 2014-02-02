@@ -82,14 +82,17 @@ class rule implements rule_interface
 		$this->data['rule_right_id'] = 0;
 		$this->data['rule_parents'] = '';
 
+		// Make extra sure there is no rule_id set
 		unset($this->data['rule_id']);
 
 		// Add the language identifier to the data array
 		$this->data['rule_language'] = $language;		
 
+		// Insert the rule data to the database
 		$sql = 'INSERT INTO ' . $this->boardrules_table . ' ' . $this->db->sql_build_array('INSERT', $this->data);
 		$this->db->sql_query($sql);
 
+		// Set the rule_id using the id created by the SQL insert
 		$this->data['rule_id'] = (int) $this->db->sql_nextid();
 
 		return $this;
