@@ -46,7 +46,6 @@
 /* rules */
 #rules { padding-right: 50px; }
 #rules li { margin-bottom: 20px; }
-#rules li:last-child { margin-bottom: 5px; }
 #rules ol { list-style: lower-alpha; }
 #rules ol li { margin-bottom: 5px; }
 #rules ol li.rule-item { padding-bottom: 5px; }
