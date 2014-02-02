@@ -10,23 +10,6 @@
 class extension_system_exception_test extends phpbb_test_case
 {
 	/**
-	* Set up the test
-	*
-	* @access public
-	*/
-	public function setUp()
-	{
-		parent::setUp();
-
-		// Must do this for testing with the user class
-		global $config;
-		$config['default_lang'] = 'en';
-
-		// Get instance of phpbb\user
-		$this->user = new \phpbb\user();
-	}
-
-	/**
 	* Data for test_exceptions function
 	*
 	* @return array
@@ -34,6 +17,13 @@ class extension_system_exception_test extends phpbb_test_case
 	*/
 	public function test_exceptions_data()
 	{
+		// Must do this for testing with the user class
+		global $config;
+		$config['default_lang'] = 'en';
+
+		// Get instance of phpbb\user (dataProvider is called before setUp(), so this must be done here)
+		$this->user = new \phpbb\user();
+
 		return array(
 			array(
 				'base',
@@ -58,7 +48,7 @@ class extension_system_exception_test extends phpbb_test_case
 			array(
 				'unexpected_value',
 				array('{foo}', 'TOO_LONG'),
-				$this->user->lang('EXCEPTION_UNEXPECTED_VALUE', '{foo}', $user->lang('EXCEPTION_TOO_LONG')),
+				$this->user->lang('EXCEPTION_UNEXPECTED_VALUE', '{foo}', $this->user->lang('EXCEPTION_TOO_LONG')),
 			),
 		);
 	}
