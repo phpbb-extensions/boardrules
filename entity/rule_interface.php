@@ -46,11 +46,13 @@ interface rule_interface
 	* Will throw an exception if the rule was already inserted (call save() instead)
 	*
 	* @param int $language The language identifier
+	* @param int $left_id The left id for the tree
+	* @param int $right_id The right id for the tree
 	* @return rule_interface $this
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
-	public function insert($language = 0);
+	public function insert($language = 0, $left_id = 0, $right_id = 0);
 
 	/**
 	* Save the current settings to the database
