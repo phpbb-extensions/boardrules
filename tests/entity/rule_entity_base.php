@@ -14,6 +14,9 @@ namespace phpbb\boardrules\tests\entity;
 */
 class rule_entity_base extends \phpbb_database_test_case
 {
+	/** @var \phpbb\db\driver\driver */
+	protected $db;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/rule.xml');
@@ -34,7 +37,7 @@ class rule_entity_base extends \phpbb_database_test_case
 	*/
 	protected function get_rule_entity()
 	{
-		return new \phpbb\boardrules\entity\rule();
+		return new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
 	}
 
 	/**
