@@ -14,6 +14,24 @@ namespace phpbb\boardrules\exception;
 */
 class base extends \Exception
 {
+	protected $previous;
+
+	/**
+	 * Constructor
+	 *
+	 * Different from normal exceptions in that we do not enforce $message to be a string.
+	 *
+	 * @param string|array $message
+	 * @param int $code
+	 * @param Exception $previous
+	 */
+	public function __construct($message = null, $code = 0, Exception $previous = null)
+	{
+		$this->message = $message;
+		$this->code = $code;
+		$this->previous = $previous;
+	}
+
 	/**
 	* Basic message translation for our exceptions
 	*
