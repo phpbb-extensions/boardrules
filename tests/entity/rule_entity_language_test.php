@@ -12,7 +12,7 @@ namespace phpbb\boardrules\tests\entity;
 /**
 * Tests related to language on rule entity
 */
-class rule_entity_id_test extends rule_entity_base
+class rule_entity_language_test extends rule_entity_base
 {
 	/**
 	* Test data for the test_language() function
