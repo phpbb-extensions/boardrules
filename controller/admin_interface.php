@@ -46,22 +46,22 @@ interface admin_interface
 	/**
 	* Display the rules
 	*
-	* @param string $language Language selection; default Board Default Language
+	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return null
 	* @access public
 	*/
-	public function display_rules($language = '', $parent_id = 0);
+	public function display_rules($language = 0, $parent_id = 0);
 
 	/**
 	* Add a rule
 	*
-	* @param string $language Language selection; default Board Default Language
+	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return null
 	* @access public
 	*/
-	public function add_rule($language = '', $parent_id = 0);
+	public function add_rule($language = 0, $parent_id = 0);
 
 	/**
 	* Edit a rule

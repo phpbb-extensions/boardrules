@@ -2,7 +2,7 @@
 /**
 *
 * @package testing
-* @copyright (c) 2013 phpBB Group
+* @copyright (c) 2014 phpBB Group
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -10,9 +10,9 @@
 namespace phpbb\boardrules\tests\entity;
 
 /**
-* Tests related to ids on rule entity
+* Tests related to tree ids on rule entity
 */
-class rule_entity_id_test extends rule_entity_base
+class rule_entity_right_id_test extends rule_entity_base
 {
 	/**
 	* Test data for the test_id() function
@@ -31,15 +31,15 @@ class rule_entity_id_test extends rule_entity_base
 			),
 			array(
 				$import_data[2],
-				2,
+				5,
 			),
 			array(
 				$import_data[3],
-				3,
+				4,
 			),
 			array(
 				$import_data[4],
-				4,
+				7,
 			),
 		);
 	}
@@ -59,6 +59,6 @@ class rule_entity_id_test extends rule_entity_base
 		$entity->import($data);
 
 		// Assert that the id matches what is expected
-		$this->assertEquals($expected, $entity->get_id());
+		$this->assertEquals($expected, $entity->get_right_id());
 	}
 }
