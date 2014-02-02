@@ -84,16 +84,6 @@ interface rule_interface
 	public function get_id();
 
 	/**
-	* Set id
-	*
-	* @param int $id Rule identifier
-	* @return rule_interface $this
-	* @access public
-	* @throws \phpbb\boardrules\exception\base
-	*/
-	public function set_id($id);
-
-	/**
 	* Get title
 	*
 	* @return string
@@ -231,7 +221,7 @@ interface rule_interface
 	/**
 	* Get the language identifier
 	*
-	* @return string language identifier
+	* @return int language identifier
 	* @access public
 	*/
 	public function get_language();
@@ -247,7 +237,7 @@ interface rule_interface
 	/**
 	* Get the right identifier (for the tree)
 	*
-	* @return int left identifier
+	* @return int right identifier
 	* @access public
 	*/
 	public function get_right_id();
