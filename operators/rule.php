@@ -10,7 +10,7 @@
 namespace phpbb\boardrules\operators;
 
 /**
-* Operator for a a set of rules
+* Operator for a set of rules
 */
 class rule implements rule_interface
 {
