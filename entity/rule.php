@@ -32,6 +32,30 @@ class rule implements rule_interface
 	*/
 	protected $data;
 
+	/** @var \phpbb\db\driver\driver */
+	protected $db;
+
+	/**
+	* The database table the rules are stored in
+	*
+	* @var string
+	*/
+	protected $boardrules_table;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\db\driver\driver    $db                 Database object
+	* @param string                     $boardrules_table   Name of the table used to store board rules data
+	* @return null
+	* @access public
+	*/
+	public function __construct(\phpbb\db\driver\driver $db, $boardrules_table)
+	{
+		$this->db = $db;
+		$this->boardrules_table = $boardrules_table;
+	}
+ 
 	/**
 	* Load the data from the database for this rule
 	*

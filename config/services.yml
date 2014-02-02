@@ -10,6 +10,14 @@ services:
             - @template
             - @user
             - %tables.boardrules%
+
+ phpbb.boardrules.entity:
+        class: phpbb\boardrules\entity\rule
+        scope: prototype # scope MUST be prototype for this to work!
+        arguments:
+            - @dbal.conn
+            - %tables.boardrules%
+
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
         arguments:
