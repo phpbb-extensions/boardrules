@@ -123,11 +123,6 @@ class main_controller implements main_interface
 			));
 		}
 
-		// Force a final closing tag to the rules array
-		$this->template->assign_block_vars('rules', array(
-			'S_CLOSE_LIST'	=> true,
-		));
-
 		$this->template->assign_vars(array(
 			'S_BOARDRULES'			=> true,
 			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
