@@ -22,6 +22,8 @@ class rule implements rule_interface
 	*	rule_language
 	*	rule_left_id
 	*	rule_right_id
+	*	rule_parent_id
+	*	rule_parents
 	*	rule_anchor
 	*	rule_title
 	*	rule_message
@@ -117,6 +119,8 @@ class rule implements rule_interface
 			'rule_language'						=> 'integer',
 			'rule_left_id'						=> 'integer',
 			'rule_right_id'						=> 'integer',
+			'rule_parent_id'					=> 'integer',
+			'rule_parents'						=> 'string',
 			'rule_anchor'						=> 'set_anchor', // call set_anchor()
 			'rule_title'						=> 'set_title', // call set_title()
 
