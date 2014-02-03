@@ -429,7 +429,7 @@ class rule implements rule_interface
 	}
 
 	/**
-	* Get the parent identifier (for the tree)
+	* Get the parent identifier
 	*
 	* @return int parent identifier
 	* @access public

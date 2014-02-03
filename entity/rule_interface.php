@@ -227,7 +227,7 @@ interface rule_interface
 	public function get_language();
 
 	/**
-	* Get the parent identifier (for the tree)
+	* Get the parent identifier
 	*
 	* @return int parent identifier
 	* @access public
