@@ -429,6 +429,17 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Get the parent identifier (for the tree)
+	*
+	* @return int parent identifier
+	* @access public
+	*/
+	public function get_parent_id()
+	{
+		return (isset($this->data['rule_parent_id'])) ? (int) $this->data['rule_parent_id'] : 0;
+	}
+
+	/**
 	* Get the left identifier (for the tree)
 	*
 	* @return int left identifier
