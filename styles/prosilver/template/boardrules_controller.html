@@ -25,12 +25,11 @@
 					<li id="{rules.U_ANCHOR}">
 						<h3>{rules.TITLE}</h3>
 						<ol>
-				<!-- ELSE -->
+				<!-- ELSEIF not rules.S_CLOSE_LIST -->
 							<li class="rule-item" id="{rules.U_ANCHOR}">
 								{rules.MESSAGE} <a class="rule-anchor" href="#{rules.U_ANCHOR}">#</a>
 							</li>
-				<!-- ENDIF -->
-				<!-- IF rules.S_LAST_RULE -->
+				<!-- ELSEIF rules.S_CLOSE_LIST -->
 						</ol>
 					</li>
 				<!-- ENDIF -->

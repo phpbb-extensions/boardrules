@@ -69,7 +69,7 @@ class main_controller implements main_interface
 		// Add boardrules controller language file
 		$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_controller');
 
-		$cat_last_row = $rule_last_row = 0;
+		$last_right_id = null; // Used when determining nesting level
 		$cat_counter = 1; // Numeric counter used for categories
 		$rule_counter = 'a'; // Alpha counter used for rules
 
@@ -82,21 +82,37 @@ class main_controller implements main_interface
 			{
 				// Rule categories
 				$is_category = true;
-				$cat_last_row = $entity->get_right_id();
 				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_CATEGORY_ANCHOR', $cat_counter);
 
+				// Increment category counter
 				$cat_counter++;
+				// Reset rule counter
 				$rule_counter = 'a';
 			}
 			else
 			{
 				// Rules
 				$is_category = false;
-				$rule_last_row = $entity->get_right_id();
 				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_RULE_ANCHOR', (($cat_counter - 1) . $rule_counter));
 
+				// Increment rule counter
 				$rule_counter++;
 			}
+
+			// Determine how deeply nested we are and use closing tags as necessary
+			$diff = ($last_right_id !== null) ? $entity->get_left_id() - $last_right_id : 1;
+			if ($diff > 1)
+			{
+				for ($i = 1; $i < $diff; $i++)
+				{
+					$this->template->assign_block_vars('rules', array(
+						'S_CLOSE_LIST'	=> true,
+					));
+				}
+			}
+
+			// Set new last_right_id value
+			$last_right_id = $entity->get_right_id();
 
 			// Rules
 			$this->template->assign_block_vars('rules', array(
@@ -104,9 +120,13 @@ class main_controller implements main_interface
 				'MESSAGE'		=> $entity->get_message_for_display(),
 				'U_ANCHOR'		=> $anchor,
  				'S_CATEGORY'	=> $is_category,
- 				'S_LAST_RULE'	=> ($cat_last_row - $rule_last_row == 1) ? true : false,
 			));
 		}
+
+		// Force a final closing tag to the rules array
+		$this->template->assign_block_vars('rules', array(
+			'S_CLOSE_LIST'	=> true,
+		));
 
 		$this->template->assign_vars(array(
 			'S_BOARDRULES'			=> true,
