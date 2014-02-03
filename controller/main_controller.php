@@ -120,6 +120,7 @@ class main_controller implements main_interface
 				'MESSAGE'		=> $entity->get_message_for_display(),
 				'U_ANCHOR'		=> $anchor,
  				'S_CATEGORY'	=> $is_category,
+ 				'S_HAS_CATS'	=> ($cat_counter > 1) ? true : false,
 			));
 		}
 
