@@ -35,7 +35,7 @@ class rule_entity_parent_id_test extends rule_entity_base
 			),
 			array(
 				$import_data[3],
-				0,
+				2,
 			),
 			array(
 				$import_data[4],

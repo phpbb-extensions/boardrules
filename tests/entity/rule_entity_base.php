@@ -82,7 +82,7 @@ class rule_entity_base extends \extension_database_test_case
 				'rule_language'						=> '1',
 				'rule_left_id'						=> '3',
 				'rule_right_id'						=> '4',
-				'rule_parent_id'					=> '0',
+				'rule_parent_id'					=> '2',
 				'rule_parents'						=> '',
 				'rule_anchor'						=> '3 Anchor',
 				'rule_title'						=> '3 Title',
