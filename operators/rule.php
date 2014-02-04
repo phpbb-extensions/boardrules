@@ -87,10 +87,10 @@ class rule implements rule_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0, $entity)
 	{
-		// Validate and insert the rule_data using our entity class
+		// Insert the rule data to the database for the given language selection
 		$entity->insert($language);
 
-		// Get the newly inserted rules identifier
+		// Get the newly inserted rule's identifier
 		$rule_id = $entity->get_id();
 
 		// Update the tree for the rule in the database
