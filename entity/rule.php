@@ -30,7 +30,7 @@ class rule implements rule_interface
 	*	rule_message_bbcode_options
 	* @access protected
 	*/
-	public $data;
+	protected $data;
 
 	/** @var \phpbb\db\driver\driver */
 	protected $db;
