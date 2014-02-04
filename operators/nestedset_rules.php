@@ -99,12 +99,13 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Update the tree for an item inserted in the database
 	*
-	* @param bool		$item_data		Data of the item inserted
-	* @return array		Array of updated column data for the inserted item
+	* @param int	$item_id	The item to be added
+	* @return array		Array with updated data, if the item was added successfully
+	*					Empty array otherwise
 	* @access public
 	*/
-	public function add_to_nestedset(array $item_data)
+	public function add_to_nestedset($item_id)
 	{
-		return array_merge($item_data, $this->add_item_to_nestedset($item_data[$this->column_item_id]));
+		return $this->add_item_to_nestedset($item_id);
 	}
 }

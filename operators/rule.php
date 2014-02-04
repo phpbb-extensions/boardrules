@@ -77,7 +77,7 @@ class rule implements rule_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @param array $rule_data Rule data to add
+	* @param array $entity Rule entity with new data to insert
 	* 								rule_anchor
 	* 								rule_title
 	* 								rule_message
@@ -85,25 +85,25 @@ class rule implements rule_interface
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
-	public function add_rule($language = 0, $parent_id = 0, $rule_data)
+	public function add_rule($language = 0, $parent_id = 0, $entity)
 	{
 		// Validate and insert the rule_data using our entity class
-		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')
-			->set_title($rule_data['rule_title'])
-			->set_anchor($rule_data['rule_anchor'])
-			->set_message($rule_data['rule_message'])
-			->insert($language);
+		$entity->insert($language);
 
-		// Update the tree for rule_data in the database
-		$rule_data = $this->nestedset_rules->add_to_nestedset($entity->data);
+		// Get the newly inserted rules identifier
+		$rule_id = $entity->get_id();
 
-		// Non-categories need to have a parent id
-		if ($rule_data['rule_parent_id'] !== $parent_id)
+		// Update the tree for the rule in the database
+		$updated_rule_data = $this->nestedset_rules->add_to_nestedset($rule_id);
+
+		// If a parent id was supplied, update the rule's parent id and tree ids
+		if ($updated_rule_data['rule_parent_id'] !== $parent_id)
 		{
-			$this->nestedset_rules->change_parent($rule_data['rule_id'], $parent_id);
+			$this->nestedset_rules->change_parent($rule_id, $parent_id);
 		}
 
-		return $entity->import($rule_data);
+		// Reload the data to return a fresh rule entity
+		return $entity->load($rule_id);
 	}
 
 	/**
