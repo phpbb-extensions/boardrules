@@ -148,12 +148,16 @@ class rule implements rule_interface
 	public function delete_rule($rule_id)
 	{
 		$rule_id = (int) $rule_id;
-		if (!$rule_id)
+
+		// Try to delete the rule or categorgy from the database
+		try
+		{
+			$this->nestedset_rules->delete($rule_id);
+		}
+		catch (\OutOfBoundsException $e)
 		{
 			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
 		}
-
-		$this->nestedset_rules->delete($rule_id);
 	}
 
 	/**
