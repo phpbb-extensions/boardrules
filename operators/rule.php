@@ -173,17 +173,16 @@ class rule implements rule_interface
 	public function move($rule_id, $direction = 'up', $amount = 1)
 	{
 		$rule_id = (int) $rule_id;
-		if (!$rule_id)
+		$amount = (int) $amount;
+
+		// Try to move the rule or categorgy from the database
+		try
+		{
+			$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
+		}
+		catch (\OutOfBoundsException $e)
 		{
 			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
 		}
-
-		$amount = (int) $amount;
-		if (!$amount)
-		{
-			throw new \phpbb\boardrules\exception\out_of_bounds(array('amount', 'INVALID_ITEM'));
-		}
-
-		$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
 	}
 }
