@@ -14,7 +14,7 @@ namespace phpbb\boardrules\tests\operators;
 */
 class rule_operator_base extends \extension_database_test_case
 {
-	protected $container, $db, $entity, $nestedset_rules;
+	protected $config, $container, $db, $entity, $nestedset_rules;
 
 	public function getDataSet()
 	{
@@ -27,11 +27,9 @@ class rule_operator_base extends \extension_database_test_case
 
 		$this->db = $this->new_dbal();
 
-		global $config, $phpbb_container;
+		$this->container = new phpbb_mock_container_builder();
 
-		$phpbb_container = $this->container = new phpbb_mock_container_builder();
-
-		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
+		$this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 		set_config(null, null, null, $this->config);
 
 		$this->lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
