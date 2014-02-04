@@ -12,7 +12,7 @@ namespace phpbb\boardrules\tests\operators;
 /**
 * Base rule operator test (helper)
 */
-class rule_operator_base extends \phpbb_database_test_case
+class rule_operator_base extends \extension_database_test_case
 {
 	protected $container, $db, $entity, $nestedset_rules;
 
