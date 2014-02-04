@@ -77,7 +77,7 @@ class rule implements rule_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @param array $entity Rule entity with new data to insert
+	* @param object $entity Rule entity with new data to insert
 	* 								rule_anchor
 	* 								rule_title
 	* 								rule_message
