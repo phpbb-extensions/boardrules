@@ -149,7 +149,7 @@ class rule implements rule_interface
 	{
 		$rule_id = (int) $rule_id;
 
-		// Try to delete the rule or categorgy from the database
+		// Try to delete the rule or category from the database
 		try
 		{
 			$this->nestedset_rules->delete($rule_id);
@@ -175,7 +175,7 @@ class rule implements rule_interface
 		$rule_id = (int) $rule_id;
 		$amount = (int) $amount;
 
-		// Try to move the rule or categorgy from the database
+		// Try to move the rule or category up/down
 		try
 		{
 			$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
