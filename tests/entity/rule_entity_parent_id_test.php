@@ -10,32 +10,28 @@
 namespace phpbb\boardrules\tests\entity;
 
 /**
-* Tests related to language on rule entity
+* Tests related to parent ids on rule entity
 */
-class rule_entity_language_test extends rule_entity_base
+class rule_entity_parent_id_test extends rule_entity_base
 {
 	/**
-	* Test data for the test_language() function
+	* Test data for the test_id() function
 	*
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_language_data()
+	public function test_id_data()
 	{
 		$import_data = $this->get_import_data();
-
-		// Set some data to test other than 1 from our import data
-		$import_data[3]['rule_language'] = 2;
-		$import_data[4]['rule_language'] = '7';
 
 		return array(
 			array(
 				$import_data[1],
-				1,
+				0,
 			),
 			array(
 				$import_data[2],
-				1,
+				0,
 			),
 			array(
 				$import_data[3],
@@ -43,18 +39,18 @@ class rule_entity_language_test extends rule_entity_base
 			),
 			array(
 				$import_data[4],
-				7,
+				0,
 			),
 		);
 	}
 
 	/**
-	* Test getting language
+	* Test getting id
 	*
-	* @dataProvider test_language_data
+	* @dataProvider test_id_data
 	* @access public
 	*/
-	public function test_language($data, $expected)
+	public function test_id($data, $expected)
 	{
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
@@ -62,7 +58,7 @@ class rule_entity_language_test extends rule_entity_base
 		// Set the data
 		$entity->import($data);
 
-		// Assert that the language matches what is expected
-		$this->assertSame($expected, $entity->get_language());
+		// Assert that the id matches what is expected
+		$this->assertEquals($expected, $entity->get_parent_id());
 	}
 }

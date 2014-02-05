@@ -14,6 +14,24 @@ namespace phpbb\boardrules\exception;
 */
 class base extends \Exception
 {
+	protected $previous;
+
+	/**
+	 * Constructor
+	 *
+	 * Different from normal exceptions in that we do not enforce $message to be a string.
+	 *
+	 * @param string|array $message
+	 * @param int $code
+	 * @param Exception $previous
+	 */
+	public function __construct($message = null, $code = 0, Exception $previous = null)
+	{
+		$this->message = $message;
+		$this->code = $code;
+		$this->previous = $previous;
+	}
+
 	/**
 	* Basic message translation for our exceptions
 	*
@@ -70,7 +88,7 @@ class base extends \Exception
 		if ($parent_message !== null)
 		{
 			// Prepend the parent message to the message portions
-			$message_portions = array_unshift((string) $parent_message);
+			array_unshift($message_portions, (string) $parent_message);
 
 			// We return a string
 			return call_user_func_array(array($user, 'lang'), $message_portions);
