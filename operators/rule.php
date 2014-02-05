@@ -123,7 +123,7 @@ class rule implements rule_interface
 		$rule_id = (int) $rule_id;
 		if (!$rule_id)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 
 		// Validate the rule_data using our entity class and save
@@ -156,7 +156,7 @@ class rule implements rule_interface
 		}
 		catch (\OutOfBoundsException $e)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 	}
 
@@ -182,7 +182,7 @@ class rule implements rule_interface
 		}
 		catch (\OutOfBoundsException $e)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 	}
 }
