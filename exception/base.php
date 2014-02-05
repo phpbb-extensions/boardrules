@@ -120,4 +120,18 @@ class base extends \Exception
 		// So the language file is only loaded once
 		$is_loaded = true;
 	}
+
+    /**
+    * Output a string of this error message
+    *
+    * This will hopefully be never called, always catch the expected exceptions
+    * and call get_message to translate them into an error that a user can
+    * understand
+    *
+    * @return string
+    */
+    public function __toString()
+    {
+        return (is_array($this->message)) ? var_export($this->message, true) : (string) $this->message;
+    }
 }
