@@ -37,6 +37,7 @@ class rule_entity_import_test extends rule_entity_base
 			'rule_language'	=> 'get_language',
 			'rule_left_id'	=> 'get_title',
 			'rule_right_id'	=> 'get_title',
+			'rule_parent_id'=> 'get_parent_id',
 			'rule_anchor'	=> 'get_anchor',
 			'rule_title'	=> 'get_title',
 		);
@@ -84,6 +85,11 @@ class rule_entity_import_test extends rule_entity_base
 		// Out of range
 		$data[] = array_merge($import_data[1], array(
 			'rule_right_id'	=> -1,
+		));
+
+		// Out of range
+		$data[] = array_merge($import_data[1], array(
+			'rule_parent_id'=> -1,
 		));
 
 		// Out of range
