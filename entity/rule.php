@@ -22,6 +22,8 @@ class rule implements rule_interface
 	*	rule_language
 	*	rule_left_id
 	*	rule_right_id
+	*	rule_parent_id
+	*	rule_parents
 	*	rule_anchor
 	*	rule_title
 	*	rule_message
@@ -183,6 +185,8 @@ class rule implements rule_interface
 			'rule_language'						=> 'integer',
 			'rule_left_id'						=> 'integer',
 			'rule_right_id'						=> 'integer',
+			'rule_parent_id'					=> 'integer',
+			'rule_parents'						=> 'string',
 			'rule_anchor'						=> 'set_anchor', // call set_anchor()
 			'rule_title'						=> 'set_title', // call set_title()
 
@@ -488,6 +492,17 @@ class rule implements rule_interface
 	public function get_language()
 	{
 		return (isset($this->data['rule_language'])) ? (int) $this->data['rule_language'] : 0;
+	}
+
+	/**
+	* Get the parent identifier
+	*
+	* @return int parent identifier
+	* @access public
+	*/
+	public function get_parent_id()
+	{
+		return (isset($this->data['rule_parent_id'])) ? (int) $this->data['rule_parent_id'] : 0;
 	}
 
 	/**

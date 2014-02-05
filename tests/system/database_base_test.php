@@ -1,13 +1,13 @@
 <?php
 /**
-*
-* @package testing
-* @copyright (c) 2013 phpBB Group
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*
-*/
+ *
+ * @package testing
+ * @copyright (c) 2013 phpBB Group
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
 
-class extension_system_database_base_test extends phpbb_database_test_case
+class extension_system_database_base_test extends extension_database_test_case
 {
 	public function getDataSet()
 	{
@@ -22,14 +22,14 @@ class extension_system_database_base_test extends phpbb_database_test_case
 	}
 
 	/**
-	* Very basic test we're running here
-	*
-	* Mostly just to check that our test case is running
-	*/
+	 * Very basic test we're running here
+	 *
+	 * Mostly just to check that our test case is running
+	 */
 	public function test_check()
 	{
-		$sql = 'SELECT *
-			FROM phpbb_config';
+		$sql = "SELECT *
+			FROM phpbb_config";
 		$result = $this->db->sql_query($sql);
 		$this->assertEquals(array(
 			array(
@@ -39,5 +39,15 @@ class extension_system_database_base_test extends phpbb_database_test_case
 			),
 		), $this->db->sql_fetchrowset($result));
 		$this->db->sql_freeresult($result);
+	}
+
+	/**
+	 * Confirm the migration was installed
+	 */
+	public function test_migration()
+	{
+		$db_tools = $this->container->get('dbal.tools');
+
+		$this->assertTrue($db_tools->sql_table_exists('phpbb_boardrules'));
 	}
 }
