@@ -97,7 +97,7 @@ class rule implements rule_interface
 		if (!empty($this->data['rule_id']))
 		{
 			// The rule already exists
-			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'ITEM_EXISTS'));
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 
 		// Resets values required for the nested set system
@@ -137,7 +137,7 @@ class rule implements rule_interface
 		if (empty($this->data['rule_id']))
 		{
 			// The rule does not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds(array('rule_id', 'INVALID_ITEM'));
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 
 		$sql = 'UPDATE ' . $this->boardrules_table . '
