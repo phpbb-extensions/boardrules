@@ -88,7 +88,7 @@ class base extends \Exception
 		if ($parent_message !== null)
 		{
 			// Prepend the parent message to the message portions
-			$message_portions = array_unshift((string) $parent_message);
+			array_unshift($message_portions, (string) $parent_message);
 
 			// We return a string
 			return call_user_func_array(array($user, 'lang'), $message_portions);
