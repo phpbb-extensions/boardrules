@@ -4,8 +4,8 @@
 
 /* page layout */
 #container {
-	margin-right: 270px;
 	position: relative;
+	overflow: hidden;
 }
 
 #main { font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif; }
@@ -56,6 +56,7 @@
 #boardrules-categories {
 	width: 260px;
 	float: right;
+	margin: 26px 0 30px 30px;
 }
 
 .mini-panel {

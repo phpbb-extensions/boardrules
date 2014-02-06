@@ -126,6 +126,7 @@ class main_controller implements main_interface
 
 		$this->template->assign_vars(array(
 			'S_BOARDRULES'			=> true,
+			'CATEGORY_COUNT'		=> $cat_counter,
 			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 
