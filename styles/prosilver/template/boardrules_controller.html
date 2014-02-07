@@ -1,13 +1,13 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- IF CATEGORY_COUNT gt 1 -->
+<!-- IF S_CATEGORIES -->
 <div id="boardrules-categories">
 	<div class="mini-panel">
 		<div class="inner">
 			<h3>{L_BOARDRULES_CATEGORIES}</h3>
 			<ul class="menu">
 				<!-- BEGIN rules -->
-					<!-- IF rules.S_CATEGORY --><li><a href="#{rules.U_ANCHOR}">{rules.TITLE}</a></li><!-- ENDIF -->
+					<!-- IF rules.S_IS_CATEGORY --><li><a href="#{rules.U_ANCHOR}">{rules.TITLE}</a></li><!-- ENDIF -->
 				<!-- END rules -->
 			</ul>
 		</div>
@@ -23,7 +23,7 @@
 	<div id="main">
 		<ol id="rules">
 			<!-- BEGIN rules -->
-				<!-- IF rules.S_CATEGORY -->
+				<!-- IF rules.S_IS_CATEGORY -->
 					<li id="{rules.U_ANCHOR}">
 						<h3>{rules.TITLE}</h3>
 						<ol>
@@ -32,7 +32,7 @@
 								{rules.MESSAGE} <a class="rule-anchor" href="#{rules.U_ANCHOR}">#</a>
 							</li>
 				<!-- ENDIF -->
-				<!-- IF rules.S_CLOSE_LIST or (rules.S_LAST_ROW and rules.S_HAS_CATS) -->
+				<!-- IF rules.S_CLOSE_LIST or (rules.S_LAST_ROW and S_CATEGORIES) -->
 						</ol>
 					</li>
 				<!-- ENDIF -->

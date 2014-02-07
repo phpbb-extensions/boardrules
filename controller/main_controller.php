@@ -119,14 +119,13 @@ class main_controller implements main_interface
 				'TITLE'			=> $entity->get_title(),
 				'MESSAGE'		=> $entity->get_message_for_display(),
 				'U_ANCHOR'		=> $anchor,
- 				'S_CATEGORY'	=> $is_category,
- 				'S_HAS_CATS'	=> ($cat_counter > 1) ? true : false,
+ 				'S_IS_CATEGORY'	=> $is_category,
 			));
 		}
 
 		$this->template->assign_vars(array(
 			'S_BOARDRULES'			=> true,
-			'CATEGORY_COUNT'		=> $cat_counter,
+			'S_CATEGORIES'			=> ($cat_counter > 1) ? true : false,
 			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 
