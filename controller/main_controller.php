@@ -70,6 +70,7 @@ class main_controller implements main_interface
 		$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_controller');
 
 		$last_right_id = null; // Used when determining nesting level
+		$depth = 0;
 		$cat_counter = 1; // Numeric counter used for categories
 		$rule_counter = 'a'; // Alpha counter used for rules
 
@@ -84,6 +85,8 @@ class main_controller implements main_interface
 				$is_category = true;
 				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_CATEGORY_ANCHOR', $cat_counter);
 
+				// Increment nesting level depth counter
+				$depth++;
 				// Increment category counter
 				$cat_counter++;
 				// Reset rule counter
@@ -105,6 +108,7 @@ class main_controller implements main_interface
 			{
 				for ($i = 1; $i < $diff; $i++)
 				{
+					$depth--; // decrement the nesting level depth cunter
 					$this->template->assign_block_vars('rules', array(
 						'S_CLOSE_LIST'	=> true,
 					));
@@ -121,6 +125,17 @@ class main_controller implements main_interface
 				'U_ANCHOR'		=> $anchor,
  				'S_IS_CATEGORY'	=> $is_category,
 			));
+		}
+
+		// By this point, if any nested structures are still open, attempt to close them
+		if ($depth > 0)
+		{
+			for ($i = 0; $i < $depth; $i++)
+			{
+				$this->template->assign_block_vars('rules', array(
+					'S_CLOSE_LIST'	=> true,
+				));
+			}
 		}
 
 		$this->template->assign_vars(array(
