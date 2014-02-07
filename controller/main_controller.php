@@ -69,8 +69,8 @@ class main_controller implements main_interface
 		// Add boardrules controller language file
 		$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_controller');
 
-		$last_right_id = null; // Used when determining nesting level
-		$depth = 0;
+		$last_right_id = null; // Used to help determine when to close nesting structures
+		$depth = 0; // Used to track the depth of nesting level
 		$cat_counter = 1; // Numeric counter used for categories
 		$rule_counter = 'a'; // Alpha counter used for rules
 
