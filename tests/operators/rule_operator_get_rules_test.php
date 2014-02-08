@@ -21,32 +21,36 @@ class rule_operator_get_rules_test extends rule_operator_base
 	{
 		return array(
 			array(
+				// language id to search, data which should match
 				array(
-					'rule_id' => 1,
-					'rule_language' => 1,
-					'rule_left_id' => 1,
-					'rule_right_id' => 2,
-					'rule_parent_id' => 0,
-					'rule_anchor' => '#',
-					'rule_title' => 'title_1',
-				),
-				array(
-					'rule_id' => 2,
-					'rule_language' => 1,
-					'rule_left_id' => 3,
-					'rule_right_id' => 4,
-					'rule_parent_id' => 0,
-					'rule_anchor' => '#',
-					'rule_title' => 'title_2',
-				),
-				array(
-					'rule_id' => 3,
-					'rule_language' => 1,
-					'rule_left_id' => 5,
-					'rule_right_id' => 6,
-					'rule_parent_id' => 0,
-					'rule_anchor' => '#',
-					'rule_title' => 'title_3',
+					1,
+					array(
+						'rule_id' => 1,
+						'rule_language' => 1,
+						'rule_left_id' => 1,
+						'rule_right_id' => 2,
+						'rule_parent_id' => 0,
+						'rule_anchor' => '#',
+						'rule_title' => 'title_1',
+					),
+					array(
+						'rule_id' => 2,
+						'rule_language' => 1,
+						'rule_left_id' => 3,
+						'rule_right_id' => 4,
+						'rule_parent_id' => 0,
+						'rule_anchor' => '#',
+						'rule_title' => 'title_2',
+					),
+					array(
+						'rule_id' => 3,
+						'rule_language' => 1,
+						'rule_left_id' => 5,
+						'rule_right_id' => 6,
+						'rule_parent_id' => 0,
+						'rule_anchor' => '#',
+						'rule_title' => 'title_3',
+					),
 				),
 			),
 		);
