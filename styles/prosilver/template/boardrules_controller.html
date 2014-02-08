@@ -23,18 +23,17 @@
 	<div id="main">
 		<ol id="rules">
 			<!-- BEGIN rules -->
-				<!-- IF rules.S_IS_CATEGORY -->
-					<li id="{rules.U_ANCHOR}">
-						<h3>{rules.TITLE}</h3>
-						<ol>
-				<!-- ELSEIF not rules.S_CLOSE_LIST -->
-							<li class="rule-item" id="{rules.U_ANCHOR}">
-								{rules.MESSAGE} <a class="rule-anchor" href="#{rules.U_ANCHOR}">#</a>
-							</li>
-				<!-- ENDIF -->
 				<!-- IF rules.S_CLOSE_LIST -->
 						</ol>
 					</li>
+				<!-- ELSEIF rules.S_IS_CATEGORY -->
+					<li id="{rules.U_ANCHOR}">
+						<h3>{rules.TITLE}</h3>
+						<ol>
+				<!-- ELSE -->
+							<li class="rule-item" id="{rules.U_ANCHOR}">
+								{rules.MESSAGE} <a class="rule-anchor" href="#{rules.U_ANCHOR}">#</a>
+							</li>
 				<!-- ENDIF -->
 			<!-- END rules -->
 		</ol>
