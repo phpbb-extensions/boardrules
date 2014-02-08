@@ -80,12 +80,8 @@ class rule implements rule_interface
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @param object $entity Rule entity with new data to insert
-	* 								rule_anchor
-	* 								rule_title
-	* 								rule_message
 	* @return rule_interface Added rule entity
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function add_rule($language = 0, $parent_id = 0, $entity)
 	{
