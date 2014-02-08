@@ -6,6 +6,7 @@
 		<column>rule_left_id</column>
 		<column>rule_right_id</column>
 		<column>rule_parent_id</column>
+		<column>rule_parents</column>
 		<column>rule_anchor</column>
 		<column>rule_title</column>
 		<column>rule_message</column>
@@ -18,6 +19,7 @@
 			<value>1</value>
 			<value>2</value>
 			<value>0</value>
+			<value></value>
 			<value>#</value>
 			<value>title_1</value>
 			<value>message_1</value>
@@ -31,6 +33,7 @@
 			<value>3</value>
 			<value>4</value>
 			<value>0</value>
+			<value></value>
 			<value>#</value>
 			<value>title_2</value>
 			<value>message_2</value>
@@ -44,6 +47,7 @@
 			<value>5</value>
 			<value>6</value>
 			<value>0</value>
+			<value></value>
 			<value>#</value>
 			<value>title_3</value>
 			<value>message_3</value>
