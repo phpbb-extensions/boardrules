@@ -39,20 +39,6 @@ interface rule_interface
 	public function add_rule($language = 0, $parent_id = 0, $entity);
 
 	/**
-	* Edit a rule
-	*
-	* @param int $rule_id The rule identifier to edit
-	* @param array $rule_data Rule data to edit
-	* 								rule_anchor
-	* 								rule_title
-	* 								rule_message
-	* @return rule_interface Edited rule entity
-	* @access public
-	* @throws \phpbb\boardrules\exception\runtime
-	*/
-	public function edit_rule($rule_id, $rule_data);
-
-	/**
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete

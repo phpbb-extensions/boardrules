@@ -105,37 +105,6 @@ class rule implements rule_interface
 	}
 
 	/**
-	* Edit a rule
-	*
-	* @param int $rule_id The rule identifier to edit
-	* @param array $rule_data Rule data to edit
-	* 								rule_anchor
-	* 								rule_title
-	* 								rule_message
-	* @return rule_interface Edited rule entity
-	* @access public
-	* @throws \phpbb\boardrules\exception\runtime
-	*/
-	public function edit_rule($rule_id, $rule_data)
-	{
-		$rule_id = (int) $rule_id;
-		if (!$rule_id)
-		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
-		}
-
-		// Validate the rule_data using our entity class and save
-		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')
-			->load($rule_id)
-			->set_title($rule_data['rule_title'])
-			->set_anchor($rule_data['rule_anchor'])
-			->set_message($rule_data['rule_message'])
-			->save();
-
-		return $entity;
-	}
-
-	/**
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
