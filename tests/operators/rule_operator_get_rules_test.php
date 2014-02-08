@@ -66,17 +66,22 @@ class rule_operator_get_rules_test extends rule_operator_base
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 
+		// Grab the rule data as an array of entities
 		$entities = $operator->get_rules($language);
+
+		$entity_data = array();
 
 		foreach ($entities as $entity)
 		{
-			$entity_data[]['rule_id'] = $entity->get_id(),
-			$entity_data[]['rule_language'] = $entity->get_language(),
-			$entity_data[]['rule_left_id'] = $entity->get_left_id(),
-			$entity_data[]['rule_right_id'] = $entity->get_right_id(),
-			$entity_data[]['rule_parent_id'] = $entity->get_parent_id(),
-			$entity_data[]['rule_title'] = $entity->get_title(),
-			$entity_data[]['rule_anchor'] = $entity->get_anchor(),
+			$entity_data[] = array(
+				'rule_id' => $entity->get_id(),
+				'rule_language' => $entity->get_language(),
+				'rule_left_id' => $entity->get_left_id(),
+				'rule_right_id' => $entity->get_right_id(),
+				'rule_parent_id' => $entity->get_parent_id(),
+				'rule_title' => $entity->get_title(),
+				'rule_anchor' => $entity->get_anchor(),
+			);
 		}
 
 		// Assert that the data matches what's expected
