@@ -9,6 +9,8 @@
 
 namespace phpbb\boardrules\operators;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 /**
 * Operator for a set of rules
 */
@@ -40,7 +42,7 @@ class rule implements rule_interface
 	* @return \phpbb\boardrules\operators\rule
 	* @access public
 	*/
-	public function __construct($phpbb_container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
+	public function __construct(ContainerBuilder $phpbb_container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
 	{
 		$this->phpbb_container = $phpbb_container;
 		$this->nestedset_rules = $nestedset_rules;
