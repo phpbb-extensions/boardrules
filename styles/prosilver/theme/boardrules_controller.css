@@ -4,8 +4,8 @@
 
 /* page layout */
 #container {
-	margin-right: 270px;
 	position: relative;
+	overflow: hidden;
 }
 
 #main { font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif; }
@@ -49,11 +49,14 @@
 #rules ol { list-style: lower-alpha; }
 #rules ol li { margin-bottom: 5px; }
 #rules ol li.rule-item { padding-bottom: 5px; }
+#rules ol li.rule-item ul,
+#rules ol li.rule-item ol { margin: 1em 0 1em 3em; }
 
 /* rules sections mini panel */
 #boardrules-categories {
 	width: 260px;
 	float: right;
+	margin: 26px 0 30px 30px;
 }
 
 .mini-panel {
@@ -90,4 +93,20 @@ ul.menu li:last-child { border-bottom: none; }
 	font-weight: bold;
 	background-color: #ECD5D8;
 	padding: 3px 6px 0 6px;
+}
+
+/* responsive design */
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
+{
+	#boardrules-categories {
+		width: 100%;
+		float: none;
+		text-align: center;
+		margin: 0;
+	}
+
+	#container {
+		width: 100%;
+		margin: 0;
+	}
 }
