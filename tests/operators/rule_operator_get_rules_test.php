@@ -20,52 +20,33 @@ class rule_operator_get_rules_test extends rule_operator_base
 	public function test_get_rules_data()
 	{
 		return array(
-			// language id to search, data which should match
 			array(
-				1,
 				array(
-					array(
-						'rule_id' => 1,
-						'rule_language' => 1,
-						'rule_left_id' => 1,
-						'rule_right_id' => 2,
-						'rule_parent_id' => 0,
-						'rule_parents' => '',
-						'rule_anchor' => '#',
-						'rule_title' => 'title_1',
-						'rule_message' => 'message_1',
-						'rule_message_bbcode_uid' => '',
-						'rule_message_bbcode_bitfield' => '',
-						'rule_message_bbcode_options' => '',
-					),
-					array(
-						'rule_id' => 2,
-						'rule_language' => 1,
-						'rule_left_id' => 3,
-						'rule_right_id' => 4,
-						'rule_parent_id' => 0,
-						'rule_parents' => '',
-						'rule_anchor' => '#',
-						'rule_title' => 'title_2',
-						'rule_message' => 'message_2',
-						'rule_message_bbcode_uid' => '',
-						'rule_message_bbcode_bitfield' => '',
-						'rule_message_bbcode_options' => '',
-					),
-					array(
-						'rule_id' => 3,
-						'rule_language' => 1,
-						'rule_left_id' => 5,
-						'rule_right_id' => 6,
-						'rule_parent_id' => 0,
-						'rule_parents' => '',
-						'rule_anchor' => '#',
-						'rule_title' => 'title_3',
-						'rule_message' => 'message_3',
-						'rule_message_bbcode_uid' => '',
-						'rule_message_bbcode_bitfield' => '',
-						'rule_message_bbcode_options' => '',
-					),
+					'rule_id' => 1,
+					'rule_language' => 1,
+					'rule_left_id' => 1,
+					'rule_right_id' => 2,
+					'rule_parent_id' => 0,
+					'rule_anchor' => '#',
+					'rule_title' => 'title_1',
+				),
+				array(
+					'rule_id' => 2,
+					'rule_language' => 1,
+					'rule_left_id' => 3,
+					'rule_right_id' => 4,
+					'rule_parent_id' => 0,
+					'rule_anchor' => '#',
+					'rule_title' => 'title_2',
+				),
+				array(
+					'rule_id' => 3,
+					'rule_language' => 1,
+					'rule_left_id' => 5,
+					'rule_right_id' => 6,
+					'rule_parent_id' => 0,
+					'rule_anchor' => '#',
+					'rule_title' => 'title_3',
 				),
 			),
 		);
@@ -81,8 +62,21 @@ class rule_operator_get_rules_test extends rule_operator_base
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 
+		$entities = $operator->get_rules($language);
+
+		foreach ($entities as $entity)
+		{
+			$entity_data[]['rule_id'] = $entity->get_id(),
+			$entity_data[]['rule_language'] = $entity->get_language(),
+			$entity_data[]['rule_left_id'] = $entity->get_left_id(),
+			$entity_data[]['rule_right_id'] = $entity->get_right_id(),
+			$entity_data[]['rule_parent_id'] = $entity->get_parent_id(),
+			$entity_data[]['rule_title'] = $entity->get_title(),
+			$entity_data[]['rule_anchor'] = $entity->get_anchor(),
+		}
+
 		// Assert that the data matches what's expected
-		$this->assertEquals($data, $operator->get_rules($language));
+		$this->assertEquals($data, $entity_data);
 	}
 
 	/**
