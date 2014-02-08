@@ -1,17 +1,19 @@
 <!-- INCLUDE overall_header.html -->
 
+<!-- IF S_CATEGORIES -->
 <div id="boardrules-categories">
 	<div class="mini-panel">
 		<div class="inner">
 			<h3>{L_BOARDRULES_CATEGORIES}</h3>
 			<ul class="menu">
-				<!-- BEGIN categories -->
-					<li><a href="#section-{categories.U_RULE_CATEGORY}">{categories.RULE_CATEGORY}</a></li>
-				<!-- END categories -->
+				<!-- BEGIN rules -->
+					<!-- IF rules.S_IS_CATEGORY --><li><a href="#{rules.U_ANCHOR}">{rules.TITLE}</a></li><!-- ENDIF -->
+				<!-- END rules -->
 			</ul>
 		</div>
 	</div>
 </div>
+<!-- ENDIF -->
 
 <div id="container">
 
@@ -20,18 +22,20 @@
 
 	<div id="main">
 		<ol id="rules">
-			<!-- BEGIN categories -->
-				<li id="section-{categories.U_RULE_CATEGORY}">
-					<h3>{categories.RULE_CATEGORY}</h3>
-					<ol>
-						<!-- BEGIN rules -->
-							<li class="rule-item" id="rule-{categories.rules.U_ANCHOR}">
-								{categories.rules.RULE_MESSAGE} <a class="rule-anchor" href="#rule-{categories.rules.U_ANCHOR}">#</a>
+			<!-- BEGIN rules -->
+				<!-- IF rules.S_CLOSE_LIST -->
+						</ol>
+					</li>
+				<!-- ELSEIF rules.S_IS_CATEGORY -->
+					<li id="{rules.U_ANCHOR}">
+						<h3>{rules.TITLE}</h3>
+						<ol>
+				<!-- ELSE -->
+							<li class="rule-item" id="{rules.U_ANCHOR}">
+								{rules.MESSAGE} <a class="rule-anchor" href="#{rules.U_ANCHOR}">#</a>
 							</li>
-						<!-- END rules -->
-					</ol>
-				</li>
-			<!-- END categories -->
+				<!-- ENDIF -->
+			<!-- END rules -->
 		</ol>
 	</div>
 
