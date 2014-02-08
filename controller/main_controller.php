@@ -20,7 +20,7 @@ class main_controller implements main_interface
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
-	/** @var \phpbb\controller\helper */
+	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
 	/** @var \phpbb\template\template */
