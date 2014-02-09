@@ -82,6 +82,7 @@ class rule implements rule_interface
 	* @param object $entity Rule entity with new data to insert
 	* @return rule_interface Added rule entity
 	* @access public
+	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function add_rule($language = 0, $parent_id = 0, $entity)
 	{
