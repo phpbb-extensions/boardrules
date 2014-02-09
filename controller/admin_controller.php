@@ -23,6 +23,9 @@ class admin controller implements admin_interface
 	/** @var \phpbb\request\request */
 	protected $request;
 
+	/** @var \phpbb\template\template */
+	protected $template;
+
 	/** @var \phpbb\boardrules\entity\rule */
 	protected $entity;
 
@@ -35,16 +38,18 @@ class admin controller implements admin_interface
 	* @param \phpbb\config\config              $config         Config object
 	* @param \phpbb\db\driver\driver           $db             Database object
 	* @param \phpbb\request\request            $request        Request object
+	* @param \phpbb\template\template          $template       Template object
 	* @param \phpbb\boardrules\entity\rule     $entity         Entity for a single rule
 	* @param \phpbb\boardrules\operators\rule  $rule_operator  Operator for a set of rules
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
+		$this->template = $template;
 		$this->entity = $entity;
 		$this->rule_operator = $rule_operator;
 	}
@@ -57,6 +62,10 @@ class admin controller implements admin_interface
 	*/
 	public function display_options()
 	{
+		$this-template->assign_vars(array(
+			'BOARDRULES_ENABLE'					=> $this->config['boardrules_enable'] ? true : false,
+			'BOARDRULES_REQUIRE_ACCEPTATION'	=> $this->config['boardrules_require_acceptation'] ? true : false,
+		));
 	}
 
 	/**

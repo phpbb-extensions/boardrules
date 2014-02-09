@@ -8,6 +8,7 @@ services:
             - @config
             - @dbal.conn
             - @request
+            - @template
             - @phpbb.boardrules.entity
             - @phpbb.boardrules.operator
 
