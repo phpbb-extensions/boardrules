@@ -14,6 +14,31 @@ namespace phpbb\boardrules\controller;
 */
 class admin controller implements admin_interface
 {
+	/** @var \phpbb\request\request */
+	protected $request;
+
+	/** @var \phpbb\boardrules\entity\rule */
+	protected $entity;
+
+	/** @var \phpbb\boardrules\operators\rule */
+	protected $rule_operator;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\request\request            $request        Request object
+	* @param \phpbb\boardrules\entity\rule     $entity         Entity for a single rule
+	* @param \phpbb\boardrules\operators\rule  $rule_operator  Operator for a set of rules
+	* @return \phpbb\boardrules\controller\admin_controller
+	* @access public
+	*/
+	public function __construct(\phpbb\request\request $request, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
+	{
+		$this->request = $request;
+		$this->entity = $entity;
+		$this->rule_operator = $rule_operator;
+	}
+
 	/**
 	* Display the options a user can configure for this extension
 	*
@@ -69,6 +94,27 @@ class admin controller implements admin_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0)
 	{
+		// Grab the form's message parsing options (possible values: 1 or 0)
+		$message_parse_options = array(
+			'bbcode' => $this->request->variable('enable_bbcode', 0),
+			'magic_url' => $this->request->variable('enable_magic_url', 0),
+			'smilies' => $this->request->variable('enable_smilies', 0),
+		);
+
+		// Set the message parse options in the entity
+		foreach ($message_parse_options as $function => $enabled)
+		{
+			call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
+		}
+
+		// Set the form's title, anchor and message fields in the entity
+		$this->entity
+			->set_title($this->request->variable('rule_title', ''))
+			->set_anchor($this->request->variable('rule_anchor', ''))
+			->set_message($this->request->variable('rule_message', ''));
+
+		// Add the rule entity to the database
+		$this->rule_operator->add_rule($language, $parent_id, $entity);
 	}
 
 	/**
@@ -80,6 +126,28 @@ class admin controller implements admin_interface
 	*/
 	public function edit_rule($rule_id)
 	{
+		// Initiate and load the rule entity
+		$this->entity->load($rule_id);
+
+		// Grab the form's message parsing options (possible values: 1 or 0)
+		$message_parse_options = array(
+			'bbcode' => $this->request->variable('enable_bbcode', 0),
+			'magic_url' => $this->request->variable('enable_magic_url', 0),
+			'smilies' => $this->request->variable('enable_smilies',0),
+		);
+
+		// Set the message parse options in the entity
+		foreach ($message_parse_options as $function => $enabled)
+		{
+			call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
+		}
+
+		// Set the form's title, anchor and message fields, and save the updated entity
+		$this->entity
+			->set_title($this->request->variable('rule_title', ''))
+			->set_anchor($this->request->variable('rule_anchor', ''))
+			->set_message($this->request->variable('rule_message', ''))
+			->save();
 	}
 
 	/**
@@ -91,6 +159,7 @@ class admin controller implements admin_interface
 	*/
 	public function delete_rule($rule_id)
 	{
+		$this->rule_operator->delete_rule($rule_id);
 	}
 
 	/**
@@ -104,5 +173,6 @@ class admin controller implements admin_interface
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1)
 	{
+		$this->rule_operator->move($rule_id, $direction, $amount);
 	}
 }
