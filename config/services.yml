@@ -5,6 +5,7 @@ services:
     phpbb.boardrules.admin.controller:
         class: phpbb\boardrules\controller\admib_controller
         arguments:
+            - @config
             - @dbal.conn
             - @request
             - @phpbb.boardrules.entity

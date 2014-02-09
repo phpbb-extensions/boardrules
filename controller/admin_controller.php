@@ -14,6 +14,9 @@ namespace phpbb\boardrules\controller;
 */
 class admin controller implements admin_interface
 {
+	/** @var \phpbb\config\config */
+	protected $config;
+
 	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
@@ -29,14 +32,17 @@ class admin controller implements admin_interface
 	/**
 	* Constructor
 	*
+	* @param \phpbb\config\config              $config         Config object
+	* @param \phpbb\db\driver\driver           $db             Database object
 	* @param \phpbb\request\request            $request        Request object
 	* @param \phpbb\boardrules\entity\rule     $entity         Entity for a single rule
 	* @param \phpbb\boardrules\operators\rule  $rule_operator  Operator for a set of rules
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
 	{
+		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->entity = $entity;
@@ -61,6 +67,8 @@ class admin controller implements admin_interface
 	*/
 	public function set_options()
 	{
+		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
+		$this->config->set('boardrules_require_acceptation', $this->request->variable('boardrules_require_acceptation', 0));
 	}
 
 	/**
