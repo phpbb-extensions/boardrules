@@ -14,6 +14,9 @@ namespace phpbb\boardrules\controller;
 */
 class admin controller implements admin_interface
 {
+	/** @var \phpbb\db\driver\driver */
+	protected $db;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
@@ -32,8 +35,9 @@ class admin controller implements admin_interface
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\request\request $request, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
+	public function __construct(\phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
 	{
+		$this->db = $db;
 		$this->request = $request;
 		$this->entity = $entity;
 		$this->rule_operator = $rule_operator;
@@ -70,6 +74,20 @@ class admin controller implements admin_interface
 	*/
 	public function display_language_selection()
 	{
+		// Check if there are any available languages
+		$sql = 'SELECT COUNT(lang_id) as languages_count
+			FROM ' . LANG_TABLE;
+		$result = $this->db->sql_query($sql);
+
+		// If there are some, build option fields
+		if ($this->db->sql_fetchfield('languages_count') > 1)
+		{
+			language_select();
+		}
+		else
+		{
+			$this->display_rules();
+		}
 	}
 
 	/**
