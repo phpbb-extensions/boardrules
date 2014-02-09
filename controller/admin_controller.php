@@ -14,6 +14,9 @@ namespace phpbb\boardrules\controller;
 */
 class admin controller implements admin_interface
 {
+	/** @var ContainerBuilder */
+	protected $phpbb_container;
+
 	/** @var \phpbb\config\config */
 	protected $config;
 
@@ -26,31 +29,28 @@ class admin controller implements admin_interface
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\boardrules\entity\rule */
-	protected $entity;
-
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config              $config         Config object
-	* @param \phpbb\db\driver\driver           $db             Database object
-	* @param \phpbb\request\request            $request        Request object
-	* @param \phpbb\template\template          $template       Template object
-	* @param \phpbb\boardrules\entity\rule     $entity         Entity for a single rule
-	* @param \phpbb\boardrules\operators\rule  $rule_operator  Operator for a set of rules
+	* @param ContainerBuilder                  $phpbb_container
+	* @param \phpbb\config\config              $config           Config object
+	* @param \phpbb\db\driver\driver           $db               Database object
+	* @param \phpbb\request\request            $request          Request object
+	* @param \phpbb\template\template          $template         Template object
+	* @param \phpbb\boardrules\operators\rule  $rule_operator    Rule operator object
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\entity\rule $entity, \phpbb\boardrules\operators\rule $rule_operator)
+	public function __construct(ContainerBuilder $phpbb_container, \phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\rule $rule_operator)
 	{
+		$this->phpbb_container = $phpbb_container;
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
-		$this->entity = $entity;
 		$this->rule_operator = $rule_operator;
 	}
 
@@ -130,6 +130,9 @@ class admin controller implements admin_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0)
 	{
+		// Initiate a rule entity
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
+
 		// Grab the form's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
 			'bbcode' => $this->request->variable('enable_bbcode', 0),
@@ -144,7 +147,7 @@ class admin controller implements admin_interface
 		}
 
 		// Set the form's title, anchor and message fields in the entity
-		$this->entity
+		$entity
 			->set_title($this->request->variable('rule_title', ''))
 			->set_anchor($this->request->variable('rule_anchor', ''))
 			->set_message($this->request->variable('rule_message', ''));
@@ -163,7 +166,7 @@ class admin controller implements admin_interface
 	public function edit_rule($rule_id)
 	{
 		// Initiate and load the rule entity
-		$this->entity->load($rule_id);
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Grab the form's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
@@ -179,7 +182,7 @@ class admin controller implements admin_interface
 		}
 
 		// Set the form's title, anchor and message fields, and save the updated entity
-		$this->entity
+		$entity
 			->set_title($this->request->variable('rule_title', ''))
 			->set_anchor($this->request->variable('rule_anchor', ''))
 			->set_message($this->request->variable('rule_message', ''))

@@ -5,11 +5,11 @@ services:
     phpbb.boardrules.admin.controller:
         class: phpbb\boardrules\controller\admin_controller
         arguments:
+            - @service_container
             - @config
             - @dbal.conn
             - @request
             - @template
-            - @phpbb.boardrules.entity
             - @phpbb.boardrules.operator
 
     phpbb.boardrules.controller:
