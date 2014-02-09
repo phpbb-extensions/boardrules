@@ -2,6 +2,13 @@ imports:
     - { resource: tables.yml }
 
 services:
+    phpbb.boardrules.admin.controller:
+        class: phpbb\boardrules\controller\admib_controller
+        arguments:
+            - @request
+            - @phpbb.boardrules.entity
+            - @phpbb.boardrules.operator
+
     phpbb.boardrules.controller:
         class: phpbb\boardrules\controller\main_controller
         arguments:
