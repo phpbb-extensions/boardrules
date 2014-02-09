@@ -3,7 +3,7 @@ imports:
 
 services:
     phpbb.boardrules.admin.controller:
-        class: phpbb\boardrules\controller\admib_controller
+        class: phpbb\boardrules\controller\admin_controller
         arguments:
             - @config
             - @dbal.conn
