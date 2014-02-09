@@ -9,6 +9,8 @@
 
 namespace phpbb\boardrules\controller;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 /**
 * Admin controller
 */
