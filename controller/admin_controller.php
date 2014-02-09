@@ -82,6 +82,7 @@ class admin controller implements admin_interface
 	*/
 	public function display_rules($language = 0, $parent_id = 0)
 	{
+		$this->rule_operator->get_rules($language, $parent_id);
 	}
 
 	/**
