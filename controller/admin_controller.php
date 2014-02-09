@@ -64,7 +64,7 @@ class admin controller implements admin_interface
 	{
 		$this-template->assign_vars(array(
 			'BOARDRULES_ENABLE'					=> $this->config['boardrules_enable'] ? true : false,
-			'BOARDRULES_REQUIRE_ACCEPTATION'	=> $this->config['boardrules_require_acceptation'] ? true : false,
+			'BOARDRULES_REQUIRE_AT_REGISTRATION'	=> $this->config['boardrules_require_at_registration'] ? true : false,
 		));
 	}
 
@@ -77,7 +77,7 @@ class admin controller implements admin_interface
 	public function set_options()
 	{
 		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
-		$this->config->set('boardrules_require_acceptation', $this->request->variable('boardrules_require_acceptation', 0));
+		$this->config->set('boardrules_require_at_registration', $this->request->variable('boardrules_require_at_registration', 0));
 	}
 
 	/**

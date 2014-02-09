@@ -36,7 +36,7 @@ class m4_add_data extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('config.add', array('boardrules_enable', '1')),
-			array('config.add', array('boardrules_require_acceptation', '1')),
+			array('config.add', array('boardrules_require_at_registration', '1')),
 		);
 	}
 }
