@@ -28,7 +28,10 @@ class rule_operator_base extends \extension_database_test_case
 		$this->db = $this->new_dbal();
 
 		$this->container = new phpbb_mock_container_builder();
-		$this->container->set('phpbb.boardrules.entity', new \ext\phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules'));
+		$db = $this->db;
+		$this->container->set('phpbb.boardrules.entity', function() use ($db) {
+			return new \ext\phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
+		});
 
 		$this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 		set_config(null, null, null, $this->config);
