@@ -2,6 +2,13 @@ imports:
     - { resource: tables.yml }
 
 services:
+    phpbb.boardrules.admin.controller:
+        class: phpbb\boardrules\controller\admin_controller
+        arguments:
+            - @config
+            - @request
+            - @template
+
     phpbb.boardrules.controller:
         class: phpbb\boardrules\controller\main_controller
         arguments:
