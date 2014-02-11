@@ -12,7 +12,7 @@ namespace phpbb\boardrules\controller;
 /**
 * Admin controller
 */
-class admin controller implements admin_interface
+class admin_controller implements admin_interface
 {
 	/** @var \phpbb\config\config */
 	protected $config;
