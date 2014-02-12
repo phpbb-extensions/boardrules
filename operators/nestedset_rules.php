@@ -17,9 +17,9 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Construct
 	*
-	* @param \phpbb\db\driver\driver	$db		Database connection
-	* @param \phpbb\lock\db		$lock	Lock class used to lock the table when moving forums around
-	* @param string				$table_name		Table name
+	* @param \phpbb\db\driver\driver $db Database connection
+	* @param \phpbb\lock\db $lock Lock class used to lock the table when moving forums around
+	* @param string $table_name Table name
 	* @return \phpbb\boardrules\operators\nestedset_rules
 	* @access public
 	*/
@@ -45,9 +45,8 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Set additional sql where restrictions to use the language id
 	*
-	* @param int        $language        The language selection identifier; default: 0
-	* @return string    Returns additional where statements to narrow down the tree,
-	*                       prefixed with operator and prepended column_prefix to column names
+	* @param int $language The language selection identifier; default: 0
+	* @return nestedset_rules $this
 	* @access public
 	*/
 	public function use_language($language)
@@ -60,8 +59,8 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Get the rules data from the database
 	*
-	* @param int		$parent_id		Category to display rules from, 0  for all
-	* @return array 	Array of rules data from the database
+	* @param int $parent_id Category to display rules from, 0 for all
+	* @return array Array of rules data from the database
 	* @access public
 	*/
 	public function get_rules_data($parent_id)
@@ -72,9 +71,9 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Get all items from a tree in the database
 	*
-	* @param bool		$order_asc		Order the items ascending by their left_id
-	* @return array		Array of items (containing all columns from the item table)
-	*						ID => Item data
+	* @param bool $order_asc Order the items ascending by their left_id
+	* @return array Array of items (containing all columns from the item table)
+	*				ID => Item data
 	* @access public
 	*/
 	public function get_tree_data($order_asc = true)
@@ -99,9 +98,9 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Update the tree for an item inserted in the database
 	*
-	* @param int	$item_id	The item to be added
-	* @return array		Array with updated data, if the item was added successfully
-	*					Empty array otherwise
+	* @param int $item_id The item to be added
+	* @return array Array with updated data, if the item was added successfully
+	*				Empty array otherwise
 	* @access public
 	*/
 	public function add_to_nestedset($item_id)

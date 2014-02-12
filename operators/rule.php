@@ -54,23 +54,26 @@ class rule implements rule_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return array Array of all rules data from the database
+	* @return array Array of rule data entities
 	* @access public
 	*/
 	public function get_rules($language = 0, $parent_id = 0)
 	{
 		$entities = array();
 
+		// Load all rule data from the database into an array
 		$rowset = $this->nestedset_rules
 			->use_language($language)
 			->get_rules_data($parent_id);
 
+		// Import each rule into an entity, and store them in an array
 		foreach ($rowset as $row)
 		{
 			$entities[] = $this->phpbb_container->get('phpbb.boardrules.entity')
 				->import($row);
 		}
 
+		// Return all rule entities
 		return $entities;
 	}
 
