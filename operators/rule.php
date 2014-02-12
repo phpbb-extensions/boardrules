@@ -96,10 +96,10 @@ class rule implements rule_interface
 		$rule_id = $entity->get_id();
 
 		// Update the tree for the rule in the database
-		$updated_rule_data = $this->nestedset_rules->add_to_nestedset($rule_id);
+		$this->nestedset_rules->add_to_nestedset($rule_id);
 
 		// If a parent id was supplied, update the rule's parent id and tree ids
-		if ($updated_rule_data['rule_parent_id'] !== $parent_id)
+		if ($parent_id)
 		{
 			$this->nestedset_rules->change_parent($rule_id, $parent_id);
 		}
