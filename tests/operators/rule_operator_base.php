@@ -27,11 +27,15 @@ class rule_operator_base extends \extension_database_test_case
 
 		$this->db = $this->new_dbal();
 
-		$this->container = new phpbb_mock_container_builder();
+		// mock container for the entity service
+		$this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
 		$db = $this->db;
-		$this->container->set('phpbb.boardrules.entity', function() use ($db) {
-			return new \ext\phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
-		});
+		$this->container->expects($this->any())
+			->method('get')
+			->with('phpbb.boardrules.entity')
+			->will($this->returnCallback(function() use ($db) {
+				return new \phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
+			}));
 
 		$this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 		set_config(null, null, null, $this->config);
