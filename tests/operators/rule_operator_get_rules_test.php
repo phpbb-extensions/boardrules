@@ -22,8 +22,8 @@ class rule_operator_get_rules_test extends rule_operator_base
 		return array(
 			array(
 				// language id to search, data which should match
+				1,
 				array(
-					1,
 					array(
 						'rule_id' => 1,
 						'rule_language' => 1,
