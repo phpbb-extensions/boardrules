@@ -33,6 +33,8 @@ class rule_entity_base extends \extension_database_test_case
 
 		global $config, $phpbb_dispatcher;
 		$config =  new \phpbb\config\config(array());
+		set_config(null, null, null, $config);
+
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 	}
 
