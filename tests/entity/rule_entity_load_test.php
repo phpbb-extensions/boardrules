@@ -33,7 +33,7 @@ class entity_test extends rule_entity_base
 					'rule_message' => 'message_1',
 					'rule_message_bbcode_uid' => '',
 					'rule_message_bbcode_bitfield' => '',
-					'rule_message_bbcode_options' => '',
+					'rule_message_bbcode_options' => 0,
 				),
 			),
 			array(
@@ -48,7 +48,7 @@ class entity_test extends rule_entity_base
 					'rule_message' => 'message_2',
 					'rule_message_bbcode_uid' => '',
 					'rule_message_bbcode_bitfield' => '',
-					'rule_message_bbcode_options' => '',
+					'rule_message_bbcode_options' => 7,
 				),
 			),
 			array(
@@ -63,7 +63,7 @@ class entity_test extends rule_entity_base
 					'rule_message' => 'message_3',
 					'rule_message_bbcode_uid' => '',
 					'rule_message_bbcode_bitfield' => '',
-					'rule_message_bbcode_options' => '',
+					'rule_message_bbcode_options' => 7,
 				),
 			),
 		);

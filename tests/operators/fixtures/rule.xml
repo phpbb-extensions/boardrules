@@ -25,7 +25,7 @@
 			<value>message_1</value>
 			<value></value>
 			<value></value>
-			<value></value>
+			<value>0</value>
 		</row>
 		<row>
 			<value>2</value>
@@ -39,7 +39,7 @@
 			<value>message_2</value>
 			<value></value>
 			<value></value>
-			<value></value>
+			<value>7</value>
 		</row>
 		<row>
 			<value>3</value>
@@ -53,7 +53,7 @@
 			<value>message_3</value>
 			<value></value>
 			<value></value>
-			<value></value>
+			<value>7</value>
 		</row>
 	</table>
 </dataset>
