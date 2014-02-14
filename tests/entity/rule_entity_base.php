@@ -30,6 +30,8 @@ class rule_entity_base extends \extension_database_test_case
 		parent::setUp();
 
 		$this->db = $this->new_dbal();
+
+		$phpbb_dispatcher = new phpbb_mock_event_dispatcher();
 	}
 
 	/**
