@@ -30,7 +30,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 						'rule_left_id' => 1,
 						'rule_right_id' => 2,
 						'rule_parent_id' => 0,
-						'rule_anchor' => '#',
+						'rule_anchor' => 'anchor_1',
 						'rule_title' => 'title_1',
 					),
 					array(
@@ -39,7 +39,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 						'rule_left_id' => 3,
 						'rule_right_id' => 4,
 						'rule_parent_id' => 0,
-						'rule_anchor' => '#',
+						'rule_anchor' => 'anchor_2',
 						'rule_title' => 'title_2',
 					),
 					array(
@@ -48,7 +48,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 						'rule_left_id' => 5,
 						'rule_right_id' => 6,
 						'rule_parent_id' => 0,
-						'rule_anchor' => '#',
+						'rule_anchor' => 'anchor_3',
 						'rule_title' => 'title_3',
 					),
 				),

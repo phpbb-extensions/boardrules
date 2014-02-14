@@ -20,7 +20,7 @@
 			<value>2</value>
 			<value>0</value>
 			<value></value>
-			<value>#</value>
+			<value>anchor_1</value>
 			<value>title_1</value>
 			<value>message_1</value>
 			<value></value>
@@ -34,7 +34,7 @@
 			<value>4</value>
 			<value>0</value>
 			<value></value>
-			<value>#</value>
+			<value>anchor_2</value>
 			<value>title_2</value>
 			<value>message_2</value>
 			<value></value>
@@ -48,7 +48,7 @@
 			<value>6</value>
 			<value>0</value>
 			<value></value>
-			<value>#</value>
+			<value>anchor_3</value>
 			<value>title_3</value>
 			<value>message_3</value>
 			<value></value>
