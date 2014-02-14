@@ -9,6 +9,8 @@
 
 namespace phpbb\boardrules\tests\entity;
 
+require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
+
 /**
 * Base rule entity test (helper)
 */
