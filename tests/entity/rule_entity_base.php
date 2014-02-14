@@ -11,6 +11,7 @@ namespace phpbb\boardrules\tests\entity;
 
 require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
 require_once dirname(__FILE__) . '/../../../../../includes/utf/utf_tools.php';
+require_once dirname(__FILE__) . '/../../../../../../tests/mock/event_dispatcher.php';
 
 /**
 * Base rule entity test (helper)
