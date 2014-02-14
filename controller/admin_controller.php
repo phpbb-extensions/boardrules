@@ -89,7 +89,9 @@ class admin_controller implements admin_interface
 		// If there are some, build option fields
 		if ($this->db->sql_fetchfield('languages_count') > 1)
 		{
-			language_select();
+			$this-template->assign_vars(array(
+				'S_LANG_OPTIONS'	=> language_select();,
+			));
 		}
 		else
 		{
