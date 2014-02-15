@@ -26,6 +26,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\template\template */
 	protected $template;
 
+	/** @var \phpbb\boardrules\operators\rule */
+	protected $rule_operator;
+
 	/**
 	* Constructor
 	*
@@ -33,15 +36,17 @@ class admin_controller implements admin_interface
 	* @param \phpbb\db\driver\driver           $db               Database object
 	* @param \phpbb\request\request            $request          Request object
 	* @param \phpbb\template\template          $template         Template object
+	* @param \phpbb\boardrules\operators\rule  $rule_operator    Rule operator object
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\rule $rule_operator)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
+		$this->rule_operator = $rule_operator;
 	}
 
 	/**
@@ -96,6 +101,43 @@ class admin_controller implements admin_interface
 		else
 		{
 			$this->display_rules();
+		}
+	}
+
+	/**
+	* Display the rules
+	*
+	* @param int $language Language selection identifier; default: 0
+	* @param int $parent_id Category to display rules from; default: 0
+	* @return null
+	* @access public
+	*/
+	public function display_rules($language = 0, $parent_id = 0)
+	{
+		// Grab all the rules in the current user's language
+		$entities = $this->rule_operator->get_rules($language, $parent_id);
+
+		foreach ($entities as $entity)
+		{
+			$is_category = false;
+
+			if ($entity->get_right_id() - $entity->get_left_id() > 1)
+			{
+				// Rule categories
+				$is_category = true;
+			}
+
+			$this->template->assign_block_vars('rules', array(
+				'TITLE'				=> $entity->get_title(),
+				'RULE_IMAGE'		=> $is_category ? '<img src="images/icon_subfolder.gif" />' : '<img src="images/icon_folder.gif" />',
+
+				'U_BACK'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity-get_parent_id(),
+				'U_DELETE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
+				'U_EDIT'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
+				'U_MOVE_DOWN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_down&amp;rule_id=" . $entity->get_id(),
+				'U_MOVE_UP'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_up&amp;rule_id=" . $entity->get_id(),
+				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
+			));
 		}
 	}
 }
