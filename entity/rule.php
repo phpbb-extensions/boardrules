@@ -213,10 +213,13 @@ class rule implements rule_interface
 			}
 			else
 			{
+				// settype passes values by reference
+				$value = $data[$field];
+				
 				// We're using settype to enforce data types
-				settype($data[$field], $type);
+				settype($value, $type);
 
-				$this->data[$field] = $data[$field];
+				$this->data[$field] = $value;
 			}
 		}
 
