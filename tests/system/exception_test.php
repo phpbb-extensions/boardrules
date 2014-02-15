@@ -20,8 +20,14 @@ class extension_system_exception_test extends phpbb_test_case
 		global $config;
 		$config['default_lang'] = 'en';
 
+		// Must mock extension manager for the user class
+		global $phpbb_extension_manager, $phpbb_root_path;
+		$phpbb_extension_manager = new phpbb_mock_extension_manager($phpbb_root_path);
+
 		// Get instance of phpbb\user (dataProvider is called before setUp(), so this must be done here)
 		$this->user = new \phpbb\user();
+
+		$this->user->add_lang_ext('phpbb/boardrules', 'exceptions');
 	}
 
 	public function setUp()

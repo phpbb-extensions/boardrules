@@ -44,6 +44,11 @@ class base extends \Exception
 		// Make sure our language file has been loaded
 		$this->add_lang($user);
 
+		if (is_array($this->getMessage()))
+		{
+			return call_user_func_array(array($user, 'lang'), $this->getMessage());
+		}
+
 		return $user->lang($this->getMessage());
 	}
 
