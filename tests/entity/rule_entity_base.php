@@ -53,9 +53,9 @@ class rule_entity_base extends \extension_database_test_case
 	* Some common data to test from which can be imported
 	*
 	* @return array Data to send to import_data
-	* @access protected
+	* @access public
 	*/
-	protected function get_import_data()
+	public function get_import_data()
 	{
 		return array(
 			1 => array(
