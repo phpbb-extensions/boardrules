@@ -10,12 +10,11 @@
 class extension_system_exception_test extends phpbb_test_case
 {
 	/**
-	* Data for test_exceptions function
+	* Get an instance of phpbb\user
 	*
-	* @return array
 	* @access public
 	*/
-	public function test_exceptions_data()
+	public function get_user_instance()
 	{
 		// Must do this for testing with the user class
 		global $config;
@@ -23,7 +22,29 @@ class extension_system_exception_test extends phpbb_test_case
 
 		// Get instance of phpbb\user (dataProvider is called before setUp(), so this must be done here)
 		$this->user = new \phpbb\user();
+	}
 
+	public function setUp()
+	{
+		parent::setUp();
+
+		// Must mock extension manager for the user class
+		global $phpbb_extension_manager, $phpbb_root_path;
+		$phpbb_extension_manager = new phpbb_mock_extension_manager($phpbb_root_path);
+
+		$this->get_user_instance();
+	}
+
+	/**
+	* Data for test_exceptions function
+	*
+	* @return array
+	* @access public
+	*/
+	public function test_exceptions_data()
+	{
+		$this->get_user_instance();
+		
 		return array(
 			array(
 				'base',
