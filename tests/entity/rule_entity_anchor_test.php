@@ -44,15 +44,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	*/
 	public function test_anchor($anchor, $expected)
 	{
-		// We need the functions_content.php file
-		if (!function_exists('truncate_string'))
-		{
-			global $phpbb_root_path, $phpEx;
-
-			include($phpbb_root_path . 'includes/functions_content.' . $phpEx);
-			include($phpbb_root_path . 'includes/utf/utf_tools.' . $phpEx);
-		}
-
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 

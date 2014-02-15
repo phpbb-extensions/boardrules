@@ -46,14 +46,6 @@ class rule_entity_message_test extends rule_entity_base
 	*/
 	public function test_message($message)
 	{
-		// We need the functions_content.php file
-		if (!function_exists('generate_text_for_storage'))
-		{
-			global $phpbb_root_path, $phpEx;
-
-			include($phpbb_root_path . 'includes/functions_content.' . $phpEx);
-		}
-
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
