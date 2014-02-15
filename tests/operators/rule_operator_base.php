@@ -28,7 +28,7 @@ class rule_operator_base extends \extension_database_test_case
 		$this->db = $this->new_dbal();
 
 		// mock container for the entity service
-		$this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
 		$db = $this->db;
 		$this->container->expects($this->any())
 			->method('get')
