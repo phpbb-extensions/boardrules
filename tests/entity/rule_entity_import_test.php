@@ -15,9 +15,27 @@ namespace phpbb\boardrules\tests\entity;
 class rule_entity_import_test extends rule_entity_base
 {
 	/**
+	* Test data for the test_import() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
+	public function test_import_data()
+	{
+		$import_data = $this->get_import_data();
+
+		return array(
+			array($import_data[1]),
+			array($import_data[2]),
+			array($import_data[3]),
+			array($import_data[4]),
+		);
+	}
+
+	/**
 	* Test importing data
 	*
-	* @dataProvider get_import_data
+	* @dataProvider test_import_data
 	* @access public
 	*/
 	public function test_import($data)
