@@ -121,7 +121,8 @@ class admin_controller implements admin_interface
 
 		foreach ($entities as $entity)
 		{
-			if ($entity->get_left_id() < $last_right_id) {
+			if ($entity->get_left_id() < $last_right_id)
+			{
 				continue; // The current rule is a child of a previous rule, do not display it
 			}
 
