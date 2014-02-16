@@ -30,7 +30,7 @@ class entity_test extends rule_entity_base
 					'rule_right_id' => 2,
 					'rule_parent_id' => 0,
 					'rule_parents' => '',
-					'rule_anchor' => '#',
+					'rule_anchor' => 'anchor_1',
 					'rule_title' => 'title_1',
 					'rule_message' => 'message_1',
 					'rule_message_bbcode_uid' => '',
@@ -47,7 +47,7 @@ class entity_test extends rule_entity_base
 					'rule_right_id' => 4,
 					'rule_parent_id' => 0,
 					'rule_parents' => '',
-					'rule_anchor' => '#',
+					'rule_anchor' => 'anchor_2',
 					'rule_title' => 'title_2',
 					'rule_message' => 'message_2',
 					'rule_message_bbcode_uid' => '',
@@ -64,7 +64,7 @@ class entity_test extends rule_entity_base
 					'rule_right_id' => 6,
 					'rule_parent_id' => 0,
 					'rule_parents' => '',
-					'rule_anchor' => '#',
+					'rule_anchor' => 'anchor_3',
 					'rule_title' => 'title_3',
 					'rule_message' => 'message_3',
 					'rule_message_bbcode_uid' => '',
@@ -85,8 +85,29 @@ class entity_test extends rule_entity_base
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
-		// Assert that the data matches what's expected
-		$this->assertEquals($data, $entity->load($id));
+		// Set the data
+		$result = $entity->load($id);
+
+		// Assert the returned value is what we expect
+		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+
+		// Map the fields to the getters
+		$map = array(
+			'rule_id'		=> 'get_id',
+			'rule_language'	=> 'get_language',
+			'rule_left_id'	=> 'get_left_id',
+			'rule_right_id'	=> 'get_right_id',
+			'rule_parent_id'=> 'get_parent_id',
+			'rule_anchor'	=> 'get_anchor',
+			'rule_title'	=> 'get_title',
+		);
+
+		// Go through each field in the data and make sure the function returns
+		// what we saved
+		foreach ($map as $field => $function)
+		{
+			$this->assertEquals($data[$field], $entity->$function());
+		}
 	}
 
 	/**
