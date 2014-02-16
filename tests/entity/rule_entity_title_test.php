@@ -54,7 +54,7 @@ class rule_entity_title_test extends rule_entity_base
 		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that the title matches what's expected
-		$this->assertSame($title, $entity->get_title());
+		$this->assertSame((string) $title, $entity->get_title());
 	}
 
 	/**
