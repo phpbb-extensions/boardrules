@@ -467,7 +467,7 @@ class rule implements rule_interface
 		// Anchor should start with a letter to be a valid HTML id attribute
 		if (!preg_match('/^[a-z]/i', $anchor) && $anchor != '')
 		{
-			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'INVALID_CHARACTERS'));
+			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}
 
 		// We limit the anchor length to 255 characters
