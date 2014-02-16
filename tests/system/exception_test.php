@@ -105,7 +105,7 @@ class extension_system_exception_test extends phpbb_test_case
 	*
 	* @access public
 	*/
-	public function test_lang()
+	public function test_exceptions_lang()
 	{
 		$this->get_user_instance();
 
