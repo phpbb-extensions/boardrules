@@ -14,6 +14,22 @@ namespace phpbb\boardrules\tests\entity;
 */
 class rule_entity_message_test extends rule_entity_base
 {
+	public function setUp()
+	{
+		parent::setUp();
+
+		global $cache, $db, $request, $user;
+
+		$cache = new \phpbb_mock_cache();
+
+		$db = $this->db;
+
+		$request = new \phpbb_mock_request();
+
+		$user = new \phpbb_mock_user();
+		$user->optionset('viewcensors', false);
+	}
+
 	/**
 	* Test data for the test_message() function
 	*
@@ -127,7 +143,7 @@ class rule_entity_message_test extends rule_entity_base
 
 		// Prepare the text for storage
 		$uid = $bitfield = $flags = '';
-		generate_text_for_storage($message, $uid, $bitfield, $flags, false, false, false);
+		generate_text_for_storage($message, $uid, $bitfield, $flags, $enable_bbcode, $enable_magic_url, $enable_smilies);
 
 		// Prepare for edit
 		$return['edit'] = generate_text_for_edit($message, $uid, $flags);
