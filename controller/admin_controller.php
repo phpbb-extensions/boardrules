@@ -117,8 +117,14 @@ class admin_controller implements admin_interface
 		// Grab all the rules in the current user's language
 		$entities = $this->rule_operator->get_rules($language, $parent_id);
 
+		$last_right_id = 0;
+
 		foreach ($entities as $entity)
 		{
+			if ($entity->get_left_id() < $last_right_id) {
+				continue; // The current rule is a child of a previous rule, do not display it
+			}
+
 			$is_category = false;
 
 			if ($entity->get_right_id() - $entity->get_left_id() > 1)
@@ -139,6 +145,8 @@ class admin_controller implements admin_interface
 				'U_MOVE_UP'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_up&amp;rule_id=" . $entity->get_id(),
 				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
+
+			$last_right_id = $entity->get_right_id();
 		}
 	}
 }
