@@ -99,7 +99,7 @@ class rule_entity_message_test extends rule_entity_base
 
 
 			// Get what we're expecting from
-			$test = $this->message_test_helper($mesage, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text);
+			$test = $this->message_test_helper($message, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text);
 
 			$this->assertSame($test['edit'], $entity->get_message_for_edit());
 
