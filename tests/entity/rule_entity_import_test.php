@@ -35,8 +35,8 @@ class rule_entity_import_test extends rule_entity_base
 		$map = array(
 			'rule_id'		=> 'get_id',
 			'rule_language'	=> 'get_language',
-			'rule_left_id'	=> 'get_title',
-			'rule_right_id'	=> 'get_title',
+			'rule_left_id'	=> 'get_left_id',
+			'rule_right_id'	=> 'get_right_id',
 			'rule_parent_id'=> 'get_parent_id',
 			'rule_anchor'	=> 'get_anchor',
 			'rule_title'	=> 'get_title',
@@ -46,7 +46,7 @@ class rule_entity_import_test extends rule_entity_base
 		// what we saved
 		foreach ($map as $field => $function)
 		{
-			$this->assertEquals($data[$field], $entity->$function);
+			$this->assertEquals($data[$field], $entity->$function());
 		}
 	}
 
