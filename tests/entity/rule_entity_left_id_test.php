@@ -20,7 +20,7 @@ class rule_entity_left_id_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_left_id_data()
+	public function left_id_test_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -47,7 +47,7 @@ class rule_entity_left_id_test extends rule_entity_base
 	/**
 	* Test getting left_id
 	*
-	* @dataProvider test_left_id_data
+	* @dataProvider left_id_test_data
 	* @access public
 	*/
 	public function test_left_id($data, $expected)

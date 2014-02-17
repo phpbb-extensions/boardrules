@@ -17,7 +17,7 @@ class entity_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_load_data()
+	public function load_test_data()
 	{
 		return array(
 			// id to search, data which should match
@@ -78,7 +78,7 @@ class entity_test extends rule_entity_base
 	/**
 	* Test loading rules from the database
 	*
-	* @dataProvider test_load_data
+	* @dataProvider load_test_data
 	*/
 	public function test_load($id, $data)
 	{
@@ -116,7 +116,7 @@ class entity_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_load_fails_data()
+	public function load_fails_test_data()
 	{
 		return array(
 			// id to search
@@ -128,7 +128,7 @@ class entity_test extends rule_entity_base
 	/**
 	* Test loading (non-existant) rules from the database
 	*
-	* @dataProvider test_load_fails_data
+	* @dataProvider load_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function test_load_fails($id)

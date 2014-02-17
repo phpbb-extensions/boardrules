@@ -20,7 +20,7 @@ class rule_entity_right_id_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_right_id_data()
+	public function right_id_test_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -47,7 +47,7 @@ class rule_entity_right_id_test extends rule_entity_base
 	/**
 	* Test getting id
 	*
-	* @dataProvider test_right_id_data
+	* @dataProvider right_id_test_data
 	* @access public
 	*/
 	public function test_right_id($data, $expected)

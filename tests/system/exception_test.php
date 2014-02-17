@@ -47,7 +47,7 @@ class extension_system_exception_test extends phpbb_test_case
 	* @return array
 	* @access public
 	*/
-	public function test_exceptions_data()
+	public function exceptions_test_data()
 	{
 		$this->get_user_instance();
 		
@@ -83,7 +83,7 @@ class extension_system_exception_test extends phpbb_test_case
 	/**
 	* Test some exceptions and make sure they're translated
 	*
-	* @dataProvider test_exceptions_data
+	* @dataProvider exceptions_test_data
 	* @access public
 	*/
 	public function test_exceptions($exception_name, $message, $expected)

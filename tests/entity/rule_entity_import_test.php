@@ -20,7 +20,7 @@ class rule_entity_import_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_import_data()
+	public function import_test_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -35,7 +35,7 @@ class rule_entity_import_test extends rule_entity_base
 	/**
 	* Test importing data
 	*
-	* @dataProvider test_import_data
+	* @dataProvider import_test_data
 	* @access public
 	*/
 	public function test_import($data)
@@ -74,7 +74,7 @@ class rule_entity_import_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_fail_data()
+	public function import_test_fail_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -137,7 +137,7 @@ class rule_entity_import_test extends rule_entity_base
 	/**
 	* Test importing data which will cause exceptions
 	*
-	* @dataProvider test_fail_data
+	* @dataProvider import_test_fail_data
 	* @expectedException \phpbb\boardrules\exception\base
 	* @access public
 	*/

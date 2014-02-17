@@ -36,7 +36,7 @@ class rule_entity_message_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_message_data()
+	public function message_test_data()
 	{
 		return array(
 			// sent to set_message()
@@ -57,7 +57,7 @@ class rule_entity_message_test extends rule_entity_base
 	* This function automatically handles different options for parsing the
 	* message and tests them all
 	*
-	* @dataProvider test_message_data
+	* @dataProvider message_test_data
 	* @access public
 	*/
 	public function test_message($message)

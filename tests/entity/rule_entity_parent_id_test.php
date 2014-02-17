@@ -20,7 +20,7 @@ class rule_entity_parent_id_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_parent_id_data()
+	public function parent_id_test_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -47,7 +47,7 @@ class rule_entity_parent_id_test extends rule_entity_base
 	/**
 	* Test getting parent_id
 	*
-	* @dataProvider test_parent_id_data
+	* @dataProvider parent_id_test_data
 	* @access public
 	*/
 	public function test_parent_id($data, $expected)

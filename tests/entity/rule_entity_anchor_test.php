@@ -20,7 +20,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_anchor_data()
+	public function anchor_test_data()
 	{
 		return array(
 			// sent to set_anchor(), expected from get_anchor()
@@ -39,7 +39,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	/**
 	* Test setting anchor
 	*
-	* @dataProvider test_anchor_data
+	* @dataProvider anchor_test_data
 	* @access public
 	*/
 	public function test_anchor($anchor, $expected)
@@ -63,7 +63,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_anchor_fails_data()
+	public function anchor_fails_test_data()
 	{
 		return array(
 			// Starts with a non-letter
@@ -79,7 +79,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	/**
 	* Test setting invalid data on the anchor which should throw an exception
 	*
-	* @dataProvider test_anchor_fails_data
+	* @dataProvider anchor_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\base
 	* @access public
 	*/
