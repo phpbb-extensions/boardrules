@@ -15,12 +15,12 @@ namespace phpbb\boardrules\tests\entity;
 class rule_entity_right_id_test extends rule_entity_base
 {
 	/**
-	* Test data for the test_id() function
+	* Test data for the test_right_id() function
 	*
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_id_data()
+	public function test_right_id_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -47,10 +47,10 @@ class rule_entity_right_id_test extends rule_entity_base
 	/**
 	* Test getting id
 	*
-	* @dataProvider test_id_data
+	* @dataProvider test_right_id_data
 	* @access public
 	*/
-	public function test_id($data, $expected)
+	public function test_right_id($data, $expected)
 	{
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
