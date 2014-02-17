@@ -79,8 +79,8 @@ class rule_operator_get_rules_test extends rule_operator_base
 				'rule_left_id' => $entity->get_left_id(),
 				'rule_right_id' => $entity->get_right_id(),
 				'rule_parent_id' => $entity->get_parent_id(),
-				'rule_title' => $entity->get_title(),
 				'rule_anchor' => $entity->get_anchor(),
+				'rule_title' => $entity->get_title(),
 			);
 		}
 
