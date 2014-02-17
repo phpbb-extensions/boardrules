@@ -18,7 +18,7 @@ class rule_entity_message_test extends rule_entity_base
 	{
 		parent::setUp();
 
-		global $cache, $db, $request, $user;
+		global $cache, $db, $request, $user, $phpbb_path_helper, $phpbb_root_path, $phpEx;
 
 		$cache = new \phpbb_mock_cache();
 
@@ -28,6 +28,14 @@ class rule_entity_message_test extends rule_entity_base
 
 		$user = new \phpbb_mock_user();
 		$user->optionset('viewcensors', false);
+		$user->style['style_path'] = 'prosilver';
+
+		$phpbb_path_helper = new \phpbb\path_helper(
+			new \phpbb\symfony_request($request),
+			new \phpbb\filesystem(),
+			$phpbb_root_path,
+			$phpEx
+		);
 	}
 
 	/**
@@ -113,7 +121,6 @@ class rule_entity_message_test extends rule_entity_base
 				$entity->message_disable_smilies();
 			}
 
-
 			// Get what we're expecting from
 			$test = $this->message_test_helper($message, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text);
 
@@ -150,7 +157,7 @@ class rule_entity_message_test extends rule_entity_base
 		$return['edit'] = $return['edit']['text'];
 
 		// Prepare for display
-		$return['display'] = generate_text_for_display($message, $uid, $bitfield, $options, $censor_text);
+		$return['display'] = generate_text_for_display($message, $uid, $bitfield, $flags, $censor_text);
 
 		return $return;
 	}
