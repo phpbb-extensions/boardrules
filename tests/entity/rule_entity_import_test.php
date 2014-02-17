@@ -130,6 +130,8 @@ class rule_entity_import_test extends rule_entity_base
 
 			$data[] = $incomplete;
 		}
+
+		return $data;
 	}
 
 	/**
