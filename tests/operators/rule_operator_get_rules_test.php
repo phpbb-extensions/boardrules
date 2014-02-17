@@ -69,23 +69,30 @@ class rule_operator_get_rules_test extends rule_operator_base
 		// Grab the rule data as an array of entities
 		$entities = $operator->get_rules($language);
 
-		$entity_data = array();
+		// Map the fields to the getters
+		$map = array(
+			'rule_id'		=> 'get_id',
+			'rule_language'	=> 'get_language',
+			'rule_left_id'	=> 'get_left_id',
+			'rule_right_id'	=> 'get_right_id',
+			'rule_parent_id'=> 'get_parent_id',
+			'rule_anchor'	=> 'get_anchor',
+			'rule_title'	=> 'get_title',
+		);
 
+		// Test through each entity in the array of entities
+		$i = 0;
 		foreach ($entities as $entity)
 		{
-			$entity_data[] = array(
-				'rule_id' => $entity->get_id(),
-				'rule_language' => $entity->get_language(),
-				'rule_left_id' => $entity->get_left_id(),
-				'rule_right_id' => $entity->get_right_id(),
-				'rule_parent_id' => $entity->get_parent_id(),
-				'rule_anchor' => $entity->get_anchor(),
-				'rule_title' => $entity->get_title(),
-			);
-		}
+			// Go through each field in the data and make sure the function returns
+			// what we saved
+			foreach ($map as $field => $function)
+			{
+				$this->assertEquals($data[$i][$field], $entity->$function());
+			}
 
-		// Assert that the data matches what's expected
-		$this->assertEquals($data, $entity_data);
+			$i++;
+		}
 	}
 
 	/**
