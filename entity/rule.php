@@ -558,7 +558,11 @@ class rule implements rule_interface
 		// Reparse the message
 		if ($reparse_message && !empty($this->data['rule_message']))
 		{
-			$this->set_message($this->data['rule_message']);
+			$message = $this->data['rule_message'];
+
+			decode_message($message, $this->data['rule_message_bbcode_uid']);
+
+			$this->set_message($message);
 		}
 	}
 }
