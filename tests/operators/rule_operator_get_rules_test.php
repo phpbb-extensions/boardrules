@@ -97,9 +97,9 @@ class rule_operator_get_rules_test extends rule_operator_base
 	public function test_get_rules_fails_data()
 	{
 		return array(
-			// language to search
-			array(0),
-			array(4),
+			// language to search, expected result (empty array)
+			array(0, array()),
+			array(4, array()),
 		);
 	}
 
@@ -107,14 +107,17 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* Test getting (non-existant) rules from the database
 	*
 	* @dataProvider test_get_rules_fails_data
-	* @expectedException \phpbb\boardrules\exception\out_of_bounds
+	* @access public
 	*/
-	public function test_get_rules_fails($language)
+	public function test_get_rules_fails($language, $expected)
 	{
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 
 		// Load the operator
-		$operator->get_rules($language);
+		$result = $operator->get_rules($language);
+
+		// Assert that the id matches what is expected
+		$this->assertEquals($expected, $result);
 	}
 }
