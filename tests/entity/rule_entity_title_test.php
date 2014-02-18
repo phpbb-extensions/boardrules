@@ -20,7 +20,7 @@ class rule_entity_title_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_title_data()
+	public function title_test_data()
 	{
 		return array(
 			// sent to set_title(), expected from get_title()
@@ -39,7 +39,7 @@ class rule_entity_title_test extends rule_entity_base
 	/**
 	* Test setting title
 	*
-	* @dataProvider test_title_data
+	* @dataProvider title_test_data
 	* @access public
 	*/
 	public function test_title($title, $expected)
@@ -54,7 +54,7 @@ class rule_entity_title_test extends rule_entity_base
 		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that the title matches what's expected
-		$this->assertSame($title, $entity->get_title());
+		$this->assertSame($expected, $entity->get_title());
 	}
 
 	/**
@@ -63,7 +63,7 @@ class rule_entity_title_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_title_fails_data()
+	public function title_fails_test_data()
 	{
 		return array(
 			// title
@@ -78,7 +78,7 @@ class rule_entity_title_test extends rule_entity_base
 	/**
 	* Test setting invalid data on the title which should throw an exception
 	*
-	* @dataProvider test_title_fails_data
+	* @dataProvider title_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\base
 	* @access public
 	*/

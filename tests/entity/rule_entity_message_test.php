@@ -14,13 +14,37 @@ namespace phpbb\boardrules\tests\entity;
 */
 class rule_entity_message_test extends rule_entity_base
 {
+	public function setUp()
+	{
+		parent::setUp();
+
+		global $cache, $db, $request, $user, $phpbb_path_helper, $phpbb_root_path, $phpEx;
+
+		$cache = new \phpbb_mock_cache();
+
+		$db = $this->db;
+
+		$request = new \phpbb_mock_request();
+
+		$user = new \phpbb_mock_user();
+		$user->optionset('viewcensors', false);
+		$user->style['style_path'] = 'prosilver';
+
+		$phpbb_path_helper = new \phpbb\path_helper(
+			new \phpbb\symfony_request($request),
+			new \phpbb\filesystem(),
+			$phpbb_root_path,
+			$phpEx
+		);
+	}
+
 	/**
 	* Test data for the test_message() function
 	*
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_message_data()
+	public function message_test_data()
 	{
 		return array(
 			// sent to set_message()
@@ -41,19 +65,11 @@ class rule_entity_message_test extends rule_entity_base
 	* This function automatically handles different options for parsing the
 	* message and tests them all
 	*
-	* @dataProvider test_message_data
+	* @dataProvider message_test_data
 	* @access public
 	*/
 	public function test_message($message)
 	{
-		// We need the functions_content.php file
-		if (!function_exists('generate_text_for_storage'))
-		{
-			global $phpbb_root_path, $phpEx;
-
-			include($phpbb_root_path . 'includes/functions_content.' . $phpEx);
-		}
-
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
@@ -105,9 +121,8 @@ class rule_entity_message_test extends rule_entity_base
 				$entity->message_disable_smilies();
 			}
 
-
 			// Get what we're expecting from
-			$test = $this->message_test_helper($mesage, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text);
+			$test = $this->message_test_helper($message, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text);
 
 			$this->assertSame($test['edit'], $entity->get_message_for_edit());
 
@@ -135,14 +150,14 @@ class rule_entity_message_test extends rule_entity_base
 
 		// Prepare the text for storage
 		$uid = $bitfield = $flags = '';
-		generate_text_for_storage($message, $uid, $bitfield, $flags, false, false, false);
+		generate_text_for_storage($message, $uid, $bitfield, $flags, $enable_bbcode, $enable_magic_url, $enable_smilies);
 
 		// Prepare for edit
 		$return['edit'] = generate_text_for_edit($message, $uid, $flags);
 		$return['edit'] = $return['edit']['text'];
 
 		// Prepare for display
-		$return['display'] = generate_text_for_display($message, $uid, $bitfield, $options, $censor_text);
+		$return['display'] = generate_text_for_display($message, $uid, $bitfield, $flags, $censor_text);
 
 		return $return;
 	}

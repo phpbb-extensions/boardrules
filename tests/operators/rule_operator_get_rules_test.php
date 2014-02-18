@@ -17,20 +17,20 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* @return array Array of test rule entities
 	* @access public
 	*/
-	public function test_get_rules_data()
+	public function get_rules_test_data()
 	{
 		return array(
 			array(
 				// language id to search, data which should match
+				1,
 				array(
-					1,
 					array(
 						'rule_id' => 1,
 						'rule_language' => 1,
 						'rule_left_id' => 1,
 						'rule_right_id' => 2,
 						'rule_parent_id' => 0,
-						'rule_anchor' => '#',
+						'rule_anchor' => 'anchor_1',
 						'rule_title' => 'title_1',
 					),
 					array(
@@ -39,7 +39,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 						'rule_left_id' => 3,
 						'rule_right_id' => 4,
 						'rule_parent_id' => 0,
-						'rule_anchor' => '#',
+						'rule_anchor' => 'anchor_2',
 						'rule_title' => 'title_2',
 					),
 					array(
@@ -48,7 +48,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 						'rule_left_id' => 5,
 						'rule_right_id' => 6,
 						'rule_parent_id' => 0,
-						'rule_anchor' => '#',
+						'rule_anchor' => 'anchor_3',
 						'rule_title' => 'title_3',
 					),
 				),
@@ -59,7 +59,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 	/**
 	* Test getting rules from the database
 	*
-	* @dataProvider test_get_rules_data
+	* @dataProvider get_rules_test_data
 	*/
 	public function test_get_rules($langauge, $data)
 	{
@@ -69,23 +69,30 @@ class rule_operator_get_rules_test extends rule_operator_base
 		// Grab the rule data as an array of entities
 		$entities = $operator->get_rules($language);
 
-		$entity_data = array();
+		// Map the fields to the getters
+		$map = array(
+			'rule_id'		=> 'get_id',
+			'rule_language'	=> 'get_language',
+			'rule_left_id'	=> 'get_left_id',
+			'rule_right_id'	=> 'get_right_id',
+			'rule_parent_id'=> 'get_parent_id',
+			'rule_anchor'	=> 'get_anchor',
+			'rule_title'	=> 'get_title',
+		);
 
+		// Test through each entity in the array of entities
+		$i = 0;
 		foreach ($entities as $entity)
 		{
-			$entity_data[] = array(
-				'rule_id' => $entity->get_id(),
-				'rule_language' => $entity->get_language(),
-				'rule_left_id' => $entity->get_left_id(),
-				'rule_right_id' => $entity->get_right_id(),
-				'rule_parent_id' => $entity->get_parent_id(),
-				'rule_title' => $entity->get_title(),
-				'rule_anchor' => $entity->get_anchor(),
-			);
-		}
+			// Go through each field in the data and make sure the function returns
+			// what we saved
+			foreach ($map as $field => $function)
+			{
+				$this->assertEquals($data[$i][$field], $entity->$function());
+			}
 
-		// Assert that the data matches what's expected
-		$this->assertEquals($data, $entity_data);
+			$i++;
+		}
 	}
 
 	/**
@@ -94,27 +101,30 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_get_rules_fails_data()
+	public function get_rules_fails_test_data()
 	{
 		return array(
-			// language to search
-			array(0),
-			array(4),
+			// language to search, expected result (empty array)
+			array(0, array()),
+			array(4, array()),
 		);
 	}
 
 	/**
 	* Test getting (non-existant) rules from the database
 	*
-	* @dataProvider test_get_rules_fails_data
-	* @expectedException \phpbb\boardrules\exception\out_of_bounds
+	* @dataProvider get_rules_fails_test_data
+	* @access public
 	*/
-	public function test_get_rules_fails($language)
+	public function test_get_rules_fails($language, $expected)
 	{
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 
 		// Load the operator
-		$operator->get_rules($language);
+		$result = $operator->get_rules($language);
+
+		// Assert that the id matches what is expected
+		$this->assertEquals($expected, $result);
 	}
 }
