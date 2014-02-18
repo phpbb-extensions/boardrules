@@ -1,0 +1,109 @@
+/**
+* Some CSS adapted from phpBB.com rules page
+*/
+
+/* page layout */
+#container {
+	position: relative;
+	overflow: hidden;
+}
+
+#main h3 {
+	color: #d21a4e;
+	font-size: 1em;
+	text-transform: none;
+	border-bottom: none;
+	margin-top: 5px;
+}
+
+#main ol {
+	font-size: 1.2em;
+	margin-left: 2em;
+	line-height: 1.3em;
+}
+
+#main ol ol{ font-size: 1em; }
+
+/* rules header */
+.boardrules-header {
+	color: #005784;
+	font-size: 2.8em;
+}
+
+.boardrules-explain {
+	font-size: 1.2em;
+	margin-bottom: 1em;
+}
+
+/* rules */
+#rules { padding-right: 50px; }
+#rules li { margin-bottom: 20px; }
+#rules ol { list-style: lower-alpha; }
+#rules ol li { margin-bottom: 5px; }
+#rules ol li.rule-item { padding-bottom: 5px; }
+#rules ol li.rule-item ul,
+#rules ol li.rule-item ol { margin: 1em 0 1em 3em; }
+
+.postlink { border-bottom: solid 1px; }
+
+/* rules sections mini panel */
+#boardrules-categories {
+	width: 260px;
+	float: right;
+	margin: 26px 0 30px 30px;
+}
+
+.mini-panel {
+	background-color: #ebebeb;
+	margin-bottom: 5px;
+	padding: 5px 10px 5px 10px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+}
+
+.mini-panel h3 {
+	color: #333333;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	margin: 5px 0 0 0;
+	padding-bottom: 5px;
+	border-bottom: solid 1px #CCCCCC;
+}
+
+ul.menu {
+	border-top: 1px solid #FFFFFF;
+	list-style: none;
+	margin: 0;
+}
+
+ul.menu li {
+	margin: 0;
+	padding: 5px 0 4px 0;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+ul.menu li:last-child { border-bottom: none; }
+
+/* rule highlighting */
+.highlight {
+	color: #BC2A4D;
+	font-weight: bold;
+	background-color: #ECD5D8;
+	padding: 3px 6px 0 6px;
+}
+
+/* responsive design */
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
+{
+	#boardrules-categories {
+		width: 100%;
+		float: none;
+		text-align: center;
+		margin: 0;
+	}
+
+	#container {
+		width: 100%;
+		margin: 0;
+	}
+}
