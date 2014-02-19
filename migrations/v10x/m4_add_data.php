@@ -23,7 +23,7 @@ class m4_add_data extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\boardrules\migrations\v10x\m3_add_schema.php');
+		return array('\phpbb\boardrules\migrations\v10x\m3_add_schema');
 	}
 
 	/**
