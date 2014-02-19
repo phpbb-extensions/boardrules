@@ -18,7 +18,6 @@ services:
             - @phpbb.boardrules.operator
             - @template
             - @user
-            - %tables.boardrules%
 
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
