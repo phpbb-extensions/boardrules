@@ -47,7 +47,6 @@ services:
         arguments:
             - @service_container
             - @phpbb.boardrules.nestedset_rules
-            - %tables.boardrules%
 
     phpbb.boardrules.table_lock:
         class: phpbb\lock\db
