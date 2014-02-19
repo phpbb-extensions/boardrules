@@ -166,11 +166,11 @@ class admin_controller implements admin_interface
 		// Prepare navigation
 		if (!$parent_id)
 		{
-			$navigation = $this->user->lang['BOARDRULES_INDEX'];
+			$navigation = $this->user->lang['FORUM_INDEX'];
 		}
 		else
 		{
-			$navigation = '<a href="' . $this->u_action . '">' . $this->user->lang['BOARDRULES_INDEX'] . '</a>';
+			$navigation = '<a href="' . $this->u_action . '">' . $this->user->lang['FORUM_INDEX'] . '</a>';
 
 			$sql = 'SELECT r2.*
 				FROM ' . $this->boardrules_table . ' r1
