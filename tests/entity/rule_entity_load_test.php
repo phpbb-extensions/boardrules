@@ -111,7 +111,7 @@ class entity_test extends rule_entity_base
 	}
 
 	/**
-	* Test data for the test_load() function
+	* Test data for the test_load_fails() function
 	*
 	* @return array Array of test data
 	* @access public
