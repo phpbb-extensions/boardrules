@@ -10,6 +10,7 @@ services:
             - @request
             - @template
             - @user
+            - @phpbb.boardrules.nestedset_rules
             - @phpbb.boardrules.operator
             - %tables.boardrules%
 

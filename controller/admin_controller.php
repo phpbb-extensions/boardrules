@@ -26,8 +26,8 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\user */
-	protected $user;
+	/** @var \phpbb\boardrules\operators\nestedset_rules */
+	protected $nestedset_rules;
 
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
@@ -42,23 +42,23 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config              $config            Config object
-	* @param \phpbb\db\driver\driver           $db                Database object
-	* @param \phpbb\request\request            $request           Request object
-	* @param \phpbb\template\template          $template          Template object
-	* @param \phpbb\user                       $user              User object
-	* @param \phpbb\boardrules\operators\rule  $rule_operator     Rule operator object
-	* @param string                            $boardrules_table  Name of the table used to store boardrules data
+	* @param \phpbb\config\config                         $config            Config object
+	* @param \phpbb\db\driver\driver                      $db                Database object
+	* @param \phpbb\request\request                       $request           Request object
+	* @param \phpbb\template\template                     $template          Template object
+	* @param \phpbb\boardrules\operators\nestedset_rules  $nestedset_rules   Nestedset object for tree functionality
+	* @param \phpbb\boardrules\operators\rule             $rule_operator     Rule operator object
+	* @param string                                       $boardrules_table  Name of the table used to store boardrules data
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, \phpbb\boardrules\operators\rule $rule_operator, $boardrules_table)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, \phpbb\boardrules\operators\rule $rule_operator, $boardrules_table)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
-		$this->user = $user;
+		$this->nestedset_rules = $nestedset_rules;
 		$this->rule_operator = $rule_operator;
 		$this->$boardrules_table = $boardrules_table;
 	}
@@ -164,40 +164,32 @@ class admin_controller implements admin_interface
 		}
 
 		// Prepare navigation
-		if (!$parent_id)
-		{
-			$navigation = $this->user->lang['FORUM_INDEX'];
-		}
-		else
-		{
-			$navigation = '<a href="' . $this->u_action . '">' . $this->user->lang['FORUM_INDEX'] . '</a>';
+		$rowset = $this->nestedset_rules
+			->use_language($language)
+			->get_path_data($parent_id);
 
-			$sql = 'SELECT r2.*
-				FROM ' . $this->boardrules_table . ' r1
-				LEFT JOIN ' . $this->boardrules_table . " r2
-					ON r1.left_id BETWEEN r2.left_id AND r2.right_id
-				WHERE r1.rule_id = $parent_id
-				ORDER BY r2.left_id ASC";
-			$result = $this->db->sql_query($sql);
+		foreach ($rowset as $row)
+		{
+			// Check tree level
+			$current_level = false;
 
-			while ($row = $this->db->sql_fetchrow($result))
+			if ($row['rule_id'] == $parent_id)
 			{
-				if ($row['rule_id'] == $parent_id)
-				{
-					$navigation .= ' -&gt; ' . $row['rule_title'];
-				}
-				else
-				{
-					$navigation .= ' -&gt; <a href="' . $this->u_action . '&amp;language=' . $language . '&amp;parent_id=' . $row['parent_id'] . '">' . $row['rule_title'] . '</a>';
-				}
+				$current_level = true;
 			}
-			$db->sql_freeresult($result);
+
+			$this->template->assign_block_vars('navigation', array(
+				'RULE_TITLE'		=> $row['rule_title'],
+
+				'S_CURRENT_LEVEL'	=> $current_level,
+
+				'U_RULE_LEVEL'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $row['parent_id'],
+			));
 		}
 
 		$this-template->assign_vars(array(
-			'NAVIGATION'	=> $navigation,
+			'U_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
-			'U_ACTION'		=> "{$this->u_action}&amp;parent_id={$parent_id}",
 		));
 	}
 }
