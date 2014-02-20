@@ -15,38 +15,15 @@ namespace phpbb\boardrules\tests\entity;
 class rule_entity_insert_test extends rule_entity_base
 {
 	/**
-	* Test data for the test_insert() function
-	*
-	* @return array Array of test data
-	* @access public
-	*/
-	public function insert_test_data()
-	{
-		return array(
-			array(
-				1,
-				array(
-					'rule_id' => 4,
-					'rule_language' => 1,
-					'rule_left_id' => 0,
-					'rule_right_id' => 0,
-					'rule_parent_id' => 0,
-					'rule_anchor' => 'inserted_anchor',
-					'rule_title' => 'inserted_title',
-					'rule_message' => 'inserted_message',
-				),
-			),
-		);
-	}
-
-	/**
 	* Test saving data
 	*
-	* @dataProvider insert_test_data
 	* @access public
 	*/
-	public function test_insert($language, $expected)
+	public function test_insert()
 	{
+		// Set a language variable
+		$language = 1;
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
@@ -60,56 +37,28 @@ class rule_entity_insert_test extends rule_entity_base
 		// Assert the returned value is what we expect
 		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
-		// Map the fields to the getters
-		$map = array(
-			'rule_id'		=> 'get_id',
-			'rule_language'	=> 'get_language',
-			'rule_left_id'	=> 'get_left_id',
-			'rule_right_id'	=> 'get_right_id',
-			'rule_parent_id'=> 'get_parent_id',
-			'rule_anchor'	=> 'get_anchor',
-			'rule_title'	=> 'get_title',
-		);
-
-		// Go through each field in the data and make sure the function returns
-		// what we saved
-		foreach ($map as $field => $function)
-		{
-			$this->assertEquals($expected[$field], $entity->$function());
-		}
-	}
-
-	/**
-	* Test data for the test_insert_fails() function
-	*
-	* @return array Array of test data
-	* @access public
-	*/
-	public function insert_fails_test_data()
-	{
-		$import_data = $this->get_import_data();
-
-		return array(
-			array(
-				$import_data[1],
-				1,
-			),
-		);
+		// Assert that a rule_id of value 4 was created
+		$this->assertEquals(4, $entity->get_id());
 	}
 
 	/**
 	* Test inserting on an existing rule in the database
 	*
-	* @dataProvider insert_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function test_insert_fails($data, $language)
+	public function test_insert_fails()
 	{
+		// Set a language variable
+		$language = 1;
+		
+		// Load some import test data
+		$import_data = $this->get_import_data();
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
 		// Set the data
-		$entity->import($data);
+		$entity->import($import_data[1]);
 
 		// Insert the entity
 		$entity->insert($language);
