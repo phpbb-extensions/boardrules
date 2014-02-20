@@ -61,8 +61,8 @@ class rule_entity_save_test extends rule_entity_base
 
 		// Set some new data
 		$entity
-			->set_anchor($xpected['rule_anchor'])
-			->set_title($xpected['rule_title'])
+			->set_anchor($expected['rule_anchor'])
+			->set_title($expected['rule_title'])
 			->save();
 
 		// Re-load the data from the database
