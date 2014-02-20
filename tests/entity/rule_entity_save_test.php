@@ -66,11 +66,11 @@ class rule_entity_save_test extends rule_entity_base
 			->save();
 
 		// Re-load the data from the database
-		$entity->load($id);
+		$result = $entity->load($id);
 
 		// Assert expected matches actual
-		$this->assertEquals($expected['rule_anchor'], $entity->get_anchor());
-		$this->assertEquals($expected['rule_title'], $entity->get_title());
+		$this->assertEquals($expected['rule_anchor'], $result->get_anchor());
+		$this->assertEquals($expected['rule_title'], $result->get_title());
 	}
 
 	/**
