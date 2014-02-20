@@ -61,23 +61,16 @@ class rule_entity_save_test extends rule_entity_base
 
 		// Set some new data
 		$entity
-			->set_anchor('new_anchor_' . $id)
-			->set_title('new_title_' . $id)
+			->set_anchor($xpected['rule_anchor'])
+			->set_title($xpected['rule_title'])
 			->save();
 
-		// Map the fields to the getters
-		$map = array(
-			'rule_id'		=> 'get_id',
-			'rule_anchor'	=> 'get_anchor',
-			'rule_title'	=> 'get_title',
-		);
+		// Re-load the data from the database
+		$entity->load($id);
 
-		// Go through each field in the data and make sure the function returns
-		// what we saved
-		foreach ($map as $field => $function)
-		{
-			$this->assertEquals($expected[$field], $entity->$function());
-		}
+		// Assert expected matches actual
+		$this->assertEquals($expected['rule_anchor'], $entity->get_anchor());
+		$this->assertEquals($expected['rule_title'], $entity->get_title());
 	}
 
 	/**
