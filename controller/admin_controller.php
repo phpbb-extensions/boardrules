@@ -150,9 +150,9 @@ class admin_controller implements admin_interface
 
 			$this->template->assign_block_vars('rules', array(
 				'TITLE'				=> $entity->get_title(),
-				'RULE_IMAGE'		=> $is_category ? '<img src="images/icon_subfolder.gif" />' : '<img src="images/icon_folder.gif" />',
 
-				'U_ADD'				=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
+				'S_IS_CATEGORY'		=> $is_category,
+
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
 				'U_MOVE_DOWN'		=> "{$this->u_action}&amp;action=move_down&amp;rule_id=" . $entity->get_id(),
@@ -196,6 +196,8 @@ class admin_controller implements admin_interface
 
 		$this-template->assign_vars(array(
 			'NAVIGATION'	=> $navigation,
+			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
+			'U_ACTION'		=> "{$this->u_action}&amp;parent_id={$parent_id}",
 		));
 	}
 }
