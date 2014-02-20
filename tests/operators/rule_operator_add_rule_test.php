@@ -25,10 +25,10 @@ class rule_operator_add_rule_test extends rule_operator_base
 		$entity = new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
 
 		// Fill the entity with basic data
-		$entity->message_disable_bbcode();
-		$entity->message_disable_magic_url();
-		$entity->message_disable_smilies();
 		$entity
+			->message_disable_bbcode()
+			->message_disable_magic_url()
+			->message_disable_smilies()
 			->set_title('title_added')
 			->set_anchor('anchor_added')
 			->set_message('message_added');
