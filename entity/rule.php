@@ -358,23 +358,27 @@ class rule implements rule_interface
 	/**
 	* Enable bbcode on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_enable_bbcode()
 	{
 		$this->set_message_option(OPTION_FLAG_BBCODE);
+
+		return $this;
 	}
 
 	/**
 	* Disable bbcode on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_disable_bbcode()
 	{
 		$this->set_message_option(OPTION_FLAG_BBCODE, true);
+
+		return $this;
 	}
 
 	/**
@@ -391,23 +395,27 @@ class rule implements rule_interface
 	/**
 	* Enable magic url on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_enable_magic_url()
 	{
 		$this->set_message_option(OPTION_FLAG_LINKS);
+
+		return $this;
 	}
 
 	/**
 	* Disable magic url on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_disable_magic_url()
 	{
 		$this->set_message_option(OPTION_FLAG_LINKS, true);
+
+		return $this;
 	}
 
 	/**
@@ -424,23 +432,27 @@ class rule implements rule_interface
 	/**
 	* Enable smilies on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_enable_smilies()
 	{
 		$this->set_message_option(OPTION_FLAG_SMILIES);
+
+		return $this;
 	}
 
 	/**
 	* Disable smilies on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_disable_smilies()
 	{
 		$this->set_message_option(OPTION_FLAG_SMILIES, true);
+
+		return $this;
 	}
 
 	/**
@@ -541,6 +553,9 @@ class rule implements rule_interface
 	*/
 	protected function set_message_option($option_value, $negate = false, $reparse_message = true)
 	{
+		// Set rule_message_bbcode_options to 0 if it does not yet exist
+		$this->data['rule_message_bbcode_options'] = (isset($this->data['rule_message_bbcode_options'])) ? $this->data['rule_message_bbcode_options'] : 0;
+
 		// If we're setting the option and the option is not already set
 		if (!$negate && !($this->data['rule_message_bbcode_options'] & $option_value))
 		{
