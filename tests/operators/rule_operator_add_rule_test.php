@@ -31,7 +31,8 @@ class rule_operator_add_rule_test extends rule_operator_base
 			->message_disable_smilies()
 			->set_title('title_added')
 			->set_anchor('anchor_added')
-			->set_message('message_added');
+			->set_message('message_added')
+		;
 
 		// Set up some basic test variables
 		$test_id = 6;
