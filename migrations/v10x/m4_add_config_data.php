@@ -10,9 +10,9 @@
 namespace phpbb\boardrules\migrations\v10x;
 
 /**
-* Migration stage 4: Additional data
+* Migration stage 4: Additional config data
 */
-class m4_add_data extends \phpbb\db\migration\migration
+class m4_add_config_data extends \phpbb\db\migration\migration
 {
 	/**
 	* Assign migration file dependencies for this migration
