@@ -71,6 +71,7 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	* Test deleting rules
 	*
 	* @dataProvider delete_rule_test_data
+	* @access public
 	*/
 	public function test_delete_rule($rule_id, $expected)
 	{

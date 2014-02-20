@@ -45,6 +45,7 @@ class rule_entity_insert_test extends rule_entity_base
 	* Test inserting on an existing rule in the database
 	*
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
+	* @access public
 	*/
 	public function test_insert_fails()
 	{

@@ -79,6 +79,7 @@ class entity_test extends rule_entity_base
 	* Test loading rules from the database
 	*
 	* @dataProvider load_test_data
+	* @access public
 	*/
 	public function test_load($id, $data)
 	{
@@ -130,6 +131,7 @@ class entity_test extends rule_entity_base
 	*
 	* @dataProvider load_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
+	* @access public
 	*/
 	public function test_load_fails($id)
 	{

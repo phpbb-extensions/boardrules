@@ -78,6 +78,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* Test getting rules from the database
 	*
 	* @dataProvider get_rules_test_data
+	* @access public
 	*/
 	public function test_get_rules($langauge, $data)
 	{
