@@ -15,7 +15,7 @@ namespace phpbb\boardrules\tests\entity;
 class rule_entity_insert_test extends rule_entity_base
 {
 	/**
-	* Test saving data
+	* Test inserting new rule data
 	*
 	* @access public
 	*/
@@ -38,11 +38,11 @@ class rule_entity_insert_test extends rule_entity_base
 		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that a rule_id of value 4 was created
-		$this->assertEquals(4, $entity->get_id());
+		$this->assertEquals(4, $result->get_id());
 	}
 
 	/**
-	* Test inserting on an existing rule in the database
+	* Try inserting a rule that already exists into the database
 	* Entities with an exisiting rule_id will fail to insert
 	*
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
