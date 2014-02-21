@@ -29,6 +29,7 @@ services:
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
         arguments:
+            - @config
             - @controller.helper
             - @template
         tags:

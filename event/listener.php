@@ -16,6 +16,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\config\config */
+	protected $config;
+
 	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
@@ -25,13 +28,15 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	* 
+	* @param \phpbb\config\config              $config           Config object
 	* @param \phpbb\controller\helper    $controller_helper  Controller helper object
 	* @param \phpbb\template\template    $template           Template object
 	* @return \phpbb\boardrules\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\controller\helper $controller_helper, \phpbb\template\template $template)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template)
 	{
+		$this->config = $config;
 		$this->controller_helper = $controller_helper;
 		$this->template = $template;
 	}
