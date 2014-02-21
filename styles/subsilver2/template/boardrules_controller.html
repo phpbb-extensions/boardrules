@@ -1,7 +1,7 @@
 <!-- INCLUDECSS @phpbb_boardrules/../theme/boardrules_controller.css -->
 <!-- INCLUDE overall_header.html -->
 
-<!-- IF S_CATEGORIES -->
+<!-- IF S_CATEGORIES and S_BOARDRULES_ENABLED -->
 <div id="boardrules-categories">
 	<div class="mini-panel">
 		<div class="inner">
@@ -17,29 +17,30 @@
 <!-- ENDIF -->
 
 <div id="container">
-
 	<h2 class="boardrules-header">{L_BOARDRULES_HEADER}</h2>
-	<p class="boardrules-explain">{BOARDRULES_EXPLAIN}</p>
-
-	<div id="main">
-		<ol id="rules">
-			<!-- BEGIN rules -->
-				<!-- IF rules.S_CLOSE_LIST -->
-						</ol>
-					</li>
-				<!-- ELSEIF rules.S_IS_CATEGORY -->
-					<li id="{rules.U_ANCHOR}">
-						<h3>{rules.TITLE}</h3>
-						<ol>
-				<!-- ELSE -->
-							<li class="rule-item" id="{rules.U_ANCHOR}">
-								{rules.MESSAGE} <a class="rule-anchor postlink" href="#{rules.U_ANCHOR}">#</a>
-							</li>
-				<!-- ENDIF -->
-			<!-- END rules -->
-		</ol>
-	</div>
-
+	<!-- IF S_BOARDRULES_ENABLED -->
+		<p class="boardrules-explain">{BOARDRULES_EXPLAIN}</p>
+		<div id="main">
+			<ol id="rules">
+				<!-- BEGIN rules -->
+					<!-- IF rules.S_CLOSE_LIST -->
+							</ol>
+						</li>
+					<!-- ELSEIF rules.S_IS_CATEGORY -->
+						<li id="{rules.U_ANCHOR}">
+							<h3>{rules.TITLE}</h3>
+							<ol>
+					<!-- ELSE -->
+								<li class="rule-item" id="{rules.U_ANCHOR}">
+									{rules.MESSAGE} <a class="rule-anchor postlink" href="#{rules.U_ANCHOR}">#</a>
+								</li>
+					<!-- ENDIF -->
+				<!-- END rules -->
+			</ol>
+		</div>
+	<!-- ELSE -->
+		<p class="boardrules-explain">{L_BOARDRULES_DISABLED}</p>
+	<!-- ENDIF -->
 </div>
 
 <!-- INCLUDEJS @phpbb_boardrules/boardrules_controller.js -->
