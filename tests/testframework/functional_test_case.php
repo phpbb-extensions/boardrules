@@ -7,7 +7,7 @@
 *
 */
 
-/*
+/**
 * Note: Copied and inspired by test code written by nickvergessen and marc1706
 * This functional test case handles installation and enabling of the Board Rules extension
 */
