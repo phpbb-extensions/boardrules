@@ -58,7 +58,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	}
 
 	/**
-	* Test data for the test_anchor() function
+	* Test data for the test_anchor_fails() function
 	*
 	* @return array Array of test data
 	* @access public
