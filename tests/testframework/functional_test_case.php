@@ -16,18 +16,47 @@ namespace phpbb\boardrules\tests\testframework;
 
 abstract class functional_test_case extends \phpbb_functional_test_case
 {
-	protected $boardrules_enabled = false;
+	/**
+	* The vendor name of an extension
+	* @var string
+	*/
+	protected $extension_vendor;
 
 	/**
-	* Enable the Board Rules extension in the ACP Extensions area
+	* The package name of an extension
+	* @var string
+	*/
+	protected $extension_name;
+
+	/**
+	* The display name of an extension
+	* @var string
+	*/
+	protected $extension_display_name;
+
+	/**
+	* The enabled state of an extension
+	* @var string
+	*/
+	protected $extension_enabled = false;
+
+	/**
+	* Enable an extension in the ACP Extensions area
 	*
+	* @param string $extension_vendor The vendor name of an extension
+	* @param string $extension_name The package name of an extension
+	* @param string $extension_display_name The display name of an extension
 	* @access public
 	*/
-	public function enable_boardrules_ext()
+	public function enable_extension($extension_vendor, $extension_name, $extension_display_name)
 	{
-		$enable_boardrules = false;
+		$this->extension_vendor = $extension_vendor;
+		$this->extension_name = $extension_name;
+		$this->extension_display_name = $extension_display_name;
 
-		if ($this->boardrules_enabled === true || $this->check_if_enabled())
+		$enable_extension = false;
+
+		if ($this->extension_enabled === true || $this->check_if_enabled())
 		{
 			return;
 		}
@@ -36,25 +65,25 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 		$disabled_extensions = $crawler->filter('tr.ext_disabled')->extract(array('_text'));
 		foreach ($disabled_extensions as $extension)
 		{
-			if (strpos($extension, 'Board Rules') !== false)
+			if (strpos($extension, $this->extension_display_name) !== false)
 			{
-				$enable_boardrules = true;
+				$enable_extension = true;
 			}
 		}
 
-		if ($enable_boardrules)
+		if ($enable_extension)
 		{
-			$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&action=enable_pre&ext_name=phpbb%2fboardrules&sid=' . $this->sid);
+			$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&action=enable_pre&ext_name=' . $this->extension_vendor . '%2f' . $this->extension_name . '&sid=' . $this->sid);
 			$form = $crawler->selectButton('Enable')->form();
 			$crawler = self::submit($form);
 			$this->assertContains('The extension was enabled successfully', $crawler->text());
-			$this->boardrules_enabled = true;
+			$this->extension_enabled = true;
 			$this->set_enabled();
 		}
 	}
 
 	/**
-	* Check if the Board Rules extension is enabled
+	* Check if the extension is enabled
 	*
 	* @access protected
 	*/
@@ -62,7 +91,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	{
 		$this->db = $this->get_db();
 
-		$sql = "SELECT config_value FROM phpbb_config WHERE config_name = 'boardrules_ext_enabled'";
+		$sql = "SELECT config_value FROM phpbb_config WHERE config_name = '" . $this->extension_name . "_ext_enabled'";
 		$result = $this->db->sql_query($sql);
 		$enabled = $this->db->sql_fetchfield('config_value');
 		$this->db->sql_freeresult($result);
@@ -71,7 +100,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	}
 
 	/**
-	* Set the Board Rules extension as enabled
+	* Set the extension to enabled
 	*
 	* @access protected
 	*/
@@ -79,7 +108,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	{
 		$this->db = $this->get_db();
 
-		$sql = "INSERT INTO phpbb_config (config_name, config_value, is_dynamic) VALUES ('boardrules_ext_enabled', 1, 1)";
+		$sql = "INSERT INTO phpbb_config (config_name, config_value, is_dynamic) VALUES ('" . $this->extension_name . "_ext_enabled', 1, 1)";
 		$this->db->sql_query($sql);
 	}
 }

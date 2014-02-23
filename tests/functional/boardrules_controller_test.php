@@ -19,7 +19,7 @@ class phpbb_functional_boardrules_controller_test extends \phpbb\boardrules\test
 		parent::setUp();
 		$this->login();
 		$this->admin_login();
-		$this->enable_boardrules_ext();
+		$this->enable_extension('phpbb', 'boardrules', 'Board Rules');
 	}
 
 	/**
