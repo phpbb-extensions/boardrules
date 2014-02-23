@@ -137,6 +137,7 @@ class rule_operator_move_test extends rule_operator_base
 	* Test moving rules up and down
 	*
 	* @dataProvider move_rules_test_data
+	* @access public
 	*/
 	public function test_move_rules($rule_id, $direction, $expected)
 	{

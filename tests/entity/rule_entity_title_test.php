@@ -58,7 +58,7 @@ class rule_entity_title_test extends rule_entity_base
 	}
 
 	/**
-	* Test data for the test_title() function
+	* Test data for the test_title_fails() function
 	*
 	* @return array Array of test data
 	* @access public
