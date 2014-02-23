@@ -12,8 +12,6 @@
 * This functional test case handles installation and enabling of the Board Rules extension
 */
 
-namespace phpbb\boardrules\tests\testframework;
-
 abstract class functional_test_case extends \phpbb_functional_test_case
 {
 	/**
@@ -46,6 +44,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	* @param string $extension_vendor The vendor name of an extension
 	* @param string $extension_name The package name of an extension
 	* @param string $extension_display_name The display name of an extension
+	* @return null
 	* @access public
 	*/
 	public function enable_extension($extension_vendor, $extension_name, $extension_display_name)
@@ -83,8 +82,9 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	}
 
 	/**
-	* Check if the extension is enabled
+	* Check if the extension is enabled in the database
 	*
+	* @return int $enabled config value for the enable state stored in the db
 	* @access protected
 	*/
 	protected function check_if_enabled()
@@ -100,8 +100,9 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	}
 
 	/**
-	* Set the extension to enabled
+	* Set the extension to enabled in the database
 	*
+	* @return null
 	* @access protected
 	*/
 	protected function set_enabled()
