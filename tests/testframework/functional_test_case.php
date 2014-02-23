@@ -12,6 +12,8 @@
 * This functional test case handles installation and enabling of an extension
 */
 
+namespace phpbb\boardrules\tests\testframework;
+
 abstract class functional_test_case extends \phpbb_functional_test_case
 {
 	/**
