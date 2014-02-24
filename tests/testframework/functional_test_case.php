@@ -93,7 +93,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	{
 		$this->db = $this->get_db();
 
-		$sql = "SELECT config_value FROM phpbb_config WHERE config_name = '" . $this->extension_name . "_ext_enabled'";
+		$sql = "SELECT config_value FROM phpbb_config WHERE config_name = '" . $this->db->sql_escape($this->extension_name) . "_ext_enabled'";
 		$result = $this->db->sql_query($sql);
 		$enabled = $this->db->sql_fetchfield('config_value');
 		$this->db->sql_freeresult($result);
@@ -111,7 +111,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	{
 		$this->db = $this->get_db();
 
-		$sql = "INSERT INTO phpbb_config (config_name, config_value, is_dynamic) VALUES ('" . $this->extension_name . "_ext_enabled', 1, 1)";
+		$sql = "INSERT INTO phpbb_config (config_name, config_value, is_dynamic) VALUES ('" . $this->db->sql_escape($this->extension_name) . "_ext_enabled', 1, 1)";
 		$this->db->sql_query($sql);
 	}
 }
