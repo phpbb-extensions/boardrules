@@ -146,7 +146,6 @@ class admin_controller implements admin_interface
 
 		foreach ($rowset as $row)
 		{
-
 			$this->template->assign_block_vars('navigation', array(
 				'RULE_TITLE'		=> $row['rule_title'],
 
