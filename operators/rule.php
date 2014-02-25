@@ -156,4 +156,24 @@ class rule implements rule_interface
 			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 	}
+
+	/**
+	* Get path data for a rule
+	*
+	* @param int $language Language selection identifier; default: 0
+	* @param int $parent_id Category to display rules from; default: 0
+	* @return array Array of rule data paths
+	* @access public
+	* @throws \phpbb\boardrules\exception\base
+	*/
+	public function get_rule_path_data($language = 0, $parent_id = 0)
+	{
+		$rowset = array();
+
+		$rowset = $this->nestedset_rules
+			->use_language($language)
+			->get_path_data($parent_id);
+
+		return $rowset;
+	}
 }

@@ -152,7 +152,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Prepare navigation
-		$rowset;
+		$rowset = $this->rule_operator->get_rule_path_data($language, $parent_id);
 
 		foreach ($rowset as $row)
 		{
