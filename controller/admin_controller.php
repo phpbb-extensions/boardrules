@@ -26,8 +26,6 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\boardrules\operators\nestedset_rules */
-	protected $nestedset_rules;
 
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
@@ -46,19 +44,17 @@ class admin_controller implements admin_interface
 	* @param \phpbb\db\driver\driver                      $db                Database object
 	* @param \phpbb\request\request                       $request           Request object
 	* @param \phpbb\template\template                     $template          Template object
-	* @param \phpbb\boardrules\operators\nestedset_rules  $nestedset_rules   Nestedset object for tree functionality
 	* @param \phpbb\boardrules\operators\rule             $rule_operator     Rule operator object
 	* @param string                                       $boardrules_table  Name of the table used to store boardrules data
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, \phpbb\boardrules\operators\rule $rule_operator, $boardrules_table)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\rule $rule_operator, $boardrules_table)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
-		$this->nestedset_rules = $nestedset_rules;
 		$this->rule_operator = $rule_operator;
 		$this->$boardrules_table = $boardrules_table;
 	}
@@ -156,9 +152,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Prepare navigation
-		$rowset = $this->nestedset_rules
-			->use_language($language)
-			->get_path_data($parent_id);
+		$rowset;
 
 		foreach ($rowset as $row)
 		{
