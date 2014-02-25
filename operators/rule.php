@@ -164,7 +164,6 @@ class rule implements rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return array Array of rule data paths
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function get_rule_path_data($language = 0, $parent_id = 0)
 	{
