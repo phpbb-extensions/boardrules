@@ -30,13 +30,6 @@ class admin_controller implements admin_interface
 	protected $rule_operator;
 
 	/**
-	* The database table the rules are stored in
-	*
-	* @var string
-	*/
-	protected $boardrules_table;
-
-	/**
 	* Constructor
 	*
 	* @param \phpbb\config\config                         $config            Config object
@@ -44,18 +37,16 @@ class admin_controller implements admin_interface
 	* @param \phpbb\request\request                       $request           Request object
 	* @param \phpbb\template\template                     $template          Template object
 	* @param \phpbb\boardrules\operators\rule             $rule_operator     Rule operator object
-	* @param string                                       $boardrules_table  Name of the table used to store boardrules data
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\rule $rule_operator, $boardrules_table)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\rule $rule_operator)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
 		$this->rule_operator = $rule_operator;
-		$this->$boardrules_table = $boardrules_table;
 	}
 
 	/**
