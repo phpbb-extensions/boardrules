@@ -162,18 +162,11 @@ class admin_controller implements admin_interface
 
 		foreach ($rowset as $row)
 		{
-			// Check tree level
-			$current_level = false;
-
-			if ($row['rule_id'] == $parent_id)
-			{
-				$current_level = true;
-			}
 
 			$this->template->assign_block_vars('navigation', array(
 				'RULE_TITLE'		=> $row['rule_title'],
 
-				'S_CURRENT_LEVEL'	=> $current_level,
+				'S_CURRENT_LEVEL'	=> ($row['rule_id'] == $parent_id) ? true : false,
 
 				'U_RULE_LEVEL'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $row['parent_id'],
 			));
