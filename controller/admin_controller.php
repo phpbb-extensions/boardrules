@@ -26,7 +26,6 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\template\template */
 	protected $template;
 
-
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
