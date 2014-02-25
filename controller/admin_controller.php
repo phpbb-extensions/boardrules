@@ -140,18 +140,10 @@ class admin_controller implements admin_interface
 				continue; // The current rule is a child of a previous rule, do not display it
 			}
 
-			$is_category = false;
-
-			if ($entity->get_right_id() - $entity->get_left_id() > 1)
-			{
-				// Rule categories
-				$is_category = true;
-			}
-
 			$this->template->assign_block_vars('rules', array(
 				'TITLE'				=> $entity->get_title(),
 
-				'S_IS_CATEGORY'		=> $is_category,
+				'S_IS_CATEGORY'		=> $entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
 
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
