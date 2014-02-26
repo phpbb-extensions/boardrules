@@ -129,6 +129,11 @@ class admin_controller implements admin_interface
 				continue; // The current rule is a child of a previous rule, do not display it
 			}
 
+			if ($entity->get_id() == $parent_id)
+			{
+				continue; // Do not display the current rule
+			}
+
 			$this->template->assign_block_vars('rules', array(
 				'TITLE'				=> $entity->get_title(),
 
