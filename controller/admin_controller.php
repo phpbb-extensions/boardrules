@@ -57,7 +57,7 @@ class admin_controller implements admin_interface
 	*/
 	public function display_options()
 	{
-		$this-template->assign_vars(array(
+		$this->template->assign_vars(array(
 			'BOARDRULES_ENABLE'						=> $this->config['boardrules_enable'] ? true : false,
 			'BOARDRULES_REQUIRE_AT_REGISTRATION'	=> $this->config['boardrules_require_at_registration'] ? true : false,
 		));
@@ -94,7 +94,7 @@ class admin_controller implements admin_interface
 		// If there are some, build option fields
 		if ($this->db->sql_fetchfield('languages_count') > 1)
 		{
-			$this-template->assign_vars(array(
+			$this->template->assign_vars(array(
 				'S_LANG_OPTIONS'	=> language_select($this->config['default_lang']),
 			));
 		}
@@ -155,7 +155,7 @@ class admin_controller implements admin_interface
 			));
 		}
 
-		$this-template->assign_vars(array(
+		$this->template->assign_vars(array(
 			'U_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 		));
