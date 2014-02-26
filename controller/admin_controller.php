@@ -29,6 +29,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
+	/** string Custom form action */
+	protected $u_action;
+
 	/**
 	* Constructor
 	*
@@ -159,5 +162,17 @@ class admin_controller implements admin_interface
 			'U_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 		));
+	}
+
+	/**
+	* Set page url
+	*
+	* @param string $u_action Custom form action
+	* @return null
+	* @access public
+	*/
+	public function set_page_url($u_action = '')
+	{
+		$this->u_action = $u_action;
 	}
 }

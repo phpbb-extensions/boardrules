@@ -91,4 +91,13 @@ interface admin_interface
 	* @access public
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1);
+
+	/**
+	* Set page url
+	*
+	* @param string $u_action Custom form action
+	* @return null
+	* @access public
+	*/
+	public function set_page_url($u_action = '');
 }
