@@ -141,8 +141,8 @@ class admin_controller implements admin_interface
 			$last_right_id = $entity->get_right_id();
 		}
 
-		// Prepare navigation
-		$rowset = $this->rule_operator->get_rule_path_data($language, $parent_id);
+		// Prepare rule breadcrumb path navigation
+		$rowset = $this->rule_operator->get_rule_tree_path_data($language, $parent_id);
 
 		foreach ($rowset as $row)
 		{
