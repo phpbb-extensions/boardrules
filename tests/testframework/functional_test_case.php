@@ -163,7 +163,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	{
 		$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&sid=' . $this->sid);
 		$enabled_extensions = $crawler->filter('tr.ext_enabled')->extract(array('_text'));
-		foreach ($disabled_extensions as $extension)
+		foreach ($enabled_extensions as $extension)
 		{
 			if (strpos($extension, $this->extension_display_name) !== false)
 			{
