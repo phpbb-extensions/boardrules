@@ -132,7 +132,7 @@ class admin_controller implements admin_interface
 			$this->template->assign_block_vars('rules', array(
 				'TITLE'				=> $entity->get_title(),
 
-				'S_IS_CATEGORY'		=> $entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
+				'S_IS_CATEGORY'		=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
 
 				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
