@@ -158,12 +158,17 @@ class rule implements rule_interface
 	*/
 	public function get_rule_tree_path_data($language = 0, $parent_id = 0)
 	{
-		$entities = array();
-
-		$entities = $this->nestedset_rules
+		// Load all parent rule data from the database into an array
+		$rowset = $this->nestedset_rules
 			->use_language($language)
 			->get_path_data($parent_id);
 
+		// Import each rule into an entity, and store them in an array
+		foreach ($rowset as $row)
+		{
+			$entities[] = $this->phpbb_container->get('phpbb.boardrules.entity')
+				->import($row);
+		}
 		return $entities;
 	}
 }

@@ -147,14 +147,14 @@ class admin_controller implements admin_interface
 		// Prepare rule breadcrumb path navigation
 		$entities = $this->rule_operator->get_rule_tree_path_data($language, $parent_id);
 
-		foreach ($entities, as $entity)
+		foreach ($entities as $entity)
 		{
 			$this->template->assign_block_vars('breadcrumb', array(
-				'RULE_TITLE'		=> $entity['rule_title'],
+				'RULE_TITLE'		=> $entity->get_title(),
 
-				'S_CURRENT_LEVEL'	=> ($entity['rule_id'] == $parent_id) ? true : false,
+				'S_CURRENT_LEVEL'	=> ($entity->get_id() == $parent_id) ? true : false,
 
-				'U_RULE_LEVEL'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity['rule_id'],
+				'U_RULE_LEVEL'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
 		}
 
