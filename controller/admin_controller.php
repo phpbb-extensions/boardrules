@@ -161,6 +161,7 @@ class admin_controller implements admin_interface
 		$this->template->assign_vars(array(
 			'U_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
+			'U_MAIN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=0",
 		));
 	}
 
