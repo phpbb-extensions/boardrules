@@ -82,20 +82,25 @@ class admin_controller implements admin_interface
 	public function display_language_selection()
 	{
 		// Check if there are any available languages
-		$sql = 'SELECT COUNT(lang_id) as languages_count
+		$sql = 'SELECT lang_id
 			FROM ' . LANG_TABLE;
 		$result = $this->db->sql_query($sql);
+		$rows = $this->db->sql_fetchrowset($result);
+		$this->db->sql_freeresult($result);
 
 		// If there are some, build option fields
-		if ($this->db->sql_fetchfield('languages_count') > 1)
+		if (sizeof($rows) > 1)
 		{
-			$this-template->assign_vars(array(
+			$this->template->assign_vars(array(
 				'S_LANG_OPTIONS'	=> language_select($this->config['default_lang']),
 			));
 		}
 		else
 		{
-			$this->display_rules();
+			// If there is only one available language its index is 0
+			// and that language is the default board language.
+			// We do not need any loops here to get its id.
+			$this->display_rules($rows[0]['lang_id']);
 		}
 	}
 }
