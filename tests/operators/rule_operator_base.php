@@ -26,10 +26,10 @@ class rule_operator_base extends \extension_database_test_case
 		parent::setUp();
 
 		$this->db = $this->new_dbal();
+		$db = $this->db;
 
 		// mock container for the entity service
-		$this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
-		$db = $this->db;
+		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\Container');
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.boardrules.entity')
@@ -52,6 +52,6 @@ class rule_operator_base extends \extension_database_test_case
 	*/
 	protected function get_rule_operator()
 	{
-		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules, 'phpbb_boardrules');
+		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules);
 	}
 }

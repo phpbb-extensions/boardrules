@@ -128,7 +128,7 @@ interface rule_interface
 	/**
 	* Enable bbcode on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_enable_bbcode();
@@ -136,7 +136,7 @@ interface rule_interface
 	/**
 	* Disable bbcode on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_disable_bbcode();
@@ -152,7 +152,7 @@ interface rule_interface
 	/**
 	* Enable magic url on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_enable_magic_url();
@@ -160,7 +160,7 @@ interface rule_interface
 	/**
 	* Disable magic url on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_disable_magic_url();
@@ -176,7 +176,7 @@ interface rule_interface
 	/**
 	* Enable smilies on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_enable_smilies();
@@ -184,7 +184,7 @@ interface rule_interface
 	/**
 	* Disable smilies on the message
 	*
-	* @return null
+	* @return rule_interface $this
 	* @access public
 	*/
 	public function message_disable_smilies();

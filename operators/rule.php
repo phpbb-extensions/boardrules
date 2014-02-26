@@ -9,14 +9,14 @@
 
 namespace phpbb\boardrules\operators;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
 * Operator for a set of rules
 */
 class rule implements rule_interface
 {
-	/** @var ContainerBuilder */
+	/** @var Container */
 	protected $phpbb_container;
 
 	/**
@@ -27,26 +27,17 @@ class rule implements rule_interface
 	protected $nestedset_rules;
 
 	/**
-	* The database table the rules are stored in
-	*
-	* @var string
-	*/
-	protected $boardrules_table;
-
-	/**
 	* Constructor
 	*
-	* @param ContainerBuilder $phpbb_container
+	* @param Container $phpbb_container
 	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
-	* @param string $boardrules_table The database table the rules are stored in
 	* @return \phpbb\boardrules\operators\rule
 	* @access public
 	*/
-	public function __construct(ContainerBuilder $phpbb_container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, $boardrules_table)
+	public function __construct(Container $phpbb_container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules)
 	{
 		$this->phpbb_container = $phpbb_container;
 		$this->nestedset_rules = $nestedset_rules;
-		$this->boardrules_table = $boardrules_table;
 	}
 
 	/**

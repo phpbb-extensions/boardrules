@@ -20,7 +20,7 @@ class rule_entity_language_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_language_data()
+	public function language_test_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -51,7 +51,7 @@ class rule_entity_language_test extends rule_entity_base
 	/**
 	* Test getting language
 	*
-	* @dataProvider test_language_data
+	* @dataProvider language_test_data
 	* @access public
 	*/
 	public function test_language($data, $expected)

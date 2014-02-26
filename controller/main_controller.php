@@ -30,13 +30,6 @@ class main_controller implements main_interface
 	protected $user;
 
 	/**
-	* The database table the rules are stored in
-	*
-	* @var string
-	*/
-	protected $boardrules_table;
-
-	/**
 	* Constructor
 	*
 	* @param \phpbb\config\config                $config             Config object
@@ -44,18 +37,16 @@ class main_controller implements main_interface
 	* @param \phpbb\boardrules\operators\rule    $rule_operator      Rule operator object
 	* @param \phpbb\template\template            $template           Template object
 	* @param \phpbb\user                         $user               User object
-	* @param string                              $boardrules_table   Name of the table used to store boardrules data
 	* @return \phpbb\boardrules\controller\main_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $boardrules_table)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
 		$this->rule_operator = $rule_operator;
 		$this->template = $template;
 		$this->user = $user;
-		$this->$boardrules_table = $boardrules_table;
 	}
 
 	/**
@@ -140,7 +131,6 @@ class main_controller implements main_interface
 
 		// Assign values to template vars for the rules page
 		$this->template->assign_vars(array(
-			'S_BOARDRULES'			=> true,
 			'S_CATEGORIES'			=> ($cat_counter > 1) ? true : false,
 			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));

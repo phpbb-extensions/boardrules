@@ -15,9 +15,27 @@ namespace phpbb\boardrules\tests\entity;
 class rule_entity_import_test extends rule_entity_base
 {
 	/**
+	* Test data for the test_import() function
+	*
+	* @return array Array of test data
+	* @access public
+	*/
+	public function import_test_data()
+	{
+		$import_data = $this->get_import_data();
+
+		return array(
+			array($import_data[1]),
+			array($import_data[2]),
+			array($import_data[3]),
+			array($import_data[4]),
+		);
+	}
+
+	/**
 	* Test importing data
 	*
-	* @dataProvider get_import_data
+	* @dataProvider import_test_data
 	* @access public
 	*/
 	public function test_import($data)
@@ -35,8 +53,8 @@ class rule_entity_import_test extends rule_entity_base
 		$map = array(
 			'rule_id'		=> 'get_id',
 			'rule_language'	=> 'get_language',
-			'rule_left_id'	=> 'get_title',
-			'rule_right_id'	=> 'get_title',
+			'rule_left_id'	=> 'get_left_id',
+			'rule_right_id'	=> 'get_right_id',
 			'rule_parent_id'=> 'get_parent_id',
 			'rule_anchor'	=> 'get_anchor',
 			'rule_title'	=> 'get_title',
@@ -46,7 +64,7 @@ class rule_entity_import_test extends rule_entity_base
 		// what we saved
 		foreach ($map as $field => $function)
 		{
-			$this->assertEquals($data[$field], $entity->$function);
+			$this->assertEquals($data[$field], $entity->$function());
 		}
 	}
 
@@ -56,7 +74,7 @@ class rule_entity_import_test extends rule_entity_base
 	* @return array Array of test data
 	* @access public
 	*/
-	public function test_fail_data()
+	public function import_test_fail_data()
 	{
 		$import_data = $this->get_import_data();
 
@@ -65,11 +83,6 @@ class rule_entity_import_test extends rule_entity_base
 		// Out of range
 		$data[] = array_merge($import_data[1], array(
 			'rule_id'	=> -1,
-		));
-
-		// Out of range
-		$data[] = array_merge($import_data[1], array(
-			'rule_language'	=> -1,
 		));
 
 		// Out of range
@@ -99,6 +112,11 @@ class rule_entity_import_test extends rule_entity_base
 
 		// Too long
 		$data[] = array_merge($import_data[1], array(
+			'rule_anchor'	=> str_repeat('a', 256),
+		));
+
+		// Too long
+		$data[] = array_merge($import_data[1], array(
 			'rule_title'	=> str_repeat('a', 201),
 		));
 
@@ -112,12 +130,14 @@ class rule_entity_import_test extends rule_entity_base
 
 			$data[] = $incomplete;
 		}
+
+		return $data;
 	}
 
 	/**
 	* Test importing data which will cause exceptions
 	*
-	* @dataProvider test_fail_data
+	* @dataProvider import_test_fail_data
 	* @expectedException \phpbb\boardrules\exception\base
 	* @access public
 	*/
