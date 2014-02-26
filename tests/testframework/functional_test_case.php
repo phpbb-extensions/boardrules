@@ -41,7 +41,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	protected $extension_enabled = false;
 
 	/**
-	* Enable an extension in the ACP Extensions area
+	* Set an extension vandor/name data up
 	*
 	* @param string $extension_vendor The vendor name of an extension
 	* @param string $extension_name The package name of an extension
@@ -49,12 +49,21 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 	* @return null
 	* @access public
 	*/
-	public function enable_extension($extension_vendor, $extension_name, $extension_display_name)
+	public function set_extension($extension_vendor, $extension_name, $extension_display_name)
 	{
 		$this->extension_vendor = $extension_vendor;
 		$this->extension_name = $extension_name;
 		$this->extension_display_name = $extension_display_name;
+	}
 
+	/**
+	* Enable an extension in the ACP Extensions area
+	*
+	* @return null
+	* @access public
+	*/
+	public function enable_extension()
+	{
 		$enable_extension = false;
 
 		if ($this->extension_enabled === true || $this->check_if_enabled())
@@ -62,6 +71,7 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 			return;
 		}
 
+		// Is the extension in the list of disabled extensions?
 		$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&sid=' . $this->sid);
 		$disabled_extensions = $crawler->filter('tr.ext_disabled')->extract(array('_text'));
 		foreach ($disabled_extensions as $extension)
@@ -79,39 +89,88 @@ abstract class functional_test_case extends \phpbb_functional_test_case
 			$crawler = self::submit($form);
 			$this->assertContains('The extension was enabled successfully', $crawler->text());
 			$this->extension_enabled = true;
-			$this->set_enabled();
+		}
+	}
+
+	/**
+	* Disable an extension in the ACP Extensions area
+	*
+	* @return null
+	* @access public
+	*/
+	public function disable_extension()
+	{
+		$disable_extension = $this->check_if_enabled();
+
+		if ($this->extension_enabled === false || !$disable_extension)
+		{
+			return;
+		}
+
+		if ($disable_extension)
+		{
+			$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&action=disable_pre&ext_name=' . $this->extension_vendor . '%2f' . $this->extension_name . '&sid=' . $this->sid);
+			$form = $crawler->selectButton('Disable')->form();
+			$crawler = self::submit($form);
+			$this->assertContains('The extension was disabled successfully', $crawler->text());
+			$this->extension_enabled = false;
+		}
+	}
+
+	/**
+	* Purge an extension's data in the ACP Extensions area
+	*
+	* @return null
+	* @access public
+	*/
+	public function purge_extension()
+	{
+		$purge_extension = false;
+
+		if ($this->extension_enabled === true || $this->check_if_enabled())
+		{
+			return;
+		}
+
+		// Is the extension in the list of disabled extensions?
+		$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&sid=' . $this->sid);
+		$disabled_extensions = $crawler->filter('tr.ext_disabled')->extract(array('_text'));
+		foreach ($disabled_extensions as $extension)
+		{
+			if (strpos($extension, $this->extension_display_name) !== false)
+			{
+				$purge_extension = true;
+			}
+		}
+
+		if ($purge_extension)
+		{
+			$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&action=delete_data_pre&ext_name=' . $this->extension_vendor . '%2f' . $this->extension_name . '&sid=' . $this->sid);
+			$form = $crawler->selectButton('Delete data')->form();
+			$crawler = self::submit($form);
+			$this->assertContains('The extension’s data was deleted successfully', $crawler->text());
+			$this->extension_enabled = false;
 		}
 	}
 
 	/**
 	* Check if the extension is enabled in the database
 	*
-	* @return int $enabled config value for the enable state stored in the db
+	* @return bool is extension found in the Enabled list
 	* @access protected
 	*/
 	protected function check_if_enabled()
 	{
-		$this->db = $this->get_db();
+		$crawler = self::request('GET', 'adm/index.php?i=acp_extensions&mode=main&sid=' . $this->sid);
+		$enabled_extensions = $crawler->filter('tr.ext_enabled')->extract(array('_text'));
+		foreach ($disabled_extensions as $extension)
+		{
+			if (strpos($extension, $this->extension_display_name) !== false)
+			{
+				return true;
+			}
+		}
 
-		$sql = "SELECT config_value FROM phpbb_config WHERE config_name = '" . $this->db->sql_escape($this->extension_name) . "_ext_enabled'";
-		$result = $this->db->sql_query($sql);
-		$enabled = $this->db->sql_fetchfield('config_value');
-		$this->db->sql_freeresult($result);
-
-		return $enabled;
-	}
-
-	/**
-	* Set the extension to enabled in the database
-	*
-	* @return null
-	* @access protected
-	*/
-	protected function set_enabled()
-	{
-		$this->db = $this->get_db();
-
-		$sql = "INSERT INTO phpbb_config (config_name, config_value, is_dynamic) VALUES ('" . $this->db->sql_escape($this->extension_name) . "_ext_enabled', 1, 1)";
-		$this->db->sql_query($sql);
+		return false;
 	}
 }
