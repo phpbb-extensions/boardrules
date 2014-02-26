@@ -158,6 +158,8 @@ class rule implements rule_interface
 	*/
 	public function get_rule_tree_path_data($language = 0, $parent_id = 0)
 	{
+		$entities = array();
+
 		// Load all parent rule data from the database into an array
 		$rowset = $this->nestedset_rules
 			->use_language($language)
