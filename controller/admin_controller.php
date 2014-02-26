@@ -146,7 +146,7 @@ class admin_controller implements admin_interface
 
 		foreach ($rowset as $row)
 		{
-			$this->template->assign_block_vars('navigation', array(
+			$this->template->assign_block_vars('breadcrumb', array(
 				'RULE_TITLE'		=> $row['rule_title'],
 
 				'S_CURRENT_LEVEL'	=> ($row['rule_id'] == $parent_id) ? true : false,
