@@ -158,12 +158,12 @@ class rule implements rule_interface
 	*/
 	public function get_rule_tree_path_data($language = 0, $parent_id = 0)
 	{
-		$rowset = array();
+		$entities = array();
 
-		$rowset = $this->nestedset_rules
+		$entities = $this->nestedset_rules
 			->use_language($language)
 			->get_path_data($parent_id);
 
-		return $rowset;
+		return $entities;
 	}
 }
