@@ -69,5 +69,5 @@ interface rule_interface
 	* @return array Array of rule data for a rule's parent rules
 	* @access public
 	*/
-	public function get_rule_path_data($language = 0, $parent_id = 0);
+	public function get_rule_tree_path_data($language = 0, $parent_id = 0);
 }
