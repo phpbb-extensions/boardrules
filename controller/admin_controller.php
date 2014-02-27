@@ -82,8 +82,9 @@ class admin_controller implements admin_interface
 	public function display_language_selection()
 	{
 		// Check if there are any available languages
-		$sql = 'SELECT lang_id
-			FROM ' . LANG_TABLE;
+		$sql = 'SELECT lang_id, lang_iso, lang_local_name
+			FROM ' . LANG_TABLE . '
+			ORDER BY lang_english_name';
 		$result = $this->db->sql_query($sql);
 		$rows = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
@@ -91,9 +92,15 @@ class admin_controller implements admin_interface
 		// If there are some, build option fields
 		if (sizeof($rows) > 1)
 		{
-			$this->template->assign_vars(array(
-				'S_LANG_OPTIONS'	=> language_select($this->config['default_lang']),
-			));
+			foreach ($rows as $row)
+			{
+				$this->template->assign_block_vars('options', array(
+					'S_LANG_DEFAULT'	=> ($row['lang_iso'] == $this->config['default_lang']) ? true : false,
+
+					'LANG_ISO'			=> $row['lang_iso'],
+					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
+				));
+			}
 		}
 		else
 		{
