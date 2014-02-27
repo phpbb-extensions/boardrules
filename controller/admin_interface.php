@@ -99,5 +99,5 @@ interface admin_interface
 	* @return null
 	* @access public
 	*/
-	public function set_page_url($u_action = '');
+	public function set_page_url($u_action);
 }

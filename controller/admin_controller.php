@@ -177,7 +177,7 @@ class admin_controller implements admin_interface
 	* @return null
 	* @access public
 	*/
-	public function set_page_url($u_action = '')
+	public function set_page_url($u_action)
 	{
 		$this->u_action = $u_action;
 	}
