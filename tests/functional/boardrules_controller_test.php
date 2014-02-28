@@ -12,7 +12,7 @@ namespace phpbb\boardrules\tests\functional;
 /**
 * @group functional
 */
-class phpbb_functional_boardrules_controller_test extends \phpbb\boardrules\tests\testframework\functional_test_case
+class phpbb_functional_boardrules_controller_test extends extension_database_test_case
 {
 	public function setUp()
 	{
