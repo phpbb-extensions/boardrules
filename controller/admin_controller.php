@@ -135,7 +135,7 @@ class admin_controller implements admin_interface
 			}
 
 			$this->template->assign_block_vars('rules', array(
-				'TITLE'				=> $entity->get_title(),
+				'RULE_TITLE'		=> $entity->get_title(),
 
 				'S_IS_CATEGORY'		=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
 
@@ -159,7 +159,7 @@ class admin_controller implements admin_interface
 
 				'S_CURRENT_LEVEL'	=> ($entity->get_id() == $parent_id) ? true : false,
 
-				'U_RULE_LEVEL'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
+				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
 		}
 
