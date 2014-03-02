@@ -29,6 +29,12 @@ class main_controller implements main_interface
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var string phpBB root path */
+	protected $root_path;
+
+	/** @var string phpEx */
+	protected $php_ext;
+
 	/**
 	* Constructor
 	*
@@ -37,16 +43,20 @@ class main_controller implements main_interface
 	* @param \phpbb\boardrules\operators\rule    $rule_operator      Rule operator object
 	* @param \phpbb\template\template            $template           Template object
 	* @param \phpbb\user                         $user               User object
+	* @param string                              $root_path          phpBB root path
+	* @param string                              $php_ext            phpEx
 	* @return \phpbb\boardrules\controller\main_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
 		$this->rule_operator = $rule_operator;
 		$this->template = $template;
 		$this->user = $user;
+		$this->root_path = $root_path;
+		$this->php_ext = $php_ext;
 	}
 
 	/**
@@ -57,6 +67,12 @@ class main_controller implements main_interface
 	*/
 	public function display()
 	{
+		// When board rules are disbaled, redirect users back to the forum index
+		if (empty($this->config['boardrules_enable']))
+		{
+			redirect(append_sid("{$this->root_path}index.$this->php_ext"));
+		}
+
 		// Add boardrules controller language file
 		$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_controller');
 

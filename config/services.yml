@@ -18,6 +18,8 @@ services:
             - @phpbb.boardrules.operator
             - @template
             - @user
+            - %core.root_path%
+            - %core.php_ext%
 
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
