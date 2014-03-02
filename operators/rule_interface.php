@@ -60,4 +60,14 @@ interface rule_interface
 	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function move($rule_id, $direction, $amount = 1);
+
+	/**
+	* Get a rule's parent rules (for use in breadcrumbs)
+	*
+	* @param int $language Language selection identifier; default: 0
+	* @param int $parent_id Category to display rules from; default: 0
+	* @return array Array of rule data for a rule's parent rules
+	* @access public
+	*/
+	public function get_rule_tree_path_data($language, $parent_id);
 }
