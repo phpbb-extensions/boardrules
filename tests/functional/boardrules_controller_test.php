@@ -21,6 +21,18 @@ class phpbb_functional_boardrules_controller_test extends \extension_functional_
 		$this->admin_login();
 		$this->set_extension('phpbb', 'boardrules', 'Board Rules');
 		$this->enable_extension();
+		$this->enable_boardrules();		
+	}
+
+	public function enable_boardrules()
+	{
+		$this->db = $this->get_db();
+
+		$sql = "UPDATE phpbb_config
+			SET config_value = '1'
+			WHERE config_name = 'boardrules_enable'";
+
+		$this->db->sql_query($sql);
 	}
 
 	/**
