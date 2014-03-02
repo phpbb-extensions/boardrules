@@ -107,7 +107,7 @@ class phpbb_functional_boardrules_controller_test extends \extension_functional_
 	*
 	* @access public
 	*/
-	public function test_boardrules_page()
+	public function test_boardrules_header_link()
 	{
 		$this->logout();
 		$crawler = self::request('GET', 'index.php');
