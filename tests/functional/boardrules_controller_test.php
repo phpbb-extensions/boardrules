@@ -101,4 +101,18 @@ class phpbb_functional_boardrules_controller_test extends \extension_functional_
 		$this->assertContains('Rule Category', $crawler->filter('#section_1')->text());
 		$this->assertContains('Rule Message', $crawler->filter('#rule_1')->text());
 	}
+
+	/**
+	* Test for presence of the Rules header link nav
+	*
+	* @access public
+	*/
+	public function test_boardrules_page()
+	{
+		$this->logout();
+		$crawler = self::request('GET', 'index.php');
+
+		$this->assertContains('Rules', $crawler->filter('.navbar')->text());
+		$this->assertGreaterThan(0, $crawler->filter('.icon-boardrules')->count());
+	}
 }
