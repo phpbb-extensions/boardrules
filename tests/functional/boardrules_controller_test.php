@@ -31,7 +31,7 @@ class phpbb_functional_boardrules_controller_test extends \extension_functional_
 	*/
 	public function enable_boardrules()
 	{
-		$this->db = $this->get_db();
+		$this->get_db();
 
 		$sql = "UPDATE phpbb_config
 			SET config_value = '1'
