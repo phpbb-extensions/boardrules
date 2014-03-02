@@ -24,6 +24,11 @@ class phpbb_functional_boardrules_controller_test extends \extension_functional_
 		$this->enable_boardrules();		
 	}
 
+	/**
+	* Board rules installs in a disabled state. We need to turn it on to test it.
+	*
+	* @access public
+	*/
 	public function enable_boardrules()
 	{
 		$this->db = $this->get_db();
