@@ -41,7 +41,6 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'BOARDRULES_HEADER'			=> 'Board rules',
 	'BOARDRULES_EXPLAIN'		=> 'These rules are disclosed to clarify the various responsibilities of all community members here on %s. They shall be adhered to by everyone to ensure that our board runs smoothly and provides a fun and productive experience for all of our community members and visitors.',
-	'BOARDRULES_DISABLED'		=> 'The rules are currently disabled.',
 	'BOARDRULES_CATEGORIES'		=> 'Rules sections',
 	'BOARDRULES_CATEGORY_ANCHOR'=> 'section-%s',
 	'BOARDRULES_RULE_ANCHOR'	=> 'rule-%s',
