@@ -19,6 +19,8 @@ services:
             - @phpbb.boardrules.operator
             - @template
             - @user
+            - %core.root_path%
+            - %core.php_ext%
 
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
@@ -30,6 +32,7 @@ services:
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
         arguments:
+            - @config
             - @controller.helper
             - @template
         tags:
