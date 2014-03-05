@@ -24,5 +24,7 @@ before_script:
   # so the script path and relative paths are correct
   - cd ../../phpbb
 
+  - echo "zend.enable_gc=0" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
 script:
-  - ./phpBB/vendor/bin/phpunit -dzend.enable_gc=0 --configuration ./phpBB/ext/$VENDOR/$NAME/travis/phpunit-$DB-travis.xml
+  - ./phpBB/vendor/bin/phpunit --configuration ./phpBB/ext/$VENDOR/$NAME/travis/phpunit-$DB-travis.xml
