@@ -25,4 +25,4 @@ before_script:
   - cd ../../phpbb
 
 script:
-  - ./phpBB/vendor/bin/phpunit --configuration ./phpBB/ext/$VENDOR/$NAME/travis/phpunit-$DB-travis.xml
+  - ./phpBB/vendor/bin/phpunit -dzend.enable_gc=0 --configuration ./phpBB/ext/$VENDOR/$NAME/travis/phpunit-$DB-travis.xml
