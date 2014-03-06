@@ -17,14 +17,14 @@ class base extends \Exception
 	protected $previous;
 
 	/**
-	 * Constructor
-	 *
-	 * Different from normal exceptions in that we do not enforce $message to be a string.
-	 *
-	 * @param string|array $message
-	 * @param int $code
-	 * @param Exception $previous
-	 */
+	* Constructor
+	*
+	* Different from normal exceptions in that we do not enforce $message to be a string.
+	*
+	* @param string|array $message
+	* @param int $code
+	* @param Exception $previous
+	*/
 	public function __construct($message = null, $code = 0, Exception $previous = null)
 	{
 		$this->message = $message;
@@ -126,17 +126,17 @@ class base extends \Exception
 		$is_loaded = true;
 	}
 
-    /**
-    * Output a string of this error message
-    *
-    * This will hopefully be never called, always catch the expected exceptions
-    * and call get_message to translate them into an error that a user can
-    * understand
-    *
-    * @return string
-    */
-    public function __toString()
-    {
-        return (is_array($this->message)) ? var_export($this->message, true) : (string) $this->message;
-    }
+	/**
+	* Output a string of this error message
+	*
+	* This will hopefully be never called, always catch the expected exceptions
+	* and call get_message to translate them into an error that a user can
+	* understand
+	*
+	* @return string
+	*/
+	public function __toString()
+	{
+		return (is_array($this->message)) ? var_export($this->message, true) : (string) $this->message;
+	}
 }
