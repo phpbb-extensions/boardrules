@@ -2,6 +2,15 @@ imports:
     - { resource: tables.yml }
 
 services:
+    phpbb.boardrules.listener:
+        class: phpbb\boardrules\event\listener
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+        tags:
+            - { name: event.listener }
+
     phpbb.boardrules.admin.controller:
         class: phpbb\boardrules\controller\admin_controller
         arguments:
@@ -29,14 +38,11 @@ services:
             - @dbal.conn
             - %tables.boardrules%
 
-    phpbb.boardrules.listener:
-        class: phpbb\boardrules\event\listener
+    phpbb.boardrules.operator:
+        class: phpbb\boardrules\operators\rule
         arguments:
-            - @config
-            - @controller.helper
-            - @template
-        tags:
-            - { name: event.listener }
+            - @service_container
+            - @phpbb.boardrules.nestedset_rules
 
     phpbb.boardrules.nestedset_rules:
         class: phpbb\boardrules\operators\nestedset_rules
@@ -44,12 +50,6 @@ services:
             - @dbal.conn
             - @phpbb.boardrules.table_lock
             - %tables.boardrules%
-
-    phpbb.boardrules.operator:
-        class: phpbb\boardrules\operators\rule
-        arguments:
-            - @service_container
-            - @phpbb.boardrules.nestedset_rules
 
     phpbb.boardrules.table_lock:
         class: phpbb\lock\db

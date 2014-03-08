@@ -52,7 +52,7 @@ class rule_entity_insert_test extends rule_entity_base
 	{
 		// Set a language variable
 		$language = 1;
-		
+
 		// Load some import test data
 		$import_data = $this->get_import_data();
 
