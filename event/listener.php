@@ -25,20 +25,25 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\template\template */
 	protected $template;
 
+	/** @var \phpbb\user */
+	protected $user;
+
 	/**
 	* Constructor
 	*
 	* @param \phpbb\config\config        $config             Config object
 	* @param \phpbb\controller\helper    $controller_helper  Controller helper object
 	* @param \phpbb\template\template    $template           Template object
+	* @param \phpbb\user                 $user               User object
 	* @return \phpbb\boardrules\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
 		$this->template = $template;
+		$this->user = $user;
 	}
 
 	/**
@@ -53,6 +58,7 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'	=> 'load_language_on_setup',
 			'core.page_header'	=> 'add_page_header_link',
+			'core.ucp_register_agreement'	=> 'rules_at_registration',
 		);
 	}
 
@@ -85,6 +91,32 @@ class listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'S_BOARDRULES_ENABLED' => (!empty($this->config['boardrules_enable'])) ? true : false,
 			'U_BOARDRULES' => $this->controller_helper->url('rules'),
+		));
+	}
+
+	/**
+	* Display board rules agreement at registration
+	*
+	* @param object $event The event object
+	* @return null
+	* @access public
+	*/
+	public function rules_at_registration($event)
+	{
+		// Return if board rules are disabled or not required at registration.
+		if (empty($this->config['boardrules_enable']) || empty($this->config['boardrules_require_at_registration']))
+		{
+			return;
+		}
+
+		// Reload the language file if the guest has changed languages on the registration page
+		if ($event['change_lang'] || $event['user_lang'] != $this->config['default_lang'])
+		{
+			$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_common');
+		}
+
+		$this->template->assign_vars(array(
+			'S_BOARDRULES_AT_REGISTRATION' => true,
 		));
 	}
 }
