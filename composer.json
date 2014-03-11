@@ -23,6 +23,11 @@
 			"name": "Matt Friedman",
 			"homepage": "http://mattfriedman.me",
 			"role": "Extensions Development Team"
+		},
+		{
+			"name": "Lukasz Kaczynski",
+			"username": "Pico88",
+			"role": "Extensions Development Team"
 		}
 	],
 	"require": {
