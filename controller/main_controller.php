@@ -130,7 +130,7 @@ class main_controller implements main_interface
 				'TITLE'			=> $entity->get_title(),
 				'MESSAGE'		=> $entity->get_message_for_display(),
 				'U_ANCHOR'		=> $anchor,
- 				'S_IS_CATEGORY'	=> $is_category,
+				'S_IS_CATEGORY'	=> $is_category,
 			));
 		}
 

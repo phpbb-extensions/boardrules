@@ -65,7 +65,7 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	*/
 	public function get_rules_data($parent_id)
 	{
-		return ($parent_id) ? $this->get_subtree_data($parent_id) : $this->get_tree_data();
+		return ($parent_id) ? $this->get_subtree_data($parent_id, true, false) : $this->get_tree_data();
 	}
 
 	/**

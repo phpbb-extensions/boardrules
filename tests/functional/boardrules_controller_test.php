@@ -21,6 +21,23 @@ class phpbb_functional_boardrules_controller_test extends \extension_functional_
 		$this->admin_login();
 		$this->set_extension('phpbb', 'boardrules', 'Board Rules');
 		$this->enable_extension();
+		$this->enable_boardrules();
+	}
+
+	/**
+	* Board rules installs in a disabled state. We need to turn it on to test it.
+	*
+	* @access public
+	*/
+	public function enable_boardrules()
+	{
+		$this->get_db();
+
+		$sql = "UPDATE phpbb_config
+			SET config_value = '1'
+			WHERE config_name = 'boardrules_enable'";
+
+		$this->db->sql_query($sql);
 	}
 
 	/**
@@ -83,5 +100,19 @@ class phpbb_functional_boardrules_controller_test extends \extension_functional_
 		// test that the data we inserted can be found on the rules page
 		$this->assertContains('Rule Category', $crawler->filter('#section_1')->text());
 		$this->assertContains('Rule Message', $crawler->filter('#rule_1')->text());
+	}
+
+	/**
+	* Test for presence of the Rules header link nav
+	*
+	* @access public
+	*/
+	public function test_boardrules_header_link()
+	{
+		$this->logout();
+		$crawler = self::request('GET', 'index.php');
+
+		$this->assertContains('Rules', $crawler->filter('.navbar')->text());
+		$this->assertGreaterThan(0, $crawler->filter('.icon-boardrules')->count());
 	}
 }

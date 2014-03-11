@@ -57,7 +57,7 @@ class rule implements rule_interface
 		$this->db = $db;
 		$this->boardrules_table = $boardrules_table;
 	}
- 
+
 	/**
 	* Load the data from the database for this rule
 	*
@@ -95,7 +95,7 @@ class rule implements rule_interface
 	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function insert($language = 0)
-	{		
+	{
 		if (!empty($this->data['rule_id']))
 		{
 			// The rule already exists
@@ -112,7 +112,7 @@ class rule implements rule_interface
 		unset($this->data['rule_id']);
 
 		// Add the language identifier to the data array
-		$this->data['rule_language'] = $language;		
+		$this->data['rule_language'] = $language;
 
 		// Insert the rule data to the database
 		$sql = 'INSERT INTO ' . $this->boardrules_table . ' ' . $this->db->sql_build_array('INSERT', $this->data);
@@ -215,7 +215,7 @@ class rule implements rule_interface
 			{
 				// settype passes values by reference
 				$value = $data[$field];
-				
+
 				// We're using settype to enforce data types
 				settype($value, $type);
 

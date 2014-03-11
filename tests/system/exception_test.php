@@ -50,7 +50,7 @@ class extension_system_exception_test extends phpbb_test_case
 	public function exceptions_test_data()
 	{
 		$this->get_user_instance();
-		
+
 		return array(
 			array(
 				'base',
