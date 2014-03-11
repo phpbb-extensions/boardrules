@@ -9,6 +9,7 @@ services:
             - @dbal.conn
             - @request
             - @template
+            - @user
             - @phpbb.boardrules.operator
 
     phpbb.boardrules.controller:
