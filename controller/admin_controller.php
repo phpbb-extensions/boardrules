@@ -219,6 +219,12 @@ class admin_controller implements admin_interface
 	public function move_rule($rule_id, $direction, $amount = 1)
 	{
 		$this->rule_operator->move($rule_id, $direction, $amount);
+		
+		if ($this->request->is_ajax())
+		{
+			$json_response = new \phpbb\json_response;
+			$json_response->send(array('success' => true));
+		}
 	}
 
 	/**
