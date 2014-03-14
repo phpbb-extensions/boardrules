@@ -61,15 +61,15 @@ class boardrules_controller_test extends \extension_functional_test_case
 		$this->get_db();
 
 		// Insert some sample rule data
- 		$insert_rules = array(
- 			array(
- 				'rule_id'							=> 1,
- 				'rule_language'						=> 1,
- 				'rule_left_id'						=> 1,
- 				'rule_right_id'						=> 4,
- 				'rule_parent_id'					=> 0,
- 				'rule_parents'						=> '',
- 				'rule_anchor'						=> 'section_1',
+		$insert_rules = array(
+			array(
+				'rule_id'							=> 1,
+				'rule_language'						=> 1,
+				'rule_left_id'						=> 1,
+				'rule_right_id'						=> 4,
+				'rule_parent_id'					=> 0,
+				'rule_parents'						=> '',
+				'rule_anchor'						=> 'section_1',
 				'rule_title'						=> 'Rule Category',
 				'rule_message'						=> '',
 				'rule_message_bbcode_uid'			=> '',
