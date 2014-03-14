@@ -22,6 +22,7 @@ class boardrules_controller_test extends \extension_functional_test_case
 		$this->set_extension('phpbb', 'boardrules', 'Board Rules');
 		$this->enable_extension();
 		$this->enable_boardrules();
+		$this->add_lang_ext('phpbb/boardrules', array('boardrules_common', 'boardrules_controller'));
 	}
 
 	/**
@@ -96,10 +97,11 @@ class boardrules_controller_test extends \extension_functional_test_case
 
 		// test loading the rules page
 		$crawler = self::request('GET', 'app.php/rules');
+		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->text());
 
 		// test that the data we inserted can be found on the rules page
-		$this->assertContains('Rule Category', $crawler->filter('#section_1')->text());
-		$this->assertContains('Rule Message', $crawler->filter('#rule_1')->text());
+		$this->assertContains($insert_rules[0]['rule_title'], $crawler->filter('#section_1')->text());
+		$this->assertContains($insert_rules[1]['rule_message'], $crawler->filter('#rule_1')->text());
 	}
 
 	/**
@@ -112,7 +114,7 @@ class boardrules_controller_test extends \extension_functional_test_case
 		$this->logout();
 		$crawler = self::request('GET', 'index.php');
 
-		$this->assertContains('Rules', $crawler->filter('.navbar')->text());
+		$this->assertContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
 		$this->assertGreaterThan(0, $crawler->filter('.icon-boardrules')->count());
 	}
 }
