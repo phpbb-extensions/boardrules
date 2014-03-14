@@ -22,7 +22,7 @@ class boardrules_controller_test extends \extension_functional_test_case
 		$this->set_extension('phpbb', 'boardrules', 'Board Rules');
 		$this->enable_extension();
 		$this->enable_boardrules();
-		$this->add_lang_ext('phpbb/boardrules', array('boardrules_common', 'boardrules_controller'));
+		$this->add_lang_ext(array('boardrules_common', 'boardrules_controller'));
 	}
 
 	/**
