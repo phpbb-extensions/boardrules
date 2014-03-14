@@ -26,6 +26,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\template\template */
 	protected $template;
 
+	/** @var \phpbb\user */
+	protected $user;
+
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
@@ -39,16 +42,18 @@ class admin_controller implements admin_interface
 	* @param \phpbb\db\driver\driver                      $db                Database object
 	* @param \phpbb\request\request                       $request           Request object
 	* @param \phpbb\template\template                     $template          Template object
+	* @param \phpbb\user                                  $user              User object
 	* @param \phpbb\boardrules\operators\rule             $rule_operator     Rule operator object
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\boardrules\operators\rule $rule_operator)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, \phpbb\boardrules\operators\rule $rule_operator)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
+		$this->user = $user;
 		$this->rule_operator = $rule_operator;
 	}
 
@@ -175,6 +180,51 @@ class admin_controller implements admin_interface
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 			'U_MAIN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=0",
 		));
+	}
+
+	/**
+	* Delete a rule
+	*
+	* @param int $rule_id The rule identifier to delete
+	* @return null
+	* @access public
+	*/
+	public function delete_rule($rule_id)
+	{
+		if (confirm_box(true))
+		{
+			$this->rule_operator->delete_rule($rule_id);
+
+			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link($this->u_action));
+		}
+		else
+		{
+			confirm_box(false, $this->user->lang['DELETE_RULE_CONFIRM'], build_hidden_fields(array(
+				'mode'		=> 'manage',
+				'action'	=> 'delete',
+				'rule_id'	=> $rule_id,
+			)));
+		}
+	}
+
+	/**
+	* Move a rule up/down
+	*
+	* @param int $rule_id The rule identifier to move
+	* @param string $direction The direction (up|down)
+	* @param int $amount The number of places to move the rule
+	* @return null
+	* @access public
+	*/
+	public function move_rule($rule_id, $direction, $amount = 1)
+	{
+		$this->rule_operator->move($rule_id, $direction, $amount);
+		
+		if ($this->request->is_ajax())
+		{
+			$json_response = new \phpbb\json_response;
+			$json_response->send(array('success' => true));
+		}
 	}
 
 	/**
