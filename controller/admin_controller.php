@@ -192,30 +192,38 @@ class admin_controller implements admin_interface
 	*/
 	public function add_rule($language = 0, $parent_id = 0)
 	{
-		// Initiate a rule entity
-		$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
-
-		// Grab the form's message parsing options (possible values: 1 or 0)
-		$message_parse_options = array(
-			'bbcode' => $this->request->variable('enable_bbcode', 0),
-			'magic_url' => $this->request->variable('enable_magic_url', 0),
-			'smilies' => $this->request->variable('enable_smilies', 0),
-		);
-
-		// Set the message parse options in the entity
-		foreach ($message_parse_options as $function => $enabled)
+		if ($this->request->is_set_post('submit')
 		{
-			call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
+			// Initiate a rule entity
+			$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
+
+			// Grab the form's message parsing options (possible values: 1 or 0)
+			$message_parse_options = array(
+				'bbcode' => $this->request->variable('enable_bbcode', 0),
+				'magic_url' => $this->request->variable('enable_magic_url', 0),
+				'smilies' => $this->request->variable('enable_smilies', 0),
+			);
+
+			// Set the message parse options in the entity
+			foreach ($message_parse_options as $function => $enabled)
+			{
+				call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
+			}
+
+			// Set the form's title, anchor and message fields in the entity
+			$entity
+				->set_title($this->request->variable('rule_title', ''))
+				->set_anchor($this->request->variable('rule_anchor', ''))
+				->set_message($this->request->variable('rule_message', ''));
+
+			// Add the rule entity to the database
+			$this->rule_operator->add_rule($language, $parent_id, $entity);
 		}
 
-		// Set the form's title, anchor and message fields in the entity
-		$entity
-			->set_title($this->request->variable('rule_title', ''))
-			->set_anchor($this->request->variable('rule_anchor', ''))
-			->set_message($this->request->variable('rule_message', ''));
-
-		// Add the rule entity to the database
-		$this->rule_operator->add_rule($language, $parent_id, $entity);
+		$this->template->assign_vars(array(
+			'U_ADD_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
+			'U_BACK'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
+		));
 	}
 
 	/**
