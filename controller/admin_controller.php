@@ -9,6 +9,8 @@
 
 namespace phpbb\boardrules\controller;
 
+use Symfony\Component\DependencyInjection\Container;
+
 /**
 * Admin controller
 */
@@ -29,6 +31,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var Container */
+	protected $phpbb_container;
+
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
@@ -38,22 +43,24 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config                         $config            Config object
-	* @param \phpbb\db\driver\driver                      $db                Database object
-	* @param \phpbb\request\request                       $request           Request object
-	* @param \phpbb\template\template                     $template          Template object
-	* @param \phpbb\user                                  $user              User object
-	* @param \phpbb\boardrules\operators\rule             $rule_operator     Rule operator object
+	* @param \phpbb\config\config $config                      Config object
+	* @param \phpbb\db\driver\driver $db                       Database object
+	* @param \phpbb\request\request $request                   Request object
+	* @param \phpbb\template\template $template                Template object
+	* @param \phpbb\user $user                                 User object
+	* @param Container $phpbb_container
+	* @param \phpbb\boardrules\operators\rule $rule_operator   Rule operator object
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, \phpbb\boardrules\operators\rule $rule_operator)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
+		$this->phpbb_container = $phpbb_container;
 		$this->rule_operator = $rule_operator;
 	}
 
