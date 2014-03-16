@@ -210,7 +210,7 @@ class admin_controller implements admin_interface
 			// The rule title have to be filled with any data
 			if ($rule_title == '')
 			{
-				$errors[] = $user->lang['RULE_TITLE_EMPTY'];
+				$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
 			}
 
 			if (empty($errors))
