@@ -239,6 +239,8 @@ class admin_controller implements admin_interface
 
 				// Add the rule entity to the database
 				$this->rule_operator->add_rule($language, $parent_id, $entity);
+
+				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}"));
 			}
 		}
 

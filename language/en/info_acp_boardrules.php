@@ -40,6 +40,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
+	'RULE_ADDED'						=> 'Rule successfully added.',
 	'RULE_DELETED'						=> 'Rule successfully removed.',
 	'RULE_TITLE_EMPTY'					=> 'You must enter a title for this rule.',
 ));
