@@ -308,7 +308,7 @@ class admin_controller implements admin_interface
 			'S_ERROR'			=> (sizeof($errors)) ? true : false,
 			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '')
 
-			'U_ADD_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
+			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
 
 			'RULE_MESSAGE'		=> $entity->get_message_for_edit(),
