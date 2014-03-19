@@ -254,6 +254,74 @@ class admin_controller implements admin_interface
 	}
 
 	/**
+	* Edit a rule
+	*
+	* @param int $rule_id The rule identifier to edit
+	* @return null
+	* @access public
+	*/
+	public function edit_rule($rule_id)
+	{
+		$errors = array();
+
+		// Initiate and load the rule entity
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+
+		if ($this->request->is_set_post('submit')
+		{
+			// The rule title
+			$rule_title = $this->request->variable('rule_title', '');
+
+			// Do not allow an empty rule title
+			// The rule title have to be filled with any data
+			if ($rule_title == '')
+			{
+				$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
+			}
+
+			if (empty($errors))
+			{
+				// Grab the form's message parsing options (possible values: 1 or 0)
+				$message_parse_options = array(
+					'bbcode' => $this->request->variable('enable_bbcode', 0),
+					'magic_url' => $this->request->variable('enable_magic_url', 0),
+					'smilies' => $this->request->variable('enable_smilies',0),
+				);
+
+				// Set the message parse options in the entity
+				foreach ($message_parse_options as $function => $enabled)
+				{
+					call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
+				}
+
+				// Set the form's title, anchor and message fields, and save the updated entity
+				$entity
+					->set_title($rule_title)
+					->set_anchor($this->request->variable('rule_anchor', ''))
+					->set_message($this->request->variable('rule_message', ''))
+					->save();
+
+				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+			}
+		}
+
+		$this->template->assign_vars(array(
+			'S_ERROR'			=> (sizeof($errors)) ? true : false,
+			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '')
+
+			'U_ADD_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
+			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
+
+			'RULE_MESSAGE'		=> $entity->get_message_for_edit(),
+			'RULE_ANCHOR'		=> $entity->get_anchor(),
+			'RULE_TITLE'		=> $entity->get_title(),
+
+			'S_RULE_LANGUAGE'	=> $entity->get_language(),
+			'S_RULE_PARENT_ID'	=> $entity->get_parent_id(),
+		));
+	}
+
+	/**
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
