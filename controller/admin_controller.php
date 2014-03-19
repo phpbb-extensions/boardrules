@@ -273,7 +273,6 @@ class admin_controller implements admin_interface
 			$rule_title = $this->request->variable('rule_title', '');
 
 			// Do not allow an empty rule title
-			// The rule title have to be filled with any data
 			if ($rule_title == '')
 			{
 				$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
