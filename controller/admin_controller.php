@@ -245,8 +245,6 @@ class admin_controller implements admin_interface
 
 			if (empty($errors))
 			{
-
-
 				// Grab the form's message parsing options (possible values: 1 or 0)
 				$message_parse_options = array(
 					'bbcode' => $bbcode,
