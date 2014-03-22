@@ -274,11 +274,7 @@ class admin_controller implements admin_interface
 		// Preview
 		if ($this->request->is_set_post('preview'))
 		{
-			// Set the form's title, anchor and message fields, and save the updated entity
 			$entity->import($data_preview);
-				->set_title($rule_title)
-				->set_anchor($rule_anchor)
-				->set_message($rule_message);
 
 			$this->template->assign_vars(array(
 				'S_PREVIEW'					=> true,
