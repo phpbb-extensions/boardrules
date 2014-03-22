@@ -207,7 +207,6 @@ class admin_controller implements admin_interface
 			$rule_title = $this->request->variable('rule_title', '');
 
 			// Do not allow an empty rule title
-			// The rule title have to be filled with any data
 			if ($rule_title == '')
 			{
 				$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
@@ -267,11 +266,30 @@ class admin_controller implements admin_interface
 		// Initiate and load the rule entity
 		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
 
+		// Rule request
+		$rule_title = $this->request->variable('rule_title', '');
+		$rule_anchor = $this->request->variable('rule_anchor', '');
+		$rule_message = $this->request->variable('rule_message', '');
+
+		// Preview
+		if ($this->request->is_set_post('preview'))
+		{
+			// Set the form's title, anchor and message fields, and save the updated entity
+			$entity->import($data_preview);
+				->set_title($rule_title)
+				->set_anchor($rule_anchor)
+				->set_message($rule_message);
+
+			$this->template->assign_vars(array(
+				'S_PREVIEW'					=> true,
+
+				'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
+			));
+		}
+
+		// Submit changes
 		if ($this->request->is_set_post('submit')
 		{
-			// The rule title
-			$rule_title = $this->request->variable('rule_title', '');
-
 			// Do not allow an empty rule title
 			if ($rule_title == '')
 			{
@@ -296,8 +314,8 @@ class admin_controller implements admin_interface
 				// Set the form's title, anchor and message fields, and save the updated entity
 				$entity
 					->set_title($rule_title)
-					->set_anchor($this->request->variable('rule_anchor', ''))
-					->set_message($this->request->variable('rule_message', ''))
+					->set_anchor($rule_anchor)
+					->set_message($rule_message)
 					->save();
 
 				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
@@ -317,6 +335,10 @@ class admin_controller implements admin_interface
 
 			'S_RULE_LANGUAGE'	=> $entity->get_language(),
 			'S_RULE_PARENT_ID'	=> $entity->get_parent_id(),
+
+			'S_MESSAGE_BBCODE_ENABLED'		=> $entity->message_bbcode_enabled(),
+			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $entity->message_magic_url_enabled(),
+			'S_MESSAGE_SMILIES_ENABLED'		=> $entity->message_smilies_enabled(),
 		));
 	}
 
