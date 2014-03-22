@@ -266,14 +266,28 @@ class admin_controller implements admin_interface
 		// Initiate and load the rule entity
 		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
 
-		// Rule request
+		// Rule requests
 		$rule_anchor = $this->request->variable('rule_anchor', $entity->get_anchor(), true);
 		$rule_message = $this->request->variable('rule_message', $entity->get_message_for_edit(), true);
 		$rule_title = $this->request->variable('rule_title', $entity->get_title(), true);
 
+		// Form's message requests
+		$bbcode = $this->request->variable('enable_bbcode', $entity->message_bbcode_enabled());
+		$magic_url = $this->request->variable('enable_magic_url', $entity->message_magic_url_enabled());
+		$smilies = $this->request->variable('enable_smilies', $entity->message_smilies_enabled());
+
 		// Preview
 		if ($this->request->is_set_post('preview'))
 		{
+			$data_preview = array(
+				'rule_anchor'						=> $rule_anchor,
+				'rule_message'						=> $rule_message,
+				'rule_message_bbcode_uid'			=> $bbcode,
+				'rule_message_bbcode_bitfield'		=> $magic_url,
+				'rule_message_bbcode_options'		=> $smilies,
+				'rule_title'						=> $rule_title,
+			);
+
 			$entity->import($data_preview);
 
 			$this->template->assign_vars(array(
@@ -296,9 +310,9 @@ class admin_controller implements admin_interface
 			{
 				// Grab the form's message parsing options (possible values: 1 or 0)
 				$message_parse_options = array(
-					'bbcode' => $this->request->variable('enable_bbcode', 0),
-					'magic_url' => $this->request->variable('enable_magic_url', 0),
-					'smilies' => $this->request->variable('enable_smilies',0),
+					'bbcode' => $bbcode,
+					'magic_url' => $magic_url,
+					'smilies' => $smilies,
 				);
 
 				// Set the message parse options in the entity
@@ -332,9 +346,9 @@ class admin_controller implements admin_interface
 			'S_RULE_LANGUAGE'	=> $entity->get_language(),
 			'S_RULE_PARENT_ID'	=> $entity->get_parent_id(),
 
-			'S_MESSAGE_BBCODE_ENABLED'		=> $entity->message_bbcode_enabled(),
-			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $entity->message_magic_url_enabled(),
-			'S_MESSAGE_SMILIES_ENABLED'		=> $entity->message_smilies_enabled(),
+			'S_MESSAGE_BBCODE_ENABLED'		=> $bbcode,
+			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $magic_url,
+			'S_MESSAGE_SMILIES_ENABLED'		=> $smilies,
 		));
 	}
 
