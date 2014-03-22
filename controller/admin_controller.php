@@ -201,6 +201,40 @@ class admin_controller implements admin_interface
 	{
 		$errors = array();
 
+		// Initiate a rule entity
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
+
+		// Rule requests
+		$rule_anchor = $this->request->variable('rule_anchor', '', true);
+		$rule_message = $this->request->variable('rule_message', '', true);
+		$rule_title = $this->request->variable('rule_title', '', true);
+
+		// Form's message requests
+		$bbcode = $this->request->variable('enable_bbcode', 0);
+		$magic_url = $this->request->variable('enable_magic_url', 0);
+		$smilies = $this->request->variable('enable_smilies', 0);
+
+		// Preview
+		if ($this->request->is_set_post('preview'))
+		{
+			$data_preview = array(
+				'rule_anchor'						=> $rule_anchor,
+				'rule_message'						=> $rule_message,
+				'rule_message_bbcode_uid'			=> $bbcode,
+				'rule_message_bbcode_bitfield'		=> $magic_url,
+				'rule_message_bbcode_options'		=> $smilies,
+				'rule_title'						=> $rule_title,
+			);
+
+			$entity->import($data_preview);
+
+			$this->template->assign_vars(array(
+				'S_PREVIEW'					=> true,
+
+				'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
+			));
+		}
+
 		if ($this->request->is_set_post('submit')
 		{
 			// The rule title
@@ -214,14 +248,13 @@ class admin_controller implements admin_interface
 
 			if (empty($errors))
 			{
-				// Initiate a rule entity
-				$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
+
 
 				// Grab the form's message parsing options (possible values: 1 or 0)
 				$message_parse_options = array(
-					'bbcode' => $this->request->variable('enable_bbcode', 0),
-					'magic_url' => $this->request->variable('enable_magic_url', 0),
-					'smilies' => $this->request->variable('enable_smilies', 0),
+					'bbcode' => $bbcode,
+					'magic_url' => $magic_url,
+					'smilies' => $smilies,
 				);
 
 				// Set the message parse options in the entity
@@ -233,8 +266,8 @@ class admin_controller implements admin_interface
 				// Set the form's title, anchor and message fields in the entity
 				$entity
 					->set_title($rule_title)
-					->set_anchor($this->request->variable('rule_anchor', ''))
-					->set_message($this->request->variable('rule_message', ''));
+					->set_anchor($rule_anchor)
+					->set_message($rule_message);
 
 				// Add the rule entity to the database
 				$this->rule_operator->add_rule($language, $parent_id, $entity);
@@ -249,6 +282,14 @@ class admin_controller implements admin_interface
 
 			'U_ADD_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
+
+			'RULE_ANCHOR'		=> $rule_anchor,
+			'RULE_MESSAGE'		=> $rule_message,
+			'RULE_TITLE'		=> $rule_title,
+
+			'S_MESSAGE_BBCODE_ENABLED'		=> $bbcode,
+			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $magic_url,
+			'S_MESSAGE_SMILIES_ENABLED'		=> $smilies,
 		));
 	}
 
