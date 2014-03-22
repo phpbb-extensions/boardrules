@@ -237,9 +237,6 @@ class admin_controller implements admin_interface
 
 		if ($this->request->is_set_post('submit')
 		{
-			// The rule title
-			$rule_title = $this->request->variable('rule_title', '');
-
 			// Do not allow an empty rule title
 			if ($rule_title == '')
 			{
