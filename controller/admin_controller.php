@@ -267,9 +267,9 @@ class admin_controller implements admin_interface
 		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Rule request
-		$rule_title = $this->request->variable('rule_title', '');
-		$rule_anchor = $this->request->variable('rule_anchor', '');
-		$rule_message = $this->request->variable('rule_message', '');
+		$rule_anchor = $this->request->variable('rule_anchor', $entity->get_anchor(), true);
+		$rule_message = $this->request->variable('rule_message', $entity->get_message_for_edit(), true);
+		$rule_title = $this->request->variable('rule_title', $entity->get_title(), true);
 
 		// Preview
 		if ($this->request->is_set_post('preview'))
