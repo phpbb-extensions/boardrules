@@ -325,9 +325,9 @@ class admin_controller implements admin_interface
 			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
 
-			'RULE_MESSAGE'		=> $entity->get_message_for_edit(),
-			'RULE_ANCHOR'		=> $entity->get_anchor(),
-			'RULE_TITLE'		=> $entity->get_title(),
+			'RULE_ANCHOR'		=> $rule_anchor,
+			'RULE_MESSAGE'		=> $rule_message,
+			'RULE_TITLE'		=> $rule_title,
 
 			'S_RULE_LANGUAGE'	=> $entity->get_language(),
 			'S_RULE_PARENT_ID'	=> $entity->get_parent_id(),
