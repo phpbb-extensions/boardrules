@@ -280,6 +280,8 @@ class admin_controller implements admin_interface
 	{
 		$errors = array();
 
+		$s_preview = false;
+
 		// Grab the form data's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
 			'bbcode'	=> $data['bbcode'],
@@ -338,7 +340,7 @@ class admin_controller implements admin_interface
 		));
 
 		// Return true if no errors, false otherwise
-		return (empty($errors) && !isset($s_preview));
+		return (empty($errors) && !$s_preview);
 	}
 
 	/**
