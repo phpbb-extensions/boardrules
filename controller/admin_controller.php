@@ -299,7 +299,8 @@ class admin_controller implements admin_interface
 		$entity
 			->set_title($data['rule_title'])
 			->set_anchor($data['rule_anchor'])
-			->set_message($data['rule_message']);
+			->set_message($data['rule_message'])
+		;
 
 		// Do not allow an empty rule title
 		if ($entity->get_title() == '')
