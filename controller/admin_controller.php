@@ -337,7 +337,7 @@ class admin_controller implements admin_interface
 		));
 
 		// Return true if no errors, false otherwise
-		return (empty($errors)) && !isset($s_preview);
+		return (empty($errors) && !isset($s_preview));
 	}
 
 	/**
