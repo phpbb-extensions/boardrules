@@ -251,7 +251,9 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
 		);
 
-		if ($this->request->is_set_post('submit') || ($preview = $this->request->is_set_post('preview')))
+		$preview = $this->request->is_set_post('preview');
+
+		if ($this->request->is_set_post('submit') || $preview)
 		{
 			if ($this->add_edit_rule_data($entity, $data, $preview))
 			{
@@ -273,11 +275,11 @@ class admin_controller implements admin_interface
 	*
 	* @param object $entity The rule entity object
 	* @param array $data The form data to be processed
-	* @param bool $s_preview True if rule is preview, false otherwise
+	* @param bool $preview True if rule is preview, false otherwise
 	* @return bool True if data passed validation and not preview, false otherwise
 	* @access protected
 	*/
-	protected function add_edit_rule_data($entity, $data, $s_preview)
+	protected function add_edit_rule_data($entity, $data, $preview)
 	{
 		$errors = array();
 
@@ -312,10 +314,10 @@ class admin_controller implements admin_interface
 		// Preview
 		if (empty($errors))
 		{
-			if ($this->request->is_set_post('preview'))
+			if ($preview)
 			{
 				$this->template->assign_vars(array(
-					'S_PREVIEW'					=> $s_preview,
+					'S_PREVIEW'					=> $preview,
 
 					'RULE_TITLE_PREVIEW'		=> $entity->get_title(),
 					'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
