@@ -80,7 +80,7 @@ interface admin_interface
 	* @return bool True if data passed validation, false otherwise
 	* @access protected
 	*/
-	protected function add_edit_rule_data($entity, $data)
+	protected function add_edit_rule_data($entity, $data);
 
 	/**
 	* Delete a rule
