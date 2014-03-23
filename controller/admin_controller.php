@@ -307,13 +307,17 @@ class admin_controller implements admin_interface
 			$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
 		}
 
+		// Preview
+		$s_preview = false;
+
 		if (empty($errors))
 		{
-			// Preview
 			if ($this->request->is_set_post('preview'))
 			{
+				$s_preview = true;
+
 				$this->template->assign_vars(array(
-					'S_PREVIEW'					=> true,
+					'S_PREVIEW'					=> $s_preview,
 
 					'RULE_TITLE_PREVIEW'		=> $entity->get_title(),
 					'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
@@ -335,7 +339,7 @@ class admin_controller implements admin_interface
 		));
 
 		// Return true if no errors, false otherwise
-		return (empty($errors));
+		return (empty($errors)) && !$s_preview;
 	}
 
 	/**
