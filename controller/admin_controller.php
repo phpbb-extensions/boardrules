@@ -212,9 +212,9 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', 0),
 		);
 
-		if ($this->request->is_set_post('submit'))
+		if ($this->request->is_set_post('submit') || ($preview = $this->request->is_set_post('preview')))
 		{
-			if ($this->add_edit_rule_data($entity, $data))
+			if ($this->add_edit_rule_data($entity, $data, $preview))
 			{
 				// Add the rule entity to the database
 				$this->rule_operator->add_rule($language, $parent_id, $entity);
@@ -251,9 +251,9 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
 		);
 
-		if ($this->request->is_set_post('submit'))
+		if ($this->request->is_set_post('submit') || ($preview = $this->request->is_set_post('preview')))
 		{
-			if ($this->add_edit_rule_data($entity, $data))
+			if ($this->add_edit_rule_data($entity, $data, $preview))
 			{
 				// Save the edited rule entity to the database
 				$entity->save();
@@ -273,14 +273,13 @@ class admin_controller implements admin_interface
 	*
 	* @param object $entity The rule entity object
 	* @param array $data The form data to be processed
+	* @param bool $s_preview True if rule is preview, false otherwise
 	* @return bool True if data passed validation and not preview, false otherwise
 	* @access protected
 	*/
-	protected function add_edit_rule_data($entity, $data)
+	protected function add_edit_rule_data($entity, $data, $s_preview)
 	{
 		$errors = array();
-
-		$s_preview = false;
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
