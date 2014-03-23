@@ -308,8 +308,6 @@ class admin_controller implements admin_interface
 		}
 
 		// Preview
-		$s_preview = false;
-
 		if (empty($errors))
 		{
 			if ($this->request->is_set_post('preview'))
@@ -339,7 +337,7 @@ class admin_controller implements admin_interface
 		));
 
 		// Return true if no errors, false otherwise
-		return (empty($errors)) && !$s_preview;
+		return (empty($errors)) && !isset($s_preview);
 	}
 
 	/**
