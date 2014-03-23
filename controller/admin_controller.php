@@ -215,7 +215,9 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', 0),
 		);
 
-		if ($this->request->is_set_post('submit') || ($preview = $this->request->is_set_post('preview')))
+		$preview = $this->request->is_set_post('preview');
+
+		if ($this->request->is_set_post('submit') || $preview)
 		{
 			if ($this->add_edit_rule_data($entity, $data, $preview))
 			{
