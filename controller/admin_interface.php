@@ -73,6 +73,16 @@ interface admin_interface
 	public function edit_rule($rule_id);
 
 	/**
+	* Process rule data to be added or edited
+	*
+	* @param object $entity The rule entity object
+	* @param array $data The form data to be processed
+	* @return bool True if data passed validation, false otherwise
+	* @access protected
+	*/
+	protected function add_edit_rule_data($entity, $data)
+
+	/**
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
