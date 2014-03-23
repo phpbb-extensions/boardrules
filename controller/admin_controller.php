@@ -325,8 +325,8 @@ class admin_controller implements admin_interface
 			'S_ERROR'			=> (sizeof($errors)) ? true : false,
 			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '')
 
-			'RULE_ANCHOR'		=> $entity->get_anchor(),
 			'RULE_TITLE'		=> $entity->get_title(),
+			'RULE_ANCHOR'		=> $entity->get_anchor(),
 			'RULE_MESSAGE'		=> $entity->get_message(),
 
 			'S_MESSAGE_BBCODE_ENABLED'		=> $entity->message_bbcode_enabled(),
