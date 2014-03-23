@@ -314,8 +314,6 @@ class admin_controller implements admin_interface
 		{
 			if ($this->request->is_set_post('preview'))
 			{
-				$s_preview = true;
-
 				$this->template->assign_vars(array(
 					'S_PREVIEW'					=> $s_preview,
 
