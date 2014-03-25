@@ -48,6 +48,8 @@ class viewonline_test extends \extension_functional_test_case
 	*/
 	public function test_viewonline_page()
 	{
+		$this->logout();
+
 		$this->create_user('user1');
 		$this->login('user1');
 		$crawler = self::request('GET', 'app.php/rules');
