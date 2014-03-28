@@ -48,20 +48,17 @@ class viewonline_test extends \extension_functional_test_case
 	*/
 	public function test_viewonline_page()
 	{
-		$this->logout();
-
-		$this->create_user('user1');
-		$this->login('user1');
-		$crawler = self::request('GET', 'app.php/rules');
+		$crawler = self::request('GET', 'app.php/rules&sid={$this->sid}');
+		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->text());
 
 		$this->sid = null;
 		self::$cookieJar->clear();
 
-		$this->create_user('user2');
-		$this->login('user2');
-		$crawler = self::request('GET', 'viewonline.php');
+		$this->create_user('user1');
+		$this->login('user1');
+		$crawler = self::request('GET', 'viewonline.php&sid={$this->sid}');
 
-		$this->assertContains('user1', $crawler->text());
+		$this->assertContains('admin', $crawler->text());
 		$this->assertContains($this->lang('BOARDRULES_VIEWONLINE'), $crawler->text());
 	}
 }
