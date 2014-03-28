@@ -39,6 +39,8 @@ class viewonline_test extends \extension_functional_test_case
 			WHERE config_name = 'boardrules_enable'";
 
 		$this->db->sql_query($sql);
+
+		$this->purge_cache();
 	}
 
 	/**
