@@ -291,6 +291,11 @@ class admin_controller implements admin_interface
 	{
 		$errors = array();
 
+		if (!check_form_key('add_edit_rule'))
+		{
+			$error[] = $this->user->lang['ADD_EDIT_RULE_FORM_INVALID'];
+		}
+
 		// Grab the form data's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
 			'bbcode'	=> $data['bbcode'],
