@@ -200,7 +200,7 @@ class admin_controller implements admin_interface
 	public function add_rule($language = 0, $parent_id = 0)
 	{
 		// Add form key
-		add_form_key('acp_boardrules_add');
+		add_form_key('add_edit_rule');
 
 		// Initiate a rule entity
 		$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
@@ -244,7 +244,7 @@ class admin_controller implements admin_interface
 	public function edit_rule($rule_id)
 	{
 		// Add form key
-		add_form_key('acp_boardrules_edit');
+		add_form_key('add_edit_rule');
 
 		// Initiate and load the rule entity
 		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
