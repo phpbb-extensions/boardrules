@@ -293,7 +293,7 @@ class admin_controller implements admin_interface
 
 		if (!check_form_key('add_edit_rule'))
 		{
-			$error[] = $this->user->lang['ADD_EDIT_RULE_FORM_INVALID'];
+			$error[] = $this->user->lang['FORM_INVALID'];
 		}
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
