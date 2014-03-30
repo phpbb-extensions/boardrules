@@ -45,6 +45,26 @@ class boardrules_module
 		switch($mode)
 		{
 			case 'settings':
+				$this->tpl_name = 'acp_boardrules_settings';
+
+				$this->page_title = $user->lang['ACP_BOARDRULES_SETTINGS'];
+
+				add_form_key('boardrules_settings');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key('boardrules_settings'))
+					{
+						trigger_error($user->lang['FORM_INVALID']);
+					}
+
+					$admin_controller->set_options();
+
+					add_log('admin', 'LOG_' . 'BOARDRULES_SETTINGS_CHANGED');
+					trigger_error($user->lang['BOARDRULES_SETTINGS_CHANGED'] . adm_back_link($this->u_action));
+				}
+
+				$admin_controller->display_options();
 			break;
 
 			case 'manage':
