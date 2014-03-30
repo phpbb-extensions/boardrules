@@ -26,6 +26,9 @@ class boardrules_module
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
 
+		// Define admin controller
+		$admin_controller = $phpbb_container->get('phpbb.boardrules.admin.controller');
+
 		switch($action)
 		{
 		}
