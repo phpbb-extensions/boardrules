@@ -215,9 +215,10 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', 0),
 		);
 
+		$submit = $this->request->is_set_post('submit');
 		$preview = $this->request->is_set_post('preview');
 
-		if ($this->request->is_set_post('submit') || $preview)
+		if ($submit || $preview)
 		{
 			if ($this->add_edit_rule_data($entity, $data, $preview))
 			{
@@ -259,9 +260,10 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
 		);
 
+		$submit = $this->request->is_set_post('submit');
 		$preview = $this->request->is_set_post('preview');
 
-		if ($this->request->is_set_post('submit') || $preview)
+		if ($submit || $preview)
 		{
 			if ($this->add_edit_rule_data($entity, $data, $preview))
 			{
@@ -352,7 +354,7 @@ class admin_controller implements admin_interface
 		));
 
 		// Return true if no errors, false otherwise
-		return (empty($errors) && !$s_preview);
+		return (empty($errors) && !$preview);
 	}
 
 	/**
