@@ -39,6 +39,11 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
+	'ACP_BOARDRULES'					=> 'Board rules',
+	'ACP_BOARDRULES_MANAGE'				=> 'Manage rules',
+	'ACP_BOARDRULES_SETTINGS'			=> 'Rules settings',
+
+
 	'DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
 	'RULE_DELETED'						=> 'Rule successfully removed.',
 ));
