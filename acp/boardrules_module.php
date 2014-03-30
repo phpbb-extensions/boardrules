@@ -35,6 +35,9 @@ class boardrules_module
 		$parent_id = $request->variable('parent_id', 0);
 		$rule_id = $request->variable('rule_id', 0);
 
+		// Send url to admin controller
+		$admin_controller->set_page_url($this->u_action);
+
 		switch($action)
 		{
 		}
