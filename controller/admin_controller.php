@@ -283,7 +283,7 @@ class admin_controller implements admin_interface
 	*
 	* @param object $entity The rule entity object
 	* @param array $data The form data to be processed
-	* @param bool $previewTrue if previewing the rule, false otherwise
+	* @param bool $preview True if previewing the rule, false otherwise
 	* @return bool True if data passed validation and not preview, false otherwise
 	* @access protected
 	*/
