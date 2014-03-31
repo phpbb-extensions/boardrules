@@ -76,7 +76,7 @@ class admin_controller implements admin_interface
 
 			$this->set_options();
 
-			add_log('admin', 'LOG_' . 'BOARDRULES_SETTINGS_CHANGED');
+			add_log('admin', 'BOARDRULES_SETTINGS_CHANGED');
 			trigger_error($this->user->lang['BOARDRULES_SETTINGS_CHANGED'] . adm_back_link($this->u_action));
 		}
 
