@@ -42,8 +42,14 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES'					=> 'Board rules',
 	'ACP_BOARDRULES_MANAGE'				=> 'Manage rules',
 	'ACP_BOARDRULES_SETTINGS'			=> 'Rules settings',
+	'ACP_BOARDRULES_SETTINGS_EXPLAIN'	=> 'Here you can enable/disable several board rules.',
 
-	'BOARDRULES_SETTINGS_CHANGED'		=> 'Board rules settings changed.',
+	'BOARDRULES_ENABLE'								=> 'Enable board rules',
+	'BOARDRULES_EXPLAIN'							=> 'Turn board rules on or off.',
+	'BOARDRULES_REQUIRE_AT_REGISTRATION'			=> 'Require new users to accept rules at registration',
+	'BOARDRULES_REQUIRE_AT_REGISTRATION_EXPLAIN'	=> 'Require new members to read and agree to the board rules at registration',
+	'BOARDRULES_SETTINGS_CHANGED'					=> 'Board rules settings changed.',
+
 	'DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
 	'RULE_DELETED'						=> 'Rule successfully removed.',
 ));
