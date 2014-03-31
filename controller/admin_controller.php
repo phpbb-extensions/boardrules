@@ -350,7 +350,7 @@ class admin_controller implements admin_interface
 			'S_MESSAGE_SMILIES_ENABLED'		=> $entity->message_smilies_enabled(),
 		));
 
-		// Return true if no errors, false otherwise
+		// Return true if no errors and is ok to save, false otherwise
 		return (empty($errors) && !$preview);
 	}
 
