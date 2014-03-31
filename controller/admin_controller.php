@@ -327,7 +327,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Preview
-		if (empty($errors))
+		if ($preview && empty($errors))
 		{
 			if ($preview)
 			{
