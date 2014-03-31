@@ -101,9 +101,7 @@ class listener implements EventSubscriberInterface
 	public function add_permission($event)
 	{
 		$permissions = $event['permissions'];
-		$permissions[] = array(
-			'a_boardrules'		=> array('lang' => 'ACL_A_BOARDRULES', 'cat' => 'misc'),
-		);
+		$permissions['a_boardrules'] = array('lang' => 'ACL_A_BOARDRULES', 'cat' => 'misc');
 		$event['permissions'] = $permissions;
 	}
 }
