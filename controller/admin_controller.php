@@ -329,15 +329,12 @@ class admin_controller implements admin_interface
 		// Preview
 		if ($preview && empty($errors))
 		{
-			if ($preview)
-			{
-				$this->template->assign_vars(array(
-					'S_PREVIEW'					=> $preview,
+			$this->template->assign_vars(array(
+				'S_PREVIEW'					=> $preview,
 
-					'RULE_TITLE_PREVIEW'		=> $entity->get_title(),
-					'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
-				));
-			}
+				'RULE_TITLE_PREVIEW'		=> $entity->get_title(),
+				'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
+			));
 		}
 
 		$this->template->assign_vars(array(
