@@ -36,18 +36,12 @@ class m6_initial_module extends \phpbb\db\migration\migration
 	{
 		return array(
 			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_BOARDRULES')),
-			array('module.add', array('acp', 'ACP_BOARDRULES', array(
+			array('module.add', array(
+				'acp', 'ACP_BOARDRULES', array(
 					'module_basename'	=> '\phpbb\boardrules\acp\boardrules_module',
-					'module_langname'	=> 'ACP_BOARDRULES_SETTINGS',
-					'module_mode'		=> 'settings',
-					'module_auth'		=> 'ext_phpbb/boardrules && acl_a_boardrules',
-			))),
-			array('module.add', array('acp', 'ACP_BOARDRULES', array(
-					'module_basename'	=> '\phpbb\boardrules\acp\boardrules_module',
-					'module_langname'	=> 'ACP_BOARDRULES_MANAGE',
-					'module_mode'		=> 'manage',
-					'module_auth'		=> 'ext_phpbb/boardrules && acl_a_boardrules',
-			))),
+					'modes'				=> array('settings', 'manage'),
+				),
+			)),
 		);
 	}
 }
