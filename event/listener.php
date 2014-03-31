@@ -54,7 +54,7 @@ class listener implements EventSubscriberInterface
 			'core.user_setup'	=> 'load_language_on_setup',
 			'core.page_header'	=> 'add_page_header_link',
 
-			// ACP events
+			// ACP event
 			'core.permissions'	=> 'add_permission',
 		);
 	}
