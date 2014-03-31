@@ -45,7 +45,7 @@ class boardrules_module
 		switch($mode)
 		{
 			case 'settings':
-				$this->tpl_name = 'acp_boardrules_settings';
+				$this->tpl_name = 'boardrules_settings';
 
 				$this->page_title = $user->lang['ACP_BOARDRULES_SETTINGS'];
 
