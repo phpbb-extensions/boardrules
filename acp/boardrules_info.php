@@ -26,8 +26,8 @@ class boardrules_info
 			'title'		=> 'ACP_BOARDRULES',
 			'version'	=> '1.0.0',
 			'modes'		=> array(
-				'settings'	=> array('title' => 'ACP_BOARDRULES_SETTINGS', 'auth' => 'ext_phpbb/boardrules && acl_a_boardrules', 'cat' => array('ACP_CAT_BOARDRULES')),
-				'manage'	=> array('title' => 'ACP_BOARDRULES_MANAGE', 'auth' => 'ext_phpbb/boardrules && acl_a_boardrules', 'cat' => array('ACP_CAT_BOARDRULES')),
+				'settings'	=> array('title' => 'ACP_BOARDRULES_SETTINGS', 'auth' => 'ext_phpbb/boardrules && acl_a_boardrules', 'cat' => array('ACP_BOARDRULES')),
+				'manage'	=> array('title' => 'ACP_BOARDRULES_MANAGE', 'auth' => 'ext_phpbb/boardrules && acl_a_boardrules', 'cat' => array('ACP_BOARDRULES')),
 			),
 		);
 	}
