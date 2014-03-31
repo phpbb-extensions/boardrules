@@ -83,8 +83,8 @@ class admin_controller implements admin_interface
 		$this->template->assign_vars(array(
 			'U_ACTION'		=> $this->u_action,
 
-			'BOARDRULES_ENABLE'						=> $this->config['boardrules_enable'] ? true : false,
-			'BOARDRULES_REQUIRE_AT_REGISTRATION'	=> $this->config['boardrules_require_at_registration'] ? true : false,
+			'S_BOARDRULES_ENABLE'						=> $this->config['boardrules_enable'] ? true : false,
+			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'		=> $this->config['boardrules_require_at_registration'] ? true : false,
 		));
 	}
 
