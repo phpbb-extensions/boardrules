@@ -42,7 +42,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES'					=> 'Board rules',
 	'ACP_BOARDRULES_MANAGE'				=> 'Manage rules',
 	'ACP_BOARDRULES_SETTINGS'			=> 'Rules settings',
-	'ACP_BOARDRULES_SETTINGS_EXPLAIN'	=> 'Here you can enable/disable several board rules.',
+	'ACP_BOARDRULES_SETTINGS_EXPLAIN'	=> 'Here you can configure the main settings for board rules.',
 
 	'BOARDRULES_ENABLE'								=> 'Enable board rules',
 	'BOARDRULES_ENABLE_EXPLAIN'						=> 'Turn board rules on or off.',
