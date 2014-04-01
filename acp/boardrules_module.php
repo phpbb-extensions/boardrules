@@ -38,10 +38,6 @@ class boardrules_module
 		// Send url to admin controller
 		$admin_controller->set_page_url($this->u_action);
 
-		switch($action)
-		{
-		}
-
 		switch($mode)
 		{
 			case 'settings':
