@@ -91,7 +91,7 @@ class listener implements EventSubscriberInterface
 		));
 	}
 
-	/*
+	/**
 	* Add board rules permission to proper category
 	*
 	* @param object $event The event object
