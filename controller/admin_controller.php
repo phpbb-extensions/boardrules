@@ -67,20 +67,28 @@ class admin_controller implements admin_interface
 	{
 		add_form_key('boardrules_settings');
 
+		$error = array();
+
 		if ($this->request->is_set_post('submit'))
 		{
 			if (!check_form_key('boardrules_settings'))
 			{
-				trigger_error($this->user->lang['FORM_INVALID']);
+				$errors[] = $this->user->lang['FORM_INVALID'];
 			}
 
-			$this->set_options();
+			if (empty($errors))
+			{
+				$this->set_options();
 
-			add_log('admin', 'BOARDRULES_SETTINGS_CHANGED');
-			trigger_error($this->user->lang['BOARDRULES_SETTINGS_CHANGED'] . adm_back_link($this->u_action));
+				add_log('admin', 'BOARDRULES_SETTINGS_CHANGED');
+				trigger_error($this->user->lang['BOARDRULES_SETTINGS_CHANGED'] . adm_back_link($this->u_action));
+			}
 		}
 
 		$this->template->assign_vars(array(
+			'S_ERROR'		=> (sizeof($errors)) ? true : false,
+			'ERROR_MSG'		=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+
 			'U_ACTION'		=> $this->u_action,
 
 			'S_BOARDRULES_ENABLE'						=> $this->config['boardrules_enable'] ? true : false,
