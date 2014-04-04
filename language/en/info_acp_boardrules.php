@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'BOARDRULES_ENABLE'								=> 'Enable board rules',
 	'BOARDRULES_ENABLE_EXPLAIN'						=> 'Turn board rules on or off.',
 	'BOARDRULES_REQUIRE_AT_REGISTRATION'			=> 'Require new users to accept rules at registration',
-	'BOARDRULES_REQUIRE_AT_REGISTRATION_EXPLAIN'	=> 'Require new members to read and agree to the board rules at registration.',
+	'BOARDRULES_REQUIRE_AT_REGISTRATION_EXPLAIN'	=> 'This option will add a clause to the "Terms of Agreement" requiring newly registering users to read and accept the board rules at registration.',
 	'BOARDRULES_SETTINGS_CHANGED'					=> 'Board rules settings changed.',
 
 	'DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
