@@ -67,7 +67,7 @@ class admin_controller implements admin_interface
 	{
 		add_form_key('boardrules_settings');
 
-		$error = array();
+		$errors = array();
 
 		if ($this->request->is_set_post('submit'))
 		{
