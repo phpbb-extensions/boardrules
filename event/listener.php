@@ -92,7 +92,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Add board rules permission to proper category
+	* Add administrative permissions to manage board rules
 	*
 	* @param object $event The event object
 	* @return null
