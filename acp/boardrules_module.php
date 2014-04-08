@@ -9,14 +9,6 @@
 
 namespace phpbb\boardrules\acp;
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
-
 class boardrules_module
 {
 	public $u_action;
