@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 class boardrules_module
 {
-	var $u_action;
+	public $u_action;
 
 	function main($id, $mode)
 	{
