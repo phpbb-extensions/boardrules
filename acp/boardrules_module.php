@@ -23,8 +23,7 @@ class boardrules_module
 
 	function main($id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache, $request;
-		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $phpbb_container;
+		global $phpbb_container, $request, $user;
 
 		// Define admin controller
 		$admin_controller = $phpbb_container->get('phpbb.boardrules.admin.controller');
