@@ -58,7 +58,6 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'	=> 'load_language_on_setup',
 			'core.page_header'	=> 'add_page_header_link',
-			'core.ucp_register_agreement'	=> 'rules_at_registration',
 
 			// ACP event
 			'core.permissions'	=> 'add_permission',
@@ -110,31 +109,5 @@ class listener implements EventSubscriberInterface
 		$permissions = $event['permissions'];
 		$permissions['a_boardrules'] = array('lang' => 'ACL_A_BOARDRULES', 'cat' => 'misc');
 		$event['permissions'] = $permissions;
-	}
-
-	/**
-	* Display board rules agreement at registration
-	*
-	* @param object $event The event object
-	* @return null
-	* @access public
-	*/
-	public function rules_at_registration($event)
-	{
-		// Return if board rules are disabled or not required at registration.
-		if (empty($this->config['boardrules_enable']) || empty($this->config['boardrules_require_at_registration']))
-		{
-			return;
-		}
-
-		// Reload the language file if the guest has changed languages on the registration page
-		if ($event['change_lang'] || $event['user_lang'] != $this->config['default_lang'])
-		{
-			$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_common');
-		}
-
-		$this->template->assign_vars(array(
-			'S_BOARDRULES_AT_REGISTRATION' => true,
-		));
 	}
 }
