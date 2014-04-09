@@ -41,6 +41,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_BOARDRULES'					=> 'Board rules',
 	'ACP_BOARDRULES_MANAGE'				=> 'Manage rules',
+	'ACP_BOARDRULES_MANAGE_EXPLAIN'		=> 'Here you can manage your board rules. A category is a group of related rules. Each category can have unlimited numbers of rules. Here you can add, edit, delete or re-order categories and rules.',
 	'ACP_BOARDRULES_SETTINGS'			=> 'Rules settings',
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'	=> 'Here you can configure the main settings for board rules.',
 
