@@ -40,6 +40,18 @@ class boardrules_module
 			break;
 
 			case 'manage':
+				$this->tpl_name = 'boardrules_manage';
+
+				$this->page_title = $user->lang['ACP_BOARDRULES_MANAGE'];
+
+				if (empty($language))
+				{
+					$admin_controller->display_language_selection();
+				}
+				else
+				{
+					$admin_controller->display_rules($language, $parent_id);
+				}
 			break;
 		}
 	}
