@@ -9,6 +9,8 @@
 
 namespace phpbb\boardrules\controller;
 
+use Symfony\Component\DependencyInjection\Container;
+
 /**
 * Admin controller
 */
@@ -29,6 +31,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var Container */
+	protected $phpbb_container;
+
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
@@ -38,22 +43,24 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config                         $config            Config object
-	* @param \phpbb\db\driver\driver                      $db                Database object
-	* @param \phpbb\request\request                       $request           Request object
-	* @param \phpbb\template\template                     $template          Template object
-	* @param \phpbb\user                                  $user              User object
-	* @param \phpbb\boardrules\operators\rule             $rule_operator     Rule operator object
+	* @param \phpbb\config\config $config                      Config object
+	* @param \phpbb\db\driver\driver $db                       Database object
+	* @param \phpbb\request\request $request                   Request object
+	* @param \phpbb\template\template $template                Template object
+	* @param \phpbb\user $user                                 User object
+	* @param Container $phpbb_container
+	* @param \phpbb\boardrules\operators\rule $rule_operator   Rule operator object
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, \phpbb\boardrules\operators\rule $rule_operator)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
+		$this->phpbb_container = $phpbb_container;
 		$this->rule_operator = $rule_operator;
 	}
 
@@ -205,6 +212,171 @@ class admin_controller implements admin_interface
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 			'U_MAIN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=0",
 		));
+	}
+
+	/**
+	* Add a rule
+	*
+	* @param int $language Language selection identifier; default: 0
+	* @param int $parent_id Category to display rules from; default: 0
+	* @return null
+	* @access public
+	*/
+	public function add_rule($language = 0, $parent_id = 0)
+	{
+		// Add form key
+		add_form_key('add_edit_rule');
+
+		// Initiate a rule entity
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
+
+		// Collect the form data
+		$data = array(
+			'rule_title'	=> $this->request->variable('rule_title', '', true),
+			'rule_anchor'	=> $this->request->variable('rule_anchor', '', true),
+			'rule_message'	=> $this->request->variable('rule_message', '', true),
+			'bbcode'		=> $this->request->variable('enable_bbcode', 0),
+			'magic_url'		=> $this->request->variable('enable_magic_url', 0),
+			'smilies'		=> $this->request->variable('enable_smilies', 0),
+		);
+
+		$submit = $this->request->is_set_post('submit');
+		$preview = $this->request->is_set_post('preview');
+
+		if ($submit || $preview)
+		{
+			if ($this->add_edit_rule_data($entity, $data, $preview))
+			{
+				// Add the rule entity to the database
+				$this->rule_operator->add_rule($language, $parent_id, $entity);
+
+				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}"));
+			}
+		}
+
+		$this->template->assign_vars(array(
+			'U_ADD_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
+			'U_BACK'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
+		));
+	}
+
+	/**
+	* Edit a rule
+	*
+	* @param int $rule_id The rule identifier to edit
+	* @return null
+	* @access public
+	*/
+	public function edit_rule($rule_id)
+	{
+		// Add form key
+		add_form_key('add_edit_rule');
+
+		// Initiate and load the rule entity
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+
+		// Collect the form data
+		$data = array(
+			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
+			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
+			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
+			'bbcode'		=> $this->request->variable('enable_bbcode', $entity->message_bbcode_enabled()),
+			'magic_url'		=> $this->request->variable('enable_magic_url', $entity->message_magic_url_enabled()),
+			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
+		);
+
+		$submit = $this->request->is_set_post('submit');
+		$preview = $this->request->is_set_post('preview');
+
+		if ($submit || $preview)
+		{
+			if ($this->add_edit_rule_data($entity, $data, $preview))
+			{
+				// Save the edited rule entity to the database
+				$entity->save();
+
+				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+			}
+		}
+
+		$this->template->assign_vars(array(
+			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
+			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
+		));
+	}
+
+	/**
+	* Process rule data to be added or edited
+	*
+	* @param object $entity The rule entity object
+	* @param array $data The form data to be processed
+	* @param bool $preview True if previewing the rule, false otherwise
+	* @return bool True if data passed validation and not preview, false otherwise
+	* @access protected
+	*/
+	protected function add_edit_rule_data($entity, $data, $preview)
+	{
+		$errors = array();
+
+		if (!check_form_key('add_edit_rule'))
+		{
+			$error[] = $this->user->lang['FORM_INVALID'];
+		}
+
+		// Grab the form data's message parsing options (possible values: 1 or 0)
+		$message_parse_options = array(
+			'bbcode'	=> $data['bbcode'],
+			'magic_url'	=> $data['magic_url'],
+			'smilies'	=> $data['smilies'],
+		);
+
+		// Set the message parse options in the entity
+		foreach ($message_parse_options as $function => $enabled)
+		{
+			call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
+		}
+		
+		unset($message_parse_options);
+
+		// Set the rule's title, anchor and message fields in the entity
+		$entity
+			->set_title($data['rule_title'])
+			->set_anchor($data['rule_anchor'])
+			->set_message($data['rule_message'])
+		;
+
+		// Do not allow an empty rule title
+		if ($entity->get_title() == '')
+		{
+			$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
+		}
+
+		// Preview
+		if ($preview && empty($errors))
+		{
+			$this->template->assign_vars(array(
+				'S_PREVIEW'					=> $preview,
+
+				'RULE_TITLE_PREVIEW'		=> $entity->get_title(),
+				'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
+			));
+		}
+
+		$this->template->assign_vars(array(
+			'S_ERROR'			=> (sizeof($errors)) ? true : false,
+			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+
+			'RULE_TITLE'		=> $entity->get_title(),
+			'RULE_ANCHOR'		=> $entity->get_anchor(),
+			'RULE_MESSAGE'		=> $entity->get_message(),
+
+			'S_MESSAGE_BBCODE_ENABLED'		=> $entity->message_bbcode_enabled(),
+			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $entity->message_magic_url_enabled(),
+			'S_MESSAGE_SMILIES_ENABLED'		=> $entity->message_smilies_enabled(),
+		));
+
+		// Return true if no errors and is ok to save, false otherwise
+		return (empty($errors) && !$preview);
 	}
 
 	/**

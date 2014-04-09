@@ -19,6 +19,7 @@ services:
             - @request
             - @template
             - @user
+            - @service_container
             - @phpbb.boardrules.operator
 
     phpbb.boardrules.controller:
