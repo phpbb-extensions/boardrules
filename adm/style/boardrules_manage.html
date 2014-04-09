@@ -1,0 +1,55 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_ACP_BOARDRULES_MANAGE}</h1>
+
+<p>{L_ACP_BOARDRULES_MANAGE_EXPLAIN}</p>
+
+<!-- IF .options -->
+<select name="language">
+	<!-- BEGIN options -->
+		<option value="{options.LANG_ISO}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
+	<!-- END options -->
+</select>
+<!-- ELSE -->
+
+	<!-- IF .breadcrumb -->
+	<p>
+		<strong>
+			<a href="{U_MAIN}">{L_FORUM_INDEX}</a>
+			<!-- BEGIN breadcrumb -->
+				 -&gt; <!-- IF not breadcrumb.S_CURRENT_LEVEL --><a href="{breadcrumb.U_RULE}"><!-- ENDIF -->{breadcrumb.RULE_TITLE}<!-- IF not breadcrumb.S_CURRENT_LEVEL --></a><!-- ENDIF -->
+			<!-- END breadcrumb -->
+		</strong>
+	</p>
+	<!-- ENDIF -->
+
+	<!-- IF .rules -->
+		<table class="table1 forums">
+			<col class="row1" /><col class="row1" /><col class="row2" />
+		<tbody>
+		<!-- BEGIN rules -->
+			<tr>
+				<td class="folder">
+					<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" /><!-- ELSE --><img src="images/icon_folder.gif" /><!-- ENDIF -->
+				</td>
+				<td class="forum-desc">
+					<strong><a href="{rules.U_RULE}">{rules.RULE_TITLE}</a></strong>
+				</td>
+				<td class="actions">
+					<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
+					<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up" data-overlay="false">{ICON_MOVE_UP}</a></span>
+					<span class="down-disabled" style="display:none;">{ICON_MOVE_DOWN_DISABLED}</span>
+					<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down" data-overlay="false">{ICON_MOVE_DOWN}</a></span>
+					<a href="{rules.U_EDIT}">{ICON_EDIT}</a>
+					<a href="{rules.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END rules -->
+		</tbody>
+		</table>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
