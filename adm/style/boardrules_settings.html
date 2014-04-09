@@ -1,0 +1,37 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_BOARDRULES_SETTINGS}</h1>
+
+<p>{L_ACP_BOARDRULES_SETTINGS_EXPLAIN}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<form id="boardrules_settings" method="post" action="{U_ACTION}">
+
+<fieldset>
+	<legend>{L_ACP_BOARDRULES_SETTINGS}</legend>
+	<dl>
+		<dt><label for="boardrules_enable">{L_BOARDRULES_ENABLE}:</label></dt>
+		<dd><label><input type="radio" class="radio" id="boardrules_enable" name="boardrules_enable" value="1"<!-- IF S_BOARDRULES_ENABLE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="boardrules_enable" value="0"<!-- IF not S_BOARDRULES_ENABLE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+	</dl>
+	<dl>
+		<dt><label for="boardrules_require_at_registration">{L_BOARDRULES_REQUIRE_AT_REGISTRATION}:</label><br /><span>{L_BOARDRULES_REQUIRE_AT_REGISTRATION_EXPLAIN}</span></dt>
+		<dd><label><input type="radio" class="radio" id="boardrules_require_at_registration" name="boardrules_require_at_registration" value="1"<!-- IF S_BOARDRULES_REQUIRE_AT_REGISTRATION --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="boardrules_require_at_registration" value="0"<!-- IF not S_BOARDRULES_REQUIRE_AT_REGISTRATION --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+	</dl>
+</fieldset>
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

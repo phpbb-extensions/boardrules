@@ -59,6 +59,9 @@ class listener implements EventSubscriberInterface
 			'core.user_setup'	=> 'load_language_on_setup',
 			'core.page_header'	=> 'add_page_header_link',
 			'core.ucp_register_agreement'	=> 'rules_at_registration',
+
+			// ACP event
+			'core.permissions'	=> 'add_permission',
 		);
 	}
 
@@ -92,6 +95,20 @@ class listener implements EventSubscriberInterface
 			'S_BOARDRULES_ENABLED' => (!empty($this->config['boardrules_enable'])) ? true : false,
 			'U_BOARDRULES' => $this->controller_helper->route('boardrules_main_controller'),
 		));
+	}
+
+	/**
+	* Add administrative permissions to manage board rules
+	*
+	* @param object $event The event object
+	* @return null
+	* @access public
+	*/
+	public function add_permission($event)
+	{
+		$permissions = $event['permissions'];
+		$permissions['a_boardrules'] = array('lang' => 'ACL_A_BOARDRULES', 'cat' => 'misc');
+		$event['permissions'] = $permissions;
 	}
 
 	/**
