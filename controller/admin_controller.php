@@ -388,17 +388,22 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_rule($rule_id)
 	{
+		// Initiate and load the rule entity
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+
 		if (confirm_box(true))
 		{
 			$this->rule_operator->delete_rule($rule_id);
 
-			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link($this->u_action));
+			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 		}
 		else
 		{
 			confirm_box(false, $this->user->lang['DELETE_RULE_CONFIRM'], build_hidden_fields(array(
 				'mode'		=> 'manage',
 				'action'	=> 'delete',
+				'language'	=> $entity->get_language(),
+				'parent_id'	=> $entity->get_parent_id(),
 				'rule_id'	=> $rule_id,
 			)));
 		}
