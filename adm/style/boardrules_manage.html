@@ -7,11 +7,15 @@
 <p>{L_ACP_BOARDRULES_MANAGE_EXPLAIN}</p>
 
 <!-- IF .options -->
-<select name="language">
-	<!-- BEGIN options -->
-		<option value="{options.LANG_ISO}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
-	<!-- END options -->
-</select>
+<form id="language" method="post" action="{U_ACTION}">
+	<select name="language">
+		<!-- BEGIN options -->
+			<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
+		<!-- END options -->
+	</select>
+	<input type="submit" value="{L_GO}" class="button2">
+	{S_FORM_TOKEN}
+</form>
 <!-- ELSE -->
 
 	<!-- IF .breadcrumb -->

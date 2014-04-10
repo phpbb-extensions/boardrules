@@ -142,7 +142,7 @@ class admin_controller implements admin_interface
 				$this->template->assign_block_vars('options', array(
 					'S_LANG_DEFAULT'	=> ($row['lang_iso'] == $this->config['default_lang']) ? true : false,
 
-					'LANG_ISO'			=> $row['lang_iso'],
+					'LANG_ID'			=> $row['lang_id'],
 					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
 				));
 			}
