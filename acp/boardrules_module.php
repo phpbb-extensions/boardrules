@@ -53,6 +53,10 @@ class boardrules_module
 					case 'move_up':
 						$admin_controller->move_rule($rule_id, 'up');
 					break;
+
+					case 'delete':
+						$admin_controller->delete_rule($rule_id);
+					break;
 				}
 
 				if (empty($language))
