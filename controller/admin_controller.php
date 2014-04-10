@@ -417,7 +417,7 @@ class admin_controller implements admin_interface
 	{
 		if (!check_link_hash($this->request->variable('hash', ''), $direction . $rule_id))
 		{
-			trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action));
+			trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		$this->rule_operator->move($rule_id, $direction, $amount);
