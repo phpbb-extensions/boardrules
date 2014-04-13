@@ -26,6 +26,12 @@ class boardrules_module
 		$parent_id = $request->variable('parent_id', 0);
 		$rule_id = $request->variable('rule_id', 0);
 
+		// Modify $u_action while deleting the rule by adding the language and the parent_id variables
+		if ($action == 'delete')
+		{
+			$this->u_action = "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}";
+		}
+
 		// Send url to admin controller
 		$admin_controller->set_page_url($this->u_action);
 
