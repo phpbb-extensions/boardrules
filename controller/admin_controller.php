@@ -187,6 +187,8 @@ class admin_controller implements admin_interface
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
 				'U_MOVE_DOWN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_down&amp;rule_id=" . $entity->get_id(),
 				'U_MOVE_UP'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_up&amp;rule_id=" . $entity->get_id(),
+				'U_MOVE_DOWN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_down&amp;rule_id=" . $entity->get_id() . '&amp;hash=' . generate_link_hash('down' . $entity->get_id()),
+				'U_MOVE_UP'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_up&amp;rule_id=" . $entity->get_id() . '&amp;hash=' . generate_link_hash('up' . $entity->get_id()),
 				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
 
@@ -411,8 +413,13 @@ class admin_controller implements admin_interface
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1)
 	{
+		if (!check_link_hash($this->request->variable('hash', ''), $direction . $rule_id))
+		{
+			trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+		}
+
 		$this->rule_operator->move($rule_id, $direction, $amount);
-		
+
 		if ($this->request->is_ajax())
 		{
 			$json_response = new \phpbb\json_response;
