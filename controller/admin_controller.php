@@ -183,10 +183,10 @@ class admin_controller implements admin_interface
 
 				'S_IS_CATEGORY'		=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
 
-				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
+				'U_DELETE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
 				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
-				'U_MOVE_DOWN'		=> "{$this->u_action}&amp;action=move_down&amp;rule_id=" . $entity->get_id(),
-				'U_MOVE_UP'			=> "{$this->u_action}&amp;action=move_up&amp;rule_id=" . $entity->get_id(),
+				'U_MOVE_DOWN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_down&amp;rule_id=" . $entity->get_id(),
+				'U_MOVE_UP'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=move_up&amp;rule_id=" . $entity->get_id(),
 				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
 
