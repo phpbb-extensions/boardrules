@@ -25,20 +25,30 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\template\template */
 	protected $template;
 
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var string phpEx */
+	protected $php_ext;
+
 	/**
 	* Constructor
 	*
 	* @param \phpbb\config\config        $config             Config object
 	* @param \phpbb\controller\helper    $controller_helper  Controller helper object
 	* @param \phpbb\template\template    $template           Template object
+	* @param \phpbb\user                 $user               User object
+	* @param string                      $php_ext            phpEx
 	* @return \phpbb\boardrules\event\listener
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
 		$this->template = $template;
+		$this->user = $user;
+		$this->php_ext = $php_ext;
 	}
 
 	/**
@@ -53,6 +63,7 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.user_setup'	=> 'load_language_on_setup',
 			'core.page_header'	=> 'add_page_header_link',
+			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 
 			// ACP event
 			'core.permissions'	=> 'add_permission',
@@ -103,5 +114,24 @@ class listener implements EventSubscriberInterface
 		$permissions = $event['permissions'];
 		$permissions['a_boardrules'] = array('lang' => 'ACL_A_BOARDRULES', 'cat' => 'misc');
 		$event['permissions'] = $permissions;
+	}
+
+	/**
+	* Show users as viewing the Board Rules on Who Is Online page
+	*
+	* @param object $event The event object
+	* @return null
+	* @access public
+	*/
+	public function viewonline_page($event)
+	{
+		if ($event['on_page'][1] == 'app')
+		{
+			if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/rules') === 0)
+			{
+				$event['location'] = $this->user->lang('BOARDRULES_VIEWONLINE');
+				$event['location_url'] = $this->controller_helper->route('boardrules_main_controller');
+			}
+		}
 	}
 }
