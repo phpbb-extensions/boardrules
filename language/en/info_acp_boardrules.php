@@ -50,6 +50,7 @@ $lang = array_merge($lang, array(
 	'BOARDRULES_REQUIRE_AT_REGISTRATION'			=> 'Require new users to accept rules at registration',
 	'BOARDRULES_REQUIRE_AT_REGISTRATION_EXPLAIN'	=> 'This option will add a clause to the “Terms of Agreement” requiring newly registering users to read and accept the board rules at registration.',
 	'BOARDRULES_RULE'								=> 'Rule',
+	'BOARDRULES_SELECT_LANGUAGE'					=> 'Select language',
 	'BOARDRULES_SETTINGS_CHANGED'					=> 'Board rules settings changed.',
 
 	'ADD_RULE'							=> 'Add rule',

@@ -8,13 +8,22 @@
 
 <!-- IF .options -->
 <form id="language" method="post" action="{U_ACTION}">
-	<select name="language">
-		<!-- BEGIN options -->
-			<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
-		<!-- END options -->
-	</select>
-	<input type="submit" value="{L_GO}" class="button2">
-	{S_FORM_TOKEN}
+	<fieldset>
+		<dl>
+			<dt>
+				<label for="select_language">{L_BOARDRULES_SELECT_LANGUAGE}</label>
+			</dt>
+			<dd>
+				<select name="language">
+					<!-- BEGIN options -->
+						<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
+					<!-- END options -->
+				</select>
+				<input type="submit" value="{L_GO}" class="button2">
+				{S_FORM_TOKEN}
+			</dd>
+		</dl>
+	</fieldset>
 </form>
 <!-- ELSE -->
 
