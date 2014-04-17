@@ -388,15 +388,20 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_rule($rule_id)
 	{
+		$language = $this->request->variable('language', 0);
+		$parent_id = $this->request->variable('parent_id', 0);
+
 		if (confirm_box(true))
 		{
 			$this->rule_operator->delete_rule($rule_id);
 
-			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link($this->u_action));
+			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link("{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}"));
 		}
 		else
 		{
 			confirm_box(false, $this->user->lang['DELETE_RULE_CONFIRM']);
+
+			redirect("{$this->u_action}&language={$language}&parent_id={$parent_id}");
 		}
 	}
 
@@ -423,6 +428,11 @@ class admin_controller implements admin_interface
 			$json_response = new \phpbb\json_response;
 			$json_response->send(array('success' => true));
 		}
+
+		$language = $this->request->variable('language', 0);
+		$parent_id = $this->request->variable('parent_id', 0);
+
+		redirect("{$this->u_action}&language={$language}&parent_id={$parent_id}");
 	}
 
 	/**
