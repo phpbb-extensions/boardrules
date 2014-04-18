@@ -93,6 +93,15 @@ interface admin_interface
 	public function move_rule($rule_id, $direction, $amount = 1);
 
 	/**
+	* Send notification to users
+	*
+	* @param int $rule_id The rule identifier
+	* @return null
+	* @access public
+	*/
+	public function send_notification($rule_id);
+
+	/**
 	* Set page url
 	*
 	* @param string $u_action Custom form action

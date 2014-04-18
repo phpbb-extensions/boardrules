@@ -36,6 +36,11 @@ class boardrules_module
 
 				$this->page_title = $user->lang['ACP_BOARDRULES_SETTINGS'];
 
+				if ($request->is_set_post('action_send_notification'))
+				{
+					$admin_controller->send_notification($rule_id);
+				}
+
 				$admin_controller->display_options();
 			break;
 
