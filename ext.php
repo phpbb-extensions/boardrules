@@ -63,9 +63,16 @@ class ext extends \phpbb\extension\base
 	*/
 	function purge_step($old_state)
 	{
-		// Purge board rules notifications
-		$phpbb_notifications = $this->container->get('notification_manager');
-		$phpbb_notifications->purge_notifications('boardrules');
+		try
+		{
+			// Purge board rules notifications
+			$phpbb_notifications = $this->container->get('notification_manager');
+			$phpbb_notifications->purge_notifications('boardrules');	
+		}
+		catch (\phpbb\notification\exception $e)
+		{
+			// continue
+		}
 
 		// The following code comes from phpbb/extension/base.php purge_step() method
 		$migrations = $this->get_migration_file_list();
