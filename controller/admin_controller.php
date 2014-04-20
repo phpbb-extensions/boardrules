@@ -454,6 +454,7 @@ class admin_controller implements admin_interface
 		{
 			confirm_box(false, $this->user->lang('ACP_BOARDRULES_NOTIFY_CONFIRM'), build_hidden_fields(array(
 				'action_send_notification' => true,
+				'rule_id' => $rule_id,
 			)));
 		}
 	}
