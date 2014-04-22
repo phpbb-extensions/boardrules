@@ -27,79 +27,90 @@ class ext extends \phpbb\extension\base
 {	
 	/**
 	* Single enable step that installs any included migrations
-	* We must overwrite the default method to handle enabling our notifications
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return false Indicates no further steps are required
 	*/
 	function enable_step($old_state)
 	{
-		// Enable board rules notifications
-		$phpbb_notifications = $this->container->get('notification_manager');
-		$phpbb_notifications->enable_notifications('boardrules');
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
 
-		// The following code comes from phpbb/extension/base.php enable_step() method
-		$migrations = $this->get_migration_file_list();
+				//enable notifications
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->enable_notifications('boardrules');
+				return 'notifications';
 
-		$this->migrator->set_migrations($migrations);
+			break;
 
-		$this->migrator->update();
+			default:
 
-		return !$this->migrator->finished();
+				return parent::enable_step($old_state);
+
+			break;
+		}
 	}
 
 	/**
 	* Single disable step that does nothing
-	* We must overwrite the default method to handle disabling our notifications
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return false Indicates no further steps are required
 	*/
 	function disable_step($old_state)
 	{
-		// Disable board rules notifications
-		$phpbb_notifications = $this->container->get('notification_manager');
-		$phpbb_notifications->disable_notifications('boardrules');
-		
-		// The following code comes from phpbb/extension/base.php disable_step() method
-		return false;
+		switch ($old_state)
+		{
+			case '': // Empty means nothing has run yet
+
+				// Disable board rules notifications
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->disable_notifications('boardrules');
+				return 'notifications';
+
+			break;
+
+			default:
+
+				return parent::disable_step($old_state);
+
+			break;
+		}
 	}
 
 	/**
 	* Single purge step that reverts any included and installed migrations
-	* We must overwrite the default method to handle purging our notifications
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return false Indicates no further steps are required
 	*/
 	function purge_step($old_state)
 	{
-		try
+		switch ($old_state)
 		{
-			// Purge board rules notifications
-			$phpbb_notifications = $this->container->get('notification_manager');
-			$phpbb_notifications->purge_notifications('boardrules');	
+			case '': // Empty means nothing has run yet
+
+				try
+				{
+					// Purge board rules notifications
+					$phpbb_notifications = $this->container->get('notification_manager');
+					$phpbb_notifications->purge_notifications('boardrules');	
+				}
+				catch (\phpbb\notification\exception $e)
+				{
+					// continue
+				}
+
+				return 'notifications';
+
+			break;
+
+			default:
+
+				return parent::purge_step($old_state);
+
+			break;
 		}
-		catch (\phpbb\notification\exception $e)
-		{
-			// continue
-		}
-
-		// The following code comes from phpbb/extension/base.php purge_step() method
-		$migrations = $this->get_migration_file_list();
-
-		$this->migrator->set_migrations($migrations);
-
-		foreach ($migrations as $migration)
-		{
-			while ($this->migrator->migration_state($migration) !== false)
-			{
-				$this->migrator->revert($migration);
-
-				return true;
-			}
-		}
-
-		return false;
 	}
 }
