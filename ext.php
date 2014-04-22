@@ -29,7 +29,7 @@ class ext extends \phpbb\extension\base
 	* Single enable step that installs any included migrations
 	*
 	* @param mixed $old_state State returned by previous call of this method
-	* @return false Indicates no further steps are required
+	* @return mixed Returns false after last step, otherwise temporary state
 	*/
 	function enable_step($old_state)
 	{
@@ -37,7 +37,7 @@ class ext extends \phpbb\extension\base
 		{
 			case '': // Empty means nothing has run yet
 
-				//enable notifications
+				// Enable board rules notifications
 				$phpbb_notifications = $this->container->get('notification_manager');
 				$phpbb_notifications->enable_notifications('boardrules');
 				return 'notifications';
@@ -46,6 +46,7 @@ class ext extends \phpbb\extension\base
 
 			default:
 
+				// Run parent enable step method
 				return parent::enable_step($old_state);
 
 			break;
@@ -56,7 +57,7 @@ class ext extends \phpbb\extension\base
 	* Single disable step that does nothing
 	*
 	* @param mixed $old_state State returned by previous call of this method
-	* @return false Indicates no further steps are required
+	* @return mixed Returns false after last step, otherwise temporary state
 	*/
 	function disable_step($old_state)
 	{
@@ -73,6 +74,7 @@ class ext extends \phpbb\extension\base
 
 			default:
 
+				// Run parent disable step method
 				return parent::disable_step($old_state);
 
 			break;
@@ -83,7 +85,7 @@ class ext extends \phpbb\extension\base
 	* Single purge step that reverts any included and installed migrations
 	*
 	* @param mixed $old_state State returned by previous call of this method
-	* @return false Indicates no further steps are required
+	* @return mixed Returns false after last step, otherwise temporary state
 	*/
 	function purge_step($old_state)
 	{
@@ -108,6 +110,7 @@ class ext extends \phpbb\extension\base
 
 			default:
 
+				// Run parent purge step method
 				return parent::purge_step($old_state);
 
 			break;
