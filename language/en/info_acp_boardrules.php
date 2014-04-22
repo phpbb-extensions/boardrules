@@ -41,17 +41,22 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_BOARDRULES'					=> 'Board rules',
 	'ACP_BOARDRULES_MANAGE'				=> 'Manage rules',
+	'ACP_BOARDRULES_MANAGE_EXPLAIN'		=> 'From this page you can add, edit, delete and re-order categories and rules. A category is a group of related rules. Each category can have an unlimited number of rules.',
 	'ACP_BOARDRULES_SETTINGS'			=> 'Rules settings',
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'	=> 'Here you can configure the main settings for board rules.',
 	'ACP_BOARDRULES_NOTIFY'				=> 'Notify users',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'		=> 'Send a notification to all registered users that the board rules have been updated. (This may take several seconds to complete on boards with many thousands of members.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'		=> 'Are you sure you wish to send notifications to all users?',
 
+	'BOARDRULES_CATEGORY'							=> 'Rule category',
 	'BOARDRULES_ENABLE'								=> 'Enable board rules',
 	'BOARDRULES_REQUIRE_AT_REGISTRATION'			=> 'Require new users to accept rules at registration',
 	'BOARDRULES_REQUIRE_AT_REGISTRATION_EXPLAIN'	=> 'This option will add a clause to the “Terms of Agreement” requiring newly registering users to read and accept the board rules at registration.',
+	'BOARDRULES_RULE'								=> 'Rule',
+	'BOARDRULES_SELECT_LANGUAGE'					=> 'Select language',
 	'BOARDRULES_SETTINGS_CHANGED'					=> 'Board rules settings changed.',
 
+	'ADD_RULE'							=> 'Add rule',
 	'DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
 	'RULE_ADDED'						=> 'Rule successfully added.',
 	'RULE_DELETED'						=> 'Rule successfully removed.',

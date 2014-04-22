@@ -45,6 +45,33 @@ class boardrules_module
 			break;
 
 			case 'manage':
+				$this->tpl_name = 'boardrules_manage';
+
+				$this->page_title = $user->lang['ACP_BOARDRULES_MANAGE'];
+
+				switch($action)
+				{
+					case 'move_down':
+						$admin_controller->move_rule($rule_id, 'down');
+					break;
+
+					case 'move_up':
+						$admin_controller->move_rule($rule_id, 'up');
+					break;
+
+					case 'delete':
+						$admin_controller->delete_rule($rule_id);
+					break;
+				}
+
+				if (empty($language))
+				{
+					$admin_controller->display_language_selection();
+				}
+				else
+				{
+					$admin_controller->display_rules($language, $parent_id);
+				}
 			break;
 		}
 	}
