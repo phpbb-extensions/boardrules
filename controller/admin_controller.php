@@ -142,7 +142,7 @@ class admin_controller implements admin_interface
 				$this->template->assign_block_vars('options', array(
 					'S_LANG_DEFAULT'	=> ($row['lang_iso'] == $this->config['default_lang']) ? true : false,
 
-					'LANG_ISO'			=> $row['lang_iso'],
+					'LANG_ID'			=> $row['lang_id'],
 					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
 				));
 			}
@@ -388,19 +388,20 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_rule($rule_id)
 	{
+		// Initiate and load the rule entity
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+
 		if (confirm_box(true))
 		{
 			$this->rule_operator->delete_rule($rule_id);
 
-			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link($this->u_action));
+			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 		}
 		else
 		{
-			confirm_box(false, $this->user->lang['DELETE_RULE_CONFIRM'], build_hidden_fields(array(
-				'mode'		=> 'manage',
-				'action'	=> 'delete',
-				'rule_id'	=> $rule_id,
-			)));
+			confirm_box(false, $this->user->lang['DELETE_RULE_CONFIRM']);
+
+			redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
 		}
 	}
 
@@ -421,12 +422,17 @@ class admin_controller implements admin_interface
 		}
 
 		$this->rule_operator->move($rule_id, $direction, $amount);
-		
+
 		if ($this->request->is_ajax())
 		{
 			$json_response = new \phpbb\json_response;
 			$json_response->send(array('success' => true));
 		}
+
+		// Initiate and load the rule entity for no AJAX request
+		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+
+		redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
 	}
 
 	/**
