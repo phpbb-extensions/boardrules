@@ -67,36 +67,18 @@ class boardrules extends \phpbb\notification\type\base
 	*/
 	public function find_users_for_notification($data, $options = array())
 	{
-		// Exclude bots and guests
-		$sql = 'SELECT group_id
-			FROM ' . GROUPS_TABLE . '
-			WHERE ' . $this->db->sql_in_set('group_name', array('BOTS', 'GUESTS'));
-		$result = $this->db->sql_query($sql);
-
-		$exclude_ids = array();
-		while ($row = $this->db->sql_fetchrow($result))
-		{
-			$exclude_ids[] = $row['group_id'];
-		}
-		$this->db->sql_freeresult($result);
-
 		// Grab all registered users (excluding bots and guests)
 		$sql = 'SELECT user_id
 			FROM ' . USERS_TABLE . '
-			WHERE ' . $this->db->sql_in_set('group_id', array_map('intval', $exclude_ids), true);
+			WHERE user_type <> ' . USER_IGNORE;
 		$result = $this->db->sql_query($sql);
 
-		$users =  array();
+		$users = array();
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$users[$row['user_id']] = array('');
 		}
 		$this->db->sql_freeresult($result);
-
-		if (empty($users))
-		{
-			return array();
-		}
 
 		return $users;
 	}
