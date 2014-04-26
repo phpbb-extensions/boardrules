@@ -46,6 +46,26 @@ class boardrules_module
 
 				switch($action)
 				{
+					case 'add':
+						$this->tpl_name = 'boardrules_add_rule';
+
+						$this->page_title = $user->lang['ACP_BOARDRULES_CREATE_RULE'];
+
+						$admin_controller->add_rule($language, $parent_id);
+
+						return;
+					break;
+
+					case 'edit':
+						$this->tpl_name = 'boardrules_edit_rule';
+
+						$this->page_title = $user->lang['ACP_BOARDRULES_EDIT_RULE'];
+
+						$admin_controller->edit_rule($rule_id);
+
+						return;
+					break;
+
 					case 'move_down':
 						$admin_controller->move_rule($rule_id, 'down');
 					break;
