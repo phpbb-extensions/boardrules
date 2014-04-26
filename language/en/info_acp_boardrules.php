@@ -53,7 +53,7 @@ $lang = array_merge($lang, array(
 	'BOARDRULES_SELECT_LANGUAGE'					=> 'Select language',
 	'BOARDRULES_SETTINGS_CHANGED'					=> 'Board rules settings changed.',
 
-	'ADD_RULE'							=> 'Add rule',
+	'CREATE_RULE'						=> 'Create new rule',
 	'DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
 	'RULE_ADDED'						=> 'Rule successfully added.',
 	'RULE_DELETED'						=> 'Rule successfully removed.',
