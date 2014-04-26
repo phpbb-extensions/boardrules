@@ -242,19 +242,7 @@ class admin_controller implements admin_interface
 			'rule_parent_id'	=> $parent_id,
 		);
 
-		$submit = $this->request->is_set_post('submit');
-		$preview = $this->request->is_set_post('preview');
-
-		if ($submit || $preview)
-		{
-			if ($this->add_edit_rule_data($entity, $data, $preview))
-			{
-				// Add the rule entity to the database
-				$this->rule_operator->add_rule($language, $parent_id, $entity);
-
-				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}"));
-			}
-		}
+		$this->add_edit_rule_data($entity, $data);
 
 		$this->template->assign_vars(array(
 			'U_ADD_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
@@ -287,16 +275,7 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
 		);
 
-		if ($submit || $preview)
-		{
-			if ($this->add_edit_rule_data($entity, $data, $preview))
-			{
-				// Save the edited rule entity to the database
-				$entity->save();
-
-				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
-			}
-		}
+		$this->add_edit_rule_data($entity, $data);
 
 		$this->template->assign_vars(array(
 			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
@@ -309,11 +288,10 @@ class admin_controller implements admin_interface
 	*
 	* @param object $entity The rule entity object
 	* @param array $data The form data to be processed
-	* @param bool $preview True if previewing the rule, false otherwise
-	* @return bool True if data passed validation and not preview, false otherwise
+	* @return null
 	* @access protected
 	*/
-	protected function add_edit_rule_data($entity, $data, $preview)
+	protected function add_edit_rule_data($entity, $data)
 	{
 		$submit = $this->request->is_set_post('submit');
 		$preview = $this->request->is_set_post('preview');
@@ -365,6 +343,25 @@ class admin_controller implements admin_interface
 				'RULE_TITLE_PREVIEW'		=> $entity->get_title(),
 				'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
 			));
+		}
+
+		// Insert or update rule
+		if ($submit && empty($errors) && !$preview)
+		{
+			if ($entity->get_id())
+			{
+				// Save the edited rule entity to the database
+				$entity->save();
+
+				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+			}
+			else
+			{
+				// Add a new rule entity to the database
+				$this->rule_operator->add_rule($data['rule_language'], $data['rule_parent_id'], $entity);
+
+				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
+			}
 		}
 
 		$this->template->assign_vars(array(
