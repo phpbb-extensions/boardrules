@@ -1,0 +1,26 @@
+<!-- INCLUDE overall_header.html -->
+
+<a id="maincontent"></a>
+
+<a href="{U_BACK}" style="float: right;">&laquo; {L_BACK}</a>
+
+<h1>{L_ACP_BOARDRULES_CREATE_RULE} {L_COLON}{L_COLON} {RULE_TITLE}</h1>
+
+<p>{L_ACP_BOARDRULES_CREATE_RULE_EXPLAIN}</p>
+
+<!-- IF S_ERROR -->
+<div class="errorbox">
+	<h3>{L_INFORMATION}</h3>
+	<p>{ERROR_MSG}</p>
+</div>
+<!-- ENDIF -->
+
+<!-- INCLUDE boardrules_preview_rule.html -->
+
+<form id="add_edit_rule" method="post" action="{U_ADD_ACTION}">
+
+<!-- INCLUDE boardrules_add_edit_rule.html -->
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->
