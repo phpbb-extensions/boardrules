@@ -287,9 +287,6 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
 		);
 
-		$submit = $this->request->is_set_post('submit');
-		$preview = $this->request->is_set_post('preview');
-
 		if ($submit || $preview)
 		{
 			if ($this->add_edit_rule_data($entity, $data, $preview))
@@ -318,12 +315,10 @@ class admin_controller implements admin_interface
 	*/
 	protected function add_edit_rule_data($entity, $data, $preview)
 	{
-		$errors = array();
+		$submit = $this->request->is_set_post('submit');
+		$preview = $this->request->is_set_post('preview');
 
-		if (!check_form_key('add_edit_rule'))
-		{
-			$error[] = $this->user->lang['FORM_INVALID'];
-		}
+		$errors = array();
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
@@ -347,10 +342,18 @@ class admin_controller implements admin_interface
 			->set_message($data['rule_message'])
 		;
 
-		// Do not allow an empty rule title
-		if ($entity->get_title() == '')
+		if ($submit || $preview)
 		{
-			$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
+			if (!check_form_key('add_edit_rule'))
+			{
+				$errors[] = $this->user->lang['FORM_INVALID'];
+			}
+
+			// Do not allow an empty rule title
+			if ($entity->get_title() == '')
+			{
+				$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
+			}
 		}
 
 		// Preview
