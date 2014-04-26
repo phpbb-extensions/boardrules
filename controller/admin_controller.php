@@ -310,7 +310,7 @@ class admin_controller implements admin_interface
 		{
 			call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
 		}
-		
+
 		unset($message_parse_options);
 
 		// Set the rule's title, anchor and message fields in the entity
@@ -370,7 +370,7 @@ class admin_controller implements admin_interface
 
 			'RULE_TITLE'		=> $entity->get_title(),
 			'RULE_ANCHOR'		=> $entity->get_anchor(),
-			'RULE_MESSAGE'		=> $entity->get_message(),
+			'RULE_MESSAGE'		=> $entity->get_message_for_edit(),
 
 			'S_MESSAGE_BBCODE_ENABLED'		=> $entity->message_bbcode_enabled(),
 			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $entity->message_magic_url_enabled(),
