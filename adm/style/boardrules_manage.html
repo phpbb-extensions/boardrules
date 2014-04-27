@@ -44,9 +44,9 @@
 			<dl>
 				<dt><label for="rule_message">{L_ACP_RULE_MESSAGE}{L_COLON}</label><br /><span>{L_ACP_RULE_MESSAGE_EXPLAIN}</span></dt>
 				<dd><textarea id="rule_message" name="rule_message" rows="6" cols="70" data-bbcode="true">{RULE_MESSAGE}</textarea></dd>
-				<dd><label><input type="checkbox" class="radio" value="1" name="enable_bbcode"<!-- IF S_MESSAGE_BBCODE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_BBCODE}</label>
-					<label><input type="checkbox" class="radio" value="1" name="enable_smilies"<!-- IF S_MESSAGE_SMILIES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_SMILIES}</label>
-					<label><input type="checkbox" class="radio" value="1" name="enable_magic_url"<!-- IF S_MESSAGE_MAGIC_URL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
+				<dd><label><input type="checkbox" class="radio" value="1" name="enable_bbcode"<!-- IF S_MESSAGE_BBCODE_ENABLED or (S_ADD_RULE and not S_PREVIEW) --> checked="checked"<!-- ENDIF --> /> {L_PARSE_BBCODE}</label>
+					<label><input type="checkbox" class="radio" value="1" name="enable_smilies"<!-- IF S_MESSAGE_SMILIES_ENABLED or (S_ADD_RULE and not S_PREVIEW) --> checked="checked"<!-- ENDIF --> /> {L_PARSE_SMILIES}</label>
+					<label><input type="checkbox" class="radio" value="1" name="enable_magic_url"<!-- IF S_MESSAGE_MAGIC_URL_ENABLED or (S_ADD_RULE and not S_PREVIEW) --> checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
 				</dd>
 			</dl>
 			
