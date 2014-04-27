@@ -245,6 +245,8 @@ class admin_controller implements admin_interface
 		$this->add_edit_rule_data($entity, $data);
 
 		$this->template->assign_vars(array(
+			'S_ADD_RULE'		=> true,
+
 			'U_ADD_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 		));
@@ -278,6 +280,8 @@ class admin_controller implements admin_interface
 		$this->add_edit_rule_data($entity, $data);
 
 		$this->template->assign_vars(array(
+			'S_EDIT_RULE'		=> true,
+
 			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
 		));

@@ -2,78 +2,138 @@
 
 <a id="maincontent"></a>
 
-<h1>{L_ACP_BOARDRULES_MANAGE}</h1>
+<!-- IF S_ADD_RULE or S_EDIT_RULE -->
 
-<p>{L_ACP_BOARDRULES_MANAGE_EXPLAIN}</p>
+	<!-- IF S_ADD_RULE -->
+		<h1>{L_ACP_BOARDRULES_CREATE_RULE} {L_COLON}{L_COLON} {RULE_TITLE}</h1>
 
-<!-- IF .options -->
-<form id="language" method="post" action="{U_ACTION}">
+		<p>{L_ACP_BOARDRULES_CREATE_RULE_EXPLAIN}</p>
+	<!-- ELSEIF S_EDIT_RULE -->
+		<h1>{L_ACP_BOARDRULES_EDIT_RULE} {L_COLON}{L_COLON} {RULE_TITLE}</h1>
+
+		<p>{L_ACP_BOARDRULES_EDIT_RULE_EXPLAIN}</p>
+	<!-- ENDIF -->
+
+	<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_INFORMATION}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+	<!-- ENDIF -->
+
+	<!-- IF S_PREVIEW -->
 	<fieldset>
-		<dl>
-			<dt>
-				<label for="select_language">{L_BOARDRULES_SELECT_LANGUAGE}{L_COLON}</label>
-			</dt>
-			<dd>
-				<select name="language">
-					<!-- BEGIN options -->
-						<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
-					<!-- END options -->
-				</select>
-				<input type="submit" value="{L_GO}" class="button2">
-				{S_FORM_TOKEN}
-			</dd>
-		</dl>
+		<legend>{L_PREVIEW}{L_COLON} {RULE_TITLE_PREVIEW}</legend>
+		{RULE_MESSAGE_PREVIEW}
 	</fieldset>
-</form>
+	<!-- ENDIF -->
+
+	<form id="add_edit_rule" method="post" action="<!-- IF S_ADD_RULE -->{U_ADD_ACTION}<!-- ELSEIF S_EDIT_RULE -->{U_EDIT_ACTION}<!-- ENDIF -->">
+		<fieldset>
+			<legend>{L_ACP_RULE_SETTINGS}</legend>
+			<dl>
+				<dt><label for="rule_title">{L_ACP_RULE_TITLE}{L_COLON}</label></dt>
+				<dd><input class="text medium" type="text" id="rule_title" name="rule_title" value="{RULE_TITLE}" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="rule_anchor">{L_ACP_RULE_ANCHOR}{L_COLON}</label></dt>
+				<dd><input class="text medium" type="text" id="rule_anchor" name="rule_anchor" value="{RULE_ANCHOR}" maxlength="255" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="rule_message">{L_ACP_RULE_MESSAGE}{L_COLON}</label><br /><span>{L_ACP_RULE_MESSAGE_EXPLAIN}</span></dt>
+				<dd><textarea id="rule_message" name="rule_message" rows="6" cols="70" data-bbcode="true">{RULE_MESSAGE}</textarea></dd>
+				<dd><label><input type="checkbox" class="radio" value="1" name="enable_bbcode"<!-- IF S_MESSAGE_BBCODE_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_BBCODE}</label>
+					<label><input type="checkbox" class="radio" value="1" name="enable_smilies"<!-- IF S_MESSAGE_SMILIES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_SMILIES}</label>
+					<label><input type="checkbox" class="radio" value="1" name="enable_magic_url"<!-- IF S_MESSAGE_MAGIC_URL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
+				</dd>
+			</dl>
+			
+		</fieldset>
+
+		<fieldset class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+			<input class="button1" type="submit" id="preview" name="preview" value="{L_PREVIEW}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+			{S_FORM_TOKEN}
+		</fieldset>
+	</form>
+
 <!-- ELSE -->
 
-	<!-- IF .breadcrumb -->
-	<p>
-		<strong>
-			<a href="{U_MAIN}">{L_ACP_BOARDRULES}</a>
-			<!-- BEGIN breadcrumb -->
-				 -&gt; <!-- IF not breadcrumb.S_CURRENT_LEVEL --><a href="{breadcrumb.U_RULE}"><!-- ENDIF -->{breadcrumb.RULE_TITLE}<!-- IF not breadcrumb.S_CURRENT_LEVEL --></a><!-- ENDIF -->
-			<!-- END breadcrumb -->
-		</strong>
-	</p>
-	<!-- ENDIF -->
+	<h1>{L_ACP_BOARDRULES_MANAGE}</h1>
 
-	<!-- IF .rules -->
-		<table class="table1 forums">
-			<col class="row1" /><col class="row1" /><col class="row2" />
-		<tbody>
-		<!-- BEGIN rules -->
-			<tr>
-				<td class="folder">
-					<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" alt="{L_BOARDRULES_CATEGORY}" /><!-- ELSE --><img src="images/icon_folder.gif" alt="{L_BOARDRULES_RULE}" /><!-- ENDIF -->
-				</td>
-				<td class="forum-desc">
-					<strong><a href="{rules.U_RULE}">{rules.RULE_TITLE}</a></strong>
-				</td>
-				<td class="actions">
-					<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
-					<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up" data-overlay="false">{ICON_MOVE_UP}</a></span>
-					<span class="down-disabled" style="display:none;">{ICON_MOVE_DOWN_DISABLED}</span>
-					<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down" data-overlay="false">{ICON_MOVE_DOWN}</a></span>
-					<a href="{rules.U_EDIT}">{ICON_EDIT}</a>
-					<a href="{rules.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a>
-				</td>
-			</tr>
-		<!-- END rules -->
-		</tbody>
-		</table>
-	<!-- ENDIF -->
+	<p>{L_ACP_BOARDRULES_MANAGE_EXPLAIN}</p>
 
-	<form id="rules" method="post" action="{U_ACTION}">
-
-	<fieldset class="quick">
-		<input type="hidden" name="action" value="add" />
-
-		<input type="text" name="rule_title" value="" maxlength="255" />
-		<input class="button2" name="addrule" type="submit" value="{L_CREATE_RULE}" />
-		{S_FORM_TOKEN}
-	</fieldset>
+	<!-- IF .options -->
+	<form id="language" method="post" action="{U_ACTION}">
+		<fieldset>
+			<dl>
+				<dt>
+					<label for="select_language">{L_BOARDRULES_SELECT_LANGUAGE}{L_COLON}</label>
+				</dt>
+				<dd>
+					<select name="language">
+						<!-- BEGIN options -->
+							<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
+						<!-- END options -->
+					</select>
+					<input type="submit" value="{L_GO}" class="button2">
+					{S_FORM_TOKEN}
+				</dd>
+			</dl>
+		</fieldset>
 	</form>
+	<!-- ELSE -->
+
+		<!-- IF .breadcrumb -->
+		<p>
+			<strong>
+				<a href="{U_MAIN}">{L_ACP_BOARDRULES}</a>
+				<!-- BEGIN breadcrumb -->
+					 -&gt; <!-- IF not breadcrumb.S_CURRENT_LEVEL --><a href="{breadcrumb.U_RULE}"><!-- ENDIF -->{breadcrumb.RULE_TITLE}<!-- IF not breadcrumb.S_CURRENT_LEVEL --></a><!-- ENDIF -->
+				<!-- END breadcrumb -->
+			</strong>
+		</p>
+		<!-- ENDIF -->
+
+		<!-- IF .rules -->
+			<table class="table1 forums">
+				<col class="row1" /><col class="row1" /><col class="row2" />
+			<tbody>
+			<!-- BEGIN rules -->
+				<tr>
+					<td class="folder">
+						<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" alt="{L_BOARDRULES_CATEGORY}" /><!-- ELSE --><img src="images/icon_folder.gif" alt="{L_BOARDRULES_RULE}" /><!-- ENDIF -->
+					</td>
+					<td class="forum-desc">
+						<strong><a href="{rules.U_RULE}">{rules.RULE_TITLE}</a></strong>
+					</td>
+					<td class="actions">
+						<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
+						<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up" data-overlay="false">{ICON_MOVE_UP}</a></span>
+						<span class="down-disabled" style="display:none;">{ICON_MOVE_DOWN_DISABLED}</span>
+						<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down" data-overlay="false">{ICON_MOVE_DOWN}</a></span>
+						<a href="{rules.U_EDIT}">{ICON_EDIT}</a>
+						<a href="{rules.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a>
+					</td>
+				</tr>
+			<!-- END rules -->
+			</tbody>
+			</table>
+		<!-- ENDIF -->
+
+		<form id="rules" method="post" action="{U_ACTION}">
+
+		<fieldset class="quick">
+			<input type="hidden" name="action" value="add" />
+
+			<input type="text" name="rule_title" value="" maxlength="255" />
+			<input class="button2" name="addrule" type="submit" value="{L_CREATE_RULE}" />
+			{S_FORM_TOKEN}
+		</fieldset>
+		</form>
+
+	<!-- ENDIF -->
 
 <!-- ENDIF -->
 

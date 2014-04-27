@@ -47,8 +47,6 @@ class boardrules_module
 				switch($action)
 				{
 					case 'add':
-						$this->tpl_name = 'boardrules_add_rule';
-
 						$this->page_title = $user->lang['ACP_BOARDRULES_CREATE_RULE'];
 
 						$admin_controller->add_rule($language, $parent_id);
@@ -57,8 +55,6 @@ class boardrules_module
 					break;
 
 					case 'edit':
-						$this->tpl_name = 'boardrules_edit_rule';
-
 						$this->page_title = $user->lang['ACP_BOARDRULES_EDIT_RULE'];
 
 						$admin_controller->edit_rule($rule_id);
