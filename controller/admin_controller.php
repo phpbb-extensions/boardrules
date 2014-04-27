@@ -272,9 +272,9 @@ class admin_controller implements admin_interface
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
 			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
-			'bbcode'		=> $this->request->variable('enable_bbcode', $entity->message_bbcode_enabled()),
-			'magic_url'		=> $this->request->variable('enable_magic_url', $entity->message_magic_url_enabled()),
-			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
+			'bbcode'		=> $this->request->variable('enable_bbcode', 0),
+			'magic_url'		=> $this->request->variable('enable_magic_url', 0),
+			'smilies'		=> $this->request->variable('enable_smilies', 0),
 		);
 
 		$this->add_edit_rule_data($entity, $data);
