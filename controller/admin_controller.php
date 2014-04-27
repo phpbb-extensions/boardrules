@@ -304,9 +304,9 @@ class admin_controller implements admin_interface
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
-			'bbcode'	=> $data['bbcode'],
-			'magic_url'	=> $data['magic_url'],
-			'smilies'	=> $data['smilies'],
+			'bbcode'	=> ($submit || $preview) ? $data['bbcode'] : $entity->message_bbcode_enabled(),
+			'magic_url'	=> ($submit || $preview) ? $data['magic_url'] : $entity->message_magic_url_enabled(),
+			'smilies'	=> ($submit || $preview) ? $data['smilies'] : $entity->message_smilies_enabled(),
 		);
 
 		// Set the message parse options in the entity
