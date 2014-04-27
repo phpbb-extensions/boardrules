@@ -64,6 +64,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_CREATE_RULE_EXPLAIN'	=> 'Using the form below you can create a new rule which will be displayed to your users.',
 	'ACP_BOARDRULES_EDIT_RULE'				=> 'Edit rule',
 	'ACP_BOARDRULES_EDIT_RULE_EXPLAIN'		=> 'Using the form below you can update an existing rule which will be displayed to your users.',
+	'ACP_RULE_SETTINS'						=> 'Rule settings',
 	'ACP_RULE_TITLE'						=> 'Rule title',
 	'ACP_RULE_ANCHOR'						=> 'Rule anchor',
 	'ACP_RULE_MESSAGE'						=> 'Rule message',
