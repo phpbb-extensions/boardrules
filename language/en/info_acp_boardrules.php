@@ -59,4 +59,13 @@ $lang = array_merge($lang, array(
 	'RULE_DELETED'						=> 'Rule successfully removed.',
 	'RULE_EDITED'						=> 'Rule successfully edited.',
 	'RULE_TITLE_EMPTY'					=> 'You must enter a title for this rule.',
+
+	'ACP_BOARDRULES_CREATE_RULE'			=> '',
+	'ACP_BOARDRULES_CREATE_RULE_EXPLAIN'	=> '',
+	'ACP_BOARDRULES_EDIT_RULE'				=> '',
+	'ACP_BOARDRULES_EDIT_RULE_EXPLAIN'		=> '',
+	'ACP_RULE_TITLE'						=> 'Rule title',
+	'ACP_RULE_ANCHOR'						=> 'Rule anchor',
+	'ACP_RULE_MESSAGE'						=> 'Rule message',
+	'ACP_RULE_MESSAGE_EXPLAIN'				=> '',
 ));

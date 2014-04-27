@@ -235,9 +235,9 @@ class admin_controller implements admin_interface
 			'rule_title'		=> $this->request->variable('rule_title', '', true),
 			'rule_anchor'		=> $this->request->variable('rule_anchor', '', true),
 			'rule_message'		=> $this->request->variable('rule_message', '', true),
-			'bbcode'			=> $this->request->variable('enable_bbcode', 0),
-			'magic_url'			=> $this->request->variable('enable_magic_url', 0),
-			'smilies'			=> $this->request->variable('enable_smilies', 0),
+			'bbcode'			=> $this->request->variable('enable_bbcode', 1),
+			'magic_url'			=> $this->request->variable('enable_magic_url', 1),
+			'smilies'			=> $this->request->variable('enable_smilies', 1),
 			'rule_language'		=> $language,
 			'rule_parent_id'	=> $parent_id,
 		);
