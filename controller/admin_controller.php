@@ -37,6 +37,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
+	/** @var string phpBB root path */
+	protected $root_path;
+
 	/** @var string phpEx */
 	protected $php_ext;
 
@@ -53,11 +56,12 @@ class admin_controller implements admin_interface
 	* @param \phpbb\user $user                                 User object
 	* @param Container $phpbb_container
 	* @param \phpbb\boardrules\operators\rule $rule_operator   Rule operator object
+	* @param string $root_path                                 phpBB root path
 	* @param string $php_ext                                   phpEx
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->db = $db;
@@ -66,6 +70,7 @@ class admin_controller implements admin_interface
 		$this->user = $user;
 		$this->phpbb_container = $phpbb_container;
 		$this->rule_operator = $rule_operator;
+		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
 
@@ -389,7 +394,7 @@ class admin_controller implements admin_interface
 		));
 
 		// Assigning custom bbcodes
-		include_once('./../includes/functions_display.' . $this->php_ext);
+		include_once($this->root_path . 'includes/functions_display.' . $this->php_ext);
 
 		display_custom_bbcodes();
 	}
