@@ -66,7 +66,9 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_EDIT_RULE_EXPLAIN'		=> 'Using the form below you can update an existing rule which will be displayed to your users.',
 	'ACP_RULE_SETTINGS'						=> 'Rule settings',
 	'ACP_RULE_TITLE'						=> 'Rule title',
+	'ACP_RULE_TITLE_EXPLAIN'				=> 'Rule titles are displayed on the rules page for rule categories only. Rule titles are also used to identify your rules when managing them in the ACP.',
 	'ACP_RULE_ANCHOR'						=> 'Rule anchor',
+	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Rule anchors are optional and are used as link anchor points on the rules page. They should be URL friendly (contain no spaces or special characters) and should begin with a letter.',
 	'ACP_RULE_MESSAGE'						=> 'Rule message',
-	'ACP_RULE_MESSAGE_EXPLAIN'				=> '',
+	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'The rule message is displayed on the rules page for each rule (categories do not display a rule message).',
 ));
