@@ -37,12 +37,6 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
-	/** @var string phpBB root path */
-	protected $root_path;
-
-	/** @var string phpEx */
-	protected $php_ext;
-
 	/** string Custom form action */
 	protected $u_action;
 
@@ -56,12 +50,10 @@ class admin_controller implements admin_interface
 	* @param \phpbb\user $user                                 User object
 	* @param Container $phpbb_container
 	* @param \phpbb\boardrules\operators\rule $rule_operator   Rule operator object
-	* @param string $root_path                                 phpBB root path
-	* @param string $php_ext                                   phpEx
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator)
 	{
 		$this->config = $config;
 		$this->db = $db;
@@ -70,8 +62,6 @@ class admin_controller implements admin_interface
 		$this->user = $user;
 		$this->phpbb_container = $phpbb_container;
 		$this->rule_operator = $rule_operator;
-		$this->root_path = $root_path;
-		$this->php_ext = $php_ext;
 	}
 
 	/**
@@ -310,8 +300,6 @@ class admin_controller implements admin_interface
 		$submit = $this->request->is_set_post('submit');
 		$preview = $this->request->is_set_post('preview');
 
-		$this->user->add_lang('posting');
-
 		$errors = array();
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
@@ -392,11 +380,6 @@ class admin_controller implements admin_interface
 			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $entity->message_magic_url_enabled(),
 			'S_MESSAGE_SMILIES_ENABLED'		=> $entity->message_smilies_enabled(),
 		));
-
-		// Assigning custom bbcodes
-		include_once($this->root_path . 'includes/functions_display.' . $this->php_ext);
-
-		display_custom_bbcodes();
 	}
 
 	/**

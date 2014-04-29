@@ -21,8 +21,6 @@ services:
             - @user
             - @service_container
             - @phpbb.boardrules.operator
-            - %core.root_path%
-            - %core.php_ext%
 
     phpbb.boardrules.controller:
         class: phpbb\boardrules\controller\main_controller
