@@ -128,7 +128,7 @@ class boardrules extends \phpbb\notification\type\base
 	*/
 	public function users_to_query()
 	{
-		return array($this->get_data('from_user_id'));
+		return array();
 	}
 
 	/**
@@ -138,9 +138,7 @@ class boardrules extends \phpbb\notification\type\base
 	*/
 	public function get_title()
 	{
-		$username = $this->user_loader->get_username($this->get_data('from_user_id'), 'no_profile');
-
-		return $this->user->lang('BOARDRULES_NOTIFICATION', $username);
+		return $this->user->lang('BOARDRULES_NOTIFICATION');
 	}
 
 	/**
@@ -153,16 +151,6 @@ class boardrules extends \phpbb\notification\type\base
 		$rule_id = ($this->item_id) ? array('#' => $rule_id) : array();
 
 		return $this->helper->route('boardrules_main_controller', $rule_id);
-	}
-
-	/**
-	* Get the user's avatar (the user who caused the notification typically)
-	*
-	* @return string
-	*/
-	public function get_avatar()
-	{
-		return $this->user_loader->get_avatar($this->get_data('from_user_id'));
 	}
 
 	/**
@@ -196,8 +184,6 @@ class boardrules extends \phpbb\notification\type\base
 	*/
 	public function create_insert_array($data, $pre_create_data = array())
 	{
-		$this->set_data('from_username', $data['from_username']);
-		$this->set_data('from_user_id', $data['from_user_id']);
 		$this->set_data('rule_id', $data['rule_id']);
 
 		return parent::create_insert_array($data, $pre_create_data);

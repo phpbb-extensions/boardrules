@@ -447,8 +447,6 @@ class admin_controller implements admin_interface
 		if (confirm_box(true))
 		{
 			$notification_data = array(
-				'from_user_id'		=> $this->user->data['user_id'],
-				'from_username'		=> $this->user->data['username'],
 				'rule_id'			=> $rule_id,
 			);
 
