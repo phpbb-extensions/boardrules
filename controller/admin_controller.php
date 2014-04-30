@@ -451,8 +451,10 @@ class admin_controller implements admin_interface
 			);
 
 			$phpbb_notifications = $this->phpbb_container->get('notification_manager');
-
 			$phpbb_notifications->add_notifications('boardrules', $notification_data);
+
+			$phpbb_log = $this->phpbb_container->get('log');
+			$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_NOTIFY_LOG');
 		}
 		else
 		{

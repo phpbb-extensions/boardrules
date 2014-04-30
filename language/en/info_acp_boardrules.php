@@ -47,6 +47,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY'				=> 'Notify users',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'		=> 'Send a notification to all registered users that the board rules have been updated. (This may take several seconds to complete on boards with many thousands of members.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'		=> 'Are you sure you wish to send notifications to all users?',
+	'ACP_BOARDRULES_NOTIFY_LOG'			=> '<strong>Board Rules notification sent to all users</strong>',
 
 	'BOARDRULES_CATEGORY'							=> 'Rule category',
 	'BOARDRULES_ENABLE'								=> 'Enable board rules',
