@@ -148,7 +148,7 @@ class boardrules extends \phpbb\notification\type\base
 	*/
 	public function get_url()
 	{
-		$rule_id = ($this->item_id) ? array('#' => $rule_id) : array();
+		$rule_id = ($this->item_id) ? array('#' => $this->item_id) : array();
 
 		return $this->helper->route('boardrules_main_controller', $rule_id);
 	}
