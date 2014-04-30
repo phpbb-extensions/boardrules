@@ -42,4 +42,5 @@ $lang = array_merge($lang, array(
 	'BOARDRULES'				=> 'Rules',
 	'BOARDRULES_TITLE'			=> 'View the Rules of this Board',
 	'BOARDRULES_VIEWONLINE'		=> 'Viewing Board Rules',
+	'BOARDRULES_NOTIFICATION'	=> 'The Board Rules have been updated. Click here to review them.',
 ));
