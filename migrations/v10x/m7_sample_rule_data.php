@@ -99,6 +99,6 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 
 		// Insert sample rule data
 		$sql = $this->db->sql_multi_insert($this->table_prefix . 'boardrules', $sample_rule_data);
-		$this->sql_query($sql);
+		$this->db->sql_query($sql);
 	}
 }
