@@ -15,6 +15,21 @@ namespace phpbb\boardrules\migrations\v10x;
 class m7_sample_rule_data extends \phpbb\db\migration\migration
 {
 	/**
+	* Check if the boardrules table contains any data
+	*
+	* @return bool True if data exists, false otherwise
+	* @access public
+	*/
+	public function effectively_installed()
+	{
+		$sql = 'SELECT * FROM ' . $this->table_prefix . 'boardrules';
+		$result = $this->db->sql_query_limit($sql, 1);
+		$row = $this->db->sql_fetchrow($result);
+
+		return $row != false;
+	}
+
+	/**
 	* Assign migration file dependencies for this migration
 	*
 	* @return array Array of migration files
@@ -47,22 +62,6 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 	*/
 	public function insert_sample_rule_data()
 	{
-		// Check if boardrules table exists and already has data
-		if ($this->db_tools->sql_table_exists($this->table_prefix . 'boardrules'))
-		{
-			$sql = 'SELECT * FROM ' . $this->table_prefix . 'boardrules';
-			$result = $this->db->sql_query_limit($sql, 1);
-			$row = $this->db->sql_fetchrow($result);
-			if (!empty($row))
-			{
-				return;
-			}
-		}
-		else
-		{
-			return;
-		}
-
 		// Get the lang_id of the board's default language
 		$sql = 'SELECT lang_id
 			FROM ' . LANG_TABLE . "
