@@ -317,7 +317,6 @@ class admin_controller implements admin_interface
 
 		unset($message_parse_options);
 
-		
 		// Grab the form data's rule
 		$rule_fields = array(
 			'title'		=> $data['rule_title'],
