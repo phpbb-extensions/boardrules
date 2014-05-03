@@ -317,12 +317,28 @@ class admin_controller implements admin_interface
 
 		unset($message_parse_options);
 
-		// Set the rule's title, anchor and message fields in the entity
-		$entity
-			->set_title($data['rule_title'])
-			->set_anchor($data['rule_anchor'])
-			->set_message($data['rule_message'])
-		;
+		
+		// Grab the form data's rule
+		$rule_fields = array(
+			'title'		=> $data['rule_title'],
+			'anchor'	=> $data['rule_anchor'],
+			'message'	=> $data['rule_message'],
+		);
+
+		// Set the rule's data in the entity
+		foreach ($rule_fields as $entity_function => $rule_data)
+		{
+			try
+			{
+				call_user_func_array(array($entity, 'set_' . $entity_function), array($rule_data));
+			}
+			catch (\phpbb\boardrules\exception\base $e)
+			{
+				$errors[] = $e->get_message($this->user);
+			}
+		}
+
+		unset($rule_fields);
 
 		if ($submit || $preview)
 		{
