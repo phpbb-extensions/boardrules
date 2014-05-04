@@ -14,6 +14,12 @@ namespace phpbb\boardrules\exception;
 */
 class base extends \Exception
 {
+	/**
+	* Null if the message is a string, array if the message was submitted as an array
+	* @var string|array
+	*/
+	protected $message_full;
+
 	protected $previous;
 
 	/**
@@ -27,7 +33,19 @@ class base extends \Exception
 	*/
 	public function __construct($message = null, $code = 0, Exception $previous = null)
 	{
-		$this->message = $message;
+		// We're slightly changing the way exceptions work
+		// Tools, such as xdebug, expect the message to be a string, so to prevent errors
+		// with those tools, we store our full message in message_full and only a string in message
+		if (is_array($message))
+		{
+			$this->message = (string) $message[0];
+		}
+		else
+		{
+			$this->message = $message;
+		}
+		$this->message_full = $message;
+
 		$this->code = $code;
 		$this->previous = $previous;
 	}
@@ -44,12 +62,12 @@ class base extends \Exception
 		// Make sure our language file has been loaded
 		$this->add_lang($user);
 
-		if (is_array($this->getMessage()))
+		if (is_array($this->message_full))
 		{
-			return call_user_func_array(array($user, 'lang'), $this->getMessage());
+			return call_user_func_array(array($user, 'lang'), $this->message_full);
 		}
 
-		return $user->lang($this->getMessage());
+		return $user->lang($this->message_full);
 	}
 
 	/**
@@ -137,6 +155,6 @@ class base extends \Exception
 	*/
 	public function __toString()
 	{
-		return (is_array($this->message)) ? var_export($this->message, true) : (string) $this->message;
+		return (is_array($this->message_full)) ? var_export($this->message_full, true) : (string) $this->message_full;
 	}
 }
