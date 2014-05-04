@@ -10,7 +10,7 @@
 		<h1>{L_ACP_BOARDRULES_CREATE_RULE} {L_COLON}{L_COLON} {RULE_TITLE}</h1>
 
 		<p>{L_ACP_BOARDRULES_CREATE_RULE_EXPLAIN}</p>
-	<!-- ELSEIF S_EDIT_RULE -->
+	<!-- ELSE -->
 		<h1>{L_ACP_BOARDRULES_EDIT_RULE} {L_COLON}{L_COLON} {RULE_TITLE}</h1>
 
 		<p>{L_ACP_BOARDRULES_EDIT_RULE_EXPLAIN}</p>
@@ -30,7 +30,7 @@
 	</fieldset>
 	<!-- ENDIF -->
 
-	<form id="add_edit_rule" method="post" action="<!-- IF S_ADD_RULE -->{U_ADD_ACTION}<!-- ELSEIF S_EDIT_RULE -->{U_EDIT_ACTION}<!-- ENDIF -->">
+	<form id="add_edit_rule" method="post" action="<!-- IF S_ADD_RULE -->{U_ADD_ACTION}<!-- ELSE -->{U_EDIT_ACTION}<!-- ENDIF -->">
 		<fieldset>
 			<legend>{L_ACP_RULE_SETTINGS}</legend>
 			<dl>
