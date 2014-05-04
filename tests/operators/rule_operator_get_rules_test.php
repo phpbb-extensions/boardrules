@@ -88,7 +88,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 		// Grab the rule data as an array of entities
 		$entities = $operator->get_rules($language);
 
-		if (empty($entities)
+		if (empty($entities))
 		{
 			$this->markTestSkipped('The get_rules method is returning an empty array');
 		}
