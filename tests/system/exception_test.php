@@ -84,8 +84,6 @@ class extension_system_exception_test extends phpbb_test_case
 	*/
 	public function test_exceptions($exception_name, $message, $expected)
 	{
-		$this->markTestSkipped('This test may be causing segmentation faults');
-
 		try
 		{
 			$exception_name = '\phpbb\boardrules\exception\\' . $exception_name;

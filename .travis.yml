@@ -12,6 +12,9 @@ before_script:
   - VENDOR="phpbb"
   - NAME="boardrules"
 
+  # Disabling xdebug helps prevent segmentation faults
+  - phpenv config-rm xdebug.ini
+
   # clone phpBB
   - git clone "git://github.com/phpbb-extensions/test-framework.git" "./../../test-framework"
 
