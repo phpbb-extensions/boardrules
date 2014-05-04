@@ -41,6 +41,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'BOARDRULES'				=> 'Rules',
 	'BOARDRULES_TITLE'			=> 'View the Rules of this Board',
+	'BOARDRULES_AGREEMENT'		=> 'You agree to abide by the rules of these forums set forth in the following “Rules” section',
 	'BOARDRULES_VIEWONLINE'		=> 'Viewing Board Rules',
 	'BOARDRULES_NOTIFICATION'	=> 'The Board Rules have been updated. Click here to review them.',
 ));
