@@ -297,9 +297,11 @@ class admin_controller implements admin_interface
 	*/
 	protected function add_edit_rule_data($entity, $data)
 	{
+		// Get form's POST actions (submit or preview)
 		$submit = $this->request->is_set_post('submit');
 		$preview = $this->request->is_set_post('preview');
 
+		// Create an array to collect errors that will be output to the user
 		$errors = array();
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
@@ -329,16 +331,19 @@ class admin_controller implements admin_interface
 		{
 			try
 			{
+				// Calling the set_$entity_function on the entity and passing it $rule_data
 				call_user_func_array(array($entity, 'set_' . $entity_function), array($rule_data));
 			}
 			catch (\phpbb\boardrules\exception\base $e)
 			{
+				// Catch exceptions and add them to errors array
 				$errors[] = $e->get_message($this->user);
 			}
 		}
 
 		unset($rule_fields);
 
+		// Form data collected - test if the form is valid
 		if ($submit || $preview)
 		{
 			if (!check_form_key('add_edit_rule'))
@@ -372,6 +377,7 @@ class admin_controller implements admin_interface
 				// Save the edited rule entity to the database
 				$entity->save();
 
+				// Show user confirmation of the saved rule and provide link back to the previous page
 				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 			}
 			else
@@ -379,6 +385,7 @@ class admin_controller implements admin_interface
 				// Add a new rule entity to the database
 				$this->rule_operator->add_rule($data['rule_language'], $data['rule_parent_id'], $entity);
 
+				// Show user confirmation of the added rule and provide link back to the previous page
 				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
 			}
 		}
