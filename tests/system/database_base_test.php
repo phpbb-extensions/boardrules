@@ -46,7 +46,7 @@ class extension_system_database_base_test extends extension_database_test_case
 	*/
 	public function test_migration()
 	{
-		$db_tools = $this->container->get('dbal.tools');
+		$db_tools = $this->get_container()->get('dbal.tools');
 
 		$this->assertTrue($db_tools->sql_table_exists('phpbb_boardrules'));
 	}

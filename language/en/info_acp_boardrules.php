@@ -44,6 +44,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'		=> 'From this page you can add, edit, delete and re-order categories and rules. A category is a group of related rules. Each category can have an unlimited number of rules.',
 	'ACP_BOARDRULES_SETTINGS'			=> 'Rules settings',
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'	=> 'Here you can configure the main settings for board rules.',
+	'ACP_BOARDRULES_NOTIFY'				=> 'Notify users',
+	'ACP_BOARDRULES_NOTIFY_EXPLAIN'		=> 'Send a notification to all registered users that the board rules have been updated. (This may take several seconds to complete on boards with many thousands of members.)',
+	'ACP_BOARDRULES_NOTIFY_CONFIRM'		=> 'Are you sure you wish to send notifications to all users?',
+	'ACP_BOARDRULES_NOTIFY_LOG'			=> '<strong>Board Rules notification sent to all users</strong>',
 
 	'BOARDRULES_CATEGORY'							=> 'Rule category',
 	'BOARDRULES_ENABLE'								=> 'Enable board rules',

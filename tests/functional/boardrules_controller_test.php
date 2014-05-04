@@ -59,49 +59,11 @@ class boardrules_controller_test extends \extension_functional_test_case
 	*/
 	public function test_boardrules_with_data()
 	{
-		$this->get_db();
-
-		// Insert some sample rule data
-		$insert_rules = array(
-			array(
-				'rule_id'							=> 1,
-				'rule_language'						=> 1,
-				'rule_left_id'						=> 1,
-				'rule_right_id'						=> 4,
-				'rule_parent_id'					=> 0,
-				'rule_parents'						=> '',
-				'rule_anchor'						=> 'section_1',
-				'rule_title'						=> 'Rule Category',
-				'rule_message'						=> '',
-				'rule_message_bbcode_uid'			=> '',
-				'rule_message_bbcode_bitfield'		=> '',
-				'rule_message_bbcode_options'		=> 7,
-			),
-			array(
-				'rule_id'							=> 2,
-				'rule_language'						=> 1,
-				'rule_left_id'						=> 2,
-				'rule_right_id'						=> 3,
-				'rule_parent_id'					=> 1,
-				'rule_parents'						=> '',
-				'rule_anchor'						=> 'rule_1',
-				'rule_title'						=> 'Rule 1',
-				'rule_message'						=> 'Rule Message',
-				'rule_message_bbcode_uid'			=> '',
-				'rule_message_bbcode_bitfield'		=> '',
-				'rule_message_bbcode_options'		=> 7,
-			),
-		);
-
-		$this->db->sql_multi_insert('phpbb_boardrules', $insert_rules);
-
-		// test loading the rules page
 		$crawler = self::request('GET', 'app.php/rules');
 		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->text());
 
-		// test that the data we inserted can be found on the rules page
-		$this->assertContains($insert_rules[0]['rule_title'], $crawler->filter('#section_1')->text());
-		$this->assertContains($insert_rules[1]['rule_message'], $crawler->filter('#rule_1')->text());
+		$this->assertEquals(1, $crawler->filter('#example-rule-category')->count());
+		$this->assertEquals(1, $crawler->filter('#example-rule')->count());
 	}
 
 	/**

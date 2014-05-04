@@ -454,6 +454,36 @@ class admin_controller implements admin_interface
 	}
 
 	/**
+	* Send notification to users
+	*
+	* @param int $rule_id The rule identifier
+	* @return null
+	* @access public
+	*/
+	public function send_notification($rule_id)
+	{
+		if (confirm_box(true))
+		{
+			$notification_data = array(
+				'rule_id'			=> $rule_id,
+			);
+
+			$phpbb_notifications = $this->phpbb_container->get('notification_manager');
+			$phpbb_notifications->add_notifications('boardrules', $notification_data);
+
+			$phpbb_log = $this->phpbb_container->get('log');
+			$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_NOTIFY_LOG');
+		}
+		else
+		{
+			confirm_box(false, $this->user->lang('ACP_BOARDRULES_NOTIFY_CONFIRM'), build_hidden_fields(array(
+				'action_send_notification' => true,
+				'rule_id' => $rule_id,
+			)));
+		}
+	}
+
+	/**
 	* Set page url
 	*
 	* @param string $u_action Custom form action
