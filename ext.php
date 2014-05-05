@@ -24,7 +24,7 @@ namespace phpbb\boardrules;
 * extension.
 */
 class ext extends \phpbb\extension\base
-{	
+{
 	/**
 	* Single enable step that installs any included migrations
 	*
@@ -102,7 +102,7 @@ class ext extends \phpbb\extension\base
 				{
 					// Purge board rules notifications
 					$phpbb_notifications = $this->container->get('notification_manager');
-					$phpbb_notifications->purge_notifications('boardrules');	
+					$phpbb_notifications->purge_notifications('boardrules');
 				}
 				catch (\phpbb\notification\exception $e)
 				{
