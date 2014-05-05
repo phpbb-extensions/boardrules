@@ -20,8 +20,8 @@ class rule_operator_get_rules_test extends rule_operator_base
 	public function get_rules_test_data()
 	{
 		return array(
+			// language id to search, data which should match
 			array(
-				// language id to search, data which should match
 				1,
 				array(
 					array(
@@ -80,7 +80,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* @dataProvider get_rules_test_data
 	* @access public
 	*/
-	public function test_get_rules($langauge, $data)
+	public function test_get_rules($language, $data)
 	{
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
