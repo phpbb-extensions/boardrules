@@ -30,14 +30,14 @@ interface rule_interface
 	/**
 	* Add a rule
 	*
+	* @param object $entity Rule entity with new data to insert
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @param object $entity Rule entity with new data to insert
 	* @return rule_interface Added rule entity
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
-	public function add_rule($language = 0, $parent_id = 0, $entity);
+	public function add_rule($entity, $language = 0, $parent_id = 0);
 
 	/**
 	* Delete a rule

@@ -383,7 +383,7 @@ class admin_controller implements admin_interface
 			else
 			{
 				// Add a new rule entity to the database
-				$this->rule_operator->add_rule($data['rule_language'], $data['rule_parent_id'], $entity);
+				$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
 
 				// Show user confirmation of the added rule and provide link back to the previous page
 				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
