@@ -194,7 +194,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Prepare rule breadcrumb path navigation
-		$entities = $this->rule_operator->get_rule_tree_path_data($language, $parent_id);
+		$entities = $this->rule_operator->get_rule_parents($language, $parent_id);
 
 		foreach ($entities as $entity)
 		{
