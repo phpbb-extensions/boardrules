@@ -232,29 +232,21 @@ class admin_controller implements admin_interface
 
 		// Collect the form data
 		$data = array(
-			'rule_title'	=> $this->request->variable('rule_title', '', true),
-			'rule_anchor'	=> $this->request->variable('rule_anchor', '', true),
-			'rule_message'	=> $this->request->variable('rule_message', '', true),
-			'bbcode'		=> $this->request->variable('enable_bbcode', 0),
-			'magic_url'		=> $this->request->variable('enable_magic_url', 0),
-			'smilies'		=> $this->request->variable('enable_smilies', 0),
+			'rule_title'		=> $this->request->variable('rule_title', '', true),
+			'rule_anchor'		=> $this->request->variable('rule_anchor', '', true),
+			'rule_message'		=> $this->request->variable('rule_message', '', true),
+			'bbcode'			=> $this->request->variable('enable_bbcode', 0),
+			'magic_url'			=> $this->request->variable('enable_magic_url', 0),
+			'smilies'			=> $this->request->variable('enable_smilies', 0),
+			'rule_language'		=> $language,
+			'rule_parent_id'	=> $parent_id,
 		);
 
-		$submit = $this->request->is_set_post('submit');
-		$preview = $this->request->is_set_post('preview');
-
-		if ($submit || $preview)
-		{
-			if ($this->add_edit_rule_data($entity, $data, $preview))
-			{
-				// Add the rule entity to the database
-				$this->rule_operator->add_rule($language, $parent_id, $entity);
-
-				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}"));
-			}
-		}
+		$this->add_edit_rule_data($entity, $data);
 
 		$this->template->assign_vars(array(
+			'S_ADD_RULE'		=> true,
+
 			'U_ADD_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 		));
@@ -280,26 +272,16 @@ class admin_controller implements admin_interface
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
 			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
-			'bbcode'		=> $this->request->variable('enable_bbcode', $entity->message_bbcode_enabled()),
-			'magic_url'		=> $this->request->variable('enable_magic_url', $entity->message_magic_url_enabled()),
-			'smilies'		=> $this->request->variable('enable_smilies', $entity->message_smilies_enabled()),
+			'bbcode'		=> $this->request->variable('enable_bbcode', 0),
+			'magic_url'		=> $this->request->variable('enable_magic_url', 0),
+			'smilies'		=> $this->request->variable('enable_smilies', 0),
 		);
 
-		$submit = $this->request->is_set_post('submit');
-		$preview = $this->request->is_set_post('preview');
-
-		if ($submit || $preview)
-		{
-			if ($this->add_edit_rule_data($entity, $data, $preview))
-			{
-				// Save the edited rule entity to the database
-				$entity->save();
-
-				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
-			}
-		}
+		$this->add_edit_rule_data($entity, $data);
 
 		$this->template->assign_vars(array(
+			'S_EDIT_RULE'		=> true,
+
 			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
 		));
@@ -310,24 +292,23 @@ class admin_controller implements admin_interface
 	*
 	* @param object $entity The rule entity object
 	* @param array $data The form data to be processed
-	* @param bool $preview True if previewing the rule, false otherwise
-	* @return bool True if data passed validation and not preview, false otherwise
+	* @return null
 	* @access protected
 	*/
-	protected function add_edit_rule_data($entity, $data, $preview)
+	protected function add_edit_rule_data($entity, $data)
 	{
-		$errors = array();
+		// Get form's POST actions (submit or preview)
+		$submit = $this->request->is_set_post('submit');
+		$preview = $this->request->is_set_post('preview');
 
-		if (!check_form_key('add_edit_rule'))
-		{
-			$error[] = $this->user->lang['FORM_INVALID'];
-		}
+		// Create an array to collect errors that will be output to the user
+		$errors = array();
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
-			'bbcode'	=> $data['bbcode'],
-			'magic_url'	=> $data['magic_url'],
-			'smilies'	=> $data['smilies'],
+			'bbcode'	=> ($submit || $preview) ? $data['bbcode'] : $entity->message_bbcode_enabled(),
+			'magic_url'	=> ($submit || $preview) ? $data['magic_url'] : $entity->message_magic_url_enabled(),
+			'smilies'	=> ($submit || $preview) ? $data['smilies'] : $entity->message_smilies_enabled(),
 		);
 
 		// Set the message parse options in the entity
@@ -335,20 +316,46 @@ class admin_controller implements admin_interface
 		{
 			call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
 		}
-		
+
 		unset($message_parse_options);
 
-		// Set the rule's title, anchor and message fields in the entity
-		$entity
-			->set_title($data['rule_title'])
-			->set_anchor($data['rule_anchor'])
-			->set_message($data['rule_message'])
-		;
+		// Grab the form's rule data fields
+		$rule_fields = array(
+			'title'		=> $data['rule_title'],
+			'anchor'	=> $data['rule_anchor'],
+			'message'	=> $data['rule_message'],
+		);
 
-		// Do not allow an empty rule title
-		if ($entity->get_title() == '')
+		// Set the rule's data in the entity
+		foreach ($rule_fields as $entity_function => $rule_data)
 		{
-			$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
+			try
+			{
+				// Calling the set_$entity_function on the entity and passing it $rule_data
+				call_user_func_array(array($entity, 'set_' . $entity_function), array($rule_data));
+			}
+			catch (\phpbb\boardrules\exception\base $e)
+			{
+				// Catch exceptions and add them to errors array
+				$errors[] = $e->get_message($this->user);
+			}
+		}
+
+		unset($rule_fields);
+
+		// Form data collected - test if the form is valid
+		if ($submit || $preview)
+		{
+			if (!check_form_key('add_edit_rule'))
+			{
+				$errors[] = $this->user->lang['FORM_INVALID'];
+			}
+
+			// Do not allow an empty rule title
+			if ($entity->get_title() == '')
+			{
+				$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
+			}
 		}
 
 		// Preview
@@ -362,21 +369,39 @@ class admin_controller implements admin_interface
 			));
 		}
 
+		// Insert or update rule
+		if ($submit && empty($errors) && !$preview)
+		{
+			if ($entity->get_id())
+			{
+				// Save the edited rule entity to the database
+				$entity->save();
+
+				// Show user confirmation of the saved rule and provide link back to the previous page
+				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+			}
+			else
+			{
+				// Add a new rule entity to the database
+				$this->rule_operator->add_rule($data['rule_language'], $data['rule_parent_id'], $entity);
+
+				// Show user confirmation of the added rule and provide link back to the previous page
+				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
+			}
+		}
+
 		$this->template->assign_vars(array(
 			'S_ERROR'			=> (sizeof($errors)) ? true : false,
 			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '',
 
 			'RULE_TITLE'		=> $entity->get_title(),
 			'RULE_ANCHOR'		=> $entity->get_anchor(),
-			'RULE_MESSAGE'		=> $entity->get_message(),
+			'RULE_MESSAGE'		=> $entity->get_message_for_edit(),
 
 			'S_MESSAGE_BBCODE_ENABLED'		=> $entity->message_bbcode_enabled(),
 			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $entity->message_magic_url_enabled(),
 			'S_MESSAGE_SMILIES_ENABLED'		=> $entity->message_smilies_enabled(),
 		));
-
-		// Return true if no errors and is ok to save, false otherwise
-		return (empty($errors) && !$preview);
 	}
 
 	/**
