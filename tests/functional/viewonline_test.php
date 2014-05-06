@@ -54,7 +54,7 @@ class viewonline_test extends \extension_functional_test_case
 
 		// Send the admin to the Rules page
 		$crawler = self::request('GET', 'app.php/rules?sid={$this->sid}');
-		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->text());
+		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->filter('h2')->text());
 
 		// Allow us to create and login a second user
 		$this->sid = null;
@@ -67,6 +67,6 @@ class viewonline_test extends \extension_functional_test_case
 
 		// Is admin still viewing Rules page
 		$this->assertContains('admin', $crawler->text());
-		$this->assertContains($this->lang('BOARDRULES_VIEWONLINE'), $crawler->text());
+		$this->assertContains($this->lang('BOARDRULES_VIEWONLINE'), $crawler->filter('.info')->text());
 	}
 }

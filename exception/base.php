@@ -107,6 +107,8 @@ class base extends \Exception
 				$message = $translated_message;
 			}
 		}
+		// Always unset a variable passed by reference in a foreach loop
+		unset($message);
 
 		if ($parent_message !== null)
 		{

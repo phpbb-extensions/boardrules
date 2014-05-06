@@ -59,6 +59,6 @@ class registration_event_test extends \extension_functional_test_case
 		$this->logout();
 		$crawler = self::request('GET', 'ucp.php?mode=register');
 
-		$this->assertContains($this->lang('BOARDRULES_AGREEMENT'), $crawler->text());
+		$this->assertContains($this->lang('BOARDRULES_AGREEMENT'), $crawler->filter('.content')->text());
 	}
 }

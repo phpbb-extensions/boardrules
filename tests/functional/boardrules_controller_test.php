@@ -39,6 +39,8 @@ class boardrules_controller_test extends \extension_functional_test_case
 			WHERE config_name = 'boardrules_enable'";
 
 		$this->db->sql_query($sql);
+
+		$this->purge_cache();
 	}
 
 	/**
@@ -48,19 +50,8 @@ class boardrules_controller_test extends \extension_functional_test_case
 	*/
 	public function test_boardrules_page()
 	{
-		$this->logout();
 		$crawler = self::request('GET', 'app.php/rules');
-	}
-
-	/**
-	* Test loading the rules page with some sample data
-	*
-	* @access public
-	*/
-	public function test_boardrules_with_data()
-	{
-		$crawler = self::request('GET', 'app.php/rules');
-		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->text());
+		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->filter('h2')->text());
 
 		$this->assertEquals(1, $crawler->filter('#example-rule-category')->count());
 		$this->assertEquals(1, $crawler->filter('#example-rule')->count());
@@ -73,7 +64,6 @@ class boardrules_controller_test extends \extension_functional_test_case
 	*/
 	public function test_boardrules_header_link()
 	{
-		$this->logout();
 		$crawler = self::request('GET', 'index.php');
 
 		$this->assertContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());

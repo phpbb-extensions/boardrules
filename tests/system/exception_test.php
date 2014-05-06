@@ -34,10 +34,6 @@ class extension_system_exception_test extends phpbb_test_case
 	{
 		parent::setUp();
 
-		// Must mock extension manager for the user class
-		global $phpbb_extension_manager, $phpbb_root_path;
-		$phpbb_extension_manager = new phpbb_mock_extension_manager($phpbb_root_path);
-
 		$this->get_user_instance();
 	}
 
@@ -107,9 +103,6 @@ class extension_system_exception_test extends phpbb_test_case
 	*/
 	public function test_exceptions_lang()
 	{
-		$this->get_user_instance();
-
-		// Test a language string present in the exceptions language file
 		$this->assertEquals('Required field missing', $this->user->lang('EXCEPTION_FIELD_MISSING'));
 	}
 }
