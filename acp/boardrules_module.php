@@ -51,6 +51,22 @@ class boardrules_module
 
 				switch($action)
 				{
+					case 'add':
+						$this->page_title = $user->lang['ACP_BOARDRULES_CREATE_RULE'];
+
+						$admin_controller->add_rule($language, $parent_id);
+
+						return;
+					break;
+
+					case 'edit':
+						$this->page_title = $user->lang['ACP_BOARDRULES_EDIT_RULE'];
+
+						$admin_controller->edit_rule($rule_id);
+
+						return;
+					break;
+
 					case 'move_down':
 						$admin_controller->move_rule($rule_id, 'down');
 					break;
