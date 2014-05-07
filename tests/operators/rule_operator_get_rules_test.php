@@ -80,18 +80,13 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* @dataProvider get_rules_test_data
 	* @access public
 	*/
-	public function test_get_rules($language, $data)
+	public function test_get_rules($language, $expected)
 	{
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 
 		// Grab the rule data as an array of entities
 		$entities = $operator->get_rules($language);
-
-		if (empty($entities))
-		{
-			$this->markTestSkipped('The get_rules method is returning an empty array');
-		}
 
 		// Map the fields to the getters
 		$map = array(
@@ -112,7 +107,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 			// what we saved
 			foreach ($map as $field => $function)
 			{
-				$this->assertEquals($data[$i][$field], $entity->$function());
+				$this->assertEquals($expected[$i][$field], $entity->$function());
 			}
 
 			$i++;
@@ -120,7 +115,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 	}
 
 	/**
-	* Test data for the test_get_rules() function
+	* Test data for the test_get_rules_fails() function
 	*
 	* @return array Array of test data
 	* @access public
@@ -145,10 +140,10 @@ class rule_operator_get_rules_test extends rule_operator_base
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 
-		// Load the operator
+		// Get the rule data
 		$result = $operator->get_rules($language);
 
-		// Assert that the id matches what is expected
+		// Assert that the result matches what is expected
 		$this->assertEquals($expected, $result);
 	}
 }
