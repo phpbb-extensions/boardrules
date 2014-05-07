@@ -87,8 +87,8 @@ class admin_controller implements admin_interface
 			{
 				$this->set_options();
 
-				add_log('admin', 'BOARDRULES_SETTINGS_CHANGED');
-				trigger_error($this->user->lang['BOARDRULES_SETTINGS_CHANGED'] . adm_back_link($this->u_action));
+				add_log('admin', 'ACP_BOARDRULES_SETTINGS_CHANGED');
+				trigger_error($this->user->lang['ACP_BOARDRULES_SETTINGS_CHANGED'] . adm_back_link($this->u_action));
 			}
 		}
 
@@ -354,7 +354,7 @@ class admin_controller implements admin_interface
 			// Do not allow an empty rule title
 			if ($entity->get_title() == '')
 			{
-				$errors[] = $this->user->lang['RULE_TITLE_EMPTY'];
+				$errors[] = $this->user->lang['ACP_RULE_TITLE_EMPTY'];
 			}
 		}
 
@@ -378,7 +378,7 @@ class admin_controller implements admin_interface
 				$entity->save();
 
 				// Show user confirmation of the saved rule and provide link back to the previous page
-				trigger_error($this->user->lang['RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+				trigger_error($this->user->lang['ACP_RULE_EDITED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 			}
 			else
 			{
@@ -386,7 +386,7 @@ class admin_controller implements admin_interface
 				$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
 
 				// Show user confirmation of the added rule and provide link back to the previous page
-				trigger_error($this->user->lang['RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
+				trigger_error($this->user->lang['ACP_RULE_ADDED'] . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
 			}
 		}
 
@@ -420,11 +420,11 @@ class admin_controller implements admin_interface
 		{
 			$this->rule_operator->delete_rule($rule_id);
 
-			trigger_error($this->user->lang['RULE_DELETED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+			trigger_error($this->user->lang['ACP_RULE_DELETED'] . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 		}
 		else
 		{
-			confirm_box(false, $this->user->lang['DELETE_RULE_CONFIRM']);
+			confirm_box(false, $this->user->lang['ACP_DELETE_RULE_CONFIRM']);
 
 			redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
 		}

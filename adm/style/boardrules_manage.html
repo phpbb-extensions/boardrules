@@ -49,7 +49,7 @@
 					<label><input type="checkbox" class="radio" value="1" name="enable_magic_url"<!-- IF S_MESSAGE_MAGIC_URL_ENABLED or (S_ADD_RULE and not S_PREVIEW) --> checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
 				</dd>
 			</dl>
-			
+
 		</fieldset>
 
 		<fieldset class="submit-buttons">
@@ -71,7 +71,7 @@
 		<fieldset>
 			<dl>
 				<dt>
-					<label for="language">{L_BOARDRULES_SELECT_LANGUAGE}{L_COLON}</label>
+					<label for="language">{L_ACP_BOARDRULES_SELECT_LANGUAGE}{L_COLON}</label>
 				</dt>
 				<dd>
 					<select name="language">
@@ -105,7 +105,7 @@
 			<!-- BEGIN rules -->
 				<tr>
 					<td class="folder">
-						<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" alt="{L_BOARDRULES_CATEGORY}" /><!-- ELSE --><img src="images/icon_folder.gif" alt="{L_BOARDRULES_RULE}" /><!-- ENDIF -->
+						<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" alt="{L_ACP_BOARDRULES_CATEGORY}" /><!-- ELSE --><img src="images/icon_folder.gif" alt="{L_ACP_BOARDRULES_RULE}" /><!-- ENDIF -->
 					</td>
 					<td class="forum-desc">
 						<strong><a href="{rules.U_RULE}">{rules.RULE_TITLE}</a></strong>
@@ -130,7 +130,7 @@
 			<input type="hidden" name="action" value="add" />
 
 			<input type="text" name="rule_title" value="" maxlength="200" />
-			<input class="button2" name="addrule" type="submit" value="{L_CREATE_RULE}" />
+			<input class="button2" name="addrule" type="submit" value="{L_ACP_ADD_RULE}" />
 			{S_FORM_TOKEN}
 		</fieldset>
 		</form>
