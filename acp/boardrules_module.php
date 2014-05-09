@@ -34,7 +34,7 @@ class boardrules_module
 			case 'settings':
 				$this->tpl_name = 'boardrules_settings';
 
-				$this->page_title = $user->lang['ACP_BOARDRULES_SETTINGS'];
+				$this->page_title = $user->lang('ACP_BOARDRULES_SETTINGS');
 
 				if ($request->is_set_post('action_send_notification'))
 				{
@@ -47,12 +47,12 @@ class boardrules_module
 			case 'manage':
 				$this->tpl_name = 'boardrules_manage';
 
-				$this->page_title = $user->lang['ACP_BOARDRULES_MANAGE'];
+				$this->page_title = $user->lang('ACP_BOARDRULES_MANAGE');
 
 				switch($action)
 				{
 					case 'add':
-						$this->page_title = $user->lang['ACP_BOARDRULES_CREATE_RULE'];
+						$this->page_title = $user->lang('ACP_BOARDRULES_CREATE_RULE');
 
 						$admin_controller->add_rule($language, $parent_id);
 
@@ -60,7 +60,7 @@ class boardrules_module
 					break;
 
 					case 'edit':
-						$this->page_title = $user->lang['ACP_BOARDRULES_EDIT_RULE'];
+						$this->page_title = $user->lang('ACP_BOARDRULES_EDIT_RULE');
 
 						$admin_controller->edit_rule($rule_id);
 
