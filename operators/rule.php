@@ -71,14 +71,14 @@ class rule implements rule_interface
 	/**
 	* Add a rule
 	*
+	* @param object $entity Rule entity with new data to insert
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @param object $entity Rule entity with new data to insert
 	* @return rule_interface Added rule entity
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
-	public function add_rule($language = 0, $parent_id = 0, $entity)
+	public function add_rule($entity, $language = 0, $parent_id = 0)
 	{
 		// Insert the rule data to the database for the given language selection
 		$entity->insert($language);
@@ -151,12 +151,12 @@ class rule implements rule_interface
 	/**
 	* Get a rule's parent rules (for use in breadcrumbs)
 	*
-	* @param int $language Language selection identifier; default: 0
-	* @param int $parent_id Category to display rules from; default: 0
+	* @param int $language Language selection identifier
+	* @param int $parent_id Category to display rules from
 	* @return array Array of rule data for a rule's parent rules
 	* @access public
 	*/
-	public function get_rule_tree_path_data($language, $parent_id)
+	public function get_rule_parents($language, $parent_id)
 	{
 		$entities = array();
 
