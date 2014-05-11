@@ -311,6 +311,7 @@ class admin_controller implements admin_interface
 		$submit = $this->request->is_set_post('submit');
 		$preview = $this->request->is_set_post('preview');
 
+		// Load posting language file for the BBCode editor
 		$this->user->add_lang('posting');
 
 		// Create an array to collect errors that will be output to the user
