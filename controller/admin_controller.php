@@ -205,7 +205,7 @@ class admin_controller implements admin_interface
 				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
 
-			// Update the right_id variable
+			// Store the current right_id value
 			$last_right_id = $entity->get_right_id();
 		}
 
@@ -473,7 +473,7 @@ class admin_controller implements admin_interface
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1)
 	{
-		// If the link hash is invalid, show an error message to the user
+		// If the link hash is invalid, stop and show an error message to the user
 		if (!check_link_hash($this->request->variable('hash', ''), $direction . $rule_id))
 		{
 			trigger_error($this->user->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
