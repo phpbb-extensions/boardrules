@@ -72,26 +72,38 @@ class admin_controller implements admin_interface
 	*/
 	public function display_options()
 	{
+		// Create a form key for preventing CSRF attacks
 		add_form_key('boardrules_settings');
 
+		// Create an array to collect errors that will be output to the user
 		$errors = array();
 
+		// Is the form being submitted to us?
 		if ($this->request->is_set_post('submit'))
 		{
+			// Test if the submitted form is valid
 			if (!check_form_key('boardrules_settings'))
 			{
 				$errors[] = $this->user->lang('FORM_INVALID');
 			}
 
+			// If no errors, process the form data
 			if (empty($errors))
 			{
+				// Set the options the user configured
 				$this->set_options();
 
-				add_log('admin', 'ACP_BOARDRULES_SETTINGS_CHANGED');
+				// Add option settings change action to the admin log
+				$phpbb_log = $this->phpbb_container->get('log');
+				$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_SETTINGS_CHANGED');
+
+				// Option settings have been updated and logged
+				// Confirm this to the user and provide link back to previous page
 				trigger_error($this->user->lang('ACP_BOARDRULES_SETTINGS_CHANGED') . adm_back_link($this->u_action));
 			}
 		}
 
+		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'		=> (sizeof($errors)) ? true : false,
 			'ERROR_MSG'		=> (sizeof($errors)) ? implode('<br />', $errors) : '',
@@ -169,8 +181,10 @@ class admin_controller implements admin_interface
 		// Grab all the rules in the current user's language
 		$entities = $this->rule_operator->get_rules($language, $parent_id);
 
+		// Initialize a variable to hold the right_id value
 		$last_right_id = 0;
 
+		// Process each rule entity for display
 		foreach ($entities as $entity)
 		{
 			if ($entity->get_left_id() < $last_right_id)
@@ -178,6 +192,7 @@ class admin_controller implements admin_interface
 				continue; // The current rule is a child of a previous rule, do not display it
 			}
 
+			// Set output block vars for display in the template
 			$this->template->assign_block_vars('rules', array(
 				'RULE_TITLE'		=> $entity->get_title(),
 
@@ -190,14 +205,17 @@ class admin_controller implements admin_interface
 				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
 
+			// Store the current right_id value
 			$last_right_id = $entity->get_right_id();
 		}
 
 		// Prepare rule breadcrumb path navigation
 		$entities = $this->rule_operator->get_rule_parents($language, $parent_id);
 
+		// Process each rule entity for breadcrumb display
 		foreach ($entities as $entity)
 		{
+			// Set output block vars for display in the template
 			$this->template->assign_block_vars('breadcrumb', array(
 				'RULE_TITLE'		=> $entity->get_title(),
 
@@ -207,6 +225,7 @@ class admin_controller implements admin_interface
 			));
 		}
 
+		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'U_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
@@ -242,8 +261,10 @@ class admin_controller implements admin_interface
 			'rule_parent_id'	=> $parent_id,
 		);
 
+		// Process the new rule
 		$this->add_edit_rule_data($entity, $data);
 
+		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ADD_RULE'		=> true,
 
@@ -277,8 +298,10 @@ class admin_controller implements admin_interface
 			'smilies'		=> $this->request->variable('enable_smilies', 0),
 		);
 
+		// Process the edited rule
 		$this->add_edit_rule_data($entity, $data);
 
+		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_EDIT_RULE'		=> true,
 
@@ -343,9 +366,10 @@ class admin_controller implements admin_interface
 
 		unset($rule_fields);
 
-		// Form data collected - test if the form is valid
+		// If the form has been submitted or previewed
 		if ($submit || $preview)
 		{
+			// Test if the form is valid
 			if (!check_form_key('add_edit_rule'))
 			{
 				$errors[] = $this->user->lang('FORM_INVALID');
@@ -361,6 +385,7 @@ class admin_controller implements admin_interface
 		// Preview
 		if ($preview && empty($errors))
 		{
+			// Set output vars for display in the template
 			$this->template->assign_vars(array(
 				'S_PREVIEW'					=> $preview,
 
@@ -390,6 +415,7 @@ class admin_controller implements admin_interface
 			}
 		}
 
+		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'			=> (sizeof($errors)) ? true : false,
 			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '',
@@ -416,16 +442,22 @@ class admin_controller implements admin_interface
 		// Initiate and load the rule entity
 		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
 
+		// Use a confirmation box routine when deleting a rule
 		if (confirm_box(true))
 		{
+			// Delete the rule on confirmation
 			$this->rule_operator->delete_rule($rule_id);
 
+			// Show user confirmation of the deleted rule and provide link back to the previous page
 			trigger_error($this->user->lang('ACP_RULE_DELETED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 		}
 		else
 		{
+			// Request confirmation from the user to delete the rule
 			confirm_box(false, $this->user->lang('ACP_DELETE_RULE_CONFIRM'));
 
+			// Use a redirect to take the user back to the previous page
+			// if the user chose not delete the rule from the confirmation page.
 			redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
 		}
 	}
@@ -441,13 +473,16 @@ class admin_controller implements admin_interface
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1)
 	{
+		// If the link hash is invalid, stop and show an error message to the user
 		if (!check_link_hash($this->request->variable('hash', ''), $direction . $rule_id))
 		{
 			trigger_error($this->user->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
+		// Move the rule
 		$this->rule_operator->move($rule_id, $direction, $amount);
 
+		// Send a JSON response if an AJAX request was used
 		if ($this->request->is_ajax())
 		{
 			$json_response = new \phpbb\json_response;
@@ -457,6 +492,7 @@ class admin_controller implements admin_interface
 		// Initiate and load the rule entity for no AJAX request
 		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
 
+		// Use a redirect to reload the current page
 		redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
 	}
 
@@ -469,20 +505,26 @@ class admin_controller implements admin_interface
 	*/
 	public function send_notification($rule_id)
 	{
+		// Use a confirmation box routine when sending notifications
 		if (confirm_box(true))
 		{
+			// Store the notification data we will use in an array
 			$notification_data = array(
 				'rule_id'			=> $rule_id,
 			);
 
+			// Create the notification
 			$phpbb_notifications = $this->phpbb_container->get('notification_manager');
 			$phpbb_notifications->add_notifications('boardrules', $notification_data);
 
+			// Log the notification
 			$phpbb_log = $this->phpbb_container->get('log');
 			$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_NOTIFY_LOG');
 		}
 		else
 		{
+			// Request confirmation from the user to send notification to all users
+			// Build a hidden array of the form data
 			confirm_box(false, $this->user->lang('ACP_BOARDRULES_NOTIFY_CONFIRM'), build_hidden_fields(array(
 				'action_send_notification' => true,
 				'rule_id' => $rule_id,
