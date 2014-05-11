@@ -87,7 +87,9 @@ class admin_controller implements admin_interface
 			{
 				$this->set_options();
 
-				add_log('admin', 'ACP_BOARDRULES_SETTINGS_CHANGED');
+				// Add option settings change action to the admin log
+				$phpbb_log = $this->phpbb_container->get('log');
+				$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_SETTINGS_CHANGED');
 				trigger_error($this->user->lang('ACP_BOARDRULES_SETTINGS_CHANGED') . adm_back_link($this->u_action));
 			}
 		}
