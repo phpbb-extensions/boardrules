@@ -98,8 +98,8 @@ class boardrules_module
 					break;
 				}
 
-				// Check if a lnaguage variable was submitted and display
-				// the rules for that langauge. If no langauge was submitted,
+				// Check if a language variable was submitted and display
+				// the rules for that language. If no language was submitted,
 				// display the language selection menu.
 				if (empty($language))
 				{

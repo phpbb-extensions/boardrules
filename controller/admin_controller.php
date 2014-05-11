@@ -72,7 +72,7 @@ class admin_controller implements admin_interface
 	*/
 	public function display_options()
 	{
-		// Create a form key for testing validity when form is submitted
+		// Create a form key for preventing CSRF attacks
 		add_form_key('boardrules_settings');
 
 		// Create an array to collect errors that will be output to the user
