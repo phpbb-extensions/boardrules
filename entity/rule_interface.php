@@ -20,7 +20,7 @@ interface rule_interface
 	* Load the data from the database for this rule
 	*
 	* @param int $id Rule identifier
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -34,9 +34,9 @@ interface rule_interface
 	* All data is validated and an exception is thrown if any data is invalid.
 	*
 	* @param array $data Data array, typically from the database
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function import($data);
 
@@ -46,9 +46,9 @@ interface rule_interface
 	* Will throw an exception if the rule was already inserted (call save() instead)
 	*
 	* @param int $language The language identifier
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function insert($language = 0);
 
@@ -58,9 +58,9 @@ interface rule_interface
 	* This must be called before closing or any changes will not be saved!
 	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function save();
 
@@ -75,7 +75,7 @@ interface rule_interface
 	/**
 	* Get title
 	*
-	* @return string
+	* @return string Title
 	* @access public
 	*/
 	public function get_title();
@@ -84,9 +84,9 @@ interface rule_interface
 	* Set title
 	*
 	* @param string $title
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\unexpected_value
 	*/
 	public function set_title($title);
 
@@ -111,9 +111,8 @@ interface rule_interface
 	* Set message
 	*
 	* @param string $message
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function set_message($message);
 
@@ -128,7 +127,7 @@ interface rule_interface
 	/**
 	* Enable bbcode on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_enable_bbcode();
@@ -136,7 +135,7 @@ interface rule_interface
 	/**
 	* Disable bbcode on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_disable_bbcode();
@@ -152,7 +151,7 @@ interface rule_interface
 	/**
 	* Enable magic url on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_enable_magic_url();
@@ -160,7 +159,7 @@ interface rule_interface
 	/**
 	* Disable magic url on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_disable_magic_url();
@@ -176,7 +175,7 @@ interface rule_interface
 	/**
 	* Enable smilies on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_enable_smilies();
@@ -184,7 +183,7 @@ interface rule_interface
 	/**
 	* Disable smilies on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_disable_smilies();
@@ -201,9 +200,9 @@ interface rule_interface
 	* Set anchor
 	*
 	* @param string $anchor Anchor text
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\unexpected_value
 	*/
 	public function set_anchor($anchor);
 

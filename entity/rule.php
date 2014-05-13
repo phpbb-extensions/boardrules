@@ -62,7 +62,7 @@ class rule implements rule_interface
 	* Load the data from the database for this rule
 	*
 	* @param int $id Rule identifier
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -92,9 +92,9 @@ class rule implements rule_interface
 	* All data is validated and an exception is thrown if any data is invalid.
 	*
 	* @param array $data Data array, typically from the database
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function import($data)
 	{
@@ -164,7 +164,6 @@ class rule implements rule_interface
 			}
 		}
 
-		// Return $this; so calls can be chained load()->set()->save()
 		return $this;
 	}
 
@@ -260,9 +259,9 @@ class rule implements rule_interface
 	* Set title
 	*
 	* @param string $title
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\unexpected_value
 	*/
 	public function set_title($title)
 	{
@@ -278,7 +277,6 @@ class rule implements rule_interface
 		// Set the title on our data array
 		$this->data['rule_title'] = $title;
 
-		// Return $this; so calls can be chained load()->set()->save()
 		return $this;
 	}
 
@@ -324,9 +322,8 @@ class rule implements rule_interface
 	* Set message
 	*
 	* @param string $message
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function set_message($message)
 	{
@@ -340,7 +337,6 @@ class rule implements rule_interface
 		$this->data['rule_message_bbcode_bitfield'] = $bitfield;
 		// Flags are already set
 
-		// Return $this; so calls can be chained load()->set()->save()
 		return $this;
 	}
 
@@ -358,7 +354,7 @@ class rule implements rule_interface
 	/**
 	* Enable bbcode on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_enable_bbcode()
@@ -371,7 +367,7 @@ class rule implements rule_interface
 	/**
 	* Disable bbcode on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_disable_bbcode()
@@ -395,7 +391,7 @@ class rule implements rule_interface
 	/**
 	* Enable magic url on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_enable_magic_url()
@@ -408,7 +404,7 @@ class rule implements rule_interface
 	/**
 	* Disable magic url on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_disable_magic_url()
@@ -432,7 +428,7 @@ class rule implements rule_interface
 	/**
 	* Enable smilies on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_enable_smilies()
@@ -445,7 +441,7 @@ class rule implements rule_interface
 	/**
 	* Disable smilies on the message
 	*
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	*/
 	public function message_disable_smilies()
@@ -470,9 +466,9 @@ class rule implements rule_interface
 	* Set anchor
 	*
 	* @param string $anchor Anchor text
-	* @return rule_interface $this
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \phpbb\boardrules\exception\unexpected_value
 	*/
 	public function set_anchor($anchor)
 	{
@@ -494,7 +490,6 @@ class rule implements rule_interface
 		// Set the anchor on our data array
 		$this->data['rule_anchor'] = $anchor;
 
-		// Return $this; so calls can be chained load()->set()->save()
 		return $this;
 	}
 
