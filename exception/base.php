@@ -30,6 +30,8 @@ class base extends \Exception
 	* @param string|array $message
 	* @param int $code
 	* @param Exception $previous
+	* @return \phpbb\boardrules\exception\base
+	* @access public
 	*/
 	public function __construct($message = null, $code = 0, Exception $previous = null)
 	{
@@ -127,6 +129,7 @@ class base extends \Exception
 	* Add our language file
 	*
 	* @param \phpbb\user $user
+	* @return null
 	* @access public
 	*/
 	public function add_lang(\phpbb\user $user)
@@ -154,6 +157,7 @@ class base extends \Exception
 	* understand
 	*
 	* @return string
+	* @access public
 	*/
 	public function __toString()
 	{
