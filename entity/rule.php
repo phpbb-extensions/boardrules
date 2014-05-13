@@ -85,83 +85,6 @@ class rule implements rule_interface
 	}
 
 	/**
-	* Insert the rule for the first time
-	*
-	* Will throw an exception if the rule was already inserted (call save() instead)
-	*
-	* @param int $language The language identifier
-	* @return rule_interface $this
-	* @access public
-	* @throws \phpbb\boardrules\exception\base
-	*/
-	public function insert($language = 0)
-	{
-		if (!empty($this->data['rule_id']))
-		{
-			// The rule already exists
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
-		}
-
-		// Resets values required for the nested set system
-		$this->data['rule_parent_id'] = 0;
-		$this->data['rule_left_id'] = 0;
-		$this->data['rule_right_id'] = 0;
-		$this->data['rule_parents'] = '';
-
-		// Make extra sure there is no rule_id set
-		unset($this->data['rule_id']);
-
-		// Add the language identifier to the data array
-		$this->data['rule_language'] = $language;
-
-		// Insert the rule data to the database
-		$sql = 'INSERT INTO ' . $this->boardrules_table . ' ' . $this->db->sql_build_array('INSERT', $this->data);
-		$this->db->sql_query($sql);
-
-		// Set the rule_id using the id created by the SQL insert
-		$this->data['rule_id'] = (int) $this->db->sql_nextid();
-
-		return $this;
-	}
-
-	/**
-	* Save the current settings to the database
-	*
-	* This must be called before closing or any changes will not be saved!
-	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
-	*
-	* @return rule_interface $this
-	* @access public
-	* @throws \phpbb\boardrules\exception\base
-	*/
-	public function save()
-	{
-		if (empty($this->data['rule_id']))
-		{
-			// The rule does not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
-		}
-
-		$sql = 'UPDATE ' . $this->boardrules_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $this->data) . '
-			WHERE rule_id = ' . $this->get_id();
-		$this->db->sql_query($sql);
-
-		return $this;
-	}
-
-	/**
-	* Get id
-	*
-	* @return int Rule identifier
-	* @access public
-	*/
-	public function get_id()
-	{
-		return (isset($this->data['rule_id'])) ? (int) $this->data['rule_id'] : 0;
-	}
-
-	/**
 	* Import data for this rule
 	*
 	* Used when the data is already loaded externally.
@@ -243,6 +166,83 @@ class rule implements rule_interface
 
 		// Return $this; so calls can be chained load()->set()->save()
 		return $this;
+	}
+
+	/**
+	* Insert the rule for the first time
+	*
+	* Will throw an exception if the rule was already inserted (call save() instead)
+	*
+	* @param int $language The language identifier
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function insert($language = 0)
+	{
+		if (!empty($this->data['rule_id']))
+		{
+			// The rule already exists
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+		}
+
+		// Resets values required for the nested set system
+		$this->data['rule_parent_id'] = 0;
+		$this->data['rule_left_id'] = 0;
+		$this->data['rule_right_id'] = 0;
+		$this->data['rule_parents'] = '';
+
+		// Make extra sure there is no rule_id set
+		unset($this->data['rule_id']);
+
+		// Add the language identifier to the data array
+		$this->data['rule_language'] = $language;
+
+		// Insert the rule data to the database
+		$sql = 'INSERT INTO ' . $this->boardrules_table . ' ' . $this->db->sql_build_array('INSERT', $this->data);
+		$this->db->sql_query($sql);
+
+		// Set the rule_id using the id created by the SQL insert
+		$this->data['rule_id'] = (int) $this->db->sql_nextid();
+
+		return $this;
+	}
+
+	/**
+	* Save the current settings to the database
+	*
+	* This must be called before closing or any changes will not be saved!
+	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
+	*
+	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function save()
+	{
+		if (empty($this->data['rule_id']))
+		{
+			// The rule does not exist
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+		}
+
+		$sql = 'UPDATE ' . $this->boardrules_table . '
+			SET ' . $this->db->sql_build_array('UPDATE', $this->data) . '
+			WHERE rule_id = ' . $this->get_id();
+		$this->db->sql_query($sql);
+
+		return $this;
+	}
+
+	/**
+	* Get id
+	*
+	* @return int Rule identifier
+	* @access public
+	*/
+	public function get_id()
+	{
+		return (isset($this->data['rule_id'])) ? (int) $this->data['rule_id'] : 0;
 	}
 
 	/**
