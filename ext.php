@@ -93,22 +93,9 @@ class ext extends \phpbb\extension\base
 		{
 			case '': // Empty means nothing has run yet
 
-				/**
-				* @todo Remove this try/catch condition once purge_notifications is fixed
-				* in the core to work with disabled extensions without fatal errors.
-				* https://tracker.phpbb.com/browse/PHPBB3-12435
-				*/
-				try
-				{
-					// Purge board rules notifications
-					$phpbb_notifications = $this->container->get('notification_manager');
-					$phpbb_notifications->purge_notifications('boardrules');
-				}
-				catch (\phpbb\notification\exception $e)
-				{
-					// continue
-				}
-
+				// Purge board rules notifications
+				$phpbb_notifications = $this->container->get('notification_manager');
+				$phpbb_notifications->purge_notifications('boardrules');
 				return 'notifications';
 
 			break;
