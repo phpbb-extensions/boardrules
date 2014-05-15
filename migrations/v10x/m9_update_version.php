@@ -10,9 +10,9 @@
 namespace phpbb\boardrules\migrations\v10x;
 
 /**
-* Migration stage 8: Update version
+* Migration stage 9: Update version
 */
-class m8_update_version extends \phpbb\db\migration\migration
+class m9_update_version extends \phpbb\db\migration\migration
 {
 	/**
 	* Assign migration file dependencies for this migration
@@ -23,7 +23,7 @@ class m8_update_version extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\boardrules\migrations\v10x\m7_sample_rule_data');
+		return array('\phpbb\boardrules\migrations\v10x\m8_header_link_option');
 	}
 
 	/**
