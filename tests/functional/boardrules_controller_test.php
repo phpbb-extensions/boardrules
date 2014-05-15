@@ -40,6 +40,12 @@ class boardrules_controller_test extends \extension_functional_test_case
 
 		$this->db->sql_query($sql);
 
+		$sql = "UPDATE phpbb_config
+			SET config_value = '1'
+			WHERE config_name = 'boardrules_header_link'";
+
+		$this->db->sql_query($sql);
+
 		$this->purge_cache();
 	}
 
