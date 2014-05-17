@@ -99,7 +99,8 @@ class boardrules extends \phpbb\notification\type\base
 	/**
 	* Find the users who will receive notifications
 	*
-	* @param array $data The data for the updated rules
+	* @param array $data The type specific data for the updated rules
+	* @param array $options Options for finding users for notification
 	*
 	* @return array
 	*/
