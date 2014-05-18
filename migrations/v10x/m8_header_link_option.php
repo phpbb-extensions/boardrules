@@ -35,7 +35,7 @@ class m8_header_link_option extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('boardrules_header_link', '0')),
+			array('config.add', array('boardrules_header_link', '1')),
 		);
 	}
 }

@@ -58,29 +58,29 @@ class boardrules_controller_test extends \extension_functional_test_case
 	}
 
 	/**
-	* Test that the Rules header link nav does not exist yet
-	*
-	* @access public
-	*/
-	public function test_boardrules_header_link_off()
-	{
-		$crawler = self::request('GET', 'index.php');
-
-		$this->assertNotContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
-		$this->assertCount(0, $crawler->filter('.icon-boardrules'));
-	}
-
-	/**
 	* Test that the Rules header link nav does exist
 	*
 	* @access public
 	*/
 	public function test_boardrules_header_link_on()
 	{
+		$crawler = self::request('GET', 'index.php');
+
+		$this->assertContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
+		$this->assertGreaterThan(0, $crawler->filter('.icon-boardrules')->count());
+	}
+
+	/**
+	* Test that the Rules header link nav does not exist yet
+	*
+	* @access public
+	*/
+	public function test_boardrules_header_link_off()
+	{
 		$this->get_db();
 
 		$sql = "UPDATE phpbb_config
-			SET config_value = '1'
+			SET config_value = '0'
 			WHERE config_name = 'boardrules_header_link'";
 
 		$this->db->sql_query($sql);
@@ -89,7 +89,7 @@ class boardrules_controller_test extends \extension_functional_test_case
 
 		$crawler = self::request('GET', 'index.php');
 
-		$this->assertContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
-		$this->assertGreaterThan(0, $crawler->filter('.icon-boardrules')->count());
+		$this->assertNotContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
+		$this->assertCount(0, $crawler->filter('.icon-boardrules'));
 	}
 }
