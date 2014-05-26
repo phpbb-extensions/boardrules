@@ -35,7 +35,7 @@ class m9_update_version extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.update', array('boardrules_version', '1.0.0')),
+			array('config.update', array('boardrules_version', '1.0.0-b1')),
 		);
 	}
 }
