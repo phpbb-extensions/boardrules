@@ -12,7 +12,7 @@ namespace phpbb\boardrules\migrations\v10x;
 /**
 * Migration stage 9: Remove version from database storage
 */
-class m9_update_version extends \phpbb\db\migration\migration
+class m9_remove_version extends \phpbb\db\migration\migration
 {
 	/**
 	* Check if this migration is effectively installed
