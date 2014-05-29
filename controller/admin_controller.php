@@ -121,6 +121,7 @@ class admin_controller implements admin_interface
 			'U_ACTION'		=> $this->u_action,
 
 			'S_BOARDRULES_ENABLE'						=> $this->config['boardrules_enable'] ? true : false,
+			'S_BOARDRULES_HEADER_LINK'					=> $this->config['boardrules_header_link'] ? true : false,
 			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'		=> $this->config['boardrules_require_at_registration'] ? true : false,
 		));
 	}
@@ -134,6 +135,7 @@ class admin_controller implements admin_interface
 	public function set_options()
 	{
 		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
+		$this->config->set('boardrules_header_link', $this->request->variable('boardrules_header_link', 0));
 		$this->config->set('boardrules_require_at_registration', $this->request->variable('boardrules_require_at_registration', 0));
 	}
 

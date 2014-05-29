@@ -21,6 +21,11 @@
 			<label><input type="radio" class="radio" name="boardrules_enable" value="0"<!-- IF not S_BOARDRULES_ENABLE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
 	<dl>
+		<dt><label for="boardrules_header_link">{L_ACP_BOARDRULES_HEADER_LINK}:</label></dt>
+		<dd><label><input type="radio" class="radio" id="boardrules_header_link" name="boardrules_header_link" value="1"<!-- IF S_BOARDRULES_HEADER_LINK --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="boardrules_header_link" value="0"<!-- IF not S_BOARDRULES_HEADER_LINK --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+	</dl>
+	<dl>
 		<dt><label for="boardrules_require_at_registration">{L_ACP_BOARDRULES_AT_REGISTRATION}:</label><br /><span>{L_ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN}</span></dt>
 		<dd><label><input type="radio" class="radio" id="boardrules_require_at_registration" name="boardrules_require_at_registration" value="1"<!-- IF S_BOARDRULES_REQUIRE_AT_REGISTRATION --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="boardrules_require_at_registration" value="0"<!-- IF not S_BOARDRULES_REQUIRE_AT_REGISTRATION --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>

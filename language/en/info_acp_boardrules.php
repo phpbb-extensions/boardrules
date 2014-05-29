@@ -49,6 +49,7 @@ $lang = array_merge($lang, array(
 	// ACP rule settings form language
 	'ACP_BOARDRULES_CATEGORY'				=> 'Rule category',
 	'ACP_BOARDRULES_ENABLE'					=> 'Enable board rules',
+	'ACP_BOARDRULES_HEADER_LINK'			=> 'Display board rules link in the header',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Require new users to accept rules at registration',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'This option will add a clause to the “Terms of Agreement” requiring newly registering users to read and accept the board rules at registration.',
 	'ACP_BOARDRULES_RULE'					=> 'Rule',
