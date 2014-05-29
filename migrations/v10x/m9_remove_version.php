@@ -10,10 +10,22 @@
 namespace phpbb\boardrules\migrations\v10x;
 
 /**
-* Migration stage 9: Update version
+* Migration stage 9: Remove version from database storage
 */
 class m9_update_version extends \phpbb\db\migration\migration
 {
+	/**
+	* Check if this migration is effectively installed
+	*
+	* @return bool True if config name does not exist, false otherwise
+	* @static
+	* @access public
+	*/
+	public function effectively_installed()
+	{
+		return !isset($this->config['boardrules_version']);
+	}
+
 	/**
 	* Assign migration file dependencies for this migration
 	*
@@ -35,7 +47,7 @@ class m9_update_version extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.update', array('boardrules_version', '1.0.0-b1')),
+			array('config.remove', array('boardrules_version')),
 		);
 	}
 }
