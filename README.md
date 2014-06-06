@@ -4,7 +4,7 @@ This is the repository for the development of the phpBB Board Rules Extension.
 
 [![Build Status](https://travis-ci.org/phpbb-extensions/boardrules.png)](https://travis-ci.org/phpbb-extensions/boardrules)
 
-## Installation
+## Quick Install
 You can install this on the latest copy of the develop branch ([phpBB 3.1-dev](https://github.com/phpbb/phpbb3)) by following the steps below:
 
 1. [Download the latest release](https://github.com/phpbb-extensions/boardrules/releases).
@@ -13,8 +13,9 @@ You can install this on the latest copy of the develop branch ([phpBB 3.1-dev](h
 4. Copy the `boardrules` folder to `phpBB/ext/phpbb/`
 5. Navigate in the ACP to `Customise -> Manage extensions`.
 6. Look for `Board Rules` under the Disabled Extensions list, and click its `Enable` link.
+7. Set up and configure Board Rules by navigating in the ACP to `Extensions` -> `Board Rules`.
 
-## Uninstallation
+## Uninstall
 
 1. Navigate in the ACP to `Customise -> Extension Management -> Extensions`.
 2. Look for `Board Rules` under the Enabled Extensions list, and click its `Disable` link.
