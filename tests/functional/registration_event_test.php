@@ -12,17 +12,24 @@ namespace phpbb\boardrules\tests\functional;
 /**
 * @group functional
 */
-class registration_event_test extends \extension_functional_test_case
+class registration_event_test extends \phpbb_functional_test_case
 {
+	/**
+	* Define the extensions to be tested
+	*
+	* @return array vendor/name of extension(s) to test
+	* @access static
+	*/
+	static protected function setup_extensions()
+	{
+		return array('phpbb/boardrules');
+	}
+
 	public function setUp()
 	{
 		parent::setUp();
-		$this->login();
-		$this->admin_login();
-		$this->set_extension('phpbb', 'boardrules', 'Board Rules');
-		$this->enable_extension();
 		$this->enable_boardrules();
-		$this->add_lang_ext(array('boardrules_common', 'boardrules_controller'));
+		$this->add_lang_ext('phpbb/boardrules', array('boardrules_common', 'boardrules_controller'));
 	}
 
 	/**
@@ -56,7 +63,6 @@ class registration_event_test extends \extension_functional_test_case
 	*/
 	public function test_boardrules_at_registration()
 	{
-		$this->logout();
 		$crawler = self::request('GET', 'ucp.php?mode=register');
 
 		$this->assertContains($this->lang('BOARDRULES_AGREEMENT'), $crawler->filter('.content')->text());
