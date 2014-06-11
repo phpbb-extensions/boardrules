@@ -266,9 +266,9 @@ class admin_controller implements admin_interface
 			'rule_title'		=> $this->request->variable('rule_title', '', true),
 			'rule_anchor'		=> $this->request->variable('rule_anchor', '', true),
 			'rule_message'		=> $this->request->variable('rule_message', '', true),
-			'bbcode'			=> $this->request->variable('enable_bbcode', 0),
-			'magic_url'			=> $this->request->variable('enable_magic_url', 0),
-			'smilies'			=> $this->request->variable('enable_smilies', 0),
+			'bbcode'			=> !$this->request->variable('disable_bbcode', false),
+			'magic_url'			=> !$this->request->variable('disable_magic_url', false),
+			'smilies'			=> !$this->request->variable('disable_smilies', false),
 			'rule_language'		=> $language,
 			'rule_parent_id'	=> $parent_id,
 		);
@@ -305,9 +305,9 @@ class admin_controller implements admin_interface
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
 			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
-			'bbcode'		=> $this->request->variable('enable_bbcode', 0),
-			'magic_url'		=> $this->request->variable('enable_magic_url', 0),
-			'smilies'		=> $this->request->variable('enable_smilies', 0),
+			'bbcode'		=> !$this->request->variable('disable_bbcode', false),
+			'magic_url'		=> !$this->request->variable('disable_magic_url', false),
+			'smilies'		=> !$this->request->variable('disable_smilies', false),
 		);
 
 		// Process the edited rule
@@ -439,9 +439,21 @@ class admin_controller implements admin_interface
 			'RULE_ANCHOR'		=> $entity->get_anchor(),
 			'RULE_MESSAGE'		=> $entity->get_message_for_edit(),
 
-			'S_MESSAGE_BBCODE_ENABLED'		=> $entity->message_bbcode_enabled(),
-			'S_MESSAGE_MAGIC_URL_ENABLED'	=> $entity->message_magic_url_enabled(),
-			'S_MESSAGE_SMILIES_ENABLED'		=> $entity->message_smilies_enabled(),
+			'S_BBCODE_DISABLE_CHECKED'		=> !$entity->message_bbcode_enabled(),
+			'S_SMILIES_DISABLE_CHECKED'		=> !$entity->message_smilies_enabled(),
+			'S_MAGIC_URL_DISABLE_CHECKED'	=> !$entity->message_magic_url_enabled(),
+
+			'BBCODE_STATUS'			=> $this->user->lang('BBCODE_IS_ON', '<a href="' . append_sid("{$this->root_path}faq.$this->php_ext", 'mode=bbcode') . '">', '</a>'),
+			'SMILIES_STATUS'		=> $this->user->lang('SMILIES_ARE_ON'),
+			'IMG_STATUS'			=> $this->user->lang('IMAGES_ARE_ON'),
+			'FLASH_STATUS'			=> $this->user->lang('FLASH_IS_ON'),
+			'URL_STATUS'			=> $this->user->lang('URL_IS_ON'),
+
+			'S_BBCODE_ALLOWED'		=> true,
+			'S_SMILIES_ALLOWED'		=> true,
+			'S_BBCODE_IMG'			=> true,
+			'S_BBCODE_FLASH'		=> true,
+			'S_LINKS_ALLOWED'		=> true,
 		));
 
 		// Assigning custom bbcodes
