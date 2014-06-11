@@ -12,8 +12,19 @@ namespace phpbb\boardrules\tests\operators;
 /**
 * Base rule operator test (helper)
 */
-class rule_operator_base extends \extension_database_test_case
+class rule_operator_base extends \phpbb_database_test_case
 {
+	/**
+	* Define the extensions to be tested
+	*
+	* @return array vendor/name of extension(s) to test
+	* @access static
+	*/
+	static protected function setup_extensions()
+	{
+		return array('phpbb/boardrules');
+	}
+
 	protected $config, $container, $db, $entity, $nestedset_rules;
 
 	public function getDataSet()

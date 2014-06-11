@@ -7,7 +7,9 @@
 *
 */
 
-class extension_system_exception_test extends phpbb_test_case
+namespace phpbb\boardrules\tests\system;
+
+class exception_test extends \phpbb_test_case
 {
 	/**
 	* Get an instance of phpbb\user
@@ -22,7 +24,7 @@ class extension_system_exception_test extends phpbb_test_case
 
 		// Must mock extension manager for the user class
 		global $phpbb_extension_manager, $phpbb_root_path;
-		$phpbb_extension_manager = new phpbb_mock_extension_manager($phpbb_root_path);
+		$phpbb_extension_manager = new \phpbb_mock_extension_manager($phpbb_root_path);
 
 		// Get instance of phpbb\user (dataProvider is called before setUp(), so this must be done here)
 		$this->user = new \phpbb\user();
@@ -90,7 +92,7 @@ class extension_system_exception_test extends phpbb_test_case
 
 			throw new $exception_name($message);
 		}
-		catch (phpbb\boardrules\exception\base $e)
+		catch (\phpbb\boardrules\exception\base $e)
 		{
 			$this->assertEquals($expected, $e->get_message($this->user));
 		}

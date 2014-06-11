@@ -12,17 +12,24 @@ namespace phpbb\boardrules\tests\functional;
 /**
 * @group functional
 */
-class boardrules_controller_test extends \extension_functional_test_case
+class boardrules_controller_test extends \phpbb_functional_test_case
 {
+	/**
+	* Define the extensions to be tested
+	*
+	* @return array vendor/name of extension(s) to test
+	* @access static
+	*/
+	static protected function setup_extensions()
+	{
+		return array('phpbb/boardrules');
+	}
+
 	public function setUp()
 	{
 		parent::setUp();
-		$this->login();
-		$this->admin_login();
-		$this->set_extension('phpbb', 'boardrules', 'Board Rules');
-		$this->enable_extension();
 		$this->enable_boardrules();
-		$this->add_lang_ext(array('boardrules_common', 'boardrules_controller'));
+		$this->add_lang_ext('phpbb/boardrules', array('boardrules_common', 'boardrules_controller'));
 	}
 
 	/**

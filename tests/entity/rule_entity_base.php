@@ -9,14 +9,26 @@
 
 namespace phpbb\boardrules\tests\entity;
 
+require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
 require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
 require_once dirname(__FILE__) . '/../../../../../includes/utf/utf_tools.php';
 
 /**
 * Base rule entity test (helper)
 */
-class rule_entity_base extends \extension_database_test_case
+class rule_entity_base extends \phpbb_database_test_case
 {
+	/**
+	* Define the extensions to be tested
+	*
+	* @return array vendor/name of extension(s) to test
+	* @access static
+	*/
+	static protected function setup_extensions()
+	{
+		return array('phpbb/boardrules');
+	}
+
 	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
