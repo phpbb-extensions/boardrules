@@ -1,7 +1,5 @@
 <!-- INCLUDE overall_header.html -->
 
-<a id="maincontent"></a>
-
 <!-- IF S_ADD_RULE or S_EDIT_RULE -->
 
 	<script type="text/javascript">
@@ -11,51 +9,12 @@
 		var text_name = 'rule_message';
 		var load_draft = false;
 		var upload = false;
-
-		// Define the bbCode tags
-		var bbcode = new Array();
-		var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
 		var imageTag = false;
-
-		// Helpline messages
-		var help_line = {
-			b: '{LA_BBCODE_B_HELP}',
-			i: '{LA_BBCODE_I_HELP}',
-			u: '{LA_BBCODE_U_HELP}',
-			q: '{LA_BBCODE_Q_HELP}',
-			c: '{LA_BBCODE_C_HELP}',
-			l: '{LA_BBCODE_L_HELP}',
-			o: '{LA_BBCODE_O_HELP}',
-			p: '{LA_BBCODE_P_HELP}',
-			w: '{LA_BBCODE_W_HELP}',
-			a: '{LA_BBCODE_A_HELP}',
-			s: '{LA_BBCODE_S_HELP}',
-			f: '{LA_BBCODE_F_HELP}',
-			y: '{LA_BBCODE_Y_HELP}',
-			d: '{LA_BBCODE_D_HELP}'
-			<!-- BEGIN custom_tags -->
-				,cb_{custom_tags.BBCODE_ID}{L_COLON} '{custom_tags.A_BBCODE_HELPLINE}'
-			<!-- END custom_tags -->
-		}
-
-		function change_palette()
-		{
-			phpbb.toggleDisplay('colour_palette');
-			e = document.getElementById('colour_palette');
-
-			if (e.style.display == 'block')
-			{
-				document.getElementById('bbpalette').value = '{LA_FONT_COLOR_HIDE}';
-			}
-			else
-			{
-				document.getElementById('bbpalette').value = '{LA_FONT_COLOR}';
-			}
-		}
 
 	// ]]>
 	</script>
-	<!-- INCLUDEJS {T_ASSETS_PATH}/javascript/editor.js -->
+
+	<a id="maincontent"></a>
 
 	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
 
@@ -94,49 +53,32 @@
 				<dt><label for="rule_anchor">{L_ACP_RULE_ANCHOR}{L_COLON}</label><br /><span>{L_ACP_RULE_ANCHOR_EXPLAIN}</span></dt>
 				<dd><input class="text medium" type="text" id="rule_anchor" name="rule_anchor" value="{RULE_ANCHOR}" maxlength="255" /></dd>
 			</dl>
-			<dl>
-				<dt><label for="rule_message">{L_ACP_RULE_MESSAGE}{L_COLON}</label><br /><span>{L_ACP_RULE_MESSAGE_EXPLAIN}</span></dt>
-				<dd>
-					<div id="colour_palette" style="display: none;">
-						{L_FONT_COLOR}{L_COLON}
-						<div id="color_palette_placeholder" data-orientation="h" data-height="12" data-width="15" data-bbcode="true"></div>
-					</div>
-					<div id="format-buttons">
-						<input type="button" class="button2" accesskey="b" name="addbbcode0" value=" B " style="font-weight:bold; width: 30px" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}" />
-						<input type="button" class="button2" accesskey="i" name="addbbcode2" value=" i " style="font-style:italic; width: 30px" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}" />
-						<input type="button" class="button2" accesskey="u" name="addbbcode4" value=" u " style="text-decoration: underline; width: 30px" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}" />
-						<input type="button" class="button2" accesskey="q" name="addbbcode6" value="Quote" style="width: 50px" onclick="bbstyle(6)" title="{L_BBCODE_Q_HELP}" />
-						<input type="button" class="button2" accesskey="c" name="addbbcode8" value="Code" style="width: 40px" onclick="bbstyle(8)" title="{L_BBCODE_C_HELP}" />
-						<input type="button" class="button2" accesskey="l" name="addbbcode10" value="List" style="width: 40px" onclick="bbstyle(10)" title="{L_BBCODE_L_HELP}" />
-						<input type="button" class="button2" accesskey="o" name="addbbcode12" value="List=" style="width: 40px" onclick="bbstyle(12)" title="{L_BBCODE_O_HELP}" />
-						<input type="button" class="button2" accesskey="y" name="addlistitem" value="[*]" style="width: 40px" onclick="bbstyle(-1)" title="{L_BBCODE_LISTITEM_HELP}" />
-						<input type="button" class="button2" accesskey="p" name="addbbcode14" value="Img" style="width: 40px" onclick="bbstyle(14)" title="{L_BBCODE_P_HELP}" />
-						<input type="button" class="button2" accesskey="w" name="addbbcode16" value="URL" style="text-decoration: underline; width: 40px" onclick="bbstyle(16)" title="{L_BBCODE_W_HELP}" />
-						<input type="button" class="button2" accesskey="d" name="addbbcode18" value="Flash" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
-						<select name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_BBCODE_F_HELP}">
-							<option value="50">{L_FONT_TINY}</option>
-							<option value="85">{L_FONT_SMALL}</option>
-							<option value="100" selected="selected">{L_FONT_NORMAL}</option>
-							<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 150 -->
-								<option value="150">{L_FONT_LARGE}</option>
-								<!-- IF not MAX_FONT_SIZE or MAX_FONT_SIZE >= 200 -->
-									<option value="200">{L_FONT_HUGE}</option>
-								<!-- ENDIF -->
-							<!-- ENDIF -->
-						</select>
-						<input type="button" class="button2 bbcode-color" name="bbpalette" id="bbpalette" value="{L_FONT_COLOR}" onclick="change_palette();" title="{L_BBCODE_S_HELP}" />
-						<!-- BEGIN custom_tags -->
-							<input type="button" class="button2" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
-						<!-- END custom_tags -->
-					</div>
-				</dd>
-				<dd><textarea id="rule_message" name="rule_message" rows="6" cols="70">{RULE_MESSAGE}</textarea></dd>
-				<dd><label><input type="checkbox" class="radio" value="1" name="enable_bbcode"<!-- IF S_MESSAGE_BBCODE_ENABLED or (S_ADD_RULE and not S_PREVIEW) --> checked="checked"<!-- ENDIF --> /> {L_PARSE_BBCODE}</label>
-					<label><input type="checkbox" class="radio" value="1" name="enable_smilies"<!-- IF S_MESSAGE_SMILIES_ENABLED or (S_ADD_RULE and not S_PREVIEW) --> checked="checked"<!-- ENDIF --> /> {L_PARSE_SMILIES}</label>
-					<label><input type="checkbox" class="radio" value="1" name="enable_magic_url"<!-- IF S_MESSAGE_MAGIC_URL_ENABLED or (S_ADD_RULE and not S_PREVIEW) --> checked="checked"<!-- ENDIF --> /> {L_PARSE_URLS}</label>
-				</dd>
-			</dl>
+		</fieldset>
 
+		<fieldset>
+			<legend>{L_ACP_RULE_MESSAGE}</legend>
+			<p>{L_ACP_RULE_MESSAGE_EXPLAIN}</p>
+
+			<!-- INCLUDE acp_posting_buttons.html -->
+
+			<dl class="responsive-columns">
+				<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-height="12" data-width="15" data-bbcode="true"></dt>
+				<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px;">
+					<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{RULE_MESSAGE}</textarea>
+				</dd>
+				<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 5px;">
+					<!-- IF S_BBCODE_ALLOWED -->
+						<label><input type="checkbox" class="radio" name="disable_bbcode"<!-- IF S_BBCODE_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) --> checked="checked"<!-- ENDIF --> /> {L_DISABLE_BBCODE}</label>
+					<!-- ENDIF -->
+					<!-- IF S_SMILIES_ALLOWED -->
+						<label><input type="checkbox" class="radio" name="disable_smilies"<!-- IF S_SMILIES_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) --> checked="checked"<!-- ENDIF --> /> {L_DISABLE_SMILIES}</label>
+					<!-- ENDIF -->
+					<!-- IF S_LINKS_ALLOWED -->
+						<label><input type="checkbox" class="radio" name="disable_magic_url"<!-- IF S_MAGIC_URL_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) --> checked="checked"<!-- ENDIF --> /> {L_DISABLE_MAGIC_URL}</label>
+					<!-- ENDIF -->
+				</dd>
+				<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 10px;"><strong>{L_OPTIONS}{L_COLON} </strong>{BBCODE_STATUS} :: {IMG_STATUS} :: {FLASH_STATUS} :: {URL_STATUS} :: {SMILIES_STATUS}</dd>
+			</dl>
 		</fieldset>
 
 		<fieldset class="submit-buttons">
