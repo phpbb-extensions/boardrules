@@ -15,6 +15,18 @@ namespace phpbb\boardrules\migrations\v10x;
 class m1_initial_schema extends \phpbb\db\migration\migration
 {
 	/**
+	* Assign migration file dependencies for this migration
+	*
+	* @return array Array of migration files
+	* @static
+	* @access public
+	*/
+	static public function depends_on()
+	{
+		return array('\phpbb\db\migration\data\v310\beta4');
+	}
+
+	/**
 	* Add the boardrules table schema to the database:
 	*    boardrules:
 	*        rule_id Rule identifier
