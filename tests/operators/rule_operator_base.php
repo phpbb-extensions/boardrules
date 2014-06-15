@@ -1,9 +1,10 @@
 <?php
 /**
 *
-* @package testing
-* @copyright (c) 2014 phpBB Group
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+* Board Rules extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
+* @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
 
