@@ -148,10 +148,14 @@ class main_controller implements main_interface
 
 		// Assign values to template vars for the rules page
 		$this->template->assign_vars(array(
-			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
-
 			'S_CATEGORIES'			=> ($cat_counter > 1) ? true : false,
-			'S_BOARDRULES_PAGE'		=> true,
+			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
+		));
+
+		// Assign breadcrumb template vars for the rules page
+		$this->template->assign_block_vars('navlinks', array(
+			'U_VIEW_FORUM'		=> $this->helper->route('boardrules_main_controller'),
+			'FORUM_NAME'		=> $this->user->lang('BOARDRULES'),
 		));
 
 		// Send all data to the template file
