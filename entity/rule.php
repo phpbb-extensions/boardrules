@@ -35,7 +35,7 @@ class rule implements rule_interface
 	*/
 	protected $data;
 
-	/** @var \phpbb\db\driver\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
 	/**
@@ -48,12 +48,12 @@ class rule implements rule_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\db\driver\driver    $db                 Database object
-	* @param string                     $boardrules_table   Name of the table used to store board rules data
+	* @param \phpbb\db\driver\driver_interface    $db                 Database object
+	* @param string                               $boardrules_table   Name of the table used to store board rules data
 	* @return null
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver $db, $boardrules_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, $boardrules_table)
 	{
 		$this->db = $db;
 		$this->boardrules_table = $boardrules_table;
