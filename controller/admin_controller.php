@@ -20,7 +20,7 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
 	/** @var \phpbb\request\request */
@@ -50,19 +50,19 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config $config                      Config object
-	* @param \phpbb\db\driver\driver $db                       Database object
-	* @param \phpbb\request\request $request                   Request object
-	* @param \phpbb\template\template $template                Template object
-	* @param \phpbb\user $user                                 User object
-	* @param Container $phpbb_container
-	* @param \phpbb\boardrules\operators\rule $rule_operator   Rule operator object
-	* @param string $root_path                                 phpBB root path
-	* @param string $php_ext                                   phpEx
+	* @param \phpbb\config\config                 $config          Config object
+	* @param \phpbb\db\driver\driver_interface    $db              Database object
+	* @param \phpbb\request\request               $request         Request object
+	* @param \phpbb\template\template             $template        Template object
+	* @param \phpbb\user                          $user            User object
+	* @param Container                            $phpbb_container Service container
+	* @param \phpbb\boardrules\operators\rule     $rule_operator   Rule operator object
+	* @param string                               $root_path       phpBB root path
+	* @param string                               $php_ext         phpEx
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->db = $db;

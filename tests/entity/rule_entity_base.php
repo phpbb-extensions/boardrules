@@ -30,7 +30,6 @@ class rule_entity_base extends \phpbb_database_test_case
 		return array('phpbb/boardrules');
 	}
 
-	/** @var \phpbb\db\driver\driver */
 	protected $db;
 
 	public function getDataSet()
