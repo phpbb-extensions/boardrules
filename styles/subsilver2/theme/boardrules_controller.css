@@ -8,31 +8,30 @@
 	overflow: hidden;
 }
 
-#main h3 {
-	color: #d21a4e;
-	font-size: 1em;
+.postbody h3 {
 	text-transform: none;
 	border-bottom: none;
 	margin-top: 5px;
 }
 
-#main ol {
-	font-size: 1.2em;
-	margin-left: 2em;
+.postbody p {
+	font-size: 1em;
+	line-height: 1.3em;
+	margin-bottom: 1.5em;
+}
+
+.postbody ol {
+	font-size: 1em;
+	margin-left: 1em;
 	line-height: 1.3em;
 }
 
-#main ol ol{ font-size: 1em; }
+.postbody ol ol{ font-size: 1em; }
 
 /* rules header */
 .boardrules-header {
 	color: #005784;
 	font-size: 2.8em;
-}
-
-.boardrules-explain {
-	font-size: 1.2em;
-	margin-bottom: 1em;
 }
 
 /* rules */
