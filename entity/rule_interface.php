@@ -37,7 +37,7 @@ interface rule_interface
 	* @param array $data Data array, typically from the database
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function import($data);
 
