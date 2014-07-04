@@ -31,11 +31,13 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.3",
-		"phpbb/phpbb": "3.1.*@dev"
+		"php": ">=5.3.3"
 	},
 	"extra": {
 		"display-name": "Board Rules",
+		"soft-require": {
+			"phpbb/phpbb": "3.1.*@dev"
+		},
 		"version-check": {
 			"host": "version.phpbb.com",
 			"directory": "/phpbb-extensions",
