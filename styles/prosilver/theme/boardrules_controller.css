@@ -8,37 +8,26 @@
 	overflow: hidden;
 }
 
-#main { font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif; }
-
-#main h3 {
-	color: #d21a4e;
-	font-size: 1em;
-	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+.content h3 {
 	text-transform: none;
 	border-bottom: none;
 	margin-top: 5px;
 }
 
-#main ol {
+.content ol {
 	font-size: 1.2em;
 	margin-left: 2em;
-	line-height: 1.3em;
+	line-height: 1.4em;
 }
 
-#main ol ol{ font-size: 1em; }
+.content ol ol{ font-size: 1em; }
 
 /* rules header */
 .boardrules-header {
 	color: #4f84ad;
 	font-size: 2.8em;
 	font-weight: 900;
-	font-family: "Helvetica", Arial, sans-serif;
-}
-
-.boardrules-explain {
-	font-size: 1.2em;
-	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-	margin-bottom: 1em;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
 /* rules */
