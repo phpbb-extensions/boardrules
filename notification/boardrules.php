@@ -77,13 +77,13 @@ class boardrules extends \phpbb\notification\type\base
 	}
 
 	/**
-	* Get the id of the rule
+	* Get the id of the notification
 	*
 	* @param array $data The data for the updated rules
 	*/
 	public static function get_item_id($data)
 	{
-		return $data['rule_id'];
+		return $data['notification_id'];
 	}
 
 	/**
@@ -150,7 +150,7 @@ class boardrules extends \phpbb\notification\type\base
 	*/
 	public function get_url()
 	{
-		$rule_id = ($this->item_id) ? array('#' => $this->item_id) : array();
+		$rule_id = ($this->get_data('rule_id')) ? array('#' => $this->get_data('rule_id')) : array();
 
 		return $this->helper->route('boardrules_main_controller', $rule_id);
 	}
