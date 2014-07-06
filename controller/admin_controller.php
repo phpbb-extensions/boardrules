@@ -544,6 +544,7 @@ class admin_controller implements admin_interface
 			// Store the notification data we will use in an array
 			$notification_data = array(
 				'rule_id'			=> $rule_id,
+				'notification_id'	=> $this->config['boardrules_notification'],
 			);
 
 			// Create the notification
@@ -553,6 +554,9 @@ class admin_controller implements admin_interface
 			// Log the notification
 			$phpbb_log = $this->phpbb_container->get('log');
 			$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_NOTIFY_LOG');
+
+			// Increment our notifications sent counter
+			$this->config->increment('boardrules_notification', 1);
 		}
 		else
 		{
