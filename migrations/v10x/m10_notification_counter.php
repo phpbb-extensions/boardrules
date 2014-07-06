@@ -36,7 +36,7 @@ class m10_notification_counter extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\boardrules\migrations\v10x\m9_remove_version');
+		return array('\phpbb\boardrules\migrations\v10x\m1_initial_schema');
 	}
 
 	/**
