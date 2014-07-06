@@ -24,7 +24,7 @@ class m3_add_schema extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\boardrules\migrations\v10x\m2_initial_data');
+		return array('\phpbb\boardrules\migrations\v10x\m1_initial_schema');
 	}
 
 	/**

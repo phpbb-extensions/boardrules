@@ -36,7 +36,7 @@ class m9_remove_version extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\boardrules\migrations\v10x\m8_header_link_option');
+		return array('\phpbb\boardrules\migrations\v10x\m2_initial_data');
 	}
 
 	/**
