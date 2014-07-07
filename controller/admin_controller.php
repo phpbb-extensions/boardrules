@@ -541,9 +541,13 @@ class admin_controller implements admin_interface
 		// Use a confirmation box routine when sending notifications
 		if (confirm_box(true))
 		{
+			// Increment our notifications sent counter
+			$this->config->increment('boardrules_notification', 1);
+
 			// Store the notification data we will use in an array
 			$notification_data = array(
 				'rule_id'			=> $rule_id,
+				'notification_id'	=> $this->config['boardrules_notification'],
 			);
 
 			// Create the notification
