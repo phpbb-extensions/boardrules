@@ -22,14 +22,6 @@
 
 .content ol ol{ font-size: 1em; }
 
-/* rules header */
-.boardrules-header {
-	color: #4f84ad;
-	font-size: 2.8em;
-	font-weight: 900;
-	font-family: Helvetica, Arial, sans-serif;
-}
-
 /* rules */
 #rules { padding-right: 50px; }
 #rules li { margin-bottom: 20px; }
