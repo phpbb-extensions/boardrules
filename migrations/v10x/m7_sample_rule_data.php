@@ -39,10 +39,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array(
-			'\phpbb\boardrules\migrations\v10x\m1_initial_schema',
-			'\phpbb\boardrules\migrations\v10x\m3_add_schema',
-		);
+		return array('\phpbb\boardrules\migrations\v10x\m3_add_schema');
 	}
 
 	/**
