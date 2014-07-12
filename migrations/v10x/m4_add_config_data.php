@@ -16,18 +16,6 @@ namespace phpbb\boardrules\migrations\v10x;
 class m4_add_config_data extends \phpbb\db\migration\migration
 {
 	/**
-	* Assign migration file dependencies for this migration
-	*
-	* @return array Array of migration files
-	* @static
-	* @access public
-	*/
-	static public function depends_on()
-	{
-		return array('\phpbb\boardrules\migrations\v10x\m3_add_schema');
-	}
-
-	/**
 	* Add or update data in the database
 	*
 	* @return array Array of table data
