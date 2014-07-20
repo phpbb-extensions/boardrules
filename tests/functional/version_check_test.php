@@ -29,7 +29,7 @@ class version_check_test extends \phpbb_functional_test_case
 	public function setUp()
 	{
 		parent::setUp();
-		$this->add_lang_ext('phpbb/boardrules', array('info_acp_boardrules'));
+		$this->add_lang_ext('phpbb/boardrules', array('boardrules_acp', 'info_acp_boardrules'));
 	}
 
 	/**
