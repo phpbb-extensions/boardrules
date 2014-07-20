@@ -18,6 +18,9 @@ class boardrules_module
 	{
 		global $phpbb_container, $request, $user;
 
+		// Add the board rules ACP lang file
+		$user->add_lang_ext('phpbb/boardrules', 'boardrules_acp');
+
 		// Get an instance of the admin controller
 		$admin_controller = $phpbb_container->get('phpbb.boardrules.admin.controller');
 
