@@ -106,7 +106,7 @@ class admin_controller implements admin_interface
 
 				// Add option settings change action to the admin log
 				$phpbb_log = $this->phpbb_container->get('log');
-				$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_SETTINGS_CHANGED');
+				$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_SETTINGS_LOG');
 
 				// Option settings have been updated and logged
 				// Confirm this to the user and provide link back to previous page
