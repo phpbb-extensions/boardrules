@@ -63,6 +63,8 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 	*/
 	public function insert_sample_rule_data()
 	{
+		global $user;
+
 		// Get the lang_id of the board's default language
 		$sql = 'SELECT lang_id
 			FROM ' . LANG_TABLE . "
@@ -71,12 +73,18 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 		$default_lang_id = (int) $this->db->sql_fetchfield('lang_id');
 		$this->db->sql_freeresult($result);
 
+		// Load the install lang file in the board's default lang
+		$user_lang_name = $user->lang_name;
+		$user->lang_name = basename($this->config['default_lang']);
+		$user->add_lang_ext('phpbb/boardrules', 'boardrules_install');
+		$user->lang_name = $user_lang_name;
+
 		// Define sample rule data
 		$sample_rule_data = array(
 			array(
-				'rule_title' => 'Example Rule Category',
-				'rule_message' => 'This is an example category in your Board Rules installation. Categories contain groups of related rules. Category messages (like this) are not displayed on the rules page.',
-				'rule_anchor' => 'example-rule-category',
+				'rule_title' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_TITLE'),
+				'rule_message' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_MESSAGE'),
+				'rule_anchor' => 'example-category',
 				'rule_id' => 1,
 				'rule_left_id' => 1,
 				'rule_right_id' => 4,
@@ -85,8 +93,8 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 				'rule_parents' => '',
 			),
 			array(
-				'rule_title' => 'Example Rule',
-				'rule_message' => 'This is an example rule in your Board Rules installation. Everything seems to be working. You may edit or delete this rule and category and continue to set up your own board rules.',
+				'rule_title' => $user->lang('BOARDRULES_SAMPLE_RULE_TITLE'),
+				'rule_message' => $user->lang('BOARDRULES_SAMPLE_RULE_MESSAGE'),
 				'rule_anchor' => 'example-rule',
 				'rule_id' => 2,
 				'rule_left_id' => 2,
