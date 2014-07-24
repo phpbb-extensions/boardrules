@@ -61,7 +61,7 @@ class boardrules_controller_test extends \phpbb_functional_test_case
 		$crawler = self::request('GET', 'app.php/rules');
 		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->filter('h2')->text());
 
-		$this->assertEquals(1, $crawler->filter('#example-rule-category')->count());
+		$this->assertEquals(1, $crawler->filter('#example-category')->count());
 		$this->assertEquals(1, $crawler->filter('#example-rule')->count());
 	}
 
