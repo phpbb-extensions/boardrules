@@ -70,6 +70,9 @@ class rule_entity_anchor_test extends rule_entity_base
 			// Starts with a non-letter
 			array('1foo'),
 
+			// Contains spaces
+			array('foo bar'),
+
 			// One character more than maximum length
 			array(
 				str_repeat('a', 256),
