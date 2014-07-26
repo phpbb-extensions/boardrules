@@ -476,8 +476,8 @@ class rule implements rule_interface
 		// Enforce a string
 		$anchor = (string) $anchor;
 
-		// Anchor should start with a letter to be a valid HTML id attribute
-		if (!preg_match('/^[a-z]+[a-z0-9_-]*$/i', $anchor) && $anchor != '')
+		// Anchor should not contain any special characters
+		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $anchor) && $anchor != '')
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}

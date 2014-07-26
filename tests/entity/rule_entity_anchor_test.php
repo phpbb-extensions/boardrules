@@ -26,6 +26,8 @@ class rule_entity_anchor_test extends rule_entity_base
 		return array(
 			// sent to set_anchor(), expected from get_anchor()
 			array('foo', 'foo'),
+			array('foø-bar', 'foø-bar'),
+			array('foó-bar', 'foó-bar'),
 			array('', ''),
 			array(null, ''),
 
@@ -67,16 +69,24 @@ class rule_entity_anchor_test extends rule_entity_base
 	public function anchor_fails_test_data()
 	{
 		return array(
-			// Starts with a non-letter
-			array('1foo'),
+			// Starts with illegal characters
 			array('#foo'),
 			array(' foo'),
 
 			// Contains illegal characters
 			array('foo bar'),
 			array('foo?bar'),
-			array('foø-bar'),
-			array('foó-bar'),
+			array('foo#bar'),
+			array('foo&bar'),
+			array('foo$bar'),
+			array('foo/bar'),
+			array('foo@bar'),
+			array('foo=bar'),
+			array('foo+bar'),
+			array('foo^bar'),
+			array('foo*bar'),
+			array('foo\'bar'),
+			array('foo\\bar'),
 
 			// Exceeds character maximum length
 			array(

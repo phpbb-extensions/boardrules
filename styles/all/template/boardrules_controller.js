@@ -13,7 +13,7 @@
 
 		// Function to apply highlight class to an element identifier
 		function highlight(id) {
-			$("#" + id).addClass("highlight");
+			$("#" + decodeURIComponent(id)).addClass("highlight");
 		}
 
 	});
