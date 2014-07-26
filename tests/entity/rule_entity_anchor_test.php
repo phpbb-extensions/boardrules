@@ -69,11 +69,16 @@ class rule_entity_anchor_test extends rule_entity_base
 		return array(
 			// Starts with a non-letter
 			array('1foo'),
+			array('#foo'),
+			array(' foo'),
 
-			// Contains spaces
+			// Contains illegal characters
 			array('foo bar'),
+			array('foo?bar'),
+			array('foø-bar'),
+			array('foó-bar'),
 
-			// One character more than maximum length
+			// Exceeds character maximum length
 			array(
 				str_repeat('a', 256),
 			),
