@@ -65,7 +65,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 	{
 		global $user;
 
-		// Get the lang_id of the admin installing boar rules
+		// Get the lang_id of the admin installing board rules
 		$lang_id = $user->get_iso_lang_id();
 
 		// Load the installation lang file
