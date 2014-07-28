@@ -65,19 +65,11 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 	{
 		global $user;
 
-		// Get the lang_id of the board's default language
-		$sql = 'SELECT lang_id
-			FROM ' . LANG_TABLE . "
-			WHERE lang_iso = '" . $this->db->sql_escape($this->config['default_lang']) . "'";
-		$result = $this->db->sql_query($sql);
-		$default_lang_id = (int) $this->db->sql_fetchfield('lang_id');
-		$this->db->sql_freeresult($result);
+		// Get the lang_id of the admin installing boar rules
+		$lang_id = $user->get_iso_lang_id();
 
-		// Load the install lang file in the board's default lang
-		$user_lang_name = $user->lang_name;
-		$user->lang_name = basename($this->config['default_lang']);
+		// Load the installation lang file
 		$user->add_lang_ext('phpbb/boardrules', 'boardrules_install');
-		$user->lang_name = $user_lang_name;
 
 		// Define sample rule data
 		$sample_rule_data = array(
@@ -89,7 +81,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 				'rule_left_id' => 1,
 				'rule_right_id' => 4,
 				'rule_parent_id' => 0,
-				'rule_language' => $default_lang_id,
+				'rule_language' => $lang_id,
 				'rule_parents' => '',
 			),
 			array(
@@ -100,7 +92,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 				'rule_left_id' => 2,
 				'rule_right_id' => 3,
 				'rule_parent_id' => 1,
-				'rule_language' => $default_lang_id,
+				'rule_language' => $lang_id,
 				'rule_parents' => '',
 			),
 		);
