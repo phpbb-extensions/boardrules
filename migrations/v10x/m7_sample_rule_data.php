@@ -76,7 +76,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 			array(
 				'rule_title' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_TITLE'),
 				'rule_message' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_MESSAGE'),
-				'rule_anchor' => 'example-category',
+				'rule_anchor' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_ANCHOR'),
 				'rule_id' => 1,
 				'rule_left_id' => 1,
 				'rule_right_id' => 4,
@@ -87,7 +87,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 			array(
 				'rule_title' => $user->lang('BOARDRULES_SAMPLE_RULE_TITLE'),
 				'rule_message' => $user->lang('BOARDRULES_SAMPLE_RULE_MESSAGE'),
-				'rule_anchor' => 'example-rule',
+				'rule_anchor' => $user->lang('BOARDRULES_SAMPLE_RULE_ANCHOR'),
 				'rule_id' => 2,
 				'rule_left_id' => 2,
 				'rule_right_id' => 3,

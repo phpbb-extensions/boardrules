@@ -40,6 +40,9 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Example Rule Category',
 	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'This is an example category in your Board Rules installation. Categories contain groups of related rules. Category messages (like this) are not displayed on the rules page.',
+	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'example-category',
+
 	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Example Rule',
 	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'This is an example rule in your Board Rules installation. Everything seems to be working. You may edit or delete this rule and category and continue to set up your own board rules.',
+	'BOARDRULES_SAMPLE_RULE_ANCHOR'			=> 'example-rule',
 ));
