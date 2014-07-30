@@ -63,36 +63,36 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 	*/
 	public function insert_sample_rule_data()
 	{
-		// Get the lang_id of the board's default language
-		$sql = 'SELECT lang_id
-			FROM ' . LANG_TABLE . "
-			WHERE lang_iso = '" . $this->db->sql_escape($this->config['default_lang']) . "'";
-		$result = $this->db->sql_query($sql);
-		$default_lang_id = (int) $this->db->sql_fetchfield('lang_id');
-		$this->db->sql_freeresult($result);
+		global $user;
+
+		// Get the lang_id of the admin installing board rules
+		$lang_id = $user->get_iso_lang_id();
+
+		// Load the installation lang file
+		$user->add_lang_ext('phpbb/boardrules', 'boardrules_install');
 
 		// Define sample rule data
 		$sample_rule_data = array(
 			array(
-				'rule_title' => 'Example Rule Category',
-				'rule_message' => 'This is an example category in your Board Rules installation. Categories contain groups of related rules. Category messages (like this) are not displayed on the rules page.',
-				'rule_anchor' => 'example-rule-category',
+				'rule_title' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_TITLE'),
+				'rule_message' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_MESSAGE'),
+				'rule_anchor' => $user->lang('BOARDRULES_SAMPLE_CATEGORY_ANCHOR'),
 				'rule_id' => 1,
 				'rule_left_id' => 1,
 				'rule_right_id' => 4,
 				'rule_parent_id' => 0,
-				'rule_language' => $default_lang_id,
+				'rule_language' => $lang_id,
 				'rule_parents' => '',
 			),
 			array(
-				'rule_title' => 'Example Rule',
-				'rule_message' => 'This is an example rule in your Board Rules installation. Everything seems to be working. You may edit or delete this rule and category and continue to set up your own board rules.',
-				'rule_anchor' => 'example-rule',
+				'rule_title' => $user->lang('BOARDRULES_SAMPLE_RULE_TITLE'),
+				'rule_message' => $user->lang('BOARDRULES_SAMPLE_RULE_MESSAGE'),
+				'rule_anchor' => $user->lang('BOARDRULES_SAMPLE_RULE_ANCHOR'),
 				'rule_id' => 2,
 				'rule_left_id' => 2,
 				'rule_right_id' => 3,
 				'rule_parent_id' => 1,
-				'rule_language' => $default_lang_id,
+				'rule_language' => $lang_id,
 				'rule_parents' => '',
 			),
 		);
