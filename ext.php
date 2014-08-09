@@ -27,7 +27,8 @@ namespace phpbb\boardrules;
 class ext extends \phpbb\extension\base
 {
 	/**
-	* Single enable step that installs any included migrations
+	* Overwrite enable_step to enable board rules notifications
+	* before any included migrations are installed.
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return mixed Returns false after last step, otherwise temporary state
@@ -55,7 +56,8 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	* Single disable step that does nothing
+	* Overwrite disable_step to disable board rules notifications
+	* before the extension is disabled.
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return mixed Returns false after last step, otherwise temporary state
@@ -83,7 +85,8 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	* Single purge step that reverts any included and installed migrations
+	* Overwrite purge_step to purge board rules notifications before 
+	* any included and installed migrations are reverted.
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return mixed Returns false after last step, otherwise temporary state
