@@ -96,14 +96,14 @@
 	<p>{L_ACP_BOARDRULES_MANAGE_EXPLAIN}</p>
 
 	<!-- IF .options -->
-	<form id="language" method="post" action="{U_ACTION}">
+	<form id="language_form" method="post" action="{U_ACTION}">
 		<fieldset>
 			<dl>
 				<dt>
 					<label for="language">{L_ACP_BOARDRULES_SELECT_LANGUAGE}{L_COLON}</label>
 				</dt>
 				<dd>
-					<select name="language">
+					<select name="language" id="language">
 						<!-- BEGIN options -->
 							<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
 						<!-- END options -->
