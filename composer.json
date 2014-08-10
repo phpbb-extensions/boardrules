@@ -9,7 +9,6 @@
 	"authors": [
 		{
 			"name": "Nathan Guse",
-			"username": "EXreaction",
 			"email": "nathaniel.guse@gmail.com",
 			"role": "Extensions Development Team Lead"
 		},
@@ -26,7 +25,6 @@
 		},
 		{
 			"name": "Lukasz Kaczynski",
-			"username": "Pico88",
 			"role": "Extensions Development Team"
 		}
 	],
