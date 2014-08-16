@@ -154,7 +154,7 @@ class main_controller implements main_interface
 
 		// Assign breadcrumb template vars for the rules page
 		$this->template->assign_block_vars('navlinks', array(
-			'U_VIEW_FORUM'		=> $this->helper->route('boardrules_main_controller'),
+			'U_VIEW_FORUM'		=> $this->helper->route('phpbb_boardrules_main_controller'),
 			'FORUM_NAME'		=> $this->user->lang('BOARDRULES'),
 		));
 
