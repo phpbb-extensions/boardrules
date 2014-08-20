@@ -100,7 +100,7 @@ class listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'S_BOARDRULES_LINK_ENABLED' => (!empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_header_link'])) ? true : false,
 			'S_BOARDRULES_AT_REGISTRATION' => (!empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_require_at_registration'])) ? true : false,
-			'U_BOARDRULES' => $this->controller_helper->route('boardrules_main_controller'),
+			'U_BOARDRULES' => $this->controller_helper->route('phpbb_boardrules_main_controller'),
 		));
 	}
 
@@ -132,7 +132,7 @@ class listener implements EventSubscriberInterface
 			if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/rules') === 0)
 			{
 				$event['location'] = $this->user->lang('BOARDRULES_VIEWONLINE');
-				$event['location_url'] = $this->controller_helper->route('boardrules_main_controller');
+				$event['location_url'] = $this->controller_helper->route('phpbb_boardrules_main_controller');
 			}
 		}
 	}

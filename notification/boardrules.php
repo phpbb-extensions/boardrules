@@ -152,7 +152,7 @@ class boardrules extends \phpbb\notification\type\base
 	{
 		$rule_id = ($this->get_data('rule_id')) ? array('#' => $this->get_data('rule_id')) : array();
 
-		return $this->helper->route('boardrules_main_controller', $rule_id);
+		return $this->helper->route('phpbb_boardrules_main_controller', $rule_id);
 	}
 
 	/**

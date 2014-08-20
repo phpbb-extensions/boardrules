@@ -37,7 +37,7 @@ class event_listener_test extends \phpbb_test_case
 		$this->php_ext = $phpEx;
 		$this->config = new \phpbb\config\config(array());
 		$this->template = new \phpbb\boardrules\tests\mock\template();
-		$this->user = new \phpbb\user;
+		$this->user = new \phpbb\user('\phpbb\datetime');
 		$this->controller_helper = new \phpbb_mock_controller_helper(
 			$this->template,
 			$this->user,

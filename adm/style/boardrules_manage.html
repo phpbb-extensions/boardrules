@@ -2,16 +2,12 @@
 
 <!-- IF S_ADD_RULE or S_EDIT_RULE -->
 
-	<script type="text/javascript">
-	// <![CDATA[
-
+	<script>
 		var form_name = 'add_edit_rule';
 		var text_name = 'rule_message';
 		var load_draft = false;
 		var upload = false;
 		var imageTag = false;
-
-	// ]]>
 	</script>
 
 	<a id="maincontent"></a>
@@ -96,14 +92,14 @@
 	<p>{L_ACP_BOARDRULES_MANAGE_EXPLAIN}</p>
 
 	<!-- IF .options -->
-	<form id="language" method="post" action="{U_ACTION}">
+	<form id="language_form" method="post" action="{U_ACTION}">
 		<fieldset>
 			<dl>
 				<dt>
 					<label for="language">{L_ACP_BOARDRULES_SELECT_LANGUAGE}{L_COLON}</label>
 				</dt>
 				<dd>
-					<select name="language">
+					<select name="language" id="language">
 						<!-- BEGIN options -->
 							<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
 						<!-- END options -->

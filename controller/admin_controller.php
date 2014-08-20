@@ -171,6 +171,9 @@ class admin_controller implements admin_interface
 					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
 				));
 			}
+
+			// Set u_action variable for the template form
+			$this->template->assign_var('U_ACTION', $this->u_action);
 		}
 		else
 		{

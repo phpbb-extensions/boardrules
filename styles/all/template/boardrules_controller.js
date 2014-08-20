@@ -1,21 +1,21 @@
-(function($, window, document) {  // Avoid conflicts with other libraries
+(function($) {  // Avoid conflicts with other libraries
 
-	$(document).ready(function () {
+'use strict';
 
-		// Apply highlight on page load
-		highlight(window.location.hash.substring(1));
+$(function() {
+	// Function to apply highlight class to an element identifier
+	var highlight = function (id) {
+		$('#' + decodeURIComponent(id)).addClass('highlight');
+	};
 
-		// Apply highlight to clicked rule anchor
-		$(".rule-anchor").on("click", function () {
-			$("li").removeClass("highlight");
-			highlight($(this).closest(".rule-item").attr("id"));
-		});
-
-		// Function to apply highlight class to an element identifier
-		function highlight(id) {
-			$("#" + decodeURIComponent(id)).addClass("highlight");
-		}
-
+	// Apply highlight to clicked rule anchor
+	$('.rule-anchor').on('click', function () {
+		$('li').removeClass('highlight');
+		highlight($(this).closest('.rule-item').attr('id'));
 	});
 
-})(jQuery, window, document);
+	// Apply highlight on page load to a rule category
+	highlight(window.location.hash.substring(1));
+});
+
+})(jQuery); // Avoid conflicts with other libraries
