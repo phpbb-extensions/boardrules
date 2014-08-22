@@ -555,7 +555,7 @@ class admin_controller implements admin_interface
 
 			// Create the notification
 			$phpbb_notifications = $this->phpbb_container->get('notification_manager');
-			$phpbb_notifications->add_notifications('boardrules', $notification_data);
+			$phpbb_notifications->add_notifications('phpbb.boardrules.notification.type.boardrules', $notification_data);
 
 			// Log the notification
 			$phpbb_log = $this->phpbb_container->get('log');
