@@ -477,7 +477,7 @@ class rule implements rule_interface
 		$anchor = (string) $anchor;
 
 		// Anchor should not contain any special characters
-		if (!preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $anchor) && $anchor != '')
+		if (($anchor != '') && !preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $anchor))
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}
@@ -486,6 +486,23 @@ class rule implements rule_interface
 		if (truncate_string($anchor, 255) != $anchor)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
+		}
+
+		// Make sure rule anchors are unique
+		if (!$this->get_id() || ($this->get_id() && $this->get_anchor() !== '' && $this->get_anchor() != $anchor))
+		{
+			$sql = 'SELECT 1
+				FROM ' . $this->boardrules_table . "
+				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
+					AND rule_id <> " . $this->get_id();
+			$result = $this->db->sql_query_limit($sql, 1);
+			$row = $this->db->sql_fetchrow($result);
+			$this->db->sql_freeresult($result);
+
+			if ($row)
+			{
+				throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'NOT_UNIQUE'));
+			}
 		}
 
 		// Set the anchor on our data array

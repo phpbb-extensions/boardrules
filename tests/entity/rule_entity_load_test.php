@@ -10,7 +10,10 @@
 
 namespace phpbb\boardrules\tests\entity;
 
-class entity_test extends rule_entity_base
+/**
+* Tests related to load on rule entity
+*/
+class rule_entity_load_test extends rule_entity_base
 {
 	/**
 	* Test data for the test_load() function
@@ -30,13 +33,9 @@ class entity_test extends rule_entity_base
 					'rule_left_id' => 1,
 					'rule_right_id' => 2,
 					'rule_parent_id' => 0,
-					'rule_parents' => '',
 					'rule_anchor' => 'anchor_1',
 					'rule_title' => 'title_1',
 					'rule_message' => 'message_1',
-					'rule_message_bbcode_uid' => '',
-					'rule_message_bbcode_bitfield' => '',
-					'rule_message_bbcode_options' => 0,
 				),
 			),
 			array(
@@ -47,13 +46,9 @@ class entity_test extends rule_entity_base
 					'rule_left_id' => 3,
 					'rule_right_id' => 4,
 					'rule_parent_id' => 0,
-					'rule_parents' => '',
 					'rule_anchor' => 'anchor_2',
 					'rule_title' => 'title_2',
 					'rule_message' => 'message_2',
-					'rule_message_bbcode_uid' => '',
-					'rule_message_bbcode_bitfield' => '',
-					'rule_message_bbcode_options' => 7,
 				),
 			),
 			array(
@@ -64,13 +59,9 @@ class entity_test extends rule_entity_base
 					'rule_left_id' => 5,
 					'rule_right_id' => 6,
 					'rule_parent_id' => 0,
-					'rule_parents' => '',
 					'rule_anchor' => 'anchor_3',
 					'rule_title' => 'title_3',
 					'rule_message' => 'message_3',
-					'rule_message_bbcode_uid' => '',
-					'rule_message_bbcode_bitfield' => '',
-					'rule_message_bbcode_options' => 7,
 				),
 			),
 		);
@@ -102,6 +93,7 @@ class entity_test extends rule_entity_base
 			'rule_parent_id'=> 'get_parent_id',
 			'rule_anchor'	=> 'get_anchor',
 			'rule_title'	=> 'get_title',
+			'rule_message'	=> 'get_message_for_edit',
 		);
 
 		// Go through each field in the data and make sure the function returns
