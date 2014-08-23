@@ -27,36 +27,22 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 		);
 	}
 
-	public function revert_data()
-	{
-		return array(
-			array('custom', array(array($this, 'revert_notifications_name'))),
-		);
-	}
-
 	public function update_notifications_name()
 	{
-		$sql = 'UPDATE ' . NOTIFICATION_TYPES_TABLE . "
-			SET notification_type_name = 'phpbb.boardrules.notification.type.boardrules'
+		// New notification_type_name and re-enable
+		$sql_ary = array(
+			'notification_type_name'	=> 'phpbb.boardrules.notification.type.boardrules',
+			'notification_type_enabled'	=> 1,
+		);
+
+		$sql = 'UPDATE ' . NOTIFICATION_TYPES_TABLE . '
+			SET ' . $this->db->sql_build_array('UPDATE', $sql_ary) . "
 			WHERE notification_type_name = 'boardrules'";
 		$this->db->sql_query($sql);
 
 		$sql = 'UPDATE ' . USER_NOTIFICATIONS_TABLE . "
-			SET item_type = 'phpbb.boardrules.notification.type.boardrules'
+			SET item_type = '" . $sql_ary['notification_type_name'] . "'
 			WHERE item_type = 'boardrules'";
-		$this->db->sql_query($sql);
-	}
-
-	public function revert_notifications_name()
-	{
-		$sql = 'UPDATE ' . NOTIFICATION_TYPES_TABLE . "
-			SET notification_type_name = 'boardrules'
-			WHERE notification_type_name = 'phpbb.boardrules.notification.type.boardrules'";
-		$this->db->sql_query($sql);
-
-		$sql = 'UPDATE ' . USER_NOTIFICATIONS_TABLE . "
-			SET item_type = 'boardrules'
-			WHERE item_type = 'phpbb.boardrules.notification.type.boardrules'";
 		$this->db->sql_query($sql);
 	}
 }
