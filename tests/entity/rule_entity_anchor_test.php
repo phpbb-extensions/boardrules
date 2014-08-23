@@ -88,10 +88,32 @@ class rule_entity_anchor_test extends rule_entity_base
 			array('foo\'bar'),
 			array('foo\\bar'),
 
+			// Only illegal chars
+			array('%'),
+			array('('),
+			array(')'),
+			array('['),
+			array(']'),
+			array('{'),
+			array('}'),
+			array('!'),
+			array('<'),
+			array('>'),
+			array(','),
+			array(';'),
+			array('"'),
+			array('`'),
+			array('~'),
+			array('|'),
+			array(':'),
+
 			// Exceeds character maximum length
 			array(
 				str_repeat('a', 256),
 			),
+
+			// Anchor is not unique
+			array('anchor_1'),
 		);
 	}
 
