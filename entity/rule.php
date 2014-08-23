@@ -493,7 +493,7 @@ class rule implements rule_interface
 		{
 			$sql = 'SELECT 1
 				FROM ' . $this->boardrules_table . "
-				WHERE rule_anchor = '" . $anchor .  "'
+				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
 					AND rule_id <> " . $this->get_id();
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
