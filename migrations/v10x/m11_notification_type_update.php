@@ -41,7 +41,7 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 		$this->db->sql_query($sql);
 
 		$sql = 'UPDATE ' . USER_NOTIFICATIONS_TABLE . "
-			SET item_type = '" . $sql_ary['notification_type_name'] . "'
+			SET item_type = '" . $this->db->sql_escape($sql_ary['notification_type_name']) . "'
 			WHERE item_type = 'boardrules'";
 		$this->db->sql_query($sql);
 	}
