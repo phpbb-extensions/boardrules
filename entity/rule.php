@@ -111,7 +111,7 @@ class rule implements rule_interface
 			'rule_right_id'						=> 'integer',
 			'rule_parent_id'					=> 'integer',
 			'rule_parents'						=> 'string',
-			'rule_anchor'						=> 'set_anchor', // call set_anchor()
+			'rule_anchor'						=> 'string',
 			'rule_title'						=> 'set_title', // call set_title()
 
 			// We do not pass to set_message() as generate_text_for_storage would run twice
@@ -489,7 +489,9 @@ class rule implements rule_interface
 		}
 
 		// Make sure rule anchors are unique
-		if (!$this->get_id() || ($this->get_id() && $this->get_anchor() !== '' && $this->get_anchor() != $anchor))
+		// Test if new page and anchor field has data or...
+		//    if existing page and anchor field has new data not equal to exisiting anchor data
+		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
 		{
 			$sql = 'SELECT 1
 				FROM ' . $this->boardrules_table . "
