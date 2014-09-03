@@ -41,7 +41,7 @@ class rule_operator_base extends \phpbb_database_test_case
 		$db = $this->db;
 
 		// mock container for the entity service
-		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\Container');
+		$this->container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
 		$this->container->expects($this->any())
 			->method('get')
 			->with('phpbb.boardrules.entity')
