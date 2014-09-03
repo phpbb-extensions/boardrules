@@ -115,7 +115,7 @@ class rule_entity_load_test extends rule_entity_base
 		return array(
 			// id to search
 			array(0),
-			array(4),
+			array(10),
 		);
 	}
 
