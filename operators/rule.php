@@ -10,15 +10,15 @@
 
 namespace phpbb\boardrules\operators;
 
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
 * Operator for a set of rules
 */
 class rule implements rule_interface
 {
-	/** @var Container */
-	protected $phpbb_container;
+	/** @var ContainerInterface */
+	protected $container;
 
 	/**
 	* Nestedset for board rules
@@ -30,14 +30,14 @@ class rule implements rule_interface
 	/**
 	* Constructor
 	*
-	* @param Container $phpbb_container
+	* @param ContainerInterface $container Service container interface
 	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
 	* @return \phpbb\boardrules\operators\rule
 	* @access public
 	*/
-	public function __construct(Container $phpbb_container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules)
+	public function __construct(ContainerInterface $container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules)
 	{
-		$this->phpbb_container = $phpbb_container;
+		$this->container = $container;
 		$this->nestedset_rules = $nestedset_rules;
 	}
 
@@ -61,7 +61,7 @@ class rule implements rule_interface
 		// Import each rule into an entity, and store them in an array
 		foreach ($rowset as $row)
 		{
-			$entities[] = $this->phpbb_container->get('phpbb.boardrules.entity')
+			$entities[] = $this->container->get('phpbb.boardrules.entity')
 				->import($row);
 		}
 
@@ -168,7 +168,7 @@ class rule implements rule_interface
 		// Import each rule into an entity, and store them in an array
 		foreach ($rowset as $row)
 		{
-			$entities[] = $this->phpbb_container->get('phpbb.boardrules.entity')
+			$entities[] = $this->container->get('phpbb.boardrules.entity')
 				->import($row);
 		}
 		return $entities;

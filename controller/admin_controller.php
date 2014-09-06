@@ -10,7 +10,7 @@
 
 namespace phpbb\boardrules\controller;
 
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
 * Admin controller
@@ -32,8 +32,8 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var Container */
-	protected $phpbb_container;
+	/** @var ContainerInterface */
+	protected $container;
 
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
@@ -55,21 +55,21 @@ class admin_controller implements admin_interface
 	* @param \phpbb\request\request               $request         Request object
 	* @param \phpbb\template\template             $template        Template object
 	* @param \phpbb\user                          $user            User object
-	* @param Container                            $phpbb_container Service container
+	* @param ContainerInterface                   $container       Service container interface
 	* @param \phpbb\boardrules\operators\rule     $rule_operator   Rule operator object
 	* @param string                               $root_path       phpBB root path
 	* @param string                               $php_ext         phpEx
 	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, Container $phpbb_container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->db = $db;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
-		$this->phpbb_container = $phpbb_container;
+		$this->container = $container;
 		$this->rule_operator = $rule_operator;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
@@ -105,7 +105,7 @@ class admin_controller implements admin_interface
 				$this->set_options();
 
 				// Add option settings change action to the admin log
-				$phpbb_log = $this->phpbb_container->get('log');
+				$phpbb_log = $this->container->get('log');
 				$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_SETTINGS_LOG');
 
 				// Option settings have been updated and logged
@@ -263,7 +263,7 @@ class admin_controller implements admin_interface
 		add_form_key('add_edit_rule');
 
 		// Initiate a rule entity
-		$entity = $this->phpbb_container->get('phpbb.boardrules.entity');
+		$entity = $this->container->get('phpbb.boardrules.entity');
 
 		// Collect the form data
 		$data = array(
@@ -302,7 +302,7 @@ class admin_controller implements admin_interface
 		add_form_key('add_edit_rule');
 
 		// Initiate and load the rule entity
-		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Collect the form data
 		$data = array(
@@ -476,7 +476,7 @@ class admin_controller implements admin_interface
 	public function delete_rule($rule_id)
 	{
 		// Initiate and load the rule entity
-		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Use a confirmation box routine when deleting a rule
 		if (confirm_box(true))
@@ -526,7 +526,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Initiate and load the rule entity for no AJAX request
-		$entity = $this->phpbb_container->get('phpbb.boardrules.entity')->load($rule_id);
+		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Use a redirect to reload the current page
 		redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
@@ -554,11 +554,11 @@ class admin_controller implements admin_interface
 			);
 
 			// Create the notification
-			$phpbb_notifications = $this->phpbb_container->get('notification_manager');
+			$phpbb_notifications = $this->container->get('notification_manager');
 			$phpbb_notifications->add_notifications('phpbb.boardrules.notification.type.boardrules', $notification_data);
 
 			// Log the notification
-			$phpbb_log = $this->phpbb_container->get('log');
+			$phpbb_log = $this->container->get('log');
 			$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_NOTIFY_LOG');
 		}
 		else

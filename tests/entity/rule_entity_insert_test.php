@@ -38,8 +38,8 @@ class rule_entity_insert_test extends rule_entity_base
 		// Assert the returned value is what we expect
 		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
-		// Assert that a rule_id of value 4 was created
-		$this->assertEquals(4, $result->get_id());
+		// Assert that a rule_id of value 5 was created
+		$this->assertEquals(5, $result->get_id());
 	}
 
 	/**
