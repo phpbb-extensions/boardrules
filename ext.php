@@ -41,7 +41,7 @@ class ext extends \phpbb\extension\base
 
 				// Enable board rules notifications
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->enable_notifications('boardrules');
+				$phpbb_notifications->enable_notifications('phpbb.boardrules.notification.type.boardrules');
 				return 'notifications';
 
 			break;
@@ -70,7 +70,7 @@ class ext extends \phpbb\extension\base
 
 				// Disable board rules notifications
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->disable_notifications('boardrules');
+				$phpbb_notifications->disable_notifications('phpbb.boardrules.notification.type.boardrules');
 				return 'notifications';
 
 			break;
@@ -85,7 +85,7 @@ class ext extends \phpbb\extension\base
 	}
 
 	/**
-	* Overwrite purge_step to purge board rules notifications before 
+	* Overwrite purge_step to purge board rules notifications before
 	* any included and installed migrations are reverted.
 	*
 	* @param mixed $old_state State returned by previous call of this method
@@ -99,7 +99,7 @@ class ext extends \phpbb\extension\base
 
 				// Purge board rules notifications
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->purge_notifications('boardrules');
+				$phpbb_notifications->purge_notifications('phpbb.boardrules.notification.type.boardrules');
 				return 'notifications';
 
 			break;

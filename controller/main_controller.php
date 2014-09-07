@@ -68,7 +68,7 @@ class main_controller implements main_interface
 	*/
 	public function display()
 	{
-		// When board rules are disbaled, redirect users back to the forum index
+		// When board rules are disabled, redirect users back to the forum index
 		if (empty($this->config['boardrules_enable']))
 		{
 			redirect(append_sid("{$this->root_path}index.$this->php_ext"));

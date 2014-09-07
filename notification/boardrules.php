@@ -63,7 +63,7 @@ class boardrules extends \phpbb\notification\type\base
 	*/
 	public function get_type()
 	{
-		return 'boardrules';
+		return 'phpbb.boardrules.notification.type.boardrules';
 	}
 
 	/**

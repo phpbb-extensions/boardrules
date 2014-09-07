@@ -64,7 +64,7 @@ services:
             - @config
             - @dbal.conn
 
-    notification.type.boardrules:
+    phpbb.boardrules.notification.type.boardrules:
         class: phpbb\boardrules\notification\boardrules
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
