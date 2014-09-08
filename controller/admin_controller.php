@@ -131,9 +131,9 @@ class admin_controller implements admin_interface
 	* Set the options a user can configure
 	*
 	* @return null
-	* @access public
+	* @access protected
 	*/
-	public function set_options()
+	protected function set_options()
 	{
 		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
 		$this->config->set('boardrules_header_link', $this->request->variable('boardrules_header_link', 0));

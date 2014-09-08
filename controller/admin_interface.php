@@ -26,14 +26,6 @@ interface admin_interface
 	public function display_options();
 
 	/**
-	* Set the options a user can configure
-	*
-	* @return null
-	* @access public
-	*/
-	public function set_options();
-
-	/**
 	* Display the language selection
 	*
 	* Display the available languages to add/manage board rules from.
