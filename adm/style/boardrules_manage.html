@@ -152,9 +152,10 @@
 		<form id="rules" method="post" action="{U_ACTION}">
 
 		<fieldset class="quick">
-			<input type="hidden" name="action" value="add" />
+			{L_ACP_ADD_RULE}{L_COLON}
 			<input type="text" name="rule_title" value="" maxlength="200" placeholder="{L_ACP_RULE_TITLE}" />
-			<input class="button2" name="addrule" type="submit" value="{L_ACP_ADD_RULE}" />
+			<input class="button2" name="addrule" type="submit" value="{L_SUBMIT}" />
+			<input type="hidden" name="action" value="add" />
 			{S_FORM_TOKEN}
 		</fieldset>
 		</form>
