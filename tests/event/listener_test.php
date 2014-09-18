@@ -35,17 +35,25 @@ class event_listener_test extends \phpbb_test_case
 
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
-		$this->config = new \phpbb\config\config(array());
+		$this->config = new \phpbb\config\config(array('enable_mod_rewrite' => '0'));
 		$this->template = new \phpbb\boardrules\tests\mock\template();
 		$this->user = new \phpbb\user('\phpbb\datetime');
+
+		$request = new \phpbb_mock_request();
+		$request->overwrite('SCRIPT_NAME', 'app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('REQUEST_URI', 'app.php', \phpbb\request\request_interface::SERVER);
+
 		$this->controller_helper = new \phpbb_mock_controller_helper(
 			$this->template,
 			$this->user,
 			$this->config,
 			new \phpbb\controller\provider(),
 			new \phpbb_mock_extension_manager($phpbb_root_path),
+			new \phpbb\symfony_request($request),
+			new \phpbb\filesystem(),
 			'',
-			'php',
+			$phpEx,
 			dirname(__FILE__) . '/../../'
 		);
 	}
