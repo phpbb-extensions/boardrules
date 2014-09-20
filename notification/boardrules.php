@@ -36,7 +36,7 @@ class boardrules extends \phpbb\notification\type\base
 	* @param string $notification_types_table
 	* @param string $notifications_table
 	* @param string $user_notifications_table
-	* @return \phpbb\notification\type\base
+	* @return \phpbb\boardrules\notification\boardrules
 	*/
 	public function __construct(\phpbb\user_loader $user_loader, \phpbb\db\driver\driver_interface $db, \phpbb\cache\driver\driver_interface $cache, $user, \phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $helper, $phpbb_root_path, $php_ext, $notification_types_table, $notifications_table, $user_notifications_table)
 	{
@@ -80,6 +80,7 @@ class boardrules extends \phpbb\notification\type\base
 	* Get the id of the notification
 	*
 	* @param array $data The data for the updated rules
+	* @return int Id of the notification
 	*/
 	public static function get_item_id($data)
 	{
@@ -90,6 +91,7 @@ class boardrules extends \phpbb\notification\type\base
 	* Get the id of the parent
 	*
 	* @param array $data The data for the updated rules
+	* @return int Id of the parent
 	*/
 	public static function get_item_parent_id($data)
 	{
@@ -102,7 +104,6 @@ class boardrules extends \phpbb\notification\type\base
 	*
 	* @param array $data The type specific data for the updated rules
 	* @param array $options Options for finding users for notification
-	*
 	* @return array
 	*/
 	public function find_users_for_notification($data, $options = array())
