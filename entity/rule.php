@@ -50,7 +50,7 @@ class rule implements rule_interface
 	*
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
 	* @param string                               $boardrules_table   Name of the table used to store board rules data
-	* @return null
+	* @return \phpbb\boardrules\entity\rule
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db, $boardrules_table)

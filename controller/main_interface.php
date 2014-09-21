@@ -20,7 +20,7 @@ interface main_interface
 	/**
 	* Display the rules page
 	*
-	* @return Symfony\Component\HttpFoundation\Response A Symfony Response object
+	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	* @access public
 	*/
 	public function display();
