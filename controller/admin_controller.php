@@ -447,7 +447,7 @@ class admin_controller implements admin_interface
 			'S_SMILIES_DISABLE_CHECKED'		=> !$entity->message_smilies_enabled(),
 			'S_MAGIC_URL_DISABLE_CHECKED'	=> !$entity->message_magic_url_enabled(),
 
-			'BBCODE_STATUS'			=> $this->user->lang('BBCODE_IS_ON', '<a href="' . append_sid("{$this->root_path}faq.$this->php_ext", 'mode=bbcode') . '">', '</a>'),
+			'BBCODE_STATUS'			=> $this->user->lang('BBCODE_IS_ON', '<a href="' . append_sid("{$this->root_path}faq.{$this->php_ext}", 'mode=bbcode') . '">', '</a>'),
 			'SMILIES_STATUS'		=> $this->user->lang('SMILIES_ARE_ON'),
 			'IMG_STATUS'			=> $this->user->lang('IMAGES_ARE_ON'),
 			'FLASH_STATUS'			=> $this->user->lang('FLASH_IS_ON'),
