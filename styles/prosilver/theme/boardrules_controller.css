@@ -20,6 +20,11 @@
 	line-height: 1.4em;
 }
 
+.rtl .content ol {
+	margin-left: 0;
+	margin-right: 2em;
+}
+
 .content ol ol{ font-size: 1em; }
 
 /* rules */
@@ -32,6 +37,16 @@
 #rules ol li.rule-item ol { margin: 1em 0 1em 3em; }
 #rules ol li ol { list-style: lower-roman; }
 
+.rtl #rules {
+	padding-right: 0;
+	padding-left: 50px;
+}
+
+.rtl #rules ol li.rule-item ol {
+	margin-left: 0;
+	margin-right: 3em;
+}
+
 /* rules sections mini panel */
 #boardrules-categories {
 	width: 260px;
@@ -39,10 +54,16 @@
 	margin: 26px 0 30px 30px;
 }
 
+.rtl #boardrules-categories {
+	float: left;
+	margin-left: 0;
+	margin-right: 30px;
+}
+
 .mini-panel {
 	background-color: #ebebeb;
 	margin-bottom: 5px;
-	padding: 5px 10px 5px 10px;
+	padding: 5px 10px;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
 	border-radius: 7px;
@@ -78,7 +99,8 @@ ul.menu li:last-child { border-bottom: none; }
 /* responsive design */
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
 {
-	#boardrules-categories {
+	#boardrules-categories,
+	.rtl #boardrules-categories {
 		width: 100%;
 		float: none;
 		text-align: center;
