@@ -25,7 +25,7 @@ You can install this on the latest release of phpBB 3.1 by following the steps b
 
 * **Important: Only official release versions validated by the phpBB Extensions Team should be installed on a live forum. Pre-release (beta, RC) versions downloaded from this repository are only to be used for testing on offline/development forums and are not officially supported.**
 * Report bugs and other issues to our [Issue Tracker](https://github.com/phpbb-extensions/boardrules/issues).
-* Support requests should be posted and discussed in the [Google Analytics topic at phpBB.com](https://www.phpbb.com/community/viewtopic.php?f=456&t=2208976).
+* Support requests should be posted and discussed in the [Board Rules topic at phpBB.com](https://www.phpbb.com/community/viewtopic.php?f=456&t=2208976).
 
 ## License
 [GNU General Public License v2](http://opensource.org/licenses/GPL-2.0)
