@@ -1,2 +1,2 @@
 parameters:
-    tables.boardrules: %core.table_prefix%boardrules
+    phpbb.boardrules.tables.boardrules: %core.table_prefix%boardrules
