@@ -77,8 +77,8 @@ services:
             - @controller.helper
             - %core.root_path%
             - %core.php_ext%
-            - %phpbb.boardrules.tables.notification_types%
-            - %phpbb.boardrules.tables.notifications%
-            - %phpbb.boardrules.tables.user_notifications%
+            - %tables.notification_types%
+            - %tables.notifications%
+            - %tables.user_notifications%
         tags:
             - { name: notification.type }
