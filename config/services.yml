@@ -42,7 +42,7 @@ services:
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - @dbal.conn
-            - %tables.boardrules%
+            - %phpbb.boardrules.tables.boardrules%
 
     phpbb.boardrules.operator:
         class: phpbb\boardrules\operators\rule
@@ -55,7 +55,7 @@ services:
         arguments:
             - @dbal.conn
             - @phpbb.boardrules.table_lock
-            - %tables.boardrules%
+            - %phpbb.boardrules.tables.boardrules%
 
     phpbb.boardrules.table_lock:
         class: phpbb\lock\db
