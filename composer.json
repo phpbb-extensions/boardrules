@@ -8,20 +8,20 @@
 	"license": "GPL-2.0",
 	"authors": [
 		{
-			"name": "Nathan Guse",
-			"email": "nathaniel.guse@gmail.com",
-			"role": "Extensions Development Team Lead"
-		},
-		{
 			"name": "Michael Cullum",
 			"homepage": "http://michaelcullum.com",
 			"email": "michael@phpbb.com",
 			"role": "Extensions Team Consultant"
 		},
 		{
+			"name": "Nathan Guse",
+			"email": "nathaniel.guse@gmail.com",
+			"role": "Former Extensions Development Team Lead"
+		},
+		{
 			"name": "Matt Friedman",
 			"homepage": "http://mattfriedman.me",
-			"role": "Extensions Development Team"
+			"role": "Extensions Development Team Lead"
 		},
 		{
 			"name": "Lukasz Kaczynski",
