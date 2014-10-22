@@ -3,15 +3,10 @@
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to create a set of rules for your phpBB forum",
 	"homepage": "https://phpbb.com",
-	"version": "1.0.0-RC2",
+	"version": "1.0.0",
 	"keywords": ["phpbb", "extension", "rules"],
 	"license": "GPL-2.0",
 	"authors": [
-		{
-			"name": "Nathan Guse",
-			"email": "nathaniel.guse@gmail.com",
-			"role": "Extensions Development Team Lead"
-		},
 		{
 			"name": "Michael Cullum",
 			"homepage": "http://michaelcullum.com",
@@ -19,9 +14,14 @@
 			"role": "Extensions Team Consultant"
 		},
 		{
+			"name": "Nathan Guse",
+			"email": "nathaniel.guse@gmail.com",
+			"role": "Former Extensions Development Team Lead"
+		},
+		{
 			"name": "Matt Friedman",
 			"homepage": "http://mattfriedman.me",
-			"role": "Extensions Development Team"
+			"role": "Extensions Development Team Lead"
 		},
 		{
 			"name": "Lukasz Kaczynski",
