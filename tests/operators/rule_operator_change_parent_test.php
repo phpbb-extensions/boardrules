@@ -86,11 +86,9 @@ class rule_operator_change_parent_test extends rule_operator_base
 	public function change_parent_fails_data()
 	{
 		return array(
-			array(
-				array(1, 100),
-				array(100, 1),
-				array(null, 1),
-			),
+			array(1, 100),
+			array(100, 1),
+			array(null, 1),
 		);
 	}
 
