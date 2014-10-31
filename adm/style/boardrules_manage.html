@@ -45,13 +45,11 @@
 				<dl>
 					<dt><label for="rule_parent">{L_ACP_RULE_PARENT}{L_COLON}</label></dt>
 					<dd><select id="rule_parent" name="rule_parent">
-						<!-- IF .rulemenu -->
-							<option value="0"<!-- IF not rulemenu.S_RULE_PARENT --> selected="selected"<!-- ENDIF -->>{L_ACP_RULE_NO_PARENT}</option>
+							<option value="0">{L_ACP_RULE_NO_PARENT}</option>
 							<!-- BEGIN rulemenu -->
 								<option value="{rulemenu.RULE_ID}"<!-- IF rulemenu.S_RULE_PARENT --> selected="selected"<!-- ENDIF --><!-- IF rulemenu.S_DISABLED --> disabled="disabled" class="disabled-option"<!-- ENDIF -->>{rulemenu.RULE_TITLE}</option>
 							<!-- END rulemenu -->
 							</select></dd>
-						<!-- ENDIF -->
 				</dl>
 			<!-- ENDIF -->
 			<dl>
