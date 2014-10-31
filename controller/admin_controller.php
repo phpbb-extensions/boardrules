@@ -311,7 +311,7 @@ class admin_controller implements admin_interface
 		$padding_store = array();
 		$right = 0;
 
-		// Process each rule entity for pull-down
+		// Process each rule menu item for pull-down
 		foreach ($rule_menu_items as $rule_menu_item)
 		{
 			if ($rule_menu_item->get_left_id() < $right)
@@ -329,10 +329,9 @@ class admin_controller implements admin_interface
 			// Set output block vars for display in the template
 			$this->template->assign_block_vars('rulemenu', array(
 				'RULE_ID'			=> $rule_menu_item->get_id(),
-				'RULE_TITLE'		=> $rule_menu_item->get_title(),
+				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
 				'S_DISABLED'		=> (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $rule_id)) ? true : false,
-				'S_PADDING'			=> $padding,
 				'S_RULE_PARENT'		=> ($rule_menu_item->get_id() == $entity->get_parent_id()) ? true : false,
 			));
 		}
