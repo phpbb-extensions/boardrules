@@ -126,26 +126,26 @@
 		<!-- IF .rules -->
 			<table class="table1 forums">
 				<col class="row1" /><col class="row1" /><col class="row2" />
-			<tbody>
-			<!-- BEGIN rules -->
-				<tr>
-					<td class="folder">
-						<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" alt="{L_ACP_BOARDRULES_CATEGORY}" /><!-- ELSE --><img src="images/icon_folder.gif" alt="{L_ACP_BOARDRULES_RULE}" /><!-- ENDIF -->
-					</td>
-					<td class="forum-desc">
-						<strong><a href="{rules.U_RULE}">{rules.RULE_TITLE}</a></strong>
-					</td>
-					<td class="actions">
-						<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
-						<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up" data-overlay="false">{ICON_MOVE_UP}</a></span>
-						<span class="down-disabled" style="display:none;">{ICON_MOVE_DOWN_DISABLED}</span>
-						<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down" data-overlay="false">{ICON_MOVE_DOWN}</a></span>
-						<a href="{rules.U_EDIT}">{ICON_EDIT}</a>
-						<a href="{rules.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a>
-					</td>
-				</tr>
-			<!-- END rules -->
-			</tbody>
+				<tbody>
+					<!-- BEGIN rules -->
+						<tr>
+							<td class="folder">
+								<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" alt="{L_ACP_BOARDRULES_CATEGORY}" /><!-- ELSE --><img src="images/icon_folder.gif" alt="{L_ACP_BOARDRULES_RULE}" /><!-- ENDIF -->
+							</td>
+							<td class="forum-desc">
+								<strong><a href="{rules.U_RULE}">{rules.RULE_TITLE}</a></strong>
+							</td>
+							<td class="actions">
+								<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
+								<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up" data-overlay="false">{ICON_MOVE_UP}</a></span>
+								<span class="down-disabled" style="display:none;">{ICON_MOVE_DOWN_DISABLED}</span>
+								<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down" data-overlay="false">{ICON_MOVE_DOWN}</a></span>
+								<a href="{rules.U_EDIT}">{ICON_EDIT}</a>
+								<a href="{rules.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a>
+							</td>
+						</tr>
+					<!-- END rules -->
+				</tbody>
 			</table>
 		<!-- ENDIF -->
 
