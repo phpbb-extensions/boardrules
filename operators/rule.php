@@ -169,7 +169,7 @@ class rule implements rule_interface
 		}
 		catch (\OutOfBoundsException $e)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id, new_parent_id');
 		}
 	}
 
