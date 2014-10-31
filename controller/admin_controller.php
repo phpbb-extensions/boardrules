@@ -339,10 +339,10 @@ class admin_controller implements admin_interface
 
 		// Collect the form data
 		$data = array(
+			'rule_parent'	=> $this->request->variable('rule_parent', $entity->get_parent_id()),
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
 			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
-			'rule_parent'	=> $this->request->variable('rule_parent', $entity->get_parent_id()),
 			'bbcode'		=> !$this->request->variable('disable_bbcode', false),
 			'magic_url'		=> !$this->request->variable('disable_magic_url', false),
 			'smilies'		=> !$this->request->variable('disable_smilies', false),
