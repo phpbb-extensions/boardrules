@@ -312,7 +312,7 @@ class admin_controller implements admin_interface
 
 		// Collect the form data
 		$data = array(
-			'rule_parent'	=> $this->request->variable('rule_parent', $entity->get_parent_id()),
+			'rule_parent_id'=> $this->request->variable('rule_parent', $entity->get_parent_id()),
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
 			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
@@ -429,9 +429,9 @@ class admin_controller implements admin_interface
 				$entity->save();
 
 				// Change rule parent
-				if (isset($data['rule_parent']) && ($data['rule_parent'] != $entity->get_parent_id()))
+				if (isset($data['rule_parent_id']) && ($data['rule_parent_id'] != $entity->get_parent_id()))
 				{
-					$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent']);
+					$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
 				}
 
 				// Show user confirmation of the saved rule and provide link back to the previous page
