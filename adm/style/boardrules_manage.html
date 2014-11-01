@@ -41,6 +41,17 @@
 	<form id="add_edit_rule" method="post" action="<!-- IF S_ADD_RULE -->{U_ADD_ACTION}<!-- ELSE -->{U_EDIT_ACTION}<!-- ENDIF -->">
 		<fieldset>
 			<legend>{L_ACP_RULE_SETTINGS}</legend>
+			<!-- IF not S_ADD_RULE -->
+				<dl>
+					<dt><label for="rule_parent">{L_ACP_RULE_PARENT}{L_COLON}</label></dt>
+					<dd><select id="rule_parent" name="rule_parent">
+						<option value="0">{L_ACP_RULE_NO_PARENT}</option>
+						<!-- BEGIN rulemenu -->
+							<option value="{rulemenu.RULE_ID}"<!-- IF rulemenu.S_RULE_PARENT --> selected="selected"<!-- ENDIF --><!-- IF rulemenu.S_DISABLED --> disabled="disabled" class="disabled-option"<!-- ENDIF -->>{rulemenu.RULE_TITLE}</option>
+						<!-- END rulemenu -->
+					</select></dd>
+				</dl>
+			<!-- ENDIF -->
 			<dl>
 				<dt><label for="rule_title">{L_ACP_RULE_TITLE}{L_COLON}</label><br /><span>{L_ACP_RULE_TITLE_EXPLAIN}</span></dt>
 				<dd><input class="text medium" type="text" id="rule_title" name="rule_title" value="{RULE_TITLE}" maxlength="200" /></dd>

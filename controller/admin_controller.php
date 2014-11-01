@@ -304,8 +304,41 @@ class admin_controller implements admin_interface
 		// Initiate and load the rule entity
 		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
+		// Prepare rule pull-down field
+		$rule_menu_items = $this->rule_operator->get_rules($entity->get_language());
+
+		$padding = '';
+		$padding_store = array();
+		$right = 0;
+
+		// Process each rule menu item for pull-down
+		foreach ($rule_menu_items as $rule_menu_item)
+		{
+			if ($rule_menu_item->get_left_id() < $right)
+			{
+				$padding .= '&nbsp;&nbsp;';
+				$padding_store[$rule_menu_item->get_parent_id()] = $padding;
+			}
+			else if ($rule_menu_item->get_left_id() > $right + 1)
+			{
+				$padding = (isset($padding_store[$rule_menu_item->get_parent_id()])) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
+			}
+
+			$right = $rule_menu_item->get_right_id();
+
+			// Set output block vars for display in the template
+			$this->template->assign_block_vars('rulemenu', array(
+				'RULE_ID'			=> $rule_menu_item->get_id(),
+				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
+
+				'S_DISABLED'		=> (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $rule_id)) ? true : false,
+				'S_RULE_PARENT'		=> ($rule_menu_item->get_id() == $entity->get_parent_id()) ? true : false,
+			));
+		}
+
 		// Collect the form data
 		$data = array(
+			'rule_parent'	=> $this->request->variable('rule_parent', $entity->get_parent_id()),
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
 			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
@@ -420,6 +453,12 @@ class admin_controller implements admin_interface
 			{
 				// Save the edited rule entity to the database
 				$entity->save();
+
+				// Change rule parent
+				if (isset($data['rule_parent']) && ($data['rule_parent'] != $entity->get_parent_id()))
+				{
+					$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent']);
+				}
 
 				// Show user confirmation of the saved rule and provide link back to the previous page
 				trigger_error($this->user->lang('ACP_RULE_EDITED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
