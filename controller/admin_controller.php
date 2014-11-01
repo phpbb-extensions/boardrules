@@ -265,16 +265,48 @@ class admin_controller implements admin_interface
 		// Initiate a rule entity
 		$entity = $this->container->get('phpbb.boardrules.entity');
 
+		// Prepare rule pull-down field
+		$rule_menu_items = $this->rule_operator->get_rules($language);
+
+		$padding = '';
+		$padding_store = array();
+		$right = 0;
+
+		// Process each rule menu item for pull-down
+		foreach ($rule_menu_items as $rule_menu_item)
+		{
+			if ($rule_menu_item->get_left_id() < $right)
+			{
+				$padding .= '&nbsp;&nbsp;';
+				$padding_store[$rule_menu_item->get_parent_id()] = $padding;
+			}
+			else if ($rule_menu_item->get_left_id() > $right + 1)
+			{
+				$padding = (isset($padding_store[$rule_menu_item->get_parent_id()])) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
+			}
+
+			$right = $rule_menu_item->get_right_id();
+
+			// Set output block vars for display in the template
+			$this->template->assign_block_vars('rulemenu', array(
+				'RULE_ID'			=> $rule_menu_item->get_id(),
+				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
+
+				'S_DISABLED'		=> false,
+				'S_RULE_PARENT'		=> ($rule_menu_item->get_id() == $parent_id) ? true : false,
+			));
+		}
+
 		// Collect the form data
 		$data = array(
+			'rule_language'		=> $language,
+			'rule_parent_id'	=> $this->request->variable('rule_parent', $parent_id),
 			'rule_title'		=> $this->request->variable('rule_title', '', true),
 			'rule_anchor'		=> $this->request->variable('rule_anchor', '', true),
 			'rule_message'		=> $this->request->variable('rule_message', '', true),
 			'bbcode'			=> !$this->request->variable('disable_bbcode', false),
 			'magic_url'			=> !$this->request->variable('disable_magic_url', false),
 			'smilies'			=> !$this->request->variable('disable_smilies', false),
-			'rule_language'		=> $language,
-			'rule_parent_id'	=> $parent_id,
 		);
 
 		// Process the new rule
