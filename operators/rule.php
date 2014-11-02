@@ -149,6 +149,33 @@ class rule implements rule_interface
 	}
 
 	/**
+	* Change rule parent
+	*
+	* @param int $rule_id The current rule identifier
+	* @param int $new_parent_id The new rule parent identifier
+	* @return null
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function change_parent($rule_id, $new_parent_id)
+	{
+		$rule_id = (int) $rule_id;
+		$new_parent_id = (int) $new_parent_id;
+
+		// Try to change rule parent
+		try
+		{
+			$this->nestedset_rules->change_parent($rule_id, $new_parent_id);
+		}
+		catch (\OutOfBoundsException $e)
+		{
+			$field = (strpos($e->getMessage(), 'INVALID_ITEM') !== false) ? 'rule_id' : 'new_parent_id';
+
+			throw new \phpbb\boardrules\exception\out_of_bounds($field);
+		}
+	}
+
+	/**
 	* Get a rule's parent rules (for use in breadcrumbs)
 	*
 	* @param int $language Language selection identifier

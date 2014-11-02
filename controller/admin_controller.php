@@ -265,16 +265,19 @@ class admin_controller implements admin_interface
 		// Initiate a rule entity
 		$entity = $this->container->get('phpbb.boardrules.entity');
 
+		// Build rule parent pull down menu
+		$this->build_parent_select_menu($entity, $language, $parent_id, $mode = 'add');
+
 		// Collect the form data
 		$data = array(
+			'rule_language'		=> $language,
+			'rule_parent_id'	=> $this->request->variable('rule_parent', $parent_id),
 			'rule_title'		=> $this->request->variable('rule_title', '', true),
 			'rule_anchor'		=> $this->request->variable('rule_anchor', '', true),
 			'rule_message'		=> $this->request->variable('rule_message', '', true),
 			'bbcode'			=> !$this->request->variable('disable_bbcode', false),
 			'magic_url'			=> !$this->request->variable('disable_magic_url', false),
 			'smilies'			=> !$this->request->variable('disable_smilies', false),
-			'rule_language'		=> $language,
-			'rule_parent_id'	=> $parent_id,
 		);
 
 		// Process the new rule
@@ -304,8 +307,12 @@ class admin_controller implements admin_interface
 		// Initiate and load the rule entity
 		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
+		// Build rule parent pull down menu
+		$this->build_parent_select_menu($entity);
+
 		// Collect the form data
 		$data = array(
+			'rule_parent_id'=> $this->request->variable('rule_parent', $entity->get_parent_id()),
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
 			'rule_message'	=> $this->request->variable('rule_message', $entity->get_message_for_edit(), true),
@@ -320,6 +327,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_EDIT_RULE'		=> true,
+			'S_IS_CATEGORY'		=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
 
 			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
@@ -420,6 +428,12 @@ class admin_controller implements admin_interface
 			{
 				// Save the edited rule entity to the database
 				$entity->save();
+
+				// Change rule parent
+				if (isset($data['rule_parent_id']) && ($data['rule_parent_id'] != $entity->get_parent_id()))
+				{
+					$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
+				}
 
 				// Show user confirmation of the saved rule and provide link back to the previous page
 				trigger_error($this->user->lang('ACP_RULE_EDITED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
@@ -586,5 +600,53 @@ class admin_controller implements admin_interface
 	public function set_page_url($u_action)
 	{
 		$this->u_action = $u_action;
+	}
+
+	/**
+	* Build pull down menu options of available rule parents
+	*
+	* @param object $entity The rule entity object
+	* @param int $language Language selection identifier; default: 0
+	* @param int $parent_id Category to display rules from; default: 0
+	* @param string $mode Display menu for add or edit mode
+	* @return null
+	* @access protected
+	*/
+	protected function build_parent_select_menu($entity, $language = 0, $parent_id = 0, $mode = 'edit')
+	{
+		$language = ($mode == 'edit') ? $entity->get_language() : $language;
+		$parent_id = ($mode == 'edit') ? $entity->get_parent_id() : $parent_id;
+
+		// Prepare rule pull-down field
+		$rule_menu_items = $this->rule_operator->get_rules($language);
+
+		$padding = '';
+		$padding_store = array();
+		$right = 0;
+
+		// Process each rule menu item for pull-down
+		foreach ($rule_menu_items as $rule_menu_item)
+		{
+			if ($rule_menu_item->get_left_id() < $right)
+			{
+				$padding .= '&nbsp;&nbsp;';
+				$padding_store[$rule_menu_item->get_parent_id()] = $padding;
+			}
+			else if ($rule_menu_item->get_left_id() > $right + 1)
+			{
+				$padding = (isset($padding_store[$rule_menu_item->get_parent_id()])) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
+			}
+
+			$right = $rule_menu_item->get_right_id();
+
+			// Set output block vars for display in the template
+			$this->template->assign_block_vars('rulemenu', array(
+				'RULE_ID'			=> $rule_menu_item->get_id(),
+				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
+
+				'S_DISABLED'		=> ($mode == 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()))) ? true : false,
+				'S_RULE_PARENT'		=> ($rule_menu_item->get_id() == $parent_id) ? true : false,
+			));
+		}
 	}
 }

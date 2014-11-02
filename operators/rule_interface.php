@@ -61,6 +61,17 @@ interface rule_interface
 	public function move($rule_id, $direction, $amount = 1);
 
 	/**
+	* Change rule parent
+	*
+	* @param int $rule_id The current rule identifier
+	* @param int $new_parent_id The new rule parent identifier
+	* @return null
+	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
+	*/
+	public function change_parent($rule_id, $new_parent_id);
+
+	/**
 	* Get a rule's parent rules (for use in breadcrumbs)
 	*
 	* @param int $language Language selection identifier
