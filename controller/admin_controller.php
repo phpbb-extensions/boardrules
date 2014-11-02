@@ -529,7 +529,11 @@ class admin_controller implements admin_interface
 		else
 		{
 			// Request confirmation from the user to delete the rule
-			confirm_box(false, $this->user->lang('ACP_DELETE_RULE_CONFIRM'));
+			confirm_box(false, $this->user->lang('ACP_DELETE_RULE_CONFIRM'), build_hidden_fields(array(
+				'mode' => 'manage',
+				'action' => 'delete',
+				'rule_id' => $rule_id,
+			)));
 
 			// Use a redirect to take the user back to the previous page
 			// if the user chose not delete the rule from the confirmation page.
