@@ -70,6 +70,7 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Rule anchors are optional and are used as link anchor points on the rules page. They should be URL friendly (contain no spaces or special characters), should begin with a letter, and they must be unique.',
 	'ACP_RULE_MESSAGE'						=> 'Rule message',
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'The rule message is displayed on the rules page for each rule (categories do not display a rule message).',
+	'ACP_RULE_MESSAGE_DISABLED'				=> 'This is a category containing rules, the message editor has been disabled.',
 	'ACP_ADD_RULE'							=> 'Create new rule',
 	'ACP_DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
 	'ACP_RULE_ADDED'						=> 'Rule successfully added.',
