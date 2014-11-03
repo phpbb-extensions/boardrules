@@ -15,6 +15,16 @@ namespace phpbb\boardrules\migrations\v10x;
 */
 class m11_notification_type_update extends \phpbb\db\migration\migration
 {
+	public function effectively_installed()
+	{
+		$sql = 'SELECT * FROM ' . $this->table_prefix . "notification_types
+			WHERE notification_type_name = 'phpbb.boardrules.notification.type.boardrules'";
+		$result = $this->db->sql_query_limit($sql, 1);
+		$row = $this->db->sql_fetchrow($result);
+
+		return $row != false;
+	}
+
 	static public function depends_on()
 	{
 		return array('\phpbb\db\migration\data\v310\notifications_use_full_name');
