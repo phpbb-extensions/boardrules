@@ -15,6 +15,12 @@ namespace phpbb\boardrules\migrations\v10x;
 */
 class m11_notification_type_update extends \phpbb\db\migration\migration
 {
+	/**
+	* Check if an updated boardrules notification type already exists
+	*
+	* @return bool True if notification type exists, false otherwise
+	* @access public
+	*/
 	public function effectively_installed()
 	{
 		$sql = 'SELECT * FROM ' . $this->table_prefix . "notification_types
@@ -25,11 +31,24 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 		return $row != false;
 	}
 
+	/**
+	* Assign migration file dependencies for this migration
+	*
+	* @return array Array of migration files
+	* @static
+	* @access public
+	*/
 	static public function depends_on()
 	{
 		return array('\phpbb\db\migration\data\v310\notifications_use_full_name');
 	}
 
+	/**
+	* Add or update data in the database
+	*
+	* @return array Array of table data
+	* @access public
+	*/
 	public function update_data()
 	{
 		return array(
@@ -37,6 +56,12 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 		);
 	}
 
+	/**
+	* Update a boardrules notification type name and state
+	*
+	* @return null
+	* @access public
+	*/
 	public function update_notifications_name()
 	{
 		// New notification_type_name and re-enable
