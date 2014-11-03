@@ -8,3 +8,7 @@
 - Remove the Reset button from rule editing forms
 - Added Spanish language pack
 - Added French language pack
+
+## 1.0.0 - 2014-10-22
+
+- First release
