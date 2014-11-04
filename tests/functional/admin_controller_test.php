@@ -54,7 +54,7 @@ class admin_controller_test extends boardrules_functional_base
 		$this->assertContainsLang('ACP_BOARDRULES_CREATE_RULE', $crawler->filter('#main h1')->text());
 
 		// Submit new rule data
-		$form = $crawler->selectButton('submit')->form(array(
+		$form = $crawler->selectButton($this->lang('SUBMIT'))->form(array(
 			'rule_title'	=> 'Test Rule',
 			'rule_anchor'	=> 'test-rule',
 			'rule_message'	=> 'This is a test rule.',
