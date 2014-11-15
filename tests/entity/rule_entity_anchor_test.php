@@ -147,7 +147,7 @@ class rule_entity_anchor_test extends rule_entity_base
 			array(null, 'foo', 'foo'), // new rule, anchor is unique, expect unqiue anchor to pass
 			array(4, '', ''), // existing rule, anchor is empty, expect empty anchor to pass
 			array(4, 'foo', 'foo'), // existing rule, anchor is unique, expect nique anchor to pass
-			array(1, 'anchor_1', 'anchor_1'), // exisiting rule, exisiting anchor is unique, expect existing anchor to pass
+			array(1, 'anchor_1', 'anchor_1'), // existing rule, existing anchor is unique, expect existing anchor to pass
 		);
 	}
 
@@ -189,7 +189,7 @@ class rule_entity_anchor_test extends rule_entity_base
 		return array(
 			// id // sent to set_anchor()
 			array(null, 'anchor_1'), // new rule, new anchor is not unique (exists already in db)
-			array(1, 'anchor_2'), // exisiting rule, new anchor is not unique (exists already in db)
+			array(1, 'anchor_2'), // existing rule, new anchor is not unique (exists already in db)
 		);
 	}
 

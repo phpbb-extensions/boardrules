@@ -44,7 +44,7 @@ class rule_entity_insert_test extends rule_entity_base
 
 	/**
 	* Try inserting a rule that already exists into the database
-	* Entities with an exisiting rule_id will fail to insert
+	* Entities with an existing rule_id will fail to insert
 	*
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
 	* @access public
@@ -63,7 +63,7 @@ class rule_entity_insert_test extends rule_entity_base
 		// Import an existing rule entity
 		$entity->import($import_data[1]);
 
-		// Try to insert the exisiting rule entity
+		// Try to insert the existing rule entity
 		$entity->insert($language);
 	}
 }

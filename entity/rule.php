@@ -490,7 +490,7 @@ class rule implements rule_interface
 
 		// Make sure rule anchors are unique
 		// Test if new page and anchor field has data or...
-		//    if existing page and anchor field has new data not equal to exisiting anchor data
+		//    if existing page and anchor field has new data not equal to existing anchor data
 		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
 		{
 			$sql = 'SELECT 1
