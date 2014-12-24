@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* French translation by ForumsFaciles (http://www.forumsfaciles.fr)
+* French translation by ForumsFaciles (http://www.forumsfaciles.fr) & Galixte (http://www.galixte.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -43,18 +43,18 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES'						=> 'Règles du forum',
 	'ACP_BOARDRULES_SETTINGS'				=> 'Paramètres des règles',
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Ici vous pouvez configurer les principaux paramètres des règles du forum.',
-	'ACP_BOARDRULES_ENABLE'					=> 'Activer les règles du forum',
-	'ACP_BOARDRULES_HEADER_LINK'			=> 'Afficher un lien vers les règles du forum dans le haut de la page',
-	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Oblige les nouveaux utilisateurs à accepter les règles lors de leur enregistrement',
-	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Cette option ajoutera une clause aux “Conditions d’Utilisation”, demandant aux nouveaux utilisateurs de lire et d’accepter les règles du forum lors de leur enregistrement.',
+	'ACP_BOARDRULES_ENABLE'					=> 'Activer les règles du forum ',
+	'ACP_BOARDRULES_HEADER_LINK'			=> 'Afficher un lien vers les règles du forum dans le haut de la page ',
+	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Oblige les nouveaux utilisateurs à accepter les règles lors de leur enregistrement ',
+	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Cette option ajoutera une clause aux “Conditions d’utilisation”, demandant aux nouveaux utilisateurs de lire et d’accepter les règles du forum lors de leur enregistrement.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Avertir les utilisateurs',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Avertit tous les utilisateurs enregistrés que les règles du forum ont été mises à jour. (Cette opération peut prendre plusieurs secondes à s’exécuter sur les forums contenant des milliers de membres.)',
-	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Êtes-vous vertain que vous souhaitez envoyer un avertissement à tous les utilisateurs ?',
+	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Êtes-vous certain(e) de vouloir envoyer un avertissement à tous les utilisateurs ?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Paramètres des règles du forum modifiés.',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Gestion des règles',
-	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Depuis cette page vous pouvez ajouter, modifier, supprimer et réordonner les catégories et les règles. Une catégorie est un groupe de règles proches. Chaque catégorie peut contenir un nombre illimité de règles.',
+	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Depuis cette page vous pouvez ajouter, modifier, supprimer et réordonner les catégories et les règles. Une catégorie est un ensemble de règles connexes. Chaque catégorie peut contenir un nombre illimité de règles.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Catégorie de règle',
 	'ACP_BOARDRULES_RULE'					=> 'Règle',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Sélectionner la langue',
@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Le texte de la règle est affiché sur la page des règles pour chacune d’elle (les catégories n’affichent aucun texte de règle).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Cette catégorie contient des règles, l’éditeur de message a été désactivé.',
 	'ACP_ADD_RULE'							=> 'Créer une nouvelle règle',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Êtes-vous certain que vous souhaitez supprimer cette règle ?',
+	'ACP_DELETE_RULE_CONFIRM'				=> 'Êtes-vous certain(e) de vouloir supprimer cette règle ?',
 	'ACP_RULE_ADDED'						=> 'Règle ajoutée avec succès.',
 	'ACP_RULE_DELETED'						=> 'Règle supprimée avec succès.',
 	'ACP_RULE_EDITED'						=> 'Règle modifiée avec succès.',
