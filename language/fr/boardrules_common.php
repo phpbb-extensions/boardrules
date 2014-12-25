@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* French translation by ForumsFaciles (http://www.forumsfaciles.fr)
+* French translation by ForumsFaciles (http://www.forumsfaciles.fr) & Galixte (http://www.galixte.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -40,8 +40,8 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'BOARDRULES'				=> 'Règles',
-	'BOARDRULES_TITLE'			=> 'Voir les Règles de ce forum',
-	'BOARDRULES_AGREEMENT'		=> 'Vous vous engagez à respecter les Règles de ce forum, mises en place dans la section "Règles" suivante',
-	'BOARDRULES_VIEWONLINE'		=> 'Consulte les Règles du forum',
-	'BOARDRULES_NOTIFICATION'	=> 'Les Règles du forum ont été modifiées. Cliquez ici pour les consulter à nouveau.',
+	'BOARDRULES_TITLE'			=> 'Voir les règles de ce forum',
+	'BOARDRULES_AGREEMENT'		=> 'Vous vous engagez à respecter les règles de ce forum, mises en place dans la section "Règles du forum" suivante',
+	'BOARDRULES_VIEWONLINE'		=> 'Consulte les règles du forum',
+	'BOARDRULES_NOTIFICATION'	=> 'Les règles du forum ont été modifiées. Cliquez ici pour les consulter à nouveau.',
 ));
