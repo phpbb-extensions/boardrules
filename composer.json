@@ -2,7 +2,7 @@
 	"name": "phpbb/boardrules",
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to create a set of rules for your phpBB forum",
-	"homepage": "https://phpbb.com",
+	"homepage": "https://www.phpbb.com",
 	"version": "1.0.1",
 	"keywords": ["phpbb", "extension", "rules"],
 	"license": "GPL-2.0",
