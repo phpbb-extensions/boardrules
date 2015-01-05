@@ -85,6 +85,7 @@ class main_controller implements main_interface
 		// Grab all the rules in the current user's language
 		$entities = $this->rule_operator->get_rules($this->user->get_iso_lang_id());
 
+		/* @var $entity \phpbb\boardrules\entity\rule */
 		foreach ($entities as $entity)
 		{
 			if ($entity->get_right_id() - $entity->get_left_id() > 1)
