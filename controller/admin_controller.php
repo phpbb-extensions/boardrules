@@ -201,6 +201,7 @@ class admin_controller implements admin_interface
 		$last_right_id = 0;
 
 		// Process each rule entity for display
+		/* @var $entity \phpbb\boardrules\entity\rule */
 		foreach ($entities as $entity)
 		{
 			if ($entity->get_left_id() < $last_right_id)
@@ -305,6 +306,7 @@ class admin_controller implements admin_interface
 		add_form_key('add_edit_rule');
 
 		// Initiate and load the rule entity
+		/* @var $entity \phpbb\boardrules\entity\rule */
 		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Build rule parent pull down menu
@@ -490,6 +492,7 @@ class admin_controller implements admin_interface
 	public function delete_rule($rule_id)
 	{
 		// Initiate and load the rule entity
+		/* @var $entity \phpbb\boardrules\entity\rule */
 		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Use a confirmation box routine when deleting a rule
@@ -544,6 +547,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Initiate and load the rule entity for no AJAX request
+		/* @var $entity \phpbb\boardrules\entity\rule */
 		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
 
 		// Use a redirect to reload the current page
@@ -625,6 +629,7 @@ class admin_controller implements admin_interface
 		$right = 0;
 
 		// Process each rule menu item for pull-down
+		/* @var $rule_menu_item \phpbb\boardrules\entity\rule */
 		foreach ($rule_menu_items as $rule_menu_item)
 		{
 			if ($rule_menu_item->get_left_id() < $right)
