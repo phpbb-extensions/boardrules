@@ -21,7 +21,6 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	* @param \phpbb\db\driver\driver_interface $db Database connection
 	* @param \phpbb\lock\db $lock Lock class used to lock the table when moving forums around
 	* @param string $table_name Table name
-	* @return \phpbb\boardrules\operators\nestedset_rules
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\lock\db $lock, $table_name)

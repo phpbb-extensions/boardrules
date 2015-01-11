@@ -32,7 +32,6 @@ class rule implements rule_interface
 	*
 	* @param ContainerInterface $container Service container interface
 	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
-	* @return \phpbb\boardrules\operators\rule
 	* @access public
 	*/
 	public function __construct(ContainerInterface $container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules)

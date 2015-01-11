@@ -46,7 +46,6 @@ class main_controller implements main_interface
 	* @param \phpbb\user                         $user               User object
 	* @param string                              $root_path          phpBB root path
 	* @param string                              $php_ext            phpEx
-	* @return \phpbb\boardrules\controller\main_controller
 	* @access public
 	*/
 	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
