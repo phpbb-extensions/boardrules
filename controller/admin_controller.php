@@ -59,7 +59,6 @@ class admin_controller implements admin_interface
 	* @param \phpbb\boardrules\operators\rule     $rule_operator   Rule operator object
 	* @param string                               $root_path       phpBB root path
 	* @param string                               $php_ext         phpEx
-	* @return \phpbb\boardrules\controller\admin_controller
 	* @access public
 	*/
 	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)

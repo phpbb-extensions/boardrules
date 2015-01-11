@@ -40,7 +40,6 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\template\template    $template           Template object
 	* @param \phpbb\user                 $user               User object
 	* @param string                      $php_ext            phpEx
-	* @return \phpbb\boardrules\event\listener
 	* @access public
 	*/
 	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)

@@ -36,7 +36,6 @@ class boardrules extends \phpbb\notification\type\base
 	* @param string $notification_types_table
 	* @param string $notifications_table
 	* @param string $user_notifications_table
-	* @return \phpbb\boardrules\notification\boardrules
 	*/
 	public function __construct(\phpbb\user_loader $user_loader, \phpbb\db\driver\driver_interface $db, \phpbb\cache\driver\driver_interface $cache, $user, \phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $helper, $phpbb_root_path, $php_ext, $notification_types_table, $notifications_table, $user_notifications_table)
 	{
