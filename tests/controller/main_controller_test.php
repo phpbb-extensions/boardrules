@@ -37,15 +37,22 @@ class main_controller_test extends \phpbb_test_case
 
 		// Global vars called upon during execution
 		$config = new \phpbb\config\config(array('boardrules_enable' => 1));
-		set_config(null, null, null, $config);
 		$user = new \phpbb\user('\phpbb\datetime');
 		$user->data['lang_id'] = 1;
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 
+		// Mock the rule operator and return an empty array for get_rules method
+		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
+			->disableOriginalConstructor()
+			->getMock();
+		$rule_operator->expects($this->any())
+			->method('get_rules')
+			->will($this->returnValue(array()));
+
 		$controller = new \phpbb\boardrules\controller\main_controller(
 			$config,
 			new \phpbb\boardrules\tests\mock\controller_helper(),
-			new \phpbb\boardrules\tests\mock\rule_operator(),
+			$rule_operator,
 			new \phpbb\boardrules\tests\mock\template(),
 			$this->getMock('\phpbb\user', array(), array('\phpbb\datetime')),
 			$phpbb_root_path,
