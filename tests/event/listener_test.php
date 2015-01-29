@@ -21,8 +21,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Setup test environment
-	*
-	* @access public
 	*/
 	public function setUp()
 	{
@@ -61,8 +59,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Create our event listener
-	*
-	* @access protected
 	*/
 	protected function set_listener()
 	{
@@ -77,8 +73,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Test the event listener is constructed correctly
-	*
-	* @access public
 	*/
 	public function test_construct()
 	{
@@ -88,8 +82,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Test the event listener is subscribing events
-	*
-	* @access public
 	*/
 	public function test_getSubscribedEvents()
 	{
@@ -105,7 +97,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_load_language_on_setup
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function load_language_on_setup_data()
 	{
@@ -144,7 +135,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the load_language_on_setup event
 	*
 	* @dataProvider load_language_on_setup_data
-	* @access public
 	*/
 	public function test_load_language_on_setup($lang_set_ext, $expected_contains)
 	{
@@ -170,7 +160,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_add_page_header_link
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function add_page_header_link_data()
 	{
@@ -227,7 +216,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the add_page_header_link event
 	*
 	* @dataProvider add_page_header_link_data
-	* @access public
 	*/
 	public function test_add_page_header_link($boardrules_enable, $boardrules_header_link, $boardrules_require_at_registration, $expected)
 	{
@@ -250,7 +238,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_add_permissions
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function add_permission_data()
 	{
@@ -289,7 +276,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the add_permission event
 	*
 	* @dataProvider add_permission_data
-	* @access public
 	*/
 	public function test_add_permission($permissions, $expected_contains)
 	{
@@ -315,7 +301,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_viewonline_page
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function viewonline_page_data()
 	{
@@ -366,7 +351,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the viewonline_page event
 	*
 	* @dataProvider viewonline_page_data
-	* @access public
 	*/
 	public function test_viewonline_page($on_page, $row, $location_url, $location, $expected_location_url, $expected_location)
 	{

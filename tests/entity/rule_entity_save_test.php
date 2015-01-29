@@ -19,7 +19,6 @@ class rule_entity_save_test extends rule_entity_base
 	* Test data for the test_save() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function save_test_data()
 	{
@@ -47,7 +46,6 @@ class rule_entity_save_test extends rule_entity_base
 	* Test saving data
 	*
 	* @dataProvider save_test_data
-	* @access public
 	*/
 	public function test_save($id, $expected)
 	{
@@ -78,7 +76,6 @@ class rule_entity_save_test extends rule_entity_base
 	* Test data for the test_save_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function save_fails_test_data()
 	{

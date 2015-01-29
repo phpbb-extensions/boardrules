@@ -16,7 +16,6 @@ class rule_operator_move_test extends rule_operator_base
 	* Test data for the test_move_rules() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function move_rules_test_data()
 	{
@@ -138,7 +137,6 @@ class rule_operator_move_test extends rule_operator_base
 	* Test moving rules up and down
 	*
 	* @dataProvider move_rules_test_data
-	* @access public
 	*/
 	public function test_move_rules($rule_id, $direction, $expected)
 	{
@@ -158,7 +156,6 @@ class rule_operator_move_test extends rule_operator_base
 	* Test data for the test_move_rules_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function move_rules_fails_data()
 	{
@@ -172,7 +169,6 @@ class rule_operator_move_test extends rule_operator_base
 	*
 	* @dataProvider move_rules_fails_data
 	* @expectedException \phpbb\boardrules\exception\base
-	* @access public
 	*/
 	public function test_move_rules_fails($rule_id)
 	{

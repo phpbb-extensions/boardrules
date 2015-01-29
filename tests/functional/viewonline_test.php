@@ -17,8 +17,6 @@ class viewonline_test extends boardrules_functional_base
 {
 	/**
 	* Visit rules page as user "admin"
-	*
-	* @access public
 	*/
 	public function test_viewonline_visit_rules()
 	{
@@ -34,7 +32,6 @@ class viewonline_test extends boardrules_functional_base
 	* We use a second function here, so we get a new session and can login
 	* without having to log out "admin" first.
 	*
-	* @access  public
 	* @depends test_viewonline_visit_rules
 	*/
 	public function test_viewonline_check_viewonline()

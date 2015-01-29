@@ -16,7 +16,6 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* Test data for the test_get_rules() function
 	*
 	* @return array Array of test rule entities
-	* @access public
 	*/
 	public function get_rules_test_data()
 	{
@@ -79,7 +78,6 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* Test getting rules from the database
 	*
 	* @dataProvider get_rules_test_data
-	* @access public
 	*/
 	public function test_get_rules($language, $expected)
 	{
@@ -119,7 +117,6 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* Test data for the test_get_rules_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function get_rules_fails_test_data()
 	{
@@ -134,7 +131,6 @@ class rule_operator_get_rules_test extends rule_operator_base
 	* Test getting (non-existant) rules from the database
 	*
 	* @dataProvider get_rules_fails_test_data
-	* @access public
 	*/
 	public function test_get_rules_fails($language, $expected)
 	{

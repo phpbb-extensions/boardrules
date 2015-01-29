@@ -14,8 +14,6 @@ class rule_operator_add_rule_test extends rule_operator_base
 {
 	/**
 	* Test adding a rule
-	*
-	* @access public
 	*/
 	public function test_add_rule()
 	{

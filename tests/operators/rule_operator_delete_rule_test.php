@@ -16,7 +16,6 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	* Test data for the test_delete_rule() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function delete_rule_test_data()
 	{
@@ -72,7 +71,6 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	* Test deleting rules
 	*
 	* @dataProvider delete_rule_test_data
-	* @access public
 	*/
 	public function test_delete_rule($rule_id, $expected)
 	{
@@ -92,7 +90,6 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	* Test data for the test_delete_rules_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function delete_rule_fails_data()
 	{
@@ -106,7 +103,6 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	*
 	* @dataProvider delete_rule_fails_data
 	* @expectedException \phpbb\boardrules\exception\base
-	* @access public
 	*/
 	public function test_delete_rules_fails($rule_id)
 	{

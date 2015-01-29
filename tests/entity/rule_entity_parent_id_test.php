@@ -19,7 +19,6 @@ class rule_entity_parent_id_test extends rule_entity_base
 	* Test data for the test_parent_id() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function parent_id_test_data()
 	{
@@ -49,7 +48,6 @@ class rule_entity_parent_id_test extends rule_entity_base
 	* Test getting parent_id
 	*
 	* @dataProvider parent_id_test_data
-	* @access public
 	*/
 	public function test_parent_id($data, $expected)
 	{

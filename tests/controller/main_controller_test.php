@@ -16,7 +16,6 @@ class main_controller_test extends \phpbb_test_case
 	* Test data for the test_display() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function display_data()
 	{
@@ -29,7 +28,6 @@ class main_controller_test extends \phpbb_test_case
 	* Test controller display
 	*
 	* @dataProvider display_data
-	* @access public
 	*/
 	public function test_display($status_code, $page_content)
 	{

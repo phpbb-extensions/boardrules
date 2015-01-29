@@ -17,8 +17,6 @@ class rule_entity_insert_test extends rule_entity_base
 {
 	/**
 	* Test inserting new rule data
-	*
-	* @access public
 	*/
 	public function test_insert()
 	{
@@ -47,7 +45,6 @@ class rule_entity_insert_test extends rule_entity_base
 	* Entities with an existing rule_id will fail to insert
 	*
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
-	* @access public
 	*/
 	public function test_insert_fails()
 	{
