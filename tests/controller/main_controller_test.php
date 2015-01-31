@@ -47,12 +47,33 @@ class main_controller_test extends \phpbb_test_case
 			->method('get_rules')
 			->will($this->returnValue(array()));
 
+		// Mock the controller helper and return render response object
+		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
+			->disableOriginalConstructor()
+			->getMock();
+		$controller_helper->expects($this->any())
+			->method('render')
+			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
+				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
+			});
+
+		// Mock the template
+		$template = $this->getMockBuilder('\phpbb\template\template')
+			->getMock();
+
+		// Mock the user
+		$user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
+
+		/** @var \phpbb\controller\helper $controller_helper */
+		/** @var \phpbb\boardrules\operators\rule $rule_operator */
+		/** @var \phpbb\template\template $template */
+		/** @var \phpbb\user $user */
 		$controller = new \phpbb\boardrules\controller\main_controller(
 			$config,
-			new \phpbb\boardrules\tests\mock\controller_helper(),
+			$controller_helper,
 			$rule_operator,
-			new \phpbb\boardrules\tests\mock\template(),
-			$this->getMock('\phpbb\user', array(), array('\phpbb\datetime')),
+			$template,
+			$user,
 			$phpbb_root_path,
 			$phpEx
 		);

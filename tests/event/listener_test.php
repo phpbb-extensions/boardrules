@@ -15,9 +15,13 @@ require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
 
 class event_listener_test extends \phpbb_test_case
 {
-
 	/** @var \phpbb\boardrules\event\listener */
 	protected $listener;
+	protected $config;
+	protected $controller_helper;
+	protected $template;
+	protected $user;
+	protected $php_ext;
 
 	/**
 	* Setup test environment
@@ -34,7 +38,8 @@ class event_listener_test extends \phpbb_test_case
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
 		$this->config = new \phpbb\config\config(array('enable_mod_rewrite' => '0'));
-		$this->template = new \phpbb\boardrules\tests\mock\template();
+		$this->template = $this->getMockBuilder('\phpbb\template\template')
+			->getMock();
 		$this->user = new \phpbb\user('\phpbb\datetime');
 
 		$request = new \phpbb_mock_request();
@@ -227,11 +232,13 @@ class event_listener_test extends \phpbb_test_case
 
 		$this->set_listener();
 
+		$this->template->expects($this->once())
+			->method('assign_vars')
+			->with($expected);
+
 		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
 		$dispatcher->addListener('core.page_header', array($this->listener, 'add_page_header_link'));
 		$dispatcher->dispatch('core.page_header');
-
-		$this->assertEquals($expected, $this->template->get_template_vars());
 	}
 
 	/**
