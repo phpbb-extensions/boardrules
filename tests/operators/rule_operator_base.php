@@ -22,7 +22,6 @@ class rule_operator_base extends \phpbb_database_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
@@ -53,7 +52,7 @@ class rule_operator_base extends \phpbb_database_test_case
 			}));
 
 		$this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
-		set_config(null, null, null, $this->config);
+		set_config(null, null, null, $this->config);  // remove in 3.2
 
 		$this->lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
 		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, 'phpbb_boardrules');
@@ -63,7 +62,6 @@ class rule_operator_base extends \phpbb_database_test_case
 	* Get the rule operator
 	*
 	* @return \phpbb\boardrules\operators\rule
-	* @access protected
 	*/
 	protected function get_rule_operator()
 	{

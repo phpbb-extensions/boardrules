@@ -17,8 +17,6 @@ class boardrules_controller_test extends boardrules_functional_base
 {
 	/**
 	* Test loading the rules page
-	*
-	* @access public
 	*/
 	public function test_boardrules_page()
 	{
@@ -31,8 +29,6 @@ class boardrules_controller_test extends boardrules_functional_base
 
 	/**
 	* Test that the Rules header link nav does exist
-	*
-	* @access public
 	*/
 	public function test_boardrules_header_link_on()
 	{
@@ -44,8 +40,6 @@ class boardrules_controller_test extends boardrules_functional_base
 
 	/**
 	* Test that the Rules header link nav does not exist yet
-	*
-	* @access public
 	*/
 	public function test_boardrules_header_link_off()
 	{

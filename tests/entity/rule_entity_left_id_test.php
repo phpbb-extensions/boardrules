@@ -19,7 +19,6 @@ class rule_entity_left_id_test extends rule_entity_base
 	* Test data for the test_left_id() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function left_id_test_data()
 	{
@@ -49,7 +48,6 @@ class rule_entity_left_id_test extends rule_entity_base
 	* Test getting left_id
 	*
 	* @dataProvider left_id_test_data
-	* @access public
 	*/
 	public function test_left_id($data, $expected)
 	{

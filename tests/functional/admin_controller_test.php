@@ -17,8 +17,6 @@ class admin_controller_test extends boardrules_functional_base
 {
 	/**
 	 * Test Board Rules ACP module appears
-	 *
-	 * @access public
 	 */
 	public function test_acp_module()
 	{
@@ -44,7 +42,6 @@ class admin_controller_test extends boardrules_functional_base
 	 * Test Board Rules ACP Create Rule
 	 *
 	 * @depends test_acp_module
-	 * @access public
 	 */
 	public function test_acp_create_rule($crawler)
 	{
@@ -68,8 +65,6 @@ class admin_controller_test extends boardrules_functional_base
 
 	/**
 	 * Test Board Rules ACP Edit Rule
-	 *
-	 * @access public
 	 */
 	public function test_acp_edit_rule()
 	{
@@ -88,8 +83,6 @@ class admin_controller_test extends boardrules_functional_base
 
 	/**
 	 * Test Board Rules ACP Delete Rule
-	 *
-	 * @access public
 	 */
 	public function test_acp_delete_rule()
 	{

@@ -15,14 +15,16 @@ require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
 
 class event_listener_test extends \phpbb_test_case
 {
-
 	/** @var \phpbb\boardrules\event\listener */
 	protected $listener;
+	protected $config;
+	protected $controller_helper;
+	protected $template;
+	protected $user;
+	protected $php_ext;
 
 	/**
 	* Setup test environment
-	*
-	* @access public
 	*/
 	public function setUp()
 	{
@@ -36,7 +38,8 @@ class event_listener_test extends \phpbb_test_case
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
 		$this->config = new \phpbb\config\config(array('enable_mod_rewrite' => '0'));
-		$this->template = new \phpbb\boardrules\tests\mock\template();
+		$this->template = $this->getMockBuilder('\phpbb\template\template')
+			->getMock();
 		$this->user = new \phpbb\user('\phpbb\datetime');
 
 		$request = new \phpbb_mock_request();
@@ -61,8 +64,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Create our event listener
-	*
-	* @access protected
 	*/
 	protected function set_listener()
 	{
@@ -77,8 +78,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Test the event listener is constructed correctly
-	*
-	* @access public
 	*/
 	public function test_construct()
 	{
@@ -88,8 +87,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Test the event listener is subscribing events
-	*
-	* @access public
 	*/
 	public function test_getSubscribedEvents()
 	{
@@ -105,7 +102,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_load_language_on_setup
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function load_language_on_setup_data()
 	{
@@ -144,7 +140,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the load_language_on_setup event
 	*
 	* @dataProvider load_language_on_setup_data
-	* @access public
 	*/
 	public function test_load_language_on_setup($lang_set_ext, $expected_contains)
 	{
@@ -170,7 +165,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_add_page_header_link
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function add_page_header_link_data()
 	{
@@ -227,7 +221,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the add_page_header_link event
 	*
 	* @dataProvider add_page_header_link_data
-	* @access public
 	*/
 	public function test_add_page_header_link($boardrules_enable, $boardrules_header_link, $boardrules_require_at_registration, $expected)
 	{
@@ -239,18 +232,19 @@ class event_listener_test extends \phpbb_test_case
 
 		$this->set_listener();
 
+		$this->template->expects($this->once())
+			->method('assign_vars')
+			->with($expected);
+
 		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
 		$dispatcher->addListener('core.page_header', array($this->listener, 'add_page_header_link'));
 		$dispatcher->dispatch('core.page_header');
-
-		$this->assertEquals($expected, $this->template->get_template_vars());
 	}
 
 	/**
 	* Data set for test_add_permissions
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function add_permission_data()
 	{
@@ -289,7 +283,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the add_permission event
 	*
 	* @dataProvider add_permission_data
-	* @access public
 	*/
 	public function test_add_permission($permissions, $expected_contains)
 	{
@@ -315,7 +308,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_viewonline_page
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function viewonline_page_data()
 	{
@@ -366,7 +358,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the viewonline_page event
 	*
 	* @dataProvider viewonline_page_data
-	* @access public
 	*/
 	public function test_viewonline_page($on_page, $row, $location_url, $location, $expected_location_url, $expected_location)
 	{

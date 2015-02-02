@@ -17,8 +17,6 @@ class registration_event_test extends boardrules_functional_base
 {
 	/**
 	* Board rules installs in a disabled state. We need to turn it on to test it.
-	*
-	* @access public
 	*/
 	public function enable_boardrules()
 	{
@@ -41,8 +39,6 @@ class registration_event_test extends boardrules_functional_base
 
 	/**
 	* Test for presence of the Rules at registration event
-	*
-	* @access public
 	*/
 	public function test_boardrules_at_registration()
 	{

@@ -19,7 +19,6 @@ class rule_entity_language_test extends rule_entity_base
 	* Test data for the test_language() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function language_test_data()
 	{
@@ -53,7 +52,6 @@ class rule_entity_language_test extends rule_entity_base
 	* Test getting language
 	*
 	* @dataProvider language_test_data
-	* @access public
 	*/
 	public function test_language($data, $expected)
 	{

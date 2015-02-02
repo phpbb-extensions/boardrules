@@ -23,7 +23,6 @@ class rule_entity_base extends \phpbb_database_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
@@ -46,7 +45,7 @@ class rule_entity_base extends \phpbb_database_test_case
 
 		global $config, $phpbb_dispatcher;
 		$config = new \phpbb\config\config(array());
-		set_config(null, null, null, $config);
+		set_config(null, null, null, $config);  // remove in 3.2
 
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 	}
@@ -55,7 +54,6 @@ class rule_entity_base extends \phpbb_database_test_case
 	* Get the rule entity
 	*
 	* @return \phpbb\boardrules\entity\rule
-	* @access protected
 	*/
 	protected function get_rule_entity()
 	{
@@ -66,7 +64,6 @@ class rule_entity_base extends \phpbb_database_test_case
 	* Some common data to test from which can be imported
 	*
 	* @return array Data to send to import_data
-	* @access public
 	*/
 	public function get_import_data()
 	{

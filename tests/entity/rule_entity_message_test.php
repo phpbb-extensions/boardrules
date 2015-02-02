@@ -44,7 +44,6 @@ class rule_entity_message_test extends rule_entity_base
 	* Test data for the test_message() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function message_test_data()
 	{
@@ -68,7 +67,6 @@ class rule_entity_message_test extends rule_entity_base
 	* message and tests them all
 	*
 	* @dataProvider message_test_data
-	* @access public
 	*/
 	public function test_message($message)
 	{
@@ -144,7 +142,6 @@ class rule_entity_message_test extends rule_entity_base
 	* @param bool $enable_smilies
 	* @param bool $censor_text
 	* @return array
-	* @access protected
 	*/
 	protected function message_test_helper($message, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text)
 	{

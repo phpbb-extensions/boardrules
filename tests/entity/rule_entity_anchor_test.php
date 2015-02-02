@@ -19,7 +19,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test data for the test_anchor() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function anchor_test_data()
 	{
@@ -43,7 +42,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test setting anchor
 	*
 	* @dataProvider anchor_test_data
-	* @access public
 	*/
 	public function test_anchor($anchor, $expected)
 	{
@@ -64,7 +62,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test data for the test_anchor_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function anchor_fails_test_data()
 	{
@@ -122,7 +119,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	*
 	* @dataProvider anchor_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\base
-	* @access public
 	*/
 	public function test_anchor_fails($anchor)
 	{
@@ -137,7 +133,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test data for the test_unique_anchor() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function unique_anchor_test_data()
 	{
@@ -155,7 +150,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test setting unique anchor
 	*
 	* @dataProvider unique_anchor_test_data
-	* @access public
 	*/
 	public function test_unique_anchor($id, $anchor, $expected)
 	{
@@ -182,7 +176,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test data for the test_unique_anchor_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function unique_anchor_test_fails_data()
 	{
@@ -198,7 +191,6 @@ class rule_entity_anchor_test extends rule_entity_base
 	*
 	* @dataProvider unique_anchor_test_fails_data
 	* @expectedException \phpbb\boardrules\exception\base
-	* @access public
 	*/
 	public function test_unique_anchor_fails($id, $anchor)
 	{

@@ -19,7 +19,6 @@ class rule_entity_right_id_test extends rule_entity_base
 	* Test data for the test_right_id() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function right_id_test_data()
 	{
@@ -49,7 +48,6 @@ class rule_entity_right_id_test extends rule_entity_base
 	* Test getting id
 	*
 	* @dataProvider right_id_test_data
-	* @access public
 	*/
 	public function test_right_id($data, $expected)
 	{
