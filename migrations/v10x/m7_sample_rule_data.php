@@ -26,6 +26,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 		$sql = 'SELECT * FROM ' . $this->table_prefix . 'boardrules';
 		$result = $this->db->sql_query_limit($sql, 1);
 		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
 
 		return $row != false;
 	}

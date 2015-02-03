@@ -84,6 +84,7 @@ class rule_operator_delete_rule_test extends rule_operator_base
 			ORDER BY rule_id ASC');
 
 		$this->assertEquals($expected, $this->db->sql_fetchrowset($result));
+		$this->db->sql_freeresult($result);
 	}
 
 	/**
