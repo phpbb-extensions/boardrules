@@ -150,6 +150,7 @@ class rule_operator_move_test extends rule_operator_base
 			ORDER BY rule_left_id ASC');
 
 		$this->assertEquals($expected, $this->db->sql_fetchrowset($result));
+		$this->db->sql_freeresult($result);
 	}
 
 	/**

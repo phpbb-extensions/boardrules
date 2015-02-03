@@ -27,6 +27,7 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 			WHERE notification_type_name = 'phpbb.boardrules.notification.type.boardrules'";
 		$result = $this->db->sql_query_limit($sql, 1);
 		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
 
 		return $row != false;
 	}
