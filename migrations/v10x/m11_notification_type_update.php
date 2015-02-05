@@ -41,7 +41,10 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\db\migration\data\v310\notifications_use_full_name');
+		return array(
+			'\phpbb\boardrules\migrations\v10x\m10_notification_counter',
+			'\phpbb\db\migration\data\v310\notifications_use_full_name',
+		);
 	}
 
 	/**
