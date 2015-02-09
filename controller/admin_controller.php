@@ -115,14 +115,14 @@ class admin_controller implements admin_interface
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_ERROR'		=> (sizeof($errors)) ? true : false,
-			'ERROR_MSG'		=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+			'S_ERROR'	=> (sizeof($errors)) ? true : false,
+			'ERROR_MSG'	=> (sizeof($errors)) ? implode('<br />', $errors) : '',
 
-			'U_ACTION'		=> $this->u_action,
+			'U_ACTION'	=> $this->u_action,
 
-			'S_BOARDRULES_ENABLE'						=> $this->config['boardrules_enable'] ? true : false,
-			'S_BOARDRULES_HEADER_LINK'					=> $this->config['boardrules_header_link'] ? true : false,
-			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'		=> $this->config['boardrules_require_at_registration'] ? true : false,
+			'S_BOARDRULES_ENABLE'					=> (bool) $this->config['boardrules_enable'],
+			'S_BOARDRULES_HEADER_LINK'				=> (bool) $this->config['boardrules_header_link'],
+			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'	=> (bool) $this->config['boardrules_require_at_registration'],
 		));
 	}
 
@@ -164,7 +164,7 @@ class admin_controller implements admin_interface
 			foreach ($rows as $row)
 			{
 				$this->template->assign_block_vars('options', array(
-					'S_LANG_DEFAULT'	=> ($row['lang_iso'] == $this->config['default_lang']) ? true : false,
+					'S_LANG_DEFAULT'	=> $row['lang_iso'] == $this->config['default_lang'],
 
 					'LANG_ID'			=> $row['lang_id'],
 					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
@@ -210,15 +210,15 @@ class admin_controller implements admin_interface
 
 			// Set output block vars for display in the template
 			$this->template->assign_block_vars('rules', array(
-				'RULE_TITLE'		=> $entity->get_title(),
+				'RULE_TITLE'	=> $entity->get_title(),
 
-				'S_IS_CATEGORY'		=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
+				'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
 
-				'U_DELETE'			=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
-				'U_EDIT'			=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
-				'U_MOVE_DOWN'		=> "{$this->u_action}&amp;action=move_down&amp;rule_id=" . $entity->get_id() . '&amp;hash=' . generate_link_hash('down' . $entity->get_id()),
-				'U_MOVE_UP'			=> "{$this->u_action}&amp;action=move_up&amp;rule_id=" . $entity->get_id() . '&amp;hash=' . generate_link_hash('up' . $entity->get_id()),
-				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
+				'U_DELETE'		=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
+				'U_EDIT'		=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
+				'U_MOVE_DOWN'	=> "{$this->u_action}&amp;action=move_down&amp;rule_id=" . $entity->get_id() . '&amp;hash=' . generate_link_hash('down' . $entity->get_id()),
+				'U_MOVE_UP'		=> "{$this->u_action}&amp;action=move_up&amp;rule_id=" . $entity->get_id() . '&amp;hash=' . generate_link_hash('up' . $entity->get_id()),
+				'U_RULE'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
 
 			// Store the current right_id value
@@ -235,7 +235,7 @@ class admin_controller implements admin_interface
 			$this->template->assign_block_vars('breadcrumb', array(
 				'RULE_TITLE'		=> $entity->get_title(),
 
-				'S_CURRENT_LEVEL'	=> ($entity->get_id() == $parent_id) ? true : false,
+				'S_CURRENT_LEVEL'	=> $entity->get_id() == $parent_id,
 
 				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
@@ -327,11 +327,11 @@ class admin_controller implements admin_interface
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_EDIT_RULE'		=> true,
-			'S_IS_CATEGORY'		=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
+			'S_EDIT_RULE'	=> true,
+			'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
 
-			'U_EDIT_ACTION'		=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
-			'U_BACK'			=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
+			'U_EDIT_ACTION'	=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
+			'U_BACK'		=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
 		));
 	}
 
@@ -415,10 +415,10 @@ class admin_controller implements admin_interface
 		{
 			// Set output vars for display in the template
 			$this->template->assign_vars(array(
-				'S_PREVIEW'					=> $preview,
+				'S_PREVIEW'				=> $preview,
 
-				'RULE_TITLE_PREVIEW'		=> $entity->get_title(),
-				'RULE_MESSAGE_PREVIEW'		=> $entity->get_message_for_display(),
+				'RULE_TITLE_PREVIEW'	=> $entity->get_title(),
+				'RULE_MESSAGE_PREVIEW'	=> $entity->get_message_for_display(),
 			));
 		}
 
@@ -649,7 +649,7 @@ class admin_controller implements admin_interface
 				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
 				'S_DISABLED'		=> ($mode == 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()))) ? true : false,
-				'S_RULE_PARENT'		=> ($rule_menu_item->get_id() == $parent_id) ? true : false,
+				'S_RULE_PARENT'		=> $rule_menu_item->get_id() == $parent_id,
 			));
 		}
 	}
