@@ -30,10 +30,7 @@ class event_listener_test extends \phpbb_test_case
 	{
 		parent::setUp();
 
-		global $phpbb_dispatcher, $phpbb_root_path, $phpEx;
-
-		// Mock some global classes that may be called during code execution
-		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
+		global $phpbb_root_path, $phpEx;
 
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
@@ -42,24 +39,15 @@ class event_listener_test extends \phpbb_test_case
 			->getMock();
 		$this->user = new \phpbb\user('\phpbb\datetime');
 
-		$request = new \phpbb_mock_request();
-		$request->overwrite('SCRIPT_NAME', 'app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('REQUEST_URI', 'app.php', \phpbb\request\request_interface::SERVER);
-
-		$this->controller_helper = new \phpbb_mock_controller_helper(
-			$this->template,
-			$this->user,
-			$this->config,
-			new \phpbb\controller\provider(),
-			new \phpbb_mock_extension_manager($phpbb_root_path),
-			new \phpbb\symfony_request($request),
-			$request,
-			new \phpbb\filesystem(),
-			'',
-			$phpEx,
-			dirname(__FILE__) . '/../../'
-		);
+		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->controller_helper->expects($this->any())
+			->method('route')
+			->willReturnCallback(function ($route, array $params = array()) {
+				return $route . '#' . serialize($params);
+			})
+		;
 	}
 
 	/**
@@ -172,47 +160,47 @@ class event_listener_test extends \phpbb_test_case
 			array(1, 1, 1, array(
 				'S_BOARDRULES_LINK_ENABLED' => true,
 				'S_BOARDRULES_AT_REGISTRATION' => true,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(1, 1, 0, array(
 				'S_BOARDRULES_LINK_ENABLED' => true,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(1, 0, 1, array(
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => true,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(1, 0, 0, array(
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(0, 1, 1, array(
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(0, 0, 1, array(
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(0, 1, 0, array(
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(0, 0, 0, array(
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(null, null, null, array(
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 		);
 	}
@@ -348,7 +336,7 @@ class event_listener_test extends \phpbb_test_case
 				),
 				'$location_url',
 				'$location',
-				'app.' . $phpEx . '/rules',
+				'phpbb_boardrules_main_controller#a:0:{}',
 				'BOARDRULES_VIEWONLINE',
 			),
 		);
