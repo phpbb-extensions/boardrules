@@ -12,7 +12,7 @@ namespace phpbb\boardrules\acp;
 
 class boardrules_info
 {
-	function module()
+	public function module()
 	{
 		return array(
 			'filename'	=> '\phpbb\boardrules\acp\boardrules_module',
