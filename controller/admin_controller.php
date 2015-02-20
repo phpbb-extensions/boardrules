@@ -20,23 +20,29 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\config\config */
 	protected $config;
 
+	/** @var ContainerInterface */
+	protected $container;
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/** @var \phpbb\log\log */
+	protected $log;
+
+	/** @var \phpbb\notification\manager */
+	protected $notification_manager;
+
 	/** @var \phpbb\request\request */
 	protected $request;
+
+	/** @var \phpbb\boardrules\operators\rule */
+	protected $rule_operator;
 
 	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var \phpbb\user */
 	protected $user;
-
-	/** @var ContainerInterface */
-	protected $container;
-
-	/** @var \phpbb\boardrules\operators\rule */
-	protected $rule_operator;
 
 	/** @var string phpBB root path */
 	protected $root_path;
@@ -50,26 +56,30 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config                 $config          Config object
-	* @param \phpbb\db\driver\driver_interface    $db              Database object
-	* @param \phpbb\request\request               $request         Request object
-	* @param \phpbb\template\template             $template        Template object
-	* @param \phpbb\user                          $user            User object
-	* @param ContainerInterface                   $container       Service container interface
-	* @param \phpbb\boardrules\operators\rule     $rule_operator   Rule operator object
-	* @param string                               $root_path       phpBB root path
-	* @param string                               $php_ext         phpEx
+	* @param \phpbb\config\config              $config               Config object
+	* @param ContainerInterface                $container            Service container interface
+	* @param \phpbb\db\driver\driver_interface $db                   Database object
+	* @param \phpbb\log\log                    $log                  Log object
+	* @param \phpbb\notification\manager       $notification_manager Notification manager
+	* @param \phpbb\request\request            $request              Request object
+	* @param \phpbb\boardrules\operators\rule  $rule_operator        Rule operator object
+	* @param \phpbb\template\template          $template             Template object
+	* @param \phpbb\user                       $user                 User object
+	* @param string                            $root_path            phpBB root path
+	* @param string                            $php_ext              phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $container, \phpbb\boardrules\operators\rule $rule_operator, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
+		$this->container = $container;
 		$this->db = $db;
+		$this->log = $log;
+		$this->notification_manager = $notification_manager;
 		$this->request = $request;
+		$this->rule_operator = $rule_operator;
 		$this->template = $template;
 		$this->user = $user;
-		$this->container = $container;
-		$this->rule_operator = $rule_operator;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
@@ -104,8 +114,7 @@ class admin_controller implements admin_interface
 				$this->set_options();
 
 				// Add option settings change action to the admin log
-				$phpbb_log = $this->container->get('log');
-				$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_SETTINGS_LOG');
+				$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_SETTINGS_LOG');
 
 				// Option settings have been updated and logged
 				// Confirm this to the user and provide link back to previous page
@@ -575,12 +584,10 @@ class admin_controller implements admin_interface
 			);
 
 			// Create the notification
-			$phpbb_notifications = $this->container->get('notification_manager');
-			$phpbb_notifications->add_notifications('phpbb.boardrules.notification.type.boardrules', $notification_data);
+			$this->notification_manager->add_notifications('phpbb.boardrules.notification.type.boardrules', $notification_data);
 
 			// Log the notification
-			$phpbb_log = $this->container->get('log');
-			$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_NOTIFY_LOG');
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_NOTIFY_LOG');
 		}
 		else
 		{
