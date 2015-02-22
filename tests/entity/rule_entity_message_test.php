@@ -19,7 +19,7 @@ class rule_entity_message_test extends rule_entity_base
 	{
 		parent::setUp();
 
-		global $cache, $db, $request, $user, $phpbb_path_helper, $phpbb_root_path, $phpEx;
+		global $cache, $db, $request, $user, $phpbb_container, $phpbb_path_helper, $phpbb_root_path, $phpEx;
 
 		$cache = new \phpbb_mock_cache();
 
@@ -38,6 +38,25 @@ class rule_entity_message_test extends rule_entity_base
 			$phpbb_root_path,
 			$phpEx
 		);
+
+		// Set container options for $template instance created in bbcodes.php:138
+		$phpbb_container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
+		$phpbb_container
+			->expects($this->any())
+			->method('get')
+			->with($this->anything())
+			->will($this->returnValueMap(array(
+				array('path_helper', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $phpbb_path_helper),
+				array('config', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, new \phpbb\config\config(array())),
+				array('user', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $user),
+				array('ext.manager', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, new \phpbb_mock_extension_manager($phpbb_root_path)),
+				array('template.twig.extensions.collection', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, array()),
+		)));
+		$phpbb_container
+			->expects($this->any())
+			->method('getParameter')
+			->with('core.root_path')
+			->will($this->returnValue($phpbb_root_path));
 	}
 
 	/**
