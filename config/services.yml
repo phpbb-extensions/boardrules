@@ -17,12 +17,14 @@ services:
         class: phpbb\boardrules\controller\admin_controller
         arguments:
             - @config
+            - @service_container
             - @dbal.conn
+            - @log
+            - @notification_manager
             - @request
+            - @phpbb.boardrules.operator
             - @template
             - @user
-            - @service_container
-            - @phpbb.boardrules.operator
             - %core.root_path%
             - %core.php_ext%
 
