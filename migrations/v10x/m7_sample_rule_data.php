@@ -28,7 +28,7 @@ class m7_sample_rule_data extends \phpbb\db\migration\migration
 		$row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 
-		return $row != false;
+		return $row !== false;
 	}
 
 	/**

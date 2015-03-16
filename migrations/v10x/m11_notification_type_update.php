@@ -29,7 +29,7 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 		$row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 
-		return $row != false;
+		return $row !== false;
 	}
 
 	/**
