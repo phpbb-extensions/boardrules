@@ -275,7 +275,7 @@ class admin_controller implements admin_interface
 		$entity = $this->container->get('phpbb.boardrules.entity');
 
 		// Build rule parent pull down menu
-		$this->build_parent_select_menu($entity, $language, $parent_id, $mode = 'add');
+		$this->build_parent_select_menu($entity, $language, $parent_id, 'add');
 
 		// Collect the form data
 		$data = array(
