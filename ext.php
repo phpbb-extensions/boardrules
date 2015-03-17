@@ -27,6 +27,22 @@ namespace phpbb\boardrules;
 class ext extends \phpbb\extension\base
 {
 	/**
+	* Check whether or not the extension can be enabled.
+	* The current phpBB version should meet or exceed
+	* the minimum version required by this extension:
+	*
+	* Requires 3.1.3 due to the use of ContainerAware migrations.
+	*
+	* @return bool
+	* @access public
+	*/
+	public function is_enableable()
+	{
+		$config = $this->container->get('config');
+		return version_compare($config['version'], '3.1.3', '>=');
+	}
+
+	/**
 	* Overwrite enable_step to enable board rules notifications
 	* before any included migrations are installed.
 	*
