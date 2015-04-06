@@ -41,27 +41,7 @@ class rule_entity_message_test extends rule_entity_base
 
 		// This is needed to set up the s9e text formatter services
 		// This can lead to a test failure if PCRE is old.
-		// TODO: USE this if s9e is added (make sure PCRE is up to date)
-		//$this->get_test_case_helpers()->set_s9e_services($phpbb_container);
-		// Set container options for $template instance created in bbcodes.php:138
-		// TODO: REMOVE this if s9e is added
-		$phpbb_container = $this->getMock('\Symfony\Component\DependencyInjection\ContainerInterface');
-		$phpbb_container
-			->expects($this->any())
-			->method('get')
-			->with($this->anything())
-			->will($this->returnValueMap(array(
-				array('path_helper', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $phpbb_path_helper),
-				array('config', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, new \phpbb\config\config(array())),
-				array('user', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $user),
-				array('ext.manager', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, new \phpbb_mock_extension_manager($phpbb_root_path)),
-				array('template.twig.extensions.collection', \Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, array()),
-		)));
-		$phpbb_container
-			->expects($this->any())
-			->method('getParameter')
-			->with('core.root_path')
-			->will($this->returnValue($phpbb_root_path));
+		$this->get_test_case_helpers()->set_s9e_services($phpbb_container);
 	}
 
 	/**
