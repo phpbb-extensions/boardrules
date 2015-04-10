@@ -31,7 +31,7 @@ class ext extends \phpbb\extension\base
 	* The current phpBB version should meet or exceed
 	* the minimum version required by this extension:
 	*
-	* Requires > phpBB 3.1.2 due to usage of container aware migrations in phpBB 3.1.3.
+	* Requires phpBB 3.1.3 due to usage of container aware migrations.
 	*
 	* @return bool
 	* @access public
@@ -39,7 +39,7 @@ class ext extends \phpbb\extension\base
 	public function is_enableable()
 	{
 		$config = $this->container->get('config');
-		return version_compare($config['version'], '3.1.2', '>');
+		return phpbb_version_compare($config['version'], '3.1.3', '>=');
 	}
 
 	/**
