@@ -33,7 +33,7 @@ class rule_entity_message_test extends rule_entity_base
 
 		$phpbb_path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request($request),
-			new \phpbb\filesystem(),
+			new \phpbb\filesystem\filesystem(),
 			$this->getMock('\phpbb\request\request'),
 			$phpbb_root_path,
 			$phpEx
