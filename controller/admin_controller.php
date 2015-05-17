@@ -23,6 +23,9 @@ class admin_controller implements admin_interface
 	/** @var ContainerInterface */
 	protected $container;
 
+	/** @var \phpbb\controller\helper $controller_helper */
+	protected $controller_helper;
+
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
@@ -58,6 +61,7 @@ class admin_controller implements admin_interface
 	*
 	* @param \phpbb\config\config              $config               Config object
 	* @param ContainerInterface                $container            Service container interface
+	* @param \phpbb\controller\helper          $controller_helper    Controller helper object
 	* @param \phpbb\db\driver\driver_interface $db                   Database object
 	* @param \phpbb\log\log                    $log                  Log object
 	* @param \phpbb\notification\manager       $notification_manager Notification manager
@@ -69,10 +73,11 @@ class admin_controller implements admin_interface
 	* @param string                            $php_ext              phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\db\driver\driver_interface $db, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->container = $container;
+		$this->controller_helper = $controller_helper;
 		$this->db = $db;
 		$this->log = $log;
 		$this->notification_manager = $notification_manager;
@@ -471,7 +476,7 @@ class admin_controller implements admin_interface
 			'S_SMILIES_DISABLE_CHECKED'		=> !$entity->message_smilies_enabled(),
 			'S_MAGIC_URL_DISABLE_CHECKED'	=> !$entity->message_magic_url_enabled(),
 
-			'BBCODE_STATUS'			=> $this->user->lang('BBCODE_IS_ON', '<a href="' . append_sid("{$this->root_path}faq.{$this->php_ext}", 'mode=bbcode') . '">', '</a>'),
+			'BBCODE_STATUS'			=> $this->user->lang('BBCODE_IS_ON', '<a href="' . $this->controller_helper->route('phpbb_help_controller', array('mode' => 'bbcode')) . '">', '</a>'),
 			'SMILIES_STATUS'		=> $this->user->lang('SMILIES_ARE_ON'),
 			'IMG_STATUS'			=> $this->user->lang('IMAGES_ARE_ON'),
 			'FLASH_STATUS'			=> $this->user->lang('FLASH_IS_ON'),

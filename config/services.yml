@@ -18,6 +18,7 @@ services:
         arguments:
             - @config
             - @service_container
+            - @controller.helper
             - @dbal.conn
             - @log
             - @notification_manager
