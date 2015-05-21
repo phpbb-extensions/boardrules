@@ -54,7 +54,7 @@ class admin_controller_test extends boardrules_functional_base
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form(array(
 			'rule_title'	=> 'Test Rule',
 			'rule_anchor'	=> 'test-rule',
-			'rule_message'	=> 'This is a test rule.',
+			'rule_message'	=> str_repeat('test ', 1000), // 5000 characters
 		));
 		$crawler = self::submit($form);
 
