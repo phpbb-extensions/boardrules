@@ -30,7 +30,7 @@ class m3_add_schema extends \phpbb\db\migration\migration
 	/**
 	* Add table columns schema to the database:
 	*    boardrules:
-	*        rule_parents Basic rule data is serialzed and cached here
+	*        rule_parents Basic rule data is serialized and cached here
 	*
 	* @return array Array of table columns schema
 	* @access public
