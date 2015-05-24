@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 - 2015-05-24
+
+- Added a new template var `S_BOARD_RULES` that styles can use when viewing the rules page
+- Added a table header to the rule lists in the ACP (visual improvement)
+- Coding improvements
 ## 1.0.1 - 2014-11-03
 
 - Fixed an issue where rules could not be deleted with phpBB 3.1.1
