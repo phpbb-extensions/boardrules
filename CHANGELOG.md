@@ -16,6 +16,7 @@
 - Added Portuguese language pack
 - Added Romanian language pack
 - Added Russian language pack
+- Added Swedish language pack
 ## 1.0.1 - 2014-11-03
 
 - Fixed an issue where rules could not be deleted with phpBB 3.1.1
