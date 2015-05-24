@@ -6,6 +6,7 @@
 - Added a table header to the rule lists in the ACP (visual improvement)
 - Coding improvements
 - Added Arabic language pack
+- Added Croatian language pack
 - Added Czech language pack
 - Added German language pack
 - Added Greek language pack
