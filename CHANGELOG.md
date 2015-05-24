@@ -18,6 +18,8 @@
 - Added Russian language pack
 - Added Swedish language pack
 - Added Turkish language pack
+- Require phpBB 3.1.3 or newer
+
 ## 1.0.1 - 2014-11-03
 
 - Fixed an issue where rules could not be deleted with phpBB 3.1.1
