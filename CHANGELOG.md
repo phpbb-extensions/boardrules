@@ -2,6 +2,7 @@
 
 ## 1.0.2 - 2015-05-24
 
+- Fixed an issue where postgreSQL and mssql dbms could not save rules with more than 4,000 characters
 - Added a new template var `S_BOARD_RULES` that styles can use when viewing the rules page
 - Added a table header to the rule lists in the ACP (visual improvement)
 - Coding improvements
