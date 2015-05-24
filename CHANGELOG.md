@@ -8,6 +8,7 @@
 - Added Arabic language pack
 - Added Czech language pack
 - Added German language pack
+- Added Greek language pack
 ## 1.0.1 - 2014-11-03
 
 - Fixed an issue where rules could not be deleted with phpBB 3.1.1
