@@ -489,7 +489,7 @@ class admin_controller implements admin_interface
 			'S_LINKS_ALLOWED'		=> true,
 		));
 
-		// Assigning custom bbcodes
+		// Build custom bbcodes array
 		include_once($this->root_path . 'includes/functions_display.' . $this->php_ext);
 
 		display_custom_bbcodes();
