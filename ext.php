@@ -31,8 +31,8 @@ class ext extends \phpbb\extension\base
 	* The current phpBB version should meet or exceed
 	* the minimum version required by this extension:
 	*
-	* Requires phpBB 3.2.0-dev due to new faq controller route for bbcodes
-	* and the revised notifications system.
+	* Requires phpBB 3.2.0-dev due to new faq controller route for bbcodes,
+	* the revised notifications system and the text reparser service.
 	*
 	* @return bool
 	* @access public
