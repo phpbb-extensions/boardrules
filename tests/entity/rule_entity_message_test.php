@@ -19,13 +19,16 @@ class rule_entity_message_test extends rule_entity_base
 	{
 		parent::setUp();
 
-		global $cache, $db, $request, $user, $phpbb_path_helper, $phpbb_root_path, $phpEx;
+		global $cache, $db, $request, $user, $phpbb_container, $phpbb_path_helper, $phpbb_root_path, $phpEx;
 
 		$cache = new \phpbb_mock_cache();
 
 		$db = $this->db;
 
 		$request = new \phpbb_mock_request();
+		$request->overwrite('SCRIPT_NAME', '/app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('REQUEST_URI', '/app.php', \phpbb\request\request_interface::SERVER);
 
 		$user = new \phpbb_mock_user();
 		$user->optionset('viewcensors', false);
@@ -33,11 +36,15 @@ class rule_entity_message_test extends rule_entity_base
 
 		$phpbb_path_helper = new \phpbb\path_helper(
 			new \phpbb\symfony_request($request),
-			new \phpbb\filesystem(),
-			$this->getMock('\phpbb\request\request'),
+			new \phpbb\filesystem\filesystem(),
+			$request,
 			$phpbb_root_path,
 			$phpEx
 		);
+
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		$this->get_test_case_helpers()->set_s9e_services($phpbb_container);
 	}
 
 	/**

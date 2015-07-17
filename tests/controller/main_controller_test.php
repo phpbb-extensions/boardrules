@@ -31,13 +31,14 @@ class main_controller_test extends \phpbb_test_case
 	*/
 	public function test_display($status_code, $page_content)
 	{
-		global $config, $user, $phpbb_dispatcher, $phpbb_root_path, $phpEx;
+		global $config, $user, $phpbb_root_path, $phpEx;
 
 		// Global vars called upon during execution
 		$config = new \phpbb\config\config(array('boardrules_enable' => 1));
-		$user = new \phpbb\user('\phpbb\datetime');
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang = new \phpbb\language\language($lang_loader);
+		$user = new \phpbb\user($lang, '\phpbb\datetime');
 		$user->data['lang_id'] = 1;
-		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 
 		// Mock the rule operator and return an empty array for get_rules method
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
@@ -62,7 +63,10 @@ class main_controller_test extends \phpbb_test_case
 			->getMock();
 
 		// Mock the user
-		$user = $this->getMock('\phpbb\user', array(), array('\phpbb\datetime'));
+		$user = $this->getMock('\phpbb\user', array(), array(
+			new \phpbb\language\language(new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx)),
+			'\phpbb\datetime'
+		));
 
 		/** @var \phpbb\controller\helper $controller_helper */
 		/** @var \phpbb\boardrules\operators\rule $rule_operator */
