@@ -98,4 +98,30 @@ class admin_controller_test extends boardrules_functional_base
 		$this->assertGreaterThan(0, $crawler->filter('.successbox')->count());
 		$this->assertContainsLang('ACP_RULE_DELETED', $crawler->text());
 	}
+
+	/**
+	 * Test Board Rules Notifications
+	 */
+	public function test_notifications()
+	{
+		$this->login();
+		$this->admin_login();
+
+		// Load Board Rules Settings page
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=settings&sid={$this->sid}");
+		$this->assertContainsLang('ACP_BOARDRULES_SETTINGS', $crawler->filter('#main')->text(), 'The Board Rules settings page failed to load');
+
+		// Send out notifications
+		$form = $crawler->selectButton('action_send_notification')->form();
+		$crawler = self::submit($form);
+		$form = $crawler->selectButton('confirm')->form();
+		$crawler = self::submit($form);
+
+		// Assert no error occurred
+		$this->assertContainsLang('ACP_BOARDRULES_SETTINGS', $crawler->filter('#main')->text(), 'Failed to successfully send notifications');
+
+		// Assert notifications were sent
+		$crawler = self::request('GET', "index.php?&sid={$this->sid}");
+		$this->assertContainsLang('BOARDRULES_NOTIFICATION', $crawler->filter('.notification-title')->text(), 'The notification was not found in the notifications list');
+	}
 }
