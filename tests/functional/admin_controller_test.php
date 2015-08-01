@@ -24,7 +24,7 @@ class admin_controller_test extends boardrules_functional_base
 		$this->admin_login();
 
 		// Load Pages ACP page
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\boardrules\acp\boardrules_module&mode=manage&language=1&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=1&sid={$this->sid}");
 
 		// Assert Board Rules module appears in sidebar
 		$this->assertContainsLang('ACP_BOARDRULES', $crawler->filter('.menu-block')->text());
@@ -72,7 +72,7 @@ class admin_controller_test extends boardrules_functional_base
 		$this->admin_login();
 
 		// Edit the rule identified by id 3
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\boardrules\acp\boardrules_module&mode=manage&language=1&action=edit&rule_id=3&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=1&action=edit&rule_id=3&sid={$this->sid}");
 
 		// Assert edit page is displayed
 		$this->assertContainsLang('ACP_BOARDRULES_EDIT_RULE', $crawler->filter('#main')->text());
@@ -88,7 +88,7 @@ class admin_controller_test extends boardrules_functional_base
 		$this->admin_login();
 
 		// Delete the rule identified by id 3
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\boardrules\acp\boardrules_module&mode=manage&language=1&action=delete&rule_id=3&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=1&action=delete&rule_id=3&sid={$this->sid}");
 
 		// Confirm delete
 		$form = $crawler->selectButton('confirm')->form();
