@@ -18,6 +18,7 @@ services:
         arguments:
             - @config
             - @service_container
+            - @controller.helper
             - @dbal.conn
             - @log
             - @notification_manager
@@ -68,19 +69,18 @@ services:
 
     phpbb.boardrules.notification.type.boardrules:
         class: phpbb\boardrules\notification\boardrules
-        scope: prototype # scope MUST be prototype for this to work!
-        arguments:
-            - @user_loader
-            - @dbal.conn
-            - @cache.driver
-            - @user
-            - @auth
-            - @config
-            - @controller.helper
-            - %core.root_path%
-            - %core.php_ext%
-            - %tables.notification_types%
-            - %tables.notifications%
-            - %tables.user_notifications%
+        scope: prototype
+        parent: notification.type.base
+        calls:
+            - [set_controller_helper, [@controller.helper]]
         tags:
             - { name: notification.type }
+
+    phpbb.boardrules.text_reparser.rule_text:
+        class: phpbb\boardrules\textreparser\plugins\rule_text
+        arguments:
+            - @dbal.conn
+        calls:
+            - [set_table_name, [%phpbb.boardrules.tables.boardrules%]]
+        tags:
+            - { name: text_reparser.plugin }

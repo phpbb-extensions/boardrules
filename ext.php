@@ -31,15 +31,15 @@ class ext extends \phpbb\extension\base
 	* The current phpBB version should meet or exceed
 	* the minimum version required by this extension:
 	*
-	* Requires phpBB 3.1.3 due to usage of container aware migrations.
+	* Requires phpBB 3.2.0-dev due to new faq controller route for bbcodes,
+	* the revised notifications system and the text reparser service.
 	*
 	* @return bool
 	* @access public
 	*/
 	public function is_enableable()
 	{
-		$config = $this->container->get('config');
-		return phpbb_version_compare($config['version'], '3.1.3', '>=');
+		return phpbb_version_compare(PHPBB_VERSION, '3.2.0-dev', '>=');
 	}
 
 	/**
