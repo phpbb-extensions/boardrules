@@ -57,7 +57,7 @@ interface rule_interface
 	* Save the current settings to the database
 	*
 	* This must be called before closing or any changes will not be saved!
-	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
+	* If adding a rule (saving for the first time), you must call insert() or an exception will be thrown
 	*
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public

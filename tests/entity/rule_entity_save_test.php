@@ -73,31 +73,16 @@ class rule_entity_save_test extends rule_entity_base
 	}
 
 	/**
-	* Test data for the test_save_fails() function
-	*
-	* @return array Array of test data
-	*/
-	public function save_fails_test_data()
-	{
-		return array(
-			// id to search
-			array(0),
-			array(4),
-		);
-	}
-
-	/**
 	* Test saving to (non-existant) rules from the database
 	*
-	* @dataProvider save_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function test_save_fails($id)
+	public function test_save_fails()
 	{
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
-		// Save the entity
-		$entity->save($id);
+		// Save the entity with no rule ID set
+		$entity->save();
 	}
 }
