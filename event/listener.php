@@ -88,7 +88,7 @@ class listener implements EventSubscriberInterface
 	}
 
 	/**
-	* Create a URL to the board rules controller file for the header linklist
+	* Create a URL to the board rules controller file for the header link list
 	*
 	* @return null
 	* @access public

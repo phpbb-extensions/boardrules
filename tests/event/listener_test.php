@@ -30,7 +30,7 @@ class event_listener_test extends \phpbb_test_case
 	{
 		parent::setUp();
 
-		global $phpbb_root_path, $phpEx;
+		global $phpEx;
 
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
