@@ -28,7 +28,17 @@ class rule_operator_base extends \phpbb_database_test_case
 		return array('phpbb/boardrules');
 	}
 
-	protected $config, $container, $db, $entity, $nestedset_rules;
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
+	protected $container;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var \phpbb\boardrules\operators\nestedset_rules */
+	protected $nestedset_rules;
 
 	public function getDataSet()
 	{
@@ -56,8 +66,8 @@ class rule_operator_base extends \phpbb_database_test_case
 		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 		set_config(null, null, null, $this->config);  // remove in 3.2
 
-		$this->lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
-		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, 'phpbb_boardrules');
+		$lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
+		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $lock, 'phpbb_boardrules');
 	}
 
 	/**
