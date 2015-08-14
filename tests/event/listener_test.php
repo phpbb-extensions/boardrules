@@ -17,10 +17,20 @@ class event_listener_test extends \phpbb_test_case
 {
 	/** @var \phpbb\boardrules\event\listener */
 	protected $listener;
+
+	/** @var \phpbb\config\config */
 	protected $config;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\controller\helper */
 	protected $controller_helper;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\template\template */
 	protected $template;
+
+	/** @var \phpbb\user */
 	protected $user;
+
+	/** @var string */
 	protected $php_ext;
 
 	/**
