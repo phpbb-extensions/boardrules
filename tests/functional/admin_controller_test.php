@@ -40,6 +40,7 @@ class admin_controller_test extends boardrules_functional_base
 
 	/**
 	 * Test Board Rules ACP Create Rule
+	 * @param $crawler \Symfony\Component\DomCrawler\Crawler
 	 *
 	 * @depends test_acp_module
 	 */
