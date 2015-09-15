@@ -125,4 +125,42 @@ class admin_controller_test extends boardrules_functional_base
 		$crawler = self::request('GET', "index.php?&sid={$this->sid}");
 		$this->assertContainsLang('BOARDRULES_NOTIFICATION', $crawler->filter('.notification-title')->text(), 'The notification was not found in the notifications list');
 	}
+
+	/**
+	 * Test Board Rules ACP Settings
+	 */
+	public function test_acp_settings_and_logs()
+	{
+		$this->login();
+		$this->admin_login();
+
+		$this->add_lang_ext('phpbb/boardrules', 'info_acp_boardrules');
+		$crawler = self::request('GET', "adm/index.php?i=-phpbb-boardrules-acp-boardrules_module&mode=settings&sid={$this->sid}");
+		$form = $crawler->selectButton('submit')->form();
+		$crawler = self::submit($form);
+		$this->assertContainsLang('ACP_BOARDRULES_SETTINGS_CHANGED', $crawler->text());
+
+		// Confirm the log entry has been added correctly
+		$crawler = self::request('GET', 'adm/index.php?i=acp_logs&mode=admin&sid=' . $this->sid);
+		$this->assertContains(strip_tags($this->lang('ACP_BOARDRULES_SETTINGS_LOG')), $crawler->text());
+	}
+
+	/**
+	* Test Board Rules ACP manage permission
+	*/
+	public function test_boardrules_acp_permissions()
+	{
+		$this->login();
+		$this->admin_login();
+
+		$this->add_lang_ext('phpbb/boardrules', 'permissions_boardrules');
+		$crawler = self::request('GET', "adm/index.php?i=acp_permissions&mode=setting_group_global&sid={$this->sid}");
+		$form = $crawler->selectButton('submit')->form();
+
+		// Select Administrative permissions option
+		$form->get('type')->setValue('a_');
+		$crawler = self::submit($form);
+
+		$this->assertContainsLang('ACL_A_BOARDRULES', $crawler->text());
+	}
 }
