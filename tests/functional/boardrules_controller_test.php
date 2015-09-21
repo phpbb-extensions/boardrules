@@ -35,7 +35,7 @@ class boardrules_controller_test extends boardrules_functional_base
 		$crawler = self::request('GET', 'index.php');
 
 		$this->assertContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
-		$this->assertGreaterThan(0, $crawler->filter('.icon-boardrules')->count());
+		$this->assertGreaterThan(0, $crawler->filter('.fa-book')->count());
 	}
 
 	/**
