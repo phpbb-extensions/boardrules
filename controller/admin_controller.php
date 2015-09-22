@@ -134,6 +134,7 @@ class admin_controller implements admin_interface
 
 			'U_ACTION'	=> $this->u_action,
 
+			'BOARDRULES_FONT_ICON'					=> $this->config['boardrules_font_icon'],
 			'S_BOARDRULES_ENABLE'					=> (bool) $this->config['boardrules_enable'],
 			'S_BOARDRULES_HEADER_LINK'				=> (bool) $this->config['boardrules_header_link'],
 			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'	=> (bool) $this->config['boardrules_require_at_registration'],
@@ -148,6 +149,14 @@ class admin_controller implements admin_interface
 	*/
 	protected function set_options()
 	{
+		// Validate font icon field characters
+		$boardrules_font_icon = $this->request->variable('boardrules_font_icon', '');
+		if (!empty($boardrules_font_icon) && !preg_match('/^[a-z0-9-]+$/', $boardrules_font_icon))
+		{
+			trigger_error($this->user->lang('ACP_BOARDRULES_FONT_ICON_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+		}
+
+		$this->config->set('boardrules_font_icon', $boardrules_font_icon);
 		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
 		$this->config->set('boardrules_header_link', $this->request->variable('boardrules_header_link', 0));
 		$this->config->set('boardrules_require_at_registration', $this->request->variable('boardrules_require_at_registration', 0));
