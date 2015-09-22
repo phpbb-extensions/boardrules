@@ -16,6 +16,17 @@ namespace phpbb\boardrules\migrations\v20x;
 class m13_font_icon extends \phpbb\db\migration\migration
 {
 	/**
+	 * Check if this migration needs to be run
+	 *
+	 * @return bool True if expected config exists, false otherwise
+	 * @access public
+	 */
+	public function effectively_installed()
+	{
+		return $this->config->offsetExists('boardrules_font_icon');
+	}
+
+	/**
 	* Assign migration file dependencies for this migration
 	*
 	* @return array Array of migration files
