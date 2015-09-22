@@ -16,17 +16,17 @@
 <fieldset>
 	<legend>{L_ACP_BOARDRULES_SETTINGS}</legend>
 	<dl>
-		<dt><label for="boardrules_enable">{L_ACP_BOARDRULES_ENABLE}:</label></dt>
+		<dt><label for="boardrules_enable">{L_ACP_BOARDRULES_ENABLE}{L_COLON}</label></dt>
 		<dd><label><input type="radio" class="radio" id="boardrules_enable" name="boardrules_enable" value="1"<!-- IF S_BOARDRULES_ENABLE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="boardrules_enable" value="0"<!-- IF not S_BOARDRULES_ENABLE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
 	<dl>
-		<dt><label for="boardrules_header_link">{L_ACP_BOARDRULES_HEADER_LINK}:</label></dt>
+		<dt><label for="boardrules_header_link">{L_ACP_BOARDRULES_HEADER_LINK}{L_COLON}</label></dt>
 		<dd><label><input type="radio" class="radio" id="boardrules_header_link" name="boardrules_header_link" value="1"<!-- IF S_BOARDRULES_HEADER_LINK --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="boardrules_header_link" value="0"<!-- IF not S_BOARDRULES_HEADER_LINK --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
 	<dl>
-		<dt><label for="boardrules_require_at_registration">{L_ACP_BOARDRULES_AT_REGISTRATION}:</label><br /><span>{L_ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN}</span></dt>
+		<dt><label for="boardrules_font_icon">{L_ACP_BOARDRULES_FONT_ICON}{L_COLON}</label><br /><span>{L_ACP_BOARDRULES_FONT_ICON_EXPLAIN}</span></dt>
 		<dd><label><input type="radio" class="radio" id="boardrules_require_at_registration" name="boardrules_require_at_registration" value="1"<!-- IF S_BOARDRULES_REQUIRE_AT_REGISTRATION --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="boardrules_require_at_registration" value="0"<!-- IF not S_BOARDRULES_REQUIRE_AT_REGISTRATION --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
@@ -35,7 +35,7 @@
 <fieldset>
 	<legend>{L_NOTIFY}</legend>
 	<dl>
-		<dt><label for="action_send_notification">{L_ACP_BOARDRULES_NOTIFY}</label><br /><span>{L_ACP_BOARDRULES_NOTIFY_EXPLAIN}</span></dt>
+		<dt><label for="action_send_notification">{L_ACP_BOARDRULES_NOTIFY}{L_COLON}</label><br /><span>{L_ACP_BOARDRULES_NOTIFY_EXPLAIN}</span></dt>
 		<dd><input class="button2" type="submit" id="action_send_notification" name="action_send_notification" value="{L_ACP_BOARDRULES_NOTIFY}" /></dd>
 	</dl>
 </fieldset>
