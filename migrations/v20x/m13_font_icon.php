@@ -47,7 +47,7 @@ class m13_font_icon extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('boardrules_font_icon', '')),
+			array('config.add', array('boardrules_font_icon', 'book')),
 		);
 	}
 }

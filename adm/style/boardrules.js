@@ -8,7 +8,7 @@
 		if (input.length > 0) {
 			$icon.attr('class', 'fa-' + input);
 		} else {
-			$icon.attr('class', 'fa-book');
+			$icon.attr('class', '');
 		}
 	});
 
