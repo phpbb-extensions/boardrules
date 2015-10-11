@@ -1,3 +1,7 @@
 <!-- IF S_BOARDRULES_LINK_ENABLED-->
-	<li class="small-icon icon-boardrules no-bulletin"><a href="{U_BOARDRULES}" title="{L_BOARDRULES_TITLE}" role="menuitem">{L_BOARDRULES}</a></li>
+	<li data-last-responsive="true">
+		<a href="{U_BOARDRULES}" rel="help" title="{L_BOARDRULES_TITLE}" role="menuitem">
+			<!-- IF BOARDRULES_FONT_ICON --><i class="icon fa-{BOARDRULES_FONT_ICON} fa-fw" aria-hidden="true"></i><!-- ENDIF --><span>{L_BOARDRULES}</span>
+		</a>
+	</li>
 <!-- ENDIF -->

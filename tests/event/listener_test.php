@@ -169,47 +169,56 @@ class event_listener_test extends \phpbb_test_case
 	public function add_page_header_link_data()
 	{
 		return array(
-			array(1, 1, 1, array(
+			array(1, 1, 1, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => true,
 				'S_BOARDRULES_AT_REGISTRATION' => true,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(1, 1, 0, array(
+			array(1, 1, 0, 'foo', array(
+				'BOARDRULES_FONT_ICON' => 'foo',
 				'S_BOARDRULES_LINK_ENABLED' => true,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(1, 0, 1, array(
+			array(1, 0, 1, 'bar', array(
+				'BOARDRULES_FONT_ICON' => 'bar',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => true,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(1, 0, 0, array(
+			array(1, 0, 0, 'foobar', array(
+				'BOARDRULES_FONT_ICON' => 'foobar',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 1, 1, array(
+			array(0, 1, 1, 'barfoo', array(
+				'BOARDRULES_FONT_ICON' => 'barfoo',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 0, 1, array(
+			array(0, 0, 1, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 1, 0, array(
+			array(0, 1, 0, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 0, 0, array(
+			array(0, 0, 0, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(null, null, null, array(
+			array(null, null, null, null, array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
@@ -222,12 +231,13 @@ class event_listener_test extends \phpbb_test_case
 	*
 	* @dataProvider add_page_header_link_data
 	*/
-	public function test_add_page_header_link($boardrules_enable, $boardrules_header_link, $boardrules_require_at_registration, $expected)
+	public function test_add_page_header_link($enable, $header_link, $require_at_registration, $font_icon, $expected)
 	{
 		$this->config = new \phpbb\config\config(array(
-			'boardrules_enable' => $boardrules_enable,
-			'boardrules_header_link' => $boardrules_header_link,
-			'boardrules_require_at_registration' => $boardrules_require_at_registration,
+			'boardrules_enable' => $enable,
+			'boardrules_font_icon' => $font_icon,
+			'boardrules_header_link' => $header_link,
+			'boardrules_require_at_registration' => $require_at_registration,
 		));
 
 		$this->set_listener();
