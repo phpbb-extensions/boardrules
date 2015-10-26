@@ -41,7 +41,7 @@ class m14_reparse extends \phpbb\db\migration\container_aware_migration
 	 */
 	public function reparse($current = 0)
 	{
-		$reparser = $this->container->get('phpbb.boardrules.text_reparser.rule_text');
+		$reparser = new \phpbb\boardrules\textreparser\plugins\rule_text($this->db);
 
 		if (empty($current))
 		{
