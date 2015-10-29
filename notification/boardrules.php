@@ -99,7 +99,7 @@ class boardrules extends \phpbb\notification\type\base
 	 */
 	public function get_title()
 	{
-		return $this->user->lang('BOARDRULES_NOTIFICATION');
+		return $this->language->lang('BOARDRULES_NOTIFICATION');
 	}
 
 	/**
