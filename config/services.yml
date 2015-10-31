@@ -7,8 +7,8 @@ services:
         arguments:
             - @config
             - @controller.helper
+            - @language
             - @template
-            - @user
             - %core.php_ext%
         tags:
             - { name: event.listener }
@@ -20,6 +20,7 @@ services:
             - @service_container
             - @controller.helper
             - @dbal.conn
+            - @language
             - @log
             - @notification_manager
             - @request
@@ -34,6 +35,7 @@ services:
         arguments:
             - @config
             - @controller.helper
+            - @language
             - @phpbb.boardrules.operator
             - @template
             - @user

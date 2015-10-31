@@ -29,6 +29,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/** @var \phpbb\language\language */
+	protected $lang;
+
 	/** @var \phpbb\log\log */
 	protected $log;
 
@@ -63,6 +66,7 @@ class admin_controller implements admin_interface
 	* @param ContainerInterface                $container            Service container interface
 	* @param \phpbb\controller\helper          $controller_helper    Controller helper object
 	* @param \phpbb\db\driver\driver_interface $db                   Database object
+	* @param \phpbb\language\language          $lang                 Language object
 	* @param \phpbb\log\log                    $log                  Log object
 	* @param \phpbb\notification\manager       $notification_manager Notification manager
 	* @param \phpbb\request\request            $request              Request object
@@ -73,12 +77,13 @@ class admin_controller implements admin_interface
 	* @param string                            $php_ext              phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->container = $container;
 		$this->controller_helper = $controller_helper;
 		$this->db = $db;
+		$this->lang = $lang;
 		$this->log = $log;
 		$this->notification_manager = $notification_manager;
 		$this->request = $request;
@@ -109,7 +114,7 @@ class admin_controller implements admin_interface
 			// Test if the submitted form is valid
 			if (!check_form_key('boardrules_settings'))
 			{
-				$errors[] = $this->user->lang('FORM_INVALID');
+				$errors[] = $this->lang->lang('FORM_INVALID');
 			}
 
 			// If no errors, process the form data
@@ -123,7 +128,7 @@ class admin_controller implements admin_interface
 
 				// Option settings have been updated and logged
 				// Confirm this to the user and provide link back to previous page
-				trigger_error($this->user->lang('ACP_BOARDRULES_SETTINGS_CHANGED') . adm_back_link($this->u_action));
+				trigger_error($this->lang->lang('ACP_BOARDRULES_SETTINGS_CHANGED') . adm_back_link($this->u_action));
 			}
 		}
 
@@ -153,7 +158,7 @@ class admin_controller implements admin_interface
 		$boardrules_font_icon = $this->request->variable('boardrules_font_icon', '');
 		if (!empty($boardrules_font_icon) && !preg_match('/^[a-z0-9-]+$/', $boardrules_font_icon))
 		{
-			trigger_error($this->user->lang('ACP_BOARDRULES_FONT_ICON_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->lang->lang('ACP_BOARDRULES_FONT_ICON_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		$this->config->set('boardrules_font_icon', $boardrules_font_icon);
@@ -373,7 +378,7 @@ class admin_controller implements admin_interface
 		$preview = $this->request->is_set_post('preview');
 
 		// Load posting language file for the BBCode editor
-		$this->user->add_lang('posting');
+		$this->lang->add_lang('posting');
 
 		// Create an array to collect errors that will be output to the user
 		$errors = array();
@@ -411,7 +416,7 @@ class admin_controller implements admin_interface
 			catch (\phpbb\boardrules\exception\base $e)
 			{
 				// Catch exceptions and add them to errors array
-				$errors[] = $e->get_message($this->user);
+				$errors[] = $e->get_message($this->lang);
 			}
 		}
 
@@ -423,13 +428,13 @@ class admin_controller implements admin_interface
 			// Test if the form is valid
 			if (!check_form_key('add_edit_rule'))
 			{
-				$errors[] = $this->user->lang('FORM_INVALID');
+				$errors[] = $this->lang->lang('FORM_INVALID');
 			}
 
 			// Do not allow an empty rule title
 			if ($entity->get_title() == '')
 			{
-				$errors[] = $this->user->lang('ACP_RULE_TITLE_EMPTY');
+				$errors[] = $this->lang->lang('ACP_RULE_TITLE_EMPTY');
 			}
 		}
 
@@ -460,7 +465,7 @@ class admin_controller implements admin_interface
 				}
 
 				// Show user confirmation of the saved rule and provide link back to the previous page
-				trigger_error($this->user->lang('ACP_RULE_EDITED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+				trigger_error($this->lang->lang('ACP_RULE_EDITED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 			}
 			else
 			{
@@ -468,7 +473,7 @@ class admin_controller implements admin_interface
 				$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
 
 				// Show user confirmation of the added rule and provide link back to the previous page
-				trigger_error($this->user->lang('ACP_RULE_ADDED') . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
+				trigger_error($this->lang->lang('ACP_RULE_ADDED') . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
 			}
 		}
 
@@ -485,11 +490,11 @@ class admin_controller implements admin_interface
 			'S_SMILIES_DISABLE_CHECKED'		=> !$entity->message_smilies_enabled(),
 			'S_MAGIC_URL_DISABLE_CHECKED'	=> !$entity->message_magic_url_enabled(),
 
-			'BBCODE_STATUS'			=> $this->user->lang('BBCODE_IS_ON', '<a href="' . $this->controller_helper->route('phpbb_help_bbcode_controller') . '">', '</a>'),
-			'SMILIES_STATUS'		=> $this->user->lang('SMILIES_ARE_ON'),
-			'IMG_STATUS'			=> $this->user->lang('IMAGES_ARE_ON'),
-			'FLASH_STATUS'			=> $this->user->lang('FLASH_IS_ON'),
-			'URL_STATUS'			=> $this->user->lang('URL_IS_ON'),
+			'BBCODE_STATUS'			=> $this->lang->lang('BBCODE_IS_ON', '<a href="' . $this->controller_helper->route('phpbb_help_bbcode_controller') . '">', '</a>'),
+			'SMILIES_STATUS'		=> $this->lang->lang('SMILIES_ARE_ON'),
+			'IMG_STATUS'			=> $this->lang->lang('IMAGES_ARE_ON'),
+			'FLASH_STATUS'			=> $this->lang->lang('FLASH_IS_ON'),
+			'URL_STATUS'			=> $this->lang->lang('URL_IS_ON'),
 
 			'S_BBCODE_ALLOWED'		=> true,
 			'S_SMILIES_ALLOWED'		=> true,
@@ -524,12 +529,12 @@ class admin_controller implements admin_interface
 			$this->rule_operator->delete_rule($rule_id);
 
 			// Show user confirmation of the deleted rule and provide link back to the previous page
-			trigger_error($this->user->lang('ACP_RULE_DELETED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
+			trigger_error($this->lang->lang('ACP_RULE_DELETED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
 		}
 		else
 		{
 			// Request confirmation from the user to delete the rule
-			confirm_box(false, $this->user->lang('ACP_DELETE_RULE_CONFIRM'), build_hidden_fields(array(
+			confirm_box(false, $this->lang->lang('ACP_DELETE_RULE_CONFIRM'), build_hidden_fields(array(
 				'mode' => 'manage',
 				'action' => 'delete',
 				'rule_id' => $rule_id,
@@ -555,7 +560,7 @@ class admin_controller implements admin_interface
 		// If the link hash is invalid, stop and show an error message to the user
 		if (!check_link_hash($this->request->variable('hash', ''), $direction . $rule_id))
 		{
-			trigger_error($this->user->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->lang->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		// Move the rule
@@ -607,7 +612,7 @@ class admin_controller implements admin_interface
 		{
 			// Request confirmation from the user to send notification to all users
 			// Build a hidden array of the form data
-			confirm_box(false, $this->user->lang('ACP_BOARDRULES_NOTIFY_CONFIRM'), build_hidden_fields(array(
+			confirm_box(false, $this->lang->lang('ACP_BOARDRULES_NOTIFY_CONFIRM'), build_hidden_fields(array(
 				'action_send_notification' => true,
 				'rule_id' => $rule_id,
 			)));

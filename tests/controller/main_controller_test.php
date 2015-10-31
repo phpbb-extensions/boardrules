@@ -75,6 +75,7 @@ class main_controller_test extends \phpbb_test_case
 		$controller = new \phpbb\boardrules\controller\main_controller(
 			$config,
 			$controller_helper,
+			$lang,
 			$rule_operator,
 			$template,
 			$user,
