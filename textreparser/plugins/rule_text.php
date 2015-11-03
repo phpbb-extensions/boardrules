@@ -16,17 +16,6 @@ class rule_text extends \phpbb\textreparser\row_based_plugin
 	protected $boardrules_table;
 
 	/**
-	* Set the board rules database table name
-	*
-	* @param string $boardrules_table
-	* @return null
-	*/
-	public function set_table_name($boardrules_table)
-	{
-		$this->boardrules_table = $boardrules_table;
-	}
-
-	/**
 	* {@inheritdoc}
 	*/
 	public function get_columns()
@@ -37,13 +26,5 @@ class rule_text extends \phpbb\textreparser\row_based_plugin
 			'bbcode_uid'	=> 'rule_message_bbcode_uid',
 			'options'		=> 'rule_message_bbcode_options',
 		);
-	}
-
-	/**
-	* {@inheritdoc}
-	*/
-	public function get_table_name()
-	{
-		return $this->boardrules_table;
 	}
 }
