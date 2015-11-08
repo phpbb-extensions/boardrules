@@ -26,10 +26,6 @@ class rule_text_test extends \phpbb_textreparser_test_row_based_plugin
 
 	protected function get_reparser()
 	{
-		$reparser = new \phpbb\boardrules\textreparser\plugins\rule_text($this->db);
-
-		$reparser->set_table_name('phpbb_boardrules');
-
-		return $reparser;
+		return new \phpbb\boardrules\textreparser\plugins\rule_text($this->db, 'phpbb_boardrules');
 	}
 }

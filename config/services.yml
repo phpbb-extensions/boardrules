@@ -82,7 +82,6 @@ services:
         class: phpbb\boardrules\textreparser\plugins\rule_text
         arguments:
             - @dbal.conn
-        calls:
-            - [set_table_name, [%phpbb.boardrules.tables.boardrules%]]
+            - %phpbb.boardrules.tables.boardrules%
         tags:
             - { name: text_reparser.plugin }
