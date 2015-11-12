@@ -39,10 +39,10 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Beispiel Regel-Kategorie',
-	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dies ist eine Beispiel-Kategorie der Board-Regeln Extension. Kategorien sind Regelblöcke mit ähnlichen Regeln. Regel-Anmerkungen (wie diese) werden bei kategorien nicht auf der Regel-seite angezeigt.',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dies ist eine Beispiel-Kategorie der Board-Regeln Erweiterung. Kategorien sind Regelblöcke mit ähnlichen Regeln. Regel-Anmerkungen (wie diese) werden bei Kategorien nicht auf der Regel-Seite angezeigt.',
 	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'beispiel_kategorie_anker',
 
 	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Beispiel-Regel',
-	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Dies ist eine Beispiel-Regel der Board-Regeln Extension. Die Extension funktioniert einwandfrei. Du kannst diese Regel bearbeiten oder löschen, um eigene Regeln zu erstellen, zu bearbeten oder hinzuzufügen.',
+	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Dies ist eine Beispiel-Regel der Board-Regeln Erweiterung. Die Erweiterung funktioniert einwandfrei. Du kannst diese Regel bearbeiten oder löschen, um eigene Regeln zu erstellen, zu bearbeten oder hinzuzufügen.',
 	'BOARDRULES_SAMPLE_RULE_ANCHOR'			=> 'beispiel_regel_anker',
 ));

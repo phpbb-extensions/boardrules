@@ -38,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES'				=> 'Regelns',
-	'BOARDRULES_TITLE'			=> 'Regeln des Baords anzeigen',
+	'BOARDRULES'				=> 'Regeln',
+	'BOARDRULES_TITLE'			=> 'Regeln des Boards anzeigen',
 	'BOARDRULES_AGREEMENT'		=> 'Du stimmst den Regeln im folgenden Abschnitt zur Nutzung des Forums ausdrücklich zu',
-	'BOARDRULES_VIEWONLINE'		=> 'Schaut die Baord-Regeln an',
-	'BOARDRULES_NOTIFICATION'	=> 'Die Board-regeln wurden geändert. Hier klicken, um die geänderte Fassung anzusehen.',
+	'BOARDRULES_VIEWONLINE'		=> 'Schaut die Board-Regeln an',
+	'BOARDRULES_NOTIFICATION'	=> 'Die Board-Regeln wurden geändert. Hier klicken, um die geänderte Fassung anzusehen.',
 ));
