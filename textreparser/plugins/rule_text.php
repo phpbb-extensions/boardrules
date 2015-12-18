@@ -12,9 +12,6 @@ namespace phpbb\boardrules\textreparser\plugins;
 
 class rule_text extends \phpbb\textreparser\row_based_plugin
 {
-	/** @var string The database table the rules are stored in */
-	protected $boardrules_table;
-
 	/**
 	* {@inheritdoc}
 	*/
