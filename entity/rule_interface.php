@@ -216,6 +216,15 @@ interface rule_interface
 	public function get_language();
 
 	/**
+	 * Set the language identifier
+	 *
+	 * @param int $language language identifier
+	 * @return rule_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_language($language);
+
+	/**
 	* Get the parent identifier
 	*
 	* @return int parent identifier
