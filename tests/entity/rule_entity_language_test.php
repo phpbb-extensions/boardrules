@@ -64,4 +64,22 @@ class rule_entity_language_test extends rule_entity_base
 		// Assert that the language matches what is expected
 		$this->assertSame($expected, $entity->get_language());
 	}
+
+	/**
+	 * Test setting language
+	 *
+	 * @dataProvider language_test_data
+	 */
+	public function test_set_language($data, $language)
+	{
+		// Setup the entity class
+		$entity = $this->get_rule_entity();
+
+		// Set the anchor
+		$entity->set_language($language);
+
+		// Assert that the anchor matches what's expected
+		$this->assertSame($language, $entity->get_language());
+
+	}
 }

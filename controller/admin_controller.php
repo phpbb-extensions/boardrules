@@ -341,6 +341,7 @@ class admin_controller implements admin_interface
 
 		// Collect the form data
 		$data = array(
+			'rule_language'	=> $entity->get_language(),
 			'rule_parent_id'=> $this->request->variable('rule_parent', $entity->get_parent_id()),
 			'rule_title'	=> $this->request->variable('rule_title', $entity->get_title(), true),
 			'rule_anchor'	=> $this->request->variable('rule_anchor', $entity->get_anchor(), true),
@@ -400,6 +401,7 @@ class admin_controller implements admin_interface
 
 		// Grab the form's rule data fields
 		$rule_fields = array(
+			'language'	=> $data['rule_language'], // set this first
 			'title'		=> $data['rule_title'],
 			'anchor'	=> $data['rule_anchor'],
 			'message'	=> $data['rule_message'],
