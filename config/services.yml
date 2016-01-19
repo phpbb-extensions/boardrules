@@ -5,82 +5,82 @@ services:
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
         arguments:
-            - @config
-            - @controller.helper
-            - @template
-            - @user
-            - %core.php_ext%
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }
 
     phpbb.boardrules.admin.controller:
         class: phpbb\boardrules\controller\admin_controller
         arguments:
-            - @config
-            - @service_container
-            - @dbal.conn
-            - @log
-            - @notification_manager
-            - @request
-            - @phpbb.boardrules.operator
-            - @template
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@config'
+            - '@service_container'
+            - '@dbal.conn'
+            - '@log'
+            - '@notification_manager'
+            - '@request'
+            - '@phpbb.boardrules.operator'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbb.boardrules.controller:
         class: phpbb\boardrules\controller\main_controller
         arguments:
-            - @config
-            - @controller.helper
-            - @phpbb.boardrules.operator
-            - @template
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@config'
+            - '@controller.helper'
+            - '@phpbb.boardrules.operator'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
-            - @dbal.conn
-            - %phpbb.boardrules.tables.boardrules%
+            - '@dbal.conn'
+            - '%phpbb.boardrules.tables.boardrules%'
 
     phpbb.boardrules.operator:
         class: phpbb\boardrules\operators\rule
         arguments:
-            - @service_container
-            - @phpbb.boardrules.nestedset_rules
+            - '@service_container'
+            - '@phpbb.boardrules.nestedset_rules'
 
     phpbb.boardrules.nestedset_rules:
         class: phpbb\boardrules\operators\nestedset_rules
         arguments:
-            - @dbal.conn
-            - @phpbb.boardrules.table_lock
-            - %phpbb.boardrules.tables.boardrules%
+            - '@dbal.conn'
+            - '@phpbb.boardrules.table_lock'
+            - '%phpbb.boardrules.tables.boardrules%'
 
     phpbb.boardrules.table_lock:
         class: phpbb\lock\db
         arguments:
             - boardrules.table_lock.boardrules_table
-            - @config
-            - @dbal.conn
+            - '@config'
+            - '@dbal.conn'
 
     phpbb.boardrules.notification.type.boardrules:
         class: phpbb\boardrules\notification\boardrules
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
-            - @user_loader
-            - @dbal.conn
-            - @cache.driver
-            - @user
-            - @auth
-            - @config
-            - @controller.helper
-            - %core.root_path%
-            - %core.php_ext%
-            - %tables.notification_types%
-            - %tables.notifications%
-            - %tables.user_notifications%
+            - '@user_loader'
+            - '@dbal.conn'
+            - '@cache.driver'
+            - '@user'
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%tables.notification_types%'
+            - '%tables.notifications%'
+            - '%tables.user_notifications%'
         tags:
             - { name: notification.type }
