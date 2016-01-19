@@ -5,69 +5,69 @@ services:
     phpbb.boardrules.listener:
         class: phpbb\boardrules\event\listener
         arguments:
-            - @config
-            - @controller.helper
-            - @language
-            - @template
-            - %core.php_ext%
+            - '@config'
+            - '@controller.helper'
+            - '@language'
+            - '@template'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener }
 
     phpbb.boardrules.admin.controller:
         class: phpbb\boardrules\controller\admin_controller
         arguments:
-            - @config
-            - @service_container
-            - @controller.helper
-            - @dbal.conn
-            - @language
-            - @log
-            - @notification_manager
-            - @request
-            - @phpbb.boardrules.operator
-            - @template
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@config'
+            - '@service_container'
+            - '@controller.helper'
+            - '@dbal.conn'
+            - '@language'
+            - '@log'
+            - '@notification_manager'
+            - '@request'
+            - '@phpbb.boardrules.operator'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbb.boardrules.controller:
         class: phpbb\boardrules\controller\main_controller
         arguments:
-            - @config
-            - @controller.helper
-            - @language
-            - @phpbb.boardrules.operator
-            - @template
-            - @user
-            - %core.root_path%
-            - %core.php_ext%
+            - '@config'
+            - '@controller.helper'
+            - '@language'
+            - '@phpbb.boardrules.operator'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
-            - @dbal.conn
-            - %phpbb.boardrules.tables.boardrules%
+            - '@dbal.conn'
+            - '%phpbb.boardrules.tables.boardrules%'
 
     phpbb.boardrules.operator:
         class: phpbb\boardrules\operators\rule
         arguments:
-            - @service_container
-            - @phpbb.boardrules.nestedset_rules
+            - '@service_container'
+            - '@phpbb.boardrules.nestedset_rules'
 
     phpbb.boardrules.nestedset_rules:
         class: phpbb\boardrules\operators\nestedset_rules
         arguments:
-            - @dbal.conn
-            - @phpbb.boardrules.table_lock
-            - %phpbb.boardrules.tables.boardrules%
+            - '@dbal.conn'
+            - '@phpbb.boardrules.table_lock'
+            - '%phpbb.boardrules.tables.boardrules%'
 
     phpbb.boardrules.table_lock:
         class: phpbb\lock\db
         arguments:
             - boardrules.table_lock.boardrules_table
-            - @config
-            - @dbal.conn
+            - '@config'
+            - '@dbal.conn'
 
     phpbb.boardrules.notification.type.boardrules:
         class: phpbb\boardrules\notification\boardrules
@@ -81,7 +81,7 @@ services:
     phpbb.boardrules.text_reparser.rule_text:
         class: phpbb\boardrules\textreparser\plugins\rule_text
         arguments:
-            - @dbal.conn
-            - %phpbb.boardrules.tables.boardrules%
+            - '@dbal.conn'
+            - '%phpbb.boardrules.tables.boardrules%'
         tags:
             - { name: text_reparser.plugin }
