@@ -2,6 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
+* @简体中文语言　David Yin <http://www.g2soft.net/>
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -37,10 +38,22 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 //
 
+/*
+* These are errors which can be triggered by sending invalid data to the
+* boardrules extension API.
+*
+* These errors will never show to a user unless they are either modifying
+* the core boardrules extension code OR unless they are writing an extension
+* which makes calls to this extension.
+*
+* Translators: Feel free to not translate these language strings
+*/
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'			=> 'Board-Regeln',
-	'BOARDRULES_EXPLAIN'		=> 'Die Regeln auf %s beschreiben die Bedingungen für den reibungslosen Ablauf, den Umgang miteinander und die Verantwortlichkeiten aller Mitglieder und Gäste.',
-	'BOARDRULES_CATEGORIES'		=> 'Regelbereiche',
-	'BOARDRULES_CATEGORY_ANCHOR'=> 'Bereich %s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'Regel %s',
+	'EXCEPTION_FIELD_MISSING'		=> '必填项缺失',
+	'EXCEPTION_INVALID_ARGUMENT'	=> '`%1$s` 的参数无效。 原因： %2$s',
+	'EXCEPTION_OUT_OF_BOUNDS'		=> '`%1$s` 字段收到的数据超出范围。',
+	'EXCEPTION_TOO_LONG'			=> '输入值超过最大长度。',
+	'EXCEPTION_NOT_UNIQUE'			=> '输入值不是唯一。',
+	'EXCEPTION_UNEXPECTED_VALUE'	=> '`%1$s` 字段收到无效数据。原因： %2$s',
+	'EXCEPTION_ILLEGAL_CHARACTERS'	=> '输入值含有非法字符。',
 ));

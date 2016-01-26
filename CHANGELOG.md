@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 - 2016-01-17
+
+- The same anchor names can now be shared between languages
+- Fixed an issue that prevented rules from being updated on MSSQL systems
+- Added German (Formal Honorifics) language pack
+- Added Mandarin Chinese (Simplified Script) language pack
+
 ## 1.0.2 - 2015-05-24
 
 - Fixed an issue where postgreSQL and mssql dbms could not save rules with more than 4,000 characters

@@ -2,6 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
+* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -38,9 +39,11 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'			=> 'Board-Regeln',
-	'BOARDRULES_EXPLAIN'		=> 'Die Regeln auf %s beschreiben die Bedingungen für den reibungslosen Ablauf, den Umgang miteinander und die Verantwortlichkeiten aller Mitglieder und Gäste.',
-	'BOARDRULES_CATEGORIES'		=> 'Regelbereiche',
-	'BOARDRULES_CATEGORY_ANCHOR'=> 'Bereich %s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'Regel %s',
+	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Beispiel Regel-Kategorie',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dies ist eine Beispiel-Kategorie der Board-Regeln. Kategorien sind Regelblöcke mit ähnlichen Regeln. Regel-Anmerkungen (wie diese) werden bei Kategorien nicht auf der Regelseite angezeigt.',
+	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'beispiel_kategorie_anker',
+
+	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Beispiel-Regel',
+	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Dies ist eine Beispiel-Regel der Board-Regeln. Die Extension funktioniert einwandfrei. Sie können diese Regel bearbeiten oder löschen, um eigene Regeln zu erstellen, zu bearbeiten oder hinzuzufügen.',
+	'BOARDRULES_SAMPLE_RULE_ANCHOR'			=> 'beispiel_regel_anker',
 ));
