@@ -52,17 +52,12 @@ class m14_reparse extends \phpbb\db\migration\container_aware_migration
 		}
 
 		$limit = 50; // lets keep the reparsing conservative
-		$processed_records = 0;
-		while ($processed_records < $limit && $current > 0)
-		{
-			$start = max(1, $current + 1 - ($limit - $processed_records));
-			$end   = max(1, $current);
+		$start = max(1, $current + 1 - $limit);
+		$end   = max(1, $current);
 
-			$reparser->reparse_range($start, $end);
+		$reparser->reparse_range($start, $end);
 
-			$processed_records = $end - $start + 1;
-			$current = $start - 1;
-		}
+		$current = $start - 1;
 
 		return ($current === 0) ? true : $current;
 	}
