@@ -44,7 +44,7 @@ services:
 
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
-        scope: prototype # scope MUST be prototype for this to work!
+        shared: false # service MUST not be shared for this to work!
         arguments:
             - '@dbal.conn'
             - '%phpbb.boardrules.tables.boardrules%'
@@ -71,7 +71,7 @@ services:
 
     phpbb.boardrules.notification.type.boardrules:
         class: phpbb\boardrules\notification\boardrules
-        scope: prototype
+        shared: false # service MUST not be shared for this to work!
         parent: notification.type.base
         calls:
             - [set_controller_helper, [@controller.helper]]
