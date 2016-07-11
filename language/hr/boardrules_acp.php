@@ -78,4 +78,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Pravilo je izbrisano.',
 	'ACP_RULE_EDITED'						=> 'Pravilo je uređeno.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Moraš upisati naslov pravila.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
 ));
