@@ -10,8 +10,8 @@
 
 namespace phpbb\boardrules\tests\operators;
 
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
-require_once dirname(__FILE__) . '/../../../../../includes/functions_content.php';
+require_once __DIR__ . '/../../../../../includes/functions.php';
+require_once __DIR__ . '/../../../../../includes/functions_content.php';
 
 /**
 * Base rule operator test (helper)
@@ -42,7 +42,7 @@ class rule_operator_base extends \phpbb_database_test_case
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/rule.xml');
+		return $this->createXMLDataSet(__DIR__ . '/fixtures/rule.xml');
 	}
 
 	public function setUp()
