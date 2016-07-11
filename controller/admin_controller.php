@@ -348,7 +348,7 @@ class admin_controller implements admin_interface
 	/**
 	* Process rule data to be added or edited
 	*
-	* @param object $entity The rule entity object
+	* @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
 	* @param array $data The form data to be processed
 	* @return null
 	* @access protected
@@ -617,7 +617,7 @@ class admin_controller implements admin_interface
 	/**
 	* Build pull down menu options of available rule parents
 	*
-	* @param object $entity The rule entity object
+	* @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @param string $mode Display menu for add or edit mode

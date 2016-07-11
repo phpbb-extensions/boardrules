@@ -73,7 +73,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Load common board rules language files during user setup
 	*
-	* @param object $event The event object
+	* @param \phpbb\event\data $event The event object
 	* @return null
 	* @access public
 	*/
@@ -105,7 +105,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Add administrative permissions to manage board rules
 	*
-	* @param object $event The event object
+	* @param \phpbb\event\data $event The event object
 	* @return null
 	* @access public
 	*/
@@ -119,7 +119,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Show users as viewing the Board Rules on Who Is Online page
 	*
-	* @param object $event The event object
+	* @param \phpbb\event\data $event The event object
 	* @return null
 	* @access public
 	*/
