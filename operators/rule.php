@@ -139,7 +139,7 @@ class rule implements rule_interface
 		// Try to move the rule or category up/down
 		try
 		{
-			$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
+			$this->nestedset_rules->move($rule_id, (($direction !== 'up') ? -$amount : $amount));
 		}
 		catch (\OutOfBoundsException $e)
 		{

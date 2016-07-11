@@ -394,7 +394,7 @@ class admin_controller implements admin_interface
 			try
 			{
 				// Calling the set_$entity_function on the entity and passing it $rule_data
-				call_user_func_array(array($entity, 'set_' . $entity_function), array($rule_data));
+				call_user_func(array($entity, 'set_' . $entity_function), $rule_data);
 			}
 			catch (\phpbb\boardrules\exception\base $e)
 			{
@@ -626,8 +626,8 @@ class admin_controller implements admin_interface
 	*/
 	protected function build_parent_select_menu($entity, $language = 0, $parent_id = 0, $mode = 'edit')
 	{
-		$language = ($mode == 'edit') ? $entity->get_language() : $language;
-		$parent_id = ($mode == 'edit') ? $entity->get_parent_id() : $parent_id;
+		$language = ($mode === 'edit') ? $entity->get_language() : $language;
+		$parent_id = ($mode === 'edit') ? $entity->get_parent_id() : $parent_id;
 
 		// Prepare rule pull-down field
 		$rule_menu_items = $this->rule_operator->get_rules($language);
@@ -657,7 +657,7 @@ class admin_controller implements admin_interface
 				'RULE_ID'			=> $rule_menu_item->get_id(),
 				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
-				'S_DISABLED'		=> ($mode == 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()))) ? true : false,
+				'S_DISABLED'		=> ($mode === 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()))) ? true : false,
 				'S_RULE_PARENT'		=> $rule_menu_item->get_id() == $parent_id,
 			));
 		}
