@@ -96,8 +96,8 @@ class listener implements EventSubscriberInterface
 	public function add_page_header_link()
 	{
 		$this->template->assign_vars(array(
-			'S_BOARDRULES_LINK_ENABLED' => (bool) !empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_header_link']),
-			'S_BOARDRULES_AT_REGISTRATION' => (bool) !empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_require_at_registration']),
+			'S_BOARDRULES_LINK_ENABLED' => !empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_header_link']),
+			'S_BOARDRULES_AT_REGISTRATION' => !empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_require_at_registration']),
 			'U_BOARDRULES' => $this->controller_helper->route('phpbb_boardrules_main_controller'),
 		));
 	}

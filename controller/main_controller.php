@@ -149,7 +149,7 @@ class main_controller implements main_interface
 		// Assign values to template vars for the rules page
 		$this->template->assign_vars(array(
 			'S_BOARD_RULES'			=> true,
-			'S_CATEGORIES'			=> (bool) $cat_counter > 1,
+			'S_CATEGORIES'			=> $cat_counter > 1,
 			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 
