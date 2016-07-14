@@ -246,7 +246,7 @@ class rule implements rule_interface
 	*/
 	public function get_id()
 	{
-		return (isset($this->data['rule_id'])) ? (int) $this->data['rule_id'] : 0;
+		return isset($this->data['rule_id']) ? (int) $this->data['rule_id'] : 0;
 	}
 
 	/**
@@ -257,7 +257,7 @@ class rule implements rule_interface
 	*/
 	public function get_title()
 	{
-		return (isset($this->data['rule_title'])) ? (string) $this->data['rule_title'] : '';
+		return isset($this->data['rule_title']) ? (string) $this->data['rule_title'] : '';
 	}
 
 	/**
@@ -294,9 +294,9 @@ class rule implements rule_interface
 	public function get_message_for_edit()
 	{
 		// Use defaults if these haven't been set yet
-		$message = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
-		$uid = (isset($this->data['rule_message_bbcode_uid'])) ? $this->data['rule_message_bbcode_uid'] : '';
-		$options = (isset($this->data['rule_message_bbcode_options'])) ? (int) $this->data['rule_message_bbcode_options'] : 0;
+		$message = isset($this->data['rule_message']) ? $this->data['rule_message'] : '';
+		$uid = isset($this->data['rule_message_bbcode_uid']) ? $this->data['rule_message_bbcode_uid'] : '';
+		$options = isset($this->data['rule_message_bbcode_options']) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for edit
 		$message_data = generate_text_for_edit($message, $uid, $options);
@@ -314,10 +314,10 @@ class rule implements rule_interface
 	public function get_message_for_display($censor_text = true)
 	{
 		// If these haven't been set yet; use defaults
-		$message = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
-		$uid = (isset($this->data['rule_message_bbcode_uid'])) ? $this->data['rule_message_bbcode_uid'] : '';
-		$bitfield = (isset($this->data['rule_message_bbcode_bitfield'])) ? $this->data['rule_message_bbcode_bitfield'] : '';
-		$options = (isset($this->data['rule_message_bbcode_options'])) ? (int) $this->data['rule_message_bbcode_options'] : 0;
+		$message = isset($this->data['rule_message']) ? $this->data['rule_message'] : '';
+		$uid = isset($this->data['rule_message_bbcode_uid']) ? $this->data['rule_message_bbcode_uid'] : '';
+		$bitfield = isset($this->data['rule_message_bbcode_bitfield']) ? $this->data['rule_message_bbcode_bitfield'] : '';
+		$options = isset($this->data['rule_message_bbcode_options']) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for display
 		return generate_text_for_display($message, $uid, $bitfield, $options, $censor_text);
@@ -464,7 +464,7 @@ class rule implements rule_interface
 	*/
 	public function get_anchor()
 	{
-		return (isset($this->data['rule_anchor'])) ? (string) $this->data['rule_anchor'] : '';
+		return isset($this->data['rule_anchor']) ? (string) $this->data['rule_anchor'] : '';
 	}
 
 	/**
@@ -526,7 +526,7 @@ class rule implements rule_interface
 	*/
 	public function get_language()
 	{
-		return (isset($this->data['rule_language'])) ? (int) $this->data['rule_language'] : 0;
+		return isset($this->data['rule_language']) ? (int) $this->data['rule_language'] : 0;
 	}
 
 	/**
@@ -554,7 +554,7 @@ class rule implements rule_interface
 	*/
 	public function get_parent_id()
 	{
-		return (isset($this->data['rule_parent_id'])) ? (int) $this->data['rule_parent_id'] : 0;
+		return isset($this->data['rule_parent_id']) ? (int) $this->data['rule_parent_id'] : 0;
 	}
 
 	/**
@@ -565,7 +565,7 @@ class rule implements rule_interface
 	*/
 	public function get_left_id()
 	{
-		return (isset($this->data['rule_left_id'])) ? (int) $this->data['rule_left_id'] : 0;
+		return isset($this->data['rule_left_id']) ? (int) $this->data['rule_left_id'] : 0;
 	}
 
 	/**
@@ -576,7 +576,7 @@ class rule implements rule_interface
 	*/
 	public function get_right_id()
 	{
-		return (isset($this->data['rule_right_id'])) ? (int) $this->data['rule_right_id'] : 0;
+		return isset($this->data['rule_right_id']) ? (int) $this->data['rule_right_id'] : 0;
 	}
 
 	/**
@@ -591,7 +591,7 @@ class rule implements rule_interface
 	protected function set_message_option($option_value, $negate = false, $reparse_message = true)
 	{
 		// Set rule_message_bbcode_options to 0 if it does not yet exist
-		$this->data['rule_message_bbcode_options'] = (isset($this->data['rule_message_bbcode_options'])) ? $this->data['rule_message_bbcode_options'] : 0;
+		$this->data['rule_message_bbcode_options'] = isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] : 0;
 
 		// If we're setting the option and the option is not already set
 		if (!$negate && !($this->data['rule_message_bbcode_options'] & $option_value))

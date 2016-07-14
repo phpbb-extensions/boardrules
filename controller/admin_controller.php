@@ -124,8 +124,8 @@ class admin_controller implements admin_interface
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_ERROR'	=> (sizeof($errors)) ? true : false,
-			'ERROR_MSG'	=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+			'S_ERROR'	=> sizeof($errors),
+			'ERROR_MSG'	=> sizeof($errors) ? implode('<br />', $errors) : '',
 
 			'U_ACTION'	=> $this->u_action,
 
@@ -221,7 +221,7 @@ class admin_controller implements admin_interface
 			$this->template->assign_block_vars('rules', array(
 				'RULE_TITLE'	=> $entity->get_title(),
 
-				'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
+				'S_IS_CATEGORY'	=> $entity->get_right_id() - $entity->get_left_id() > 1,
 
 				'U_DELETE'		=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
 				'U_EDIT'		=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
@@ -338,7 +338,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_EDIT_RULE'	=> true,
-			'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
+			'S_IS_CATEGORY'	=> $entity->get_right_id() - $entity->get_left_id() > 1,
 
 			'U_EDIT_ACTION'	=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'		=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
@@ -469,8 +469,8 @@ class admin_controller implements admin_interface
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_ERROR'			=> (sizeof($errors)) ? true : false,
-			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+			'S_ERROR'			=> sizeof($errors),
+			'ERROR_MSG'			=> sizeof($errors) ? implode('<br />', $errors) : '',
 
 			'RULE_TITLE'		=> $entity->get_title(),
 			'RULE_ANCHOR'		=> $entity->get_anchor(),
@@ -668,7 +668,7 @@ class admin_controller implements admin_interface
 			}
 			else if ($rule_menu_item->get_left_id() > $right + 1)
 			{
-				$padding = (isset($padding_store[$rule_menu_item->get_parent_id()])) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
+				$padding = isset($padding_store[$rule_menu_item->get_parent_id()]) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
 			}
 
 			$right = $rule_menu_item->get_right_id();
@@ -678,7 +678,7 @@ class admin_controller implements admin_interface
 				'RULE_ID'			=> $rule_menu_item->get_id(),
 				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
-				'S_DISABLED'		=> ($mode === 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()))) ? true : false,
+				'S_DISABLED'		=> $mode === 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id())),
 				'S_RULE_PARENT'		=> $rule_menu_item->get_id() == $parent_id,
 			));
 		}

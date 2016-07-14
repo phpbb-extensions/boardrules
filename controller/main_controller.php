@@ -104,7 +104,7 @@ class main_controller implements main_interface
 			{
 				// Rules
 				$is_category = false;
-				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_RULE_ANCHOR', (($cat_counter - 1) . $rule_counter));
+				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_RULE_ANCHOR', ($cat_counter - 1) . $rule_counter);
 
 				// Increment rule counter
 				$rule_counter++;
