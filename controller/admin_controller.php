@@ -444,7 +444,14 @@ class admin_controller implements admin_interface
 				// Change rule parent
 				if (isset($data['rule_parent_id']) && ($data['rule_parent_id'] != $entity->get_parent_id()))
 				{
-					$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
+					try
+					{
+						$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
+					}
+					catch (\Exception $e)
+					{
+						trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 				}
 
 				// Show user confirmation of the saved rule and provide link back to the previous page
@@ -509,7 +516,14 @@ class admin_controller implements admin_interface
 		if (confirm_box(true))
 		{
 			// Delete the rule on confirmation
-			$this->rule_operator->delete_rule($rule_id);
+			try
+			{
+				$this->rule_operator->delete_rule($rule_id);
+			}
+			catch (\Exception $e)
+			{
+				trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+			}
 
 			// Show user confirmation of the deleted rule and provide link back to the previous page
 			trigger_error($this->user->lang('ACP_RULE_DELETED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
@@ -547,7 +561,14 @@ class admin_controller implements admin_interface
 		}
 
 		// Move the rule
-		$this->rule_operator->move($rule_id, $direction, $amount);
+		try
+		{
+			$this->rule_operator->move($rule_id, $direction, $amount);
+		}
+		catch (\Exception $e)
+		{
+			trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+		}
 
 		// Send a JSON response if an AJAX request was used
 		if ($this->request->is_ajax())
