@@ -81,7 +81,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Laiendusel "Foorumi reeglid" ei õnnestunud omandada tabeli lukustamist. Järgmise toimingu ajal võib õnnestuda lukustamine. Lukustamine on vabastatakse jõuliselt peale ühe tunnist ooteaega.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Soovitud reeglit ei eksisteeri.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Soovitud reeglil ei ole vanemkategooriat.',
 ));
