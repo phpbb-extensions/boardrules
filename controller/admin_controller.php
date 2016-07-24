@@ -338,7 +338,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_EDIT_RULE'	=> true,
-			'S_IS_CATEGORY'	=> $entity->get_right_id() - $entity->get_left_id() > 1,
+			'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id()) > 1,
 
 			'U_EDIT_ACTION'	=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'		=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
