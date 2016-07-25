@@ -122,10 +122,12 @@ class admin_controller implements admin_interface
 			}
 		}
 
+		$s_errors = (bool) sizeof($errors);
+
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_ERROR'	=> sizeof($errors),
-			'ERROR_MSG'	=> sizeof($errors) ? implode('<br />', $errors) : '',
+			'S_ERROR'	=> $s_errors,
+			'ERROR_MSG'	=> $s_errors ? implode('<br />', $errors) : '',
 
 			'U_ACTION'	=> $this->u_action,
 
