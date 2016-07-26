@@ -122,10 +122,12 @@ class admin_controller implements admin_interface
 			}
 		}
 
+		$s_errors = (bool) sizeof($errors);
+
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_ERROR'	=> (sizeof($errors)) ? true : false,
-			'ERROR_MSG'	=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+			'S_ERROR'	=> $s_errors,
+			'ERROR_MSG'	=> $s_errors ? implode('<br />', $errors) : '',
 
 			'U_ACTION'	=> $this->u_action,
 
@@ -221,7 +223,7 @@ class admin_controller implements admin_interface
 			$this->template->assign_block_vars('rules', array(
 				'RULE_TITLE'	=> $entity->get_title(),
 
-				'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
+				'S_IS_CATEGORY'	=> $entity->get_right_id() - $entity->get_left_id() > 1,
 
 				'U_DELETE'		=> "{$this->u_action}&amp;action=delete&amp;rule_id=" . $entity->get_id(),
 				'U_EDIT'		=> "{$this->u_action}&amp;action=edit&amp;rule_id=" . $entity->get_id(),
@@ -338,7 +340,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_EDIT_RULE'	=> true,
-			'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id() > 1) ? true : false,
+			'S_IS_CATEGORY'	=> ($entity->get_right_id() - $entity->get_left_id()) > 1,
 
 			'U_EDIT_ACTION'	=> "{$this->u_action}&amp;rule_id={$rule_id}&amp;action=edit",
 			'U_BACK'		=> "{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}",
@@ -348,7 +350,7 @@ class admin_controller implements admin_interface
 	/**
 	* Process rule data to be added or edited
 	*
-	* @param object $entity The rule entity object
+	* @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
 	* @param array $data The form data to be processed
 	* @return null
 	* @access protected
@@ -394,7 +396,7 @@ class admin_controller implements admin_interface
 			try
 			{
 				// Calling the set_$entity_function on the entity and passing it $rule_data
-				call_user_func_array(array($entity, 'set_' . $entity_function), array($rule_data));
+				call_user_func(array($entity, 'set_' . $entity_function), $rule_data);
 			}
 			catch (\phpbb\boardrules\exception\base $e)
 			{
@@ -444,7 +446,14 @@ class admin_controller implements admin_interface
 				// Change rule parent
 				if (isset($data['rule_parent_id']) && ($data['rule_parent_id'] != $entity->get_parent_id()))
 				{
-					$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
+					try
+					{
+						$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
+					}
+					catch (\Exception $e)
+					{
+						trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 				}
 
 				// Show user confirmation of the saved rule and provide link back to the previous page
@@ -462,8 +471,8 @@ class admin_controller implements admin_interface
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
-			'S_ERROR'			=> (sizeof($errors)) ? true : false,
-			'ERROR_MSG'			=> (sizeof($errors)) ? implode('<br />', $errors) : '',
+			'S_ERROR'			=> sizeof($errors),
+			'ERROR_MSG'			=> sizeof($errors) ? implode('<br />', $errors) : '',
 
 			'RULE_TITLE'		=> $entity->get_title(),
 			'RULE_ANCHOR'		=> $entity->get_anchor(),
@@ -509,7 +518,14 @@ class admin_controller implements admin_interface
 		if (confirm_box(true))
 		{
 			// Delete the rule on confirmation
-			$this->rule_operator->delete_rule($rule_id);
+			try
+			{
+				$this->rule_operator->delete_rule($rule_id);
+			}
+			catch (\Exception $e)
+			{
+				trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+			}
 
 			// Show user confirmation of the deleted rule and provide link back to the previous page
 			trigger_error($this->user->lang('ACP_RULE_DELETED') . adm_back_link("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}"));
@@ -547,7 +563,14 @@ class admin_controller implements admin_interface
 		}
 
 		// Move the rule
-		$this->rule_operator->move($rule_id, $direction, $amount);
+		try
+		{
+			$this->rule_operator->move($rule_id, $direction, $amount);
+		}
+		catch (\Exception $e)
+		{
+			trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+		}
 
 		// Send a JSON response if an AJAX request was used
 		if ($this->request->is_ajax())
@@ -617,7 +640,7 @@ class admin_controller implements admin_interface
 	/**
 	* Build pull down menu options of available rule parents
 	*
-	* @param object $entity The rule entity object
+	* @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @param string $mode Display menu for add or edit mode
@@ -626,8 +649,8 @@ class admin_controller implements admin_interface
 	*/
 	protected function build_parent_select_menu($entity, $language = 0, $parent_id = 0, $mode = 'edit')
 	{
-		$language = ($mode == 'edit') ? $entity->get_language() : $language;
-		$parent_id = ($mode == 'edit') ? $entity->get_parent_id() : $parent_id;
+		$language = ($mode === 'edit') ? $entity->get_language() : $language;
+		$parent_id = ($mode === 'edit') ? $entity->get_parent_id() : $parent_id;
 
 		// Prepare rule pull-down field
 		$rule_menu_items = $this->rule_operator->get_rules($language);
@@ -647,7 +670,7 @@ class admin_controller implements admin_interface
 			}
 			else if ($rule_menu_item->get_left_id() > $right + 1)
 			{
-				$padding = (isset($padding_store[$rule_menu_item->get_parent_id()])) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
+				$padding = isset($padding_store[$rule_menu_item->get_parent_id()]) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
 			}
 
 			$right = $rule_menu_item->get_right_id();
@@ -657,7 +680,7 @@ class admin_controller implements admin_interface
 				'RULE_ID'			=> $rule_menu_item->get_id(),
 				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
-				'S_DISABLED'		=> ($mode == 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()))) ? true : false,
+				'S_DISABLED'		=> $mode === 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id())),
 				'S_RULE_PARENT'		=> $rule_menu_item->get_id() == $parent_id,
 			));
 		}

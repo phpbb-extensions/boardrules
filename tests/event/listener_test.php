@@ -11,7 +11,7 @@
 
 namespace phpbb\boardrules\tests\event;
 
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
+require_once __DIR__ . '/../../../../../includes/functions.php';
 
 class event_listener_test extends \phpbb_test_case
 {

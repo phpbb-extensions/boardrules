@@ -73,7 +73,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Load common board rules language files during user setup
 	*
-	* @param object $event The event object
+	* @param \phpbb\event\data $event The event object
 	* @return null
 	* @access public
 	*/
@@ -96,8 +96,8 @@ class listener implements EventSubscriberInterface
 	public function add_page_header_link()
 	{
 		$this->template->assign_vars(array(
-			'S_BOARDRULES_LINK_ENABLED' => (!empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_header_link'])) ? true : false,
-			'S_BOARDRULES_AT_REGISTRATION' => (!empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_require_at_registration'])) ? true : false,
+			'S_BOARDRULES_LINK_ENABLED' => !empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_header_link']),
+			'S_BOARDRULES_AT_REGISTRATION' => !empty($this->config['boardrules_enable']) && !empty($this->config['boardrules_require_at_registration']),
 			'U_BOARDRULES' => $this->controller_helper->route('phpbb_boardrules_main_controller'),
 		));
 	}
@@ -105,7 +105,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Add administrative permissions to manage board rules
 	*
-	* @param object $event The event object
+	* @param \phpbb\event\data $event The event object
 	* @return null
 	* @access public
 	*/
@@ -119,19 +119,16 @@ class listener implements EventSubscriberInterface
 	/**
 	* Show users as viewing the Board Rules on Who Is Online page
 	*
-	* @param object $event The event object
+	* @param \phpbb\event\data $event The event object
 	* @return null
 	* @access public
 	*/
 	public function viewonline_page($event)
 	{
-		if ($event['on_page'][1] == 'app')
+		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/rules') === 0)
 		{
-			if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/rules') === 0)
-			{
-				$event['location'] = $this->user->lang('BOARDRULES_VIEWONLINE');
-				$event['location_url'] = $this->controller_helper->route('phpbb_boardrules_main_controller');
-			}
+			$event['location'] = $this->user->lang('BOARDRULES_VIEWONLINE');
+			$event['location_url'] = $this->controller_helper->route('phpbb_boardrules_main_controller');
 		}
 	}
 }

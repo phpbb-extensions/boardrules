@@ -77,4 +77,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'החוק הוסר בהצלחה.',
 	'ACP_RULE_EDITED'						=> 'החוק נערך בהצלחה.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'אתה חייב לתת כותרת לחוק.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'התוספת חוקי הפורום לא הצליחו לנעול את הטבלה המבוקשת. כנראה שתהליך אחר נועל את הטבלה. לאחר שעה הנעילה משתחררת.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'הכלל המבוקש לא קיים.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'לכלל המבוקש אין הורה.',
 ));

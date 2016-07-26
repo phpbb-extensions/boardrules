@@ -77,4 +77,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Pravidlo úspěšně odstraněno.',
 	'ACP_RULE_EDITED'						=> 'Pravidlo úspěšně upraveno.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Musíš zadat název pravidla.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules se nepodařilo uzamknout tabulku. Možná je právě uzamčena jiným procesem. Zámky jsou násilně odstraňovány po uplynutí jedné hodiny.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Požadované pravidlo neexistuje.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Požadované pravidlo nemá žádný nadřazený prvek.',
 ));

@@ -78,4 +78,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Ο όρος διαγράφηκε με επιτυχία.',
 	'ACP_RULE_EDITED'						=> 'Ο όρος επεξεργάστηκε με επιτυχία.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Πρέπει να εισάγετε ένα τίτλο για αυτό τον όρο.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Ο όρος που ζητήσατε δεν υπάρχει.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Ο όρος που ζητήσατε δεν έχει γονέα.',
 ));

@@ -77,4 +77,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Kural başarıyla kaldırıldı.',
 	'ACP_RULE_EDITED'						=> 'Kural başarıyla düzenlendi.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Bu kural için bir başlık girmelisiniz.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Site kuralları tablo kilidi elde etmek için başarısız oldu. Başka bir işlem kilitleme yapıyor olabilir. Kilitler 1 saatlik bir zaman aşımından sonra zorla serbest bırakılır.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'İstenilen kural mevcut değil.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'İstenilen kuralın üst kategorisi yok.',
 ));
