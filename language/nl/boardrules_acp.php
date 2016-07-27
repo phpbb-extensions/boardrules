@@ -81,4 +81,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regel succesvol verwijderd.',
 	'ACP_RULE_EDITED'						=> 'Regel succesvol gewijzigd.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Je moet een titel invullen voor deze regel.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Forumregels is er niet in geslaagd om de table lock te verkrijgen. Een ander proces zou de lock kunnen tegenhouden. Locks worden geforceerd vrijgegeven na een timeout van 1 uur.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'De opgevraagde regel bestaat niet.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'De opgevraagde regel heeft geen hoofdregel.',
 ));

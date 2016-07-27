@@ -78,4 +78,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> '成功删除了章程。',
 	'ACP_RULE_EDITED'						=> '章程编辑成功。',
 	'ACP_RULE_TITLE_EMPTY'					=> '您必须输入一个标题。',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> '论坛章程无法锁定，可能已被其它进程锁定了。锁会在超时一个小时后强制释放。 ',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> '章程不存在。',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> '要求的章程没有父章程。',
 ));
