@@ -81,4 +81,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regeln har raderats.',
 	'ACP_RULE_EDITED'						=> 'Regeln har uppdaterats.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Du måste ange en rubrik för denna regel.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Forumreglerna kunde ej låsa tabellen. En annan process verkar låsa tabellen. Lås öppnas efter en timme.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Regeln existerar ej.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Regeln har ingen förälder.',
 ));

@@ -30,7 +30,7 @@ class rule_entity_base extends \phpbb_database_test_case
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/rule.xml');
+		return $this->createXMLDataSet(__DIR__ . '/fixtures/rule.xml');
 	}
 
 	public function setUp()

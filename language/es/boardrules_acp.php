@@ -81,4 +81,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Norma eliminada correctamente.',
 	'ACP_RULE_EDITED'						=> 'Norma editada correctamente.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Debe especificar un título para esta norma.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Las Normas del Foro han fallado al adquirir el bloqueo de la tabla. Otro proceso puede ser que tenga el bloqueo. Los bloqueos se liberan por la fuerza, después de un tiempo de espera de 1 hora.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'No existe la norma solicitada.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'La norma solicitada no tiene padre.',
 ));

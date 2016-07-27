@@ -81,4 +81,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'تم حذف القانون بنجاح.',
 	'ACP_RULE_EDITED'						=> 'تم تعديل القانون بنجاح.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'يجب إضافة عنوان لهذه القانون.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'فشلت قوانين المنتدى في اغلاق الجدول. ربما هناك عملية أخرى تمنع ذلك حالياً. يتم إيقاف عمليات الإغلاق بعد فترة مُحددة : ساعة واحدة.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'القانون الذي طلبته غير موجود.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'القانون المطلوب لا يتفرع من قانون آخر ( بدون أصل ).',
 ));

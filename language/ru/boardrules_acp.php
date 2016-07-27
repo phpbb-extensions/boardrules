@@ -80,4 +80,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Правило успешно удалено.',
 	'ACP_RULE_EDITED'						=> 'Правило успешно отредактировано.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Вы должны ввести заголовок для правила',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Расширению не удалось заблокировать таблицу. Возможно, блокировка используется другим процессом. Разблокировка происходит принудительно через 1 час.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Запрашиваемое правило не существует.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Родительское правило не существует.',
 ));

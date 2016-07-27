@@ -81,4 +81,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Reegel on edukalt kustutatud.',
 	'ACP_RULE_EDITED'						=> 'Reegel on edukalt muudetud.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Sa pead sisestama pealkirja antud reeglile.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Laiendusel "Foorumi reeglid" ei õnnestunud omandada tabeli lukustamist. Järgmise toimingu ajal võib õnnestuda lukustamine. Lukustamine on vabastatakse jõuliselt peale ühe tunnist ooteaega.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Soovitud reeglit ei eksisteeri.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Soovitud reeglil ei ole vanemkategooriat.',
 ));
