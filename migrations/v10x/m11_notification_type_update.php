@@ -63,7 +63,7 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 	/**
 	* Update a boardrules notification type name and state
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function update_notifications_name()

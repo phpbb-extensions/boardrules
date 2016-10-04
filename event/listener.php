@@ -74,7 +74,7 @@ class listener implements EventSubscriberInterface
 	* Load common board rules language files during user setup
 	*
 	* @param \phpbb\event\data $event The event object
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function load_language_on_setup($event)
@@ -90,7 +90,7 @@ class listener implements EventSubscriberInterface
 	/**
 	* Create a URL to the board rules controller file for the header link list
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_page_header_link()
@@ -107,7 +107,7 @@ class listener implements EventSubscriberInterface
 	* Add administrative permissions to manage board rules
 	*
 	* @param \phpbb\event\data $event The event object
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_permission($event)
@@ -121,7 +121,7 @@ class listener implements EventSubscriberInterface
 	* Show users as viewing the Board Rules on Who Is Online page
 	*
 	* @param \phpbb\event\data $event The event object
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function viewonline_page($event)
