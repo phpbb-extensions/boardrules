@@ -20,7 +20,7 @@ interface admin_interface
 	/**
 	* Display the options a user can configure for this extension
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_options();
@@ -31,7 +31,7 @@ interface admin_interface
 	* Display the available languages to add/manage board rules from.
 	* If there is only one board language, this will just call display_rules().
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_language_selection();
@@ -41,7 +41,7 @@ interface admin_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_rules($language = 0, $parent_id = 0);
@@ -51,7 +51,7 @@ interface admin_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_rule($language = 0, $parent_id = 0);
@@ -60,7 +60,7 @@ interface admin_interface
 	* Edit a rule
 	*
 	* @param int $rule_id The rule identifier to edit
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function edit_rule($rule_id);
@@ -69,7 +69,7 @@ interface admin_interface
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function delete_rule($rule_id);
@@ -80,7 +80,7 @@ interface admin_interface
 	* @param int $rule_id The rule identifier to move
 	* @param string $direction The direction (up|down)
 	* @param int $amount The number of places to move the rule
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1);
@@ -89,7 +89,7 @@ interface admin_interface
 	* Send notification to users
 	*
 	* @param int $rule_id The rule identifier
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function send_notification($rule_id);
@@ -98,7 +98,7 @@ interface admin_interface
 	* Set page url
 	*
 	* @param string $u_action Custom form action
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function set_page_url($u_action);

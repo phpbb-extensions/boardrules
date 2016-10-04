@@ -61,7 +61,7 @@ class m7_sample_rule_data extends container_aware_migration
 	/**
 	* Custom function to install sample rule data to the boardrules table in the database
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function insert_sample_rule_data()

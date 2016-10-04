@@ -87,7 +87,7 @@ class admin_controller implements admin_interface
 	/**
 	* Display the options a user can configure for this extension
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_options()
@@ -140,7 +140,7 @@ class admin_controller implements admin_interface
 	/**
 	* Set the options a user can configure
 	*
-	* @return null
+	* @return void
 	* @access protected
 	*/
 	protected function set_options()
@@ -156,7 +156,7 @@ class admin_controller implements admin_interface
 	* Display the available languages to add/manage board rules from.
 	* If there is only one board language, this will just call display_rules().
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_language_selection()
@@ -199,7 +199,7 @@ class admin_controller implements admin_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function display_rules($language = 0, $parent_id = 0)
@@ -265,7 +265,7 @@ class admin_controller implements admin_interface
 	*
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function add_rule($language = 0, $parent_id = 0)
@@ -307,7 +307,7 @@ class admin_controller implements admin_interface
 	* Edit a rule
 	*
 	* @param int $rule_id The rule identifier to edit
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function edit_rule($rule_id)
@@ -352,7 +352,7 @@ class admin_controller implements admin_interface
 	*
 	* @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
 	* @param array $data The form data to be processed
-	* @return null
+	* @return void
 	* @access protected
 	*/
 	protected function add_edit_rule_data($entity, $data)
@@ -505,7 +505,7 @@ class admin_controller implements admin_interface
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function delete_rule($rule_id)
@@ -551,7 +551,7 @@ class admin_controller implements admin_interface
 	* @param int $rule_id The rule identifier to move
 	* @param string $direction The direction (up|down)
 	* @param int $amount The number of places to move the rule
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1)
@@ -591,7 +591,7 @@ class admin_controller implements admin_interface
 	* Send notification to users
 	*
 	* @param int $rule_id The rule identifier
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function send_notification($rule_id)
@@ -629,7 +629,7 @@ class admin_controller implements admin_interface
 	* Set page url
 	*
 	* @param string $u_action Custom form action
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function set_page_url($u_action)
@@ -644,7 +644,7 @@ class admin_controller implements admin_interface
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
 	* @param string $mode Display menu for add or edit mode
-	* @return null
+	* @return void
 	* @access protected
 	*/
 	protected function build_parent_select_menu($entity, $language = 0, $parent_id = 0, $mode = 'edit')

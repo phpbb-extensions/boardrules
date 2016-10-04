@@ -102,7 +102,7 @@ class rule implements rule_interface
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
-	* @return null
+	* @return void
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -127,7 +127,7 @@ class rule implements rule_interface
 	* @param int $rule_id The rule identifier to move
 	* @param string $direction The direction (up|down)
 	* @param int $amount The number of places to move the rule
-	* @return null
+	* @return void
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -152,7 +152,7 @@ class rule implements rule_interface
 	*
 	* @param int $rule_id The current rule identifier
 	* @param int $new_parent_id The new rule parent identifier
-	* @return null
+	* @return void
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/

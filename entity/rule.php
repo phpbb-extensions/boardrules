@@ -585,7 +585,7 @@ class rule implements rule_interface
 	* @param int $option_value Value of the option
 	* @param bool $negate Negate (unset) option (Default: False)
 	* @param bool $reparse_message Re-parse the message after setting option (Default: True)
-	* @return null
+	* @return void
 	* @access protected
 	*/
 	protected function set_message_option($option_value, $negate = false, $reparse_message = true)
