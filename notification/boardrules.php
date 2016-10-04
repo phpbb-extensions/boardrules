@@ -25,7 +25,7 @@ class boardrules extends \phpbb\notification\type\base
 	 * Set the controller helper
 	 *
 	 * @param \phpbb\controller\helper $helper
-	 * @return null
+	 * @return void
 	 */
 	public function set_controller_helper(\phpbb\controller\helper $helper)
 	{
