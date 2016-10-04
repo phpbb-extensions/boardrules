@@ -377,7 +377,7 @@ class admin_controller implements admin_interface
 		// Set the message parse options in the entity
 		foreach ($message_parse_options as $function => $enabled)
 		{
-			call_user_func(array($entity, ($enabled ? 'message_enable_' : 'message_disable_') . $function));
+			$entity->{($enabled ? 'message_enable_' : 'message_disable_') . $function}();
 		}
 
 		unset($message_parse_options);
@@ -395,8 +395,7 @@ class admin_controller implements admin_interface
 		{
 			try
 			{
-				// Calling the set_$entity_function on the entity and passing it $rule_data
-				call_user_func(array($entity, 'set_' . $entity_function), $rule_data);
+				$entity->{'set_' . $entity_function}($rule_data);
 			}
 			catch (\phpbb\boardrules\exception\base $e)
 			{
