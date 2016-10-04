@@ -161,7 +161,7 @@ class rule_entity_anchor_test extends rule_entity_base
 		$entity = $this->get_rule_entity();
 
 		// Load the rule from the db if it exists
-		if (!is_null($id))
+		if (null !== $id)
 		{
 			$entity->load($id);
 		}
@@ -206,7 +206,7 @@ class rule_entity_anchor_test extends rule_entity_base
 		$entity = $this->get_rule_entity();
 
 		// Load the rule from the db if it exists
-		if (!is_null($id))
+		if (null !== $id)
 		{
 			$entity->load($id);
 		}
