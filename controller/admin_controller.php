@@ -276,9 +276,6 @@ class admin_controller implements admin_interface
 		// Initiate a rule entity
 		$entity = $this->container->get('phpbb.boardrules.entity');
 
-		// Build rule parent pull down menu
-		$this->build_parent_select_menu($entity, $language, $parent_id, 'add');
-
 		// Collect the form data
 		$data = array(
 			'rule_language'		=> $language,
@@ -318,9 +315,6 @@ class admin_controller implements admin_interface
 		// Initiate and load the rule entity
 		/* @var $entity \phpbb\boardrules\entity\rule */
 		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
-
-		// Build rule parent pull down menu
-		$this->build_parent_select_menu($entity);
 
 		// Collect the form data
 		$data = array(
@@ -467,6 +461,9 @@ class admin_controller implements admin_interface
 				trigger_error($this->user->lang('ACP_RULE_ADDED') . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
 			}
 		}
+
+		// Build rule parent pull down menu
+		$this->build_parent_select_menu($entity, $data['rule_parent_id']);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -640,19 +637,14 @@ class admin_controller implements admin_interface
 	* Build pull down menu options of available rule parents
 	*
 	* @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
-	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @param string $mode Display menu for add or edit mode
 	* @return void
 	* @access protected
 	*/
-	protected function build_parent_select_menu($entity, $language = 0, $parent_id = 0, $mode = 'edit')
+	protected function build_parent_select_menu($entity, $parent_id = 0)
 	{
-		$language = ($mode === 'edit') ? $entity->get_language() : $language;
-		$parent_id = ($mode === 'edit') ? $entity->get_parent_id() : $parent_id;
-
 		// Prepare rule pull-down field
-		$rule_menu_items = $this->rule_operator->get_rules($language);
+		$rule_menu_items = $this->rule_operator->get_rules($entity->get_language());
 
 		$padding = '';
 		$padding_store = array();
@@ -679,7 +671,7 @@ class admin_controller implements admin_interface
 				'RULE_ID'			=> $rule_menu_item->get_id(),
 				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
-				'S_DISABLED'		=> $mode === 'edit' && (($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id())),
+				'S_DISABLED'		=> ($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()),
 				'S_RULE_PARENT'		=> $rule_menu_item->get_id() == $parent_id,
 			));
 		}
