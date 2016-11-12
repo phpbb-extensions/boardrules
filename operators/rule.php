@@ -76,6 +76,7 @@ class rule implements rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return rule_interface Added rule entity
 	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function add_rule($entity, $language = 0, $parent_id = 0)
 	{

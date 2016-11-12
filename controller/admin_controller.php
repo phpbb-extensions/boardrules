@@ -434,7 +434,14 @@ class admin_controller implements admin_interface
 			if ($entity->get_id())
 			{
 				// Save the edited rule entity to the database
-				$entity->save();
+				try
+				{
+					$entity->save();
+				}
+				catch (\phpbb\boardrules\exception\out_of_bounds $e)
+				{
+					trigger_error($e->get_message($this->user) . adm_back_link($this->u_action), E_USER_WARNING);
+				}
 
 				// Change rule parent
 				if (isset($data['rule_parent_id']) && ($data['rule_parent_id'] != $entity->get_parent_id()))
@@ -455,7 +462,14 @@ class admin_controller implements admin_interface
 			else
 			{
 				// Add a new rule entity to the database
-				$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
+				try
+				{
+					$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
+				}
+				catch (\phpbb\boardrules\exception\out_of_bounds $e)
+				{
+					trigger_error($e->get_message($this->user) . adm_back_link($this->u_action), E_USER_WARNING);
+				}
 
 				// Show user confirmation of the added rule and provide link back to the previous page
 				trigger_error($this->user->lang('ACP_RULE_ADDED') . adm_back_link("{$this->u_action}&amp;language={$data['rule_language']}&amp;parent_id={$data['rule_parent_id']}"));
