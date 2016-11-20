@@ -132,7 +132,7 @@ class admin_controller implements admin_interface
 			}
 		}
 
-		$s_errors = (bool) sizeof($errors);
+		$s_errors = (bool) count($errors);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -189,7 +189,7 @@ class admin_controller implements admin_interface
 		$this->db->sql_freeresult($result);
 
 		// If there are some, build option fields
-		if (sizeof($rows) > 1)
+		if (count($rows) > 1)
 		{
 			foreach ($rows as $row)
 			{
@@ -498,7 +498,7 @@ class admin_controller implements admin_interface
 		// Build rule parent pull down menu
 		$this->build_parent_select_menu($entity, $data['rule_parent_id']);
 
-		$s_errors = (bool) sizeof($errors);
+		$s_errors = (bool) count($errors);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
