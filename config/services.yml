@@ -78,7 +78,7 @@ services:
         tags:
             - { name: notification.type }
 
-    phpbb.boardrules.text_reparser.rule_text:
+    text_reparser.phpbb_boardrules_rule_text:
         class: phpbb\boardrules\textreparser\plugins\rule_text
         arguments:
             - '@dbal.conn'
