@@ -1,10 +1,11 @@
 # Changelog
 
-## 1.0.4 - 2016-11-20
+## 1.0.4 - 2016-12-02
 
 - Fixed some rare cases where errors caused a blank page. They are now caught, resulting in a proper error message.
 - Fixed some missing language keys in rare error messages from the nestedset class.
 - Fixed an issue in the ACP where the "Rule parent" field would not retain its value when previewing a rule or getting an warning message.
+- Fixed an issue where the AJAX processing indicator was not displaying in the ACP when moving rules up/down.
 - Ensure compatibility with Symfony in future phpBB releases.
 - Major code improvements and optimisations.
 - Language packs added:
