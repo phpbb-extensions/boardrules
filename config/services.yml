@@ -78,10 +78,12 @@ services:
         tags:
             - { name: notification.type }
 
-    text_reparser.phpbb_boardrules_rule_text:
+    phpbb.boardrules.text_reparser.rule_text:
         class: phpbb\boardrules\textreparser\plugins\rule_text
         arguments:
             - '@dbal.conn'
             - '%phpbb.boardrules.tables.boardrules%'
+        calls:
+            - [set_name, [phpbb_boardrules_rules]]
         tags:
             - { name: text_reparser.plugin }
