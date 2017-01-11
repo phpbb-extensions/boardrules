@@ -10,10 +10,6 @@
 
 namespace phpbb\boardrules\tests\entity;
 
-require_once __DIR__ . '/../../../../../includes/functions.php';
-require_once __DIR__ . '/../../../../../includes/functions_content.php';
-require_once __DIR__ . '/../../../../../includes/utf/utf_tools.php';
-
 /**
 * Base rule entity test (helper)
 */
@@ -45,7 +41,6 @@ class rule_entity_base extends \phpbb_database_test_case
 
 		global $config, $phpbb_dispatcher;
 		$config = new \phpbb\config\config(array());
-		set_config(null, null, null, $config);  // remove in 3.2
 
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 	}

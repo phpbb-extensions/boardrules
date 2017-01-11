@@ -20,6 +20,10 @@ class rule_entity_insert_test extends rule_entity_base
 	*/
 	public function test_insert()
 	{
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		$this->get_test_case_helpers()->set_s9e_services();
+
 		// Set a language variable
 		$language = 1;
 

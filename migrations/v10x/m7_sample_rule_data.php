@@ -69,18 +69,21 @@ class m7_sample_rule_data extends container_aware_migration
 		/** @var \phpbb\user $user */
 		$user = $this->container->get('user');
 
+		/** @var \phpbb\language\language $lang */
+		$lang = $this->container->get('language');
+
 		// Get the lang_id of the admin installing board rules
 		$lang_id = $user->get_iso_lang_id();
 
 		// Load the installation lang file
-		$user->add_lang_ext('phpbb/boardrules', 'boardrules_install');
+		$lang->add_lang('boardrules_install', 'phpbb/boardrules');
 
 		// Define sample rule data
 		$sample_rule_data = array(
 			array(
-				'rule_title'     => $user->lang('BOARDRULES_SAMPLE_CATEGORY_TITLE'),
-				'rule_message'   => $user->lang('BOARDRULES_SAMPLE_CATEGORY_MESSAGE'),
-				'rule_anchor'    => $user->lang('BOARDRULES_SAMPLE_CATEGORY_ANCHOR'),
+				'rule_title'     => $lang->lang('BOARDRULES_SAMPLE_CATEGORY_TITLE'),
+				'rule_message'   => $lang->lang('BOARDRULES_SAMPLE_CATEGORY_MESSAGE'),
+				'rule_anchor'    => $lang->lang('BOARDRULES_SAMPLE_CATEGORY_ANCHOR'),
 				'rule_left_id'   => 1,
 				'rule_right_id'  => 4,
 				'rule_parent_id' => 0,
@@ -88,9 +91,9 @@ class m7_sample_rule_data extends container_aware_migration
 				'rule_parents'   => '',
 			),
 			array(
-				'rule_title'     => $user->lang('BOARDRULES_SAMPLE_RULE_TITLE'),
-				'rule_message'   => $user->lang('BOARDRULES_SAMPLE_RULE_MESSAGE'),
-				'rule_anchor'    => $user->lang('BOARDRULES_SAMPLE_RULE_ANCHOR'),
+				'rule_title'     => $lang->lang('BOARDRULES_SAMPLE_RULE_TITLE'),
+				'rule_message'   => $lang->lang('BOARDRULES_SAMPLE_RULE_MESSAGE'),
+				'rule_anchor'    => $lang->lang('BOARDRULES_SAMPLE_RULE_ANCHOR'),
 				'rule_left_id'   => 2,
 				'rule_right_id'  => 3,
 				'rule_parent_id' => 1,

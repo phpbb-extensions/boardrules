@@ -7,8 +7,8 @@ services:
         arguments:
             - '@config'
             - '@controller.helper'
+            - '@language'
             - '@template'
-            - '@user'
             - '%core.php_ext%'
         tags:
             - { name: event.listener }
@@ -18,7 +18,9 @@ services:
         arguments:
             - '@config'
             - '@service_container'
+            - '@controller.helper'
             - '@dbal.conn'
+            - '@language'
             - '@log'
             - '@notification_manager'
             - '@request'
@@ -33,6 +35,7 @@ services:
         arguments:
             - '@config'
             - '@controller.helper'
+            - '@language'
             - '@phpbb.boardrules.operator'
             - '@template'
             - '@user'
@@ -41,7 +44,7 @@ services:
 
     phpbb.boardrules.entity:
         class: phpbb\boardrules\entity\rule
-        scope: prototype # scope MUST be prototype for this to work!
+        shared: false # service MUST not be shared for this to work!
         arguments:
             - '@dbal.conn'
             - '%phpbb.boardrules.tables.boardrules%'
@@ -68,19 +71,19 @@ services:
 
     phpbb.boardrules.notification.type.boardrules:
         class: phpbb\boardrules\notification\boardrules
-        scope: prototype # scope MUST be prototype for this to work!
-        arguments:
-            - '@user_loader'
-            - '@dbal.conn'
-            - '@cache.driver'
-            - '@user'
-            - '@auth'
-            - '@config'
-            - '@controller.helper'
-            - '%core.root_path%'
-            - '%core.php_ext%'
-            - '%tables.notification_types%'
-            - '%tables.notifications%'
-            - '%tables.user_notifications%'
+        shared: false # service MUST not be shared for this to work!
+        parent: notification.type.base
+        calls:
+            - [set_controller_helper, ['@controller.helper']]
         tags:
             - { name: notification.type }
+
+    phpbb.boardrules.text_reparser.rule_text:
+        class: phpbb\boardrules\textreparser\plugins\rule_text
+        arguments:
+            - '@dbal.conn'
+            - '%phpbb.boardrules.tables.boardrules%'
+        calls:
+            - [set_name, [phpbb_boardrules_rules]]
+        tags:
+            - { name: text_reparser.plugin }

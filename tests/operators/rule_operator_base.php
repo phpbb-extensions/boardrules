@@ -10,9 +10,6 @@
 
 namespace phpbb\boardrules\tests\operators;
 
-require_once __DIR__ . '/../../../../../includes/functions.php';
-require_once __DIR__ . '/../../../../../includes/functions_content.php';
-
 /**
 * Base rule operator test (helper)
 */
@@ -64,7 +61,6 @@ class rule_operator_base extends \phpbb_database_test_case
 			}));
 
 		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
-		set_config(null, null, null, $this->config);  // remove in 3.2
 
 		$lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
 		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $lock, 'phpbb_boardrules');
