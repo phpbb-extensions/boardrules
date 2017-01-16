@@ -1,5 +1,15 @@
 # Changelog
 
+## Vesion 2.x (for phpBB 3.2)
+
+### 2.0.0 - 2017-01-16
+
+- Updated for phpBB 3.2 (continue using the 1.x branch for phpBB 3.1.x)
+- New minimum requirements: phpBB 3.2.0 and PHP 5.4
+- Option to set your own (supported) Font Awesome icon for the Rules nav-bar link
+
+## Version 1.x (for phpBB 3.1)
+
 ## 1.0.4 - 2016-12-02
 
 - Fixed some rare cases where errors caused a blank page. They are now caught, resulting in a proper error message.
@@ -22,7 +32,7 @@
     - German (Formal Honorifics)
     - Mandarin Chinese (Simplified Script)
 
-## 1.0.2 - 2015-05-24
+### 1.0.2 - 2015-05-24
 
 - Fixed an issue where postgreSQL and MSSQL dbms could not save rules with more than 4,000 characters.
 - Added a new template var `S_BOARD_RULES` that styles can use when viewing the rules page.
@@ -44,7 +54,7 @@
     - Turkish
 - Require phpBB 3.1.3 or newer.
 
-## 1.0.1 - 2014-11-03
+### 1.0.1 - 2014-11-03
 
 - Fixed an issue where rules could not be deleted with phpBB 3.1.1.
 - Fixed an issue where rules could not be created on postgreSQL databases.
@@ -57,6 +67,6 @@
     - Dutch
     - Estonian
 
-## 1.0.0 - 2014-10-22
+### 1.0.0 - 2014-10-22
 
 - First release
