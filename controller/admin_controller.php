@@ -459,7 +459,7 @@ class admin_controller implements admin_interface
 				}
 				catch (\phpbb\boardrules\exception\out_of_bounds $e)
 				{
-					trigger_error($e->get_message($this->user) . adm_back_link($this->u_action), E_USER_WARNING);
+					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
 				// Change rule parent
@@ -471,7 +471,7 @@ class admin_controller implements admin_interface
 					}
 					catch (\Exception $e)
 					{
-						trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+						trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 					}
 				}
 
@@ -487,7 +487,7 @@ class admin_controller implements admin_interface
 				}
 				catch (\phpbb\boardrules\exception\out_of_bounds $e)
 				{
-					trigger_error($e->get_message($this->user) . adm_back_link($this->u_action), E_USER_WARNING);
+					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
 				// Show user confirmation of the added rule and provide link back to the previous page
@@ -555,7 +555,7 @@ class admin_controller implements admin_interface
 			}
 			catch (\Exception $e)
 			{
-				trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 
 			// Show user confirmation of the deleted rule and provide link back to the previous page
@@ -600,7 +600,7 @@ class admin_controller implements admin_interface
 		}
 		catch (\Exception $e)
 		{
-			trigger_error($this->user->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		// Send a JSON response if an AJAX request was used
