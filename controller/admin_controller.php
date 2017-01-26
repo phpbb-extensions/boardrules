@@ -293,6 +293,7 @@ class admin_controller implements admin_interface
 		add_form_key('add_edit_rule');
 
 		// Initiate a rule entity
+		/* @var $entity \phpbb\boardrules\entity\rule */
 		$entity = $this->container->get('phpbb.boardrules.entity');
 
 		// Collect the form data

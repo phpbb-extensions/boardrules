@@ -74,7 +74,7 @@ class rule implements rule_interface
 	* @param \phpbb\boardrules\entity\rule_interface $entity Rule entity with new data to insert
 	* @param int $language Language selection identifier; default: 0
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return rule_interface Added rule entity
+	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
