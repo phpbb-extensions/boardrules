@@ -49,10 +49,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Oblige les nouveaux utilisateurs à accepter les règles lors de leur enregistrement ',
-	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Cette option ajoutera une clause aux « Conditions d’utilisation », demandant aux nouveaux utilisateurs de lire et d’accepter les règles du forum lors de leur enregistrement.',
+	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Cette option ajoutera une clause aux « Conditions d’utilisation », demandant aux nouveaux utilisateurs de lire et d’accepter les règles du forum lors de leur enregistrement.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Avertir les utilisateurs',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Avertit tous les utilisateurs enregistrés que les règles du forum ont été mises à jour. (Cette opération peut prendre plusieurs secondes à s’exécuter sur les forums contenant des milliers de membres.)',
-	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Êtes-vous certain(e) de vouloir envoyer un avertissement à tous les utilisateurs ?',
+	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Êtes-vous certain(e) de vouloir envoyer un avertissement à tous les utilisateurs ?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Paramètres des règles du forum modifiés.',
 
 	// Manage page
@@ -71,12 +71,12 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_TITLE'						=> 'Intitulé de la règle',
 	'ACP_RULE_TITLE_EXPLAIN'				=> 'Les intitulés de la règle sont affichés sur la page des règles pour les catégories de la règle uniquement. Les intitulés de la règle sont également utilisés pour identifier les règles lorsque vous les gérez via le PCA.',
 	'ACP_RULE_ANCHOR'						=> 'Ancre de la règle',
-	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Les ancres des règles sont optionnelles et utilisées comme des points d’ancrage de liens sur la page des règles. Elles doivent être « SEO-Friendly » (ne pas contenir d’espaces ou de caractères spéciaux) et doivent commencer par une lettre.',
+	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Les ancres des règles sont optionnelles et utilisées comme des points d’ancrage de liens sur la page des règles. Elles doivent être « SEO-Friendly » (ne pas contenir d’espaces ou de caractères spéciaux) et doivent commencer par une lettre.',
 	'ACP_RULE_MESSAGE'						=> 'Texte de la règle',
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Le texte de la règle est affiché sur la page des règles pour chacune d’elle (les catégories n’affichent aucun texte de règle).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Cette catégorie contient des règles, l’éditeur de message a été désactivé.',
 	'ACP_ADD_RULE'							=> 'Créer une nouvelle règle',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Êtes-vous certain(e) de vouloir supprimer cette catégorie / règle ?<br />Attention : Si vous supprimez une catégorie cela supprimera aussi toutes les règles qu’elle contient.',
+	'ACP_DELETE_RULE_CONFIRM'				=> 'Êtes-vous certain(e) de vouloir supprimer cette catégorie / règle ?<br />Attention : Si vous supprimez une catégorie cela supprimera aussi toutes les règles qu’elle contient.',
 	'ACP_RULE_ADDED'						=> 'Règle ajoutée avec succès.',
 	'ACP_RULE_DELETED'						=> 'Règle supprimée avec succès.',
 	'ACP_RULE_EDITED'						=> 'Règle modifiée avec succès.',
@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'L’extension « Board rules » a échoué lors du verrouillage de la table. Un autre processus doit maintenir ce verrouillage. Les verrouillages sont forcés à s’arrêter après un délais d’une heure.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'L’extension « Board rules » a échoué lors du verrouillage de la table. Un autre processus doit maintenir ce verrouillage. Les verrouillages sont forcés à s’arrêter après un délais d’une heure.',
 	'RULES_NESTEDSET_INVALID_ITEM'			=> 'La règle demandée n’existe pas.',
 	'RULES_NESTEDSET_INVALID_PARENT'		=> 'La règle demandée ne possède pas de règle parente.',
 ));
