@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'L’extension « Board rules » a échoué lors du verrouillage de la table. Un autre processus doit maintenir ce verrouillage. Les verrouillages sont forcés à s’arrêter après un délais d’une heure.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'L’extension « Board rules » a échoué lors du verrouillage de la table. Un autre processus doit maintenir ce verrouillage. Les verrouillages sont forcés à s’arrêter après un délais d’une heure.',
 	'RULES_NESTEDSET_INVALID_ITEM'			=> 'La règle demandée n’existe pas.',
 	'RULES_NESTEDSET_INVALID_PARENT'		=> 'La règle demandée ne possède pas de règle parente.',
 ));
