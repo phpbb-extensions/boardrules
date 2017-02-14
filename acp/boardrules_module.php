@@ -18,10 +18,13 @@ class boardrules_module
 
 	public function main($id, $mode)
 	{
-		global $phpbb_container, $request;
+		global $phpbb_container;
 
 		/** @var \phpbb\language\language $lang */
 		$lang = $phpbb_container->get('language');
+
+		/** @var \phpbb\request\request $request */
+		$request = $phpbb_container->get('request');
 
 		// Add the board rules ACP lang file
 		$lang->add_lang('boardrules_acp', 'phpbb/boardrules');

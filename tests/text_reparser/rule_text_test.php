@@ -10,7 +10,7 @@
 
 namespace phpbb\boardrules\tests\text_reparser;
 
-include_once dirname(__FILE__) . '/../../../../../../tests/text_reparser/plugins/test_row_based_plugin.php';
+include_once __DIR__ . '/../../../../../../tests/text_reparser/plugins/test_row_based_plugin.php';
 
 class rule_text_test extends \phpbb_textreparser_test_row_based_plugin
 {
