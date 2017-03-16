@@ -22,11 +22,11 @@ class rule_operator_get_rules_test extends rule_operator_base
 		return array(
 			// language id to search, data which should match
 			array(
-				1,
+				'en',
 				array(
 					array(
 						'rule_id' => 1,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 1,
 						'rule_right_id' => 2,
 						'rule_parent_id' => 0,
@@ -35,7 +35,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 					),
 					array(
 						'rule_id' => 2,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 3,
 						'rule_right_id' => 4,
 						'rule_parent_id' => 0,
@@ -44,7 +44,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 					),
 					array(
 						'rule_id' => 3,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 5,
 						'rule_right_id' => 6,
 						'rule_parent_id' => 0,
@@ -53,7 +53,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 					),
 					array(
 						'rule_id' => 4,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 7,
 						'rule_right_id' => 10,
 						'rule_parent_id' => 0,
@@ -62,7 +62,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 					),
 					array(
 						'rule_id' => 5,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 8,
 						'rule_right_id' => 9,
 						'rule_parent_id' => 4,
@@ -125,8 +125,8 @@ class rule_operator_get_rules_test extends rule_operator_base
 	{
 		return array(
 			// language to search, expected result (empty array)
-			array(0, array()),
-			array(4, array()),
+			array('foo', array()),
+			array('bar', array()),
 		);
 	}
 

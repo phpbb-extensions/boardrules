@@ -39,7 +39,8 @@ class rule_operator_add_rule_test extends rule_operator_base
 
 		// Set up some basic test variables
 		$test_id = 6;
-		$language = $parent_id = 1; // using 1 allows us to test the nestability
+		$language = 'en';
+		$parent_id = 1; // using 1 allows us to test the nestability
 
 		// Setup the operator class
 		$operator = $this->get_rule_operator();

@@ -138,15 +138,15 @@ class rule_entity_anchor_test extends rule_entity_base
 	{
 		return array(
 			// id // language // sent to set_anchor(), expected from get_anchor()
-			array(null, 1, '', ''), // new rule, anchor field empty, expect empty anchor to pass
-			array(null, 1, 'foo', 'foo'), // new rule, anchor is unique, expect unique anchor to pass
-			array(4, 1, '', ''), // existing rule, anchor is empty, expect empty anchor to pass
-			array(4, 1, 'foo', 'foo'), // existing rule, anchor is unique, expect unique anchor to pass
-			array(1, 1, 'anchor_1', 'anchor_1'), // existing rule, existing anchor is unique, expect existing anchor to pass
-			array(null, 2, 'anchor_1', 'anchor_1'), // new rule, new language, anchor is unique to the new language, expect anchor to pass
-			array(null, 0, '', ''), // new rule, no lang, anchor field empty, expect empty anchor to pass
-			array(null, 0, 'foo', 'foo'), // new rule, no lang, anchor is unique, expect unique anchor to pass
-			array(1, 0, 'anchor_1', 'anchor_1'), // existing rule, no lang, existing anchor is unique, expect existing anchor to pass
+			array(null, 'en', '', ''), // new rule, anchor field empty, expect empty anchor to pass
+			array(null, 'en', 'foo', 'foo'), // new rule, anchor is unique, expect unique anchor to pass
+			array(4, 'en', '', ''), // existing rule, anchor is empty, expect empty anchor to pass
+			array(4, 'en', 'foo', 'foo'), // existing rule, anchor is unique, expect unique anchor to pass
+			array(1, 'en', 'anchor_1', 'anchor_1'), // existing rule, existing anchor is unique, expect existing anchor to pass
+			array(null, 'en-us', 'anchor_1', 'anchor_1'), // new rule, new language, anchor is unique to the new language, expect anchor to pass
+			array(null, '', '', ''), // new rule, no lang, anchor field empty, expect empty anchor to pass
+			array(null, '', 'foo', 'foo'), // new rule, no lang, anchor is unique, expect unique anchor to pass
+			array(1, '', 'anchor_1', 'anchor_1'), // existing rule, no lang, existing anchor is unique, expect existing anchor to pass
 		);
 	}
 
@@ -187,10 +187,10 @@ class rule_entity_anchor_test extends rule_entity_base
 	{
 		return array(
 			// id // language // sent to set_anchor()
-			array(null, 1, 'anchor_1'), // new rule, new anchor is not unique (exists already in db)
-			array(1, 1, 'anchor_2'), // existing rule, new anchor is not unique (exists already in db)
-			array(null, 0, 'anchor_1'), // new rule, no lang, new anchor is not unique (exists already in db)
-			array(1, 0, 'anchor_2'), // existing rule, no lang, new anchor is not unique (exists already in db)
+			array(null, 'en', 'anchor_1'), // new rule, new anchor is not unique (exists already in db)
+			array(1, 'en', 'anchor_2'), // existing rule, new anchor is not unique (exists already in db)
+			array(null, '', 'anchor_1'), // new rule, no lang, new anchor is not unique (exists already in db)
+			array(1, '', 'anchor_2'), // existing rule, no lang, new anchor is not unique (exists already in db)
 		);
 	}
 

@@ -85,11 +85,6 @@ class rule_entity_import_test extends rule_entity_base
 
 		// Out of range
 		$data[] = array_merge($import_data[1], array(
-			'rule_language'	=> -1,
-		));
-
-		// Out of range
-		$data[] = array_merge($import_data[1], array(
 			'rule_left_id'	=> -1,
 		));
 

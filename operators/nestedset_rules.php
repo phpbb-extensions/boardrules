@@ -51,7 +51,7 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	*/
 	public function use_language($language)
 	{
-		$this->sql_where = '%srule_language = ' . (int) $language;
+		$this->sql_where = "%srule_language = '" . $this->db->sql_escape($language) . "'";
 
 		return $this;
 	}

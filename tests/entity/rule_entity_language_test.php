@@ -24,26 +24,26 @@ class rule_entity_language_test extends rule_entity_base
 	{
 		$import_data = $this->get_import_data();
 
-		// Set some data to test other than 1 from our import data
-		$import_data[3]['rule_language'] = 2;
-		$import_data[4]['rule_language'] = '7';
+		// Set some data to test other than en from our import data
+		$import_data[3]['rule_language'] = 'foo';
+		$import_data[4]['rule_language'] = 0;
 
 		return array(
 			array(
 				$import_data[1],
-				1,
+				'en',
 			),
 			array(
 				$import_data[2],
-				1,
+				'en',
 			),
 			array(
 				$import_data[3],
-				2,
+				'foo',
 			),
 			array(
 				$import_data[4],
-				7,
+				'0',
 			),
 		);
 	}

@@ -34,7 +34,7 @@ class boardrules_module
 
 		// Requests
 		$action = $request->variable('action', '');
-		$language = $request->variable('language', 0);
+		$language = $request->variable('language', '');
 		$parent_id = $request->variable('parent_id', 0);
 		$rule_id = $request->variable('rule_id', 0);
 
