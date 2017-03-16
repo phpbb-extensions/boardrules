@@ -76,6 +76,9 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 		// Grab the rule data as an array of entities
 		$entities = $operator->get_rule_parents($language, $parent_id);
 
+		// Assert we have found some rules!
+		$this->assertNotEmpty($entities);
+
 		// Map the fields to the getters
 		$map = array(
 			'rule_id'		=> 'get_id',

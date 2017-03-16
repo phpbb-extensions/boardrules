@@ -80,6 +80,5 @@ class rule_entity_language_test extends rule_entity_base
 
 		// Assert that the anchor matches what's expected
 		$this->assertSame($language, $entity->get_language());
-
 	}
 }

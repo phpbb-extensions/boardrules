@@ -108,10 +108,10 @@ class rule_entity_import_test extends rule_entity_base
 			'rule_message_bbcode_options'	=> -1,
 		));
 
-		// Too long
-		$data[] = array_merge($import_data[1], array(
-			'rule_anchor'	=> str_repeat('a', 256),
-		));
+//		// Too long (no longer tested inside in the import method)
+//		$data[] = array_merge($import_data[1], array(
+//			'rule_anchor'	=> str_repeat('a', 256),
+//		));
 
 		// Too long
 		$data[] = array_merge($import_data[1], array(
@@ -127,6 +127,12 @@ class rule_entity_import_test extends rule_entity_base
 			unset($incomplete[$field]);
 
 			$data[] = $incomplete;
+		}
+
+		// Make each $data array a proper test array
+		foreach ($data as $key => $array)
+		{
+			$data[$key] = array($array);
 		}
 
 		return $data;

@@ -152,6 +152,7 @@ class rule implements rule_interface
 			'rule_language',
 			'rule_left_id',
 			'rule_right_id',
+			'rule_parent_id',
 			'rule_message_bbcode_options',
 		);
 

@@ -26,11 +26,11 @@ class boardrules_module
 		/** @var \phpbb\request\request $request */
 		$request = $phpbb_container->get('request');
 
+		/** @var \phpbb\boardrules\controller\admin_controller $admin_controller */
+		$admin_controller = $phpbb_container->get('phpbb.boardrules.admin.controller');
+
 		// Add the board rules ACP lang file
 		$lang->add_lang('boardrules_acp', 'phpbb/boardrules');
-
-		// Get an instance of the admin controller
-		$admin_controller = $phpbb_container->get('phpbb.boardrules.admin.controller');
 
 		// Requests
 		$action = $request->variable('action', '');
