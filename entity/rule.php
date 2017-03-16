@@ -535,11 +535,28 @@ class rule implements rule_interface
 	 * @param string $language language iso
 	 * @return rule_interface $this object for chaining calls; load()->set()->save()
 	 * @access public
+	 * @throws \phpbb\boardrules\exception\unexpected_value
 	 */
 	public function set_language($language)
 	{
 		if (!isset($this->data['rule_language']))
 		{
+			// Validate the requested language ISO is installed
+			if ($language !== '')
+			{
+				$sql = 'SELECT lang_id
+					FROM ' . LANG_TABLE . "
+					WHERE lang_iso = '" . $this->db->sql_escape($language) . "'";
+				$result = $this->db->sql_query($sql);
+				$lang_id = $this->db->sql_fetchfield('lang_id');
+				$this->db->sql_freeresult($result);
+
+				if (!$lang_id)
+				{
+					throw new \phpbb\boardrules\exception\unexpected_value(array('rule_language', 'WRONG_DATA_LANG', 'UNEXPECTED_VALUE'));
+				}
+			}
+
 			$this->data['rule_language'] = $language;
 		}
 

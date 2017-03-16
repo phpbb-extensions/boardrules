@@ -70,4 +70,16 @@
 			<value>7</value>
 		</row>
 	</table>
+	<table name="phpbb_lang">
+		<column>lang_id</column>
+		<column>lang_iso</column>
+		<row>
+			<value>1</value>
+			<value>en</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>en-us</value>
+		</row>
+	</table>
 </dataset>
