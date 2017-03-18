@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Η εισαχθείσα τιμή δεν ήταν μοναδική.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Το πεδίο "%1$s" δέχτηκε μη αναμενόμενα δεδομένα. Λόγος: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Η εισαχθείσα τιμή περιείχε μη επιτρεπτούς χαρακτήρες.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

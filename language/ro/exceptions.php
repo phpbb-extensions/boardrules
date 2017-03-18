@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Campul nu este unic.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Campul `%1$s` date neasteptate primite. Motiv: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Campurile contin caractere nepermise.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

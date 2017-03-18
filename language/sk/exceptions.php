@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Vstup nebol jedinečný.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Pole `%1$s` obdržalo neočakávané dáta. Dôvod: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Vstup obsahuje neplatné znaky.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'La donnée n’était pas unique.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Le champ `%1$s` a reçu une donnée inattendue. Motif : %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'La donnée contenait des caractères interdits.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

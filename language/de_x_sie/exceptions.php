@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Uneindeutige Eingabe (Bezeichnung bereits vergeben).',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Unerwartete Zeichen in Feld `%1$s`. Grund: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Eingabe enthält für dieses Feld nicht zulässige Zeichen.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

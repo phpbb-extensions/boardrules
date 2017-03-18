@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Sisend ei olnud unikaalne.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Väli `%1$s` sai ootamatud andmed. Põhjus: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Sisend sisaldab keelatuid sümboleid.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

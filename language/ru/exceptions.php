@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Значение не уникально.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Некорректное значение в поле `%1$s`. Причина: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Введеная строка содержит некорректные символы.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

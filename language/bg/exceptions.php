@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Въведеното не съответства.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Полето `%1$s` получава неочаквани данни. Причина: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Въведенот съдържа непозволени знаци.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

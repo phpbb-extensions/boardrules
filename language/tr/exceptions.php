@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Girdi eşsiz değil.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> '`%1$s` alanı beklenmeyen bir veri aldı. Sebep: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Girdi uygun olmayan karakterler içeriyor.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));
