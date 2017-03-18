@@ -85,7 +85,7 @@ class m16_update_lang_postgres extends \phpbb\db\migration\migration
 		}
 
 		// Add an index for the rule_language column
-		$this->db_tools->sql_create_index($boardrules_table, 'rule_language', 'rule_language');
+		$this->db_tools->sql_create_index($boardrules_table, 'rule_language', array('rule_language'));
 
 		// Get installed language identifiers and iso codes
 		$sql = 'SELECT lang_id, lang_iso
