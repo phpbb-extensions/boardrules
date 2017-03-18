@@ -10,8 +10,18 @@
 
 namespace phpbb\boardrules\migrations\v20x;
 
-class m15_language_iso extends \phpbb\db\migration\container_aware_migration
+class m15_update_lang_schema extends \phpbb\db\migration\migration
 {
+	/**
+	 * @inheritDoc
+	 *
+	 * This migration is incompatible with PostgreSQL
+	 */
+	public function effectively_installed()
+	{
+		return $this->db->get_sql_layer() === 'postgres';
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -34,6 +44,11 @@ class m15_language_iso extends \phpbb\db\migration\container_aware_migration
 					'rule_language' => array('VCHAR:30', ''),
 				),
 			),
+			'add_index' => array(
+				$this->table_prefix . 'boardrules' => array(
+					'rule_language' => array('rule_language'),
+				),
+			),
 		);
 	}
 
@@ -43,9 +58,9 @@ class m15_language_iso extends \phpbb\db\migration\container_aware_migration
 	public function revert_schema()
 	{
 		return array(
-			'change_columns' => array(
+			'drop_keys' => array(
 				$this->table_prefix . 'boardrules' => array(
-					'rule_language' => array('UINT', ''),
+					'rule_language',
 				),
 			),
 		);
