@@ -526,7 +526,7 @@ class rule implements rule_interface
 	*/
 	public function get_language()
 	{
-		return isset($this->data['rule_language']) ? $this->data['rule_language'] : 'en';
+		return isset($this->data['rule_language']) ? $this->data['rule_language'] : '';
 	}
 
 	/**
