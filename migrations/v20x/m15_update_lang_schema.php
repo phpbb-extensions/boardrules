@@ -81,27 +81,7 @@ class m15_update_lang_schema extends \phpbb\db\migration\migration
 	 */
 	public function change_rule_language()
 	{
-		// Get installed language identifiers and iso codes
-		$sql = 'SELECT lang_id, lang_iso
-			FROM ' . LANG_TABLE;
-		$result = $this->db->sql_query($sql);
-		$rows = $this->db->sql_fetchrowset($result);
-		$this->db->sql_freeresult($result);
-
-		// Update the languages in the boardrules table, from id to iso
-		if (!empty($rows))
-		{
-			$this->db->sql_transaction('begin');
-
-			foreach ($rows as $row)
-			{
-				$sql = 'UPDATE ' . $this->table_prefix . "boardrules
-					SET rule_language = '" . $this->db->sql_escape($row['lang_iso']) . "'
-					WHERE rule_language = " . (int) $row['lang_id'];
-				$this->db->sql_query($sql);
-			}
-
-			$this->db->sql_transaction('commit');
-		}
+		$helper = new \phpbb\boardrules\migrations\helper($this->db, $this->table_prefix);
+		$helper->change_rule_language('rule_language', 'rule_language');
 	}
 }

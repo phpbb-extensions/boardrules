@@ -87,28 +87,9 @@ class m16_update_lang_postgres extends \phpbb\db\migration\migration
 		// Add an index for the rule_language column
 		$this->db_tools->sql_create_index($boardrules_table, 'rule_language', array('rule_language'));
 
-		// Get installed language identifiers and iso codes
-		$sql = 'SELECT lang_id, lang_iso
-			FROM ' . LANG_TABLE;
-		$result = $this->db->sql_query($sql);
-		$rows = $this->db->sql_fetchrowset($result);
-		$this->db->sql_freeresult($result);
-
-		// Update the languages in the boardrules table, from id to iso
-		if (!empty($rows))
-		{
-			$this->db->sql_transaction('begin');
-
-			foreach ($rows as $row)
-			{
-				$sql = 'UPDATE ' . $boardrules_table . "
-					SET rule_language = '" . $this->db->sql_escape($row['lang_iso']) . "'
-					WHERE old_rule_language = " . (int) $row['lang_id'];
-				$this->db->sql_query($sql);
-			}
-
-			$this->db->sql_transaction('commit');
-		}
+		// Set the new rule_language values
+		$helper = new \phpbb\boardrules\migrations\helper($this->db, $this->table_prefix);
+		$helper->change_rule_language('rule_language', 'old_rule_language');
 
 		// Drop the temporary column
 		$this->db_tools->sql_column_remove($boardrules_table, 'old_rule_language');
