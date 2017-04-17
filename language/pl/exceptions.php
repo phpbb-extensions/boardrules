@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Wprowadzone dane nie były wyjątkowe.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Pole `%1$s` odebrało nieoczekiwane dane. Powód: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Wprowadzone dane zawierały niedozwolone znaki.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

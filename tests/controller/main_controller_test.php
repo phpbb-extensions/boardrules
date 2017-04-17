@@ -38,7 +38,6 @@ class main_controller_test extends \phpbb_test_case
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$lang = new \phpbb\language\language($lang_loader);
 		$user = new \phpbb\user($lang, '\phpbb\datetime');
-		$user->data['lang_id'] = 1;
 
 		// Mock the rule operator and return an empty array for get_rules method
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')

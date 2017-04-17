@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> '输入值不是唯一。',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> '`%1$s` 字段收到无效数据。原因： %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> '输入值含有非法字符。',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

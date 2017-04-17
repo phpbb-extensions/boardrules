@@ -105,7 +105,7 @@ class rule implements rule_interface
 		$fields = array(
 			// column							=> data type (see settype())
 			'rule_id'							=> 'integer',
-			'rule_language'						=> 'integer',
+			'rule_language'						=> 'string',
 			'rule_left_id'						=> 'integer',
 			'rule_right_id'						=> 'integer',
 			'rule_parent_id'					=> 'integer',
@@ -149,9 +149,9 @@ class rule implements rule_interface
 		// Some fields must be unsigned (>= 0)
 		$validate_unsigned = array(
 			'rule_id',
-			'rule_language',
 			'rule_left_id',
 			'rule_right_id',
+			'rule_parent_id',
 			'rule_message_bbcode_options',
 		);
 
@@ -172,12 +172,12 @@ class rule implements rule_interface
 	*
 	* Will throw an exception if the rule was already inserted (call save() instead)
 	*
-	* @param int $language The language identifier
+	* @param string $language The language iso
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function insert($language = 0)
+	public function insert($language)
 	{
 		if (!empty($this->data['rule_id']))
 		{
@@ -501,7 +501,7 @@ class rule implements rule_interface
 				FROM ' . $this->boardrules_table . "
 				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
 					AND rule_id <> " . $this->get_id() .
-					($this->get_language() ? ' AND rule_language = ' . $this->get_language() : '');
+					($this->get_language() ? " AND rule_language = '" . $this->get_language() . "'" : '');
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -519,28 +519,45 @@ class rule implements rule_interface
 	}
 
 	/**
-	* Get the language identifier
+	* Get the language iso
 	*
-	* @return int language identifier
+	* @return string language iso
 	* @access public
 	*/
 	public function get_language()
 	{
-		return isset($this->data['rule_language']) ? (int) $this->data['rule_language'] : 0;
+		return isset($this->data['rule_language']) ? $this->data['rule_language'] : '';
 	}
 
 	/**
-	 * Set the language identifier
+	 * Set the language iso
 	 *
-	 * @param int $language language identifier
+	 * @param string $language language iso
 	 * @return rule_interface $this object for chaining calls; load()->set()->save()
 	 * @access public
+	 * @throws \phpbb\boardrules\exception\unexpected_value
 	 */
 	public function set_language($language)
 	{
 		if (!isset($this->data['rule_language']))
 		{
-			$this->data['rule_language'] = (int) $language;
+			// Validate the requested language ISO is installed
+			if ($language !== '')
+			{
+				$sql = 'SELECT lang_id
+					FROM ' . LANG_TABLE . "
+					WHERE lang_iso = '" . $this->db->sql_escape($language) . "'";
+				$result = $this->db->sql_query($sql);
+				$lang_id = $this->db->sql_fetchfield('lang_id');
+				$this->db->sql_freeresult($result);
+
+				if (!$lang_id)
+				{
+					throw new \phpbb\boardrules\exception\unexpected_value(array('rule_language', 'WRONG_DATA_LANG', 'UNEXPECTED_VALUE'));
+				}
+			}
+
+			$this->data['rule_language'] = $language;
 		}
 
 		return $this;

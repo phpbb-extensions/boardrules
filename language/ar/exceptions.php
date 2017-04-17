@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'البيانات المُدخلة موجودة مُسبقاً.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'هناك خطأ في البيانات المُدخلة في الحقل `%1$s`. السبب : %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'البيانات التي أدخلتها تحتوي على حروف غير مقبولة.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

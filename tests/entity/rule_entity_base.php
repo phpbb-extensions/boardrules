@@ -65,7 +65,7 @@ class rule_entity_base extends \phpbb_database_test_case
 		return array(
 			1 => array(
 				'rule_id'							=> 1,
-				'rule_language'						=> 1,
+				'rule_language'						=> 'en',
 				'rule_left_id'						=> 0,
 				'rule_right_id'						=> 1,
 				'rule_parent_id'					=> 0,
@@ -79,7 +79,7 @@ class rule_entity_base extends \phpbb_database_test_case
 			),
 			2 => array(
 				'rule_id'							=> 2,
-				'rule_language'						=> 1,
+				'rule_language'						=> 'en',
 				'rule_left_id'						=> 2,
 				'rule_right_id'						=> 5,
 				'rule_parent_id'					=> 0,
@@ -93,7 +93,7 @@ class rule_entity_base extends \phpbb_database_test_case
 			),
 			3 => array(
 				'rule_id'							=> 3,
-				'rule_language'						=> 1,
+				'rule_language'						=> 'en',
 				'rule_left_id'						=> 3,
 				'rule_right_id'						=> 4,
 				'rule_parent_id'					=> 2,
@@ -107,7 +107,7 @@ class rule_entity_base extends \phpbb_database_test_case
 			),
 			4 => array(
 				'rule_id'							=> 4,
-				'rule_language'						=> 1,
+				'rule_language'						=> 'en',
 				'rule_left_id'						=> 6,
 				'rule_right_id'						=> 7,
 				'rule_parent_id'					=> 0,

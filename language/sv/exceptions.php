@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Inmatningen var ej unik.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Fältet `%1$s` har mottagit oväntad data. Orsak: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Inmatningen innehöll otillåtna tecken.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

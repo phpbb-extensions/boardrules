@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'התוכן לא היה ייחודי.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'השדה `%1$s` קיבל מידע לא-צפוי. סיבה: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'התוכן הכיל תווים לא חוקיים.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

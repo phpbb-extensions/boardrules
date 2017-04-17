@@ -43,12 +43,12 @@ class rule implements rule_interface
 	/**
 	* Get the rules
 	*
-	* @param int $language Language selection identifier; default: 0
+	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return array Array of rule data entities
 	* @access public
 	*/
-	public function get_rules($language = 0, $parent_id = 0)
+	public function get_rules($language, $parent_id = 0)
 	{
 		$entities = array();
 
@@ -72,13 +72,13 @@ class rule implements rule_interface
 	* Add a rule
 	*
 	* @param \phpbb\boardrules\entity\rule_interface $entity Rule entity with new data to insert
-	* @param int $language Language selection identifier; default: 0
+	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function add_rule($entity, $language = 0, $parent_id = 0)
+	public function add_rule($entity, $language, $parent_id = 0)
 	{
 		// Insert the rule data to the database for the given language selection
 		$entity->insert($language);
@@ -178,7 +178,7 @@ class rule implements rule_interface
 	/**
 	* Get a rule's parent rules (for use in breadcrumbs)
 	*
-	* @param int $language Language selection identifier
+	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from
 	* @return array Array of rule data for a rule's parent rules
 	* @access public

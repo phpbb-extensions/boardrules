@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'Upis nije jedinstven.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'U polje `%1$s` su upisani neočekivani podatci.<br />Razlog: %2$s.',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Upis sadrži nedopuštene znakove.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));
