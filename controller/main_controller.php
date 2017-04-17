@@ -91,7 +91,7 @@ class main_controller implements main_interface
 
 		// If no rules were found, it may be because no rules exist in the current user's
 		// language, so let's look for rules in the board's default language as a fallback.
-		if (empty($entities))
+		if (empty($entities) && $this->lang->get_used_language() !== $this->config['default_lang'])
 		{
 			$entities = $this->rule_operator->get_rules($this->config['default_lang']);
 		}
