@@ -2,11 +2,11 @@
 <!-- INCLUDE overall_header.html -->
 
 <!-- IF S_CATEGORIES -->
-<div id="boardrules-categories">
+<div class="boardrules-categories">
 	<div class="mini-panel">
 		<div class="inner">
 			<h3>{L_BOARDRULES_CATEGORIES}</h3>
-			<ul class="menu">
+			<ul class="boardrules-menu">
 				<!-- BEGIN rules -->
 					<!-- IF rules.S_IS_CATEGORY --><li><a href="#{rules.U_ANCHOR}">{rules.TITLE}</a></li><!-- ENDIF -->
 				<!-- END rules -->
@@ -16,11 +16,11 @@
 </div>
 <!-- ENDIF -->
 
-<div id="container">
+<div class="boardrules-container">
 	<h2 class="boardrules-header">{L_BOARDRULES_HEADER}</h2>
 	<div id="main" class="content">
 		<p>{BOARDRULES_EXPLAIN}</p>
-		<ol id="rules">
+		<ol class="boardrules-rules">
 			<!-- BEGIN rules -->
 				<!-- IF rules.S_CLOSE_LIST -->
 						</ol>
