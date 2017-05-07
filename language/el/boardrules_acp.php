@@ -41,22 +41,22 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// Settings page
 	'ACP_BOARDRULES'						=> 'Όροι Συμμετοχής Δ. Συζήτησης',
-	'ACP_BOARDRULES_SETTINGS'				=> 'Ρυθμίσεις όρων συμμετοχής',
-	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Εδώ μπορείτε να διαμορφώσετε τις κύριες ρυθμίσεις των όρων συμμετοχής της Δ. Συζήτησης.',
-	'ACP_BOARDRULES_ENABLE'					=> 'Ενεργοποίηση όρων συμμετοχής Δ. Συζήτησης',
-	'ACP_BOARDRULES_HEADER_LINK'			=> 'Εμφάνιση συνδέσμου όρων συμμετοχής Δ. Συζήτησης στην κορυφή',
-	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
-	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
-	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Απαιτείται στα νέα μέλη να αποδεχθούν τους όρους συμμετοχής κατά την εγγραφή',
+	'ACP_BOARDRULES_SETTINGS'				=> 'Ρυθμίσεις Όρων Συμμετοχής',
+	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Εδώ μπορείτε να διαμορφώσετε τις κύριες ρυθμίσεις των Όρων Συμμετοχής της Δ. Συζήτησης.',
+	'ACP_BOARDRULES_ENABLE'					=> 'Ενεργοποίηση Όρων Συμμετοχής Δ. Συζήτησης',
+	'ACP_BOARDRULES_HEADER_LINK'			=> 'Εμφάνιση συνδέσμου Όρων Συμμετοχής Δ. Συζήτησης στην κορυφή',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Σύνδεσμος εικονιδίου Όρων Συμμετοχής',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Εισάγετε το όνομα του εικονιδίου από το <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> που θα χρησιμοποιηθεί στον σύνδεσμο των Όρων Συμμετοχής. Αφήστε αυτό το πεδίο κενό αν δεν θέλετε να εμφανίζεται κάποιο εικονίδιο.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Ο σύνδεσμος εικονιδίου Όρων Συμμετοχής περιέχει μη έγκυρους χαρακτήρες.',
+	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Απαιτείται στα νέα μέλη να αποδεχθούν τους Όρους Συμμετοχής κατά την εγγραφή',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Αυτή η επιλογή θα προσθέσει ένα σύνδεσμο στους κυρίως "Όρους Συμμετοχής" απαιτώντας από τα νέα μέλη να διαβάσουν και να αποδεχτούν τους όρους συμμετοχής της Δ. Συζήτησης κατά την εγγραφή τους.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Ειδοποίηση μελών',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Αποστέλει μια ειδοποίηση σε όλα τα μέλη ότι οι όροι συμμετοχής της Δ. Συζήτησης έχουν ανανεωθεί. (Αυτό θα διαρκέσει μερικά δευτερόλεπτα να ολοκληρωθεί σε Δ. Συζητήσεις με αρκετές χιλιάδες μέλη.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Είστε σίγουρος (-η) ότι θέλετε να στείλετε ειδοποίηση σε όλα τα μέλη;',
-	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Οι ρυθμίσεις των όρων συμμετοχής Δ. Συζήτησης άλλαξαν.',
+	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Οι ρυθμίσεις των Όρων Συμμετοχής Δ. Συζήτησης άλλαξαν.',
 
 	// Manage page
-	'ACP_BOARDRULES_MANAGE'					=> 'Διαχείριση όρων συμμετοχής',
+	'ACP_BOARDRULES_MANAGE'					=> 'Διαχείριση Όρων Συμμετοχής',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Από εδώ μπορείτε να προσθέσετε, επεξεργαστείτε, διαγράψετε και να αναδιατάξετε κατηγορίες και όρους. Μια κατηγορία είναι μια ομάδα σχετικών όρων. Κάθε κατηγορία μπορεί να περιέχει απεριόριστο αριθμό όρων.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Κατηγορία όρων',
 	'ACP_BOARDRULES_RULE'					=> 'Όρος',
@@ -85,6 +85,6 @@ $lang = array_merge($lang, array(
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
 	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Ο όρος που ζητήσατε δεν υπάρχει.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Ο όρος που ζητήσατε δεν έχει γονέα.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
 ));
