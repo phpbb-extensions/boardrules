@@ -2,6 +2,11 @@
 
 ## Vesion 2.x (for phpBB 3.2)
 
+### 2.1.0 - 2017-05-07
+
+- Default language fallback: if board rules do not exist for an installed language, the rules written in the board's default language will be shown instead (if they exist).
+- Major code improvements and optimisations.
+
 ### 2.0.0 - 2017-01-16
 
 - Updated for phpBB 3.2 (continue using the 1.x branch for phpBB 3.1.x)
@@ -10,7 +15,7 @@
 
 ## Version 1.x (for phpBB 3.1)
 
-## 1.0.4 - 2016-12-02
+### 1.0.4 - 2016-12-02
 
 - Fixed some rare cases where errors caused a blank page. They are now caught, resulting in a proper error message.
 - Fixed some missing language keys in rare error messages from the nestedset class.
@@ -24,7 +29,7 @@
     - Norwegian
     - Slovak
 
-## 1.0.3 - 2016-01-17
+### 1.0.3 - 2016-01-17
 
 - The same anchor names can now be shared between languages.
 - Fixed an issue that prevented rules from being updated on MSSQL systems.
