@@ -39,5 +39,5 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACL_A_BOARDRULES'		=> 'Μπορεί να διαχειριστεί τους όρους συμμετοχής στη Δ. Συζήτηση',
+	'ACL_A_BOARDRULES'		=> 'Μπορεί να διαχειριστεί τους Όρους Συμμετοχής στη Δ. Συζήτηση',
 ));

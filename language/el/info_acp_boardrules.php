@@ -45,6 +45,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS'		=> 'Ρυθμίσεις',
 
 	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Οι ρυθμίσεις των όρων συμμετοχής Δ. Συζήτησης άλλαξαν</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Η ειδοποίηση όρων συμμετοχής της Δ. Συζήτησης στάλθηκε σε όλα τα μέλη</strong>',
+	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Οι ρυθμίσεις των Όρων Συμμετοχής Δ. Συζήτησης άλλαξαν</strong>',
+	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Η ειδοποίηση τροποποίησης των Όρων Συμμετοχής της Δ. Συζήτησης στάλθηκε σε όλα τα μέλη</strong>',
 ));
