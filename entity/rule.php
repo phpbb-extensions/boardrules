@@ -501,7 +501,7 @@ class rule implements rule_interface
 				FROM ' . $this->boardrules_table . "
 				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
 					AND rule_id <> " . $this->get_id() .
-					($this->get_language() ? " AND rule_language = '" . $this->get_language() . "'" : '');
+					($this->get_language() ? " AND rule_language = '" . $this->db->sql_escape($this->get_language()) . "'" : '');
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
