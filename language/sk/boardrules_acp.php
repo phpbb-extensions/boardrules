@@ -72,7 +72,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Obsah pravidla je zobrazený pri každom z pravidiel (toto pole je pri kategóriách ignorované).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Toto je kategória pravidiel, preto nie je možné pravidlo upravovať.',
 	'ACP_ADD_RULE'							=> 'Vytvoriť nové pravidlo',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Naozaj chcete odstrániť toto pravidlo?<br />Varovanie: Odstránením kategórie odstraníte tiež všetky pravidlá v nej.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Naozaj chcete odstrániť toto pravidlo?',
+		1 => 'Naozaj chcete odstrániť toto pravidlo?<br />Varovanie: Odstránením kategórie odstraníte tiež všetky pravidlá v nej.',
+	),
 	'ACP_RULE_ADDED'						=> 'Pravidlo bolo úspešne pridané.',
 	'ACP_RULE_DELETED'						=> 'Pravidlo bolo úspešne odstránené.',
 	'ACP_RULE_EDITED'						=> 'Pravidlo bolo úspešne upravené.',

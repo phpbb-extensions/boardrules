@@ -73,7 +73,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Regelmeldingen vises på regelsiden for hver regel. (Kategorier viser ikke regelmeldinger.)',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Denne kategorien inneholder regler. Meldingsredigering har blitt deaktivert.',
 	'ACP_ADD_RULE'							=> 'Opprett en ny regel',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Er du sikker på at du vil slette denne regelen?<br />Advarsel: Hvis en regelkategori blir slettet, slettes også alle reglene i den.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Er du sikker på at du vil slette denne regelen?',
+		1 => 'Er du sikker på at du vil slette denne regelkategori?<br />Advarsel: Hvis en regelkategori blir slettet, slettes også alle reglene i den.',
+	),
 	'ACP_RULE_ADDED'						=> 'Regelen har blitt opprettet.',
 	'ACP_RULE_DELETED'						=> 'Regelen har blitt slettet.',
 	'ACP_RULE_EDITED'						=> 'Regelen har blitt oppdatert.',

@@ -564,8 +564,10 @@ class admin_controller implements admin_interface
 		}
 		else
 		{
+			$is_cat = (int) ($entity->get_right_id() - $entity->get_left_id() > 1);
+
 			// Request confirmation from the user to delete the rule
-			confirm_box(false, $this->lang->lang('ACP_DELETE_RULE_CONFIRM'), build_hidden_fields(array(
+			confirm_box(false, $this->lang->lang('ACP_DELETE_RULE_CONFIRM', $is_cat), build_hidden_fields(array(
 				'mode' => 'manage',
 				'action' => 'delete',
 				'rule_id' => $rule_id,
