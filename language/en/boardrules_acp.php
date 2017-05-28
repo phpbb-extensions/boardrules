@@ -75,7 +75,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'The rule message is displayed on the rules page for each rule (categories do not display a rule message).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'This is a category containing rules, the message editor has been disabled.',
 	'ACP_ADD_RULE'							=> 'Create new rule',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?<br />Warning: Removing a rule category will also remove all rules contained within it.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Are you sure you want to remove this rule?',
+		1 => 'Are you sure you want to remove this rule category?<br />Warning: Removing a rule category will also remove all rules contained within it.',
+	),
 	'ACP_RULE_ADDED'						=> 'Rule successfully added.',
 	'ACP_RULE_DELETED'						=> 'Rule successfully removed.',
 	'ACP_RULE_EDITED'						=> 'Rule successfully edited.',

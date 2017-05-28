@@ -75,7 +75,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Mesajul regula apare doar pe pagina de reguli.',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Aceasta categorie contine mesaje, iar editarea a fost oprita.',
 	'ACP_ADD_RULE'							=> 'Creaza o regula noua',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Esti sigur ca vrei sa stergi aceasta regula?<br />Avertisment: Eliminarea unei categorii reguli va duce la elimina toate regulile conținute în ea.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Esti sigur ca vrei sa stergi aceasta regula?',
+		1 => 'Esti sigur ca vrei sa stergi aceasta regula?<br />Avertisment: Eliminarea unei categorii reguli va duce la elimina toate regulile conținute în ea.',
+	),
 	'ACP_RULE_ADDED'						=> 'Regula a fost adaugata cu succes.',
 	'ACP_RULE_DELETED'						=> 'Regula a fost stearsa cu succes.',
 	'ACP_RULE_EDITED'						=> 'Regula a fost editata cu succes.',

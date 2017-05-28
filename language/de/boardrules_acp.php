@@ -75,7 +75,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Der Regel-Text wird für jede Regel angezeigt, diekeine Regel-Kategorie ist.',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Dies ist eine Regel-Kategorie. Der Regel-Text-Editor ist deshalb nicht verfügbar.',
 	'ACP_ADD_RULE'							=> 'Neue Regel erstellen',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Bist du dir sicher, dass du diese Regel entfernen möchtest?<br />Warnung: Das Entfernen einer Regel-Kategorie wird auch alle enthaltenen Regeln entfernen.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Bist du dir sicher, dass du diese Regel entfernen möchtest?',
+		1 => 'Bist du dir sicher, dass du diese Regel-Kategorie entfernen möchtest?<br />Warnung: Das Entfernen einer Regel-Kategorie wird auch alle enthaltenen Regeln entfernen.',
+	),
 	'ACP_RULE_ADDED'						=> 'Regel hinzugefügt.',
 	'ACP_RULE_DELETED'						=> 'Regel gelöscht.',
 	'ACP_RULE_EDITED'						=> 'Regel bearbeitet.',

@@ -76,7 +76,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Regelmeddelandet visas på regelsidan för varje regel (kategorier visar ej regelmeddelanden).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Denna kategori innehåller regler, meddelandeeditorn har deaktiverats.',
 	'ACP_ADD_RULE'							=> 'Skapa en ny regel',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Är du säker på att du vill ta bort denna regel?<br />Varning: raderas en regelkategori så raderas även alla regler i denna kategori.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Är du säker på att du vill ta bort denna regel?',
+		1 => 'Är du säker på att du vill ta bort denna regelkategori?<br />Varning: raderas en regelkategori så raderas även alla regler i denna kategori.',
+	),
 	'ACP_RULE_ADDED'						=> 'Regeln har skapats.',
 	'ACP_RULE_DELETED'						=> 'Regeln har raderats.',
 	'ACP_RULE_EDITED'						=> 'Regeln har uppdaterats.',

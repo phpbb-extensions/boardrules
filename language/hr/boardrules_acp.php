@@ -76,7 +76,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Poruka pravila prikazana je na stranici pravila za svako pravilo.<br />Kategorije ne prikazuju poruke pravila.',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Ovo je kategorija koja sadrži pravila.<br />Uređivač poruka je onemogućen.',
 	'ACP_ADD_RULE'							=> 'Dodaj novo pravilo',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Jesi li siguran/na da želiš izbrisati ovo pravilo?<br />Upozorenje: izbrisivanje kategorije pravila rezultirat će izbrisivanjem svih pravila povezanih s istom.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Jesi li siguran/na da želiš izbrisati ovo pravilo?',
+		1 => 'Jesi li siguran/na da želiš izbrisati ovo kategorije pravila?<br />Upozorenje: izbrisivanje kategorije pravila rezultirat će izbrisivanjem svih pravila povezanih s istom.',
+	),
 	'ACP_RULE_ADDED'						=> 'Pravilo je dodano.',
 	'ACP_RULE_DELETED'						=> 'Pravilo je izbrisano.',
 	'ACP_RULE_EDITED'						=> 'Pravilo je uređeno.',

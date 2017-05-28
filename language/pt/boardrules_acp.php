@@ -76,7 +76,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'A mensagem da regra é exibida na página de regra para cada regra (categorias não exibem mensagens das regras).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Esta é uma categoria que contém regras, o editor mensagem foi desativado.',
 	'ACP_ADD_RULE'							=> 'Criar nova regra',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Tem a certeza que deseja eliminar esta regra?<br />Aviso: Removendo um categoria de regra irá remover todas as regras contidas dentro dela.',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Tem a certeza que deseja eliminar esta regra?',
+		1 => 'Tem a certeza que deseja eliminar esta categoria de regra?<br />Aviso: Removendo um categoria de regra irá remover todas as regras contidas dentro dela.',
+	),
 	'ACP_RULE_ADDED'						=> 'Regra criada com sucesso.',
 	'ACP_RULE_DELETED'						=> 'Regra eliminada com sucesso.',
 	'ACP_RULE_EDITED'						=> 'Regra editada com sucesso.',

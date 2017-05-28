@@ -73,7 +73,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> '章程消息是显示在章程页面。（分类并不会显示章程消息）',
 	'ACP_RULE_MESSAGE_DISABLED'				=> '这是分类，消息编辑器已经禁用。',
 	'ACP_ADD_RULE'							=> '创建一条新章程',
-	'ACP_DELETE_RULE_CONFIRM'				=> '您确认要删除这条章程？<br />警告：删除分类会删除所有其包含的章程。',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => '您确认要删除这条章程？',
+		1 => '您确认要删除这条章程？<br />警告：删除分类会删除所有其包含的章程。',
+	),
 	'ACP_RULE_ADDED'						=> '成功增加了章程。',
 	'ACP_RULE_DELETED'						=> '成功删除了章程。',
 	'ACP_RULE_EDITED'						=> '章程编辑成功。',
