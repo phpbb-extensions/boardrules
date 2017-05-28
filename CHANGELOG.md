@@ -2,6 +2,13 @@
 
 ## Vesion 2.x (for phpBB 3.2)
 
+### 2.1.1 - 2017-05-28
+
+- Fixed a bug where some older MySQL databases would fail to update or install.
+- Fixed a trivial potential security issue.
+- Fixed an unnecessary call to load Font Awesome in the ACP.
+- Updated confirmation messages when deleting either a rule or rule category.
+
 ### 2.1.0 - 2017-05-07
 
 - Default language fallback: if board rules do not exist for an installed language, the rules written in the board's default language will be shown instead (if they exist).
