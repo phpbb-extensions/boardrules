@@ -66,7 +66,7 @@ class helper
 			{
 				$sql = 'UPDATE ' . $this->table_prefix . "boardrules
 					SET $new_column = '" . $this->db->sql_escape($row['lang_iso']) . "'
-					WHERE $old_column = " . (int) $row['lang_id'];
+					WHERE $old_column = '" . $this->db->sql_escape($row['lang_id']) . "'";
 				$this->db->sql_query($sql);
 			}
 
