@@ -21,7 +21,6 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	* @param \phpbb\db\driver\driver_interface $db Database connection
 	* @param \phpbb\lock\db $lock Lock class used to lock the table when moving forums around
 	* @param string $table_name Table name
-	* @return \phpbb\boardrules\operators\nestedset_rules
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\lock\db $lock, $table_name)
@@ -52,7 +51,7 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	*/
 	public function use_language($language)
 	{
-		$this->sql_where = '%srule_language = ' . (int) $language;
+		$this->sql_where = "%srule_language = '" . $this->db->sql_escape($language) . "'";
 
 		return $this;
 	}
@@ -66,7 +65,7 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	*/
 	public function get_rules_data($parent_id)
 	{
-		return ($parent_id) ? $this->get_subtree_data($parent_id, true, false) : $this->get_all_tree_data();
+		return $parent_id ? $this->get_subtree_data($parent_id, true, false) : $this->get_all_tree_data();
 	}
 
 	/**

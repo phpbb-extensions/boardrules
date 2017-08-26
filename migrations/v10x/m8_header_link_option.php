@@ -16,6 +16,18 @@ namespace phpbb\boardrules\migrations\v10x;
 class m8_header_link_option extends \phpbb\db\migration\migration
 {
 	/**
+	* Assign migration file dependencies for this migration
+	*
+	* @return array Array of migration files
+	* @static
+	* @access public
+	*/
+	static public function depends_on()
+	{
+		return array('\phpbb\boardrules\migrations\v10x\m1_initial_schema');
+	}
+
+	/**
 	* Add or update data in the database
 	*
 	* @return array Array of table data

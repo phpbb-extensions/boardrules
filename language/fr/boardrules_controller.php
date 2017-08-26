@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* French translation by ForumsFaciles (http://www.forumsfaciles.fr)
+* French translation by ForumsFaciles (http://www.forumsfaciles.fr) & Galixte (http://www.galixte.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -40,8 +40,8 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'BOARDRULES_HEADER'			=> 'Règles du forum',
-	'BOARDRULES_EXPLAIN'		=> 'Ces règles sont établies pour préciser les différentes responsabilités de tous les membres de la communauté sur %s. Elles doivent être acceptées par chacun dans le but de garantir que notre forum fonctionne sans heurt et procure une expérience amusante et productive pour tous les membres de notre communauté ainsi que les visiteurs.',
-	'BOARDRULES_CATEGORIES'		=> 'Sections des Règles',
+	'BOARDRULES_EXPLAIN'		=> 'Ces règles sont établies pour préciser les différentes responsabilités de tous les membres de la communauté sur %s. Elles doivent être acceptées par chacun dans le but de garantir que notre forum fonctionne sans heurt et procure une expérience ludique et enrichissante pour tous les membres de notre communauté ainsi que les visiteurs.',
+	'BOARDRULES_CATEGORIES'		=> 'Sections des règles',
 	'BOARDRULES_CATEGORY_ANCHOR'=> 'section-%s',
 	'BOARDRULES_RULE_ANCHOR'	=> 'regle-%s',
 ));

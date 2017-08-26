@@ -16,7 +16,6 @@ class rule_operator_change_parent_test extends rule_operator_base
 	* Test data for the test_change_parent() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function change_parent_test_data()
 	{
@@ -61,7 +60,6 @@ class rule_operator_change_parent_test extends rule_operator_base
 	* Test changing parent identifier
 	*
 	* @dataProvider change_parent_test_data
-	* @access public
 	*/
 	public function test_change_parent($rule_id, $new_parent_id, $expected)
 	{
@@ -75,13 +73,13 @@ class rule_operator_change_parent_test extends rule_operator_base
 			ORDER BY rule_id ASC');
 
 		$this->assertEquals($expected, $this->db->sql_fetchrowset($result));
+		$this->db->sql_freeresult($result);
 	}
 
 	/**
 	* Test data for the test_change_parent_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function change_parent_fails_data()
 	{
@@ -97,7 +95,6 @@ class rule_operator_change_parent_test extends rule_operator_base
 	*
 	* @dataProvider change_parent_fails_data
 	* @expectedException \phpbb\boardrules\exception\base
-	* @access public
 	*/
 	public function test_change_parent_fails($rule_id, $new_parent_id)
 	{

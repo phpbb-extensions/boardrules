@@ -19,7 +19,6 @@ class rule_entity_load_test extends rule_entity_base
 	* Test data for the test_load() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function load_test_data()
 	{
@@ -29,7 +28,7 @@ class rule_entity_load_test extends rule_entity_base
 				1,
 				array(
 					'rule_id' => 1,
-					'rule_language' => 1,
+					'rule_language' => 'en',
 					'rule_left_id' => 1,
 					'rule_right_id' => 2,
 					'rule_parent_id' => 0,
@@ -42,7 +41,7 @@ class rule_entity_load_test extends rule_entity_base
 				2,
 				array(
 					'rule_id' => 2,
-					'rule_language' => 1,
+					'rule_language' => 'en',
 					'rule_left_id' => 3,
 					'rule_right_id' => 4,
 					'rule_parent_id' => 0,
@@ -55,7 +54,7 @@ class rule_entity_load_test extends rule_entity_base
 				3,
 				array(
 					'rule_id' => 3,
-					'rule_language' => 1,
+					'rule_language' => 'en',
 					'rule_left_id' => 5,
 					'rule_right_id' => 6,
 					'rule_parent_id' => 0,
@@ -71,7 +70,6 @@ class rule_entity_load_test extends rule_entity_base
 	* Test loading rules from the database
 	*
 	* @dataProvider load_test_data
-	* @access public
 	*/
 	public function test_load($id, $data)
 	{
@@ -108,7 +106,6 @@ class rule_entity_load_test extends rule_entity_base
 	* Test data for the test_load_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function load_fails_test_data()
 	{
@@ -124,7 +121,6 @@ class rule_entity_load_test extends rule_entity_base
 	*
 	* @dataProvider load_fails_test_data
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
-	* @access public
 	*/
 	public function test_load_fails($id)
 	{

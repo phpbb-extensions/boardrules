@@ -44,6 +44,9 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Here you can configure the main settings for board rules.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Enable board rules',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Display board rules link in the header',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Require new users to accept rules at registration',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'This option will add a clause to the “Terms of Agreement” requiring newly registering users to read and accept the board rules at registration.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Notify users',
@@ -72,9 +75,18 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'The rule message is displayed on the rules page for each rule (categories do not display a rule message).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'This is a category containing rules, the message editor has been disabled.',
 	'ACP_ADD_RULE'							=> 'Create new rule',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Are you sure you want to remove this rule?',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Are you sure you want to remove this rule?',
+		1 => 'Are you sure you want to remove this rule category?<br />Warning: Removing a rule category will also remove all rules contained within it.',
+	),
 	'ACP_RULE_ADDED'						=> 'Rule successfully added.',
 	'ACP_RULE_DELETED'						=> 'Rule successfully removed.',
 	'ACP_RULE_EDITED'						=> 'Rule successfully edited.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'You must enter a title for this rule.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
 ));

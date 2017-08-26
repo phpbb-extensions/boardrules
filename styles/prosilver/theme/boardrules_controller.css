@@ -3,7 +3,7 @@
 */
 
 /* page layout */
-#container {
+.boardrules-container {
 	position: relative;
 	overflow: hidden;
 }
@@ -16,98 +16,121 @@
 
 .content ol {
 	font-size: 1.2em;
-	margin-left: 2em;
 	line-height: 1.4em;
+	margin-left: 2em;
 }
 
 .rtl .content ol {
-	margin-left: 0;
 	margin-right: 2em;
+	margin-left: 0;
 }
 
-.content ol ol{ font-size: 1em; }
+.content ol ol {
+	font-size: 1em;
+}
 
 /* rules */
-#rules { padding-right: 50px; }
-#rules li { margin-bottom: 20px; }
-#rules ol { list-style: lower-alpha; }
-#rules ol li { margin-bottom: 5px; }
-#rules ol li.rule-item { padding-bottom: 5px; }
-#rules ol li.rule-item ul,
-#rules ol li.rule-item ol { margin: 1em 0 1em 3em; }
-#rules ol li ol { list-style: lower-roman; }
+.boardrules-rules {
+	padding-right: 50px;
+}
 
-.rtl #rules {
+.boardrules-rules li {
+	margin-bottom: 20px;
+}
+
+.boardrules-rules ol {
+	list-style: lower-alpha;
+}
+
+.boardrules-rules ol li {
+	margin-bottom: 5px;
+}
+
+.boardrules-rules ol .rule-item {
+	padding-bottom: 5px;
+}
+
+.boardrules-rules ol .rule-item ul,
+.boardrules-rules ol .rule-item ol {
+	margin: 1em 0 1em 3em;
+}
+
+.boardrules-rules ol li ol {
+	list-style: lower-roman;
+}
+
+.rtl .boardrules-rules {
 	padding-right: 0;
 	padding-left: 50px;
 }
 
-.rtl #rules ol li.rule-item ol {
-	margin-left: 0;
+.rtl .boardrules-rules ol .rule-item ol {
 	margin-right: 3em;
+	margin-left: 0;
 }
 
 /* rules sections mini panel */
-#boardrules-categories {
-	width: 260px;
+.boardrules-categories {
 	float: right;
+	width: 260px;
 	margin: 26px 0 30px 30px;
 }
 
-.rtl #boardrules-categories {
+.rtl .boardrules-categories {
 	float: left;
-	margin-left: 0;
 	margin-right: 30px;
+	margin-left: 0;
 }
 
 .mini-panel {
 	background-color: #ebebeb;
-	margin-bottom: 5px;
-	padding: 5px 10px;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
 	border-radius: 7px;
+	margin-bottom: 5px;
+	padding: 5px 10px;
 }
 
 .mini-panel h3 {
-	color: #333333;
 	font-family: Verdana, Helvetica, Arial, sans-serif;
-	margin: 5px 0 0 0;
+	color: #333333;
+	margin: 5px 0 0;
 }
 
-ul.menu {
-	border-top: 1px solid #FFFFFF;
+.boardrules-menu {
+	border-top: 1px solid #ffffff;
 	list-style: none;
 }
 
-ul.menu li {
+.boardrules-menu li {
+	border-bottom: 1px solid #cccccc;
 	margin: 0;
-	padding: 5px 0 4px 0;
-	border-bottom: 1px solid #CCCCCC;
+	padding: 5px 0 4px;
 }
 
-ul.menu li:last-child { border-bottom: none; }
+.boardrules-menu li:last-child {
+	border-bottom: none;
+}
 
 /* rule highlighting */
 .highlight {
-	color: #BC2A4D;
 	font-weight: bold;
-	background-color: #ECD5D8;
-	padding: 3px 6px 0 6px;
+	background-color: #ecd5d8;
+	color: #bc2a4d;
+	padding: 3px 6px 0;
 }
 
 /* responsive design */
-@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
-{
-	#boardrules-categories,
-	.rtl #boardrules-categories {
-		width: 100%;
-		float: none;
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {
+	.boardrules-categories,
+	.rtl .boardrules-categories {
 		text-align: center;
+		float: none;
+		width: 100%;
 		margin: 0;
 	}
 
-	#container {
+	.boardrules-container {
 		width: 100%;
 		margin: 0;
 	}

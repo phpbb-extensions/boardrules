@@ -27,13 +27,30 @@ namespace phpbb\boardrules;
 class ext extends \phpbb\extension\base
 {
 	/**
+	* Check whether or not the extension can be enabled.
+	* The current phpBB version should meet or exceed
+	* the minimum version required by this extension:
+	*
+	* Requires phpBB 3.2.0 due to new faq controller route for bbcodes,
+	* the revised notifications system, font awesome and the text reparser.
+	*
+	* @return bool
+	* @access public
+	*/
+	public function is_enableable()
+	{
+		return phpbb_version_compare(PHPBB_VERSION, '3.2.0', '>=');
+	}
+
+	/**
 	* Overwrite enable_step to enable board rules notifications
 	* before any included migrations are installed.
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return mixed Returns false after last step, otherwise temporary state
+	* @access public
 	*/
-	function enable_step($old_state)
+	public function enable_step($old_state)
 	{
 		switch ($old_state)
 		{
@@ -61,8 +78,9 @@ class ext extends \phpbb\extension\base
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return mixed Returns false after last step, otherwise temporary state
+	* @access public
 	*/
-	function disable_step($old_state)
+	public function disable_step($old_state)
 	{
 		switch ($old_state)
 		{
@@ -90,8 +108,9 @@ class ext extends \phpbb\extension\base
 	*
 	* @param mixed $old_state State returned by previous call of this method
 	* @return mixed Returns false after last step, otherwise temporary state
+	* @access public
 	*/
-	function purge_step($old_state)
+	public function purge_step($old_state)
 	{
 		switch ($old_state)
 		{

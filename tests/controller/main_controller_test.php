@@ -16,7 +16,6 @@ class main_controller_test extends \phpbb_test_case
 	* Test data for the test_display() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function display_data()
 	{
@@ -29,25 +28,56 @@ class main_controller_test extends \phpbb_test_case
 	* Test controller display
 	*
 	* @dataProvider display_data
-	* @access public
 	*/
 	public function test_display($status_code, $page_content)
 	{
-		global $config, $user, $phpbb_dispatcher, $phpbb_root_path, $phpEx;
+		global $config, $user, $phpbb_root_path, $phpEx;
 
 		// Global vars called upon during execution
 		$config = new \phpbb\config\config(array('boardrules_enable' => 1));
-		set_config(null, null, null, $config);
-		$user = new \phpbb\user('\phpbb\datetime');
-		$user->data['lang_id'] = 1;
-		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang = new \phpbb\language\language($lang_loader);
+		$user = new \phpbb\user($lang, '\phpbb\datetime');
 
+		// Mock the rule operator and return an empty array for get_rules method
+		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
+			->disableOriginalConstructor()
+			->getMock();
+		$rule_operator->expects($this->any())
+			->method('get_rules')
+			->will($this->returnValue(array()));
+
+		// Mock the controller helper and return render response object
+		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
+			->disableOriginalConstructor()
+			->getMock();
+		$controller_helper->expects($this->any())
+			->method('render')
+			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
+				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
+			});
+
+		// Mock the template
+		$template = $this->getMockBuilder('\phpbb\template\template')
+			->getMock();
+
+		// Mock the user
+		$user = $this->getMock('\phpbb\user', array(), array(
+			new \phpbb\language\language(new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx)),
+			'\phpbb\datetime'
+		));
+
+		/** @var \phpbb\controller\helper $controller_helper */
+		/** @var \phpbb\boardrules\operators\rule $rule_operator */
+		/** @var \phpbb\template\template $template */
+		/** @var \phpbb\user $user */
 		$controller = new \phpbb\boardrules\controller\main_controller(
 			$config,
-			new \phpbb\boardrules\tests\mock\controller_helper(),
-			new \phpbb\boardrules\tests\mock\rule_operator(),
-			new \phpbb\boardrules\tests\mock\template(),
-			$this->getMock('\phpbb\user', array(), array('\phpbb\datetime')),
+			$controller_helper,
+			$lang,
+			$rule_operator,
+			$template,
+			$user,
 			$phpbb_root_path,
 			$phpEx
 		);

@@ -32,7 +32,6 @@ class rule implements rule_interface
 	*
 	* @param ContainerInterface $container Service container interface
 	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
-	* @return \phpbb\boardrules\operators\rule
 	* @access public
 	*/
 	public function __construct(ContainerInterface $container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules)
@@ -44,12 +43,12 @@ class rule implements rule_interface
 	/**
 	* Get the rules
 	*
-	* @param int $language Language selection identifier; default: 0
+	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return array Array of rule data entities
 	* @access public
 	*/
-	public function get_rules($language = 0, $parent_id = 0)
+	public function get_rules($language, $parent_id = 0)
 	{
 		$entities = array();
 
@@ -72,13 +71,14 @@ class rule implements rule_interface
 	/**
 	* Add a rule
 	*
-	* @param object $entity Rule entity with new data to insert
-	* @param int $language Language selection identifier; default: 0
+	* @param \phpbb\boardrules\entity\rule_interface $entity Rule entity with new data to insert
+	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return rule_interface Added rule entity
+	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function add_rule($entity, $language = 0, $parent_id = 0)
+	public function add_rule($entity, $language, $parent_id = 0)
 	{
 		// Insert the rule data to the database for the given language selection
 		$entity->insert($language);
@@ -103,7 +103,7 @@ class rule implements rule_interface
 	* Delete a rule
 	*
 	* @param int $rule_id The rule identifier to delete
-	* @return null
+	* @return void
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -128,7 +128,7 @@ class rule implements rule_interface
 	* @param int $rule_id The rule identifier to move
 	* @param string $direction The direction (up|down)
 	* @param int $amount The number of places to move the rule
-	* @return null
+	* @return void
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -140,7 +140,7 @@ class rule implements rule_interface
 		// Try to move the rule or category up/down
 		try
 		{
-			$this->nestedset_rules->move($rule_id, (($direction != 'up') ? -$amount : $amount));
+			$this->nestedset_rules->move($rule_id, (($direction !== 'up') ? -$amount : $amount));
 		}
 		catch (\OutOfBoundsException $e)
 		{
@@ -153,7 +153,7 @@ class rule implements rule_interface
 	*
 	* @param int $rule_id The current rule identifier
 	* @param int $new_parent_id The new rule parent identifier
-	* @return null
+	* @return void
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -178,7 +178,7 @@ class rule implements rule_interface
 	/**
 	* Get a rule's parent rules (for use in breadcrumbs)
 	*
-	* @param int $language Language selection identifier
+	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from
 	* @return array Array of rule data for a rule's parent rules
 	* @access public

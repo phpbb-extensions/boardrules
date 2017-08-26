@@ -27,8 +27,9 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 			WHERE notification_type_name = 'phpbb.boardrules.notification.type.boardrules'";
 		$result = $this->db->sql_query_limit($sql, 1);
 		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
 
-		return $row != false;
+		return $row !== false;
 	}
 
 	/**
@@ -40,7 +41,10 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 	*/
 	static public function depends_on()
 	{
-		return array('\phpbb\db\migration\data\v310\notifications_use_full_name');
+		return array(
+			'\phpbb\boardrules\migrations\v10x\m10_notification_counter',
+			'\phpbb\db\migration\data\v310\notifications_use_full_name',
+		);
 	}
 
 	/**
@@ -59,7 +63,7 @@ class m11_notification_type_update extends \phpbb\db\migration\migration
 	/**
 	* Update a boardrules notification type name and state
 	*
-	* @return null
+	* @return void
 	* @access public
 	*/
 	public function update_notifications_name()

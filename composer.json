@@ -2,8 +2,8 @@
 	"name": "phpbb/boardrules",
 	"type": "phpbb-extension",
 	"description": "An extension which allows you to create a set of rules for your phpBB forum",
-	"homepage": "https://phpbb.com",
-	"version": "1.0.1",
+	"homepage": "https://www.phpbb.com",
+	"version": "2.1.1",
 	"keywords": ["phpbb", "extension", "rules"],
 	"license": "GPL-2.0",
 	"authors": [
@@ -25,25 +25,25 @@
 		},
 		{
 			"name": "Lukasz Kaczynski",
-			"role": "Extensions Development Team"
+			"role": "Former Extensions Development Team Member"
 		}
 	],
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.4",
 		"composer/installers": "~1.0"
 	},
 	"require-dev": {
-		"phpbb/epv": "dev-master"
+		"phing/phing": "2.4.*"
 	},
 	"extra": {
 		"display-name": "Board Rules",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.0-RC4,<3.2.*@dev"
+			"phpbb/phpbb": ">=3.2.0"
 		},
 		"version-check": {
-			"host": "version.phpbb.com",
-			"directory": "/phpbb-extensions",
-			"filename": "boardrules_versions.json"
+			"host": "www.phpbb.com",
+			"directory": "/customise/db/extension/boardrules",
+			"filename": "version_check"
 		}
 	}
 }

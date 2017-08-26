@@ -46,18 +46,18 @@ interface rule_interface
 	*
 	* Will throw an exception if the rule was already inserted (call save() instead)
 	*
-	* @param int $language The language identifier
+	* @param string $language The language iso
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function insert($language = 0);
+	public function insert($language);
 
 	/**
 	* Save the current settings to the database
 	*
 	* This must be called before closing or any changes will not be saved!
-	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
+	* If adding a rule (saving for the first time), you must call insert() or an exception will be thrown
 	*
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -208,12 +208,21 @@ interface rule_interface
 	public function set_anchor($anchor);
 
 	/**
-	* Get the language identifier
+	* Get the language iso
 	*
-	* @return int language identifier
+	* @return string language iso
 	* @access public
 	*/
 	public function get_language();
+
+	/**
+	 * Set the language iso
+	 *
+	 * @param string $language language iso
+	 * @return rule_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_language($language);
 
 	/**
 	* Get the parent identifier

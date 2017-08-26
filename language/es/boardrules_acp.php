@@ -45,6 +45,9 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Aquí puede configurar los ajustes principales de las Normas del Foro.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Habilitar Normas del Foro',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Mostrar enlace de las Normas del Foro en el encabezado',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Requerir a los nuevos usuarios a aceptar las Normas en el registro',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Esta opción agregará una cláusula a las "Condiciones de uso" que requieren a los nuevos usuarios que quieran registrarse, deben leer y aceptar las Normas del Foro en el registro.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Notificar a usuarios',
@@ -73,9 +76,18 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'El mensaje de la Norma se muestra en la página de Normas para cada norma (las categorías no muestran un mensaje de norma).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Está es una categoría que contiene normas, el editor de mensajes está deshabilitado.',
 	'ACP_ADD_RULE'							=> 'Crear nueva norma',
-	'ACP_DELETE_RULE_CONFIRM'				=> '¿Está seguro de querer eliminar esta norma?',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => '¿Está seguro de querer borrar esta norma?',
+		1 => '¿Está seguro de querer borrar esta norma de categoría?<br />Advertencia: Al eliminar una norma de categoría también eliminará todas las normas contenidas de la misma.',
+	),
 	'ACP_RULE_ADDED'						=> 'Norma añadida correctamente.',
 	'ACP_RULE_DELETED'						=> 'Norma eliminada correctamente.',
 	'ACP_RULE_EDITED'						=> 'Norma editada correctamente.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Debe especificar un título para esta norma.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Las Normas del Foro han fallado al adquirir el bloqueo de la tabla. Otro proceso puede ser que tenga el bloqueo. Los bloqueos se liberan por la fuerza, después de un tiempo de espera de 1 hora.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'No existe la norma solicitada.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'La norma solicitada no tiene padre.',
 ));

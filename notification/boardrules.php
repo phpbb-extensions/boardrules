@@ -22,77 +22,43 @@ class boardrules extends \phpbb\notification\type\base
 	protected $helper;
 
 	/**
-	* Notification Type Boardrules Constructor
-	*
-	* @param \phpbb\user_loader $user_loader
-	* @param \phpbb\db\driver\driver_interface $db
-	* @param \phpbb\cache\driver\driver_interface $cache
-	* @param \phpbb\user $user
-	* @param \phpbb\auth\auth $auth
-	* @param \phpbb\config\config $config
-	* @param \phpbb\controller\helper $helper
-	* @param string $phpbb_root_path
-	* @param string $php_ext
-	* @param string $notification_types_table
-	* @param string $notifications_table
-	* @param string $user_notifications_table
-	* @return \phpbb\boardrules\notification\boardrules
-	*/
-	public function __construct(\phpbb\user_loader $user_loader, \phpbb\db\driver\driver_interface $db, \phpbb\cache\driver\driver_interface $cache, $user, \phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $helper, $phpbb_root_path, $php_ext, $notification_types_table, $notifications_table, $user_notifications_table)
+	 * Set the controller helper
+	 *
+	 * @param \phpbb\controller\helper $helper
+	 * @return void
+	 */
+	public function set_controller_helper(\phpbb\controller\helper $helper)
 	{
-		$this->user_loader = $user_loader;
-		$this->db = $db;
-		$this->cache = $cache;
-		$this->user = $user;
-		$this->auth = $auth;
-		$this->config = $config;
 		$this->helper = $helper;
-
-		$this->phpbb_root_path = $phpbb_root_path;
-		$this->php_ext = $php_ext;
-
-		$this->notification_types_table = $notification_types_table;
-		$this->notifications_table = $notifications_table;
-		$this->user_notifications_table = $user_notifications_table;
 	}
 
 	/**
-	* Get notification type name
-	*
-	* @return string
-	*/
+	 * {@inheritdoc}
+	 */
 	public function get_type()
 	{
 		return 'phpbb.boardrules.notification.type.boardrules';
 	}
 
 	/**
-	* Is this type available to the current user (defines whether or not it will be shown in the UCP Edit notification options)
-	*
-	* @return bool True/False whether or not this is available to the user
-	*/
+	 * {@inheritdoc}
+	 */
 	public function is_available()
 	{
 		return false;
 	}
 
 	/**
-	* Get the id of the notification
-	*
-	* @param array $data The data for the updated rules
-	* @return int Id of the notification
-	*/
+	 * {@inheritdoc}
+	 */
 	public static function get_item_id($data)
 	{
 		return $data['notification_id'];
 	}
 
 	/**
-	* Get the id of the parent
-	*
-	* @param array $data The data for the updated rules
-	* @return int Id of the parent
-	*/
+	 * {@inheritdoc}
+	 */
 	public static function get_item_parent_id($data)
 	{
 		// No parent
@@ -100,12 +66,8 @@ class boardrules extends \phpbb\notification\type\base
 	}
 
 	/**
-	* Find the users who will receive notifications
-	*
-	* @param array $data The type specific data for the updated rules
-	* @param array $options Options for finding users for notification
-	* @return array
-	*/
+	 * {@inheritdoc}
+	 */
 	public function find_users_for_notification($data, $options = array())
 	{
 		// Grab all registered users (excluding bots and guests)
@@ -117,7 +79,7 @@ class boardrules extends \phpbb\notification\type\base
 		$users = array();
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$users[$row['user_id']] = array('');
+			$users[$row['user_id']] = $this->notification_manager->get_default_methods();
 		}
 		$this->db->sql_freeresult($result);
 
@@ -125,70 +87,54 @@ class boardrules extends \phpbb\notification\type\base
 	}
 
 	/**
-	* Users needed to query before this notification can be displayed
-	*
-	* @return array Array of user_ids
-	*/
+	 * {@inheritdoc}
+	 */
 	public function users_to_query()
 	{
 		return array();
 	}
 
 	/**
-	* Get the HTML formatted title of this notification
-	*
-	* @return string
-	*/
+	 * {@inheritdoc}
+	 */
 	public function get_title()
 	{
-		return $this->user->lang('BOARDRULES_NOTIFICATION');
+		return $this->language->lang('BOARDRULES_NOTIFICATION');
 	}
 
 	/**
-	* Get the url to this item
-	*
-	* @return string URL
-	*/
+	 * {@inheritdoc}
+	 */
 	public function get_url()
 	{
-		$rule_id = ($this->get_data('rule_id')) ? array('#' => $this->get_data('rule_id')) : array();
+		$rule_id = $this->get_data('rule_id') ? array('#' => $this->get_data('rule_id')) : array();
 
 		return $this->helper->route('phpbb_boardrules_main_controller', $rule_id);
 	}
 
 	/**
-	* Get email template
-	*
-	* @return string|bool
-	*/
+	 * {@inheritdoc}
+	 */
 	public function get_email_template()
 	{
 		return false;
 	}
 
 	/**
-	* Get email template variables
-	*
-	* @return array
-	*/
+	 * {@inheritdoc}
+	 */
 	public function get_email_template_variables()
 	{
 		return array();
 	}
 
 	/**
-	* Function for preparing the data for insertion in an SQL query
-	* (The service handles insertion)
-	*
-	* @param array $data The data for the updated rules
-	* @param array $pre_create_data Data from pre_create_insert_array()
-	*
-	* @return array Array of data ready to be inserted into the database
-	*/
+	 * {@inheritdoc}
+	 */
 	public function create_insert_array($data, $pre_create_data = array())
 	{
 		$this->set_data('rule_id', $data['rule_id']);
 
-		return parent::create_insert_array($data, $pre_create_data);
+		parent::create_insert_array($data, $pre_create_data);
 	}
 }

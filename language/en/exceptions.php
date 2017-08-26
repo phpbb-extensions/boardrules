@@ -55,4 +55,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'The input was not unique.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'The field `%1$s` received unexpected data. Reason: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'The input contained illegal characters.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

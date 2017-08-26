@@ -17,13 +17,15 @@ class rule_entity_insert_test extends rule_entity_base
 {
 	/**
 	* Test inserting new rule data
-	*
-	* @access public
 	*/
 	public function test_insert()
 	{
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		$this->get_test_case_helpers()->set_s9e_services();
+
 		// Set a language variable
-		$language = 1;
+		$language = 'en';
 
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
@@ -47,12 +49,11 @@ class rule_entity_insert_test extends rule_entity_base
 	* Entities with an existing rule_id will fail to insert
 	*
 	* @expectedException \phpbb\boardrules\exception\out_of_bounds
-	* @access public
 	*/
 	public function test_insert_fails()
 	{
 		// Set a language variable
-		$language = 1;
+		$language = 'en';
 
 		// Load some import test data
 		$import_data = $this->get_import_data();

@@ -14,13 +14,15 @@ class rule_operator_add_rule_test extends rule_operator_base
 {
 	/**
 	* Test adding a rule
-	*
-	* @access public
 	*/
 	public function test_add_rule()
 	{
 		global $phpbb_dispatcher;
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
+
+		// This is needed to set up the s9e text formatter services
+		// This can lead to a test failure if PCRE is old.
+		$this->get_test_case_helpers()->set_s9e_services();
 
 		// Setup the entity class
 		$entity = new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
@@ -37,7 +39,8 @@ class rule_operator_add_rule_test extends rule_operator_base
 
 		// Set up some basic test variables
 		$test_id = 6;
-		$language = $parent_id = 1; // using 1 allows us to test the nestability
+		$language = 'en';
+		$parent_id = 1; // using 1 allows us to test the nestability
 
 		// Setup the operator class
 		$operator = $this->get_rule_operator();

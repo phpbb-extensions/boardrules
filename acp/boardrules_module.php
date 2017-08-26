@@ -12,21 +12,29 @@ namespace phpbb\boardrules\acp;
 
 class boardrules_module
 {
+	public $page_title;
+	public $tpl_name;
 	public $u_action;
 
-	function main($id, $mode)
+	public function main($id, $mode)
 	{
-		global $phpbb_container, $request, $user;
+		global $phpbb_container;
+
+		/** @var \phpbb\language\language $lang */
+		$lang = $phpbb_container->get('language');
+
+		/** @var \phpbb\request\request $request */
+		$request = $phpbb_container->get('request');
+
+		/** @var \phpbb\boardrules\controller\admin_controller $admin_controller */
+		$admin_controller = $phpbb_container->get('phpbb.boardrules.admin.controller');
 
 		// Add the board rules ACP lang file
-		$user->add_lang_ext('phpbb/boardrules', 'boardrules_acp');
-
-		// Get an instance of the admin controller
-		$admin_controller = $phpbb_container->get('phpbb.boardrules.admin.controller');
+		$lang->add_lang('boardrules_acp', 'phpbb/boardrules');
 
 		// Requests
 		$action = $request->variable('action', '');
-		$language = $request->variable('language', 0);
+		$language = $request->variable('language', '');
 		$parent_id = $request->variable('parent_id', 0);
 		$rule_id = $request->variable('rule_id', 0);
 
@@ -34,14 +42,14 @@ class boardrules_module
 		$admin_controller->set_page_url($this->u_action);
 
 		// Load the "settings" or "manage" module modes
-		switch($mode)
+		switch ($mode)
 		{
 			case 'settings':
 				// Load a template from adm/style for our ACP page
 				$this->tpl_name = 'boardrules_settings';
 
 				// Set the page title for our ACP page
-				$this->page_title = $user->lang('ACP_BOARDRULES_SETTINGS');
+				$this->page_title = $lang->lang('ACP_BOARDRULES_SETTINGS');
 
 				// If the "Notify users" button was submitted
 				if ($request->is_set_post('action_send_notification'))
@@ -59,14 +67,14 @@ class boardrules_module
 				$this->tpl_name = 'boardrules_manage';
 
 				// Set the page title for our ACP page
-				$this->page_title = $user->lang('ACP_BOARDRULES_MANAGE');
+				$this->page_title = $lang->lang('ACP_BOARDRULES_MANAGE');
 
 				// Perform any actions submitted by the user
-				switch($action)
+				switch ($action)
 				{
 					case 'add':
 						// Set the page title for our ACP page
-						$this->page_title = $user->lang('ACP_BOARDRULES_CREATE_RULE');
+						$this->page_title = $lang->lang('ACP_BOARDRULES_CREATE_RULE');
 
 						// Load the add rule handle in the admin controller
 						$admin_controller->add_rule($language, $parent_id);
@@ -77,7 +85,7 @@ class boardrules_module
 
 					case 'edit':
 						// Set the page title for our ACP page
-						$this->page_title = $user->lang('ACP_BOARDRULES_EDIT_RULE');
+						$this->page_title = $lang->lang('ACP_BOARDRULES_EDIT_RULE');
 
 						// Load the edit rule handle in the admin controller
 						$admin_controller->edit_rule($rule_id);

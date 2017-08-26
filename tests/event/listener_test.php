@@ -11,74 +11,70 @@
 
 namespace phpbb\boardrules\tests\event;
 
-require_once dirname(__FILE__) . '/../../../../../includes/functions.php';
-
 class event_listener_test extends \phpbb_test_case
 {
-
 	/** @var \phpbb\boardrules\event\listener */
 	protected $listener;
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\controller\helper */
+	protected $controller_helper;
+
+	/** @var \phpbb\language\language */
+	protected $lang;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\template\template */
+	protected $template;
+
+	/** @var string */
+	protected $php_ext;
+
 	/**
 	* Setup test environment
-	*
-	* @access public
 	*/
 	public function setUp()
 	{
 		parent::setUp();
 
-		global $phpbb_dispatcher, $phpbb_root_path, $phpEx;
-
-		// Mock some global classes that may be called during code execution
-		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
+		global $phpbb_root_path, $phpEx;
 
 		// Load/Mock classes required by the event listener class
 		$this->php_ext = $phpEx;
 		$this->config = new \phpbb\config\config(array('enable_mod_rewrite' => '0'));
-		$this->template = new \phpbb\boardrules\tests\mock\template();
-		$this->user = new \phpbb\user('\phpbb\datetime');
+		$this->template = $this->getMockBuilder('\phpbb\template\template')
+			->getMock();
+		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$this->lang = new \phpbb\language\language($lang_loader);
 
-		$request = new \phpbb_mock_request();
-		$request->overwrite('SCRIPT_NAME', 'app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('REQUEST_URI', 'app.php', \phpbb\request\request_interface::SERVER);
-
-		$this->controller_helper = new \phpbb_mock_controller_helper(
-			$this->template,
-			$this->user,
-			$this->config,
-			new \phpbb\controller\provider(),
-			new \phpbb_mock_extension_manager($phpbb_root_path),
-			new \phpbb\symfony_request($request),
-			$request,
-			new \phpbb\filesystem(),
-			'',
-			$phpEx,
-			dirname(__FILE__) . '/../../'
-		);
+		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->controller_helper->expects($this->any())
+			->method('route')
+			->willReturnCallback(function ($route, array $params = array()) {
+				return $route . '#' . serialize($params);
+			})
+		;
 	}
 
 	/**
 	* Create our event listener
-	*
-	* @access protected
 	*/
 	protected function set_listener()
 	{
 		$this->listener = new \phpbb\boardrules\event\listener(
 			$this->config,
 			$this->controller_helper,
+			$this->lang,
 			$this->template,
-			$this->user,
 			$this->php_ext
 		);
 	}
 
 	/**
 	* Test the event listener is constructed correctly
-	*
-	* @access public
 	*/
 	public function test_construct()
 	{
@@ -88,8 +84,6 @@ class event_listener_test extends \phpbb_test_case
 
 	/**
 	* Test the event listener is subscribing events
-	*
-	* @access public
 	*/
 	public function test_getSubscribedEvents()
 	{
@@ -105,7 +99,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_load_language_on_setup
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function load_language_on_setup_data()
 	{
@@ -144,7 +137,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the load_language_on_setup event
 	*
 	* @dataProvider load_language_on_setup_data
-	* @access public
 	*/
 	public function test_load_language_on_setup($lang_set_ext, $expected_contains)
 	{
@@ -170,55 +162,63 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_add_page_header_link
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function add_page_header_link_data()
 	{
 		return array(
-			array(1, 1, 1, array(
+			array(1, 1, 1, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => true,
 				'S_BOARDRULES_AT_REGISTRATION' => true,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(1, 1, 0, array(
+			array(1, 1, 0, 'foo', array(
+				'BOARDRULES_FONT_ICON' => 'foo',
 				'S_BOARDRULES_LINK_ENABLED' => true,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(1, 0, 1, array(
+			array(1, 0, 1, 'bar', array(
+				'BOARDRULES_FONT_ICON' => 'bar',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => true,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(1, 0, 0, array(
+			array(1, 0, 0, 'foobar', array(
+				'BOARDRULES_FONT_ICON' => 'foobar',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 1, 1, array(
+			array(0, 1, 1, 'barfoo', array(
+				'BOARDRULES_FONT_ICON' => 'barfoo',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 0, 1, array(
+			array(0, 0, 1, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 1, 0, array(
+			array(0, 1, 0, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 0, 0, array(
+			array(0, 0, 0, '', array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(null, null, null, array(
+			array(null, null, null, null, array(
+				'BOARDRULES_FONT_ICON' => '',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
-				'U_BOARDRULES' => 'app.php/rules',
+				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 		);
 	}
@@ -227,30 +227,31 @@ class event_listener_test extends \phpbb_test_case
 	* Test the add_page_header_link event
 	*
 	* @dataProvider add_page_header_link_data
-	* @access public
 	*/
-	public function test_add_page_header_link($boardrules_enable, $boardrules_header_link, $boardrules_require_at_registration, $expected)
+	public function test_add_page_header_link($enable, $header_link, $require_at_registration, $font_icon, $expected)
 	{
 		$this->config = new \phpbb\config\config(array(
-			'boardrules_enable' => $boardrules_enable,
-			'boardrules_header_link' => $boardrules_header_link,
-			'boardrules_require_at_registration' => $boardrules_require_at_registration,
+			'boardrules_enable' => $enable,
+			'boardrules_font_icon' => $font_icon,
+			'boardrules_header_link' => $header_link,
+			'boardrules_require_at_registration' => $require_at_registration,
 		));
 
 		$this->set_listener();
 
+		$this->template->expects($this->once())
+			->method('assign_vars')
+			->with($expected);
+
 		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
 		$dispatcher->addListener('core.page_header', array($this->listener, 'add_page_header_link'));
 		$dispatcher->dispatch('core.page_header');
-
-		$this->assertEquals($expected, $this->template->get_template_vars());
 	}
 
 	/**
 	* Data set for test_add_permissions
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function add_permission_data()
 	{
@@ -289,7 +290,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the add_permission event
 	*
 	* @dataProvider add_permission_data
-	* @access public
 	*/
 	public function test_add_permission($permissions, $expected_contains)
 	{
@@ -315,7 +315,6 @@ class event_listener_test extends \phpbb_test_case
 	* Data set for test_viewonline_page
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function viewonline_page_data()
 	{
@@ -356,7 +355,7 @@ class event_listener_test extends \phpbb_test_case
 				),
 				'$location_url',
 				'$location',
-				'app.' . $phpEx . '/rules',
+				'phpbb_boardrules_main_controller#a:0:{}',
 				'BOARDRULES_VIEWONLINE',
 			),
 		);
@@ -366,7 +365,6 @@ class event_listener_test extends \phpbb_test_case
 	* Test the viewonline_page event
 	*
 	* @dataProvider viewonline_page_data
-	* @access public
 	*/
 	public function test_viewonline_page($on_page, $row, $location_url, $location, $expected_location_url, $expected_location)
 	{

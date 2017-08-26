@@ -15,7 +15,7 @@
 		<column>rule_message_bbcode_options</column>
 		<row>
 			<value>1</value>
-			<value>1</value>
+			<value>en</value>
 			<value>1</value>
 			<value>2</value>
 			<value>0</value>
@@ -29,7 +29,7 @@
 		</row>
 		<row>
 			<value>2</value>
-			<value>1</value>
+			<value>en</value>
 			<value>3</value>
 			<value>4</value>
 			<value>0</value>
@@ -43,7 +43,7 @@
 		</row>
 		<row>
 			<value>3</value>
-			<value>1</value>
+			<value>en</value>
 			<value>5</value>
 			<value>6</value>
 			<value>0</value>
@@ -57,17 +57,29 @@
 		</row>
 		<row>
 			<value>4</value>
-			<value>1</value>
+			<value>en</value>
 			<value>7</value>
 			<value>8</value>
 			<value>0</value>
 			<value></value>
 			<value></value>
-			<value>title_3</value>
-			<value>message_3</value>
+			<value>title_4</value>
+			<value>message_4</value>
 			<value></value>
 			<value></value>
 			<value>7</value>
+		</row>
+	</table>
+	<table name="phpbb_lang">
+		<column>lang_id</column>
+		<column>lang_iso</column>
+		<row>
+			<value>1</value>
+			<value>en</value>
+		</row>
+		<row>
+			<value>2</value>
+			<value>en-us</value>
 		</row>
 	</table>
 </dataset>

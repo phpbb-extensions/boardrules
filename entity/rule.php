@@ -50,7 +50,6 @@ class rule implements rule_interface
 	*
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
 	* @param string                               $boardrules_table   Name of the table used to store board rules data
-	* @return \phpbb\boardrules\entity\rule
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db, $boardrules_table)
@@ -106,7 +105,7 @@ class rule implements rule_interface
 		$fields = array(
 			// column							=> data type (see settype())
 			'rule_id'							=> 'integer',
-			'rule_language'						=> 'integer',
+			'rule_language'						=> 'string',
 			'rule_left_id'						=> 'integer',
 			'rule_right_id'						=> 'integer',
 			'rule_parent_id'					=> 'integer',
@@ -150,9 +149,9 @@ class rule implements rule_interface
 		// Some fields must be unsigned (>= 0)
 		$validate_unsigned = array(
 			'rule_id',
-			'rule_language',
 			'rule_left_id',
 			'rule_right_id',
+			'rule_parent_id',
 			'rule_message_bbcode_options',
 		);
 
@@ -173,12 +172,12 @@ class rule implements rule_interface
 	*
 	* Will throw an exception if the rule was already inserted (call save() instead)
 	*
-	* @param int $language The language identifier
+	* @param string $language The language iso
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
-	public function insert($language = 0)
+	public function insert($language)
 	{
 		if (!empty($this->data['rule_id']))
 		{
@@ -212,7 +211,7 @@ class rule implements rule_interface
 	* Save the current settings to the database
 	*
 	* This must be called before closing or any changes will not be saved!
-	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
+	* If adding a rule (saving for the first time), you must call insert() or an exception will be thrown
 	*
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -226,8 +225,13 @@ class rule implements rule_interface
 			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 
+		// Copy the data array, filtering out the rule_id identifier
+		// so we do not attempt to update the row's identity column.
+		$sql_array = array_diff_key($this->data, array('rule_id' => null));
+
+		// Update the page data in the database
 		$sql = 'UPDATE ' . $this->boardrules_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $this->data) . '
+			SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . '
 			WHERE rule_id = ' . $this->get_id();
 		$this->db->sql_query($sql);
 
@@ -242,7 +246,7 @@ class rule implements rule_interface
 	*/
 	public function get_id()
 	{
-		return (isset($this->data['rule_id'])) ? (int) $this->data['rule_id'] : 0;
+		return isset($this->data['rule_id']) ? (int) $this->data['rule_id'] : 0;
 	}
 
 	/**
@@ -253,7 +257,7 @@ class rule implements rule_interface
 	*/
 	public function get_title()
 	{
-		return (isset($this->data['rule_title'])) ? (string) $this->data['rule_title'] : '';
+		return isset($this->data['rule_title']) ? (string) $this->data['rule_title'] : '';
 	}
 
 	/**
@@ -290,9 +294,9 @@ class rule implements rule_interface
 	public function get_message_for_edit()
 	{
 		// Use defaults if these haven't been set yet
-		$message = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
-		$uid = (isset($this->data['rule_message_bbcode_uid'])) ? $this->data['rule_message_bbcode_uid'] : '';
-		$options = (isset($this->data['rule_message_bbcode_options'])) ? (int) $this->data['rule_message_bbcode_options'] : 0;
+		$message = isset($this->data['rule_message']) ? $this->data['rule_message'] : '';
+		$uid = isset($this->data['rule_message_bbcode_uid']) ? $this->data['rule_message_bbcode_uid'] : '';
+		$options = isset($this->data['rule_message_bbcode_options']) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for edit
 		$message_data = generate_text_for_edit($message, $uid, $options);
@@ -310,10 +314,10 @@ class rule implements rule_interface
 	public function get_message_for_display($censor_text = true)
 	{
 		// If these haven't been set yet; use defaults
-		$message = (isset($this->data['rule_message'])) ? $this->data['rule_message'] : '';
-		$uid = (isset($this->data['rule_message_bbcode_uid'])) ? $this->data['rule_message_bbcode_uid'] : '';
-		$bitfield = (isset($this->data['rule_message_bbcode_bitfield'])) ? $this->data['rule_message_bbcode_bitfield'] : '';
-		$options = (isset($this->data['rule_message_bbcode_options'])) ? (int) $this->data['rule_message_bbcode_options'] : 0;
+		$message = isset($this->data['rule_message']) ? $this->data['rule_message'] : '';
+		$uid = isset($this->data['rule_message_bbcode_uid']) ? $this->data['rule_message_bbcode_uid'] : '';
+		$bitfield = isset($this->data['rule_message_bbcode_bitfield']) ? $this->data['rule_message_bbcode_bitfield'] : '';
+		$options = isset($this->data['rule_message_bbcode_options']) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for display
 		return generate_text_for_display($message, $uid, $bitfield, $options, $censor_text);
@@ -460,7 +464,7 @@ class rule implements rule_interface
 	*/
 	public function get_anchor()
 	{
-		return (isset($this->data['rule_anchor'])) ? (string) $this->data['rule_anchor'] : '';
+		return isset($this->data['rule_anchor']) ? (string) $this->data['rule_anchor'] : '';
 	}
 
 	/**
@@ -477,7 +481,7 @@ class rule implements rule_interface
 		$anchor = (string) $anchor;
 
 		// Anchor should not contain any special characters
-		if (($anchor != '') && !preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/i', $anchor))
+		if (($anchor != '') && !preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/', $anchor))
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}
@@ -488,7 +492,7 @@ class rule implements rule_interface
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
 		}
 
-		// Make sure rule anchors are unique
+		// Make sure rule anchors are unique for the current language
 		// Test if new page and anchor field has data or...
 		//    if existing page and anchor field has new data not equal to existing anchor data
 		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
@@ -496,7 +500,8 @@ class rule implements rule_interface
 			$sql = 'SELECT 1
 				FROM ' . $this->boardrules_table . "
 				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
-					AND rule_id <> " . $this->get_id();
+					AND rule_id <> " . $this->get_id() .
+					($this->get_language() ? " AND rule_language = '" . $this->db->sql_escape($this->get_language()) . "'" : '');
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -514,14 +519,48 @@ class rule implements rule_interface
 	}
 
 	/**
-	* Get the language identifier
+	* Get the language iso
 	*
-	* @return int language identifier
+	* @return string language iso
 	* @access public
 	*/
 	public function get_language()
 	{
-		return (isset($this->data['rule_language'])) ? (int) $this->data['rule_language'] : 0;
+		return isset($this->data['rule_language']) ? $this->data['rule_language'] : '';
+	}
+
+	/**
+	 * Set the language iso
+	 *
+	 * @param string $language language iso
+	 * @return rule_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 * @throws \phpbb\boardrules\exception\unexpected_value
+	 */
+	public function set_language($language)
+	{
+		if (!isset($this->data['rule_language']))
+		{
+			// Validate the requested language ISO is installed
+			if ($language !== '')
+			{
+				$sql = 'SELECT lang_id
+					FROM ' . LANG_TABLE . "
+					WHERE lang_iso = '" . $this->db->sql_escape($language) . "'";
+				$result = $this->db->sql_query($sql);
+				$lang_id = $this->db->sql_fetchfield('lang_id');
+				$this->db->sql_freeresult($result);
+
+				if (!$lang_id)
+				{
+					throw new \phpbb\boardrules\exception\unexpected_value(array('rule_language', 'WRONG_DATA_LANG', 'UNEXPECTED_VALUE'));
+				}
+			}
+
+			$this->data['rule_language'] = $language;
+		}
+
+		return $this;
 	}
 
 	/**
@@ -532,7 +571,7 @@ class rule implements rule_interface
 	*/
 	public function get_parent_id()
 	{
-		return (isset($this->data['rule_parent_id'])) ? (int) $this->data['rule_parent_id'] : 0;
+		return isset($this->data['rule_parent_id']) ? (int) $this->data['rule_parent_id'] : 0;
 	}
 
 	/**
@@ -543,7 +582,7 @@ class rule implements rule_interface
 	*/
 	public function get_left_id()
 	{
-		return (isset($this->data['rule_left_id'])) ? (int) $this->data['rule_left_id'] : 0;
+		return isset($this->data['rule_left_id']) ? (int) $this->data['rule_left_id'] : 0;
 	}
 
 	/**
@@ -554,7 +593,7 @@ class rule implements rule_interface
 	*/
 	public function get_right_id()
 	{
-		return (isset($this->data['rule_right_id'])) ? (int) $this->data['rule_right_id'] : 0;
+		return isset($this->data['rule_right_id']) ? (int) $this->data['rule_right_id'] : 0;
 	}
 
 	/**
@@ -562,14 +601,14 @@ class rule implements rule_interface
 	*
 	* @param int $option_value Value of the option
 	* @param bool $negate Negate (unset) option (Default: False)
-	* @param bool $reparse_message Reparse the message after setting option (Default: True)
-	* @return null
+	* @param bool $reparse_message Re-parse the message after setting option (Default: True)
+	* @return void
 	* @access protected
 	*/
 	protected function set_message_option($option_value, $negate = false, $reparse_message = true)
 	{
 		// Set rule_message_bbcode_options to 0 if it does not yet exist
-		$this->data['rule_message_bbcode_options'] = (isset($this->data['rule_message_bbcode_options'])) ? $this->data['rule_message_bbcode_options'] : 0;
+		$this->data['rule_message_bbcode_options'] = isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] : 0;
 
 		// If we're setting the option and the option is not already set
 		if (!$negate && !($this->data['rule_message_bbcode_options'] & $option_value))
@@ -578,14 +617,14 @@ class rule implements rule_interface
 			$this->data['rule_message_bbcode_options'] += $option_value;
 		}
 
-		// If we're unsetting the option and the option is already set
+		// If we're un-setting the option and the option is already set
 		if ($negate && $this->data['rule_message_bbcode_options'] & $option_value)
 		{
 			// Subtract the option from the options
 			$this->data['rule_message_bbcode_options'] -= $option_value;
 		}
 
-		// Reparse the message
+		// Re-parse the message
 		if ($reparse_message && !empty($this->data['rule_message']))
 		{
 			$message = $this->data['rule_message'];

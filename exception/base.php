@@ -31,22 +31,22 @@ class base extends \Exception
 	* @param string|array $message
 	* @param int $code
 	* @param \Exception $previous
-	* @return \phpbb\boardrules\exception\base
 	* @access public
 	*/
 	public function __construct($message = null, $code = 0, \Exception $previous = null)
 	{
-		// We're slightly changing the way exceptions work
-		// Tools, such as xdebug, expect the message to be a string, so to prevent errors
-		// with those tools, we store our full message in message_full and only a string in message
+		parent::__construct();
+
+		$this->message = $message;
+
 		if (is_array($message))
 		{
 			$this->message = (string) $message[0];
 		}
-		else
-		{
-			$this->message = $message;
-		}
+
+		// We're slightly changing the way exceptions work
+		// Tools, such as xDebug, expect the message to be a string, so to prevent errors
+		// with those tools, we store our full message in message_full and only a string in message
 		$this->message_full = $message;
 
 		$this->code = $code;
@@ -56,21 +56,21 @@ class base extends \Exception
 	/**
 	* Basic message translation for our exceptions
 	*
-	* @param \phpbb\user $user
+	* @param \phpbb\language\language $lang
 	* @return string
 	* @access public
 	*/
-	public function get_message(\phpbb\user $user)
+	public function get_message(\phpbb\language\language $lang)
 	{
 		// Make sure our language file has been loaded
-		$this->add_lang($user);
+		$this->add_lang($lang);
 
 		if (is_array($this->message_full))
 		{
-			return call_user_func_array(array($user, 'lang'), $this->message_full);
+			return call_user_func_array(array($lang, 'lang'), $this->message_full);
 		}
 
-		return $user->lang($this->message_full);
+		return $lang->lang($this->message_full);
 	}
 
 	/**
@@ -78,18 +78,18 @@ class base extends \Exception
 	*
 	* Goes through each element of the array and tries to translate them
 	*
-	* @param \phpbb\user $user
-	* @param array $message_portions The message portions to translate
+	* @param \phpbb\language\language $lang
+	* @param string|array $message_portions The message portions to translate
 	* @param string|null $parent_message Send a string to translate all of the
 	*     portions with the parent message (typically used to format a string
 	*     with the given message portions). Null to ignore. Default: Null
 	* @return array|string Array if $parent_message === null else a string
 	* @access protected
 	*/
-	protected function translate_portions(\phpbb\user $user, $message_portions, $parent_message = null)
+	protected function translate_portions(\phpbb\language\language $lang, $message_portions, $parent_message = null)
 	{
 		// Make sure our language file has been loaded
-		$this->add_lang($user);
+		$this->add_lang($lang);
 
 		// Ensure we have an array
 		if (!is_array($message_portions))
@@ -101,7 +101,7 @@ class base extends \Exception
 		foreach ($message_portions as &$message)
 		{
 			// Attempt to translate each portion
-			$translated_message = $user->lang('EXCEPTION_' . $message);
+			$translated_message = $lang->lang('EXCEPTION_' . $message);
 
 			// Check if translating did anything
 			if ($translated_message !== 'EXCEPTION_' . $message)
@@ -119,7 +119,7 @@ class base extends \Exception
 			array_unshift($message_portions, (string) $parent_message);
 
 			// We return a string
-			return call_user_func_array(array($user, 'lang'), $message_portions);
+			return call_user_func_array(array($lang, 'lang'), $message_portions);
 		}
 
 		// We return an array
@@ -129,11 +129,11 @@ class base extends \Exception
 	/**
 	* Add our language file
 	*
-	* @param \phpbb\user $user
-	* @return null
+	* @param \phpbb\language\language $lang
+	* @return void
 	* @access public
 	*/
-	public function add_lang(\phpbb\user $user)
+	public function add_lang(\phpbb\language\language $lang)
 	{
 		static $is_loaded = false;
 
@@ -144,7 +144,7 @@ class base extends \Exception
 		}
 
 		// Add our language file
-		$user->add_lang_ext('phpbb/boardrules', 'exceptions');
+		$lang->add_lang('exceptions', 'phpbb/boardrules');
 
 		// So the language file is only loaded once
 		$is_loaded = true;
@@ -162,6 +162,6 @@ class base extends \Exception
 	*/
 	public function __toString()
 	{
-		return (is_array($this->message_full)) ? var_export($this->message_full, true) : (string) $this->message_full;
+		return is_array($this->message_full) ? (string) var_export($this->message_full, true) : (string) $this->message_full;
 	}
 }

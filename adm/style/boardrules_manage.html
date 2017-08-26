@@ -15,11 +15,11 @@
 	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
 
 	<!-- IF S_ADD_RULE -->
-		<h1>{L_ACP_BOARDRULES_CREATE_RULE} {L_COLON}{L_COLON} {RULE_TITLE}</h1>
+		<h1>{L_ACP_BOARDRULES_CREATE_RULE} :: {RULE_TITLE}</h1>
 
 		<p>{L_ACP_BOARDRULES_CREATE_RULE_EXPLAIN}</p>
 	<!-- ELSE -->
-		<h1>{L_ACP_BOARDRULES_EDIT_RULE} {L_COLON}{L_COLON} {RULE_TITLE}</h1>
+		<h1>{L_ACP_BOARDRULES_EDIT_RULE} :: {RULE_TITLE}</h1>
 
 		<p>{L_ACP_BOARDRULES_EDIT_RULE_EXPLAIN}</p>
 	<!-- ENDIF -->
@@ -111,7 +111,7 @@
 					<dd>
 						<select name="language" id="language">
 							<!-- BEGIN options -->
-								<option value="{options.LANG_ID}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
+								<option value="{options.LANG_ISO}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
 							<!-- END options -->
 						</select>
 						<input type="submit" value="{L_GO}" class="button2">
@@ -136,6 +136,12 @@
 		<!-- IF .rules -->
 			<table class="table1 forums">
 				<colgroup><col class="row1" /><col class="row1" /><col class="row2" /></colgroup>
+				<thead>
+					<tr>
+						<th colspan="2">{L_ACP_BOARDRULES}</th>
+						<th>{L_ACTION}</th>
+					</tr>
+				</thead>
 				<tbody>
 					<!-- BEGIN rules -->
 						<tr>
@@ -147,9 +153,9 @@
 							</td>
 							<td class="actions">
 								<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
-								<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up" data-overlay="false">{ICON_MOVE_UP}</a></span>
+								<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up">{ICON_MOVE_UP}</a></span>
 								<span class="down-disabled" style="display:none;">{ICON_MOVE_DOWN_DISABLED}</span>
-								<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down" data-overlay="false">{ICON_MOVE_DOWN}</a></span>
+								<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down">{ICON_MOVE_DOWN}</a></span>
 								<a href="{rules.U_EDIT}">{ICON_EDIT}</a>
 								<a href="{rules.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a>
 							</td>

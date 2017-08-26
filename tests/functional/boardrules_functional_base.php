@@ -19,7 +19,6 @@ class boardrules_functional_base extends \phpbb_functional_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
@@ -40,8 +39,6 @@ class boardrules_functional_base extends \phpbb_functional_test_case
 
 	/**
 	 * Board rules installs in a disabled state. We need to turn it on to test it.
-	 *
-	 * @access public
 	 */
 	public function enable_boardrules()
 	{

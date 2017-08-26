@@ -19,23 +19,34 @@ class rule_operator_base extends \phpbb_database_test_case
 	* Define the extensions to be tested
 	*
 	* @return array vendor/name of extension(s) to test
-	* @access static
 	*/
 	static protected function setup_extensions()
 	{
 		return array('phpbb/boardrules');
 	}
 
-	protected $config, $container, $db, $entity, $nestedset_rules;
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
+	protected $container;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var \phpbb\boardrules\operators\nestedset_rules */
+	protected $nestedset_rules;
 
 	public function getDataSet()
 	{
-		return $this->createXMLDataSet(dirname(__FILE__) . '/fixtures/rule.xml');
+		return $this->createXMLDataSet(__DIR__ . '/fixtures/rule.xml');
 	}
 
 	public function setUp()
 	{
 		parent::setUp();
+
+		global $config;
 
 		$this->db = $this->new_dbal();
 		$db = $this->db;
@@ -49,18 +60,16 @@ class rule_operator_base extends \phpbb_database_test_case
 				return new \phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
 			}));
 
-		$this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
-		set_config(null, null, null, $this->config);
+		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 
-		$this->lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
-		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, 'phpbb_boardrules');
+		$lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
+		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $lock, 'phpbb_boardrules');
 	}
 
 	/**
 	* Get the rule operator
 	*
 	* @return \phpbb\boardrules\operators\rule
-	* @access protected
 	*/
 	protected function get_rule_operator()
 	{

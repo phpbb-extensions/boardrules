@@ -45,6 +45,9 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Sellel lehel saad seadistada foorumi reegleid.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Luba foorumi reeglid',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Näita foorumi reeglite linki päises',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Nõua uutel kasutajatel nõustuda tingimustega registreerimislehel',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'See valik lisab täiendava punkti “kasutamistingimuste” lehele, kus uued liikmed peavad enne registreerumist nõustuma täiendavate foorumi reeglitega.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Teavita kasutajat',
@@ -66,16 +69,25 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_PARENT'						=> 'Peamine reegel',
 	'ACP_RULE_NO_PARENT'					=> 'Ei ole peamist',
 	'ACP_RULE_TITLE'						=> 'Reegli pealkiri',
-	'ACP_RULE_TITLE_EXPLAIN'				=> 'Reegli pealkirja näidatakse ainult  reeglite lehel kategooriates ainult. Reeglite pealkirju kasutatakse ka AJP\'s, tuvastades reegleid kui haldad neid.',
+	'ACP_RULE_TITLE_EXPLAIN'				=> 'Reegli pealkirja näidatakse ainult  reeglite lehel kategooriates ainult. Reeglite pealkirju kasutatakse ka AJP’s, tuvastades reegleid kui haldad neid.',
 	'ACP_RULE_ANCHOR'						=> 'Reegli kinnitus',
 	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Reegli kinnitus on valikuline ja kasutatakse siis kui lingitakse kinnitus punktile reeglite lehele. Need peaksid olema URL sõbralikud (mitte sisaldades tühikuid ega mõnda muud spetsiaalset sümbolit), peaksid algama tähega ja olema unikaalsed.',
 	'ACP_RULE_MESSAGE'						=> 'Reegli sisu',
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Reegli sisu näidatakse reeglite lehel igal reeglil (kategooriatel ei ole reeglite sisu).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'See on kategooria, mis sisaldab reegleid, sõnumi muutja on keelatud.',
 	'ACP_ADD_RULE'							=> 'Loo uus reegel',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Oled sa kindel, et soovid kustutada antud reegli?',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Oled sa kindel, et soovid eemaldada selle reegli?',
+		1 => 'Oled sa kindel, et soovid eemaldada selle reeglite kategooria?<br />Hoiatus: Reeglite kategooria eemaldamisega, eemaldad ka selles kategoorias asetsevad reeglid.',
+	),
 	'ACP_RULE_ADDED'						=> 'Reegel on edukalt lisatud.',
 	'ACP_RULE_DELETED'						=> 'Reegel on edukalt kustutatud.',
 	'ACP_RULE_EDITED'						=> 'Reegel on edukalt muudetud.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Sa pead sisestama pealkirja antud reeglile.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Laiendusel "Foorumi reeglid" ei õnnestunud omandada tabeli lukustamist. Järgmise toimingu ajal võib õnnestuda lukustamine. Lukustamine on vabastatakse jõuliselt peale ühe tunnist ooteaega.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Soovitud reeglit ei eksisteeri.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Soovitud reeglil ei ole vanemkategooriat.',
 ));

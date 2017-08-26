@@ -16,19 +16,18 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 	* Test data for the test_get_rule_parents() function
 	*
 	* @return array Array of test rule entities
-	* @access public
 	*/
 	public function get_rule_parents_test_data()
 	{
 		return array(
-			// language id, rule id, expected data from the rule and its parents
+			// language iso, rule id, expected data from the rule and its parents
 			array(
-				1,
+				'en',
 				4,
 				array(
 					array(
 						'rule_id' => 4,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 7,
 						'rule_right_id' => 10,
 						'rule_parent_id' => 0,
@@ -38,12 +37,12 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 				),
 			),
 			array(
-				1,
+				'en',
 				5,
 				array(
 					array(
 						'rule_id' => 4,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 7,
 						'rule_right_id' => 10,
 						'rule_parent_id' => 0,
@@ -52,7 +51,7 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 					),
 					array(
 						'rule_id' => 5,
-						'rule_language' => 1,
+						'rule_language' => 'en',
 						'rule_left_id' => 8,
 						'rule_right_id' => 9,
 						'rule_parent_id' => 4,
@@ -68,7 +67,6 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 	* Test getting rules from the database
 	*
 	* @dataProvider get_rule_parents_test_data
-	* @access public
 	*/
 	public function test_get_rule_parents($language, $parent_id, $expected)
 	{
@@ -77,6 +75,9 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 
 		// Grab the rule data as an array of entities
 		$entities = $operator->get_rule_parents($language, $parent_id);
+
+		// Assert we have found some rules!
+		$this->assertNotEmpty($entities);
 
 		// Map the fields to the getters
 		$map = array(
@@ -108,14 +109,13 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 	* Test data for the test_get_rule_parents_fails() function
 	*
 	* @return array Array of test data
-	* @access public
 	*/
 	public function get_rule_parents_fails_test_data()
 	{
 		return array(
 			// language, item_id, expected result (empty array)
-			array(0, 1, array()),
-			array(1, 0, array()),
+			array('foo', 1, array()), // wrong language, valid item
+			array('en', 0, array()), // valid language, wrong item
 		);
 	}
 
@@ -123,7 +123,6 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 	* Test getting (non-existant) rules from the database
 	*
 	* @dataProvider get_rule_parents_fails_test_data
-	* @access public
 	*/
 	public function test_get_rule_parents_fails($language, $parent_id, $expected)
 	{

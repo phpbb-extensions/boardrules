@@ -17,8 +17,6 @@ class admin_controller_test extends boardrules_functional_base
 {
 	/**
 	 * Test Board Rules ACP module appears
-	 *
-	 * @access public
 	 */
 	public function test_acp_module()
 	{
@@ -26,7 +24,7 @@ class admin_controller_test extends boardrules_functional_base
 		$this->admin_login();
 
 		// Load Pages ACP page
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\boardrules\acp\boardrules_module&mode=manage&language=1&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&sid={$this->sid}");
 
 		// Assert Board Rules module appears in sidebar
 		$this->assertContainsLang('ACP_BOARDRULES', $crawler->filter('.menu-block')->text());
@@ -42,9 +40,9 @@ class admin_controller_test extends boardrules_functional_base
 
 	/**
 	 * Test Board Rules ACP Create Rule
+	 * @param $crawler \Symfony\Component\DomCrawler\Crawler
 	 *
 	 * @depends test_acp_module
-	 * @access public
 	 */
 	public function test_acp_create_rule($crawler)
 	{
@@ -57,7 +55,7 @@ class admin_controller_test extends boardrules_functional_base
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form(array(
 			'rule_title'	=> 'Test Rule',
 			'rule_anchor'	=> 'test-rule',
-			'rule_message'	=> 'This is a test rule.',
+			'rule_message'	=> str_repeat('test ', 1000), // 5000 character message
 		));
 		$crawler = self::submit($form);
 
@@ -68,8 +66,6 @@ class admin_controller_test extends boardrules_functional_base
 
 	/**
 	 * Test Board Rules ACP Edit Rule
-	 *
-	 * @access public
 	 */
 	public function test_acp_edit_rule()
 	{
@@ -77,19 +73,15 @@ class admin_controller_test extends boardrules_functional_base
 		$this->admin_login();
 
 		// Edit the rule identified by id 3
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\boardrules\acp\boardrules_module&mode=manage&language=1&action=edit&rule_id=3&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&action=edit&rule_id=3&sid={$this->sid}");
 
 		// Assert edit page is displayed
 		$this->assertContainsLang('ACP_BOARDRULES_EDIT_RULE', $crawler->filter('#main')->text());
 		$this->assertContainsLang('ACP_BOARDRULES_EDIT_RULE_EXPLAIN', $crawler->filter('#main')->text());
-
-		return $rule_id;
 	}
 
 	/**
 	 * Test Board Rules ACP Delete Rule
-	 *
-	 * @access public
 	 */
 	public function test_acp_delete_rule()
 	{
@@ -97,7 +89,7 @@ class admin_controller_test extends boardrules_functional_base
 		$this->admin_login();
 
 		// Delete the rule identified by id 3
-		$crawler = self::request('GET', "adm/index.php?i=\phpbb\boardrules\acp\boardrules_module&mode=manage&language=1&action=delete&rule_id=3&sid={$this->sid}");
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&action=delete&rule_id=3&sid={$this->sid}");
 
 		// Confirm delete
 		$form = $crawler->selectButton('confirm')->form();
@@ -106,5 +98,69 @@ class admin_controller_test extends boardrules_functional_base
 		// Assert deletion was success
 		$this->assertGreaterThan(0, $crawler->filter('.successbox')->count());
 		$this->assertContainsLang('ACP_RULE_DELETED', $crawler->text());
+	}
+
+	/**
+	 * Test Board Rules Notifications
+	 */
+	public function test_notifications()
+	{
+		$this->login();
+		$this->admin_login();
+
+		// Load Board Rules Settings page
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=settings&sid={$this->sid}");
+		$this->assertContainsLang('ACP_BOARDRULES_SETTINGS', $crawler->filter('#main')->text(), 'The Board Rules settings page failed to load');
+
+		// Send out notifications
+		$form = $crawler->selectButton('action_send_notification')->form();
+		$crawler = self::submit($form);
+		$form = $crawler->selectButton('confirm')->form();
+		$crawler = self::submit($form);
+
+		// Assert no error occurred
+		$this->assertContainsLang('ACP_BOARDRULES_SETTINGS', $crawler->filter('#main')->text(), 'Failed to successfully send notifications');
+
+		// Assert notifications were sent
+		$crawler = self::request('GET', "index.php?&sid={$this->sid}");
+		$this->assertContainsLang('BOARDRULES_NOTIFICATION', $crawler->filter('.notification-title')->text(), 'The notification was not found in the notifications list');
+	}
+
+	/**
+	 * Test Board Rules ACP Settings
+	 */
+	public function test_acp_settings_and_logs()
+	{
+		$this->login();
+		$this->admin_login();
+
+		$this->add_lang_ext('phpbb/boardrules', 'info_acp_boardrules');
+		$crawler = self::request('GET', "adm/index.php?i=-phpbb-boardrules-acp-boardrules_module&mode=settings&sid={$this->sid}");
+		$form = $crawler->selectButton('submit')->form();
+		$crawler = self::submit($form);
+		$this->assertContainsLang('ACP_BOARDRULES_SETTINGS_CHANGED', $crawler->text());
+
+		// Confirm the log entry has been added correctly
+		$crawler = self::request('GET', 'adm/index.php?i=acp_logs&mode=admin&sid=' . $this->sid);
+		$this->assertContains(strip_tags($this->lang('ACP_BOARDRULES_SETTINGS_LOG')), $crawler->text());
+	}
+
+	/**
+	* Test Board Rules ACP manage permission
+	*/
+	public function test_boardrules_acp_permissions()
+	{
+		$this->login();
+		$this->admin_login();
+
+		$this->add_lang_ext('phpbb/boardrules', 'permissions_boardrules');
+		$crawler = self::request('GET', "adm/index.php?i=acp_permissions&mode=setting_group_global&sid={$this->sid}");
+		$form = $crawler->selectButton('submit')->form();
+
+		// Select Administrative permissions option
+		$form->get('type')->setValue('a_');
+		$crawler = self::submit($form);
+
+		$this->assertContainsLang('ACL_A_BOARDRULES', $crawler->text());
 	}
 }

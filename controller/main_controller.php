@@ -21,6 +21,9 @@ class main_controller implements main_interface
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
+	/** @var \phpbb\language\language */
+	protected $lang;
+
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
@@ -39,20 +42,21 @@ class main_controller implements main_interface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config                $config             Config object
-	* @param \phpbb\controller\helper            $helper             Controller helper object
-	* @param \phpbb\boardrules\operators\rule    $rule_operator      Rule operator object
-	* @param \phpbb\template\template            $template           Template object
-	* @param \phpbb\user                         $user               User object
-	* @param string                              $root_path          phpBB root path
-	* @param string                              $php_ext            phpEx
-	* @return \phpbb\boardrules\controller\main_controller
+	* @param \phpbb\config\config             $config        Config object
+	* @param \phpbb\controller\helper         $helper        Controller helper object
+	* @param \phpbb\language\language         $lang          Language object
+	* @param \phpbb\boardrules\operators\rule $rule_operator Rule operator object
+	* @param \phpbb\template\template         $template      Template object
+	* @param \phpbb\user                      $user          User object
+	* @param string                           $root_path     phpBB root path
+	* @param string                           $php_ext       phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
+		$this->lang = $lang;
 		$this->rule_operator = $rule_operator;
 		$this->template = $template;
 		$this->user = $user;
@@ -75,7 +79,7 @@ class main_controller implements main_interface
 		}
 
 		// Add boardrules controller language file
-		$this->user->add_lang_ext('phpbb/boardrules', 'boardrules_controller');
+		$this->lang->add_lang('boardrules_controller', 'phpbb/boardrules');
 
 		$last_right_id = null; // Used to help determine when to close nesting structures
 		$depth = 0; // Used to track the depth of nesting level
@@ -83,15 +87,23 @@ class main_controller implements main_interface
 		$rule_counter = 'a'; // Alpha counter used for rules
 
 		// Grab all the rules in the current user's language
-		$entities = $this->rule_operator->get_rules($this->user->get_iso_lang_id());
+		$entities = $this->rule_operator->get_rules($this->lang->get_used_language());
 
+		// If no rules were found, it may be because no rules exist in the current user's
+		// language, so let's look for rules in the board's default language as a fallback.
+		if (empty($entities) && $this->lang->get_used_language() !== $this->config['default_lang'])
+		{
+			$entities = $this->rule_operator->get_rules($this->config['default_lang']);
+		}
+
+		/* @var $entity \phpbb\boardrules\entity\rule */
 		foreach ($entities as $entity)
 		{
 			if ($entity->get_right_id() - $entity->get_left_id() > 1)
 			{
 				// Rule categories
 				$is_category = true;
-				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_CATEGORY_ANCHOR', $cat_counter);
+				$anchor = $entity->get_anchor() ?: $this->lang->lang('BOARDRULES_CATEGORY_ANCHOR', $cat_counter);
 
 				// Increment nesting level depth counter
 				$depth++;
@@ -104,7 +116,7 @@ class main_controller implements main_interface
 			{
 				// Rules
 				$is_category = false;
-				$anchor = $entity->get_anchor() ?: $this->user->lang('BOARDRULES_RULE_ANCHOR', (($cat_counter - 1) . $rule_counter));
+				$anchor = $entity->get_anchor() ?: $this->lang->lang('BOARDRULES_RULE_ANCHOR', ($cat_counter - 1) . $rule_counter);
 
 				// Increment rule counter
 				$rule_counter++;
@@ -148,17 +160,18 @@ class main_controller implements main_interface
 
 		// Assign values to template vars for the rules page
 		$this->template->assign_vars(array(
-			'S_CATEGORIES'			=> ($cat_counter > 1) ? true : false,
-			'BOARDRULES_EXPLAIN'	=> $this->user->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
+			'S_BOARD_RULES'			=> true,
+			'S_CATEGORIES'			=> $cat_counter > 1,
+			'BOARDRULES_EXPLAIN'	=> $this->lang->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 
 		// Assign breadcrumb template vars for the rules page
 		$this->template->assign_block_vars('navlinks', array(
 			'U_VIEW_FORUM'		=> $this->helper->route('phpbb_boardrules_main_controller'),
-			'FORUM_NAME'		=> $this->user->lang('BOARDRULES'),
+			'FORUM_NAME'		=> $this->lang->lang('BOARDRULES'),
 		));
 
 		// Send all data to the template file
-		return $this->helper->render('boardrules_controller.html', $this->user->lang('BOARDRULES'));
+		return $this->helper->render('boardrules_controller.html', $this->lang->lang('BOARDRULES'));
 	}
 }

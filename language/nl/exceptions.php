@@ -56,4 +56,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_NOT_UNIQUE'			=> 'De invoer is niet uniek.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Het veld `%1$s` ontvangt onverwachte data. Reden: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'De invoer bevat ongeldige tekens.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

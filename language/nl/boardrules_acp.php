@@ -45,6 +45,9 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Hier kan je de hoofdinstellingen voor de forumregels instellen.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Forumregels inschakelen',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Geeft de forumregels-link weer in de kop',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Vereist nieuwe gebruikers om de regels te accepteren bij registratie',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Deze optie zal een clausule toevoegen aan de “Voorwaarden”, die vereist dat nieuw geregistreerde gebruikers de forumregels lezen en accepteren tijdens registratie.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Notificeer gebruikers',
@@ -73,9 +76,18 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Het regelbericht wordt weergegeven op de regelspagina voor iedere regel (categorieën geven geen regelberict weer).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Dit is een categorie die regels bevat, de berichten bewerker is uitgeschakeld.',
 	'ACP_ADD_RULE'							=> 'Nieuwe regel aanmaken',
-	'ACP_DELETE_RULE_CONFIRM'				=> 'Weet je zeker dat je deze regel wilt verwijderen?',
+	'ACP_DELETE_RULE_CONFIRM'				=> array(
+		0 => 'Weet je zeker dat je deze regel wilt verwijderen?',
+		1 => 'Weet je zeker dat je deze regel categorie wilt verwijderen?<br />Waarschuwing: Als je deze regel categorie verwijderd, verwijder je ook de regels die in deze categorie staan.',
+	),
 	'ACP_RULE_ADDED'						=> 'Regel succesvol toegevoegd.',
 	'ACP_RULE_DELETED'						=> 'Regel succesvol verwijderd.',
 	'ACP_RULE_EDITED'						=> 'Regel succesvol gewijzigd.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Je moet een titel invullen voor deze regel.',
+
+	// Nested set exception messages (only appears in PHP error logging)
+	// Translators: Feel free to not translate these language strings
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Forumregels is er niet in geslaagd om de table lock te verkrijgen. Een ander proces zou de lock kunnen tegenhouden. Locks worden geforceerd vrijgegeven na een timeout van 1 uur.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'De opgevraagde regel bestaat niet.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'De opgevraagde regel heeft geen hoofdregel.',
 ));
