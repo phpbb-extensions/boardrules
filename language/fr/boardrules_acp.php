@@ -77,8 +77,8 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Cette catégorie contient des règles, l’éditeur de message a été désactivé.',
 	'ACP_ADD_RULE'							=> 'Créer une nouvelle règle',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
-		0 => 'Êtes-vous certain(e) de vouloir supprimer cette règle ?',
-		1 => 'Êtes-vous certain(e) de vouloir supprimer cette catégorie ?<br />Attention : Si vous supprimez une catégorie cela supprimera aussi toutes les règles qu’elle contient.',
+		0 => 'Confirmer la supression de cette règle.',
+		1 => 'Confirmer la suppression de cette catégorie.<br />Information importante : La suppression d’une catégorie supprimera aussi toutes les règles qu’elle contient.',
 	),
 	'ACP_RULE_ADDED'						=> 'Règle ajoutée avec succès.',
 	'ACP_RULE_DELETED'						=> 'Règle supprimée avec succès.',
