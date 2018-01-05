@@ -61,12 +61,6 @@ class main_controller_test extends \phpbb_test_case
 		$template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
 
-		// Mock the user
-		$user = $this->getMock('\phpbb\user', array(), array(
-			new \phpbb\language\language(new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx)),
-			'\phpbb\datetime'
-		));
-
 		/** @var \phpbb\controller\helper $controller_helper */
 		/** @var \phpbb\boardrules\operators\rule $rule_operator */
 		/** @var \phpbb\template\template $template */
