@@ -19,7 +19,7 @@ class rule_entity_message_test extends rule_entity_base
 	{
 		parent::setUp();
 
-		global $cache, $db, $request, $user, $phpbb_container, $phpbb_path_helper, $phpbb_root_path, $phpEx;
+		global $cache, $db, $request, $user, $phpbb_container, $phpbb_path_helper;
 
 		$cache = new \phpbb_mock_cache();
 
@@ -34,13 +34,9 @@ class rule_entity_message_test extends rule_entity_base
 		$user->optionset('viewcensors', false);
 		$user->style['style_path'] = 'prosilver';
 
-		$phpbb_path_helper = new \phpbb\path_helper(
-			new \phpbb\symfony_request($request),
-			new \phpbb\filesystem\filesystem(),
-			$request,
-			$phpbb_root_path,
-			$phpEx
-		);
+		$phpbb_path_helper = $this->getMockBuilder('\phpbb\path_helper')
+			->disableOriginalConstructor()
+			->getMock();
 
 		// This is needed to set up the s9e text formatter services
 		// This can lead to a test failure if PCRE is old.
