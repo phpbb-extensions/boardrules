@@ -23,7 +23,7 @@ class admin_controller implements admin_interface
 	/** @var ContainerInterface */
 	protected $container;
 
-	/** @var \phpbb\controller\helper $controller_helper */
+	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
 	/** @var \phpbb\db\driver\driver_interface */
