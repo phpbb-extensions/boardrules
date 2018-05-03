@@ -1,6 +1,6 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
-<!-- IF S_ADD_RULE or S_EDIT_RULE -->
+{% if S_ADD_RULE or S_EDIT_RULE %}
 
 	<script>
 		var form_name = 'add_edit_rule';
@@ -12,172 +12,172 @@
 
 	<a id="maincontent"></a>
 
-	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
 
-	<!-- IF S_ADD_RULE -->
-		<h1>{L_ACP_BOARDRULES_CREATE_RULE} :: {RULE_TITLE}</h1>
+	{% if S_ADD_RULE %}
+		<h1>{{ lang('ACP_BOARDRULES_CREATE_RULE') }} :: {{ RULE_TITLE }}</h1>
 
-		<p>{L_ACP_BOARDRULES_CREATE_RULE_EXPLAIN}</p>
-	<!-- ELSE -->
-		<h1>{L_ACP_BOARDRULES_EDIT_RULE} :: {RULE_TITLE}</h1>
+		<p>{{ lang('ACP_BOARDRULES_CREATE_RULE_EXPLAIN') }}</p>
+	{% else %}
+		<h1>{{ lang('ACP_BOARDRULES_EDIT_RULE') }} :: {{ RULE_TITLE }}</h1>
 
-		<p>{L_ACP_BOARDRULES_EDIT_RULE_EXPLAIN}</p>
-	<!-- ENDIF -->
+		<p>{{ lang('ACP_BOARDRULES_EDIT_RULE_EXPLAIN') }}</p>
+	{% endif %}
 
-	<!-- IF S_ERROR -->
+	{% if S_ERROR %}
 	<div class="errorbox">
-		<h3>{L_WARNING}</h3>
-		<p>{ERROR_MSG}</p>
+		<h3>{{ lang('WARNING') }}</h3>
+		<p>{{ ERROR_MSG }}</p>
 	</div>
-	<!-- ENDIF -->
+	{% endif %}
 
-	<!-- IF S_PREVIEW -->
+	{% if S_PREVIEW %}
 	<fieldset>
-		<legend>{L_PREVIEW}{L_COLON} {RULE_TITLE_PREVIEW}</legend>
-		{RULE_MESSAGE_PREVIEW}
+		<legend>{{ lang('PREVIEW') ~ lang('COLON') }} {{ RULE_TITLE_PREVIEW }}</legend>
+		{{ RULE_MESSAGE_PREVIEW }}
 	</fieldset>
-	<!-- ENDIF -->
+	{% endif %}
 
-	<form id="add_edit_rule" method="post" action="<!-- IF S_ADD_RULE -->{U_ADD_ACTION}<!-- ELSE -->{U_EDIT_ACTION}<!-- ENDIF -->">
+	<form id="add_edit_rule" method="post" action="{% if S_ADD_RULE %}{{ U_ADD_ACTION }}{% else %}{{ U_EDIT_ACTION }}{% endif %}">
 		<fieldset>
-			<legend>{L_ACP_RULE_SETTINGS}</legend>
+			<legend>{{ lang('ACP_RULE_SETTINGS') }}</legend>
 			<dl>
-				<dt><label for="rule_parent">{L_ACP_RULE_PARENT}{L_COLON}</label></dt>
+				<dt><label for="rule_parent">{{ lang('ACP_RULE_PARENT') ~ lang('COLON') }}</label></dt>
 				<dd><select id="rule_parent" name="rule_parent">
-					<option value="0">{L_ACP_RULE_NO_PARENT}</option>
-					<!-- BEGIN rulemenu -->
-						<option value="{rulemenu.RULE_ID}"<!-- IF rulemenu.S_RULE_PARENT --> selected="selected"<!-- ENDIF --><!-- IF rulemenu.S_DISABLED --> disabled="disabled" class="disabled-option"<!-- ENDIF -->>{rulemenu.RULE_TITLE}</option>
-					<!-- END rulemenu -->
+					<option value="0">{{ lang('ACP_RULE_NO_PARENT') }}</option>
+					{% for rulemenu in loops.rulemenu %}
+						<option value="{{ rulemenu.RULE_ID }}"{% if rulemenu.S_RULE_PARENT %} selected="selected"{% endif %}{% if rulemenu.S_DISABLED %} disabled="disabled" class="disabled-option"{% endif %}>{{ rulemenu.RULE_TITLE }}</option>
+					{% endfor %}
 				</select></dd>
 			</dl>
 			<dl>
-				<dt><label for="rule_title">{L_ACP_RULE_TITLE}{L_COLON}</label><br /><span>{L_ACP_RULE_TITLE_EXPLAIN}</span></dt>
-				<dd><input class="text medium" type="text" id="rule_title" name="rule_title" value="{RULE_TITLE}" maxlength="200" /></dd>
+				<dt><label for="rule_title">{{ lang('ACP_RULE_TITLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_RULE_TITLE_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="rule_title" name="rule_title" value="{{ RULE_TITLE }}" maxlength="200" /></dd>
 			</dl>
 			<dl>
-				<dt><label for="rule_anchor">{L_ACP_RULE_ANCHOR}{L_COLON}</label><br /><span>{L_ACP_RULE_ANCHOR_EXPLAIN}</span></dt>
-				<dd><input class="text medium" type="text" id="rule_anchor" name="rule_anchor" value="{RULE_ANCHOR}" maxlength="255" /></dd>
+				<dt><label for="rule_anchor">{{ lang('ACP_RULE_ANCHOR') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_RULE_ANCHOR_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="rule_anchor" name="rule_anchor" value="{{ RULE_ANCHOR }}" maxlength="255" /></dd>
 			</dl>
 		</fieldset>
 
 		<fieldset>
-			<legend>{L_ACP_RULE_MESSAGE}</legend>
-			<!-- IF S_IS_CATEGORY -->
-				<p>{L_ACP_RULE_MESSAGE_DISABLED}</p>
-			<!-- ELSE -->
-				<p>{L_ACP_RULE_MESSAGE_EXPLAIN}</p>
-				<!-- INCLUDE acp_posting_buttons.html -->
+			<legend>{{ lang('ACP_RULE_MESSAGE') }}</legend>
+			{% if S_IS_CATEGORY %}
+				<p>{{ lang('ACP_RULE_MESSAGE_DISABLED') }}</p>
+			{% else %}
+				<p>{{ lang('ACP_RULE_MESSAGE_EXPLAIN') }}</p>
+				{% INCLUDE 'acp_posting_buttons.html' %}
 				<dl class="responsive-columns">
 					<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-height="12" data-width="15" data-bbcode="true"></dt>
-					<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px;">
-						<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{RULE_MESSAGE}</textarea>
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px;">
+						<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{{ RULE_MESSAGE }}</textarea>
 					</dd>
-					<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 5px;">
-						<!-- IF S_BBCODE_ALLOWED -->
-							<label><input type="checkbox" class="radio" name="disable_bbcode"<!-- IF S_BBCODE_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) --> checked="checked"<!-- ENDIF --> /> {L_DISABLE_BBCODE}</label>
-						<!-- ENDIF -->
-						<!-- IF S_SMILIES_ALLOWED -->
-							<label><input type="checkbox" class="radio" name="disable_smilies"<!-- IF S_SMILIES_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) --> checked="checked"<!-- ENDIF --> /> {L_DISABLE_SMILIES}</label>
-						<!-- ENDIF -->
-						<!-- IF S_LINKS_ALLOWED -->
-							<label><input type="checkbox" class="radio" name="disable_magic_url"<!-- IF S_MAGIC_URL_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) --> checked="checked"<!-- ENDIF --> /> {L_DISABLE_MAGIC_URL}</label>
-						<!-- ENDIF -->
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
+						{% if S_BBCODE_ALLOWED %}
+							<label><input type="checkbox" class="radio" name="disable_bbcode"{% if S_BBCODE_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %} /> {{ lang('DISABLE_BBCODE') }}</label>
+						{% endif %}
+						{% if S_SMILIES_ALLOWED %}
+							<label><input type="checkbox" class="radio" name="disable_smilies"{% if S_SMILIES_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %} /> {{ lang('DISABLE_SMILIES') }}</label>
+						{% endif %}
+						{% if S_LINKS_ALLOWED %}
+							<label><input type="checkbox" class="radio" name="disable_magic_url"{% if S_MAGIC_URL_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %} /> {{ lang('DISABLE_MAGIC_URL') }}</label>
+						{% endif %}
 					</dd>
-					<dd style="margin-{S_CONTENT_FLOW_BEGIN}: 90px; margin-top: 10px;"><strong>{L_OPTIONS}{L_COLON} </strong>{BBCODE_STATUS} :: {IMG_STATUS} :: {FLASH_STATUS} :: {URL_STATUS} :: {SMILIES_STATUS}</dd>
+					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
 				</dl>
-			<!-- ENDIF -->
+			{% endif %}
 		</fieldset>
 
 		<fieldset class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<!-- IF not S_IS_CATEGORY --><input class="button2" type="submit" id="preview" name="preview" value="{L_PREVIEW}" /><!-- ENDIF -->
-			{S_FORM_TOKEN}
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+			{% if not S_IS_CATEGORY %}<input class="button2" type="submit" id="preview" name="preview" value="{{ lang('PREVIEW') }}" />{% endif %}
+			{{ S_FORM_TOKEN }}
 		</fieldset>
 	</form>
 
-<!-- ELSE -->
+{% else %}
 
-	<h1>{L_ACP_BOARDRULES_MANAGE}</h1>
+	<h1>{{ lang('ACP_BOARDRULES_MANAGE') }}</h1>
 
-	<p>{L_ACP_BOARDRULES_MANAGE_EXPLAIN}</p>
+	<p>{{ lang('ACP_BOARDRULES_MANAGE_EXPLAIN') }}</p>
 
-	<!-- IF .options -->
-		<form id="language_form" method="post" action="{U_ACTION}">
+	{% if loops.options|length %}
+		<form id="language_form" method="post" action="{{ U_ACTION }}">
 			<fieldset>
 				<dl>
 					<dt>
-						<label for="language">{L_ACP_BOARDRULES_SELECT_LANGUAGE}{L_COLON}</label>
+						<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') ~ lang('COLON') }}</label>
 					</dt>
 					<dd>
 						<select name="language" id="language">
-							<!-- BEGIN options -->
-								<option value="{options.LANG_ISO}"<!-- IF options.S_LANG_DEFAULT --> selected="selected"<!-- ENDIF -->>{options.LANG_LOCAL_NAME}</option>
-							<!-- END options -->
+							{% for options in loops.options %}
+								<option value="{{ options.LANG_ISO }}"{% if options.S_LANG_DEFAULT %} selected="selected"{% endif %}>{{ options.LANG_LOCAL_NAME }}</option>
+							{% endfor %}
 						</select>
-						<input type="submit" value="{L_GO}" class="button2">
-						{S_FORM_TOKEN}
+						<input type="submit" value="{{ lang('GO') }}" class="button2">
+						{{ S_FORM_TOKEN }}
 					</dd>
 				</dl>
 			</fieldset>
 		</form>
-	<!-- ELSE -->
+	{% else %}
 
-		<!-- IF .breadcrumb -->
+		{% if loops.breadcrumb|length %}
 		<p>
 			<strong>
-				<a href="{U_MAIN}">{L_ACP_BOARDRULES}</a>
-				<!-- BEGIN breadcrumb -->
-					 -&gt; <!-- IF not breadcrumb.S_CURRENT_LEVEL --><a href="{breadcrumb.U_RULE}"><!-- ENDIF -->{breadcrumb.RULE_TITLE}<!-- IF not breadcrumb.S_CURRENT_LEVEL --></a><!-- ENDIF -->
-				<!-- END breadcrumb -->
+				<a href="{{ U_MAIN }}">{{ lang('ACP_BOARDRULES') }}</a>
+				{% for breadcrumb in loops.breadcrumb %}
+					 -&gt; {% if not breadcrumb.S_CURRENT_LEVEL %}<a href="{{ breadcrumb.U_RULE }}">{% endif %}{{ breadcrumb.RULE_TITLE }}{% if not breadcrumb.S_CURRENT_LEVEL %}</a>{% endif %}
+				{% endfor %}
 			</strong>
 		</p>
-		<!-- ENDIF -->
+		{% endif %}
 
-		<!-- IF .rules -->
+		{% if loops.rules|length %}
 			<table class="table1 forums">
 				<colgroup><col class="row1" /><col class="row1" /><col class="row2" /></colgroup>
 				<thead>
 					<tr>
-						<th colspan="2">{L_ACP_BOARDRULES}</th>
-						<th>{L_ACTION}</th>
+						<th colspan="2">{{ lang('ACP_BOARDRULES') }}</th>
+						<th>{{ lang('ACTION') }}</th>
 					</tr>
 				</thead>
 				<tbody>
-					<!-- BEGIN rules -->
+					{% for rules in loops.rules %}
 						<tr>
 							<td class="folder">
-								<!-- IF rules.S_IS_CATEGORY --><img src="images/icon_subfolder.gif" alt="{L_ACP_BOARDRULES_CATEGORY}" /><!-- ELSE --><img src="images/icon_folder.gif" alt="{L_ACP_BOARDRULES_RULE}" /><!-- ENDIF -->
+								{% if rules.S_IS_CATEGORY %}<img src="images/icon_subfolder.gif" alt="{{ lang('ACP_BOARDRULES_CATEGORY') }}" />{% else %}<img src="images/icon_folder.gif" alt="{{ lang('ACP_BOARDRULES_RULE') }}" />{% endif %}
 							</td>
 							<td class="forum-desc">
-								<strong><a href="{rules.U_RULE}">{rules.RULE_TITLE}</a></strong>
+								<strong><a href="{{ rules.U_RULE }}">{{ rules.RULE_TITLE }}</a></strong>
 							</td>
 							<td class="actions">
-								<span class="up-disabled" style="display:none;">{ICON_MOVE_UP_DISABLED}</span>
-								<span class="up"><a href="{rules.U_MOVE_UP}" data-ajax="row_up">{ICON_MOVE_UP}</a></span>
-								<span class="down-disabled" style="display:none;">{ICON_MOVE_DOWN_DISABLED}</span>
-								<span class="down"><a href="{rules.U_MOVE_DOWN}" data-ajax="row_down">{ICON_MOVE_DOWN}</a></span>
-								<a href="{rules.U_EDIT}">{ICON_EDIT}</a>
-								<a href="{rules.U_DELETE}" data-ajax="row_delete">{ICON_DELETE}</a>
+								<span class="up-disabled" style="display:none;">{{ ICON_MOVE_UP_DISABLED }}</span>
+								<span class="up"><a href="{{ rules.U_MOVE_UP }}" data-ajax="row_up">{{ ICON_MOVE_UP }}</a></span>
+								<span class="down-disabled" style="display:none;">{{ ICON_MOVE_DOWN_DISABLED }}</span>
+								<span class="down"><a href="{{ rules.U_MOVE_DOWN }}" data-ajax="row_down">{{ ICON_MOVE_DOWN }}</a></span>
+								<a href="{{ rules.U_EDIT }}">{{ ICON_EDIT }}</a>
+								<a href="{{ rules.U_DELETE }}" data-ajax="row_delete">{{ ICON_DELETE }}</a>
 							</td>
 						</tr>
-					<!-- END rules -->
+					{% endfor %}
 				</tbody>
 			</table>
-		<!-- ENDIF -->
+		{% endif %}
 
-		<form id="rules" method="post" action="{U_ACTION}">
+		<form id="rules" method="post" action="{{ U_ACTION }}">
 
 		<fieldset class="quick">
-			{L_ACP_ADD_RULE}{L_COLON}
-			<input type="text" name="rule_title" value="" maxlength="200" placeholder="{L_ACP_RULE_TITLE}" />
-			<input class="button2" name="addrule" type="submit" value="{L_SUBMIT}" />
+			{{ lang('ACP_ADD_RULE') ~ lang('COLON') }}
+			<input type="text" name="rule_title" value="" maxlength="200" placeholder="{{ lang('ACP_RULE_TITLE') }}" />
+			<input class="button2" name="addrule" type="submit" value="{{ lang('SUBMIT') }}" />
 			<input type="hidden" name="action" value="add" />
-			{S_FORM_TOKEN}
+			{{ S_FORM_TOKEN }}
 		</fieldset>
 		</form>
 
-	<!-- ENDIF -->
+	{% endif %}
 
-<!-- ENDIF -->
+{% endif %}
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}

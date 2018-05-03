@@ -1,7 +1,7 @@
-<!-- IF S_BOARDRULES_LINK_ENABLED-->
+{% if S_BOARDRULES_LINK_ENABLED%}
 	<li data-last-responsive="true">
-		<a href="{U_BOARDRULES}" rel="help" title="{L_BOARDRULES_TITLE}" role="menuitem">
-			<!-- IF BOARDRULES_FONT_ICON --><i class="icon fa-{BOARDRULES_FONT_ICON} fa-fw" aria-hidden="true"></i><!-- ENDIF --><span>{L_BOARDRULES}</span>
+		<a href="{{ U_BOARDRULES }}" rel="help" title="{{ lang('BOARDRULES_TITLE') }}" role="menuitem">
+			{% if BOARDRULES_FONT_ICON %}<i class="icon fa-{{ BOARDRULES_FONT_ICON }} fa-fw" aria-hidden="true"></i>{% endif %}<span>{{ lang('BOARDRULES') }}</span>
 		</a>
 	</li>
-<!-- ENDIF -->
+{% endif %}
