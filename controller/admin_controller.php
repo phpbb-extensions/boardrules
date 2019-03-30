@@ -194,7 +194,7 @@ class admin_controller implements admin_interface
 			foreach ($rows as $row)
 			{
 				$this->template->assign_block_vars('options', array(
-					'S_LANG_DEFAULT'	=> $row['lang_iso'] == $this->config['default_lang'],
+					'S_LANG_DEFAULT'	=> $row['lang_iso'] === $this->config['default_lang'],
 
 					'LANG_ISO'			=> $row['lang_iso'],
 					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
