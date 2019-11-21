@@ -14,7 +14,7 @@ include_once __DIR__ . '/../../../../../../tests/text_reparser/plugins/test_row_
 
 class rule_text_test extends \phpbb_textreparser_test_row_based_plugin
 {
-	static protected function setup_extensions()
+	protected static function setup_extensions()
 	{
 		return array('phpbb/boardrules');
 	}

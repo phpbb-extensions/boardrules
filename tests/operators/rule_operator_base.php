@@ -20,7 +20,7 @@ class rule_operator_base extends \phpbb_database_test_case
 	*
 	* @return array vendor/name of extension(s) to test
 	*/
-	static protected function setup_extensions()
+	protected static function setup_extensions()
 	{
 		return array('phpbb/boardrules');
 	}
@@ -42,7 +42,7 @@ class rule_operator_base extends \phpbb_database_test_case
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/rule.xml');
 	}
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
@@ -54,12 +54,12 @@ class rule_operator_base extends \phpbb_database_test_case
 		// mock container for the entity service
 		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
 			->getMock();
-		$this->container->expects($this->any())
+		$this->container
 			->method('get')
 			->with('phpbb.boardrules.entity')
-			->will($this->returnCallback(function() use ($db) {
+			->willReturnCallback(function () use ($db) {
 				return new \phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
-			}));
+			});
 
 		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 

@@ -43,15 +43,15 @@ class main_controller_test extends \phpbb_test_case
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
 			->disableOriginalConstructor()
 			->getMock();
-		$rule_operator->expects($this->any())
+		$rule_operator->expects($this->exactly(2))
 			->method('get_rules')
-			->will($this->returnValue(array()));
+			->willReturn(array());
 
 		// Mock the controller helper and return render response object
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
-		$controller_helper->expects($this->any())
+		$controller_helper->expects($this->once())
 			->method('render')
 			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);

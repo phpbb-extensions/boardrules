@@ -70,7 +70,9 @@
 				<dl class="responsive-columns">
 					<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-height="12" data-width="15" data-bbcode="true"></dt>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px;">
-						<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{{ RULE_MESSAGE }}</textarea>
+						<label>
+							<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{{ RULE_MESSAGE }}</textarea>
+						</label>
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
 						{% if S_BBCODE_ALLOWED %}
@@ -169,8 +171,10 @@
 
 		<fieldset class="quick">
 			{{ lang('ACP_ADD_RULE') ~ lang('COLON') }}
-			<input type="text" name="rule_title" value="" maxlength="200" placeholder="{{ lang('ACP_RULE_TITLE') }}" />
-			<input class="button2" name="addrule" type="submit" value="{{ lang('SUBMIT') }}" />
+			<label>
+				<input type="text" name="rule_title" value="" maxlength="200" placeholder="{{ lang('ACP_RULE_TITLE') }}" />
+			</label>
+			<input type="submit" name="addrule" class="button2" value="{{ lang('SUBMIT') }}" />
 			<input type="hidden" name="action" value="add" />
 			{{ S_FORM_TOKEN }}
 		</fieldset>
