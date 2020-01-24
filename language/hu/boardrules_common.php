@@ -3,7 +3,7 @@
 *
 * Board Rules extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
+* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -38,12 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	// ACP modules
-	'ACP_BOARDRULES'				=> 'Site kuralları',
-	'ACP_BOARDRULES_MANAGE'			=> 'Kuralları yönet',
-	'ACP_BOARDRULES_SETTINGS'		=> 'Kural ayarları',
-
-	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Site kuralları ayarları değiştirildi.</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Site kuralları bildirimi tüm kullanıcılara gönderildi.</strong>',
+	'BOARDRULES'				=> 'Szabályzat',
+	'BOARDRULES_TITLE'			=> 'Fórum szabályzatok megtekintése.',
+	'BOARDRULES_AGREEMENT'		=> 'Kérjük, olvassa el a Fórum "Szabályzat" részben felsorolt szabályokat. Amennyiben egyet ért, folytathatja a regisztrációt.',
+	'BOARDRULES_VIEWONLINE'		=> 'Fórum szabályzat megtenintése',
+	'BOARDRULES_NOTIFICATION'	=> 'A Fórum szabályzat frissítésre került.. Kattintson ide a megtekintéshez',
 ));

@@ -38,12 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	// ACP modules
-	'ACP_BOARDRULES'				=> 'Site kuralları',
-	'ACP_BOARDRULES_MANAGE'			=> 'Kuralları yönet',
-	'ACP_BOARDRULES_SETTINGS'		=> 'Kural ayarları',
-
-	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Site kuralları ayarları değiştirildi.</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Site kuralları bildirimi tüm kullanıcılara gönderildi.</strong>',
+	'BOARDRULES_HEADER'			=> 'Boardregler',
+	'BOARDRULES_EXPLAIN'		=> 'Reglerne oplyses for at forklare de forskellige ansvar som alle fællesskabets medlemmer har her på %s. De skal følges af alle for at sikre at boardet kører godt og giver en sjov og produktiv oplevelse for alle fællesskabets medlemmer og besøgende.',
+	'BOARDRULES_CATEGORIES'		=> 'Regler-sektioner',
+	'BOARDRULES_CATEGORY_ANCHOR'=> 'sektion-%s',
+	'BOARDRULES_RULE_ANCHOR'	=> 'regel-%s',
 ));

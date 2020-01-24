@@ -38,12 +38,11 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	// ACP modules
-	'ACP_BOARDRULES'				=> 'Site kuralları',
-	'ACP_BOARDRULES_MANAGE'			=> 'Kuralları yönet',
-	'ACP_BOARDRULES_SETTINGS'		=> 'Kural ayarları',
+	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Eksempel på regelkategori',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dette er et eksempel på en kategori i din boardregler-installation. Kategorier indeholder grupper af relaterede regler. Kategoribeskeder (som denne) vises ikke på regler-siden.',
+	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'eksempel-pa-regelkategori',
 
-	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Site kuralları ayarları değiştirildi.</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Site kuralları bildirimi tüm kullanıcılara gönderildi.</strong>',
+	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Eksempel på regel',
+	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Dette er et eksempel på en regel i din boardregler-installation. Det ser alt sammen ud til at virke. Du kan redigere eller slette denne regel og kategorien, og fortsætte med at opsætte dine egne boardregler.',
+	'BOARDRULES_SAMPLE_RULE_ANCHOR'			=> 'eksempel-pa-regel',
 ));

@@ -3,7 +3,7 @@
 *
 * Board Rules extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
+* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -38,12 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	// ACP modules
-	'ACP_BOARDRULES'				=> 'Site kuralları',
-	'ACP_BOARDRULES_MANAGE'			=> 'Kuralları yönet',
-	'ACP_BOARDRULES_SETTINGS'		=> 'Kural ayarları',
-
-	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Site kuralları ayarları değiştirildi.</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Site kuralları bildirimi tüm kullanıcılara gönderildi.</strong>',
+	'BOARDRULES'				=> 'Regler',
+	'BOARDRULES_TITLE'			=> 'Vis reglerne for boardet',
+	'BOARDRULES_AGREEMENT'		=> 'Du accepterer at følge reglerne for disse fora, som fremsat i følgende “Regler”-sektion',
+	'BOARDRULES_VIEWONLINE'		=> 'Viser boardregler',
+	'BOARDRULES_NOTIFICATION'	=> 'Boardreglerne er blevet opdateret. Klik her for at gennemgå dem.',
 ));

@@ -2,8 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* @简体中文语言　David Yin <http://www.g2soft.net/>
-*
+* @简体中文语言　David Yin <https://www.phpbbchinese.com/>
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
@@ -45,6 +44,9 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> '在这里您可以设置论坛章程的主要参数。',
 	'ACP_BOARDRULES_ENABLE'					=> '启用论坛章程',
 	'ACP_BOARDRULES_HEADER_LINK'			=> '在页眉显示论坛章程的链接',
+	'ACP_BOARDRULES_FONT_ICON'				=> '论坛章程链接图标',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> '输入一个 <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> 图标的名字，用于顶部的论坛章程链接。留空则不显示图标。',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> '论坛章程链接图标包含不合法字符。',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> '注册新用户必须同意论坛章程',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> '这个选项会要求新用户在注册时，在“条款”的附近增加一个阅读和同意论坛章程的选项。',
 	'ACP_BOARDRULES_NOTIFY'					=> '通知用户',

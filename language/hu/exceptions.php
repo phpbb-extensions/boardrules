@@ -37,13 +37,25 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 //
 
+/*
+* These are errors which can be triggered by sending invalid data to the
+* boardrules extension API.
+*
+* These errors will never show to a user unless they are either modifying
+* the core boardrules extension code OR unless they are writing an extension
+* which makes calls to this extension.
+*
+* Translators: Feel free to not translate these language strings
+*/
 $lang = array_merge($lang, array(
-	// ACP modules
-	'ACP_BOARDRULES'				=> 'Site kuralları',
-	'ACP_BOARDRULES_MANAGE'			=> 'Kuralları yönet',
-	'ACP_BOARDRULES_SETTINGS'		=> 'Kural ayarları',
+	'EXCEPTION_FIELD_MISSING'		=> 'A szükséges mező hiányzik',
+	'EXCEPTION_INVALID_ARGUMENT'	=> 'Érvénytelen argumentum ehhez: `%1$s`. Ok: %2$s',
+	'EXCEPTION_OUT_OF_BOUNDS'		=> '`%1$s` mező későn kapott adatokat.',
+	'EXCEPTION_TOO_LONG'			=> 'A bemenet hosszabb volt, mint a maximális hossz.',
+	'EXCEPTION_NOT_UNIQUE'			=> 'A bemenet nem volt egyedi.',
+	'EXCEPTION_UNEXPECTED_VALUE'	=> '`%1$s` mező váratlan adatokat kapott. Ok: %2$s',
+	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'A bemenet érvénytelen karaktereket tartalmazott.',
 
-	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Site kuralları ayarları değiştirildi.</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Site kuralları bildirimi tüm kullanıcılara gönderildi.</strong>',
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

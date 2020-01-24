@@ -39,11 +39,11 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// ACP modules
-	'ACP_BOARDRULES'				=> 'Site kuralları',
-	'ACP_BOARDRULES_MANAGE'			=> 'Kuralları yönet',
-	'ACP_BOARDRULES_SETTINGS'		=> 'Kural ayarları',
+	'ACP_BOARDRULES'				=> 'Szabályzatok',
+	'ACP_BOARDRULES_MANAGE'			=> 'Szabályzatok kezelése',
+	'ACP_BOARDRULES_SETTINGS'		=> 'Szabályzat beállítások',
 
 	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Site kuralları ayarları değiştirildi.</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Site kuralları bildirimi tüm kullanıcılara gönderildi.</strong>',
+	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Szabályzat beállítások mentésre kerültek</strong>',
+	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Szabályzat értesítések elküldésre kerültek az összes felhasználónak</strong>',
 ));

@@ -2,6 +2,14 @@
 
 ## Vesion 2.x (for phpBB 3.2)
 
+### 2.1.2 - 2019-11-20
+
+- Dropped support for subsilver2 style (and subsilver2 based styles).
+- Various code improvements, including converting to Twig template syntax.
+- Language packs added:
+    - Danish
+    - Hungarian
+
 ### 2.1.1 - 2017-05-28
 
 - Fixed a bug where some older MySQL databases would fail to update or install.

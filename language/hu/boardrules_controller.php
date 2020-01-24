@@ -38,12 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	// ACP modules
-	'ACP_BOARDRULES'				=> 'Site kuralları',
-	'ACP_BOARDRULES_MANAGE'			=> 'Kuralları yönet',
-	'ACP_BOARDRULES_SETTINGS'		=> 'Kural ayarları',
-
-	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Site kuralları ayarları değiştirildi.</strong>',
-	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Site kuralları bildirimi tüm kullanıcılara gönderildi.</strong>',
+	'BOARDRULES_HEADER'			=> 'Szabályzat',
+	'BOARDRULES_EXPLAIN'		=> '%s létrehozza a Fórum Szabályzatot, hogy világossá tegye a közösség minden tagjának a Fórum házirendjét. Mindenkinek ragaszkodnia kell ahhoz, hogy fórum zökkenőmentesen működjön, szórakoztató és produktív élményt nyújtson minden közösségi tag és látogató számára.',
+	'BOARDRULES_CATEGORIES'		=> 'Kategória',
+	'BOARDRULES_CATEGORY_ANCHOR'=> '%s-kategoria',
+	'BOARDRULES_RULE_ANCHOR'	=> '%s-szabalyzat',
 ));
