@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Omogući forumska pravila',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Prikaži link na forumska pravila u zaglavlju',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Zahtijevaj prihvaćanje forumskih pravila prilikom “Registracije”',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Ukoliko je omogućeno, prilikom “Registracije”, uz inicijalna pravila, bit će prikazana i forumska pravila te će se, kao što se mora i s inicijalnim pravilima, (a) da bi “Registracija” bila uspješna, [budući(a] korisnik/ca morati složiti odnosno prihvatiti ih.',

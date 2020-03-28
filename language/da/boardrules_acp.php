@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Aktiver boardregler',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Vis boardregler-link i headeren',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Ikon til boardregler-link',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Indtast navnet på et <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a>-ikon som skal bruges til boardregler-linket i headeren. Lad feltet være tomt hvis der ikke skal være et boardregler-ikon.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Indtast navnet på et <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong>-ikon som skal bruges til boardregler-linket i headeren. Lad feltet være tomt hvis der ikke skal være et boardregler-ikon.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Ikonet til boardregler-linket indeholder ugyldige tegn.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Kræv at nye brugere skal acceptere reglerne ved tilmelding',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Valgmuligheden tilføjer en klausul til “Betingelser for brug” som kræver at nye brugere som tilmelder sig skal læse og acceptere boardreglerne ved tilmelding.',

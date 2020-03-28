@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Włącz regulamin witryny',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Wyświetlaj odnośnik do regulamin witryny w nagłówku',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Wymagaj od nowych użytkowników akceptacji regulaminu podczas rejestracji',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Opcja ta doda dodatkową klauzulę do warunków korzystania z witryny podczas rejestracji wymagającą od nowo zarejestrowanych użytkowników przeczytania i zaakceptowania regulaminu witryny.',
