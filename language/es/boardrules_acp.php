@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Habilitar Normas del Foro',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Mostrar enlace de las Normas del Foro en el encabezado',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Icono del enlace de Normas del Foro',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Introduzca el nombre de un icono <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> para usarlo con el enlace de la página. Deje este campo en blanco para no usar icono en Normas del Foro.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Introduzca el nombre de un icono <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> para usarlo con el enlace de la página. Deje este campo en blanco para no usar icono en Normas del Foro.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Requerir a los nuevos usuarios a aceptar las Normas en el registro',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Esta opción agregará una cláusula a las "Condiciones de uso" que requieren a los nuevos usuarios que quieran registrarse, deben leer y aceptar las Normas del Foro en el registro.',

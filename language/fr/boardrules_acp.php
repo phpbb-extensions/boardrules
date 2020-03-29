@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Activer les règles du forum ',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Afficher un lien vers les règles du forum dans le haut de la page ',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Icône du lien des règles du forum',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Permet de saisir le nom d’une icône <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> affichée dans l’entête du forum pour le lien des règles du forum. Laisser le champ vide pour ne pas afficher d’icône.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Permet de saisir le nom d’une icône <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> affichée dans l’entête du forum pour le lien des règles du forum. Laisser le champ vide pour ne pas afficher d’icône.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'L’icône du lien des règles du forum contient un caractère incorrect.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Oblige les nouveaux utilisateurs à accepter les règles lors de leur enregistrement ',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Cette option ajoutera une clause aux « Conditions d’utilisation », demandant aux nouveaux utilisateurs de lire et d’accepter les règles du forum lors de leur enregistrement.',
