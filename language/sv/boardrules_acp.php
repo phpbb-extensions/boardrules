@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Aktivera forumregler',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Visa en länk till forumreglerna i sidhuvudet',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Länkikon till forumregler',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Ange namnet för <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong>-ikonen som ska användas till länken i sidhuvudet. Lämna fältet tomt om ingen ikon ska användas.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Ange namnet för <strong><a href="%s" target="_blank">Font Awesome</a></strong>-ikonen som ska användas till länken i sidhuvudet. Lämna fältet tomt om ingen ikon ska användas.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Länkikonen du angav innehåller ogiltiga tecken.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Tvinga nya användare att acceptera reglerna under registreringen',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Denna inställning lägger till en punkt till “Medlemsvillkoren” som kräver att nya användare läser och accepterar forumreglerna under registreringen.',

@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Site kurallarını aktifleştir',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Site kuralları linkini headerda (üst kısımda) göster',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Site Kuralları link simgesi',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Headerda (üst kısımda) site kuralları linkinde kullanılmak üzere bir <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> simge ismi girin. Site kural simgesi istemiyorsanız alanı boş bırakın.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Headerda (üst kısımda) site kuralları linkinde kullanılmak üzere bir <strong><a href="%s" target="_blank">Font Awesome</a></strong> simge ismi girin. Site kural simgesi istemiyorsanız alanı boş bırakın.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Site kuralları link simgesi geçersiz karakterler içeriyor.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Yeni kullanıcıların Kuralları kayıtta kabul etmesi gerekli olsun',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Bu seçenek “Kullanıcı Sözleşmesine” yeni kayıt olacak kullanıcıların okuyup kabul etmesi gereken bir kurallar alanı ekler.',

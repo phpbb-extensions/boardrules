@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Activeaza reguli forum',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Arata link in header catre reguli',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Utilizatorii noi trebuie sa confirme ca sunt de acord cu regurile',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Utilizatorii noi trebuie sa confirme ca sunt de acord cu regurile impuse pe aceste site.',

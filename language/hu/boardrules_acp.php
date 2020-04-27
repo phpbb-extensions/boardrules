@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Fórum szabályzat engedélyezése',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Fórum szabályzat hivatkozás megjelenítése a fejrészben',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Fórum szabályzat hivatkozás ikon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Adja meg a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> ikont, amelyet használni szeretne a fejrészben a Fórum Szabázat hivatkozáshoz. Hagyja üresen ezt a mezőt ha nem szeretne ikont használni.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Adja meg a <strong><a href="%s" target="_blank">Font Awesome</a></strong> ikont, amelyet használni szeretne a fejrészben a Fórum Szabázat hivatkozáshoz. Hagyja üresen ezt a mezőt ha nem szeretne ikont használni.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'A Fórum Szabályzat hivatkozás ikonja érvénytelen karaktereket tartalmaz.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Az új felhasználóknak el kell fogadniuk a regisztrációs szabályzatot.',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Ez az opció hozzáfűzi a "Felhasználási Feltételekre" vonatkozó záradékot, amely előírja az újonnan regisztrált felhasználók számára, hogy elolvassák és elfogadják a regisztrációs szabályokat a regisztráció során.',
