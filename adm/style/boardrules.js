@@ -6,7 +6,7 @@
 		var input = $(this).val();
 		var $icon = $(this).next('i');
 		if (input.length > 0) {
-			$icon.attr('class', 'fa-' + input);
+			$icon.attr('class', 'icon fa-' + input);
 		} else {
 			$icon.attr('class', '');
 		}

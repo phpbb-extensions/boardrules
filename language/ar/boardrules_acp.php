@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'تفعيل ',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'عرض رابط القوانين في الشريط العلوي ',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'عرض رابط القوانين في صفحة التسجيل ',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'سيتم إضافة سطر في صفحة التسجيل يطلب من الأعضاء المسجلين الجُدد قراءة قوانين المنتدى والموافقة عليها.',

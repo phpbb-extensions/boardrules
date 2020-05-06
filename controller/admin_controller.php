@@ -145,6 +145,8 @@ class admin_controller implements admin_interface
 			'S_BOARDRULES_ENABLE'					=> (bool) $this->config['boardrules_enable'],
 			'S_BOARDRULES_HEADER_LINK'				=> (bool) $this->config['boardrules_header_link'],
 			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'	=> (bool) $this->config['boardrules_require_at_registration'],
+
+			'U_FONTAWESOME_ICONS'	=> 'https://fontawesome.com/' . (phpbb_version_compare(PHPBB_VERSION, '3.3.0', '>') ? 'icons?d=gallery&m=free' : 'v4.7.0/icons/'),
 		));
 	}
 

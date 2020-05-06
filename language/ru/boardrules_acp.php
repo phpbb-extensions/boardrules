@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Включить правила форума',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Отображать ссылку на правила',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Значок ссылки',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Введите имя значка из набора <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> для отображения рядом со ссылкой на правила. Оставьте поле пустым, чтобы значок не отображался.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Введите имя значка из набора <strong><a href="%s" target="_blank">Font Awesome</a></strong> для отображения рядом со ссылкой на правила. Оставьте поле пустым, чтобы значок не отображался.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Имя значка ссылки содержит неверные символы.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Требовать согласия пользователей с правилами перед регистрацией',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Включение этой опции добавит (для регистрирующихся пользователей) к Пользовательскому Соглашению требование ознакомиться и согласиться с правилами форума.',

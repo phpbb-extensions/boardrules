@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Ativar regras',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Mostrar link no cabeçalho',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Exigir aceitação das regras no momento do registo',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Acrescenta as Regras do Fórum às "Condições de utilização", permitindo a sua leitura e obrigando à sua aceitação antes do registo.',
