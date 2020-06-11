@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de)
+* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.2
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -45,6 +45,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS'		=> 'Regel-Einstellungen',
 
 	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Board-Regel-Einstellungen wurden geändert</strong>',
+	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Einstellungen der Board-Regeln wurden geändert</strong>',
 	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Regeländerungs-Mitteilung an alle Mitglieder versendet</strong>',
 ));

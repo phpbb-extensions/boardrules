@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de)
+* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.2
 *
 * @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -43,5 +43,5 @@ $lang = array_merge($lang, array(
 	'BOARDRULES_TITLE'			=> 'Regeln des Boards anzeigen',
 	'BOARDRULES_AGREEMENT'		=> 'Sie stimmen den Regeln im folgenden Abschnitt zur Nutzung des Forums ausdrücklich zu.',
 	'BOARDRULES_VIEWONLINE'		=> 'Betrachtet die Board-Regeln',
-	'BOARDRULES_NOTIFICATION'	=> 'Die Boardregeln wurden geändert. Um die geänderte Fassung anzusehen, rufen Sie bitte den Link auf.',
+	'BOARDRULES_NOTIFICATION'	=> 'Die Boardregeln wurden geändert. Die geänderte Fassung erreichen Sie über den Link. Bei Fragen, wenden Sie sich bitte an die Board-Administration.',
 ));

@@ -10,7 +10,7 @@
 
 namespace phpbb\boardrules\migrations\v10x;
 
-use \phpbb\db\migration\container_aware_migration;
+use phpbb\db\migration\container_aware_migration;
 
 /**
 * Migration stage 7: Install sample rule data

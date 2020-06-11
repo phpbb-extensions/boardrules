@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de)
+* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.2
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -40,7 +40,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Beispiel Regel-Kategorie',
-	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dies ist eine Beispiel-Kategorie der Board-Regeln. Kategorien sind Regelblöcke mit ähnlichen Regeln. Regel-Anmerkungen (wie diese) werden bei Kategorien nicht auf der Regelseite angezeigt.',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dies ist eine Beispiel-Kategorie der Board-Regeln. Kategorien sind Regelblöcke mit ähnlichen Regeln. Regel-Anmerkungen (wie diese) werden bei Kategorien nicht auf der Seite der Board-Regeln angezeigt.',
 	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'beispiel_kategorie_anker',
 
 	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Beispiel-Regel',
