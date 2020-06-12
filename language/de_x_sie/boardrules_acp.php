@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de)
+* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.2
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -44,15 +44,15 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS'				=> 'Einstellungen',
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Hier können Sie die wichtigsten Einstellungen für die Board-Regeln in dieser Extension vornehmen.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Board-Regeln aktivieren',
-	'ACP_BOARDRULES_HEADER_LINK'			=> 'Link zu den Board-Regeln im Seitenkopf anzeigen',
-	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
-	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
+	'ACP_BOARDRULES_HEADER_LINK'			=> 'Link zu den Board-Regeln in der Navigation anzeigen',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Board-Regeln | Font Awesome Symbol',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Geben Sie einen Namen eines <a href="%s" target="_blank">Font Awesome</a> Icon ein, um dieses zu verwenden. Das voreingestellte Icon (Font Awesome Symbol) wird geändert.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Der angegebene Name für das Font Awesome Symbol ist fehlerhaft.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Zustimmungspflicht für neue Mitglieder',
-	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Ein Abschnitt für die Board-Regeln wird den Nutzungsbedingungen hinzugefügt und diesen muss während der Registrierung zugestimmt werden.',
+	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Ein Abschnitt für die Board-Regeln wird den Nutzungsbedingungen hinzugefügt und erfordert eine aktive Zustimmung beim Registrierungsvorgang im Board.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Mitglieder erinnern',
-	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Allen Registrierten eine Mitteilung über die Änderung der Board-Regeln zusenden (dies kann bei vielen Mitgliedern einige Sekunden dauern).',
-	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Sind Sie sicher, allen Mitgliedern diese Nachricht zu übersenden?',
+	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Allen Registrierten eine Mitteilung über die Änderung der Board-Regeln zusenden. Das Versenden der Mitteilung kann einige Minuten dauern.',
+	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Sind Sie sicher, allen Mitgliedern diese Nachricht übersenden zu wollen?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Einstellungen der Board-Regeln.',
 
 	// Manage page
@@ -69,16 +69,16 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_PARENT'						=> 'Übergeordnete Regel',
 	'ACP_RULE_NO_PARENT'					=> 'Nicht übergeordnet',
 	'ACP_RULE_TITLE'						=> 'Regel-Bezeichnung',
-	'ACP_RULE_TITLE_EXPLAIN'				=> 'Regelbezeichnungen werden nur bei Kategorien auf der Board-Regel-Seite angezeigt. Regelbezeichnungen dienen auch zum Auffinden und Verwalten im Admin-Bereich der Board-Regel Extension.',
+	'ACP_RULE_TITLE_EXPLAIN'				=> 'Regelbezeichnungen werden nur bei Kategorien auf der Board-Regel-Seite angezeigt. Regelbezeichnungen dienen auch zum Auffinden und Verwalten der Board-Regeln im Administrationsbereich.',
 	'ACP_RULE_ANCHOR'						=> 'Regel-Anker',
-	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Regel-Anker sind optional und werden als Linkziele für Regeln genutzt. Anker dürfen je nur einmal angelegt sein, dürfen keine Sonderzeichen (Leerstellen, HTML-Zeichen und/oder Umlaute) enthalten und dürfen nicht mit einer Ziffer beginnen, da sie in der URL genutzt werden.',
+	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Regel-Anker sind optional und werden als Linkziele für Regeln genutzt. Anker dürfen je nur einmal angelegt sein, dürfen keine Sonderzeichen (Leerstellen, HTML-Zeichen und/oder Umlaute) enthalten und dürfen nicht mit einer Ziffer beginnen, da sie in der URL bereits genutzt werden.',
 	'ACP_RULE_MESSAGE'						=> 'Regel-Text',
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Der Regel-Text wird für jede Regel angezeigt, die keine Regel-Kategorie ist.',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Dies ist eine Regel-Kategorie. Der Regel-Text-Editor ist deshalb nicht verfügbar.',
 	'ACP_ADD_RULE'							=> 'Neue Regel erstellen',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
-		0 => 'Bist du dir sicher, dass du diese Regel entfernen möchtest?',
-		1 => 'Bist du dir sicher, dass du diese Regel-Kategorie entfernen möchtest?<br />Warnung: Das Entfernen einer Regel-Kategorie wird auch alle enthaltenen Regeln entfernen.',
+		0 => 'Sind Sie sicher, dass Sie diese Regel entfernen möchten?',
+		1 => 'Sind Sie sicher, dass diese Regel-Kategorie entfernt werden soll?<br />Warnung: Das Entfernen einer Regel-Kategorie wird auch alle darin enthaltenen Regeln entfernen.',
 	),
 	'ACP_RULE_ADDED'						=> 'Regel hinzugefügt.',
 	'ACP_RULE_DELETED'						=> 'Regel gelöscht.',
@@ -87,7 +87,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Die Board-Regeln konnten nicht in die Tabelle geschrieben werden, da ein anderer Prozess dies vermutlich verhindert und angehalten hat. Die Sperren werden nach einer Zeitüberschreitung von 1 Stunde aufgehoben.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Die angeforderte Regel existiert nicht.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Die angeforderte Regel hat kein übergeordnetes Element.',
 ));
