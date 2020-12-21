@@ -42,4 +42,4 @@ ratings:
 exclude_paths:
 - config/
 - tests/
-- travis/
+- .github/
