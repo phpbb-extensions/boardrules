@@ -307,7 +307,7 @@ class listener_test extends \phpbb_test_case
 
 		foreach ($expected_contains as $expected)
 		{
-			self::assertStringContainsString($expected, $permissions);
+			self::assertContains($expected, $permissions);
 		}
 	}
 
