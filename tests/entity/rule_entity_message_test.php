@@ -15,7 +15,7 @@ namespace phpbb\boardrules\tests\entity;
 */
 class rule_entity_message_test extends rule_entity_base
 {
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -80,7 +80,7 @@ class rule_entity_message_test extends rule_entity_base
 		$result = $entity->set_message($message);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// We start with all options set to false
 		$enable_bbcode = $enable_magic_url = $enable_smilies = $censor_text = false;
@@ -127,9 +127,9 @@ class rule_entity_message_test extends rule_entity_base
 			// Get what we're expecting from
 			$test = $this->message_test_helper($message, $enable_bbcode, $enable_magic_url, $enable_smilies, $censor_text);
 
-			$this->assertSame($test['edit'], $entity->get_message_for_edit());
+			self::assertSame($test['edit'], $entity->get_message_for_edit());
 
-			$this->assertSame($test['display'], $entity->get_message_for_display($censor_text));
+			self::assertSame($test['display'], $entity->get_message_for_display($censor_text));
 
 			// Increment the options
 			$i++;

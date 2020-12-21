@@ -58,6 +58,6 @@ class rule_entity_right_id_test extends rule_entity_base
 		$entity->import($data);
 
 		// Assert that the id matches what is expected
-		$this->assertEquals($expected, $entity->get_right_id());
+		self::assertEquals($expected, $entity->get_right_id());
 	}
 }

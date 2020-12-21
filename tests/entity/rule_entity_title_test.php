@@ -50,10 +50,10 @@ class rule_entity_title_test extends rule_entity_base
 		$result = $entity->set_title($title);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that the title matches what's expected
-		$this->assertSame($expected, $entity->get_title());
+		self::assertSame($expected, $entity->get_title());
 	}
 
 	/**
@@ -77,10 +77,11 @@ class rule_entity_title_test extends rule_entity_base
 	* Test setting invalid data on the title which should throw an exception
 	*
 	* @dataProvider title_fails_test_data
-	* @expectedException \phpbb\boardrules\exception\base
 	*/
 	public function test_title_fails($title)
 	{
+		$this->expectException(\phpbb\boardrules\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 

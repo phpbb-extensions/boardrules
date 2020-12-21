@@ -88,7 +88,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 		$entities = $operator->get_rules($language);
 
 		// Assert we have found some rules!
-		$this->assertNotEmpty($entities);
+		self::assertNotEmpty($entities);
 
 		// Map the fields to the getters
 		$map = array(
@@ -109,7 +109,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 			// what we saved
 			foreach ($map as $field => $function)
 			{
-				$this->assertEquals($expected[$i][$field], $entity->$function());
+				self::assertEquals($expected[$i][$field], $entity->$function());
 			}
 
 			$i++;
@@ -144,6 +144,6 @@ class rule_operator_get_rules_test extends rule_operator_base
 		$result = $operator->get_rules($language);
 
 		// Assert that the result matches what is expected
-		$this->assertEquals($expected, $result);
+		self::assertEquals($expected, $result);
 	}
 }

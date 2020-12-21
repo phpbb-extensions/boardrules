@@ -44,6 +44,6 @@ class registration_event_test extends boardrules_functional_base
 	{
 		$crawler = self::request('GET', 'ucp.php?mode=register');
 
-		$this->assertContains($this->lang('BOARDRULES_AGREEMENT'), $crawler->filter('.content')->text());
+		$this->assertContainsLang('BOARDRULES_AGREEMENT', $crawler->filter('.content')->text());
 	}
 }

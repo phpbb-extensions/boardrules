@@ -52,10 +52,10 @@ class rule_entity_anchor_test extends rule_entity_base
 		$result = $entity->set_anchor($anchor);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that the anchor matches what's expected
-		$this->assertSame($expected, $entity->get_anchor());
+		self::assertSame($expected, $entity->get_anchor());
 	}
 
 	/**
@@ -118,10 +118,11 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test setting invalid data on the anchor which should throw an exception
 	*
 	* @dataProvider anchor_fails_test_data
-	* @expectedException \phpbb\boardrules\exception\base
 	*/
 	public function test_anchor_fails($anchor)
 	{
+		$this->expectException(\phpbb\boardrules\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
@@ -172,10 +173,10 @@ class rule_entity_anchor_test extends rule_entity_base
 			->set_anchor($anchor);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that the anchor matches what's expected
-		$this->assertSame($expected, $entity->get_anchor());
+		self::assertSame($expected, $entity->get_anchor());
 	}
 
 	/**
@@ -198,10 +199,11 @@ class rule_entity_anchor_test extends rule_entity_base
 	* Test setting non-unique data on the anchor which should throw an exception
 	*
 	* @dataProvider unique_anchor_test_fails_data
-	* @expectedException \phpbb\boardrules\exception\base
 	*/
 	public function test_unique_anchor_fails($id, $language, $anchor)
 	{
+		$this->expectException(\phpbb\boardrules\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 

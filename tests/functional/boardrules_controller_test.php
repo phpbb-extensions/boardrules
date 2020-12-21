@@ -21,10 +21,10 @@ class boardrules_controller_test extends boardrules_functional_base
 	public function test_boardrules_page()
 	{
 		$crawler = self::request('GET', 'app.php/rules');
-		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->filter('h2')->text());
+		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
 
-		$this->assertEquals(1, $crawler->filter('#example-category')->count());
-		$this->assertEquals(1, $crawler->filter('#example-rule')->count());
+		self::assertEquals(1, $crawler->filter('#example-category')->count());
+		self::assertEquals(1, $crawler->filter('#example-rule')->count());
 	}
 
 	/**
@@ -34,8 +34,8 @@ class boardrules_controller_test extends boardrules_functional_base
 	{
 		$crawler = self::request('GET', 'index.php');
 
-		$this->assertContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
-		$this->assertGreaterThan(0, $crawler->filter('.fa-book')->count());
+		$this->assertContainsLang('BOARDRULES', $crawler->filter('.navbar')->text());
+		self::assertGreaterThan(0, $crawler->filter('.fa-book')->count());
 	}
 
 	/**
@@ -55,7 +55,7 @@ class boardrules_controller_test extends boardrules_functional_base
 
 		$crawler = self::request('GET', 'index.php');
 
-		$this->assertNotContains($this->lang('BOARDRULES'), $crawler->filter('.navbar')->text());
-		$this->assertCount(0, $crawler->filter('.fa-book'));
+		$this->assertNotContainsLang('BOARDRULES', $crawler->filter('.navbar')->text());
+		self::assertCount(0, $crawler->filter('.fa-book'));
 	}
 }

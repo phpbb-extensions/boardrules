@@ -56,7 +56,7 @@ class rule_entity_save_test extends rule_entity_base
 		$result = $entity->load($id);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Set some new data
 		$entity
@@ -68,18 +68,19 @@ class rule_entity_save_test extends rule_entity_base
 		$result = $entity->load($id);
 
 		// Assert expected matches actual
-		$this->assertEquals($expected['rule_id'], $result->get_id());
-		$this->assertEquals($expected['rule_anchor'], $result->get_anchor());
-		$this->assertEquals($expected['rule_title'], $result->get_title());
+		self::assertEquals($expected['rule_id'], $result->get_id());
+		self::assertEquals($expected['rule_anchor'], $result->get_anchor());
+		self::assertEquals($expected['rule_title'], $result->get_title());
 	}
 
 	/**
 	* Test saving to (non-existant) rules from the database
 	*
-	* @expectedException \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function test_save_fails()
 	{
+		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 

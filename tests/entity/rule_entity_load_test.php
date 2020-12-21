@@ -80,7 +80,7 @@ class rule_entity_load_test extends rule_entity_base
 		$result = $entity->load($id);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Map the fields to the getters
 		$map = array(
@@ -98,7 +98,7 @@ class rule_entity_load_test extends rule_entity_base
 		// what we saved
 		foreach ($map as $field => $function)
 		{
-			$this->assertEquals($data[$field], $entity->$function());
+			self::assertEquals($data[$field], $entity->$function());
 		}
 	}
 
@@ -120,10 +120,11 @@ class rule_entity_load_test extends rule_entity_base
 	* Test loading (non-existant) rules from the database
 	*
 	* @dataProvider load_fails_test_data
-	* @expectedException \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function test_load_fails($id)
 	{
+		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 

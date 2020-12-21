@@ -49,6 +49,6 @@ class rule_operator_add_rule_test extends rule_operator_base
 		$result = $operator->add_rule($entity, $language, $parent_id);
 
 		// Assert the rule was added
-		$this->assertEquals($test_id, $result->get_id());
+		self::assertEquals($test_id, $result->get_id());
 	}
 }
