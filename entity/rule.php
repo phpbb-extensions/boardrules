@@ -353,7 +353,7 @@ class rule implements rule_interface
 	*/
 	public function message_bbcode_enabled()
 	{
-		return ($this->data['rule_message_bbcode_options'] & OPTION_FLAG_BBCODE);
+		return isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] & OPTION_FLAG_BBCODE : false;
 	}
 
 	/**
@@ -390,7 +390,7 @@ class rule implements rule_interface
 	*/
 	public function message_magic_url_enabled()
 	{
-		return ($this->data['rule_message_bbcode_options'] & OPTION_FLAG_LINKS);
+		return isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] & OPTION_FLAG_LINKS : false;
 	}
 
 	/**
@@ -427,7 +427,7 @@ class rule implements rule_interface
 	*/
 	public function message_smilies_enabled()
 	{
-		return ($this->data['rule_message_bbcode_options'] & OPTION_FLAG_SMILIES);
+		return isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] & OPTION_FLAG_SMILIES : false;
 	}
 
 	/**
