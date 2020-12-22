@@ -2,7 +2,7 @@
 
 This is the repository for the development of the phpBB Board Rules Extension.
 
-[![Build Status](https://github.com/phpbb-extensions/boardrules/workflows/Tests/badge.svg?branch=master)](https://github.com/phpbb-extensions/boardrules/actions)
+[![Build Status](https://github.com/phpbb-extensions/boardrules/workflows/Tests/badge.svg)](https://github.com/phpbb-extensions/boardrules/actions)
 [![Code Climate](https://codeclimate.com/github/phpbb-extensions/boardrules/badges/gpa.svg)](https://codeclimate.com/github/phpbb-extensions/boardrules)
 
 ## Install
