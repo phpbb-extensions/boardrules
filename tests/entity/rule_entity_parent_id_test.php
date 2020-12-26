@@ -58,6 +58,6 @@ class rule_entity_parent_id_test extends rule_entity_base
 		$entity->import($data);
 
 		// Assert that the id matches what is expected
-		$this->assertEquals($expected, $entity->get_parent_id());
+		self::assertEquals($expected, $entity->get_parent_id());
 	}
 }

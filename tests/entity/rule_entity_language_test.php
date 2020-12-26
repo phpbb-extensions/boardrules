@@ -62,7 +62,7 @@ class rule_entity_language_test extends rule_entity_base
 		$entity->import($data);
 
 		// Assert that the language matches what is expected
-		$this->assertSame($expected, $entity->get_language());
+		self::assertSame($expected, $entity->get_language());
 	}
 
 	/**
@@ -85,6 +85,6 @@ class rule_entity_language_test extends rule_entity_base
 		$entity->set_language($language);
 
 		// Assert that the anchor matches what's expected
-		$this->assertSame($language, $entity->get_language());
+		self::assertSame($language, $entity->get_language());
 	}
 }

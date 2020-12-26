@@ -149,7 +149,7 @@ class rule_operator_move_test extends rule_operator_base
 			FROM phpbb_boardrules
 			ORDER BY rule_left_id ASC');
 
-		$this->assertEquals($expected, $this->db->sql_fetchrowset($result));
+		self::assertEquals($expected, $this->db->sql_fetchrowset($result));
 		$this->db->sql_freeresult($result);
 	}
 
@@ -169,10 +169,11 @@ class rule_operator_move_test extends rule_operator_base
 	* Test moving non-existent rules which should throw an exception
 	*
 	* @dataProvider move_rules_fails_data
-	* @expectedException \phpbb\boardrules\exception\base
 	*/
 	public function test_move_rules_fails($rule_id)
 	{
+		$this->expectException(\phpbb\boardrules\exception\base::class);
+
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 

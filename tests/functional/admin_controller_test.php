@@ -60,7 +60,7 @@ class admin_controller_test extends boardrules_functional_base
 		$crawler = self::submit($form);
 
 		// Assert addition was success
-		$this->assertGreaterThan(0, $crawler->filter('.successbox')->count());
+		self::assertGreaterThan(0, $crawler->filter('.successbox')->count());
 		$this->assertContainsLang('ACP_RULE_ADDED', $crawler->text());
 	}
 
@@ -96,7 +96,7 @@ class admin_controller_test extends boardrules_functional_base
 		$crawler = self::submit($form);
 
 		// Assert deletion was success
-		$this->assertGreaterThan(0, $crawler->filter('.successbox')->count());
+		self::assertGreaterThan(0, $crawler->filter('.successbox')->count());
 		$this->assertContainsLang('ACP_RULE_DELETED', $crawler->text());
 	}
 
@@ -142,7 +142,7 @@ class admin_controller_test extends boardrules_functional_base
 
 		// Confirm the log entry has been added correctly
 		$crawler = self::request('GET', 'adm/index.php?i=acp_logs&mode=admin&sid=' . $this->sid);
-		$this->assertContains(strip_tags($this->lang('ACP_BOARDRULES_SETTINGS_LOG')), $crawler->text());
+		self::assertStringContainsString(strip_tags($this->lang('ACP_BOARDRULES_SETTINGS_LOG')), $crawler->text());
 	}
 
 	/**

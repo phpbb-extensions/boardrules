@@ -72,7 +72,7 @@ class rule_operator_change_parent_test extends rule_operator_base
 			FROM phpbb_boardrules
 			ORDER BY rule_id ASC');
 
-		$this->assertEquals($expected, $this->db->sql_fetchrowset($result));
+		self::assertEquals($expected, $this->db->sql_fetchrowset($result));
 		$this->db->sql_freeresult($result);
 	}
 
@@ -94,10 +94,11 @@ class rule_operator_change_parent_test extends rule_operator_base
 	* Test moving to non-existent rules which should throw an exception
 	*
 	* @dataProvider change_parent_fails_data
-	* @expectedException \phpbb\boardrules\exception\base
 	*/
 	public function test_change_parent_fails($rule_id, $new_parent_id)
 	{
+		$this->expectException(\phpbb\boardrules\exception\base::class);
+
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
 

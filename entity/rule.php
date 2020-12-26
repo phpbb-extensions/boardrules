@@ -348,12 +348,12 @@ class rule implements rule_interface
 	/**
 	* Check if bbcode is enabled on the message
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function message_bbcode_enabled()
 	{
-		return ($this->data['rule_message_bbcode_options'] & OPTION_FLAG_BBCODE);
+		return isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] & OPTION_FLAG_BBCODE : 0;
 	}
 
 	/**
@@ -385,12 +385,12 @@ class rule implements rule_interface
 	/**
 	* Check if magic_url is enabled on the message
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function message_magic_url_enabled()
 	{
-		return ($this->data['rule_message_bbcode_options'] & OPTION_FLAG_LINKS);
+		return isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] & OPTION_FLAG_LINKS : 0;
 	}
 
 	/**
@@ -422,12 +422,12 @@ class rule implements rule_interface
 	/**
 	* Check if smilies are enabled on the message
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function message_smilies_enabled()
 	{
-		return ($this->data['rule_message_bbcode_options'] & OPTION_FLAG_SMILIES);
+		return isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] & OPTION_FLAG_SMILIES : 0;
 	}
 
 	/**

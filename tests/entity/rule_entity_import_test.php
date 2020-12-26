@@ -46,7 +46,7 @@ class rule_entity_import_test extends rule_entity_base
 		$result = $entity->import($data);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Map the fields to the getters
 		$map = array(
@@ -63,7 +63,7 @@ class rule_entity_import_test extends rule_entity_base
 		// what we saved
 		foreach ($map as $field => $function)
 		{
-			$this->assertEquals($data[$field], $entity->$function());
+			self::assertEquals($data[$field], $entity->$function());
 		}
 	}
 
@@ -137,10 +137,11 @@ class rule_entity_import_test extends rule_entity_base
 	* Test importing data which will cause exceptions
 	*
 	* @dataProvider import_test_fail_data
-	* @expectedException \phpbb\boardrules\exception\base
 	*/
 	public function test_import_fail($data)
 	{
+		$this->expectException(\phpbb\boardrules\exception\base::class);
+
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 

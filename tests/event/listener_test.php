@@ -34,7 +34,7 @@ class listener_test extends \phpbb_test_case
 	/**
 	* Setup test environment
 	*/
-	public function setUp()
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -51,7 +51,7 @@ class listener_test extends \phpbb_test_case
 		$this->controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
-		$this->controller_helper->expects($this->atMost(1))
+		$this->controller_helper->expects(self::atMost(1))
 			->method('route')
 			->willReturnCallback(function ($route, array $params = array()) {
 				return $route . '#' . serialize($params);
@@ -79,7 +79,7 @@ class listener_test extends \phpbb_test_case
 	public function test_construct()
 	{
 		$this->set_listener();
-		$this->assertInstanceOf('\Symfony\Component\EventDispatcher\EventSubscriberInterface', $this->listener);
+		self::assertInstanceOf('\Symfony\Component\EventDispatcher\EventSubscriberInterface', $this->listener);
 	}
 
 	/**
@@ -87,7 +87,7 @@ class listener_test extends \phpbb_test_case
 	*/
 	public function test_getSubscribedEvents()
 	{
-		$this->assertEquals(array(
+		self::assertEquals(array(
 			'core.user_setup',
 			'core.page_header',
 			'core.viewonline_overwrite_location',
@@ -154,7 +154,7 @@ class listener_test extends \phpbb_test_case
 
 		foreach ($expected_contains as $expected)
 		{
-			$this->assertContains($expected, $lang_set_ext);
+			self::assertContains($expected, $lang_set_ext);
 		}
 	}
 
@@ -239,7 +239,7 @@ class listener_test extends \phpbb_test_case
 
 		$this->set_listener();
 
-		$this->template->expects($this->once())
+		$this->template->expects(self::once())
 			->method('assign_vars')
 			->with($expected);
 
@@ -307,7 +307,7 @@ class listener_test extends \phpbb_test_case
 
 		foreach ($expected_contains as $expected)
 		{
-			$this->assertContains($expected, $permissions);
+			self::assertContains($expected, $permissions);
 		}
 	}
 
@@ -380,11 +380,11 @@ class listener_test extends \phpbb_test_case
 		$event_data_after = $event->get_data_filtered($event_data);
 		foreach ($event_data as $expected)
 		{
-			$this->assertArrayHasKey($expected, $event_data_after);
+			self::assertArrayHasKey($expected, $event_data_after);
 		}
 		extract($event_data_after);
 
-		$this->assertEquals($expected_location_url, $location_url);
-		$this->assertEquals($expected_location, $location);
+		self::assertEquals($expected_location_url, $location_url);
+		self::assertEquals($expected_location, $location);
 	}
 }

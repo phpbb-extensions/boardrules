@@ -38,20 +38,21 @@ class rule_entity_insert_test extends rule_entity_base
 			->insert($language);
 
 		// Assert the returned value is what we expect
-		$this->assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
+		self::assertInstanceOf('\phpbb\boardrules\entity\rule', $result);
 
 		// Assert that a rule_id of value 5 was created
-		$this->assertEquals(5, $result->get_id());
+		self::assertEquals(5, $result->get_id());
 	}
 
 	/**
 	* Try inserting a rule that already exists into the database
 	* Entities with an existing rule_id will fail to insert
 	*
-	* @expectedException \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function test_insert_fails()
 	{
+		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+
 		// Set a language variable
 		$language = 'en';
 

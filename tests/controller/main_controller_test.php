@@ -43,7 +43,7 @@ class main_controller_test extends \phpbb_test_case
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
 			->disableOriginalConstructor()
 			->getMock();
-		$rule_operator->expects($this->exactly(2))
+		$rule_operator->expects(self::exactly(2))
 			->method('get_rules')
 			->willReturn(array());
 
@@ -51,7 +51,7 @@ class main_controller_test extends \phpbb_test_case
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
 			->disableOriginalConstructor()
 			->getMock();
-		$controller_helper->expects($this->once())
+		$controller_helper->expects(self::once())
 			->method('render')
 			->willReturnCallback(function ($template_file, $page_title = '', $status_code = 200, $display_online_list = false) {
 				return new \Symfony\Component\HttpFoundation\Response($template_file, $status_code);
@@ -77,8 +77,8 @@ class main_controller_test extends \phpbb_test_case
 		);
 
 		$response = $controller->display();
-		$this->assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
-		$this->assertEquals($status_code, $response->getStatusCode());
-		$this->assertEquals($page_content, $response->getContent());
+		self::assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
+		self::assertEquals($status_code, $response->getStatusCode());
+		self::assertEquals($page_content, $response->getContent());
 	}
 }

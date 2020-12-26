@@ -23,7 +23,7 @@ class viewonline_test extends boardrules_functional_base
 		// Send the admin to the Rules page
 		$this->login();
 		$crawler = self::request('GET', "app.php/rules?sid={$this->sid}");
-		$this->assertContains($this->lang('BOARDRULES_HEADER'), $crawler->filter('h2')->text());
+		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
 	}
 
 	/**
@@ -42,10 +42,10 @@ class viewonline_test extends boardrules_functional_base
 		$crawler = self::request('GET', "viewonline.php?sid={$this->sid}");
 
 		// Is admin still viewing Rules page
-		$this->assertContains('admin', $crawler->filter('#page-body table.table1')->text());
+		self::assertStringContainsString('admin', $crawler->filter('#page-body table.table1')->text());
 
 		$session_entries = $crawler->filter('#page-body table.table1 tr')->count();
-		$this->assertGreaterThanOrEqual(3, $session_entries, 'Too few session entries found');
+		self::assertGreaterThanOrEqual(3, $session_entries, 'Too few session entries found');
 
 		// Check each entry in the viewonline table
 		// Skip the first row (header)
@@ -55,12 +55,12 @@ class viewonline_test extends boardrules_functional_base
 			$subcrawler = $crawler->filter('#page-body table.table1 tr')->eq($i);
 			if (strpos($subcrawler->filter('td')->text(), 'admin') !== false)
 			{
-				$this->assertContains($this->lang('BOARDRULES_VIEWONLINE'), $subcrawler->filter('td.info')->text());
+				$this->assertContainsLang('BOARDRULES_VIEWONLINE', $subcrawler->filter('td.info')->text());
 				return;
 			}
 		}
 
 		// If we did not find the admin, we fail
-		$this->fail('User "admin" was not found on viewonline page.');
+		self::fail('User "admin" was not found on viewonline page.');
 	}
 }
