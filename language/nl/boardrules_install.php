@@ -40,7 +40,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Voorbeeld Regelcategorie',
-	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dit is een voorbeeldcategorie in je Forumregels-installatie. Categorieën bevatten groepen gerelateerde regels. Categorieberichten (zoals deze) worden niet weergegeven op de regelspagina.',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Dit is een voorbeeldcategorie in je Forumregels-installatie. Categorieën bevatten gerelateerde regels. Categorieberichten (zoals deze) in categorieën met onderliggende regels worden niet weergegeven op de regelspagina.',
 	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'voorbeeld-categorie',
 
 	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Voorbeeld regel',
