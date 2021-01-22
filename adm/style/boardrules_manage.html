@@ -101,9 +101,9 @@
 
 	<h1>{{ lang('ACP_BOARDRULES_MANAGE') }}</h1>
 
-	<p>{{ lang('ACP_BOARDRULES_MANAGE_EXPLAIN') }}</p>
-
 	{% if loops.options|length %}
+
+		<p>{{ lang('ACP_BOARDRULES_LANGUAGE_EXPLAIN') }}</p>
 		<form id="language_form" method="post" action="{{ U_ACTION }}">
 			<fieldset>
 				<dl>
@@ -122,8 +122,10 @@
 				</dl>
 			</fieldset>
 		</form>
+
 	{% else %}
 
+		<p>{{ lang('ACP_BOARDRULES_MANAGE_EXPLAIN') }}</p>
 		{% if loops.breadcrumb|length %}
 		<p>
 			<strong>

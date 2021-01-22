@@ -58,6 +58,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Διαχείριση Όρων Συμμετοχής',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Από εδώ μπορείτε να προσθέσετε, επεξεργαστείτε, διαγράψετε και να αναδιατάξετε κατηγορίες και όρους. Μια κατηγορία είναι μια ομάδα σχετικών όρων. Κάθε κατηγορία μπορεί να περιέχει απεριόριστο αριθμό όρων.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Κατηγορία όρων',
 	'ACP_BOARDRULES_RULE'					=> 'Όρος',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Επιλογή γλώσσας',

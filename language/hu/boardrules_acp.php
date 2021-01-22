@@ -57,6 +57,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Szabályzat kezelése',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Ezen az oldalon hozzáadhat, szerkeszthet, törölhet és módosíthat kategóriákat és szabályzatokat. A kategória a kapcsolódó szabályzatok egy csoportja. Minden kategória korlátlan számú szabályzatot tartalmazhat.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Szabályzat kategória',
 	'ACP_BOARDRULES_RULE'					=> 'Szabályzat',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Nyelv kiválasztás',

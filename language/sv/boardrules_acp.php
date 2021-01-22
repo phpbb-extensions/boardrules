@@ -58,6 +58,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Hantera reglerna',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'På denna sidan kan du skapa, uppdatera, radera och omorganisera kategorier och regler. En kategori är en grupp av liknande regler. Varja kategori kan innehålla ett obegränsat antal regler.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regelkategori',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Välj språk',

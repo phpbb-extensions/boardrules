@@ -57,6 +57,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Kuralları yönet',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Bu sayfadan kategori ve kuralları ekleyebilir, düzenleyebilir, silebilir ve yeniden sıralayabilirsiniz. Kategori ilişkili kurallar grubudur. Her kategoriye sınırsız sayıda kural ekleyebilirsiniz.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Kural kategorisi',
 	'ACP_BOARDRULES_RULE'					=> 'Kural',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Dil seç',

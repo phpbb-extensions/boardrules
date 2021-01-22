@@ -57,6 +57,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Редактирование правил',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'С помощью этой страницы вы можете добавлять, редактировать, удалять и менять порядок правил и категорий. Категория — набор связанных правил. В каждой категории может быть неограниченное количество правил.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Категория правил',
 	'ACP_BOARDRULES_RULE'					=> 'Правило',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Выберете язык',

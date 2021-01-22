@@ -58,6 +58,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Halda reegleid',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Siin lehel saad lisada, muuta, kustutada ja muuta järjestust reeglitel. Kategooria on grupp, seotud reeglitega. Igal kategoorial võib olla piiramatu arv reegleid.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Reegli kategooria',
 	'ACP_BOARDRULES_RULE'					=> 'Reegel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Vali keel',

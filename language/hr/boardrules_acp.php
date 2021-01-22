@@ -58,6 +58,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Upravljanje pravilima',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Ovdje možeš dod(av)ati, uređivati, izbrisivati i reorganizirati kategorije i pravila.<br />Kategorija je grupa povezanih pravila. Svaka kategorija može imati neograničen broj pravila.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Pravilo kategorije',
 	'ACP_BOARDRULES_RULE'					=> 'Pravilo',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Izaberi jezik',
