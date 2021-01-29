@@ -58,6 +58,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Zarządzanie przepisami',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Z tej strony można dodać, zmienić, usunąć albo zmienić kolejność rozdziałów i przepisów. Rozdział jest grupą powiązanych przepisów. Każdy rozdział może składać się z nieograniczonej liczby przepisów.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Rozdział regulaminu',
 	'ACP_BOARDRULES_RULE'					=> 'Przepis',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Wybierz język',

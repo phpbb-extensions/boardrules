@@ -58,6 +58,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Beheer regels',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Op deze pagina kan je regels en categorieën toevoegen, wijzigen, verwijderen en rangschikken. Een categorie is een groep gerelateerde regels. Elke categorie kan een onbeperkt aantal regels bevatten.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regelcategorie',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Selecteer taal',

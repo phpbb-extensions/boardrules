@@ -58,6 +58,7 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Gestionar Normas',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Desde esta página puede añadir, editar, borrar y re-ordenar categorías y normas. Una categoría es un grupo de normas relacionadas. Cada categoría puede tener un número ilimitado de normas.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Categoría de Norma',
 	'ACP_BOARDRULES_RULE'					=> 'Norma',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Seleccionar idioma',
