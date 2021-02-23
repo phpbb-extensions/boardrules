@@ -5,7 +5,9 @@
 $(function() {
 	// Function to apply highlight class to an element identifier
 	var highlight = function (id) {
-		$('#' + decodeURIComponent(id)).addClass('highlight');
+		if (id) {
+			$('#' + decodeURIComponent(id)).addClass('highlight');
+		}
 	};
 
 	// Apply highlight to clicked rule anchor
