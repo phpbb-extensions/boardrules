@@ -145,6 +145,12 @@ class admin_controller implements admin_interface
 			'S_BOARDRULES_ENABLE'					=> (bool) $this->config['boardrules_enable'],
 			'S_BOARDRULES_HEADER_LINK'				=> (bool) $this->config['boardrules_header_link'],
 			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'	=> (bool) $this->config['boardrules_require_at_registration'],
+
+			'BOARDRULES_LIST_STYLE'	=> build_select([
+				'' => 'ACP_BOARDRULES_LIST_STYLE_ORDERED',
+				'disc' => 'ACP_BOARDRULES_LIST_STYLE_BULLET',
+				'none' => 'ACP_BOARDRULES_LIST_STYLE_NONE',
+			], $this->config['boardrules_list_style']),
 		));
 	}
 
@@ -167,6 +173,7 @@ class admin_controller implements admin_interface
 		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
 		$this->config->set('boardrules_header_link', $this->request->variable('boardrules_header_link', 0));
 		$this->config->set('boardrules_require_at_registration', $this->request->variable('boardrules_require_at_registration', 0));
+		$this->config->set('boardrules_list_style', $this->request->variable('boardrules_list_style', ''));
 	}
 
 	/**
