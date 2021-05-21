@@ -169,11 +169,18 @@ class admin_controller implements admin_interface
 			trigger_error($this->lang->lang('ACP_BOARDRULES_FONT_ICON_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
+		// Validate list style (since it's injected into HTML)
+		$boardrules_list_style = $this->request->variable('boardrules_list_style', '');
+		if (!in_array($boardrules_list_style, ['', 'none', 'disc']))
+		{
+			$boardrules_list_style = '';
+		}
+
 		$this->config->set('boardrules_font_icon', $boardrules_font_icon);
 		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
 		$this->config->set('boardrules_header_link', $this->request->variable('boardrules_header_link', 0));
 		$this->config->set('boardrules_require_at_registration', $this->request->variable('boardrules_require_at_registration', 0));
-		$this->config->set('boardrules_list_style', $this->request->variable('boardrules_list_style', ''));
+		$this->config->set('boardrules_list_style', $boardrules_list_style);
 	}
 
 	/**
