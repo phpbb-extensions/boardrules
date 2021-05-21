@@ -131,3 +131,20 @@
 		margin: 0;
 	}
 }
+
+/* Non default ordered list modifiers (bulleted or none) */
+.content .br-list-style-disc {
+	list-style-type: disc;
+}
+
+.content .br-list-style-none {
+	list-style-type: none;
+}
+
+.content > .br-list-style-none {
+	margin-left: 0;
+}
+
+.rtl .content > .br-list-style-none {
+	margin-right: 0;
+}
