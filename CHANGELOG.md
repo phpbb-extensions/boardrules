@@ -2,6 +2,14 @@
 
 ## Vesion 2.x (for phpBB 3.2)
 
+### 2.1.3 - 2021-05-28
+
+- Added a new setting to choose whether rule and category list items be preceded by alpha-numeric ordinals, bullets or nothing.
+- Fixed links to FontAwesome from the ACP Rules Settings page.
+- Slightly adjusted the Rule Categories side-menu on the rules page to inherit more styling from the parent style, so it will be more compatible with 3rd party styles.
+- Added a more in-depth description to Board Language option screen in the ACP.
+- Fixed PHP 8 and JavaScript errors.
+
 ### 2.1.2 - 2019-11-20
 
 - Dropped support for subsilver2 style (and subsilver2 based styles).
