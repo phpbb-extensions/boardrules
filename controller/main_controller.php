@@ -162,6 +162,7 @@ class main_controller implements main_interface
 		$this->template->assign_vars(array(
 			'S_BOARD_RULES'			=> true,
 			'S_CATEGORIES'			=> $cat_counter > 1,
+			'BOARDRULES_LIST_STYLE'	=> $this->config['boardrules_list_style'],
 			'BOARDRULES_EXPLAIN'	=> $this->lang->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 

@@ -20,7 +20,7 @@
 	<h2 class="boardrules-header">{{ lang('BOARDRULES_HEADER') }}</h2>
 	<div id="main" class="content">
 		<p>{{ BOARDRULES_EXPLAIN }}</p>
-		<ol class="boardrules-rules">
+		<ol class="boardrules-rules{{ BOARDRULES_LIST_STYLE ? ' br-list-style-' ~ BOARDRULES_LIST_STYLE }}">
 			{% for rules in loops.rules %}
 				{% if rules.S_CLOSE_LIST %}
 						</ol>
@@ -28,7 +28,7 @@
 				{% elseif rules.S_IS_CATEGORY %}
 					<li id="{{ rules.U_ANCHOR }}">
 						<h3>{{ rules.TITLE }}</h3>
-						<ol>
+						<ol{{ BOARDRULES_LIST_STYLE ? ' class="br-list-style-' ~ BOARDRULES_LIST_STYLE ~ '"' }}>
 				{% else %}
 							<li class="rule-item" id="{{ rules.U_ANCHOR }}">
 								{{ rules.MESSAGE }} <a class="rule-anchor postlink" href="#{{ rules.U_ANCHOR }}">#</a>
