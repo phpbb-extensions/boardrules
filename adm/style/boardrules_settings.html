@@ -30,13 +30,13 @@
 		<dd><input name="boardrules_font_icon" id="boardrules_font_icon" placeholder="book" type="text" size="15" maxlength="255" value="{{ BOARDRULES_FONT_ICON }}" /> <i style="font-size:14px" class="icon fa-{{ BOARDRULES_FONT_ICON }}"></i></dd>
 	</dl>
 	<dl>
+		<dt><label for="boardrules_list_style">{{ lang('ACP_BOARDRULES_LIST_STYLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_LIST_STYLE_EXPLAIN') }}</span></dt>
+		<dd><label for="boardrules_list_style"><select name="boardrules_list_style" id="boardrules_list_style">{{ BOARDRULES_LIST_STYLE }}</select></label></dd>
+	</dl>
+	<dl>
 		<dt><label for="boardrules_require_at_registration">{{ lang('ACP_BOARDRULES_AT_REGISTRATION') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN') }}</span></dt>
 		<dd><label><input type="radio" class="radio" id="boardrules_require_at_registration" name="boardrules_require_at_registration" value="1"{% if S_BOARDRULES_REQUIRE_AT_REGISTRATION %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
 			<label><input type="radio" class="radio" name="boardrules_require_at_registration" value="0"{% if not S_BOARDRULES_REQUIRE_AT_REGISTRATION %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
-	</dl>
-	<dl>
-		<dt><label for="boardrules_list_style">{{ lang('ACP_BOARDRULES_LIST_STYLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_LIST_STYLE_EXPLAIN') }}</span></dt>
-		<dd><label for="boardrules_list_style"><select name="boardrules_list_style" id="boardrules_list_style">{{ BOARDRULES_LIST_STYLE }}</select></label></dd>
 	</dl>
 </fieldset>
 
