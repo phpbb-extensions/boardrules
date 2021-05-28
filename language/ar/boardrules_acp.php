@@ -54,6 +54,11 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'ارسال إشعار إلى جميع الأعضاء المسجلين بأنه تم تحديث قوانين المنتدى. ( عملية الإرسال قد تستغرق وقت أكثر في المنتديات التي لديها آلاف الأعضاء ).',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'متأكد أنك تريد إرسال الإشعارات إلى جميع الأعضاء ?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'تم تغيير الإعدادات بنجاح.',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
+	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'إدارة القوانين',

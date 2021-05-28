@@ -54,6 +54,11 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Enviar una notificación a todos los usuarios registrados que las Normas del Foro han sido actualizadas. (Esto puede tardar varios segundos en completarse en foros con muchos miles de miembros.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> '¿Está seguro de querer enviar notificaciones a todos los usuarios?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Ajustes de Normas del Foro cambiados.',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
+	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Gestionar Normas',
