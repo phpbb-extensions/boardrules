@@ -53,6 +53,11 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Send en notifikation til alle tilmeldte brugere om at boardreglerne er blevet opdateret. (Det kan tage adskillige sekunder at fuldføre på boards med tusindvis af medlemmer).',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Er du sikker på, at du vil sende notifikationer til alle brugere?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Ændret indstillinger for boardregler.',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
+	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Håndter regler',

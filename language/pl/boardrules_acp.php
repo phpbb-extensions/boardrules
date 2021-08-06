@@ -54,6 +54,11 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Wyślij powiadomienie do wszystkich zarejestrowanych użytkowników z informacją o zmianie regulaminu. (Operacja ta może zająć kilka sekund na witrynie z wieloma tysiącami użytkowników.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Czy na pewno chcesz wysłać powiadomienie do wszystkich użytkowników?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Ustawienia regulaminu witryny zostały zmienione.',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
+	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Zarządzanie przepisami',

@@ -28,7 +28,7 @@ class rule_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
 	protected $container;
 
 	/** @var \phpbb\db\driver\driver_interface */

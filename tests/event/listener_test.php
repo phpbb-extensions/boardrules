@@ -19,13 +19,13 @@ class listener_test extends \phpbb_test_case
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\controller\helper */
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\controller\helper */
 	protected $controller_helper;
 
 	/** @var \phpbb\language\language */
 	protected $lang;
 
-	/** @var \PHPUnit_Framework_MockObject_MockObject|\phpbb\template\template */
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\template\template */
 	protected $template;
 
 	/** @var string */
@@ -142,15 +142,12 @@ class listener_test extends \phpbb_test_case
 	{
 		$this->set_listener();
 
-		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
+		$dispatcher = new \phpbb\event\dispatcher();
 		$dispatcher->addListener('core.user_setup', array($this->listener, 'load_language_on_setup'));
 
 		$event_data = array('lang_set_ext');
-		$event = new \phpbb\event\data(compact($event_data));
-		$dispatcher->dispatch('core.user_setup', $event);
-
-		$lang_set_ext = $event->get_data_filtered($event_data);
-		$lang_set_ext = $lang_set_ext['lang_set_ext'];
+		$event_data_after = $dispatcher->trigger_event('core.user_setup', compact($event_data));
+		extract($event_data_after, EXTR_OVERWRITE);
 
 		foreach ($expected_contains as $expected)
 		{
@@ -243,9 +240,9 @@ class listener_test extends \phpbb_test_case
 			->method('assign_vars')
 			->with($expected);
 
-		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
+		$dispatcher = new \phpbb\event\dispatcher();
 		$dispatcher->addListener('core.page_header', array($this->listener, 'add_page_header_link'));
-		$dispatcher->dispatch('core.page_header');
+		$dispatcher->trigger_event('core.page_header');
 	}
 
 	/**
@@ -295,15 +292,12 @@ class listener_test extends \phpbb_test_case
 	{
 		$this->set_listener();
 
-		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
+		$dispatcher = new \phpbb\event\dispatcher();
 		$dispatcher->addListener('core.permissions', array($this->listener, 'add_permission'));
 
 		$event_data = array('permissions');
-		$event = new \phpbb\event\data(compact($event_data));
-		$dispatcher->dispatch('core.permissions', $event);
-
-		$permissions = $event->get_data_filtered($event_data);
-		$permissions = $permissions['permissions'];
+		$event_data_after = $dispatcher->trigger_event('core.permissions', compact($event_data));
+		extract($event_data_after, EXTR_OVERWRITE);
 
 		foreach ($expected_contains as $expected)
 		{
@@ -370,19 +364,12 @@ class listener_test extends \phpbb_test_case
 	{
 		$this->set_listener();
 
-		$dispatcher = new \Symfony\Component\EventDispatcher\EventDispatcher();
+		$dispatcher = new \phpbb\event\dispatcher();
 		$dispatcher->addListener('core.viewonline_overwrite_location', array($this->listener, 'viewonline_page'));
 
 		$event_data = array('on_page', 'row', 'location_url', 'location');
-		$event = new \phpbb\event\data(compact($event_data));
-		$dispatcher->dispatch('core.viewonline_overwrite_location', $event);
-
-		$event_data_after = $event->get_data_filtered($event_data);
-		foreach ($event_data as $expected)
-		{
-			self::assertArrayHasKey($expected, $event_data_after);
-		}
-		extract($event_data_after);
+		$event_data_after = $dispatcher->trigger_event('core.viewonline_overwrite_location', compact($event_data));
+		extract($event_data_after, EXTR_OVERWRITE);
 
 		self::assertEquals($expected_location_url, $location_url);
 		self::assertEquals($expected_location, $location);

@@ -53,6 +53,11 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Všem registrovaným uživatelům zaslat informace o změně v pravidlech. (To může trvat několik sekund v závislosti na počtu registrovaných uživatelů)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Opravdu chceš odeslat oznámení všem uživatelům na fóru?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Nastavení pravidel fóra změněno.',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
+	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Spravovat pravidla',

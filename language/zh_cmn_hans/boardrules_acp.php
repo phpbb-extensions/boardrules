@@ -53,6 +53,11 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> '给所有的注册用户发送论坛章程更新的通知。（用户数量较多的话，耗时也多）',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> '您确认要给所有用户都发送通知？',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> '论坛章程设置已改变。',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
+	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> '管理章程',
