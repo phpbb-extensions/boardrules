@@ -46,6 +46,9 @@ class admin_controller_test extends boardrules_functional_base
 	 */
 	public function test_acp_create_rule($crawler)
 	{
+		$this->login();
+		$this->admin_login();
+
 		// Jump to the create page
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 		$crawler = self::submit($form);
