@@ -43,6 +43,15 @@ class helper
 	}
 
 	/**
+	 * This is an unused function. To be removed if chita/topological_sort
+	 * stops requiring this be present in every class found inside the
+	 * migrations folder, even when it's not a migration class.
+	 */
+	public static function depends_on()
+	{
+	}
+
+	/**
 	 * Change rule_language values from lang_id to lang_iso
 	 *
 	 * @param string $new_column Name of the column to be updated
