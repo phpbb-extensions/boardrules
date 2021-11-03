@@ -71,7 +71,7 @@
 					<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-color-palette="v" data-height="12" data-width="15" data-bbcode="true"></dt>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px;">
 						<label>
-							<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" data-bbcode="true">{{ RULE_MESSAGE }}</textarea>
+							<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" data-bbcode="true">{{ RULE_MESSAGE }}</textarea>
 						</label>
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
@@ -96,6 +96,14 @@
 			{{ S_FORM_TOKEN }}
 		</fieldset>
 	</form>
+
+	<script>
+		const textarea = document.querySelector("textarea[name='rule_message']");
+		textarea.addEventListener("select", (e) => storeCaret(e.target));
+		textarea.addEventListener("click", (e) => storeCaret(e.target));
+		textarea.addEventListener("keyup", (e) => storeCaret(e.target));
+		textarea.addEventListener("focus", () => initInsertions());
+	</script>
 
 {% else %}
 
