@@ -27,7 +27,7 @@
 	</dl>
 	<dl>
 		<dt><label for="boardrules_font_icon">{{ lang('ACP_BOARDRULES_FONT_ICON') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_FONT_ICON_EXPLAIN', 'https://fontawesome.com/v4.7.0/icons/') }}</span></dt>
-		<dd><input name="boardrules_font_icon" id="boardrules_font_icon" placeholder="book" type="text" size="15" maxlength="255" value="{{ BOARDRULES_FONT_ICON }}" /> <i style="font-size:14px" class="icon fa-{{ BOARDRULES_FONT_ICON }}"></i></dd>
+		<dd><input name="boardrules_font_icon" id="boardrules_font_icon" placeholder="book" type="text" size="15" maxlength="255" value="{{ BOARDRULES_FONT_ICON }}" style="margin-right:5px;" /><span class="iconify-inline" data-icon="{{ ':' in BOARDRULES_FONT_ICON ? BOARDRULES_FONT_ICON : 'fa:' ~ BOARDRULES_FONT_ICON }}"></span></dd>
 	</dl>
 	<dl>
 		<dt><label for="boardrules_list_style">{{ lang('ACP_BOARDRULES_LIST_STYLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_LIST_STYLE_EXPLAIN') }}</span></dt>
@@ -55,5 +55,7 @@
 </fieldset>
 </form>
 
+{% INCLUDEJS T_ASSETS_PATH ~ '/iconify/iconify-bundle.js' %}
+{% INCLUDEJS T_ASSETS_PATH ~ '/iconify/iconify.min.js' %}
 {% INCLUDEJS '@phpbb_boardrules/boardrules.js' %}
 {% INCLUDE 'overall_footer.html' %}

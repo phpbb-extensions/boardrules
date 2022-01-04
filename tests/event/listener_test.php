@@ -170,25 +170,25 @@ class listener_test extends \phpbb_test_case
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(1, 1, 0, 'foo', array(
-				'BOARDRULES_FONT_ICON' => 'foo',
+				'BOARDRULES_FONT_ICON' => 'fa:foo',
 				'S_BOARDRULES_LINK_ENABLED' => true,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
 			array(1, 0, 1, 'bar', array(
-				'BOARDRULES_FONT_ICON' => 'bar',
+				'BOARDRULES_FONT_ICON' => 'fa:bar',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => true,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(1, 0, 0, 'foobar', array(
-				'BOARDRULES_FONT_ICON' => 'foobar',
+			array(1, 0, 0, 'fa:foobar', array(
+				'BOARDRULES_FONT_ICON' => 'fa:foobar',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',
 			)),
-			array(0, 1, 1, 'barfoo', array(
-				'BOARDRULES_FONT_ICON' => 'barfoo',
+			array(0, 1, 1, 'mdi:barfoo', array(
+				'BOARDRULES_FONT_ICON' => 'mdi:barfoo',
 				'S_BOARDRULES_LINK_ENABLED' => false,
 				'S_BOARDRULES_AT_REGISTRATION' => false,
 				'U_BOARDRULES' => 'phpbb_boardrules_main_controller#a:0:{}',

@@ -164,7 +164,7 @@ class admin_controller implements admin_interface
 	{
 		// Validate font icon field characters
 		$boardrules_font_icon = $this->request->variable('boardrules_font_icon', '');
-		if (!empty($boardrules_font_icon) && !preg_match('/^[a-z0-9-]+$/', $boardrules_font_icon))
+		if (!empty($boardrules_font_icon) && !preg_match('/^[a-z0-9-:]+$/', $boardrules_font_icon))
 		{
 			trigger_error($this->lang->lang('ACP_BOARDRULES_FONT_ICON_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
