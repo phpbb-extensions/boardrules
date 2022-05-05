@@ -1,0 +1,23 @@
+/**
+* Some CSS adapted from phpBB.com rules page
+*/
+
+/* rules */
+
+
+.boardrules-rules ol {
+	list-style: lower-alpha;
+}
+
+.boardrules-rules ol li ol {
+	list-style: lower-roman;
+}
+
+/* Non default ordered list modifiers (bulleted or none) */
+.content .br-list-style-disc {
+	list-style-type: disc;
+}
+
+.content .br-list-style-none {
+	list-style-type: none;
+}

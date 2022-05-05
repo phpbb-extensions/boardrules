@@ -1,0 +1,47 @@
+{% INCLUDECSS '@phpbb_boardrules/boardrules_controller.css' %}
+{% INCLUDE 'overall_header.html' %}
+
+
+{% if S_CATEGORIES %}
+<div class="row gx-0 flex-row-reverse">
+<div class="boardrules-categories col-md-3">
+	<div class="bg1 bg-secondary bg-opacity-10 mini-panel rounded-3 p2">
+		<div class="inner p-2">
+			<h3 class="fs-5 border-bottom">{{ lang('BOARDRULES_CATEGORIES') }}</h3>
+			<ul class="boardrules-menu list-unstyled">
+				{% for rules in loops.rules %}
+					{% if rules.S_IS_CATEGORY %}<li><a class="text-decoration-none" href="#{{ rules.U_ANCHOR }}">{{ rules.TITLE }}</a></li>{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<div class="boardrules-container {% if S_CATEGORIES %}col-md-9{% endif %}">
+	<h2 class="boardrules-header fs-5">{{ lang('BOARDRULES_HEADER') }}</h2>
+	<div id="main" class="content">
+		<p>{{ BOARDRULES_EXPLAIN }}</p>
+		<ol class="boardrules-rules{{ BOARDRULES_LIST_STYLE ? ' br-list-style-' ~ BOARDRULES_LIST_STYLE }}">
+			{% for rules in loops.rules %}
+				{% if rules.S_CLOSE_LIST %}
+						</ol>
+					</li>
+				{% elseif rules.S_IS_CATEGORY %}
+					<li class="mb-3" id="{{ rules.U_ANCHOR }}">
+						<h3 class="fs-5">{{ rules.TITLE }}</h3>
+						<ol{{ BOARDRULES_LIST_STYLE ? ' class="br-list-style-' ~ BOARDRULES_LIST_STYLE ~ '"' }}>
+				{% else %}
+							<li class="rule-item" id="{{ rules.U_ANCHOR }}">
+								{{ rules.MESSAGE }} <a class="rule-anchor postlink" href="#{{ rules.U_ANCHOR }}">#</a>
+							</li>
+				{% endif %}
+			{% endfor %}
+		</ol>
+	</div>
+</div>
+{% if S_CATEGORIES %}
+</div>
+{% endif %}
+{% INCLUDEJS '@phpbb_boardrules/boardrules_controller.js' %}
+{% INCLUDE 'overall_footer.html' %}

@@ -1,0 +1,7 @@
+{% if S_BOARDRULES_LINK_ENABLED%}
+	<li class="nav-item" data-last-responsive="true">
+		<a class="nav-link px-1 py-0 text-body" href="{{ U_BOARDRULES }}" rel="help" title="{{ lang('BOARDRULES_TITLE') }}" role="menuitem">
+			{% if BOARDRULES_FONT_ICON %}<i class="fa fs-5 fa-{{ BOARDRULES_FONT_ICON }} fa-fw" aria-hidden="true"></i>{% endif %}<span>{{ lang('BOARDRULES') }}</span>
+		</a>
+	</li>
+{% endif %}
