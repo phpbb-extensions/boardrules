@@ -28,9 +28,9 @@ class base extends \Exception
 	*
 	* Different from normal exceptions in that we do not enforce $message to be a string.
 	*
-	* @param string|array $message
+	* @param string|array|null $message
 	* @param int $code
-	* @param \Exception $previous
+	* @param \Exception|null $previous
 	* @access public
 	*/
 	public function __construct($message = null, $code = 0, \Exception $previous = null)

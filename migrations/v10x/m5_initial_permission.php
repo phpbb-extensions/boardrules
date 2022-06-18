@@ -22,7 +22,7 @@ class m5_initial_permission extends \phpbb\db\migration\migration
 	* @static
 	* @access public
 	*/
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array('\phpbb\boardrules\migrations\v10x\m1_initial_schema');
 	}
@@ -40,8 +40,14 @@ class m5_initial_permission extends \phpbb\db\migration\migration
 			array('permission.add', array('a_boardrules', true)),
 
 			// Set permissions
-			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_boardrules')),
-			array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 'a_boardrules')),
+			array('if', array(
+				array('permission.role_exists', array('ROLE_ADMIN_FULL')),
+				array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_boardrules')),
+			)),
+			array('if', array(
+				array('permission.role_exists', array('ROLE_ADMIN_STANDARD')),
+				array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 'a_boardrules')),
+			)),
 		);
 	}
 }
