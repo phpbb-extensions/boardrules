@@ -40,8 +40,14 @@ class m5_initial_permission extends \phpbb\db\migration\migration
 			array('permission.add', array('a_boardrules', true)),
 
 			// Set permissions
-			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_boardrules')),
-			array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 'a_boardrules')),
+			array('if', array(
+				array('permission.role_exists', array('ROLE_ADMIN_FULL')),
+				array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_boardrules')),
+			)),
+			array('if', array(
+				array('permission.role_exists', array('ROLE_ADMIN_STANDARD')),
+				array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 'a_boardrules')),
+			)),
 		);
 	}
 }

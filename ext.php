@@ -31,15 +31,14 @@ class ext extends \phpbb\extension\base
 	* The current phpBB version should meet or exceed
 	* the minimum version required by this extension:
 	*
-	* Requires phpBB 3.2.0 due to new faq controller route for bbcodes,
-	* the revised notifications system, font awesome and the text reparser.
+	* Requires phpBB 3.3.2 due to using role_exists check in permission migration.
 	*
 	* @return bool
 	* @access public
 	*/
 	public function is_enableable()
 	{
-		return phpbb_version_compare(PHPBB_VERSION, '3.2.0', '>=');
+		return phpbb_version_compare(PHPBB_VERSION, '3.3.2', '>=');
 	}
 
 	/**
