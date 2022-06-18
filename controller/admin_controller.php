@@ -444,7 +444,7 @@ class admin_controller implements admin_interface
 			}
 
 			// Do not allow an empty rule title
-			if ($entity->get_title() == '')
+			if ($entity->get_title() === '')
 			{
 				$errors[] = $this->lang->lang('ACP_RULE_TITLE_EMPTY');
 			}
@@ -713,7 +713,7 @@ class admin_controller implements admin_interface
 			}
 			else if ($rule_menu_item->get_left_id() > $right + 1)
 			{
-				$padding = isset($padding_store[$rule_menu_item->get_parent_id()]) ? $padding_store[$rule_menu_item->get_parent_id()] : '';
+				$padding = $padding_store[$rule_menu_item->get_parent_id()] ?? '';
 			}
 
 			$right = $rule_menu_item->get_right_id();

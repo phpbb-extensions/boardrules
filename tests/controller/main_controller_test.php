@@ -64,7 +64,6 @@ class main_controller_test extends \phpbb_test_case
 		/** @var \phpbb\controller\helper $controller_helper */
 		/** @var \phpbb\boardrules\operators\rule $rule_operator */
 		/** @var \phpbb\template\template $template */
-		/** @var \phpbb\user $user */
 		$controller = new \phpbb\boardrules\controller\main_controller(
 			$config,
 			$controller_helper,

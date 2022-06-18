@@ -51,15 +51,15 @@ class boardrules extends \phpbb\notification\type\base
 	/**
 	 * {@inheritdoc}
 	 */
-	public static function get_item_id($data)
+	public static function get_item_id($type_data)
 	{
-		return $data['notification_id'];
+		return $type_data['notification_id'];
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public static function get_item_parent_id($data)
+	public static function get_item_parent_id($type_data)
 	{
 		// No parent
 		return 0;
@@ -68,7 +68,7 @@ class boardrules extends \phpbb\notification\type\base
 	/**
 	 * {@inheritdoc}
 	 */
-	public function find_users_for_notification($data, $options = array())
+	public function find_users_for_notification($type_data, $options = array())
 	{
 		// Grab all registered users (excluding bots and guests)
 		$sql = 'SELECT user_id
@@ -131,10 +131,10 @@ class boardrules extends \phpbb\notification\type\base
 	/**
 	 * {@inheritdoc}
 	 */
-	public function create_insert_array($data, $pre_create_data = array())
+	public function create_insert_array($type_data, $pre_create_data = array())
 	{
-		$this->set_data('rule_id', $data['rule_id']);
+		$this->set_data('rule_id', $type_data['rule_id']);
 
-		parent::create_insert_array($data, $pre_create_data);
+		parent::create_insert_array($type_data, $pre_create_data);
 	}
 }

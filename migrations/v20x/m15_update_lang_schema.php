@@ -25,7 +25,7 @@ class m15_update_lang_schema extends \phpbb\db\migration\migration
 	/**
 	 * @inheritDoc
 	 */
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array(
 			'\phpbb\boardrules\migrations\v10x\m7_sample_rule_data',

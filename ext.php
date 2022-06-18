@@ -19,7 +19,7 @@ namespace phpbb\boardrules;
 * enable_step(), disable_step() and purge_step(). As it is, these methods are defined
 * in phpbb_extension_base, which this class extends, but you can overwrite them to
 * give special instructions for those cases. Board Rules must do this because it uses
-* the notifications system, which requires the methods enable_notifications(),
+* the notifications' system, which requires the methods enable_notifications(),
 * disable_notifications() and purge_notifications() be run to properly manage the
 * notifications created by Board Rules when enabling, disabling or deleting this
 * extension.
@@ -27,7 +27,7 @@ namespace phpbb\boardrules;
 class ext extends \phpbb\extension\base
 {
 	/**
-	* Check whether or not the extension can be enabled.
+	* Check whether the extension can be enabled.
 	* The current phpBB version should meet or exceed
 	* the minimum version required by this extension:
 	*
@@ -46,29 +46,22 @@ class ext extends \phpbb\extension\base
 	* before any included migrations are installed.
 	*
 	* @param mixed $old_state State returned by previous call of this method
-	* @return mixed Returns false after last step, otherwise temporary state
+	* @return bool|string Returns false after last step, otherwise temporary state
 	* @access public
 	*/
 	public function enable_step($old_state)
 	{
-		switch ($old_state)
+		// if nothing has run yet
+		if ($old_state === false)
 		{
-			case '': // Empty means nothing has run yet
-
-				// Enable board rules notifications
-				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->enable_notifications('phpbb.boardrules.notification.type.boardrules');
-				return 'notifications';
-
-			break;
-
-			default:
-
-				// Run parent enable step method
-				return parent::enable_step($old_state);
-
-			break;
+			// Enable board rules notifications
+			$phpbb_notifications = $this->container->get('notification_manager');
+			$phpbb_notifications->enable_notifications('phpbb.boardrules.notification.type.boardrules');
+			return 'notifications';
 		}
+
+		// Run parent enable step method
+		return parent::enable_step($old_state);
 	}
 
 	/**
@@ -76,29 +69,22 @@ class ext extends \phpbb\extension\base
 	* before the extension is disabled.
 	*
 	* @param mixed $old_state State returned by previous call of this method
-	* @return mixed Returns false after last step, otherwise temporary state
+	* @return bool|string Returns false after last step, otherwise temporary state
 	* @access public
 	*/
 	public function disable_step($old_state)
 	{
-		switch ($old_state)
+		// if nothing has run yet
+		if ($old_state === false)
 		{
-			case '': // Empty means nothing has run yet
-
-				// Disable board rules notifications
-				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->disable_notifications('phpbb.boardrules.notification.type.boardrules');
-				return 'notifications';
-
-			break;
-
-			default:
-
-				// Run parent disable step method
-				return parent::disable_step($old_state);
-
-			break;
+			// Disable board rules notifications
+			$phpbb_notifications = $this->container->get('notification_manager');
+			$phpbb_notifications->disable_notifications('phpbb.boardrules.notification.type.boardrules');
+			return 'notifications';
 		}
+
+		// Run parent disable step method
+		return parent::disable_step($old_state);
 	}
 
 	/**
@@ -106,28 +92,21 @@ class ext extends \phpbb\extension\base
 	* any included and installed migrations are reverted.
 	*
 	* @param mixed $old_state State returned by previous call of this method
-	* @return mixed Returns false after last step, otherwise temporary state
+	* @return bool|string Returns false after last step, otherwise temporary state
 	* @access public
 	*/
 	public function purge_step($old_state)
 	{
-		switch ($old_state)
+		// if nothing has run yet
+		if ($old_state === false)
 		{
-			case '': // Empty means nothing has run yet
-
-				// Purge board rules notifications
-				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->purge_notifications('phpbb.boardrules.notification.type.boardrules');
-				return 'notifications';
-
-			break;
-
-			default:
-
-				// Run parent purge step method
-				return parent::purge_step($old_state);
-
-			break;
+			// Purge board rules notifications
+			$phpbb_notifications = $this->container->get('notification_manager');
+			$phpbb_notifications->purge_notifications('phpbb.boardrules.notification.type.boardrules');
+			return 'notifications';
 		}
+
+		// Run parent purge step method
+		return parent::purge_step($old_state);
 	}
 }

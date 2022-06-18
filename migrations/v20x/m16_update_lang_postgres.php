@@ -25,7 +25,7 @@ class m16_update_lang_postgres extends \phpbb\db\migration\migration
 	/**
 	 * @inheritDoc
 	 */
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array(
 			'\phpbb\boardrules\migrations\v10x\m7_sample_rule_data',
@@ -65,7 +65,7 @@ class m16_update_lang_postgres extends \phpbb\db\migration\migration
 		$boardrules_table = $this->table_prefix . 'boardrules';
 
 		// Rename existing column to a temporary name
-		$sql = 'ALTER TABLE ' . $boardrules_table . ' 
+		$sql = 'ALTER TABLE ' . $boardrules_table . '
 			RENAME COLUMN rule_language TO old_rule_language';
 		$this->db->sql_query($sql);
 
