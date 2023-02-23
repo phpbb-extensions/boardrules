@@ -173,6 +173,6 @@ class main_controller implements main_interface
 		));
 
 		// Send all data to the template file
-		return $this->helper->render('boardrules_controller.html', $this->lang->lang('BOARDRULES'));
+		return $this->helper->render('@phpbb_boardrules/boardrules_controller.html', $this->lang->lang('BOARDRULES'));
 	}
 }

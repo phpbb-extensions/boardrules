@@ -41,5 +41,6 @@ ratings:
   - "**.rb"
 exclude_paths:
 - config/
+- language/
 - tests/
 - .github/

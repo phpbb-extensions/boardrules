@@ -20,7 +20,7 @@ class main_controller_test extends \phpbb_test_case
 	public function display_data()
 	{
 		return array(
-			array(200, 'boardrules_controller.html'),
+			array(200, '@phpbb_boardrules/boardrules_controller.html'),
 		);
 	}
 
@@ -64,7 +64,6 @@ class main_controller_test extends \phpbb_test_case
 		/** @var \phpbb\controller\helper $controller_helper */
 		/** @var \phpbb\boardrules\operators\rule $rule_operator */
 		/** @var \phpbb\template\template $template */
-		/** @var \phpbb\user $user */
 		$controller = new \phpbb\boardrules\controller\main_controller(
 			$config,
 			$controller_helper,

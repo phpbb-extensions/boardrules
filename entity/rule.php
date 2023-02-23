@@ -274,7 +274,7 @@ class rule implements rule_interface
 		$title = (string) $title;
 
 		// We limit the title length to 200 characters
-		if (truncate_string($title, 200) != $title)
+		if (truncate_string($title, 200) !== $title)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
@@ -294,8 +294,8 @@ class rule implements rule_interface
 	public function get_message_for_edit()
 	{
 		// Use defaults if these haven't been set yet
-		$message = isset($this->data['rule_message']) ? $this->data['rule_message'] : '';
-		$uid = isset($this->data['rule_message_bbcode_uid']) ? $this->data['rule_message_bbcode_uid'] : '';
+		$message = $this->data['rule_message'] ?? '';
+		$uid = $this->data['rule_message_bbcode_uid'] ?? '';
 		$options = isset($this->data['rule_message_bbcode_options']) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for edit
@@ -314,9 +314,9 @@ class rule implements rule_interface
 	public function get_message_for_display($censor_text = true)
 	{
 		// If these haven't been set yet; use defaults
-		$message = isset($this->data['rule_message']) ? $this->data['rule_message'] : '';
-		$uid = isset($this->data['rule_message_bbcode_uid']) ? $this->data['rule_message_bbcode_uid'] : '';
-		$bitfield = isset($this->data['rule_message_bbcode_bitfield']) ? $this->data['rule_message_bbcode_bitfield'] : '';
+		$message = $this->data['rule_message'] ?? '';
+		$uid = $this->data['rule_message_bbcode_uid'] ?? '';
+		$bitfield = $this->data['rule_message_bbcode_bitfield'] ?? '';
 		$options = isset($this->data['rule_message_bbcode_options']) ? (int) $this->data['rule_message_bbcode_options'] : 0;
 
 		// Generate for display
@@ -481,13 +481,13 @@ class rule implements rule_interface
 		$anchor = (string) $anchor;
 
 		// Anchor should not contain any special characters
-		if (($anchor != '') && !preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/', $anchor))
+		if (($anchor !== '') && !preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/', $anchor))
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}
 
 		// We limit the anchor length to 255 characters
-		if (truncate_string($anchor, 255) != $anchor)
+		if (truncate_string($anchor, 255) !== $anchor)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
 		}
@@ -526,7 +526,7 @@ class rule implements rule_interface
 	*/
 	public function get_language()
 	{
-		return isset($this->data['rule_language']) ? $this->data['rule_language'] : '';
+		return $this->data['rule_language'] ?? '';
 	}
 
 	/**
@@ -608,7 +608,7 @@ class rule implements rule_interface
 	protected function set_message_option($option_value, $negate = false, $reparse_message = true)
 	{
 		// Set rule_message_bbcode_options to 0 if it does not yet exist
-		$this->data['rule_message_bbcode_options'] = isset($this->data['rule_message_bbcode_options']) ? $this->data['rule_message_bbcode_options'] : 0;
+		$this->data['rule_message_bbcode_options'] = $this->data['rule_message_bbcode_options'] ?? 0;
 
 		// If we're setting the option and the option is not already set
 		if (!$negate && !($this->data['rule_message_bbcode_options'] & $option_value))
