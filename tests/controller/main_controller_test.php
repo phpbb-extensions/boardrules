@@ -20,7 +20,7 @@ class main_controller_test extends \phpbb_test_case
 	public function display_data()
 	{
 		return array(
-			array(200, 'boardrules_controller.html'),
+			array(200, '@phpbb_boardrules/boardrules_controller.html'),
 		);
 	}
 
