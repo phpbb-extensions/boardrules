@@ -51,12 +51,12 @@
 				</select></dd>
 			</dl>
 			<dl>
-				<dt><label for="rule_title">{{ lang('ACP_RULE_TITLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_RULE_TITLE_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="rule_title" name="rule_title" value="{{ RULE_TITLE }}" maxlength="200" /></dd>
+				<dt><label for="rule_title">{{ lang('ACP_RULE_TITLE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_RULE_TITLE_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="rule_title" name="rule_title" value="{{ RULE_TITLE }}" maxlength="200"></dd>
 			</dl>
 			<dl>
-				<dt><label for="rule_anchor">{{ lang('ACP_RULE_ANCHOR') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_RULE_ANCHOR_EXPLAIN') }}</span></dt>
-				<dd><input class="text medium" type="text" id="rule_anchor" name="rule_anchor" value="{{ RULE_ANCHOR }}" maxlength="255" /></dd>
+				<dt><label for="rule_anchor">{{ lang('ACP_RULE_ANCHOR') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_RULE_ANCHOR_EXPLAIN') }}</span></dt>
+				<dd><input class="text medium" type="text" id="rule_anchor" name="rule_anchor" value="{{ RULE_ANCHOR }}" maxlength="255"></dd>
 			</dl>
 		</fieldset>
 
@@ -76,13 +76,13 @@
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
 						{% if S_BBCODE_ALLOWED %}
-							<label><input type="checkbox" class="radio" name="disable_bbcode"{% if S_BBCODE_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %} /> {{ lang('DISABLE_BBCODE') }}</label>
+							<label><input type="checkbox" class="radio" name="disable_bbcode"{% if S_BBCODE_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %}> {{ lang('DISABLE_BBCODE') }}</label>
 						{% endif %}
 						{% if S_SMILIES_ALLOWED %}
-							<label><input type="checkbox" class="radio" name="disable_smilies"{% if S_SMILIES_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %} /> {{ lang('DISABLE_SMILIES') }}</label>
+							<label><input type="checkbox" class="radio" name="disable_smilies"{% if S_SMILIES_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %}> {{ lang('DISABLE_SMILIES') }}</label>
 						{% endif %}
 						{% if S_LINKS_ALLOWED %}
-							<label><input type="checkbox" class="radio" name="disable_magic_url"{% if S_MAGIC_URL_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %} /> {{ lang('DISABLE_MAGIC_URL') }}</label>
+							<label><input type="checkbox" class="radio" name="disable_magic_url"{% if S_MAGIC_URL_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %}> {{ lang('DISABLE_MAGIC_URL') }}</label>
 						{% endif %}
 					</dd>
 					<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
@@ -91,8 +91,8 @@
 		</fieldset>
 
 		<fieldset class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
-			{% if not S_IS_CATEGORY %}<input class="button2" type="submit" id="preview" name="preview" value="{{ lang('PREVIEW') }}" />{% endif %}
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+			{% if not S_IS_CATEGORY %}<input class="button2" type="submit" id="preview" name="preview" value="{{ lang('PREVIEW') }}">{% endif %}
 			{{ S_FORM_TOKEN }}
 		</fieldset>
 	</form>
@@ -147,7 +147,7 @@
 
 		{% if loops.rules|length %}
 			<table class="table1 forums">
-				<colgroup><col class="row1" /><col class="row1" /><col class="row2" /></colgroup>
+				<colgroup><col class="row1"><col class="row1"><col class="row2"></colgroup>
 				<thead>
 					<tr>
 						<th colspan="2">{{ lang('ACP_BOARDRULES') }}</th>
@@ -158,7 +158,7 @@
 					{% for rules in loops.rules %}
 						<tr>
 							<td class="folder">
-								{% if rules.S_IS_CATEGORY %}<img src="images/icon_subfolder.gif" alt="{{ lang('ACP_BOARDRULES_CATEGORY') }}" />{% else %}<img src="images/icon_folder.gif" alt="{{ lang('ACP_BOARDRULES_RULE') }}" />{% endif %}
+								{% if rules.S_IS_CATEGORY %}<img src="images/icon_subfolder.gif" width="27" height="27" alt="{{ lang('ACP_BOARDRULES_CATEGORY') }}">{% else %}<img src="images/icon_folder.gif" width="27" height="27" alt="{{ lang('ACP_BOARDRULES_RULE') }}">{% endif %}
 							</td>
 							<td class="forum-desc">
 								<strong><a href="{{ rules.U_RULE }}">{{ rules.RULE_TITLE }}</a></strong>
@@ -182,10 +182,10 @@
 		<fieldset class="quick">
 			{{ lang('ACP_ADD_RULE') ~ lang('COLON') }}
 			<label>
-				<input type="text" name="rule_title" value="" maxlength="200" placeholder="{{ lang('ACP_RULE_TITLE') }}" />
+				<input type="text" name="rule_title" value="" maxlength="200" placeholder="{{ lang('ACP_RULE_TITLE') }}">
 			</label>
-			<input type="submit" name="addrule" class="button2" value="{{ lang('SUBMIT') }}" />
-			<input type="hidden" name="action" value="add" />
+			<input type="submit" name="addrule" class="button2" value="{{ lang('SUBMIT') }}">
+			<input type="hidden" name="action" value="add">
 			{{ S_FORM_TOKEN }}
 		</fieldset>
 		</form>
