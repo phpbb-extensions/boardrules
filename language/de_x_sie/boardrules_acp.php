@@ -2,7 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.2
+* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.3
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -53,17 +53,17 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY'					=> 'Mitglieder erinnern',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Allen Registrierten eine Mitteilung über die Änderung der Board-Regeln zusenden. Das Versenden der Mitteilung kann einige Minuten dauern.',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Sind Sie sicher, allen Mitgliedern diese Nachricht übersenden zu wollen?',
-	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Einstellungen der Board-Regeln.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
-	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
+	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Einstellungen der Board-Regeln | Einstellungen geändert.',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Listenformat der Board-Regeln',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Die Board-Regeln werden im Listenformat präsentiert. Legen Sie fest, ob vor Regel- und Kategorieelementen geordnete alphanumerische Ordnungszahlen (dies ist das Standardverhalten), Aufzählungszeichen (Bullets) oder keine stehen sollen.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Alphanumerisch geordnet',
 	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Keines',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Regeln verwalten',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Hier können Sie Kategorien und Regeln hinzufügen, ändern und löschen. Kategorien sind Regelblöcke mit ähnlichen Regeln. Jede Kategorie kann unendlich viele Regeln enthalten.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Wählen Sie eine Sprache für Ihre Boardregeln. Die Benutzer sehen die Regeln, die Sie für ihre bevorzugte Sprache erstellen. Wenn Sie keine Regeln in der bevorzugten Sprache erstellen, sehen die Benutzer die Regeln, die in der Standardsprache des Forums erstellt wurden.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regel-Kategorie',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Sprache auswählen',

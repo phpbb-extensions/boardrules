@@ -2,6 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
+* Turkish translation by ESQARE (https://www.phpbbturkey.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -38,8 +39,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'			=> 'Site kuralları',
-	'BOARDRULES_EXPLAIN'		=> 'Bu kurallar, %s sitesindeki tüm topluluk üyelerinin çeşitli sorumluluklarını açıklığa kavuşturmak için açıklanmıştır. Bunların herkes tarafından uyulması gerekir ve tüm site üyeleri ve ziyaretçiler için daha eğlenceli ve üretken bir ortam oluşturmak için konulmuştur.',
+	'BOARDRULES_HEADER'			=> 'Mesaj panosu kuralları',
+	'BOARDRULES_EXPLAIN'		=> 'Bu kurallar %s üzerindeki tüm üyelerin buradaki çeşitli sorumluluklarını netleştirmek için açıklanmıştır. Mesaj panomuzun sorunsuz çalışmasını sağlamak için bu kurallara herkes tarafından uyulmalı, tüm üyeler ve ziyaretçiler için eğlenceli ve verimli bir deneyim ortamı sağlanmalıdır.',
 	'BOARDRULES_CATEGORIES'		=> 'Kural bölümleri',
 	'BOARDRULES_CATEGORY_ANCHOR'=> 'bölüm-%s',
 	'BOARDRULES_RULE_ANCHOR'	=> 'kural-%s',
