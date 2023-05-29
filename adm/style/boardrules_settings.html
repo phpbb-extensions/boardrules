@@ -17,40 +17,40 @@
 	<legend>{{ lang('ACP_BOARDRULES_SETTINGS') }}</legend>
 	<dl>
 		<dt><label for="boardrules_enable">{{ lang('ACP_BOARDRULES_ENABLE') ~ lang('COLON') }}</label></dt>
-		<dd><label><input type="radio" class="radio" id="boardrules_enable" name="boardrules_enable" value="1"{% if S_BOARDRULES_ENABLE %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-			<label><input type="radio" class="radio" name="boardrules_enable" value="0"{% if not S_BOARDRULES_ENABLE %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+		<dd><label><input type="radio" class="radio" id="boardrules_enable" name="boardrules_enable" value="1"{% if S_BOARDRULES_ENABLE %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="boardrules_enable" value="0"{% if not S_BOARDRULES_ENABLE %} checked="checked"{% endif %}> {{ lang('NO') }}</label></dd>
 	</dl>
 	<dl>
 		<dt><label for="boardrules_header_link">{{ lang('ACP_BOARDRULES_HEADER_LINK') ~ lang('COLON') }}</label></dt>
-		<dd><label><input type="radio" class="radio" id="boardrules_header_link" name="boardrules_header_link" value="1"{% if S_BOARDRULES_HEADER_LINK %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-			<label><input type="radio" class="radio" name="boardrules_header_link" value="0"{% if not S_BOARDRULES_HEADER_LINK %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+		<dd><label><input type="radio" class="radio" id="boardrules_header_link" name="boardrules_header_link" value="1"{% if S_BOARDRULES_HEADER_LINK %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="boardrules_header_link" value="0"{% if not S_BOARDRULES_HEADER_LINK %} checked="checked"{% endif %}> {{ lang('NO') }}</label></dd>
 	</dl>
 	<dl>
-		<dt><label for="boardrules_font_icon">{{ lang('ACP_BOARDRULES_FONT_ICON') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_FONT_ICON_EXPLAIN', 'https://fontawesome.com/v4.7.0/icons/') }}</span></dt>
-		<dd><input name="boardrules_font_icon" id="boardrules_font_icon" placeholder="book" type="text" size="15" maxlength="255" value="{{ BOARDRULES_FONT_ICON }}" /> <i style="font-size:14px" class="icon fa-{{ BOARDRULES_FONT_ICON }}"></i></dd>
+		<dt><label for="boardrules_font_icon">{{ lang('ACP_BOARDRULES_FONT_ICON') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_BOARDRULES_FONT_ICON_EXPLAIN', 'https://fontawesome.com/v4.7.0/icons/') }}</span></dt>
+		<dd><input name="boardrules_font_icon" id="boardrules_font_icon" placeholder="book" type="text" size="15" maxlength="255" value="{{ BOARDRULES_FONT_ICON }}"> <i style="font-size:14px" class="icon fa-{{ BOARDRULES_FONT_ICON }}"></i></dd>
 	</dl>
 	<dl>
-		<dt><label for="boardrules_list_style">{{ lang('ACP_BOARDRULES_LIST_STYLE') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_LIST_STYLE_EXPLAIN') }}</span></dt>
+		<dt><label for="boardrules_list_style">{{ lang('ACP_BOARDRULES_LIST_STYLE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_BOARDRULES_LIST_STYLE_EXPLAIN') }}</span></dt>
 		<dd><label for="boardrules_list_style"><select name="boardrules_list_style" id="boardrules_list_style">{{ BOARDRULES_LIST_STYLE }}</select></label></dd>
 	</dl>
 	<dl>
-		<dt><label for="boardrules_require_at_registration">{{ lang('ACP_BOARDRULES_AT_REGISTRATION') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN') }}</span></dt>
-		<dd><label><input type="radio" class="radio" id="boardrules_require_at_registration" name="boardrules_require_at_registration" value="1"{% if S_BOARDRULES_REQUIRE_AT_REGISTRATION %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-			<label><input type="radio" class="radio" name="boardrules_require_at_registration" value="0"{% if not S_BOARDRULES_REQUIRE_AT_REGISTRATION %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+		<dt><label for="boardrules_require_at_registration">{{ lang('ACP_BOARDRULES_AT_REGISTRATION') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN') }}</span></dt>
+		<dd><label><input type="radio" class="radio" id="boardrules_require_at_registration" name="boardrules_require_at_registration" value="1"{% if S_BOARDRULES_REQUIRE_AT_REGISTRATION %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="boardrules_require_at_registration" value="0"{% if not S_BOARDRULES_REQUIRE_AT_REGISTRATION %} checked="checked"{% endif %}> {{ lang('NO') }}</label></dd>
 	</dl>
 </fieldset>
 
 <fieldset>
 	<legend>{{ lang('NOTIFY') }}</legend>
 	<dl>
-		<dt><label for="action_send_notification">{{ lang('ACP_BOARDRULES_NOTIFY') ~ lang('COLON') }}</label><br /><span>{{ lang('ACP_BOARDRULES_NOTIFY_EXPLAIN') }}</span></dt>
-		<dd><input class="button2" type="submit" id="action_send_notification" name="action_send_notification" value="{{ lang('ACP_BOARDRULES_NOTIFY') }}" /></dd>
+		<dt><label for="action_send_notification">{{ lang('ACP_BOARDRULES_NOTIFY') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_BOARDRULES_NOTIFY_EXPLAIN') }}</span></dt>
+		<dd><input class="button2" type="submit" id="action_send_notification" name="action_send_notification" value="{{ lang('ACP_BOARDRULES_NOTIFY') }}"></dd>
 	</dl>
 </fieldset>
 
 <fieldset class="submit-buttons">
-	<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
-	<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+	<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
 	{{ S_FORM_TOKEN }}
 </fieldset>
 </form>
