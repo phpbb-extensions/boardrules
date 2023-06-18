@@ -45,6 +45,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS'		=> 'Configurar regras globais',
 
 	// ACP Logs
-	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Configurações das regras do fórum foram alteradas/strong>',
+	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Configurações das regras do fórum foram alteradas</strong>',
 	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Enviadas notificações das regras a todos os usuários</strong>',
 ));
