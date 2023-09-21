@@ -2,9 +2,8 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Casual Honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.3
 *
-* @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
+* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -39,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'			=> 'Board-Regeln',
-	'BOARDRULES_EXPLAIN'		=> 'Die Regeln auf %s beschreiben die Bedingungen für den reibungslosen Ablauf, den Umgang miteinander und die Verantwortlichkeiten aller Mitglieder und Gäste.',
-	'BOARDRULES_CATEGORIES'		=> 'Regelbereiche',
-	'BOARDRULES_CATEGORY_ANCHOR'=> 'Bereich-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'Regel-%s',
+	'BOARDRULES'				=> 'Правила',
+	'BOARDRULES_TITLE'			=> 'Переглянути правила цього форуму',
+	'BOARDRULES_AGREEMENT'		=> 'Ви погоджуєтесь дотримуватись правил, розміщених у секції “Правила”',
+	'BOARDRULES_VIEWONLINE'		=> 'Переглядає “Правила Форуму”',
+	'BOARDRULES_NOTIFICATION'	=> 'Правила форуму оновлено. Натисніть тут, щоб переглянути їх.',
 ));

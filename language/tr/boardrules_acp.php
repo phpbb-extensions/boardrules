@@ -2,6 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
+* Turkish translation by ESQARE (https://www.phpbbturkey.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -39,51 +40,51 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// Settings page
-	'ACP_BOARDRULES'						=> 'Site kuralları',
+	'ACP_BOARDRULES'						=> 'Mesaj panosu kuralları',
 	'ACP_BOARDRULES_SETTINGS'				=> 'Kurallar ayarları',
-	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Buradan site kurallarının ana ayarlarını düzenleyebilirsiniz.',
-	'ACP_BOARDRULES_ENABLE'					=> 'Site kurallarını aktifleştir',
-	'ACP_BOARDRULES_HEADER_LINK'			=> 'Site kuralları linkini headerda (üst kısımda) göster',
-	'ACP_BOARDRULES_FONT_ICON'				=> 'Site Kuralları link simgesi',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Headerda (üst kısımda) site kuralları linkinde kullanılmak üzere bir <strong><a href="%s" target="_blank">Font Awesome</a></strong> simge ismi girin. Site kural simgesi istemiyorsanız alanı boş bırakın.',
-	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Site kuralları link simgesi geçersiz karakterler içeriyor.',
-	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Yeni kullanıcıların Kuralları kayıtta kabul etmesi gerekli olsun',
-	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Bu seçenek “Kullanıcı Sözleşmesine” yeni kayıt olacak kullanıcıların okuyup kabul etmesi gereken bir kurallar alanı ekler.',
-	'ACP_BOARDRULES_NOTIFY'					=> 'Kullanıcıları bilgilendir',
-	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Tüm kayıtlı kullanıcılara site kurallarının güncellendiğine dair bir bildirim gönder. (Binlerce üyesi olan sitelerde bu işlemin tamamlanması biraz süre alabilir.)',
-	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Tüm kullanıcılara bilgilendirme mesajı göndermek istediğinize emin misiniz?',
-	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Site kuralları ayarları değiştirildi.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
-	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Buradan mesaj panosu kuralları için ana ayarları yapılandırabilirsiniz.',
+	'ACP_BOARDRULES_ENABLE'					=> 'Mesaj panosu kurallarını aç',
+	'ACP_BOARDRULES_HEADER_LINK'			=> 'Mesaj panosu kuralları bağlantısını sayfa üstlerinde göster',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Mesaj panosu kuralları bağlantı ikonu',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Tüm sayfa üstlerindeki mesaj panosu kuralları bağlantısında kullanılması için bir <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> ikonunun adını girin. Eğer mesaj panosu kuralları için bir ikon kullanmak istemiyorsanız bu alanı boş bırakın.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Mesaj panosu kuralları ikonu geçersiz karakterler içeriyor.',
+	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Yeni kullanıcılara kayıt sırasında kuralları kabul etmelerini zorunlu tut',
+	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Bu seçenek, yeni kayıt olan kullanıcıların kayıt sırasında mesaj panosu kurallarını okuyup kabul etmelerini zorunlu tutmak için “Anlaşma Şartları” na bir madde ekleyecektir.',
+	'ACP_BOARDRULES_NOTIFY'					=> 'Kullanıcılara bildir',
+	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Tüm kayıtlı kullanıcılara mesaj panosu kurallarının güncellendiğini belirten bir bildirim gönder. (Binlerce üyesi olan mesaj panolarında bu işlemin tamamlanması bir kaç saniye sürebilir.)',
+	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Tüm kullanıcılara bildirim göndermek istediğinize emin misiniz?',
+	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Mesaj panosu kuralları ayarları değiştirildi.',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Mesaj panosu kuralları liste stili',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Kural ve kategori öğelerinin önünde sıralı alfa-nümerik sayılar (bu varsayılandır), madde işaretleri veya herhangi bir şey olup olmadığına karar verin.',
+	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Sıralı alfa-nümerik',
+	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Madde işaretleri',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Hiçbiri',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Kuralları yönet',
-	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Bu sayfadan kategori ve kuralları ekleyebilir, düzenleyebilir, silebilir ve yeniden sıralayabilirsiniz. Kategori ilişkili kurallar grubudur. Her kategoriye sınırsız sayıda kural ekleyebilirsiniz.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Bu sayfadan kurallar ve kategoriler ekleyebilir, düzenleyebilir, silebilir ve yeniden sıralayabilirsiniz. Kategori, kurallar ile bağlantılı olan bir gruptur. Her kategori sınırsız sayıda mesaja sahip olabilir.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Mesaj Panosu kurallarınız için bir dil seçin. Kullanıcılar, tercih ettikleri dil için oluşturduğunuz kuralları göreceklerdir. Eğer kullanıcıların tercih ettikleri dilde herhangi bir kural oluşturmazsanız, o zaman kullanıcılar mesaj panosunun varsayılan dili kullanılarak oluşturulan kuralları görürler.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Kural kategorisi',
 	'ACP_BOARDRULES_RULE'					=> 'Kural',
-	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Dil seç',
+	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Dil seçin',
 	'ACP_BOARDRULES_CREATE_RULE'			=> 'Kural oluştur',
-	'ACP_BOARDRULES_CREATE_RULE_EXPLAIN'	=> 'Aşağıdaki formu kullanarak kullanıcılara göstereceğiniz yeni bir kural oluşturabilirsiniz.',
+	'ACP_BOARDRULES_CREATE_RULE_EXPLAIN'	=> 'Alttaki formu kullanarak kullanıcılarınıza gösterilecek yeni bir kural oluşturabilirsiniz.',
 	'ACP_BOARDRULES_EDIT_RULE'				=> 'Kuralı düzenle',
-	'ACP_BOARDRULES_EDIT_RULE_EXPLAIN'		=> 'Aşağıdaki formu kullanarak kullanıcılara göstereceğiniz mevcut bir kuralınızı güncelleyebilirsiniz.',
+	'ACP_BOARDRULES_EDIT_RULE_EXPLAIN'		=> 'Alttaki formu kullanarak kullanıcılarınıza gösterilen mevcut bir kuralı güncelleyebilirsiniz.',
 	'ACP_RULE_SETTINGS'						=> 'Kural ayarları',
 	'ACP_RULE_PARENT'						=> 'Kural üst kategorisi',
 	'ACP_RULE_NO_PARENT'					=> 'Üst kategori yok',
 	'ACP_RULE_TITLE'						=> 'Kural başlığı',
-	'ACP_RULE_TITLE_EXPLAIN'				=> 'Kural başlıkları sadece kurallar kategorisindeki kurallar sayfasında gösterilir. Kural başlıkları onları YKPde yönetirken tanımlamaya yardımcı olur.',
+	'ACP_RULE_TITLE_EXPLAIN'				=> 'Kural başlıkları sadece kural kategorileri için kurallar sayfasında gösterilir. Kural başlıkları ayrıca YKPdeki kural yönetiminden kurallarınızı tanımlamak için de kullanılır.',
 	'ACP_RULE_ANCHOR'						=> 'Kural bağlantısı',
-	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Kural bağlantısı opsiyoneledir ve kurallar sayfasındaki belli bir noktaya link şeklinde kullanılabilir. Bunlar URL dostu olmalı (boşluk veya özel karakterler içeremez), bir harfle başlamalı ve eşsiz olmalılar.',
+	'ACP_RULE_ANCHOR_EXPLAIN'				=> 'Kural bağlantıları isteğe bağlıdır ve kurallar sayfasındaki bağlantı noktalarında kullanılır. Kural bağlantıları URL dostu olmalıdır (boşluk ya da özel karakterler içermemelidir), bir harf ile başlamalı, ve benzersiz olmalıdır.',
 	'ACP_RULE_MESSAGE'						=> 'Kural mesajı',
-	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Kural mesajı her kural için kurallar sayfasında gösterilir (kategoriler bir kural mesajı göstermez).',
-	'ACP_RULE_MESSAGE_DISABLED'				=> 'Bu kurallar içeren bir kategoridir, mesaj editörü kapalıdır.',
+	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Kural mesajı, her bir kural için kurallar sayfasında gösterilir (kategoriler bir kural mesajı görüntülemez).',
+	'ACP_RULE_MESSAGE_DISABLED'				=> 'Bu kurallar içeren bir kategoridir, mesaj editörü devre dışı bırakıldı.',
 	'ACP_ADD_RULE'							=> 'Yeni kural oluştur',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
-		0 => 'Bu kuralı silmek istediğinize emin misiniz?',
-		1 => 'Bu kural katgorisini silmek istediğinize emin misiniz?<br />Dikkat: Bir kural kategorisini silerseniz içindeki kayıtlı kuralları da silmiş olursunuz.',
+		0 => 'Bu kuralı kaldırmak istediğinize emin misiniz?',
+		1 => 'Bu kuralı kaldırmak istediğinize emin misiniz?<br />Dikkat: Bir kural kategorisi kaldırıldığında içerdiği tüm kurallar da kaldırılır.',
 	),
 	'ACP_RULE_ADDED'						=> 'Kural başarıyla eklendi.',
 	'ACP_RULE_DELETED'						=> 'Kural başarıyla kaldırıldı.',
@@ -92,7 +93,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Site kuralları tablo kilidi elde etmek için başarısız oldu. Başka bir işlem kilitleme yapıyor olabilir. Kilitler 1 saatlik bir zaman aşımından sonra zorla serbest bırakılır.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Mesaj panosu kuralları tablo kilidini alamadı. Başka bir işlem kilidi tutuyor olabilir. Kilitler, 1 saatlik zamanaşımı sonrasında serbest bırakılmaya zorlanır.',
 	'RULES_NESTEDSET_INVALID_ITEM'			=> 'İstenilen kural mevcut değil.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'İstenilen kuralın üst kategorisi yok.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'İstenilen kural üst kategoriye sahip değil.',
 ));
