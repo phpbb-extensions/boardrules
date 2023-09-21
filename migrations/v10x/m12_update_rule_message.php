@@ -48,4 +48,11 @@ class m12_update_rule_message extends \phpbb\db\migration\migration
 			),
 		);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function revert_schema()
+	{
+	}
 }

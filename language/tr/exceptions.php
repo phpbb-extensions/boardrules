@@ -2,6 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
+* Turkish translation by ESQARE (https://www.phpbbturkey.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -48,13 +49,13 @@ if (empty($lang) || !is_array($lang))
 * Translators: Feel free to not translate these language strings
 */
 $lang = array_merge($lang, array(
-	'EXCEPTION_FIELD_MISSING'		=> 'Gerekli alanlar doldurulmamış',
-	'EXCEPTION_INVALID_ARGUMENT'	=> '`%1$s` için geçersiz konu belirlendi. Sebep: %2$s',
-	'EXCEPTION_OUT_OF_BOUNDS'		=> '`%1$s` alanı sınırlarından fazla veri aldı',
-	'EXCEPTION_TOO_LONG'			=> 'Girdi maksimum uzunluktan daha uzun.',
-	'EXCEPTION_NOT_UNIQUE'			=> 'Girdi eşsiz değil.',
-	'EXCEPTION_UNEXPECTED_VALUE'	=> '`%1$s` alanı beklenmeyen bir veri aldı. Sebep: %2$s',
-	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Girdi uygun olmayan karakterler içeriyor.',
+	'EXCEPTION_FIELD_MISSING'		=> 'Gerekli alan eksik',
+	'EXCEPTION_INVALID_ARGUMENT'	=> '`%1$s` için geçersiz değişken belirtildi. Sebep: %2$s',
+	'EXCEPTION_OUT_OF_BOUNDS'		=> '`%1$s` alanı sınırın ötesinde bir veri aldı',
+	'EXCEPTION_TOO_LONG'			=> 'Girdi, en fazla izin verilen uzunluğu aşıyordu.',
+	'EXCEPTION_NOT_UNIQUE'			=> 'Girdi benzersiz değildi.',
+	'EXCEPTION_UNEXPECTED_VALUE'	=> '`%1$s` alanı beklenmeyen veriler aldı. Sebep: %2$s',
+	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Girdi illegal karakterler içeriyordu.',
 
 	// Translators: do not change this
 	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
