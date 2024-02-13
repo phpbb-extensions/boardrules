@@ -2,6 +2,12 @@
 
 ## Version 3.x (for phpBB 3.3)
 
+### 3.0.1 - 2024-01-18
+
+- Rules in the ACP are clickable again, fixes an issue introduced in v3.0.0..
+- Updated French and Brazilian translations.
+- Added Finnish Translation.
+
 ### 3.0.0 - 2023-05-29
 
 - Dropped support for phpBB 3.2 and PHP 5.
