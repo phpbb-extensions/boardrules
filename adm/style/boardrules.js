@@ -1,26 +1,17 @@
-(function($) { // Avoid conflicts with other libraries
-
+document.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
-	/* global Iconify */
-	$('#boardrules_font_icon').on('keyup blur', function() {
-		var input = $(this).val();
-		var $icon = $(this).next('svg');
-		if (input.length > 0) {
-			input = input.indexOf(':') === -1 ? 'fa:' + input : input;
-			Iconify.loadIcons([input], (loaded, missing, pending, unsubscribe) => {
-				if (loaded.length) {
-					$icon.remove().end().after(Iconify.renderHTML(input));
-					return;
-				}
+	const boardRulesFontIcon = document.getElementById('boardrules_font_icon');
 
-				if (missing.length) {
-					$icon.remove();
-				}
-			});
+	boardRulesFontIcon.addEventListener('keyup', () => updateIcon());
+	boardRulesFontIcon.addEventListener('blur', () => updateIcon());
+
+	const updateIcon = () => {
+		const input = boardRulesFontIcon.value;
+		const icon = boardRulesFontIcon.nextElementSibling; // Assuming the <i> element is the next sibling
+
+		if (icon && icon.tagName.toLowerCase() === 'i') {
+			icon.setAttribute('class', 'icon fa-' + input);
 		}
-
-		$icon.remove();
-	});
-
-})(jQuery);
+	};
+});
