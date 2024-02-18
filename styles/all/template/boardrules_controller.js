@@ -1,23 +1,20 @@
-(function($) {  // Avoid conflicts with other libraries
-
-'use strict';
-
-$(function() {
+document.addEventListener('DOMContentLoaded', () => {
+	'use strict';
 	// Function to apply highlight class to an element identifier
-	var highlight = function (id) {
+	const highlight = (id) => {
 		if (id) {
-			$('#' + decodeURIComponent(id)).addClass('highlight');
+			document.getElementById(decodeURIComponent(id)).classList.add('highlight');
 		}
 	};
 
 	// Apply highlight to clicked rule anchor
-	$('.rule-anchor').on('click', function () {
-		$('li').removeClass('highlight');
-		highlight($(this).closest('.rule-item').attr('id'));
+	document.querySelectorAll('.rule-anchor').forEach(anchor => {
+		anchor.addEventListener('click', () => {
+			document.querySelectorAll('li').forEach(li => li.classList.remove('highlight'));
+			highlight(anchor.closest('.rule-item').id);
+		});
 	});
 
 	// Apply highlight on page load to a rule category
 	highlight(window.location.hash.substring(1));
 });
-
-})(jQuery); // Avoid conflicts with other libraries
