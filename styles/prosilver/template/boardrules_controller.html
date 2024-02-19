@@ -8,7 +8,11 @@
 			<h3>{{ lang('BOARDRULES_CATEGORIES') }}</h3>
 			<ul class="boardrules-menu">
 				{% for rules in loops.rules %}
-					{% if rules.S_IS_CATEGORY %}<li><a href="#{{ rules.U_ANCHOR }}">{{ rules.TITLE }}</a></li>{% endif %}
+					{% if rules.S_IS_CATEGORY %}
+						<li>
+							{% if rules.DEPTH > 1 %}{% for i in range(2, rules.DEPTH) %}&nbsp;{% endfor %}{% endif %}<a href="#{{ rules.U_ANCHOR }}">{{ rules.TITLE }}</a>
+						</li>
+					{% endif %}
 				{% endfor %}
 			</ul>
 		</div>
