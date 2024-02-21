@@ -10,7 +10,7 @@
 				{% for rules in loops.rules %}
 					{% if rules.S_IS_CATEGORY %}
 						<li>
-							{% if rules.DEPTH > 1 %}{% for i in range(2, rules.DEPTH) %}&nbsp;{% endfor %}{% endif %}<a href="#{{ rules.U_ANCHOR }}">{{ rules.TITLE }}</a>
+							<a {% if rules.DEPTH > 1 %}style="margin-{{ S_CONTENT_FLOW_BEGIN }}:{{ (rules.DEPTH - 1) * 4 }}px" {% endif %}href="#{{ rules.U_ANCHOR }}">{{ rules.TITLE }}</a>
 						</li>
 					{% endif %}
 				{% endfor %}
