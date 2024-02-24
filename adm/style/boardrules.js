@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const icon = boardRulesFontIcon.nextElementSibling; // Assuming the <i> element is the next sibling
 
 		if (icon && icon.tagName.toLowerCase() === 'i') {
-			icon.setAttribute('class', 'icon fa-' + input);
+			icon.setAttribute('class', 'o-icon o-icon-font acp-icon fa-' + input);
 		}
 	};
 });
