@@ -144,6 +144,7 @@ class main_controller implements main_interface
 				'MESSAGE'		=> $entity->get_message_for_display(),
 				'U_ANCHOR'		=> $anchor,
 				'S_IS_CATEGORY'	=> $is_category,
+				'DEPTH'			=> $depth,
 			));
 		}
 
