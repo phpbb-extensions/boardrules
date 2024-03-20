@@ -45,7 +45,7 @@ class nestedset_rules extends \phpbb\tree\nestedset
 	/**
 	* Set additional sql where restrictions to use the language id
 	*
-	* @param int $language The language selection identifier; default: 0
+	* @param string $language Language selection iso
 	* @return nestedset_rules $this object for chaining calls
 	* @access public
 	*/

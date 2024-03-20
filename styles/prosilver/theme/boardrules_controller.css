@@ -131,6 +131,11 @@
 		width: 100%;
 		margin: 0;
 	}
+
+	.boardrules-menu li a {
+		margin-right: 0 !important;
+		margin-left: 0 !important;
+	}
 }
 
 /* Non default ordered list modifiers (bulleted or none) */
