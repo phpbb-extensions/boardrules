@@ -42,6 +42,6 @@ $lang = array_merge($lang, array(
 	'BOARDRULES'			=> 'Regras',
 	'BOARDRULES_TITLE'		=> 'Ver as regras deste Fórum',
 	'BOARDRULES_AGREEMENT'		=> 'Concorda em respeitar as regras deste fórum estabelecidas na secção “Regras”',
-	'BOARDRULES_VIEWONLINE'		=> 'A Ler as regras do Fórum',
+	'BOARDRULES_VIEWONLINE'		=> 'A ler as regras do Fórum',
 	'BOARDRULES_NOTIFICATION'	=> 'As regras do Fórum foram atualizadas. Clique aqui para as rever.',
 ));
