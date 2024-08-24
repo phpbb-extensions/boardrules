@@ -44,5 +44,4 @@ $lang = array_merge($lang, array(
 	'BOARDRULES_CATEGORIES'		=> 'Secções de Regras',
 	'BOARDRULES_CATEGORY_ANCHOR'=> 'seccao-%s',
 	'BOARDRULES_RULE_ANCHOR'	=> 'regra-%s',
-	'BOARDRULES_REGISTERED'		=> 'Precisa de estar registado para ter acesso às regras',
 ));
