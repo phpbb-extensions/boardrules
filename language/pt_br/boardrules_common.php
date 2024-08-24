@@ -39,9 +39,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES'				=> 'Regras',
-	'BOARDRULES_TITLE'			=> 'Ver as regras deste fórum',
+	'BOARDRULES'			=> 'Regras',
+	'BOARDRULES_TITLE'		=> 'Ver as regras deste fórum',
 	'BOARDRULES_AGREEMENT'		=> 'Concorda em respeitar as regras deste fórum estabelecidas na seção “Regras”',
-	'BOARDRULES_VIEWONLINE'		=> 'Vendo as regras do Fórum',
+	'BOARDRULES_VIEWONLINE'		=> 'Lendo as regras do Fórum',
 	'BOARDRULES_NOTIFICATION'	=> 'As regras do fórum foram atualizadas. Clique aqui para revê-las.',
 ));
