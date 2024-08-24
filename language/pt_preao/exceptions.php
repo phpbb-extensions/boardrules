@@ -38,10 +38,25 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 //
 
+/*
+* These are errors which can be triggered by sending invalid data to the
+* boardrules extension API.
+*
+* These errors will never show to a user unless they are either modifying
+* the core boardrules extension code OR unless they are writing an extension
+* which makes calls to this extension.
+*
+* Translators: Feel free to not translate these language strings
+*/
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'		=> 'Regras do Fórum',
-	'BOARDRULES_EXPLAIN'		=> 'Estas regras são divulgadas para esclarecer as várias responsabilidades de todos os membros da comunidade aqui no %s. Elas devem ser respeitadas por todos para garantir que nosso fórum funcione sem problemas e ofereça uma experiência divertida e produtiva para todos os membros da comunidade e visitantes.',
-	'BOARDRULES_CATEGORIES'		=> 'Seções de Regras',
-	'BOARDRULES_CATEGORY_ANCHOR' 	=> 'secao-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'regra-%s',
+	'EXCEPTION_FIELD_MISSING'		=> 'Campo obrigatório em falta',
+	'EXCEPTION_INVALID_ARGUMENT'	=> 'O argumento especificado para `%1$s` é inválido. Razão: %2$s',
+	'EXCEPTION_OUT_OF_BOUNDS'		=> 'O Campo `%1$s` recebeu dados além do limite',
+	'EXCEPTION_TOO_LONG'			=> 'A entrada foi maior do que o máximo permitido.',
+	'EXCEPTION_NOT_UNIQUE'			=> 'A entrada não é única.',
+	'EXCEPTION_UNEXPECTED_VALUE'	=> 'O campo `%1$s` recebeu dados não previstos. Razão: %2$s',
+	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'A entrada tem caracteres inválidos.',
+
+	// Translators: do not change this
+	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],
 ));

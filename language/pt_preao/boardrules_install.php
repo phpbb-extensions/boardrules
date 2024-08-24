@@ -39,9 +39,11 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'		=> 'Regras do Fórum',
-	'BOARDRULES_EXPLAIN'		=> 'Estas regras são divulgadas para esclarecer as várias responsabilidades de todos os membros da comunidade aqui no %s. Elas devem ser respeitadas por todos para garantir que nosso fórum funcione sem problemas e ofereça uma experiência divertida e produtiva para todos os membros da comunidade e visitantes.',
-	'BOARDRULES_CATEGORIES'		=> 'Seções de Regras',
-	'BOARDRULES_CATEGORY_ANCHOR' 	=> 'secao-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'regra-%s',
+	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Examplo Regra Categoria',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Esta é uma categoria de exemplo das Regras do Fórum. Categorias contêm grupos de regras relacionadas. Mensagens Categoria (como esta) não são exibidas na página de regras.',
+	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'examplo-categoria',
+
+	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Examplo de Regra',
+	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Esta é uma Regras de exemplo das Regras do Fórum. Tudo parece funcionar bem. Pode editar ou excluir esta regra e categoria e continuar a configurar suas próprias regras deste Fórum.',
+	'BOARDRULES_SAMPLE_RULE_ANCHOR'			=> 'examplo-regra',
 ));
