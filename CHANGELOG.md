@@ -1,10 +1,28 @@
 # Changelog
 
-## Vesion 2.x (for phpBB 3.2)
+## Version 3.x (for phpBB 3.3)
+
+### 3.0.1 - 2024-01-18
+
+- Rules in the ACP are clickable again, fixes an issue introduced in v3.0.0..
+- Updated French and Brazilian translations.
+- Added Finnish Translation.
+
+### 3.0.0 - 2023-05-29
+
+- Dropped support for phpBB 3.2 and PHP 5.
+- New minimum requirements: phpBB 3.3.2 and PHP 7.1.3.
+- Fixed potential installation problems when default phpBB roles do not exist.
+- Rules in the ACP are no longer clickable like Rule Categories, to avoid any confusion.
+- Internal code improvements
+- Updated Chinese, Turkish and German language packs.
+- Added Ukrainian language pack.
+
+## Version 2.x (for phpBB 3.2)
 
 ### 2.1.3 - 2021-05-28
 
-- Added a new setting to choose whether rule and category list items be preceded by alpha-numeric ordinals, bullets or nothing.
+- Added a new setting to choose whether rule and category list items be preceded by alphanumeric ordinals, bullets or nothing.
 - Fixed links to FontAwesome from the ACP Rules Settings page.
 - Slightly adjusted the Rule Categories side-menu on the rules page to inherit more styling from the parent style, so it will be more compatible with 3rd party styles.
 - Added a more in-depth description to Board Language option screen in the ACP.
@@ -42,7 +60,7 @@
 
 - Fixed some rare cases where errors caused a blank page. They are now caught, resulting in a proper error message.
 - Fixed some missing language keys in rare error messages from the nestedset class.
-- Fixed an issue in the ACP where the "Rule parent" field would not retain its value when previewing a rule or getting an warning message.
+- Fixed an issue in the ACP where the "Rule parent" field would not retain its value when previewing a rule or getting a warning message.
 - Fixed an issue where the AJAX processing indicator was not displaying in the ACP when moving rules up/down.
 - Ensure compatibility with Symfony in future phpBB releases.
 - Major code improvements and optimisations.

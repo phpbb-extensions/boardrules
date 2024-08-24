@@ -2,7 +2,6 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Formal honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.3
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -49,13 +48,13 @@ if (empty($lang) || !is_array($lang))
 * Translators: Feel free to not translate these language strings
 */
 $lang = array_merge($lang, array(
-	'EXCEPTION_FIELD_MISSING'		=> 'Erforderliches Feld fehlt',
-	'EXCEPTION_INVALID_ARGUMENT'	=> 'Ungültige Eingabe in `%1$s`. Grund: %2$s',
-	'EXCEPTION_OUT_OF_BOUNDS'		=> 'Das Feld `%1$s` enthält unzulässige Zeichen',
-	'EXCEPTION_TOO_LONG'			=> 'Die Eingabe ist länger als maximal zulässig.',
-	'EXCEPTION_NOT_UNIQUE'			=> 'Uneindeutige Eingabe (Bezeichnung gegebenenfalls bereits vergeben).',
-	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Unerwartete Zeichen in Feld `%1$s`. Grund: %2$s',
-	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Die Eingabe enthält für dieses Feld nicht zulässige Zeichen.',
+	'EXCEPTION_FIELD_MISSING'		=> 'Обов\'язкове поле незаповнене',
+	'EXCEPTION_INVALID_ARGUMENT'	=> 'Некоректне значення у полі `%1$s`. Причина: %2$s',
+	'EXCEPTION_OUT_OF_BOUNDS'		=> 'В полі `%1$s` знаходиться значення, що виходить за допустимі рамки',
+	'EXCEPTION_TOO_LONG'			=> 'Введений рядок довший за максимум.',
+	'EXCEPTION_NOT_UNIQUE'			=> 'Значення не унікальне.',
+	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Некоректне значення у полі `%1$s`. Причина: %2$s',
+	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Введений рядок містить некоректні символи.',
 
 	// Translators: do not change this
 	'EXCEPTION_WRONG_DATA_LANG'		=> $lang['WRONG_DATA_LANG'],

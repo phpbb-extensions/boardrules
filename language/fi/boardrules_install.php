@@ -2,7 +2,6 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Casual Honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.3
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -39,9 +38,11 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'			=> 'Board-Regeln',
-	'BOARDRULES_EXPLAIN'		=> 'Die Regeln auf %s beschreiben die Bedingungen für den reibungslosen Ablauf, den Umgang miteinander und die Verantwortlichkeiten aller Mitglieder und Gäste.',
-	'BOARDRULES_CATEGORIES'		=> 'Regelbereiche',
-	'BOARDRULES_CATEGORY_ANCHOR'=> 'Bereich-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'Regel-%s',
+	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Esimerkki Sääntö kategoria',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Tämä on esimerkkikategoria lisäosan asennuksessa. Kategoriat sisältävät ryhmän siihen liittyviä sääntöjä. Kategoria kuvaukset (kuten tämä) eivät näy Säännöt-sivulla.',
+	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'esimerkki-kategoria',
+
+	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Esimerkki Sääntö',
+	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Tämä on esimerkkisääntö lisäosan asennuksessa. Kaikki näyttää toimivan. Voit editoita tai poistaa tämän säännön ja ryhtyä asettamaan foorumisi sääntöjä näkyviin.',
+	'BOARDRULES_SAMPLE_RULE_ANCHOR'			=> 'esimerkki-saanto',
 ));

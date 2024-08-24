@@ -2,6 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
+* Turkish translation by ESQARE (https://www.phpbbturkey.com)
 *
 * @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -39,8 +40,8 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'BOARDRULES'				=> 'Kurallar',
-	'BOARDRULES_TITLE'			=> 'Bu Sitenin Kurallarını gör',
-	'BOARDRULES_AGREEMENT'		=> 'Bunu kabul ederek aşağıda "Kurallar" bölümünde yazan kurallara uymayı kabul ediyorsunuz',
-	'BOARDRULES_VIEWONLINE'		=> 'Site Kuralları görüntüleniyor',
-	'BOARDRULES_NOTIFICATION'	=> 'Site Kuralları güncellendi. Onları görüntülemek için buraya tıklayın.',
+	'BOARDRULES_TITLE'			=> 'Bu mesaj panosunun kurallarını görüntüle',
+	'BOARDRULES_AGREEMENT'		=> 'Aşağıdaki “Kurallar” bölümünde belirtilen forumların kurallarına uymayı kabul ediyorsunuz',
+	'BOARDRULES_VIEWONLINE'		=> 'Mesaj Panosu Kuralları görüntüleniyor',
+	'BOARDRULES_NOTIFICATION'	=> 'Mesaj Panosu Kuralları güncellendi. Buraya tıklayarak gözden geçirin.',
 ));

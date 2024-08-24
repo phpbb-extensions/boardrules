@@ -2,7 +2,6 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
-* German (Casual Honorifics) translation by Talk19Zehn (www.ongray-design.de), extension version 2.1.3
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -39,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'			=> 'Board-Regeln',
-	'BOARDRULES_EXPLAIN'		=> 'Die Regeln auf %s beschreiben die Bedingungen für den reibungslosen Ablauf, den Umgang miteinander und die Verantwortlichkeiten aller Mitglieder und Gäste.',
-	'BOARDRULES_CATEGORIES'		=> 'Regelbereiche',
-	'BOARDRULES_CATEGORY_ANCHOR'=> 'Bereich-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'Regel-%s',
+	'BOARDRULES_HEADER'			=> 'Foorumin säännöt',
+	'BOARDRULES_EXPLAIN'		=> 'Nämä säännöt on luotu tekemään selväksi kaikille foorumin käyttäjille, miten yhteisössä tulee käyttäytyä. Jokaisen odotetaan noudattavan näitä sääntöjä, jotta voimme tarjota mukavan ja turvallisen kokemuksen kaikille jäsenillemme ja vierialijoillemme.',
+	'BOARDRULES_CATEGORIES'		=> 'Sääntöjen sisällysluettelo',
+	'BOARDRULES_CATEGORY_ANCHOR'=> 'osio-%s',
+	'BOARDRULES_RULE_ANCHOR'	=> 'saanto-%s',
 ));

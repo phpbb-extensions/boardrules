@@ -2,6 +2,7 @@
 /**
 *
 * Board Rules extension for the phpBB Forum Software package.
+* Turkish translation by ESQARE (https://www.phpbbturkey.com)
 *
 * @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
@@ -38,11 +39,11 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Örnek Kural kategorisi',
-	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Bu sizin Site Kuralları yüklemenizdeki örnek bir kategoridir. Kategoriler ilgili kuralların bulunduğu grupları içerir. Kategori mesajları (bunun gibi) kurallar sayfasında görünmez.',
+	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'Örnek Kural Kategorisi',
+	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'Bu, Mesaj Panosu Kuralları kurulumunuz içerisindeki örnek bir kategoridir. Kategoriler, kurallar ile bağlantılı grupları içerir. Kategori mesajları (bunun gibi) kurallar sayfasında gösterilmez.',
 	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'örnek-kategori',
 
-	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Örnek kural',
-	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Bu sizin Site Kuralları yüklemenizdeki örnek bir kuraldır. Herşey çalışıyor gibi görünüyor. Bu kuralı ve kategoriyi düzenleyebilir veya silebilirsiniz ve kendi site kurallarınızı eklemeye devam edebilirsiniz.',
+	'BOARDRULES_SAMPLE_RULE_TITLE'			=> 'Örnek Kural',
+	'BOARDRULES_SAMPLE_RULE_MESSAGE'		=> 'Bu, Mesaj Panosu Kuralları kurulumunuz içerisindeki örnek bir kuraldır. Her şey çalışıyor gibi görünüyor. Bu kuralı ve kategoriyi düzenleyebilir ya da silebilirsiniz ve kendi mesaj panosu kurallarınızı ayarlamaya devam edebilirsiniz.',
 	'BOARDRULES_SAMPLE_RULE_ANCHOR'			=> 'örnek-kural',
 ));
