@@ -39,9 +39,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'			=> 'Regras do Fórum',
-	'BOARDRULES_EXPLAIN'		=> 'Estas regras são divulgados para esclarecer as várias responsabilidades de todos os membros da comunidade aqui no %s. Elas devem ser respeitadas por todos para garantir que nosso Fórum funciona sem problemas e oferece uma experiência divertida e produtiva para todos os membros da comunidade e visitantes.',
+	'BOARDRULES_HEADER'		=> 'Regras do Fórum',
+	'BOARDRULES_EXPLAIN'		=> 'Estas regras servem para esclarecer as várias responsabilidades de todos os membros da comunidade %s. Devem ser respeitadas por todos para garantir que o nosso Fórum funciona sem problemas e oferece uma experiência divertida e produtiva para todos os membros da comunidade.',
 	'BOARDRULES_CATEGORIES'		=> 'Secções de Regras',
-	'BOARDRULES_CATEGORY_ANCHOR'=> 'section-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'rule-%s',
+	'BOARDRULES_CATEGORY_ANCHOR' 	=> 'seccao-%s',
+	'BOARDRULES_RULE_ANCHOR'	=> 'regra-%s',
 ));

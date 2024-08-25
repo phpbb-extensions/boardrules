@@ -4,7 +4,7 @@
 * Board Rules extension for the phpBB Forum Software package.
 * @Traduzido por: http://phpbbportugal.com - segundo as normas do Acordo Ortográfico
 *
-* @copyright (c) 2014 phpBB Limited <https://www.phpbb.com>
+* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -39,9 +39,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_HEADER'		=> 'Regras do Fórum',
-	'BOARDRULES_EXPLAIN'		=> 'Estas regras são divulgadas para esclarecer as várias responsabilidades de todos os membros da comunidade aqui no %s. Elas devem ser respeitadas por todos para garantir que nosso fórum funcione sem problemas e ofereça uma experiência divertida e produtiva para todos os membros da comunidade e visitantes.',
-	'BOARDRULES_CATEGORIES'		=> 'Seções de Regras',
-	'BOARDRULES_CATEGORY_ANCHOR' 	=> 'secao-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'regra-%s',
+	'BOARDRULES'				=> 'Regras',
+	'BOARDRULES_TITLE'			=> 'Ver as regras deste Fórum',
+	'BOARDRULES_AGREEMENT'		=> 'Concorda em respeitar as regras deste fórum estabelecidas na secção “Regras”',
+	'BOARDRULES_VIEWONLINE'		=> 'A ler as regras do Fórum',
+	'BOARDRULES_NOTIFICATION'	=> 'As regras do Fórum foram actualizadas. Clique aqui para as rever.',
 ));
