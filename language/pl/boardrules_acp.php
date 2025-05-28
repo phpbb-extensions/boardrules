@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Utwórz nowy przepis',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Czy na pewno chcesz usunąć ten przepis?',
-		1 => 'Czy na pewno chcesz usunąć ten kategorii reguły?<br />Uwaga: Usunięcie kategorii reguły spowoduje także usunięcie wszystkich zawartych w nim zasad.',
+		1 => 'Czy na pewno chcesz usunąć ten kategorii reguły?<br>Uwaga: Usunięcie kategorii reguły spowoduje także usunięcie wszystkich zawartych w nim zasad.',
 	),
 	'ACP_RULE_ADDED'						=> 'Przepis został dodany.',
 	'ACP_RULE_DELETED'						=> 'Przepis został usunięty.',

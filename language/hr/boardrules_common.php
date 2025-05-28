@@ -43,5 +43,5 @@ $lang = array_merge($lang, array(
 	'BOARDRULES_TITLE'			=> 'Pogledaj forumska pravila',
 	'BOARDRULES_AGREEMENT'		=> 'Slažeš se da ćeš se pridržavati pravila navedenih u odjeljku “Pravila”.',
 	'BOARDRULES_VIEWONLINE'		=> 'Pregledava forumska pravila',
-	'BOARDRULES_NOTIFICATION'	=> 'Forumska pravila su ažurirana.<br />Klikni ovdje za prikaz (istih).',
+	'BOARDRULES_NOTIFICATION'	=> 'Forumska pravila su ažurirana.<br>Klikni ovdje za prikaz (istih).',
 ));

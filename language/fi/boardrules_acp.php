@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Luo uusi sääntö',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Haluatko varmasti poistaa tämän säännön?',
-		1 => 'Haluatko varmasti poistaa tämän sääntökategorian?<br />Varoitus: Sääntökategorian poistaminen poistaa myös kaikki sen sisältämät säännöt.',
+		1 => 'Haluatko varmasti poistaa tämän sääntökategorian?<br>Varoitus: Sääntökategorian poistaminen poistaa myös kaikki sen sisältämät säännöt.',
 	),
 	'ACP_RULE_ADDED'						=> 'Sääntö lisätty onnistuneesti.',
 	'ACP_RULE_DELETED'						=> 'Sääntö poistettu onnistuneesti.',

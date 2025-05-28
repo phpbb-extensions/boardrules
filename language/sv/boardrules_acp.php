@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Skapa en ny regel',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Är du säker på att du vill ta bort denna regel?',
-		1 => 'Är du säker på att du vill ta bort denna regelkategori?<br />Varning: raderas en regelkategori så raderas även alla regler i denna kategori.',
+		1 => 'Är du säker på att du vill ta bort denna regelkategori?<br>Varning: raderas en regelkategori så raderas även alla regler i denna kategori.',
 	),
 	'ACP_RULE_ADDED'						=> 'Regeln har skapats.',
 	'ACP_RULE_DELETED'						=> 'Regeln har raderats.',

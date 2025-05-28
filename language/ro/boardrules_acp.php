@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Creaza o regula noua',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Esti sigur ca vrei sa stergi aceasta regula?',
-		1 => 'Esti sigur ca vrei sa stergi aceasta regula?<br />Avertisment: Eliminarea unei categorii reguli va duce la elimina toate regulile conținute în ea.',
+		1 => 'Esti sigur ca vrei sa stergi aceasta regula?<br>Avertisment: Eliminarea unei categorii reguli va duce la elimina toate regulile conținute în ea.',
 	),
 	'ACP_RULE_ADDED'						=> 'Regula a fost adaugata cu succes.',
 	'ACP_RULE_DELETED'						=> 'Regula a fost stearsa cu succes.',

@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Loo uus reegel',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Oled sa kindel, et soovid eemaldada selle reegli?',
-		1 => 'Oled sa kindel, et soovid eemaldada selle reeglite kategooria?<br />Hoiatus: Reeglite kategooria eemaldamisega, eemaldad ka selles kategoorias asetsevad reeglid.',
+		1 => 'Oled sa kindel, et soovid eemaldada selle reeglite kategooria?<br>Hoiatus: Reeglite kategooria eemaldamisega, eemaldad ka selles kategoorias asetsevad reeglid.',
 	),
 	'ACP_RULE_ADDED'						=> 'Reegel on edukalt lisatud.',
 	'ACP_RULE_DELETED'						=> 'Reegel on edukalt kustutatud.',

@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Yeni kural oluştur',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Bu kuralı kaldırmak istediğinize emin misiniz?',
-		1 => 'Bu kuralı kaldırmak istediğinize emin misiniz?<br />Dikkat: Bir kural kategorisi kaldırıldığında içerdiği tüm kurallar da kaldırılır.',
+		1 => 'Bu kuralı kaldırmak istediğinize emin misiniz?<br>Dikkat: Bir kural kategorisi kaldırıldığında içerdiği tüm kurallar da kaldırılır.',
 	),
 	'ACP_RULE_ADDED'						=> 'Kural başarıyla eklendi.',
 	'ACP_RULE_DELETED'						=> 'Kural başarıyla kaldırıldı.',

@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Vytvoriť nové pravidlo',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Naozaj chcete odstrániť toto pravidlo?',
-		1 => 'Naozaj chcete odstrániť toto pravidlo?<br />Varovanie: Odstránením kategórie odstraníte tiež všetky pravidlá v nej.',
+		1 => 'Naozaj chcete odstrániť toto pravidlo?<br>Varovanie: Odstránením kategórie odstraníte tiež všetky pravidlá v nej.',
 	),
 	'ACP_RULE_ADDED'						=> 'Pravidlo bolo úspešne pridané.',
 	'ACP_RULE_DELETED'						=> 'Pravidlo bolo úspešne odstránené.',

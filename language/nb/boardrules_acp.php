@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Opprett en ny regel',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Er du sikker på at du vil slette denne regelen?',
-		1 => 'Er du sikker på at du vil slette denne regelkategori?<br />Advarsel: Hvis en regelkategori blir slettet, slettes også alle reglene i den.',
+		1 => 'Er du sikker på at du vil slette denne regelkategori?<br>Advarsel: Hvis en regelkategori blir slettet, slettes også alle reglene i den.',
 	),
 	'ACP_RULE_ADDED'						=> 'Regelen har blitt opprettet.',
 	'ACP_RULE_DELETED'						=> 'Regelen har blitt slettet.',

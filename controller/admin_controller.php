@@ -137,7 +137,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'	=> $s_errors,
-			'ERROR_MSG'	=> $s_errors ? implode('<br />', $errors) : '',
+			'ERROR_MSG'	=> $s_errors ? implode('<br>', $errors) : '',
 
 			'U_ACTION'	=> $this->u_action,
 
@@ -518,7 +518,7 @@ class admin_controller implements admin_interface
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
 			'S_ERROR'			=> $s_errors,
-			'ERROR_MSG'			=> $s_errors ? implode('<br />', $errors) : '',
+			'ERROR_MSG'			=> $s_errors ? implode('<br>', $errors) : '',
 
 			'RULE_TITLE'		=> $entity->get_title(),
 			'RULE_ANCHOR'		=> $entity->get_anchor(),

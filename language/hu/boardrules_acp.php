@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Új szabályzat létrehozása',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Biztos törölni szeretné a szabályzat?',
-		1 => 'Biztos szeretné törölni a szabályzat kategőriát?<br />Figyelmeztetés: A szabályzat kategória eltávolítása esetén eltávolítja az abban foglalt szabályzatokat is.',
+		1 => 'Biztos szeretné törölni a szabályzat kategőriát?<br>Figyelmeztetés: A szabályzat kategória eltávolítása esetén eltávolítja az abban foglalt szabályzatokat is.',
 	),
 	'ACP_RULE_ADDED'						=> 'Szabályzat sikeresen hozzáadva.',
 	'ACP_RULE_DELETED'						=> 'Szabályzat sikeresen törölve.',

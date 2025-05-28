@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Crear nueva norma',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => '¿Está seguro de querer borrar esta norma?',
-		1 => '¿Está seguro de querer borrar esta norma de categoría?<br />Advertencia: Al eliminar una norma de categoría también eliminará todas las normas contenidas de la misma.',
+		1 => '¿Está seguro de querer borrar esta norma de categoría?<br>Advertencia: Al eliminar una norma de categoría también eliminará todas las normas contenidas de la misma.',
 	),
 	'ACP_RULE_ADDED'						=> 'Norma añadida correctamente.',
 	'ACP_RULE_DELETED'						=> 'Norma eliminada correctamente.',

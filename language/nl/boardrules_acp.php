@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADD_RULE'							=> 'Nieuwe regel aanmaken',
 	'ACP_DELETE_RULE_CONFIRM'				=> array(
 		0 => 'Weet je zeker dat je deze regel wilt verwijderen?',
-		1 => 'Weet je zeker dat je deze regel categorie wilt verwijderen?<br />Let op: Als je deze regel categorie verwijdert, verwijder je ook de onderliggende regels.',
+		1 => 'Weet je zeker dat je deze regel categorie wilt verwijderen?<br>Let op: Als je deze regel categorie verwijdert, verwijder je ook de onderliggende regels.',
 	),
 	'ACP_RULE_ADDED'						=> 'Regel succesvol toegevoegd.',
 	'ACP_RULE_DELETED'						=> 'Regel succesvol verwijderd.',
