@@ -1,7 +1,3 @@
-.codeclimate.yml	export-ignore
-.csslintrc		export-ignore
-.eslintignore	export-ignore
-.eslintrc		export-ignore
 .github         export-ignore
 .gitignore		export-ignore
 .gitattributes	export-ignore

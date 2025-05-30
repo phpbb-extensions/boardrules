@@ -19,10 +19,6 @@
 
 		<delete file="${dir}/.gitignore" />
 		<delete file="${dir}/.gitattributes" />
-		<delete file="${dir}/.codeclimate.yml" />
-		<delete file="${dir}/.csslintrc" />
-		<delete file="${dir}/.eslintignore" />
-		<delete file="${dir}/.eslintrc" />
 		<delete file="${dir}/build.xml" />
 		<delete file="${dir}/composer.lock" />
 		<delete file="${dir}/phpunit.xml.dist" />
