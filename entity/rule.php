@@ -202,7 +202,7 @@ class rule implements rule_interface
 		$this->db->sql_query($sql);
 
 		// Set the rule_id using the id created by the SQL insert
-		$this->data['rule_id'] = (int) $this->db->sql_nextid();
+		$this->data['rule_id'] = (int) $this->db->sql_last_inserted_id();
 
 		return $this;
 	}
