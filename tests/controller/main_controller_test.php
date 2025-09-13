@@ -17,7 +17,7 @@ class main_controller_test extends \phpbb_test_case
 	*
 	* @return array Array of test data
 	*/
-	public function display_data()
+	public static function display_data(): array
 	{
 		return array(
 			'A rule' => array(
@@ -73,12 +73,9 @@ class main_controller_test extends \phpbb_test_case
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
 			->disableOriginalConstructor()
 			->getMock();
-		$rule_operator->expects(self::at(0))
+		$rule_operator->expects(self::exactly(2))
 			->method('get_rules')
-			->willReturn(array());
-		$rule_operator->expects(self::at(1))
-			->method('get_rules')
-			->willReturn([$entity]);
+			->willReturnOnConsecutiveCalls(array(), [$entity]);
 
 		// Mock the controller helper and return render response object
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')

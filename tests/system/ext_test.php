@@ -12,7 +12,7 @@ namespace phpbb\boardrules\tests\system;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use phpbb\notification\manager;
-use phpbb\finder;
+use phpbb\finder\finder;
 use phpbb\db\migrator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use phpbb\boardrules\ext;
