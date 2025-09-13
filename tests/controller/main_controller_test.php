@@ -20,7 +20,28 @@ class main_controller_test extends \phpbb_test_case
 	public function display_data()
 	{
 		return array(
-			array(200, '@phpbb_boardrules/boardrules_controller.html'),
+			'A rule' => array(
+				200,
+				'@phpbb_boardrules/boardrules_controller.html',
+				[
+					'get_left_id' => 1,
+					'get_right_id' => 2,
+					'get_anchor' => '',
+					'get_title' => 'title',
+					'get_message_for_display' => 'content',
+				]
+			),
+			'A category' => array(
+				200,
+				'@phpbb_boardrules/boardrules_controller.html',
+				[
+					'get_left_id' => 1,
+					'get_right_id' => 6,
+					'get_anchor' => '',
+					'get_title' => 'title',
+					'get_message_for_display' => 'content',
+				],
+			),
 		);
 	}
 
@@ -29,7 +50,7 @@ class main_controller_test extends \phpbb_test_case
 	*
 	* @dataProvider display_data
 	*/
-	public function test_display($status_code, $page_content)
+	public function test_display($status_code, $page_content, $rule_data)
 	{
 		global $config, $user, $phpbb_root_path, $phpEx;
 
@@ -39,13 +60,25 @@ class main_controller_test extends \phpbb_test_case
 		$lang = new \phpbb\language\language($lang_loader);
 		$user = new \phpbb\user($lang, '\phpbb\datetime');
 
+		$entity = $this->getMockBuilder('\phpbb\boardrules\entity\rule')
+			->disableOriginalConstructor()
+			->getMock();
+
+		foreach ($rule_data as $method => $return_value)
+		{
+			$entity->method($method)->willReturn($return_value);
+		}
+
 		// Mock the rule operator and return an empty array for get_rules method
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
 			->disableOriginalConstructor()
 			->getMock();
-		$rule_operator->expects(self::exactly(2))
+		$rule_operator->expects(self::at(0))
 			->method('get_rules')
 			->willReturn(array());
+		$rule_operator->expects(self::at(1))
+			->method('get_rules')
+			->willReturn([$entity]);
 
 		// Mock the controller helper and return render response object
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
