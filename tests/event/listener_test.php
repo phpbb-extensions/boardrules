@@ -100,7 +100,7 @@ class listener_test extends \phpbb_test_case
 	*
 	* @return array Array of test data
 	*/
-	public function load_language_on_setup_data()
+	public static function load_language_on_setup_data()
 	{
 		return array(
 			array(
@@ -160,7 +160,7 @@ class listener_test extends \phpbb_test_case
 	*
 	* @return array Array of test data
 	*/
-	public function add_page_header_link_data()
+	public static function add_page_header_link_data()
 	{
 		return array(
 			array(1, 1, 1, '', array(
@@ -250,7 +250,7 @@ class listener_test extends \phpbb_test_case
 	*
 	* @return array Array of test data
 	*/
-	public function add_permission_data()
+	public static function add_permission_data()
 	{
 		return array(
 			array(
@@ -310,7 +310,7 @@ class listener_test extends \phpbb_test_case
 	*
 	* @return array Array of test data
 	*/
-	public function viewonline_page_data()
+	public static function viewonline_page_data()
 	{
 		global $phpEx;
 

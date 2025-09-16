@@ -20,9 +20,9 @@ class rule_entity_left_id_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function left_id_test_data()
+	public static function left_id_test_data()
 	{
-		$import_data = $this->get_import_data();
+		$import_data = parent::get_import_data();
 
 		return array(
 			array(

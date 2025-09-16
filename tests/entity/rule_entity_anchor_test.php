@@ -20,7 +20,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function anchor_test_data()
+	public static function anchor_test_data()
 	{
 		return array(
 			// sent to set_anchor(), expected from get_anchor()
@@ -63,7 +63,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function anchor_fails_test_data()
+	public static function anchor_fails_test_data()
 	{
 		return array(
 			// Starts with illegal characters
@@ -135,7 +135,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function unique_anchor_test_data()
+	public static function unique_anchor_test_data()
 	{
 		return array(
 			// id // language // sent to set_anchor(), expected from get_anchor()
@@ -184,7 +184,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function unique_anchor_test_fails_data()
+	public static function unique_anchor_test_fails_data()
 	{
 		return array(
 			// id // language // sent to set_anchor()

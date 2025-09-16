@@ -17,7 +17,7 @@ class rule_operator_move_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function move_rules_test_data()
+	public static function move_rules_test_data()
 	{
 		return array(
 			array(
@@ -158,7 +158,7 @@ class rule_operator_move_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function move_rules_fails_data()
+	public static function move_rules_fails_data()
 	{
 		return array(
 			array(10),

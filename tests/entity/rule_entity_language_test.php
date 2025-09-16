@@ -20,9 +20,9 @@ class rule_entity_language_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function language_test_data()
+	public static function language_test_data()
 	{
-		$import_data = $this->get_import_data();
+		$import_data = parent::get_import_data();
 
 		// Set some data to test other than en from our import data
 		$import_data[3]['rule_language'] = 'foo';

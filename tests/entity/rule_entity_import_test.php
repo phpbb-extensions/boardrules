@@ -20,9 +20,9 @@ class rule_entity_import_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function import_test_data()
+	public static function import_test_data()
 	{
-		$import_data = $this->get_import_data();
+		$import_data = parent::get_import_data();
 
 		return array(
 			array($import_data[1]),
@@ -72,9 +72,9 @@ class rule_entity_import_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function import_test_fail_data()
+	public static function import_test_fail_data()
 	{
-		$import_data = $this->get_import_data();
+		$import_data = parent::get_import_data();
 
 		$data = array();
 

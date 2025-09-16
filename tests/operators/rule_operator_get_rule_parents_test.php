@@ -17,7 +17,7 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 	*
 	* @return array Array of test rule entities
 	*/
-	public function get_rule_parents_test_data()
+	public static function get_rule_parents_test_data()
 	{
 		return array(
 			// language iso, rule id, expected data from the rule and its parents
@@ -110,7 +110,7 @@ class rule_operator_get_rule_parents_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function get_rule_parents_fails_test_data()
+	public static function get_rule_parents_fails_test_data()
 	{
 		return array(
 			// language, item_id, expected result (empty array)

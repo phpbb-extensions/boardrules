@@ -17,7 +17,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 	*
 	* @return array Array of test rule entities
 	*/
-	public function get_rules_test_data()
+	public static function get_rules_test_data()
 	{
 		return array(
 			// language id to search, data which should match
@@ -121,7 +121,7 @@ class rule_operator_get_rules_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function get_rules_fails_test_data()
+	public static function get_rules_fails_test_data()
 	{
 		return array(
 			// language to search, expected result (empty array)

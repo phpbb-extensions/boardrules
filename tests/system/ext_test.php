@@ -88,7 +88,7 @@ class ext_test extends \phpbb_test_case
 		$this->assertEquals('notifications', $state);
 	}
 
-	public function notification_step_provider(): array
+	public static function notification_step_provider(): array
 	{
 		return [
 			'enable step'  => ['enable_notifications', 'enable_step'],

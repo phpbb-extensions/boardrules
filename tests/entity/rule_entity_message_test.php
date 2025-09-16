@@ -48,7 +48,7 @@ class rule_entity_message_test extends rule_entity_base
 	*
 	* @return array Array of test data
 	*/
-	public function message_test_data()
+	public static function message_test_data()
 	{
 		return array(
 			// sent to set_message()

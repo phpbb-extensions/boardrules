@@ -17,7 +17,7 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function delete_rule_test_data()
+	public static function delete_rule_test_data()
 	{
 		return array(
 			array(
@@ -92,7 +92,7 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function delete_rule_fails_data()
+	public static function delete_rule_fails_data()
 	{
 		return array(
 			array(10),

@@ -17,7 +17,7 @@ class rule_operator_change_parent_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function change_parent_test_data()
+	public static function change_parent_test_data()
 	{
 		return array(
 			array(
@@ -81,7 +81,7 @@ class rule_operator_change_parent_test extends rule_operator_base
 	*
 	* @return array Array of test data
 	*/
-	public function change_parent_fails_data()
+	public static function change_parent_fails_data()
 	{
 		return array(
 			array(1, 100),
