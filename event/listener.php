@@ -126,7 +126,7 @@ class listener implements EventSubscriberInterface
 	*/
 	public function viewonline_page($event)
 	{
-		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/rules') === 0)
+		if ($event['on_page'][1] === 'index' && strrpos($event['row']['session_page'], 'index.' . $this->php_ext . '/rules') === 0)
 		{
 			$event['location'] = $this->lang->lang('BOARDRULES_VIEWONLINE');
 			$event['location_url'] = $this->controller_helper->route('phpbb_boardrules_main_controller');

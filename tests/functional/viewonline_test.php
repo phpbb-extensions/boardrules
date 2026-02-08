@@ -22,7 +22,7 @@ class viewonline_test extends boardrules_functional_base
 	{
 		// Send the admin to the Rules page
 		$this->login();
-		$crawler = self::request('GET', "app.php/rules?sid={$this->sid}");
+		$crawler = self::request('GET', "index.php/rules?sid={$this->sid}");
 		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
 	}
 

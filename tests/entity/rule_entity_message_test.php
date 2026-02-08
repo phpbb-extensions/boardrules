@@ -26,9 +26,9 @@ class rule_entity_message_test extends rule_entity_base
 		$db = $this->db;
 
 		$request = new \phpbb_mock_request();
-		$request->overwrite('SCRIPT_NAME', '/app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('REQUEST_URI', '/app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('SCRIPT_NAME', '/index.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('SCRIPT_FILENAME', 'index.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('REQUEST_URI', '/index.php', \phpbb\request\request_interface::SERVER);
 
 		$user = new \phpbb_mock_user();
 		$user->optionset('viewcensors', false);

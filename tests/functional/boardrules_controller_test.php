@@ -20,7 +20,7 @@ class boardrules_controller_test extends boardrules_functional_base
 	*/
 	public function test_boardrules_page()
 	{
-		$crawler = self::request('GET', 'app.php/rules');
+		$crawler = self::request('GET', 'index.php/rules');
 		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
 
 		self::assertEquals(1, $crawler->filter('#example-category')->count());
