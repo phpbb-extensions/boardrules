@@ -22,7 +22,7 @@ class viewonline_test extends boardrules_functional_base
 	{
 		$db = $this->get_db();
 
-		// XXX hardcoded user id
+		// Visit Ideas as user "admin"
 		$sql = 'DELETE FROM ' . SESSIONS_TABLE . ' WHERE session_user_id = 2';
 		$db->sql_query($sql);
 
