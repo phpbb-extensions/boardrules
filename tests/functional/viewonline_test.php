@@ -22,12 +22,12 @@ class viewonline_test extends boardrules_functional_base
 	{
 		$db = $this->get_db();
 
-		// XXX hardcoded user id
+		// Visit Ideas as user "admin"
 		$sql = 'DELETE FROM ' . SESSIONS_TABLE . ' WHERE session_user_id = 2';
 		$db->sql_query($sql);
 
 		$this->login();
-		$crawler = self::request('GET', "index.php/rules?sid=$this->sid");
+		$crawler = self::request('GET', "app.php/rules?sid=$this->sid");
 		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
 	}
 
