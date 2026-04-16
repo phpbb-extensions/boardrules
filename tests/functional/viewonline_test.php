@@ -16,32 +16,37 @@ namespace phpbb\boardrules\tests\functional;
 class viewonline_test extends boardrules_functional_base
 {
 	/**
-	* Visit rules page as user "admin"
+	* Create a fresh admin session on the board rules page.
 	*/
-	public function test_viewonline_visit_rules()
+	protected function visit_rules_as_admin()
 	{
-		// Send the admin to the Rules page
+		$db = $this->get_db();
+
+		// XXX hardcoded user id
+		$sql = 'DELETE FROM ' . SESSIONS_TABLE . ' WHERE session_user_id = 2';
+		$db->sql_query($sql);
+
 		$this->login();
-		$crawler = self::request('GET', "app.php/rules?sid={$this->sid}");
+		$crawler = self::request('GET', "app.php/rules?sid=$this->sid");
 		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
 	}
 
 	/**
 	* Test viewonline page for admin
-	*
-	* We use a second function here, so we get a new session and can login
-	* without having to log out "admin" first.
-	*
-	* @depends test_viewonline_visit_rules
 	*/
 	public function test_viewonline_check_viewonline()
 	{
-		// Create user1 and send them to the Viewonline
-		$this->create_user('user1');
-		$this->login('user1');
-		$crawler = self::request('GET', "viewonline.php?sid={$this->sid}");
+		$this->visit_rules_as_admin();
 
-		// Is admin still viewing Rules page
+		// Create a second user and check who is online from a separate session.
+		self::$client->restart();
+		$this->create_user('boardrules-viewonline-user1');
+		$this->login('boardrules-viewonline-user1');
+		// PHP goes faster than DBMS, make sure session data got written to the database.
+		sleep(1);
+		$crawler = self::request('GET', "viewonline.php?sid=$this->sid");
+
+		// Is admin still viewing Rules page?
 		self::assertStringContainsString('admin', $crawler->filter('#page-body table.table1')->text());
 
 		$session_entries = $crawler->filter('#page-body table.table1 tr')->count();
