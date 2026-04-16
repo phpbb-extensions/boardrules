@@ -16,27 +16,14 @@ namespace phpbb\boardrules\tests\functional;
 class viewonline_test extends boardrules_functional_base
 {
 	/**
-	* Create a fresh admin session on the board rules page.
-	*/
-	protected function visit_rules_as_admin()
-	{
-		$db = $this->get_db();
-
-		// XXX hardcoded user id
-		$sql = 'DELETE FROM ' . SESSIONS_TABLE . ' WHERE session_user_id = 2';
-		$db->sql_query($sql);
-
-		$this->login();
-		$crawler = self::request('GET', "app.php/rules?sid=$this->sid");
-		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
-	}
-
-	/**
 	* Test viewonline page for admin
 	*/
 	public function test_viewonline_check_viewonline()
 	{
-		$this->visit_rules_as_admin();
+		// Visit Ideas as user "admin"
+		$this->login();
+		$crawler = self::request('GET', "app.php/rules?sid=$this->sid");
+		$this->assertContainsLang('BOARDRULES_HEADER', $crawler->filter('h2')->text());
 
 		// Create a second user and check who is online from a separate session.
 		self::$client->restart();
