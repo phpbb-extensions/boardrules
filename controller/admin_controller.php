@@ -146,7 +146,7 @@ class admin_controller implements admin_interface
 			'S_BOARDRULES_HEADER_LINK'				=> (bool) $this->config['boardrules_header_link'],
 			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'	=> (bool) $this->config['boardrules_require_at_registration'],
 
-			'BOARDRULES_LIST_STYLE'	=> build_select([
+			'S_BOARDRULES_LIST_STYLE'	=> build_select([
 				'' => 'ACP_BOARDRULES_LIST_STYLE_ORDERED',
 				'disc' => 'ACP_BOARDRULES_LIST_STYLE_BULLET',
 				'none' => 'ACP_BOARDRULES_LIST_STYLE_NONE',
