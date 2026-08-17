@@ -244,7 +244,7 @@ class admin_controller implements admin_interface
 		$last_right_id = 0;
 
 		// Process each rule entity for display
-		/* @var $entity \phpbb\boardrules\entity\rule */
+		/** @var $entity \phpbb\boardrules\entity\rule */
 		foreach ($entities as $entity)
 		{
 			if ($entity->get_left_id() < $last_right_id)
