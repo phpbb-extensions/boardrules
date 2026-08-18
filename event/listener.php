@@ -131,6 +131,11 @@ class listener implements EventSubscriberInterface
 	*/
 	public function viewonline_page($event)
 	{
+		if (!isset($event['row']['session_page']))
+		{
+			return;
+		}
+
 		$session_path = parse_url($event['row']['session_page'], PHP_URL_PATH);
 		if (!is_string($session_path))
 		{
@@ -145,12 +150,12 @@ class listener implements EventSubscriberInterface
 		{
 			$route = $this->router->match($session_path);
 		}
-		catch (\Symfony\Component\Routing\Exception\ExceptionInterface $e)
+		catch (\RuntimeException $e)
 		{
 			return;
 		}
 
-		if ($route['_route'] === 'phpbb_boardrules_main_controller')
+		if (isset($route['_route']) && $route['_route'] === 'phpbb_boardrules_main_controller')
 		{
 			$event['location'] = $this->lang->lang('BOARDRULES_VIEWONLINE');
 			$event['location_url'] = $this->controller_helper->route('phpbb_boardrules_main_controller');
