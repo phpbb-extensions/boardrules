@@ -348,7 +348,10 @@ class listener_test extends \phpbb_test_case
 			// test when on_page is app and session_page is NOT for boardrules
 			array(
 				array(
-					'session_page' => 'index.' . $phpEx
+					1 => 'app',
+				),
+				array(
+					'session_page' => 'app.' . $phpEx . '/foobar'
 				),
 				'$location_url',
 				'$location',
@@ -381,13 +384,13 @@ class listener_test extends \phpbb_test_case
 				'phpbb_boardrules_main_controller#a:0:{}',
 				'BOARDRULES_VIEWONLINE',
 			),
-			// test when the front controller has the phpBB 4 name
+			// test when the front controller has the phpBB 3 name
 			array(
 				array(
-					1 => 'index',
+					1 => 'app',
 				),
 				array(
-					'session_page' => 'index.' . $phpEx . '/rules'
+					'session_page' => 'app.' . $phpEx . '/rules'
 				),
 				'$location_url',
 				'$location',
