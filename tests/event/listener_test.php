@@ -70,6 +70,14 @@ class listener_test extends \phpbb_test_case
 				{
 					return array('_route' => 'phpbb_boardrules_main_controller');
 				}
+				else if ($path === '/runtime-error')
+				{
+					throw new \RuntimeException('Unable to match route.');
+				}
+				else if ($path === '/missing-route-name')
+				{
+					return array();
+				}
 
 				throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
 			});
@@ -370,6 +378,56 @@ class listener_test extends \phpbb_test_case
 				'$location',
 				'phpbb_boardrules_main_controller#a:0:{}',
 				'BOARDRULES_VIEWONLINE',
+			),
+			// test when the session page is missing
+			array(
+				array(
+					1 => 'app',
+				),
+				array(),
+				'$location_url',
+				'$location',
+				'$location_url',
+				'$location',
+			),
+			// test a non-routing runtime exception is treated as an unmatched page
+			array(
+				array(
+					1 => 'app',
+				),
+				array(
+					'session_page' => 'app.' . $phpEx . '/runtime-error'
+				),
+				'$location_url',
+				'$location',
+				'$location_url',
+				'$location',
+			),
+			// test a route result without a route name
+			array(
+				array(
+					1 => 'app',
+				),
+				array(
+					'session_page' => 'app.' . $phpEx . '/missing-route-name'
+				),
+				'$location_url',
+				'$location',
+				'$location_url',
+				'$location',
+			),
+			// test when on_page is index and session_page is NOT for boardrules
+			array(
+				array(
+					1 => 'index',
+				),
+				array(
+					'session_page' => 'index.' . $phpEx . '/foobar'
+				),
+				'$location_url',
+				'$location',
+				'$location_url',
+				'$location',
 			),
 			// test when the front controller has the phpBB 4 name
 			array(
