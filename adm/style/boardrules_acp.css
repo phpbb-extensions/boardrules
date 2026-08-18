@@ -1,0 +1,49 @@
+.boardrules-language-toolbar {
+	display: flex;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 14px 0;
+	padding: 12px;
+}
+
+.boardrules-language-picker {
+	display: flex;
+	flex: 1 1 240px;
+	flex-direction: column;
+	gap: 5px;
+	max-width: 360px;
+}
+
+.boardrules-language-picker label {
+	font-weight: bold;
+}
+
+.boardrules-language-picker select {
+	box-sizing: border-box;
+	min-height: 28px;
+	width: 100%;
+}
+
+.boardrules-language-actions,
+.boardrules-action-bar {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.boardrules-action-bar {
+	margin: 12px 0;
+}
+
+a.boardrules-button,
+input.boardrules-button {
+	box-sizing: border-box;
+	display: inline-block;
+	height: 28px;
+	margin: 0;
+	padding: 4px 10px !important;
+	line-height: 18px;
+	vertical-align: middle;
+}

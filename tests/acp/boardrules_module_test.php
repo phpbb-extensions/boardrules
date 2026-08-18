@@ -88,7 +88,7 @@ class boardrules_module_test extends \phpbb_test_case
 		$this->setupEmptyRequestVariables();
 
 		$this->admin_controller->expects($this->once())
-			->method('display_language_selection');
+			->method('display_language_dashboard');
 
 		$this->executeModeAndAssert('manage', self::TEMPLATE_MANAGE, 'ACP_BOARDRULES_MANAGE');
 	}
@@ -153,6 +153,41 @@ class boardrules_module_test extends \phpbb_test_case
 		$this->executeModeAndAssert('manage', self::TEMPLATE_MANAGE, 'ACP_BOARDRULES_MANAGE');
 	}
 
+	public function test_manage_mode_copy_action(): void
+	{
+		$this->setupLanguageExpectation();
+		$this->setupManageRequestVariables('copy', 'fr', 0, 0, 'dashboard');
+
+		$this->admin_controller->expects($this->once())
+			->method('copy_ruleset')
+			->with('fr', 'dashboard');
+
+		$this->executeModeAndAssert('manage', self::TEMPLATE_MANAGE, 'ACP_BOARDRULES_COPY_RULESET');
+	}
+
+	/**
+	 * @dataProvider ruleset_status_data
+	 */
+	public function test_manage_mode_ruleset_status_action(string $action, bool $published): void
+	{
+		$this->setupLanguageExpectation();
+		$this->setupManageRequestVariables($action, 'fr', 0, 0, 'dashboard');
+
+		$this->admin_controller->expects($this->once())
+			->method('set_ruleset_published')
+			->with('fr', $published, 'dashboard');
+
+		$this->executeModeAndAssert('manage', self::TEMPLATE_MANAGE, 'ACP_BOARDRULES_MANAGE');
+	}
+
+	public function ruleset_status_data(): array
+	{
+		return [
+			['publish', true],
+			['draft', false],
+		];
+	}
+
 	private function setupNotificationRequest(bool $value): void
 	{
 		$this->request->expects($this->once())
@@ -168,18 +203,20 @@ class boardrules_module_test extends \phpbb_test_case
 				['action', '', ''],
 				['language', '', ''],
 				['parent_id', 0, 0],
-				['rule_id', 0, 0]
+				['rule_id', 0, 0],
+				['return_to', '', '']
 			]);
 	}
 
-	private function setupManageRequestVariables(string $action, string $language, int $parentId, int $ruleId): void
+	private function setupManageRequestVariables(string $action, string $language, int $parentId, int $ruleId, string $returnTo = ''): void
 	{
 		$this->request->method('variable')
 			->willReturnMap([
 				['action', '', false, \phpbb\request\request_interface::REQUEST, $action],
 				['language', '', false, \phpbb\request\request_interface::REQUEST, $language],
 				['parent_id', 0, false, \phpbb\request\request_interface::REQUEST, $parentId],
-				['rule_id', 0, false, \phpbb\request\request_interface::REQUEST, $ruleId]
+				['rule_id', 0, false, \phpbb\request\request_interface::REQUEST, $ruleId],
+				['return_to', '', false, \phpbb\request\request_interface::REQUEST, $returnTo]
 			]);
 	}
 

@@ -44,6 +44,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
+	/** @var \phpbb\boardrules\operators\ruleset */
+	protected $ruleset_operator;
+
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -71,13 +74,14 @@ class admin_controller implements admin_interface
 	* @param \phpbb\notification\manager       $notification_manager Notification manager
 	* @param \phpbb\request\request            $request              Request object
 	* @param \phpbb\boardrules\operators\rule  $rule_operator        Rule operator object
+	* @param \phpbb\boardrules\operators\ruleset $ruleset_operator  Ruleset operator object
 	* @param \phpbb\template\template          $template             Template object
 	* @param \phpbb\user                       $user                 User object
 	* @param string                            $root_path            phpBB root path
 	* @param string                            $php_ext              phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->container = $container;
@@ -88,6 +92,7 @@ class admin_controller implements admin_interface
 		$this->notification_manager = $notification_manager;
 		$this->request = $request;
 		$this->rule_operator = $rule_operator;
+		$this->ruleset_operator = $ruleset_operator;
 		$this->template = $template;
 		$this->user = $user;
 		$this->root_path = $root_path;
@@ -184,47 +189,41 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Display the language selection
-	*
-	* Display the available languages to add/manage board rules from.
-	* If there is only one board language, this will just call display_rules().
+	* Display the language dashboard
 	*
 	* @return void
 	* @access public
 	*/
-	public function display_language_selection()
+	public function display_language_dashboard()
 	{
-		// Check if there are any available languages
-		$sql = 'SELECT lang_iso, lang_local_name
-			FROM ' . LANG_TABLE . '
-			ORDER BY lang_english_name';
-		$result = $this->db->sql_query($sql);
-		$rows = $this->db->sql_fetchrowset($result);
-		$this->db->sql_freeresult($result);
+		$languages = $this->ruleset_operator->get_languages();
 
-		// If there are some, build option fields
-		if (count($rows) > 1)
+		foreach ($languages as $language)
 		{
-			foreach ($rows as $row)
-			{
-				$this->template->assign_block_vars('options', array(
-					'S_LANG_DEFAULT'	=> $row['lang_iso'] === $this->config['default_lang'],
-
-					'LANG_ISO'			=> $row['lang_iso'],
-					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
-				));
-			}
-
-			// Set u_action variable for the template form
-			$this->template->assign_var('U_ACTION', $this->u_action);
+			$is_empty = $language['rule_count'] === 0;
+			$is_default = $language['lang_iso'] === $this->config['default_lang'];
+			$this->template->assign_block_vars('languages', array(
+				'LANG_ISO' => $language['lang_iso'],
+				'LANG_LOCAL_NAME' => $language['lang_local_name'],
+				'LANG_ENGLISH_NAME' => $language['lang_english_name'],
+				'RULE_COUNT' => $language['rule_count'],
+				'S_DEFAULT' => $is_default,
+				'S_EMPTY' => $is_empty,
+				'S_PUBLISHED' => !$is_empty && $language['published'],
+				'S_DRAFT' => !$is_empty && !$language['published'],
+				'S_CAN_COPY' => $this->has_copy_source($languages, $language['lang_iso']),
+				'S_CAN_DRAFT' => !$is_empty && $language['published'] && !$is_default,
+				'U_MANAGE' => "{$this->u_action}&amp;language={$language['lang_iso']}",
+				'U_COPY' => "{$this->u_action}&amp;action=copy&amp;language={$language['lang_iso']}&amp;return_to=dashboard",
+				'U_PUBLISH' => "{$this->u_action}&amp;action=publish&amp;language={$language['lang_iso']}&amp;return_to=dashboard",
+				'U_DRAFT' => "{$this->u_action}&amp;action=draft&amp;language={$language['lang_iso']}&amp;return_to=dashboard",
+			));
 		}
-		else
-		{
-			// If there is only one available language its index is 0
-			// and that language is the default board language.
-			// We do not need any loops here to get its iso code.
-			$this->display_rules($rows[0]['lang_iso']);
-		}
+
+		$this->template->assign_vars(array(
+			'S_LANGUAGE_DASHBOARD' => true,
+			'U_ACTION' => $this->u_action,
+		));
 	}
 
 	/**
@@ -237,6 +236,13 @@ class admin_controller implements admin_interface
 	*/
 	public function display_rules($language, $parent_id = 0)
 	{
+		$languages = $this->assign_language_options($language);
+		$current_language = $this->find_language($languages, $language);
+		if ($current_language === null)
+		{
+			trigger_error($this->lang->lang('ACP_BOARDRULES_INVALID_LANGUAGE') . adm_back_link($this->u_action), E_USER_WARNING);
+		}
+
 		// Grab all the rules in the current user's language
 		$entities = $this->rule_operator->get_rules($language, $parent_id);
 
@@ -290,7 +296,148 @@ class admin_controller implements admin_interface
 			'U_ACTION'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}",
 			'U_ADD_RULE'	=> "{$this->u_action}&amp;language={$language}&amp;parent_id={$parent_id}&amp;action=add",
 			'U_MAIN'		=> "{$this->u_action}&amp;language={$language}&amp;parent_id=0",
+			'U_DASHBOARD' => $this->u_action,
+			'U_LANGUAGE_ACTION' => $this->u_action,
+			'U_COPY_RULESET' => "{$this->u_action}&amp;action=copy&amp;language={$language}",
+			'U_PUBLISH_RULESET' => "{$this->u_action}&amp;action=publish&amp;language={$language}",
+			'U_DRAFT_RULESET' => "{$this->u_action}&amp;action=draft&amp;language={$language}",
+			'CURRENT_LANGUAGE' => $current_language['lang_local_name'],
+			'CURRENT_RULE_COUNT' => $current_language['rule_count'],
+			'S_RULESET_EMPTY' => $current_language['rule_count'] === 0,
+			'S_DEFAULT_LANGUAGE' => $language === $this->config['default_lang'],
+			'S_RULESET_PUBLISHED' => $current_language['rule_count'] > 0 && $current_language['published'],
+			'S_RULESET_DRAFT' => $current_language['rule_count'] > 0 && !$current_language['published'],
+			'S_CAN_DRAFT_RULESET' => $current_language['rule_count'] > 0 && $current_language['published'] && $language !== $this->config['default_lang'],
+			'S_CAN_COPY_RULESET' => $this->has_copy_source($languages, $language),
 		));
+	}
+
+	/**
+	 * Display and process the complete ruleset copy form.
+	 *
+	 * @param string $target_language
+	 * @param string $return_to Return destination context
+	 * @return void
+	 */
+	public function copy_ruleset($target_language, $return_to = '')
+	{
+		add_form_key('copy_ruleset');
+		$languages = $this->ruleset_operator->get_languages();
+		$target = $this->find_language($languages, $target_language);
+		$return_url = $this->get_ruleset_return_url($target_language, $return_to);
+		$return_parameter = $return_to === 'dashboard' ? '&amp;return_to=dashboard' : '';
+
+		if ($target === null)
+		{
+			trigger_error($this->lang->lang('ACP_BOARDRULES_COPY_INVALID_LANGUAGE') . adm_back_link($return_url), E_USER_WARNING);
+		}
+
+		$source_language = $this->request->variable('source_language', $this->config['default_lang']);
+		if ($this->request->is_set_post('submit'))
+		{
+			if (!check_form_key('copy_ruleset'))
+			{
+				trigger_error($this->lang->lang('FORM_INVALID') . adm_back_link($return_url), E_USER_WARNING);
+			}
+
+			try
+			{
+				$copy_result = $this->ruleset_operator->copy($source_language, $target_language);
+			}
+			catch (\InvalidArgumentException $e)
+			{
+				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($return_url), E_USER_WARNING);
+			}
+
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_COPY_LOG', false, array($source_language, $target_language, $copy_result['rule_count']));
+			$message = $this->lang->lang('ACP_BOARDRULES_COPY_SUCCESS', $copy_result['rule_count'], $target['lang_local_name']);
+			if ($copy_result['renamed_anchors'])
+			{
+				$message .= '<br>' . $this->lang->lang('ACP_BOARDRULES_COPY_ANCHORS_RENAMED', $copy_result['renamed_anchors']);
+			}
+			trigger_error($message . adm_back_link($return_url));
+		}
+
+		foreach ($languages as $language)
+		{
+			if ($language['lang_iso'] !== $target_language && $language['rule_count'] > 0)
+			{
+				$this->template->assign_block_vars('copy_sources', array(
+					'LANG_ISO' => $language['lang_iso'],
+					'LANG_LOCAL_NAME' => $language['lang_local_name'],
+					'RULE_COUNT' => $language['rule_count'],
+					'S_SELECTED' => $language['lang_iso'] === $source_language,
+				));
+			}
+		}
+
+		$this->template->assign_vars(array(
+			'S_COPY_RULESET' => true,
+			'TARGET_LANGUAGE' => $target['lang_local_name'],
+			'TARGET_RULE_COUNT' => $target['rule_count'],
+			'S_TARGET_HAS_RULES' => $target['rule_count'] > 0,
+			'U_COPY_ACTION' => "{$this->u_action}&amp;action=copy&amp;language={$target_language}{$return_parameter}",
+			'U_BACK' => $return_url,
+		));
+	}
+
+	/**
+	 * Publish or return a complete language ruleset to draft.
+	 *
+	 * @param string $language
+	 * @param bool $published
+	 * @param string $return_to Return destination context
+	 * @return void
+	 */
+	public function set_ruleset_published($language, $published, $return_to = '')
+	{
+		$return_url = $this->get_ruleset_return_url($language, $return_to);
+
+		if (!$published && $language === $this->config['default_lang'])
+		{
+			trigger_error($this->lang->lang('ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT') . adm_back_link($return_url), E_USER_WARNING);
+		}
+
+		if (confirm_box(true))
+		{
+			try
+			{
+				$this->ruleset_operator->set_published($language, $published);
+			}
+			catch (\InvalidArgumentException $e)
+			{
+				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($return_url), E_USER_WARNING);
+			}
+
+			$log_key = $published ? 'ACP_BOARDRULES_PUBLISH_LOG' : 'ACP_BOARDRULES_DRAFT_LOG';
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, $log_key, false, array($language));
+			$message = $published ? 'ACP_BOARDRULES_PUBLISH_SUCCESS' : 'ACP_BOARDRULES_DRAFT_SUCCESS';
+			trigger_error($this->lang->lang($message) . adm_back_link($return_url));
+		}
+
+		$confirm_key = $published ? 'ACP_BOARDRULES_PUBLISH_CONFIRM' : 'ACP_BOARDRULES_DRAFT_CONFIRM';
+		confirm_box(false, $this->lang->lang($confirm_key), build_hidden_fields(array(
+			'mode' => 'manage',
+			'action' => $published ? 'publish' : 'draft',
+			'language' => $language,
+			'return_to' => $return_to === 'dashboard' ? 'dashboard' : '',
+		)));
+
+		redirect($return_url);
+	}
+
+	/**
+	 * Resolve a ruleset action's safe return destination.
+	 *
+	 * @param string $language
+	 * @param string $return_to
+	 * @return string
+	 */
+	protected function get_ruleset_return_url($language, $return_to)
+	{
+		return $return_to === 'dashboard'
+			? $this->u_action
+			: "{$this->u_action}&amp;language={$language}";
 	}
 
 	/**
@@ -683,6 +830,63 @@ class admin_controller implements admin_interface
 	public function set_page_url($u_action)
 	{
 		$this->u_action = $u_action;
+	}
+
+	/**
+	 * Assign installed language options and return their dashboard data.
+	 *
+	 * @param string $selected_language
+	 * @return array
+	 */
+	protected function assign_language_options($selected_language)
+	{
+		$languages = $this->ruleset_operator->get_languages();
+		foreach ($languages as $language)
+		{
+			$this->template->assign_block_vars('language_options', array(
+				'LANG_ISO' => $language['lang_iso'],
+				'LANG_LOCAL_NAME' => $language['lang_local_name'],
+				'S_SELECTED' => $language['lang_iso'] === $selected_language,
+			));
+		}
+
+		return $languages;
+	}
+
+	/**
+	 * @param array $languages
+	 * @param string $language_iso
+	 * @return array|null
+	 */
+	protected function find_language(array $languages, $language_iso)
+	{
+		foreach ($languages as $language)
+		{
+			if ($language['lang_iso'] === $language_iso)
+			{
+				return $language;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param array $languages
+	 * @param string $target_language
+	 * @return bool
+	 */
+	protected function has_copy_source(array $languages, $target_language)
+	{
+		foreach ($languages as $language)
+		{
+			if ($language['lang_iso'] !== $target_language && $language['rule_count'] > 0)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

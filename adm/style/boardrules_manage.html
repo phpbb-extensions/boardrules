@@ -1,3 +1,4 @@
+{% INCLUDECSS '@phpbb_boardrules/boardrules_acp.css' %}
 {% INCLUDE 'overall_header.html' %}
 
 {% if S_ADD_RULE or S_EDIT_RULE %}
@@ -105,35 +106,122 @@
 		textarea.addEventListener("focus", () => initInsertions());
 	</script>
 
+{% elseif S_COPY_RULESET %}
+
+	<a id="maincontent"></a>
+	<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
+
+	<h1>{{ lang('ACP_BOARDRULES_COPY_RULESET') }}</h1>
+	<p>{{ lang('ACP_BOARDRULES_COPY_RULESET_EXPLAIN', TARGET_LANGUAGE) }}</p>
+	{% if S_TARGET_HAS_RULES %}
+		<div class="errorbox notice">
+			<h3>{{ lang('ACP_BOARDRULES_COPY_APPEND') }}</h3>
+			<p>{{ lang('ACP_BOARDRULES_COPY_APPEND_EXPLAIN', TARGET_RULE_COUNT) }}</p>
+		</div>
+	{% endif %}
+
+	<form id="copy_ruleset" method="post" action="{{ U_COPY_ACTION }}">
+		<fieldset>
+			<legend>{{ lang('ACP_BOARDRULES_COPY_SETTINGS') }}</legend>
+			<dl>
+				<dt><label for="source_language">{{ lang('ACP_BOARDRULES_COPY_SOURCE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_BOARDRULES_COPY_SOURCE_EXPLAIN') }}</span></dt>
+				<dd>
+					<select name="source_language" id="source_language">
+						{% for source in loops.copy_sources %}
+							<option value="{{ source.LANG_ISO }}"{% if source.S_SELECTED %} selected="selected"{% endif %}>{{ source.LANG_LOCAL_NAME }} ({{ lang('ACP_BOARDRULES_RULE_COUNT', source.RULE_COUNT) }})</option>
+						{% endfor %}
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt><strong>{{ lang('ACP_BOARDRULES_COPY_TARGET') ~ lang('COLON') }}</strong></dt>
+				<dd>{{ TARGET_LANGUAGE }}</dd>
+			</dl>
+		</fieldset>
+
+		<fieldset class="submit-buttons">
+			<input class="button1" type="submit" name="submit" value="{{ lang('ACP_BOARDRULES_COPY_ACTION') }}">
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+	</form>
+
+{% elseif S_LANGUAGE_DASHBOARD %}
+
+	<a id="maincontent"></a>
+	<h1>{{ lang('ACP_BOARDRULES_LANGUAGES') }}</h1>
+	<p>{{ lang('ACP_BOARDRULES_LANGUAGES_EXPLAIN') }}</p>
+
+	<table class="table1 zebra-table">
+		<thead>
+			<tr>
+				<th>{{ lang('LANGUAGE') }}</th>
+				<th>{{ lang('ACP_BOARDRULES_RULES') }}</th>
+				<th>{{ lang('ACP_BOARDRULES_STATUS') }}</th>
+				<th>{{ lang('ACTION') }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for language in loops.languages %}
+				<tr>
+					<td><strong>{{ language.LANG_LOCAL_NAME }}</strong><br><span>{{ language.LANG_ENGLISH_NAME }}{% if language.S_DEFAULT %} · {{ lang('DEFAULT') }}{% endif %}</span></td>
+					<td>{{ language.RULE_COUNT }}</td>
+					<td>
+						{% if language.S_EMPTY %}<span class="error">{{ lang(language.S_DEFAULT ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</span>
+						{% elseif language.S_DRAFT %}<strong>{{ lang('ACP_BOARDRULES_STATUS_DRAFT') }}</strong>
+						{% else %}<strong class="success">{{ lang('ACP_BOARDRULES_STATUS_PUBLISHED') }}</strong>{% endif %}
+					</td>
+					<td class="actions">
+						<a href="{{ language.U_MANAGE }}">{{ lang('ACP_BOARDRULES_MANAGE_ACTION') }}</a>
+						{% if language.S_CAN_COPY %} &middot; <a href="{{ language.U_COPY }}">{{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
+						{% if language.S_DRAFT %} &middot; <a href="{{ language.U_PUBLISH }}">{{ lang('ACP_BOARDRULES_PUBLISH') }}</a>{% endif %}
+						{% if language.S_CAN_DRAFT %} &middot; <a href="{{ language.U_DRAFT }}">{{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
 {% else %}
 
 	<h1>{{ lang('ACP_BOARDRULES_MANAGE') }}</h1>
+	<p>{{ lang('ACP_BOARDRULES_MANAGE_EXPLAIN') }}</p>
 
-	{% if loops.options|length %}
+	<form id="language_form" method="post" action="{{ U_LANGUAGE_ACTION }}">
+		<fieldset class="boardrules-language-toolbar">
+			<div class="boardrules-language-picker">
+				<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') ~ lang('COLON') }}</label>
+				<select name="language" id="language">
+					{% for option in loops.language_options %}
+						<option value="{{ option.LANG_ISO }}"{% if option.S_SELECTED %} selected="selected"{% endif %}>{{ option.LANG_LOCAL_NAME }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="boardrules-language-actions">
+				<input type="submit" value="{{ lang('GO') }}" class="button2 boardrules-button">
+				<a href="{{ U_DASHBOARD }}" class="button2 boardrules-button">{{ lang('ACP_BOARDRULES_ALL_LANGUAGES') }}</a>
+			</div>
+		</fieldset>
+	</form>
 
-		<p>{{ lang('ACP_BOARDRULES_LANGUAGE_EXPLAIN') }}</p>
-		<form id="language_form" method="post" action="{{ U_ACTION }}">
-			<fieldset>
-				<dl>
-					<dt>
-						<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') ~ lang('COLON') }}</label>
-					</dt>
-					<dd>
-						<select name="language" id="language">
-							{% for options in loops.options %}
-								<option value="{{ options.LANG_ISO }}"{% if options.S_LANG_DEFAULT %} selected="selected"{% endif %}>{{ options.LANG_LOCAL_NAME }}</option>
-							{% endfor %}
-						</select>
-						<input type="submit" value="{{ lang('GO') }}" class="button2">
-						{{ S_FORM_TOKEN }}
-					</dd>
-				</dl>
-			</fieldset>
-		</form>
+	{% if (S_CAN_COPY_RULESET and not S_RULESET_EMPTY) or S_CAN_DRAFT_RULESET %}
+		<p class="boardrules-action-bar">
+			{% if S_CAN_COPY_RULESET and not S_RULESET_EMPTY %}<a href="{{ U_COPY_RULESET }}" class="button2 boardrules-button">{{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
+			{% if S_CAN_DRAFT_RULESET %}<a href="{{ U_DRAFT_RULESET }}" class="button2 boardrules-button">{{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
+		</p>
+	{% endif %}
 
-	{% else %}
+	{% if S_RULESET_DRAFT %}
+		<div class="errorbox notice">
+			<h3>{{ lang('ACP_BOARDRULES_STATUS_DRAFT') }}</h3>
+			<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_DRAFT_DEFAULT_NOTICE' : 'ACP_BOARDRULES_DRAFT_NOTICE') }} <a href="{{ U_PUBLISH_RULESET }}">{{ lang('ACP_BOARDRULES_PUBLISH') }}</a></p>
+		</div>
+	{% elseif S_RULESET_EMPTY %}
+		<div class="errorbox notice">
+			<h3>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</h3>
+			<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_EMPTY_DEFAULT_NOTICE' : 'ACP_BOARDRULES_EMPTY_NOTICE') }}{% if S_CAN_COPY_RULESET %} <a href="{{ U_COPY_RULESET }}">{{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}</p>
+		</div>
+	{% endif %}
 
-		<p>{{ lang('ACP_BOARDRULES_MANAGE_EXPLAIN') }}</p>
 		{% if loops.breadcrumb|length %}
 		<p>
 			<strong>
@@ -189,8 +277,6 @@
 			{{ S_FORM_TOKEN }}
 		</fieldset>
 		</form>
-
-	{% endif %}
 
 {% endif %}
 

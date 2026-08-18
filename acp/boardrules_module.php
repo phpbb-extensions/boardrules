@@ -44,6 +44,7 @@ class boardrules_module
 		$language = $request->variable('language', '');
 		$parent_id = $request->variable('parent_id', 0);
 		$rule_id = $request->variable('rule_id', 0);
+		$return_to = $request->variable('return_to', '') === 'dashboard' ? 'dashboard' : '';
 
 		// Make the $u_action url available in the admin controller
 		$admin_controller->set_page_url($this->u_action);
@@ -115,6 +116,20 @@ class boardrules_module
 						// Delete a rule
 						$admin_controller->delete_rule($rule_id);
 					break;
+
+					case 'copy':
+						$this->page_title = 'ACP_BOARDRULES_COPY_RULESET';
+						$admin_controller->copy_ruleset($language, $return_to);
+						return;
+					break;
+
+					case 'publish':
+						$admin_controller->set_ruleset_published($language, true, $return_to);
+					break;
+
+					case 'draft':
+						$admin_controller->set_ruleset_published($language, false, $return_to);
+					break;
 				}
 
 				// Check if a language variable was submitted and display
@@ -122,7 +137,7 @@ class boardrules_module
 				// display the language selection menu.
 				if (empty($language))
 				{
-					$admin_controller->display_language_selection();
+					$admin_controller->display_language_dashboard();
 				}
 				else
 				{

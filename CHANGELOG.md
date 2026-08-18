@@ -2,6 +2,10 @@
 
 ## Version 3.x (for phpBB 3.3)
 
+### 3.0.2 - Unreleased
+
+- Added language dashboard with complete ruleset copying and draft/publish workflow.
+
 ### 3.0.1 - 2024-01-18
 
 - Rules in the ACP are clickable again, fixes an issue introduced in v3.0.0..
