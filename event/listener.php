@@ -29,6 +29,9 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\template\template */
 	protected $template;
 
+	/** @var \phpbb\routing\router */
+	protected $router;
+
 	/** @var string phpEx */
 	protected $php_ext;
 
@@ -39,15 +42,17 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\controller\helper $controller_helper Controller helper object
 	* @param \phpbb\language\language $lang              Language object
 	* @param \phpbb\template\template $template          Template object
+	* @param \phpbb\routing\router     $router            Router object
 	* @param string                   $php_ext           phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\language\language $lang, \phpbb\template\template $template, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\language\language $lang, \phpbb\template\template $template, \phpbb\routing\router $router, $php_ext)
 	{
 		$this->config = $config;
 		$this->controller_helper = $controller_helper;
 		$this->lang = $lang;
 		$this->template = $template;
+		$this->router = $router;
 		$this->php_ext = $php_ext;
 	}
 
@@ -126,7 +131,26 @@ class listener implements EventSubscriberInterface
 	*/
 	public function viewonline_page($event)
 	{
-		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/rules') === 0)
+		$session_path = parse_url($event['row']['session_page'], PHP_URL_PATH);
+		if (!is_string($session_path))
+		{
+			return;
+		}
+
+		// Session pages include the front controller, whose name differs between
+		// phpBB versions. The router expects only the path that follows it.
+		$session_path = preg_replace('#^.*\.' . preg_quote($this->php_ext, '#') . '(?=/)#', '', $session_path);
+
+		try
+		{
+			$route = $this->router->match($session_path);
+		}
+		catch (\Symfony\Component\Routing\Exception\ExceptionInterface $e)
+		{
+			return;
+		}
+
+		if ($route['_route'] === 'phpbb_boardrules_main_controller')
 		{
 			$event['location'] = $this->lang->lang('BOARDRULES_VIEWONLINE');
 			$event['location_url'] = $this->controller_helper->route('phpbb_boardrules_main_controller');

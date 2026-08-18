@@ -28,6 +28,9 @@ class listener_test extends \phpbb_test_case
 	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\template\template */
 	protected $template;
 
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\routing\router */
+	protected $router;
+
 	/** @var string */
 	protected $php_ext;
 
@@ -57,6 +60,19 @@ class listener_test extends \phpbb_test_case
 				return $route . '#' . serialize($params);
 			})
 		;
+
+		$this->router = $this->getMockBuilder('\phpbb\routing\router')
+			->disableOriginalConstructor()
+			->getMock();
+		$this->router->method('match')
+			->willReturnCallback(function ($path) {
+				if ($path === '/rules')
+				{
+					return array('_route' => 'phpbb_boardrules_main_controller');
+				}
+
+				throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+			});
 	}
 
 	/**
@@ -69,6 +85,7 @@ class listener_test extends \phpbb_test_case
 			$this->controller_helper,
 			$this->lang,
 			$this->template,
+			$this->router,
 			$this->php_ext
 		);
 	}
@@ -315,12 +332,14 @@ class listener_test extends \phpbb_test_case
 		global $phpEx;
 
 		return array(
-			// test when on_page is index
+			// test when session page is not a route
 			array(
 				array(
 					1 => 'index',
 				),
-				array(),
+				array(
+					'session_page' => 'index.' . $phpEx,
+				),
 				'$location_url',
 				'$location',
 				'$location_url',
@@ -346,6 +365,32 @@ class listener_test extends \phpbb_test_case
 				),
 				array(
 					'session_page' => 'app.' . $phpEx . '/rules'
+				),
+				'$location_url',
+				'$location',
+				'phpbb_boardrules_main_controller#a:0:{}',
+				'BOARDRULES_VIEWONLINE',
+			),
+			// test when the front controller has the phpBB 4 name
+			array(
+				array(
+					1 => 'index',
+				),
+				array(
+					'session_page' => 'index.' . $phpEx . '/rules'
+				),
+				'$location_url',
+				'$location',
+				'phpbb_boardrules_main_controller#a:0:{}',
+				'BOARDRULES_VIEWONLINE',
+			),
+			// test without relying on a particular front-controller name
+			array(
+				array(
+					1 => 'front',
+				),
+				array(
+					'session_page' => 'front.' . $phpEx . '/rules?foo=bar'
 				),
 				'$location_url',
 				'$location',
