@@ -14,7 +14,7 @@
 	<tbody>
 		{% for language in loops.languages %}
 			<tr>
-				<td><strong>{{ language.LANG_LOCAL_NAME }}</strong><br><span>{{ language.LANG_ENGLISH_NAME }}{% if language.S_DEFAULT %} · {{ lang('DEFAULT') }}{% endif %}</span></td>
+				<td><strong>{{ language.LANG_LOCAL_NAME }}</strong><br><span>{{ language.LANG_ENGLISH_NAME }}{% if language.S_DEFAULT %} · {{ lang('ACP_BOARDRULES_DEFAULT_LANGUAGE') }}{% endif %}</span></td>
 				<td>{{ language.RULE_COUNT }}</td>
 				<td>
 					{% if language.S_EMPTY %}<span class="error">{{ lang(language.S_DEFAULT ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</span>
