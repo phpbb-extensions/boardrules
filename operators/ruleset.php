@@ -189,7 +189,9 @@ class ruleset implements ruleset_interface
 		$published = $this->db->sql_fetchfield('rules_published');
 		$this->db->sql_freeresult($result);
 
-		return $published === false || $published;
+		// Rules were always published before draft status was added, so rules
+		// without a saved status must still be treated as published.
+		return $published === false ? true : (bool) $published;
 	}
 
 	/**
