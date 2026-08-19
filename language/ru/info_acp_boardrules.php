@@ -46,4 +46,7 @@ $lang = array_merge($lang, array(
 	// ACP Logs
 	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Настройки правил форума обновлены</strong>',
 	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Разосланы уведомления об изменении правил форума</strong>',
+	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Скопирован языковой набор правил форума</strong><br />» %1$s → %2$s (%3$d правил)',
+	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Опубликован языковой набор правил форума</strong><br />» %s',
+	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Языковой набор правил форума переведён в черновик</strong><br />» %s',
 ));
