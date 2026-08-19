@@ -1,0 +1,36 @@
+<a id="maincontent"></a>
+<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
+
+<h1>{{ lang('ACP_BOARDRULES_COPY_RULESET') }}</h1>
+<p>{{ lang('ACP_BOARDRULES_COPY_RULESET_EXPLAIN', TARGET_LANGUAGE) }}</p>
+{% if S_TARGET_HAS_RULES %}
+	<div class="errorbox notice">
+		<h3>{{ lang('ACP_BOARDRULES_COPY_APPEND') }}</h3>
+		<p>{{ lang('ACP_BOARDRULES_COPY_APPEND_EXPLAIN', TARGET_RULE_COUNT) }}</p>
+	</div>
+{% endif %}
+
+<form id="copy_ruleset" method="post" action="{{ U_COPY_ACTION }}">
+	<fieldset>
+		<legend>{{ lang('ACP_BOARDRULES_COPY_SETTINGS') }}</legend>
+		<dl>
+			<dt><label for="source_language">{{ lang('ACP_BOARDRULES_COPY_SOURCE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_BOARDRULES_COPY_SOURCE_EXPLAIN') }}</span></dt>
+			<dd>
+				<select name="source_language" id="source_language">
+					{% for source in loops.copy_sources %}
+						<option value="{{ source.LANG_ISO }}"{% if source.S_SELECTED %} selected="selected"{% endif %}>{{ source.LANG_LOCAL_NAME }} ({{ lang('ACP_BOARDRULES_RULE_COUNT', source.RULE_COUNT) }})</option>
+					{% endfor %}
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt><strong>{{ lang('ACP_BOARDRULES_COPY_TARGET') ~ lang('COLON') }}</strong></dt>
+			<dd>{{ TARGET_LANGUAGE }}</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" name="submit" value="{{ lang('ACP_BOARDRULES_COPY_ACTION') }}">
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+</form>

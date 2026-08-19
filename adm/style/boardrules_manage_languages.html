@@ -1,0 +1,33 @@
+<a id="maincontent"></a>
+<h1>{{ lang('ACP_BOARDRULES_LANGUAGES') }}</h1>
+<p>{{ lang('ACP_BOARDRULES_LANGUAGES_EXPLAIN') }}</p>
+
+<table class="table1 zebra-table">
+	<thead>
+		<tr>
+			<th>{{ lang('LANGUAGE') }}</th>
+			<th>{{ lang('ACP_BOARDRULES_RULES') }}</th>
+			<th>{{ lang('ACP_BOARDRULES_STATUS') }}</th>
+			<th>{{ lang('ACTION') }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for language in loops.languages %}
+			<tr>
+				<td><strong>{{ language.LANG_LOCAL_NAME }}</strong><br><span>{{ language.LANG_ENGLISH_NAME }}{% if language.S_DEFAULT %} · {{ lang('DEFAULT') }}{% endif %}</span></td>
+				<td>{{ language.RULE_COUNT }}</td>
+				<td>
+					{% if language.S_EMPTY %}<span class="error">{{ lang(language.S_DEFAULT ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</span>
+					{% elseif language.S_DRAFT %}<strong>{{ lang('ACP_BOARDRULES_STATUS_DRAFT') }}</strong>
+					{% else %}<strong class="success">{{ lang('ACP_BOARDRULES_STATUS_PUBLISHED') }}</strong>{% endif %}
+				</td>
+				<td class="actions">
+					<a href="{{ language.U_MANAGE }}">{{ lang('ACP_BOARDRULES_MANAGE_ACTION') }}</a>
+					{% if language.S_CAN_COPY %} &middot; <a href="{{ language.U_COPY }}">{{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
+					{% if language.S_DRAFT %} &middot; <a href="{{ language.U_PUBLISH }}">{{ lang('ACP_BOARDRULES_PUBLISH') }}</a>{% endif %}
+					{% if language.S_CAN_DRAFT %} &middot; <a href="{{ language.U_DRAFT }}">{{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

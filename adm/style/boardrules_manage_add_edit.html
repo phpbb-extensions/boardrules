@@ -1,0 +1,102 @@
+<script>
+	var form_name = 'add_edit_rule';
+	var text_name = 'rule_message';
+	var load_draft = false;
+	var upload = false;
+	var imageTag = false;
+</script>
+
+<a id="maincontent"></a>
+
+<a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
+
+{% if S_ADD_RULE %}
+	<h1>{{ lang('ACP_BOARDRULES_CREATE_RULE') }} :: {{ RULE_TITLE }}</h1>
+
+	<p>{{ lang('ACP_BOARDRULES_CREATE_RULE_EXPLAIN') }}</p>
+{% else %}
+	<h1>{{ lang('ACP_BOARDRULES_EDIT_RULE') }} :: {{ RULE_TITLE }}</h1>
+
+	<p>{{ lang('ACP_BOARDRULES_EDIT_RULE_EXPLAIN') }}</p>
+{% endif %}
+
+{% if S_ERROR %}
+<div class="errorbox">
+	<h3>{{ lang('WARNING') }}</h3>
+	<p>{{ ERROR_MSG }}</p>
+</div>
+{% endif %}
+
+{% if S_PREVIEW %}
+<fieldset>
+	<legend>{{ lang('PREVIEW') ~ lang('COLON') }} {{ RULE_TITLE_PREVIEW }}</legend>
+	{{ RULE_MESSAGE_PREVIEW }}
+</fieldset>
+{% endif %}
+
+<form id="add_edit_rule" method="post" action="{% if S_ADD_RULE %}{{ U_ADD_ACTION }}{% else %}{{ U_EDIT_ACTION }}{% endif %}">
+	<fieldset>
+		<legend>{{ lang('ACP_RULE_SETTINGS') }}</legend>
+		<dl>
+			<dt><label for="rule_parent">{{ lang('ACP_RULE_PARENT') ~ lang('COLON') }}</label></dt>
+			<dd><select id="rule_parent" name="rule_parent">
+				<option value="0">{{ lang('ACP_RULE_NO_PARENT') }}</option>
+				{% for rulemenu in loops.rulemenu %}
+					<option value="{{ rulemenu.RULE_ID }}"{% if rulemenu.S_RULE_PARENT %} selected="selected"{% endif %}{% if rulemenu.S_DISABLED %} disabled="disabled" class="disabled-option"{% endif %}>{{ rulemenu.RULE_TITLE }}</option>
+				{% endfor %}
+			</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="rule_title">{{ lang('ACP_RULE_TITLE') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_RULE_TITLE_EXPLAIN') }}</span></dt>
+			<dd><input class="text medium" type="text" id="rule_title" name="rule_title" value="{{ RULE_TITLE }}" maxlength="200"></dd>
+		</dl>
+		<dl>
+			<dt><label for="rule_anchor">{{ lang('ACP_RULE_ANCHOR') ~ lang('COLON') }}</label><br><span>{{ lang('ACP_RULE_ANCHOR_EXPLAIN') }}</span></dt>
+			<dd><input class="text medium" type="text" id="rule_anchor" name="rule_anchor" value="{{ RULE_ANCHOR }}" maxlength="255"></dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>{{ lang('ACP_RULE_MESSAGE') }}</legend>
+		{% if S_IS_CATEGORY %}
+			<p>{{ lang('ACP_RULE_MESSAGE_DISABLED') }}</p>
+		{% else %}
+			<p>{{ lang('ACP_RULE_MESSAGE_EXPLAIN') }}</p>
+			{% INCLUDE 'acp_posting_buttons.html' %}
+			<dl class="responsive-columns">
+				<dt style="width: 90px;" id="color_palette_placeholder" data-orientation="v" data-color-palette="v" data-height="12" data-width="15" data-bbcode="true"></dt>
+				<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px;">
+					<label>
+						<textarea name="rule_message" rows="10" cols="60" style="width: 95%;" data-bbcode="true">{{ RULE_MESSAGE }}</textarea>
+					</label>
+				</dd>
+				<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 5px;">
+					{% if S_BBCODE_ALLOWED %}
+						<label><input type="checkbox" class="radio" name="disable_bbcode"{% if S_BBCODE_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %}> {{ lang('DISABLE_BBCODE') }}</label>
+					{% endif %}
+					{% if S_SMILIES_ALLOWED %}
+						<label><input type="checkbox" class="radio" name="disable_smilies"{% if S_SMILIES_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %}> {{ lang('DISABLE_SMILIES') }}</label>
+					{% endif %}
+					{% if S_LINKS_ALLOWED %}
+						<label><input type="checkbox" class="radio" name="disable_magic_url"{% if S_MAGIC_URL_DISABLE_CHECKED and (S_PREVIEW or not S_ADD_RULE) %} checked="checked"{% endif %}> {{ lang('DISABLE_MAGIC_URL') }}</label>
+					{% endif %}
+				</dd>
+				<dd style="margin-{{ S_CONTENT_FLOW_BEGIN }}: 90px; margin-top: 10px;"><strong>{{ lang('OPTIONS') ~ lang('COLON') }} </strong>{{ BBCODE_STATUS }} :: {{ IMG_STATUS }} :: {{ FLASH_STATUS }} :: {{ URL_STATUS }} :: {{ SMILIES_STATUS }}</dd>
+			</dl>
+		{% endif %}
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+		{% if not S_IS_CATEGORY %}<input class="button2" type="submit" id="preview" name="preview" value="{{ lang('PREVIEW') }}">{% endif %}
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+</form>
+
+<script>
+	const textarea = document.querySelector("textarea[name='rule_message']");
+	textarea.addEventListener("select", (e) => storeCaret(e.target));
+	textarea.addEventListener("click", (e) => storeCaret(e.target));
+	textarea.addEventListener("keyup", (e) => storeCaret(e.target));
+	textarea.addEventListener("focus", () => initInsertions());
+</script>
