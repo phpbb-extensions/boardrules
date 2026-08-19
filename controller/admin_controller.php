@@ -324,14 +324,14 @@ class admin_controller implements admin_interface
 		add_form_key('copy_ruleset');
 		$languages = $this->ruleset_operator->get_languages();
 		$target = $this->find_language($languages, $target_language);
-		$return_url = $this->get_ruleset_return_url($target_language, $return_to);
-		$return_parameter = $return_to === 'dashboard' ? '&amp;return_to=dashboard' : '';
 
 		if ($target === null)
 		{
-			trigger_error($this->lang->lang('ACP_BOARDRULES_COPY_INVALID_LANGUAGE') . adm_back_link($return_url), E_USER_WARNING);
+			trigger_error($this->lang->lang('ACP_BOARDRULES_COPY_INVALID_LANGUAGE') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
+		$return_url = $this->get_ruleset_return_url($target_language, $return_to);
+		$return_parameter = $return_to === 'dashboard' ? '&amp;return_to=dashboard' : '';
 		$source_language = $this->request->variable('source_language', $this->config['default_lang']);
 		if ($this->request->is_set_post('submit'))
 		{
