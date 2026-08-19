@@ -202,6 +202,10 @@ class admin_controller_test extends boardrules_functional_base
 		$source_count = (int) $this->db->sql_fetchfield('rule_count');
 		$this->db->sql_freeresult($result);
 
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=fr&sid={$this->sid}");
+		self::assertCount(1, $crawler->filter('.boardrules-action-bar .boardrules-button'));
+		$this->assertContainsLang('ACP_BOARDRULES_COPY_ACTION', $crawler->filter('.boardrules-action-bar')->text());
+
 		$result = $this->db->sql_query_limit("SELECT rule_anchor FROM phpbb_boardrules WHERE rule_language = 'en' AND rule_anchor <> '' ORDER BY rule_id", 1);
 		$conflicting_anchor = $this->db->sql_fetchfield('rule_anchor');
 		$this->db->sql_freeresult($result);
@@ -247,6 +251,9 @@ class admin_controller_test extends boardrules_functional_base
 		$this->assertContainsLang('ACP_BOARDRULES_DRAFT_NOTICE', $crawler->filter('#main')->text());
 		self::assertCount(1, $crawler->filter('.boardrules-language-toolbar'));
 		self::assertCount(2, $crawler->filter('.boardrules-language-toolbar .boardrules-button'));
+		self::assertCount(2, $crawler->filter('.boardrules-action-bar .boardrules-button'));
+		$this->assertContainsLang('ACP_BOARDRULES_COPY_ACTION', $crawler->filter('.boardrules-action-bar')->text());
+		$this->assertContainsLang('ACP_BOARDRULES_PUBLISH', $crawler->filter('.boardrules-action-bar')->text());
 
 		$publish_url = "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&action=publish&language=fr&return_to=dashboard&sid={$this->sid}";
 		$crawler = self::request('GET', $publish_url);
