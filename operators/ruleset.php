@@ -15,6 +15,9 @@ class ruleset implements ruleset_interface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/** @var \phpbb\lock\db */
+	protected $lock;
+
 	/** @var string */
 	protected $boardrules_table;
 
@@ -23,12 +26,14 @@ class ruleset implements ruleset_interface
 
 	/**
 	 * @param \phpbb\db\driver\driver_interface $db
+	 * @param \phpbb\lock\db $lock
 	 * @param string $boardrules_table
 	 * @param string $rulesets_table
 	 */
-	public function __construct(\phpbb\db\driver\driver_interface $db, $boardrules_table, $rulesets_table)
+	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\lock\db $lock, $boardrules_table, $rulesets_table)
 	{
 		$this->db = $db;
+		$this->lock = $lock;
 		$this->boardrules_table = $boardrules_table;
 		$this->rulesets_table = $rulesets_table;
 	}
@@ -93,30 +98,38 @@ class ruleset implements ruleset_interface
 			throw new \InvalidArgumentException('ACP_BOARDRULES_COPY_INVALID_LANGUAGE');
 		}
 
-		$source_rules = $this->get_rules_data($source_language);
-		if (empty($source_rules))
+		if (!$this->lock->acquire())
 		{
-			throw new \InvalidArgumentException('ACP_BOARDRULES_COPY_SOURCE_EMPTY');
+			throw new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
 		}
 
-		$id_map = array();
-		// Board Rules uses one nested-set coordinate space for all languages.
-		// Append copied rules after the table's final bound to keep IDs unique.
-		$right_id_offset = $this->get_max_right_id();
-		$used_anchors = $this->get_anchors($target_language);
-		$reserved_anchors = array();
-		foreach ($source_rules as $source_rule)
-		{
-			if ($source_rule['rule_anchor'] !== '')
-			{
-				$reserved_anchors[utf8_strtolower($source_rule['rule_anchor'])] = true;
-			}
-		}
-		$renamed_anchors = 0;
-		$this->db->sql_transaction('begin');
-
+		$transaction_started = false;
 		try
 		{
+			$this->db->sql_transaction('begin');
+			$transaction_started = true;
+
+			$source_rules = $this->get_rules_data($source_language);
+			if (empty($source_rules))
+			{
+				throw new \InvalidArgumentException('ACP_BOARDRULES_COPY_SOURCE_EMPTY');
+			}
+
+			$id_map = array();
+			// Board Rules uses one nested-set coordinate space for all languages.
+			// Append copied rules after the table's final bound to keep IDs unique.
+			$right_id_offset = $this->get_max_right_id();
+			$used_anchors = $this->get_anchors($target_language);
+			$reserved_anchors = array();
+			foreach ($source_rules as $source_rule)
+			{
+				if ($source_rule['rule_anchor'] !== '')
+				{
+					$reserved_anchors[utf8_strtolower($source_rule['rule_anchor'])] = true;
+				}
+			}
+			$renamed_anchors = 0;
+
 			foreach ($source_rules as $row)
 			{
 				$source_id = (int) $row['rule_id'];
@@ -143,11 +156,19 @@ class ruleset implements ruleset_interface
 
 			$this->save_published_state($target_language, false);
 			$this->db->sql_transaction('commit');
+			$transaction_started = false;
 		}
 		catch (\Exception $e)
 		{
-			$this->db->sql_transaction('rollback');
+			if ($transaction_started)
+			{
+				$this->db->sql_transaction('rollback');
+			}
 			throw $e;
+		}
+		finally
+		{
+			$this->lock->release();
 		}
 
 		return array(

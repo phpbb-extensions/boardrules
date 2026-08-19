@@ -18,6 +18,12 @@ class ruleset_operator_test extends \phpbb_database_test_case
 	/** @var \phpbb\boardrules\operators\ruleset */
 	protected $operator;
 
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\lock\db */
+	protected $lock;
+
 	protected static function setup_extensions()
 	{
 		return array('phpbb/boardrules');
@@ -32,8 +38,11 @@ class ruleset_operator_test extends \phpbb_database_test_case
 	{
 		parent::setUp();
 		$this->db = $this->new_dbal();
+		$this->config = new \phpbb\config\config(array('boardrules.table_lock.boardrules_table' => 0));
+		$this->lock = new \phpbb\lock\db('boardrules.table_lock.boardrules_table', $this->config, $this->db);
 		$this->operator = new \phpbb\boardrules\operators\ruleset(
 			$this->db,
+			$this->lock,
 			'phpbb_boardrules',
 			'phpbb_boardrules_rulesets'
 		);
@@ -105,6 +114,35 @@ class ruleset_operator_test extends \phpbb_database_test_case
 		self::assertSame(array('general', 'be-kind', 'stay-topic', 'general-2', 'be-kind-2', 'stay-topic-2'), array_column($rules, 'rule_anchor'));
 		self::assertSame((int) $rules[3]['rule_id'], (int) $rules[4]['rule_parent_id']);
 		self::assertSame((int) $rules[3]['rule_id'], (int) $rules[5]['rule_parent_id']);
+	}
+
+	public function test_copy_rejects_when_nestedset_lock_is_held(): void
+	{
+		$competing_lock = new \phpbb\lock\db('boardrules.table_lock.boardrules_table', $this->config, $this->db);
+		self::assertTrue($competing_lock->acquire());
+
+		try
+		{
+			$this->operator->copy('en', 'fr');
+			self::fail('Copy should not run while the nested-set lock is held.');
+		}
+		catch (\RuntimeException $e)
+		{
+			self::assertSame('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE', $e->getMessage());
+		}
+		finally
+		{
+			$competing_lock->release();
+		}
+
+		self::assertSame(0, $this->operator->get_languages()[1]['rule_count']);
+	}
+
+	public function test_copy_releases_nestedset_lock(): void
+	{
+		$this->operator->copy('en', 'fr');
+
+		self::assertSame('0', (string) $this->config['boardrules.table_lock.boardrules_table']);
 	}
 
 	public function test_copy_rejects_empty_source(): void
