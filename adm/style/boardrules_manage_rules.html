@@ -22,9 +22,9 @@
 
 {% if S_CAN_COPY_RULESET or S_RULESET_DRAFT or S_CAN_DRAFT_RULESET %}
 	<p class="boardrules-action-bar">
-		{% if S_CAN_COPY_RULESET %}<a href="{{ U_COPY_RULESET }}" class="button2 boardrules-button">{{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
-		{% if S_RULESET_DRAFT %}<a href="{{ U_PUBLISH_RULESET }}" class="button2 boardrules-button">{{ lang('ACP_BOARDRULES_PUBLISH') }}</a>{% endif %}
-		{% if S_CAN_DRAFT_RULESET %}<a href="{{ U_DRAFT_RULESET }}" class="button2 boardrules-button">{{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
+		{% if S_CAN_COPY_RULESET %}<a href="{{ U_COPY_RULESET }}" class="button2 boardrules-button"><i class="icon fa-copy fa-fw" aria-hidden="true"></i> {{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
+		{% if S_RULESET_DRAFT %}<a href="{{ U_PUBLISH_RULESET }}" class="button2 boardrules-button"><i class="icon fa-eye fa-fw" aria-hidden="true"></i> {{ lang('ACP_BOARDRULES_PUBLISH') }}</a>{% endif %}
+		{% if S_CAN_DRAFT_RULESET %}<a href="{{ U_DRAFT_RULESET }}" class="button2 boardrules-button"><i class="icon fa-eye-slash fa-fw" aria-hidden="true"></i> {{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
 	</p>
 {% endif %}
 

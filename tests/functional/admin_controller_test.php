@@ -204,6 +204,7 @@ class admin_controller_test extends boardrules_functional_base
 
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=fr&sid={$this->sid}");
 		self::assertCount(1, $crawler->filter('.boardrules-action-bar .boardrules-button'));
+		self::assertCount(1, $crawler->filter('.boardrules-action-bar .fa-copy'));
 		$this->assertContainsLang('ACP_BOARDRULES_COPY_ACTION', $crawler->filter('.boardrules-action-bar')->text());
 
 		$result = $this->db->sql_query_limit("SELECT rule_anchor FROM phpbb_boardrules WHERE rule_language = 'en' AND rule_anchor <> '' ORDER BY rule_id", 1);
@@ -252,6 +253,8 @@ class admin_controller_test extends boardrules_functional_base
 		self::assertCount(1, $crawler->filter('.boardrules-language-toolbar'));
 		self::assertCount(2, $crawler->filter('.boardrules-language-toolbar .boardrules-button'));
 		self::assertCount(2, $crawler->filter('.boardrules-action-bar .boardrules-button'));
+		self::assertCount(1, $crawler->filter('.boardrules-action-bar .fa-copy'));
+		self::assertCount(1, $crawler->filter('.boardrules-action-bar .fa-eye'));
 		$this->assertContainsLang('ACP_BOARDRULES_COPY_ACTION', $crawler->filter('.boardrules-action-bar')->text());
 		$this->assertContainsLang('ACP_BOARDRULES_PUBLISH', $crawler->filter('.boardrules-action-bar')->text());
 
@@ -274,6 +277,10 @@ class admin_controller_test extends boardrules_functional_base
 		$result = $this->db->sql_query($sql);
 		self::assertSame(1, (int) $this->db->sql_fetchfield('rules_published'));
 		$this->db->sql_freeresult($result);
+
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=fr&sid={$this->sid}");
+		self::assertCount(1, $crawler->filter('.boardrules-action-bar .fa-copy'));
+		self::assertCount(1, $crawler->filter('.boardrules-action-bar .fa-eye-slash'));
 
 		$sql = "SELECT COUNT(rule_id) AS rule_count
 			FROM phpbb_boardrules
