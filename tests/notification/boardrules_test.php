@@ -39,8 +39,11 @@ class boardrules_test extends \phpbb_test_case
 		$auth = $this->createMock(\phpbb\auth\auth::class);
 		$this->manager = $this->createMock(\phpbb\notification\manager::class);
 		$this->helper = $this->createMock(\phpbb\controller\helper::class);
+		$avatar_helper = $this->createMock(\phpbb\avatar\helper::class);
 
 		$this->notification = new \phpbb\boardrules\notification\boardrules(
+			$avatar_helper,
+			$this->helper,
 			$this->db,
 			$this->language,
 			$user,

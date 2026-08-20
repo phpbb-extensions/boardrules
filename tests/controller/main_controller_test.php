@@ -185,13 +185,26 @@ class main_controller_test extends \phpbb_test_case
 			->getMock();
 		$ruleset_operator->method('is_published')->with('en')->willReturn(true);
 		$template = $this->createMock(\phpbb\template\template::class);
-		$template->expects(self::exactly(5))->method('assign_block_vars')->withConsecutive(
-			array('rules', self::arrayHasKey('TITLE')),
-			array('rules', self::arrayHasKey('TITLE')),
-			array('rules', array('S_CLOSE_LIST' => true)),
-			array('rules', self::arrayHasKey('TITLE')),
-			array('navlinks', self::arrayHasKey('U_VIEW_FORUM'))
-		);
+		$block_var_call = 0;
+		$template->expects(self::exactly(5))
+			->method('assign_block_vars')
+			->willReturnCallback(function ($block, $variables) use (&$block_var_call) {
+				$expected = array(
+					array('rules', 'TITLE'),
+					array('rules', 'TITLE'),
+					array('rules', 'S_CLOSE_LIST'),
+					array('rules', 'TITLE'),
+					array('navlinks', 'U_VIEW_FORUM'),
+				);
+
+				self::assertSame($expected[$block_var_call][0], $block);
+				self::assertArrayHasKey($expected[$block_var_call][1], $variables);
+				if ($expected[$block_var_call][1] === 'S_CLOSE_LIST')
+				{
+					self::assertSame(array('S_CLOSE_LIST' => true), $variables);
+				}
+				$block_var_call++;
+			});
 		$helper = $this->getMockBuilder(\phpbb\controller\helper::class)
 			->disableOriginalConstructor()
 			->getMock();
