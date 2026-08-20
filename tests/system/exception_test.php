@@ -101,4 +101,21 @@ class exception_test extends \phpbb_test_case
 	{
 		self::assertEquals('Required field missing', $this->lang->lang('EXCEPTION_FIELD_MISSING'));
 	}
+
+	public static function exception_string_data(): array
+	{
+		return array(
+			'scalar message' => array('plain message', 'plain message'),
+			'array message' => array(array('KEY', 'argument'), "array (\n  0 => 'KEY',\n  1 => 'argument',\n)"),
+			'null message' => array(null, ''),
+		);
+	}
+
+	/**
+	 * @dataProvider exception_string_data
+	 */
+	public function test_exception_string_representation($message, $expected): void
+	{
+		self::assertSame($expected, (string) new \phpbb\boardrules\exception\base($message));
+	}
 }

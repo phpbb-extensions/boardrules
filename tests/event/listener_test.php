@@ -366,6 +366,19 @@ class listener_test extends \phpbb_test_case
 				'$location_url',
 				'$location',
 			),
+			// test a malformed URL whose path cannot be parsed
+			array(
+				array(
+					1 => 'index',
+				),
+				array(
+					'session_page' => 'http://[invalid',
+				),
+				'$location_url',
+				'$location',
+				'$location_url',
+				'$location',
+			),
 			// test when the session page is missing
 			array(
 				array(

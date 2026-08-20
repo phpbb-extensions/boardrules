@@ -96,4 +96,42 @@ class ext_test extends \phpbb_test_case
 			'purge step'   => ['purge_notifications', 'purge_step']
 		];
 	}
+
+	public function test_enable_step_delegates_after_notification_step(): void
+	{
+		$this->extension_finder->expects($this->once())
+			->method('extension_directory')
+			->with('/migrations')
+			->willReturnSelf();
+		$this->extension_finder->expects($this->once())
+			->method('find_from_extension')
+			->with('phpbb/boardrules', '')
+			->willReturn(array());
+		$this->extension_finder->expects($this->once())
+			->method('get_classes_from_files')
+			->with(array())
+			->willReturn(array());
+		$this->migrator->expects($this->once())->method('set_migrations')->with(array());
+		$this->migrator->expects($this->once())->method('get_migrations')->willReturn(array());
+		$this->migrator->expects($this->once())->method('update');
+		$this->migrator->expects($this->once())->method('finished')->willReturn(true);
+
+		self::assertFalse($this->ext->enable_step('notifications'));
+	}
+
+	public function test_disable_step_delegates_after_notification_step(): void
+	{
+		self::assertFalse($this->ext->disable_step('notifications'));
+	}
+
+	public function test_purge_step_delegates_after_notification_step(): void
+	{
+		$this->extension_finder->expects($this->once())->method('extension_directory')->willReturnSelf();
+		$this->extension_finder->expects($this->once())->method('find_from_extension')->willReturn(array());
+		$this->extension_finder->expects($this->once())->method('get_classes_from_files')->willReturn(array());
+		$this->migrator->expects($this->once())->method('set_migrations')->with(array());
+		$this->migrator->expects($this->once())->method('get_migrations')->willReturn(array());
+
+		self::assertFalse($this->ext->purge_step('notifications'));
+	}
 }
