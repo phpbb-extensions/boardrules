@@ -1,6 +1,9 @@
 {% INCLUDECSS '@phpbb_boardrules/boardrules_controller.css' %}
 {% INCLUDE 'overall_header.html' %}
 
+{% set boardrules_list_tag = S_LIST_UNORDERED ? 'ul' : 'ol' %}
+{% set boardrules_root_list_style = S_LIST_UNORDERED ? 'disc' : (S_LIST_COMPOUND ? 'compound' : (S_LIST_UNSTYLED ? 'none' : 'decimal')) %}
+
 {% if S_CATEGORIES %}
 <div class="boardrules-categories">
 	<div class="bg1 mini-panel">
@@ -9,8 +12,8 @@
 			<ul class="boardrules-menu">
 				{% for rules in loops.rules %}
 					{% if rules.S_IS_CATEGORY %}
-						<li>
-							<a {% if rules.DEPTH > 1 %}style="margin-{{ S_CONTENT_FLOW_BEGIN }}:{{ (rules.DEPTH - 1) * 4 }}px" {% endif %}href="#{{ rules.U_ANCHOR }}">{{ rules.TITLE }}</a>
+						<li{% if rules.DEPTH > 1 %} style="padding-{{ S_CONTENT_FLOW_BEGIN }}:{{ (rules.DEPTH - 1) * 8 }}px"{% endif %}>
+							<a href="#{{ rules.U_ANCHOR }}">{{ rules.TITLE }}</a>
 						</li>
 					{% endif %}
 				{% endfor %}
@@ -24,22 +27,34 @@
 	<h2 class="boardrules-header">{{ lang('BOARDRULES_HEADER') }}</h2>
 	<div id="main" class="content">
 		<p>{{ BOARDRULES_EXPLAIN }}</p>
-		<ol class="boardrules-rules{{ BOARDRULES_LIST_STYLE ? ' br-list-style-' ~ BOARDRULES_LIST_STYLE }}">
+		<{{ boardrules_list_tag }} class="boardrules-list boardrules-rules br-list-style-{{ boardrules_root_list_style }}">
 			{% for rules in loops.rules %}
 				{% if rules.S_CLOSE_LIST %}
-						</ol>
+						</{{ boardrules_list_tag }}>
 					</li>
 				{% elseif rules.S_IS_CATEGORY %}
 					<li id="{{ rules.U_ANCHOR }}">
+						{% if S_LIST_COMPOUND %}<span class="boardrules-compound-prefix">{{ rules.COMPOUND_NUMBER }}.</span>{% endif %}
 						<h3>{{ rules.TITLE }}</h3>
-						<ol{{ BOARDRULES_LIST_STYLE ? ' class="br-list-style-' ~ BOARDRULES_LIST_STYLE ~ '"' }}>
+						{% set list_style_cycle = rules.DEPTH % 3 %}
+						{% if S_LIST_UNORDERED %}
+							{% set nested_list_style = list_style_cycle == 0 ? 'disc' : (list_style_cycle == 1 ? 'circle' : 'square') %}
+						{% elseif S_LIST_COMPOUND %}
+							{% set nested_list_style = 'compound' %}
+						{% elseif S_LIST_UNSTYLED %}
+							{% set nested_list_style = 'none' %}
+						{% else %}
+							{% set nested_list_style = list_style_cycle == 0 ? 'decimal' : (list_style_cycle == 1 ? 'lower-alpha' : 'lower-roman') %}
+						{% endif %}
+						<{{ boardrules_list_tag }} class="boardrules-list br-list-style-{{ nested_list_style }}{{ rules.DEPTH >= 6 ? ' br-list-depth-capped' }}">
 				{% else %}
 							<li class="rule-item" id="{{ rules.U_ANCHOR }}">
+								{% if S_LIST_COMPOUND %}<span class="boardrules-compound-prefix">{{ rules.COMPOUND_NUMBER }}.</span>{% endif %}
 								{{ rules.MESSAGE }} <a class="rule-anchor postlink" href="#{{ rules.U_ANCHOR }}">#</a>
 							</li>
 				{% endif %}
 			{% endfor %}
-		</ol>
+		</{{ boardrules_list_tag }}>
 	</div>
 </div>
 

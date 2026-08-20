@@ -56,8 +56,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Mesaj panosu kuralları ayarları değiştirildi.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Mesaj panosu kuralları liste stili',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Kural ve kategori öğelerinin önünde sıralı alfa-nümerik sayılar (bu varsayılandır), madde işaretleri veya herhangi bir şey olup olmadığına karar verin.',
+	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Sıralı alfa-nümerik',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Madde işaretleri',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Madde işaretleri',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Hiçbiri',
 
 	// Manage page

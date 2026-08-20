@@ -56,8 +56,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Einstellungen der Board-Regeln | Einstellungen geändert.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Listenformat der Board-Regeln',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Die Board-Regeln werden im Listenformat präsentiert. Legen Sie fest, ob vor Regel- und Kategorieelementen geordnete alphanumerische Ordnungszahlen (dies ist das Standardverhalten), Aufzählungszeichen (Bullets) oder keine stehen sollen.',
+	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Alphanumerisch geordnet',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Keines',
 
 	// Manage page

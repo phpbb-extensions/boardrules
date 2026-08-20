@@ -55,8 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> '论坛章程设置已改变。',
 	'ACP_BOARDRULES_LIST_STYLE'				=> '论坛章程列表之样式',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> '论坛章程会以列表的格式来展示。选择决定你希望规则和目录是否以字母数字顺序（默认样式），无序列表项，还是没有样式。',
+	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> '字母数字顺序',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> '无序列表项',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> '无序列表项',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> '无样式',
 
 	// Manage page

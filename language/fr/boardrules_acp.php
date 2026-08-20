@@ -56,8 +56,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Paramètres des règles du forum modifiés.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Style de liste des règles du forum',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Les règles du forum sont présentées sous forme de liste. Décidez si vous souhaitez que les éléments de règle et de catégorie soient précédés d‘une liste alphanumériques ordonnés (c‘est le comportement par défaut), de puces ou d‘aucun affichage..',
+	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Alphanumérique ordonné',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Puces',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Puces',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Aucun affichage',
 
 	// Manage page

@@ -86,10 +86,11 @@ class main_controller implements main_interface
 		// Add boardrules controller language file
 		$this->lang->add_lang('boardrules_controller', 'phpbb/boardrules');
 
-		$last_right_id = null; // Used to help determine when to close nesting structures
-		$depth = 0; // Used to track the depth of nesting level
+		$open_categories = array(); // Right boundaries for categories currently containing the next item
 		$cat_counter = 1; // Numeric counter used for categories
 		$rule_counter = 'a'; // Alpha counter used for rules
+		$list_style = $this->config['boardrules_list_style'];
+		$compound_counters = array();
 
 		// Grab all published rules in the current user's language
 		$used_language = $this->lang->get_used_language();
@@ -105,14 +106,24 @@ class main_controller implements main_interface
 		/* @var $entity \phpbb\boardrules\entity\rule */
 		foreach ($entities as $entity)
 		{
+			// Nested-set coordinates are shared by every language. Filtering one language
+			// leaves gaps, so close lists by ancestor boundaries rather than ID distance.
+			while (!empty($open_categories) && $entity->get_left_id() > end($open_categories))
+			{
+				array_pop($open_categories);
+				$this->template->assign_block_vars('rules', array(
+					'S_CLOSE_LIST'	=> true,
+				));
+			}
+
+			$item_depth = count($open_categories);
+
 			if ($entity->get_right_id() - $entity->get_left_id() > 1)
 			{
 				// Rule categories
 				$is_category = true;
 				$anchor = $entity->get_anchor() ?: $this->lang->lang('BOARDRULES_CATEGORY_ANCHOR', $cat_counter);
 
-				// Increment nesting level depth counter
-				$depth++;
 				// Increment category counter
 				$cat_counter++;
 				// Reset rule counter
@@ -128,21 +139,14 @@ class main_controller implements main_interface
 				$rule_counter++;
 			}
 
-			// Determine how deeply nested we are and use closing tags as necessary
-			$diff = ($last_right_id !== null) ? $entity->get_left_id() - $last_right_id : 1;
-			if ($diff > 1)
-			{
-				for ($i = 1; $i < $diff; $i++)
-				{
-					$depth--; // decrement the nesting level depth counter
-					$this->template->assign_block_vars('rules', array(
-						'S_CLOSE_LIST'	=> true,
-					));
-				}
-			}
+			// Categories open the list containing their children. Keep their existing
+			// one-based display depth; rules use the containing category count.
+			$depth = $is_category ? $item_depth + 1 : $item_depth;
 
-			// Set last_right_id value with the current item's value
-			$last_right_id = $entity->get_right_id();
+			// Build a stable compound number from sibling positions at every nesting level
+			$compound_counters = array_slice($compound_counters, 0, $item_depth + 1);
+			$compound_counters[$item_depth] = isset($compound_counters[$item_depth]) ? $compound_counters[$item_depth] + 1 : 1;
+			$compound_number = implode('.', $compound_counters);
 
 			// Assign values to template vars for this rule entity
 			$this->template->assign_block_vars('rules', array(
@@ -151,25 +155,31 @@ class main_controller implements main_interface
 				'U_ANCHOR'		=> $anchor,
 				'S_IS_CATEGORY'	=> $is_category,
 				'DEPTH'			=> $depth,
+				'COMPOUND_NUMBER' => $compound_number,
 			));
+
+			if ($is_category)
+			{
+				$open_categories[] = $entity->get_right_id();
+			}
 		}
 
-		// By this point, if any nested structures are still open, attempt to close them
-		if ($depth > 0)
+		// Close every category still containing the end of the result set.
+		while (!empty($open_categories))
 		{
-			for ($i = 0; $i < $depth; $i++)
-			{
-				$this->template->assign_block_vars('rules', array(
-					'S_CLOSE_LIST'	=> true,
-				));
-			}
+			array_pop($open_categories);
+			$this->template->assign_block_vars('rules', array(
+				'S_CLOSE_LIST'	=> true,
+			));
 		}
 
 		// Assign values to template vars for the rules page
 		$this->template->assign_vars(array(
 			'S_BOARD_RULES'			=> true,
 			'S_CATEGORIES'			=> $cat_counter > 1,
-			'BOARDRULES_LIST_STYLE'	=> $this->config['boardrules_list_style'],
+			'S_LIST_UNORDERED'		=> $list_style === 'unordered',
+			'S_LIST_COMPOUND'		=> $list_style === 'compound',
+			'S_LIST_UNSTYLED'		=> $list_style === 'none',
 			'BOARDRULES_EXPLAIN'	=> $this->lang->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 

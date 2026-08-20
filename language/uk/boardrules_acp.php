@@ -55,8 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Налаштування правил форуму успішно оновлено.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Стиль списку правил форуму',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Правила форуму представлені у вигляді списку. Вирішіть, чи ви хочете, щоб елементам правил і категорій передували буквено-цифрові порядкові номери (це поведінка за замовчуванням), маркери або нічого.',
+	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Впорядкований буквено-цифровий',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Маркер Куля',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Маркер Куля',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Нічого',
 
 	// Manage page
