@@ -168,4 +168,40 @@ class ruleset_operator_test extends \phpbb_database_test_case
 		$this->expectExceptionMessage('ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
 		$this->operator->set_published('fr', true);
 	}
+
+	/**
+	 * @dataProvider invalid_copy_language_data
+	 */
+	public function test_copy_rejects_invalid_languages($source, $target): void
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('ACP_BOARDRULES_COPY_INVALID_LANGUAGE');
+		$this->operator->copy($source, $target);
+	}
+
+	public static function invalid_copy_language_data(): array
+	{
+		return array(
+			'same language' => array('en', 'en'),
+			'unknown source' => array('xx', 'fr'),
+			'unknown target' => array('en', 'xx'),
+			'non-string values' => array(null, false),
+		);
+	}
+
+	public function test_unknown_ruleset_cannot_change_publication_state(): void
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('ACP_BOARDRULES_INVALID_LANGUAGE');
+		$this->operator->set_published('xx', true);
+	}
+
+	public function test_empty_anchor_remains_empty(): void
+	{
+		$method = new \ReflectionMethod($this->operator, 'make_unique_anchor');
+		$method->setAccessible(true);
+		$used = array();
+		self::assertSame('', $method->invokeArgs($this->operator, array('', &$used, array())));
+		self::assertSame(array(), $used);
+	}
 }
