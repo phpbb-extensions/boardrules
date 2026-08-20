@@ -29,7 +29,8 @@ class main_controller_test extends \phpbb_test_case
 					'get_anchor' => '',
 					'get_title' => 'title',
 					'get_message_for_display' => 'content',
-				]
+				],
+				true,
 			),
 			'A category' => array(
 				200,
@@ -41,6 +42,19 @@ class main_controller_test extends \phpbb_test_case
 					'get_title' => 'title',
 					'get_message_for_display' => 'content',
 				],
+				true,
+			),
+			'A draft language falls back to published default rules' => array(
+				200,
+				'@phpbb_boardrules/boardrules_controller.html',
+				[
+					'get_left_id' => 1,
+					'get_right_id' => 2,
+					'get_anchor' => '',
+					'get_title' => 'fallback title',
+					'get_message_for_display' => 'fallback content',
+				],
+				false,
 			),
 		);
 	}
@@ -50,14 +64,16 @@ class main_controller_test extends \phpbb_test_case
 	*
 	* @dataProvider display_data
 	*/
-	public function test_display($status_code, $page_content, $rule_data)
+	public function test_display($status_code, $page_content, $rule_data, $language_published)
 	{
 		global $config, $user, $phpbb_root_path, $phpEx;
 
 		// Global vars called upon during execution
-		$config = new \phpbb\config\config(array('boardrules_enable' => 1));
+		$config = new \phpbb\config\config(array('boardrules_enable' => 1, 'default_lang' => 'en'));
 		$lang_loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
 		$lang = new \phpbb\language\language($lang_loader);
+		$lang->set_default_language('en');
+		$lang->set_user_language('fr');
 		$user = new \phpbb\user($lang, '\phpbb\datetime');
 
 		$entity = $this->getMockBuilder('\phpbb\boardrules\entity\rule')
@@ -73,12 +89,19 @@ class main_controller_test extends \phpbb_test_case
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
 			->disableOriginalConstructor()
 			->getMock();
-		$rule_operator->expects(self::at(0))
+		$rule_operator->expects($language_published ? self::exactly(2) : self::once())
 			->method('get_rules')
-			->willReturn(array());
-		$rule_operator->expects(self::at(1))
-			->method('get_rules')
-			->willReturn([$entity]);
+			->willReturnCallback(function ($language) use ($entity) {
+				return $language === 'fr' ? array() : array($entity);
+			});
+
+		$ruleset_operator = $this->getMockBuilder('\phpbb\boardrules\operators\ruleset')
+			->disableOriginalConstructor()
+			->getMock();
+		$ruleset_operator->method('is_published')
+			->willReturnCallback(function ($language) use ($language_published) {
+				return $language === 'fr' ? $language_published : true;
+			});
 
 		// Mock the controller helper and return render response object
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
@@ -102,6 +125,7 @@ class main_controller_test extends \phpbb_test_case
 			$controller_helper,
 			$lang,
 			$rule_operator,
+			$ruleset_operator,
 			$template,
 			$user,
 			$phpbb_root_path,

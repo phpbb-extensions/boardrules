@@ -46,4 +46,7 @@ $lang = array_merge($lang, array(
 	// ACP Logs
 	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Ændret indstillinger for boardregler</strong>',
 	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Notifikation om boardregler blev sendt til alle brugere</strong>',
+	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Sprogsæt med boardregler kopieret</strong><br />» %1$s → %2$s (%3$d regler)',
+	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Sprogsæt med boardregler udgivet</strong><br />» %s',
+	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Sprogsæt med boardregler ændret til kladde</strong><br />» %s',
 ));

@@ -26,6 +26,7 @@ services:
             - '@notification_manager'
             - '@request'
             - '@phpbb.boardrules.operator'
+            - '@phpbb.boardrules.ruleset_operator'
             - '@template'
             - '@user'
             - '%core.root_path%'
@@ -38,6 +39,7 @@ services:
             - '@controller.helper'
             - '@language'
             - '@phpbb.boardrules.operator'
+            - '@phpbb.boardrules.ruleset_operator'
             - '@template'
             - '@user'
             - '%core.root_path%'
@@ -55,6 +57,15 @@ services:
         arguments:
             - '@service_container'
             - '@phpbb.boardrules.nestedset_rules'
+            - '@phpbb.boardrules.table_lock'
+
+    phpbb.boardrules.ruleset_operator:
+        class: phpbb\boardrules\operators\ruleset
+        arguments:
+            - '@dbal.conn'
+            - '@phpbb.boardrules.table_lock'
+            - '%phpbb.boardrules.tables.boardrules%'
+            - '%phpbb.boardrules.tables.rulesets%'
 
     phpbb.boardrules.nestedset_rules:
         class: phpbb\boardrules\operators\nestedset_rules

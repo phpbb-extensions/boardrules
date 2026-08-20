@@ -27,6 +27,9 @@ class main_controller implements main_interface
 	/** @var \phpbb\boardrules\operators\rule */
 	protected $rule_operator;
 
+	/** @var \phpbb\boardrules\operators\ruleset */
+	protected $ruleset_operator;
+
 	/** @var \phpbb\template\template */
 	protected $template;
 
@@ -46,18 +49,20 @@ class main_controller implements main_interface
 	* @param \phpbb\controller\helper         $helper        Controller helper object
 	* @param \phpbb\language\language         $lang          Language object
 	* @param \phpbb\boardrules\operators\rule $rule_operator Rule operator object
+	* @param \phpbb\boardrules\operators\ruleset $ruleset_operator Ruleset operator object
 	* @param \phpbb\template\template         $template      Template object
 	* @param \phpbb\user                      $user          User object
 	* @param string                           $root_path     phpBB root path
 	* @param string                           $php_ext       phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
 		$this->lang = $lang;
 		$this->rule_operator = $rule_operator;
+		$this->ruleset_operator = $ruleset_operator;
 		$this->template = $template;
 		$this->user = $user;
 		$this->root_path = $root_path;
@@ -86,12 +91,13 @@ class main_controller implements main_interface
 		$cat_counter = 1; // Numeric counter used for categories
 		$rule_counter = 'a'; // Alpha counter used for rules
 
-		// Grab all the rules in the current user's language
-		$entities = $this->rule_operator->get_rules($this->lang->get_used_language());
+		// Grab all published rules in the current user's language
+		$used_language = $this->lang->get_used_language();
+		$entities = $this->ruleset_operator->is_published($used_language) ? $this->rule_operator->get_rules($used_language) : array();
 
 		// If no rules were found, it may be because no rules exist in the current user's
 		// language, so let's look for rules in the board's default language as a fallback.
-		if (empty($entities) && $this->lang->get_used_language() !== $this->config['default_lang'])
+		if (empty($entities) && $used_language !== $this->config['default_lang'] && $this->ruleset_operator->is_published($this->config['default_lang']))
 		{
 			$entities = $this->rule_operator->get_rules($this->config['default_lang']);
 		}

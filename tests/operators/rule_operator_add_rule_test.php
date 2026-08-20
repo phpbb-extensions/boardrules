@@ -50,5 +50,48 @@ class rule_operator_add_rule_test extends rule_operator_base
 
 		// Assert the rule was added
 		self::assertEquals($test_id, $result->get_id());
+		self::assertSame('0', (string) $this->config['nestedset_rules_lock']);
+	}
+
+	/**
+	 * Test adding a rule cannot race another nested-set write.
+	 */
+	public function test_add_rule_rejects_when_nestedset_lock_is_held()
+	{
+		global $phpbb_dispatcher;
+		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
+		$this->get_test_case_helpers()->set_s9e_services();
+
+		$entity = new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
+		$entity
+			->message_disable_bbcode()
+			->message_disable_magic_url()
+			->message_disable_smilies()
+			->set_title('locked_rule')
+			->set_anchor('locked-rule')
+			->set_message('locked rule');
+
+		$competing_lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
+		self::assertTrue($competing_lock->acquire());
+
+		try
+		{
+			$this->get_rule_operator()->add_rule($entity, 'en');
+			self::fail('Rule insertion should not run while the nested-set lock is held.');
+		}
+		catch (\RuntimeException $e)
+		{
+			self::assertSame('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE', $e->getMessage());
+		}
+		finally
+		{
+			$competing_lock->release();
+		}
+
+		$result = $this->db->sql_query("SELECT COUNT(rule_id) AS rule_count
+			FROM phpbb_boardrules
+			WHERE rule_title = 'locked_rule'");
+		self::assertSame(0, (int) $this->db->sql_fetchfield('rule_count'));
+		$this->db->sql_freeresult($result);
 	}
 }

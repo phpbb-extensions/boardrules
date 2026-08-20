@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dataset>
+	<table name="phpbb_lang">
+		<column>lang_id</column>
+		<column>lang_iso</column>
+		<column>lang_local_name</column>
+		<column>lang_english_name</column>
+		<row><value>1</value><value>en</value><value>English</value><value>English</value></row>
+		<row><value>2</value><value>fr</value><value>Français</value><value>French</value></row>
+		<row><value>3</value><value>de</value><value>Deutsch</value><value>German</value></row>
+	</table>
+	<table name="phpbb_boardrules">
+		<column>rule_id</column>
+		<column>rule_language</column>
+		<column>rule_left_id</column>
+		<column>rule_right_id</column>
+		<column>rule_parent_id</column>
+		<column>rule_parents</column>
+		<column>rule_anchor</column>
+		<column>rule_title</column>
+		<column>rule_message</column>
+		<column>rule_message_bbcode_uid</column>
+		<column>rule_message_bbcode_bitfield</column>
+		<column>rule_message_bbcode_options</column>
+		<row>
+			<value>1</value><value>en</value><value>1</value><value>6</value><value>0</value><value></value>
+			<value>general</value><value>General</value><value></value><value></value><value></value><value>7</value>
+		</row>
+		<row>
+			<value>2</value><value>en</value><value>2</value><value>3</value><value>1</value><value>cached-parent-data</value>
+			<value>be-kind</value><value>Be kind</value><value>Be [b:abcd1234]kind[/b:abcd1234].</value><value>abcd1234</value><value>QA==</value><value>7</value>
+		</row>
+		<row>
+			<value>3</value><value>en</value><value>4</value><value>5</value><value>1</value><value>cached-parent-data</value>
+			<value>stay-topic</value><value>Stay on topic</value><value>Keep discussions relevant.</value><value></value><value></value><value>7</value>
+		</row>
+	</table>
+	<table name="phpbb_boardrules_rulesets">
+		<column>language_iso</column>
+		<column>rules_published</column>
+	</table>
+</dataset>
