@@ -10,6 +10,8 @@
 
 namespace phpbb\boardrules\tests\controller;
 
+require_once __DIR__ . '/admin_test_helpers.php';
+
 class main_controller_test extends \phpbb_test_case
 {
 	/**
@@ -136,5 +138,80 @@ class main_controller_test extends \phpbb_test_case
 		self::assertInstanceOf('\Symfony\Component\HttpFoundation\Response', $response);
 		self::assertEquals($status_code, $response->getStatusCode());
 		self::assertEquals($page_content, $response->getContent());
+	}
+
+	public function test_display_redirects_when_disabled_and_closes_completed_tree(): void
+	{
+		global $config, $user, $phpbb_root_path, $phpEx;
+
+		\phpbb\boardrules\controller\admin_test_state::reset();
+		$config = new \phpbb\config\config(array(
+			'boardrules_enable' => 0,
+			'boardrules_list_style' => '',
+			'default_lang' => 'en',
+			'sitename' => 'Board',
+		));
+		$loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang = new \phpbb\language\language($loader);
+		$lang->set_default_language('en');
+		$lang->set_user_language('en');
+		$user = new \phpbb\user($lang, '\\phpbb\\datetime');
+
+		$tree_data = array(
+			array(1, 4, '', 'Category'),
+			array(2, 3, '', 'Nested rule'),
+			array(5, 6, '', 'Following rule'),
+		);
+		$entities = array();
+		foreach ($tree_data as $data)
+		{
+			$entity = $this->getMockBuilder(\phpbb\boardrules\entity\rule::class)
+				->disableOriginalConstructor()
+				->getMock();
+			$entity->method('get_left_id')->willReturn($data[0]);
+			$entity->method('get_right_id')->willReturn($data[1]);
+			$entity->method('get_anchor')->willReturn($data[2]);
+			$entity->method('get_title')->willReturn($data[3]);
+			$entity->method('get_message_for_display')->willReturn($data[3] . ' body');
+			$entities[] = $entity;
+		}
+
+		$rule_operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$rule_operator->method('get_rules')->with('en')->willReturn($entities);
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$ruleset_operator->method('is_published')->with('en')->willReturn(true);
+		$template = $this->createMock(\phpbb\template\template::class);
+		$template->expects(self::exactly(5))->method('assign_block_vars')->withConsecutive(
+			array('rules', self::arrayHasKey('TITLE')),
+			array('rules', self::arrayHasKey('TITLE')),
+			array('rules', array('S_CLOSE_LIST' => true)),
+			array('rules', self::arrayHasKey('TITLE')),
+			array('navlinks', self::arrayHasKey('U_VIEW_FORUM'))
+		);
+		$helper = $this->getMockBuilder(\phpbb\controller\helper::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$helper->method('route')->willReturn('/rules');
+		$helper->method('render')->willReturn(new \Symfony\Component\HttpFoundation\Response('rules'));
+
+		$controller = new \phpbb\boardrules\controller\main_controller(
+			$config,
+			$helper,
+			$lang,
+			$rule_operator,
+			$ruleset_operator,
+			$template,
+			$user,
+			$phpbb_root_path,
+			$phpEx
+		);
+
+		self::assertSame('rules', $controller->display()->getContent());
+		self::assertCount(1, \phpbb\boardrules\controller\admin_test_state::$redirects);
+		self::assertStringContainsString('index.' . $phpEx, \phpbb\boardrules\controller\admin_test_state::$redirects[0]);
 	}
 }

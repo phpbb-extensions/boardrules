@@ -82,6 +82,19 @@ class boardrules_module_test extends \phpbb_test_case
 		$this->executeModeAndAssert('settings', self::TEMPLATE_SETTINGS, 'ACP_BOARDRULES_SETTINGS');
 	}
 
+	public function test_settings_mode_sends_requested_notification(): void
+	{
+		$this->setupLanguageExpectation();
+		$this->setupNotificationRequest(true);
+		$this->request->method('variable')->willReturnCallback(function ($name, $default) {
+			return $name === 'rule_id' ? 27 : $default;
+		});
+		$this->admin_controller->expects($this->once())->method('send_notification')->with(27);
+		$this->admin_controller->expects($this->once())->method('display_options');
+
+		$this->executeModeAndAssert('settings', self::TEMPLATE_SETTINGS, 'ACP_BOARDRULES_SETTINGS');
+	}
+
 	public function test_manage_mode_with_empty_language(): void
 	{
 		$this->setupLanguageExpectation();
