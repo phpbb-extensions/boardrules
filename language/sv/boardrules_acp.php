@@ -55,11 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Är du säker på att du vill skicka ett meddelande till alla användre?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Inställningarna för forumreglerna har ändrats.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
-	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Välj hur regler och kategorier ska markeras. Ordnad växlar mellan siffror, bokstäver och romerska siffror. Oordnad växlar mellan fylld cirkel, cirkel och fyrkant. Sammansatt numrering visar hela den numeriska sökvägen.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Bullet',
-	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Oordnad (fylld cirkel, cirkel, fyrkant)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Sammansatt numrering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

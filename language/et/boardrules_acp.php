@@ -55,11 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Oled sa kindel, et soovid saata teavituse kõigile kasutajatele?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Foorumi reeglite seaded on muudetud.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
-	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Vali, kuidas reegleid ja kategooriaid tähistatakse. Järjestatud loend vaheldub numbrite, tähtede ja Rooma numbrite vahel. Järjestamata loend vaheldub täidetud ringi, ringjoone ja ruudu vahel. Liitnumeratsioon näitab täielikku numbrilist teed.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Bullet',
-	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Järjestamata (täidetud ring, ringjoon, ruut)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Liitnumeratsioon (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

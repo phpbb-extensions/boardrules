@@ -55,11 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Jesi li siguran/na da želiš poslati obavijest svim korisnicima/ama?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Postavke forumskih pravila su izmijenjene.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
-	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Odaberite način označavanja pravila i kategorija. Uređeni popis izmjenjuje brojeve, slova i rimske brojeve. Neuređeni popis izmjenjuje puni krug, kružnicu i kvadrat. Složeno numeriranje prikazuje cijelu brojčanu putanju.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Bullet',
-	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Neuređeno (puni krug, kružnica, kvadrat)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Složeno numeriranje (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

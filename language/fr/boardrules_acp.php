@@ -55,11 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Êtes-vous certain(e) de vouloir envoyer un avertissement à tous les utilisateurs ?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Paramètres des règles du forum modifiés.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Style de liste des règles du forum',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Les règles du forum sont présentées sous forme de liste. Décidez si vous souhaitez que les éléments de règle et de catégorie soient précédés d‘une liste alphanumériques ordonnés (c‘est le comportement par défaut), de puces ou d‘aucun affichage..',
-	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Choisissez le préfixe des règles et des catégories. La liste ordonnée alterne entre chiffres, lettres et chiffres romains. La liste non ordonnée alterne entre disque, cercle et carré. La numérotation composée affiche le chemin numérique complet.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Alphanumérique ordonné',
-	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Puces',
-	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Non ordonnée (disque, cercle, carré)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Numérotation composée (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Aucun affichage',
 
 	// Manage page

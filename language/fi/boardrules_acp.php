@@ -54,11 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Haluatko varmasti lähettää ilmoituksia kaikille käyttäjille?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Sääntöjen asetuksia muutettu.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Sääntöjen listaustyyli',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Säännöt esitetään luettelomuodossa. Päätä, haluatko sääntö- ja luokkakohtien edeltävän aakkosnumeerisia järjestyslukuja (tämä on oletustoiminto), luettelomerkit vai ei mitään.',
-	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Valitse sääntöjen ja luokkien etumerkintätapa. Järjestetty luettelo vuorottelee numeroiden, kirjainten ja roomalaisten numeroiden välillä. Järjestämätön luettelo vuorottelee täytetyn ympyrän, ympyrän ja neliön välillä. Yhdistelmänumerointi näyttää koko numeropolun.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Aakkosnumeerinen',
-	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Piste',
-	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Järjestämätön (täytetty ympyrä, ympyrä, neliö)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Yhdistelmänumerointi (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Ei mitään',
 
 	// Manage page

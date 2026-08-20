@@ -54,11 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Er du sikker på, at du vil sende notifikationer til alle brugere?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Ændret indstillinger for boardregler.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
-	'ACP_BOARDRULES_LIST_STYLE_OPTIONS_EXPLAIN' => 'Choose how rule and category items are prefixed. Ordered cycles through numbers, letters and Roman numerals. Unordered cycles through disc, circle and square bullets. Compound displays the complete numeric path.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Vælg, hvordan regler og kategorier skal markeres. Ordnet skifter mellem tal, bogstaver og romertal. Uordnet skifter mellem udfyldte cirkler, cirkler og firkanter. Sammensat nummerering viser hele den numeriske sti.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'		=> 'Bullet',
-	'ACP_BOARDRULES_LIST_STYLE_COMPOUND' => 'Compound numbering (1, 1.1, 1.1.1)',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Uordnet (udfyldt cirkel, cirkel, firkant)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Sammensat nummerering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
