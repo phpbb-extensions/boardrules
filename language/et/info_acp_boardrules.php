@@ -47,4 +47,7 @@ $lang = array_merge($lang, array(
 	// ACP Logs => AJP Logid
 	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Foorumi reeglite seaded on muudetud</strong>',
 	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Foorumi reeglite teavitus on saadetud kõigile liikmetele</strong>',
+	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Foorumi reeglite keelekomplekt kopeeritud</strong><br />» %1$s → %2$s (%3$d reeglit)',
+	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Foorumi reeglite keelekomplekt avaldatud</strong><br />» %s',
+	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Foorumi reeglite keelekomplekt muudeti mustandiks</strong><br />» %s',
 ));

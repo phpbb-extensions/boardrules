@@ -1,0 +1,102 @@
+{% INCLUDECSS '@phpbb_boardrules/boardrules_acp.css' %}
+
+<h1>{{ lang('ACP_BOARDRULES_MANAGE') }}</h1>
+<p>{{ lang('ACP_BOARDRULES_MANAGE_EXPLAIN') }}</p>
+
+<form id="language_form" method="post" action="{{ U_LANGUAGE_ACTION }}">
+	<fieldset class="boardrules-language-toolbar">
+		<div class="boardrules-language-picker">
+			<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') ~ lang('COLON') }}</label>
+			<select name="language" id="language">
+				{% for option in loops.language_options %}
+					<option value="{{ option.LANG_ISO }}"{% if option.S_SELECTED %} selected="selected"{% endif %}>{{ option.LANG_LOCAL_NAME }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="boardrules-language-actions">
+			<input type="submit" value="{{ lang('GO') }}" class="button2 boardrules-button">
+			<a href="{{ U_DASHBOARD }}" class="button2 boardrules-button">{{ lang('ACP_BOARDRULES_ALL_LANGUAGES') }}</a>
+		</div>
+	</fieldset>
+</form>
+
+{% if S_CAN_COPY_RULESET or S_RULESET_DRAFT or S_CAN_DRAFT_RULESET %}
+	<p class="boardrules-action-bar">
+		{% if S_CAN_COPY_RULESET %}<a href="{{ U_COPY_RULESET }}" class="button2 boardrules-button"><i class="icon fa-copy fa-fw" aria-hidden="true"></i> {{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
+		{% if S_RULESET_DRAFT %}<a href="{{ U_PUBLISH_RULESET }}" class="button2 boardrules-button"><i class="icon fa-eye fa-fw" aria-hidden="true"></i> {{ lang('ACP_BOARDRULES_PUBLISH') }}</a>{% endif %}
+		{% if S_CAN_DRAFT_RULESET %}<a href="{{ U_DRAFT_RULESET }}" class="button2 boardrules-button"><i class="icon fa-eye-slash fa-fw" aria-hidden="true"></i> {{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
+	</p>
+{% endif %}
+
+{% if S_RULESET_DRAFT %}
+	<div class="errorbox notice">
+		<h3>{{ lang('ACP_BOARDRULES_STATUS_DRAFT') }}</h3>
+		<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_DRAFT_DEFAULT_NOTICE' : 'ACP_BOARDRULES_DRAFT_NOTICE') }}</p>
+	</div>
+{% elseif S_RULESET_EMPTY %}
+	<div class="errorbox notice">
+		<h3>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</h3>
+		<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_EMPTY_DEFAULT_NOTICE' : 'ACP_BOARDRULES_EMPTY_NOTICE') }}</p>
+	</div>
+{% endif %}
+
+{% if loops.breadcrumb|length %}
+	<p>
+		<strong>
+			<a href="{{ U_MAIN }}">{{ lang('ACP_BOARDRULES') }}</a>
+			{% for breadcrumb in loops.breadcrumb %}
+				 -&gt; {% if not breadcrumb.S_CURRENT_LEVEL %}<a href="{{ breadcrumb.U_RULE }}">{% endif %}{{ breadcrumb.RULE_TITLE }}{% if not breadcrumb.S_CURRENT_LEVEL %}</a>{% endif %}
+			{% endfor %}
+		</strong>
+	</p>
+{% endif %}
+
+{% if loops.rules|length %}
+	<table class="table1 forums">
+		<colgroup><col class="row1"><col class="row1"><col class="row2"></colgroup>
+		<thead>
+			<tr>
+				<th colspan="2">{{ lang('ACP_BOARDRULES') }}</th>
+				<th>{{ lang('ACTION') }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for rules in loops.rules %}
+				<tr>
+					<td class="folder">
+						<span class="fa-stack fa-2x">
+						{{ Icon('font', 'circle', '', true, 'fas fa-stack-2x') }}
+							{{ Icon('font', {
+								'folder' : rules.S_IS_CATEGORY,
+								'file-lines' : true,
+							}, '', true, 'fas fa-inverse fa-stack-1x') }}
+						</span>
+					</td>
+					<td class="forum-desc">
+						<strong><a href="{{ rules.U_RULE }}">{{ rules.RULE_TITLE }}</a></strong>
+					</td>
+					<td class="actions">
+						<span class="up-disabled" style="display:none;">{{ ICON_MOVE_UP_DISABLED }}</span>
+						<span class="up"><a href="{{ rules.U_MOVE_UP }}" data-ajax="row_up">{{ ICON_MOVE_UP }}</a></span>
+						<span class="down-disabled" style="display:none;">{{ ICON_MOVE_DOWN_DISABLED }}</span>
+						<span class="down"><a href="{{ rules.U_MOVE_DOWN }}" data-ajax="row_down">{{ ICON_MOVE_DOWN }}</a></span>
+						<a href="{{ rules.U_EDIT }}">{{ ICON_EDIT }}</a>
+						<a href="{{ rules.U_DELETE }}" data-ajax="row_delete">{{ ICON_DELETE }}</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endif %}
+
+<form id="rules" method="post" action="{{ U_ACTION }}">
+	<fieldset class="quick">
+		{{ lang('ACP_ADD_RULE') ~ lang('COLON') }}
+		<label>
+			<input type="text" name="rule_title" value="" maxlength="200" placeholder="{{ lang('ACP_RULE_TITLE') }}">
+		</label>
+		<input type="submit" name="addrule" class="button2" value="{{ lang('SUBMIT') }}">
+		<input type="hidden" name="action" value="add">
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+</form>

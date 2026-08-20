@@ -37,6 +37,9 @@ class rule_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\boardrules\operators\nestedset_rules */
 	protected $nestedset_rules;
 
+	/** @var \phpbb\lock\db */
+	protected $lock;
+
 	public function getDataSet()
 	{
 		return $this->createXMLDataSet(__DIR__ . '/fixtures/rule.xml');
@@ -63,8 +66,8 @@ class rule_operator_base extends \phpbb_database_test_case
 
 		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 
-		$lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
-		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $lock, 'phpbb_boardrules');
+		$this->lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
+		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, 'phpbb_boardrules');
 	}
 
 	/**
@@ -74,6 +77,6 @@ class rule_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_rule_operator()
 	{
-		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules);
+		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules, $this->lock);
 	}
 }

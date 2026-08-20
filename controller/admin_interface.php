@@ -26,15 +26,31 @@ interface admin_interface
 	public function display_options();
 
 	/**
-	* Display the language selection
-	*
-	* Display the available languages to add/manage board rules from.
-	* If there is only one board language, this will just call display_rules().
+	* Display the language dashboard
 	*
 	* @return void
 	* @access public
 	*/
-	public function display_language_selection();
+	public function display_language_dashboard();
+
+	/**
+	 * Display and process the complete ruleset copy form.
+	 *
+	 * @param string $target_language
+	 * @param string $return_to Return destination context
+	 * @return void
+	 */
+	public function copy_ruleset($target_language, $return_to = '');
+
+	/**
+	 * Publish or return a language ruleset to draft.
+	 *
+	 * @param string $language
+	 * @param bool $published
+	 * @param string $return_to Return destination context
+	 * @return void
+	 */
+	public function set_ruleset_published($language, $published, $return_to = '');
 
 	/**
 	* Display the rules

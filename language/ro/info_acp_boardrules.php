@@ -46,4 +46,7 @@ $lang = array_merge($lang, array(
 	// ACP Logs
 	'ACP_BOARDRULES_SETTINGS_LOG'	=> '<strong>Setările regulilor forumului au fost schimbate</strong>',
 	'ACP_BOARDRULES_NOTIFY_LOG'		=> '<strong>Regulament forum trimis catre toti utlizatorii</strong>',
+	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Setul de reguli al limbii a fost copiat</strong><br />» %1$s → %2$s (%3$d reguli)',
+	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Setul de reguli al limbii a fost publicat</strong><br />» %s',
+	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Setul de reguli al limbii a fost schimbat în ciornă</strong><br />» %s',
 ));
