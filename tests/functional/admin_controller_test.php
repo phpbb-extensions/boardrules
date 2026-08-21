@@ -53,6 +53,10 @@ class admin_controller_test extends boardrules_functional_base
 		self::assertCount(1, $form_node);
 		self::assertSame('true', $form_node->attr('data-ajax'));
 		self::assertNotSame('', $form_node->filter('#boardrules_intro_text')->attr('placeholder'));
+		self::assertNotSame(
+			$form_node->filter('input[name="form_token"]')->attr('value'),
+			$crawler->filter('#rules input[name="form_token"]')->attr('value')
+		);
 
 		try
 		{

@@ -310,6 +310,11 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertTrue($this->assigned_vars['S_RULESET_ROOT']);
 		self::assertSame('', $this->assigned_vars['BOARDRULES_INTRO_TEXT']);
 		self::assertSame('Fallback for Test board.', $this->assigned_vars['BOARDRULES_INTRO_FALLBACK']);
+		self::assertSame(array('boardrules_intro', 'add_edit_rule'), admin_test_state::$form_keys);
+		self::assertSame(array(
+			'boardrules_intro' => '_INTRO',
+			'add_edit_rule' => '_ADD_RULE',
+		), admin_test_state::$form_key_suffixes);
 	}
 
 	public function test_display_rules_escapes_encoded_sitename_once(): void

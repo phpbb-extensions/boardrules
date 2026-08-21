@@ -242,7 +242,8 @@ class admin_controller implements admin_interface
 	*/
 	public function display_rules($language, $parent_id = 0)
 	{
-		add_form_key('boardrules_intro');
+		add_form_key('boardrules_intro', '_INTRO');
+		add_form_key('add_edit_rule', '_ADD_RULE');
 		$this->lang->add_lang('boardrules_controller', 'phpbb/boardrules');
 
 		$languages = $this->assign_language_options($language);

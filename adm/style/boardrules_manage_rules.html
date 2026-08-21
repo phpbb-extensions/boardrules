@@ -37,7 +37,7 @@
 				<input type="submit" name="submit_intro" class="button1" value="{{ lang('ACP_BOARDRULES_INTRO_SAVE') }}">
 				<input type="reset" class="button2" value="{{ lang('RESET') }}">
 			</p>
-			{{ S_FORM_TOKEN }}
+			{{ S_FORM_TOKEN_INTRO }}
 		</fieldset>
 	</form>
 {% endif %}
@@ -125,6 +125,6 @@
 		</label>
 		<input type="submit" name="addrule" class="button2" value="{{ lang('SUBMIT') }}">
 		<input type="hidden" name="action" value="add">
-		{{ S_FORM_TOKEN }}
+		{{ S_FORM_TOKEN_ADD_RULE }}
 	</fieldset>
 </form>
