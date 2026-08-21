@@ -219,7 +219,7 @@ class ruleset implements ruleset_interface
 			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
 		}
 
-		$this->save_ruleset_value($language, 'rules_intro_text', utf8_encode_ucr((string) $intro_text));
+		$this->save_ruleset_value($language, 'rules_intro_text', utf8_encode_ncr((string) $intro_text));
 	}
 
 	/**

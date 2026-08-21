@@ -166,12 +166,12 @@ class ruleset_operator_test extends \phpbb_database_test_case
 	{
 		self::assertSame('', $this->operator->get_intro_text('en'));
 
-		$this->operator->set_intro_text('en', 'Welcome to our rules. 👋');
+		$this->operator->set_intro_text('en', 'Welcome to our rules. 👋 مرحبًا こんにちは');
 
-		self::assertSame('Welcome to our rules. 👋', $this->operator->get_intro_text('en'));
+		self::assertSame('Welcome to our rules. 👋 مرحبًا こんにちは', $this->operator->get_intro_text('en'));
 
 		$result = $this->db->sql_query("SELECT rules_intro_text FROM phpbb_boardrules_rulesets WHERE language_iso = 'en'");
-		self::assertSame('Welcome to our rules. &#128075;', $this->db->sql_fetchfield('rules_intro_text'));
+		self::assertSame('Welcome to our rules. &#128075; &#1605;&#1585;&#1581;&#1576;&#1611;&#1575; &#12371;&#12435;&#12395;&#12385;&#12399;', $this->db->sql_fetchfield('rules_intro_text'));
 		$this->db->sql_freeresult($result);
 		self::assertTrue($this->operator->is_published('en'));
 	}

@@ -63,7 +63,7 @@ class admin_controller_test extends boardrules_functional_base
 			$this->assertContainsLang('ACP_BOARDRULES_INTRO_SAVED', $crawler->text());
 
 			$result = $this->db->sql_query("SELECT rules_intro_text FROM phpbb_boardrules_rulesets WHERE language_iso = 'en'");
-			self::assertSame(utf8_encode_ucr($intro_text), $this->db->sql_fetchfield('rules_intro_text'));
+			self::assertSame(utf8_encode_ncr($intro_text), $this->db->sql_fetchfield('rules_intro_text'));
 			$this->db->sql_freeresult($result);
 
 			$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&sid={$this->sid}");
