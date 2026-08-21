@@ -54,9 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'ВЫ уверены, что хотете оповестить всех пользователей?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Настройки правил форума успешно обновлены.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Выберите способ обозначения правил и категорий. Упорядоченный список чередует числа, буквы и римские цифры. Неупорядоченный список чередует закрашенный круг, окружность и квадрат. Составная нумерация показывает полный числовой путь.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Неупорядоченный (круг, окружность, квадрат)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Составная нумерация (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

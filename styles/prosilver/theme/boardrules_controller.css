@@ -5,27 +5,34 @@
 /* page layout */
 .boardrules-container {
 	position: relative;
-	overflow: hidden;
+	display: flow-root;
+	overflow-wrap: anywhere;
 }
 
-.content h3 {
+.boardrules-list > li > h3 {
 	text-transform: none;
 	border-bottom: none;
 	margin-top: 5px;
 }
 
-.content ol {
-	font-size: 1.2em;
-	margin-left: 2em;
+.content .boardrules-list {
+	font-size: 120%;
+	margin-left: 2rem;
 }
 
-.rtl .content ol {
-	margin-right: 2em;
+.rtl .content .boardrules-list {
+	margin-right: 2rem;
 	margin-left: 0;
 }
 
-.content ol ol {
-	font-size: 1em;
+.content .boardrules-list .boardrules-list {
+	font-size: 100%;
+	margin: 0.8rem 0 0.9rem 1.5rem;
+}
+
+.rtl .content .boardrules-list .boardrules-list {
+	margin-right: 1.5rem;
+	margin-left: 0;
 }
 
 /* rules */
@@ -33,29 +40,25 @@
 	padding-right: 50px;
 }
 
-.boardrules-rules li {
+.boardrules-list > li {
 	margin-bottom: 20px;
 }
 
-.boardrules-rules ol {
-	list-style: lower-alpha;
-}
-
-.boardrules-rules ol li {
+.boardrules-list .boardrules-list > li {
 	margin-bottom: 5px;
 }
 
-.boardrules-rules ol .rule-item {
+.boardrules-list .rule-item {
 	padding-bottom: 5px;
 }
 
-.boardrules-rules ol .rule-item ul,
-.boardrules-rules ol .rule-item ol {
+.boardrules-rules .rule-item ul,
+.boardrules-rules .rule-item ol {
 	margin: 1em 0 1em 3em;
 }
 
-.boardrules-rules ol li ol {
-	list-style: lower-roman;
+.content .boardrules-list.br-list-depth-capped {
+	margin-left: 0;
 }
 
 .rtl .boardrules-rules {
@@ -63,8 +66,12 @@
 	padding-left: 50px;
 }
 
-.rtl .boardrules-rules ol .rule-item ol {
-	margin-right: 3em;
+.rtl .content .boardrules-list.br-list-depth-capped {
+	margin-right: 0;
+}
+
+.rtl .boardrules-rules .rule-item ol {
+	margin-right: 3rem;
 	margin-left: 0;
 }
 
@@ -82,8 +89,6 @@
 }
 
 .mini-panel {
-	-moz-border-radius: 7px;
-	-webkit-border-radius: 7px;
 	border-radius: 7px;
 	margin-bottom: 5px;
 	padding: 5px 10px;
@@ -95,6 +100,7 @@
 
 .boardrules-menu {
 	border-top: 1px solid #ffffff;
+	overflow-x: auto;
 	list-style: none;
 }
 
@@ -120,7 +126,6 @@
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {
 	.boardrules-categories,
 	.rtl .boardrules-categories {
-		text-align: center;
 		float: none;
 		width: 100%;
 		margin: 0;
@@ -131,15 +136,71 @@
 		margin: 0;
 	}
 
-	.boardrules-menu li a {
-		margin-right: 0 !important;
-		margin-left: 0 !important;
+	.content .boardrules-list {
+		margin-left: 1.5rem;
+	}
+
+	.rtl .content .boardrules-list {
+		margin-right: 1.5rem;
+		margin-left: 0;
+	}
+
+	.content .boardrules-list .boardrules-list {
+		margin-left: 1rem;
+	}
+
+	.rtl .content .boardrules-list .boardrules-list {
+		margin-right: 1rem;
+		margin-left: 0;
+	}
+
+	.content .boardrules-list.br-list-depth-capped,
+	.rtl .content .boardrules-list.br-list-depth-capped {
+		margin-right: 0;
+		margin-left: 0;
 	}
 }
 
-/* Non default ordered list modifiers (bulleted or none) */
+/* Ordered list styles cycle at every level. */
+.content .br-list-style-decimal {
+	list-style-type: decimal;
+}
+
+.content .br-list-style-lower-alpha {
+	list-style-type: lower-alpha;
+}
+
+.content .br-list-style-lower-roman {
+	list-style-type: lower-roman;
+}
+
+/* Unordered list styles cycle at every level. */
 .content .br-list-style-disc {
 	list-style-type: disc;
+}
+
+.content .br-list-style-circle {
+	list-style-type: circle;
+}
+
+.content .br-list-style-square {
+	list-style-type: square;
+}
+
+/* Compound numbers are generated server-side (for example, 1.2.3). */
+.content .br-list-style-compound {
+	list-style-type: none;
+}
+
+.content .br-list-style-compound > li {
+	position: relative;
+}
+
+.boardrules-compound-prefix {
+	white-space: nowrap;
+	position: absolute;
+	font-variant-numeric: tabular-nums;
+	inset-inline-end: calc(100% + 0.5rem);
 }
 
 .content .br-list-style-none {

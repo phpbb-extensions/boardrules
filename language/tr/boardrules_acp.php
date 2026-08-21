@@ -55,9 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Tüm kullanıcılara bildirim göndermek istediğinize emin misiniz?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Mesaj panosu kuralları ayarları değiştirildi.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Mesaj panosu kuralları liste stili',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Kural ve kategori öğelerinin önünde sıralı alfa-nümerik sayılar (bu varsayılandır), madde işaretleri veya herhangi bir şey olup olmadığına karar verin.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Kural ve kategorilerin nasıl işaretleneceğini seçin. Sıralı liste sayılar, harfler ve Roma rakamları arasında geçiş yapar. Sırasız liste dolu daire, çember ve kare arasında geçiş yapar. Bileşik numaralandırma tam sayısal yolu gösterir.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Sıralı alfa-nümerik',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Madde işaretleri',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Sırasız (dolu daire, çember, kare)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Bileşik numaralandırma (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Hiçbiri',
 
 	// Manage page

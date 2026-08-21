@@ -82,7 +82,7 @@ class admin_controller_test extends \phpbb_database_test_case
 			'boardrules_font_icon' => 'fa-gavel',
 			'boardrules_header_link' => 1,
 			'boardrules_require_at_registration' => 0,
-			'boardrules_list_style' => 'disc',
+			'boardrules_list_style' => 'unordered',
 			'boardrules_notification' => 4,
 			'boardrules.table_lock.boardrules_table' => 0,
 			'default_lang' => 'en',
@@ -185,7 +185,9 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame('adm.php?i=boardrules', $this->assigned_vars['U_ACTION']);
 		self::assertSame('fa-gavel', $this->assigned_vars['BOARDRULES_FONT_ICON']);
 		self::assertTrue($this->assigned_vars['S_BOARDRULES_ENABLE']);
-		self::assertStringContainsString('"selected":"disc"', $this->assigned_vars['S_BOARDRULES_LIST_STYLE']);
+		self::assertStringContainsString('"selected":"unordered"', $this->assigned_vars['S_BOARDRULES_LIST_STYLE']);
+		self::assertStringContainsString('"compound":"ACP_BOARDRULES_LIST_STYLE_COMPOUND"', $this->assigned_vars['S_BOARDRULES_LIST_STYLE']);
+		self::assertStringNotContainsString('"disc":', $this->assigned_vars['S_BOARDRULES_LIST_STYLE']);
 	}
 
 	public function test_display_options_rejects_invalid_form(): void
@@ -222,7 +224,8 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		return array(
 			'ordered list and empty icon' => array('', '', ''),
-			'bullets and valid icon' => array('fa-book-open', 'disc', 'disc'),
+			'unordered list and valid icon' => array('fa-book-open', 'unordered', 'unordered'),
+			'compound numbering' => array('fa-list-ol', 'compound', 'compound'),
 			'no markers' => array('rules-123', 'none', 'none'),
 			'invalid list style falls back' => array('fa-gavel', 'url(javascript:bad)', ''),
 		);

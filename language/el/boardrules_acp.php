@@ -55,9 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Είστε σίγουρος (-η) ότι θέλετε να στείλετε ειδοποίηση σε όλα τα μέλη;',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Οι ρυθμίσεις των Όρων Συμμετοχής Δ. Συζήτησης άλλαξαν.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Επιλέξτε τον τρόπο αρίθμησης των κανόνων και των κατηγοριών. Η ταξινομημένη λίστα εναλλάσσεται μεταξύ αριθμών, γραμμάτων και λατινικών αριθμών. Η μη ταξινομημένη λίστα εναλλάσσεται μεταξύ δίσκου, κύκλου και τετραγώνου. Η σύνθετη αρίθμηση εμφανίζει την πλήρη αριθμητική διαδρομή.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Μη ταξινομημένη (δίσκος, κύκλος, τετράγωνο)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Σύνθετη αρίθμηση (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

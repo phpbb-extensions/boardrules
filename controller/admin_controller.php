@@ -153,7 +153,8 @@ class admin_controller implements admin_interface
 
 			'S_BOARDRULES_LIST_STYLE'	=> build_select([
 				'' => 'ACP_BOARDRULES_LIST_STYLE_ORDERED',
-				'disc' => 'ACP_BOARDRULES_LIST_STYLE_BULLET',
+				'unordered' => 'ACP_BOARDRULES_LIST_STYLE_UNORDERED',
+				'compound' => 'ACP_BOARDRULES_LIST_STYLE_COMPOUND',
 				'none' => 'ACP_BOARDRULES_LIST_STYLE_NONE',
 			], $this->config['boardrules_list_style']),
 		));
@@ -176,7 +177,7 @@ class admin_controller implements admin_interface
 
 		// Validate list style (since it's injected into HTML)
 		$boardrules_list_style = $this->request->variable('boardrules_list_style', '');
-		if (!in_array($boardrules_list_style, ['', 'none', 'disc']))
+		if (!in_array($boardrules_list_style, ['', 'none', 'unordered', 'compound'], true))
 		{
 			$boardrules_list_style = '';
 		}

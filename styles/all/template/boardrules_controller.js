@@ -4,14 +4,20 @@
 
 $(function() {
 	// Function to apply highlight class to an element identifier
-	var highlight = function (id) {
+	var highlight = function(id) {
 		if (id) {
-			$('#' + decodeURIComponent(id)).addClass('highlight');
+			try {
+				id = decodeURIComponent(id);
+			} catch (e) {
+				return;
+			}
+
+			$(document.getElementById(id)).addClass('highlight');
 		}
 	};
 
 	// Apply highlight to clicked rule anchor
-	$('.rule-anchor').on('click', function () {
+	$('.rule-anchor').on('click', function() {
 		$('li').removeClass('highlight');
 		highlight($(this).closest('.rule-item').attr('id'));
 	});

@@ -55,9 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Weet je zeker dat je meldingen wilt versturen naar alle gebruikers?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Forumregels-instellingen veranderd.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Kies hoe regels en categorieën worden gemarkeerd. Geordend wisselt tussen cijfers, letters en Romeinse cijfers. Ongeordend wisselt tussen een gevulde cirkel, cirkel en vierkant. Samengestelde nummering toont het volledige numerieke pad.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Ongeordend (stip, cirkel, vierkant)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Samengestelde nummering (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

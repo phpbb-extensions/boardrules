@@ -54,9 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'אתה בטוח שאתה רוצה לשלוח הודעה לכל המשתמשים?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'הגדרות חוקי הפורום שונו בהצלחה.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'בחר כיצד לסמן כללים וקטגוריות. רשימה מסודרת עוברת במחזור בין מספרים, אותיות וספרות רומיות. רשימה לא מסודרת עוברת במחזור בין עיגול מלא, עיגול וריבוע. מספור מורכב מציג את הנתיב המספרי המלא.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'לא מסודרת (עיגול מלא, עיגול, ריבוע)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'מספור מורכב (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

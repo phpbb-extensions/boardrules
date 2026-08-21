@@ -214,4 +214,173 @@ class main_controller_test extends \phpbb_test_case
 		self::assertCount(1, \phpbb\boardrules\controller\admin_test_state::$redirects);
 		self::assertStringContainsString('index.' . $phpEx, \phpbb\boardrules\controller\admin_test_state::$redirects[0]);
 	}
+
+	public static function deep_list_style_data(): array
+	{
+		return array(
+			'ordered' => array(
+				'',
+				false,
+				false,
+				false,
+			),
+			'unordered' => array(
+				'unordered',
+				true,
+				false,
+				false,
+			),
+			'compound' => array(
+				'compound',
+				false,
+				true,
+				false,
+			),
+			'none' => array(
+				'none',
+				false,
+				false,
+				true,
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider deep_list_style_data
+	 */
+	public function test_display_assigns_list_mode_and_deep_tree_structure($configured_style, $is_unordered, $is_compound, $is_unstyled): void
+	{
+		global $config, $user, $phpbb_root_path, $phpEx;
+
+		$config = new \phpbb\config\config(array(
+			'boardrules_enable' => 1,
+			'boardrules_list_style' => $configured_style,
+			'default_lang' => 'en',
+			'sitename' => 'Board',
+		));
+		$loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$lang = new \phpbb\language\language($loader);
+		$lang->set_default_language('en');
+		$lang->set_user_language('en');
+		$user = new \phpbb\user($lang, '\\phpbb\\datetime');
+
+		$tree_data = array(
+			array(1, 22, 'Category 1'),
+			array(2, 19, 'Category 2'),
+			array(3, 16, 'Category 3'),
+			array(4, 15, 'Category 4'),
+			array(5, 14, 'Category 5'),
+			array(6, 13, 'Category 6'),
+			array(7, 12, 'Category 7'),
+			array(8, 9, 'Deep rule'),
+			array(10, 11, 'Deep sibling rule'),
+			array(17, 18, 'Category 2 sibling rule'),
+			array(20, 21, 'Category 1 sibling rule'),
+			// Gap 23-42 represents nested-set rows belonging to another language.
+			array(43, 46, 'Second top-level category'),
+			array(44, 45, 'Second category rule'),
+		);
+		$entities = array();
+		foreach ($tree_data as $data)
+		{
+			$entity = $this->getMockBuilder(\phpbb\boardrules\entity\rule::class)
+				->disableOriginalConstructor()
+				->getMock();
+			$entity->method('get_left_id')->willReturn($data[0]);
+			$entity->method('get_right_id')->willReturn($data[1]);
+			$entity->method('get_anchor')->willReturn('');
+			$entity->method('get_title')->willReturn($data[2]);
+			$entity->method('get_message_for_display')->willReturn($data[2] . ' body');
+			$entities[] = $entity;
+		}
+
+		$rule_operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$rule_operator->method('get_rules')->with('en')->willReturn($entities);
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$ruleset_operator->method('is_published')->with('en')->willReturn(true);
+
+		$assigned_rules = array();
+		$assigned_vars = array();
+		$template = $this->createMock(\phpbb\template\template::class);
+		$template->method('assign_block_vars')->willReturnCallback(function ($block, $vars) use (&$assigned_rules) {
+			if ($block === 'rules')
+			{
+				$assigned_rules[] = $vars;
+			}
+		});
+		$template->method('assign_vars')->willReturnCallback(function ($vars) use (&$assigned_vars) {
+			$assigned_vars = array_merge($assigned_vars, $vars);
+		});
+
+		$helper = $this->getMockBuilder(\phpbb\controller\helper::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$helper->method('route')->willReturn('/rules');
+		$helper->method('render')->willReturn(new \Symfony\Component\HttpFoundation\Response('rules'));
+
+		$controller = new \phpbb\boardrules\controller\main_controller(
+			$config,
+			$helper,
+			$lang,
+			$rule_operator,
+			$ruleset_operator,
+			$template,
+			$user,
+			$phpbb_root_path,
+			$phpEx
+		);
+		$controller->display();
+
+		$categories = array();
+		$rules = array();
+		$items = array();
+		$close_count = 0;
+		foreach ($assigned_rules as $assigned_rule)
+		{
+			if (!empty($assigned_rule['S_CLOSE_LIST']))
+			{
+				$close_count++;
+			}
+			else if (!empty($assigned_rule['S_IS_CATEGORY']))
+			{
+				$categories[] = $assigned_rule;
+				$items[] = $assigned_rule;
+			}
+			else
+			{
+				$rules[] = $assigned_rule;
+				$items[] = $assigned_rule;
+			}
+		}
+
+		self::assertSame(array(1, 2, 3, 4, 5, 6, 7, 1), array_column($categories, 'DEPTH'));
+		self::assertSame(array(7, 7, 2, 1, 1), array_column($rules, 'DEPTH'));
+		self::assertSame(8, $close_count);
+		self::assertSame($is_unordered, $assigned_vars['S_LIST_UNORDERED']);
+		self::assertSame($is_compound, $assigned_vars['S_LIST_COMPOUND']);
+		self::assertSame($is_unstyled, $assigned_vars['S_LIST_UNSTYLED']);
+
+		if ($configured_style === 'compound')
+		{
+			self::assertSame(array(
+				'1',
+				'1.1',
+				'1.1.1',
+				'1.1.1.1',
+				'1.1.1.1.1',
+				'1.1.1.1.1.1',
+				'1.1.1.1.1.1.1',
+				'1.1.1.1.1.1.1.1',
+				'1.1.1.1.1.1.1.2',
+				'1.1.2',
+				'1.2',
+				'2',
+				'2.1',
+			), array_column($items, 'COMPOUND_NUMBER'));
+		}
+	}
 }

@@ -54,9 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Naozaj chceš poslať oznámenie všetkým užívateľom fóra?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Nastavenia pravidiel fóra boli zmenené.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Vyberte spôsob označenia pravidiel a kategórií. Zoradený zoznam strieda čísla, písmená a rímske číslice. Nezoradený zoznam strieda plný kruh, kružnicu a štvorec. Zložené číslovanie zobrazuje úplnú číselnú cestu.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Nezoradený (kruh, kružnica, štvorec)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Zložené číslovanie (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
