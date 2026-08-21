@@ -63,6 +63,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Muokkaa sääntöjä',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Tällä sivulla voit lisätä, muokata, poistaa ja järjestää uudelleen kategorioita ja sääntöjä. Kategoria on joukko toisiinsa liittyviä sääntöjä. Jokaisella kategorialla voi olla rajoittamaton määrä sääntöjä.',
+	'ACP_BOARDRULES_INTRO'					=> 'Sääntösivun johdanto',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Kirjoita johdanto, joka näytetään sääntöjen yläpuolella käyttäjille, jotka tarkastelevat sääntökokonaisuutta <strong>%s</strong>. Jätä kenttä tyhjäksi käyttääksesi paikkamerkkinä näkyvää käännettyä oletustekstiä.',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Tallenna johdanto',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Sääntösivun johdanto tallennettu.',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Valitse sääntöjen kieli. Käyttäjät näkevät heidän haluamalleen kielelle luomasi säännöt. Jos et luo sääntöjä halutulla kielellä, käyttäjät näkevät säännöt, jotka on luotu laudan oletuskielellä.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Sääntö kategoria',
 	'ACP_BOARDRULES_RULE'					=> 'Sääntö',

@@ -49,4 +49,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Foorumin sääntöjen kielikohtainen sääntökokonaisuus kopioitu</strong><br />» %1$s → %2$s (%3$d sääntöä)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Foorumin sääntöjen kielikohtainen sääntökokonaisuus julkaistu</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Foorumin sääntöjen kielikohtainen sääntökokonaisuus muutettu luonnokseksi</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Sääntösivun johdanto muutettu</strong><br />» %s',
 ));

@@ -50,4 +50,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Το γλωσσικό σύνολο όρων συμμετοχής αντιγράφηκε</strong><br />» %1$s → %2$s (%3$d κανόνες)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Το γλωσσικό σύνολο όρων συμμετοχής δημοσιεύτηκε</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Το γλωσσικό σύνολο όρων συμμετοχής άλλαξε σε πρόχειρο</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Η εισαγωγή της σελίδας όρων άλλαξε</strong><br />» %s',
 ));

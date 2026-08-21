@@ -49,4 +49,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>מערכת חוקי הפורום של השפה הועתקה</strong><br />» %1$s → %2$s (%3$d חוקים)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>מערכת חוקי הפורום של השפה פורסמה</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>מערכת חוקי הפורום של השפה שונתה לטיוטה</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>המבוא לדף חוקי הפורום שונה</strong><br />» %s',
 ));

@@ -50,4 +50,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Ensemble de règles du forum de la langue copié</strong><br />» %1$s → %2$s (%3$d règles)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Ensemble de règles du forum de la langue publié</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Ensemble de règles du forum de la langue défini comme brouillon</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Introduction de la page des règles modifiée</strong><br />» %s',
 ));
