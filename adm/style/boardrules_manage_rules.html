@@ -64,7 +64,19 @@
 			{% for rules in loops.rules %}
 				<tr>
 					<td class="folder">
-						{% if rules.S_IS_CATEGORY %}<img src="images/icon_subfolder.gif" width="27" height="27" alt="{{ lang('ACP_BOARDRULES_CATEGORY') }}">{% else %}<img src="images/icon_folder.gif" width="27" height="27" alt="{{ lang('ACP_BOARDRULES_RULE') }}">{% endif %}
+						{% if rules.S_IS_CATEGORY %}
+							<span class="fa-stack fa-2x" aria-hidden="true">
+								<i class="fa fa-fw fa-circle fa-stack-2x"></i>
+								<i class="fa fa-fw fa-folder fa-inverse fa-stack-1x"></i>
+							</span>
+							<span class="sr-only">{{ lang('ACP_BOARDRULES_CATEGORY') }}</span>
+						{% else %}
+							<span class="fa-stack fa-2x" aria-hidden="true">
+								<i class="fa fa-fw fa-circle fa-stack-2x"></i>
+								<i class="fa fa-fw fa-file-text fa-inverse fa-stack-1x"></i>
+							</span>
+							<span class="sr-only">{{ lang('ACP_BOARDRULES_RULE') }}</span>
+						{% endif %}
 					</td>
 					<td class="forum-desc">
 						<strong><a href="{{ rules.U_RULE }}">{{ rules.RULE_TITLE }}</a></strong>
