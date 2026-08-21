@@ -55,9 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Bist du dir sicher, dass du diese Nachricht senden möchtest?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Einstellungen der Board-Regeln | Einstellungen geändert.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Listenformat der Board-Regeln',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Die Board-Regeln werden im Listenformat angezeigt. Lege fest, ob vor Regel- und Kategorieelementen geordnete alphanumerische Ordnungszahlen (dies ist das Standardverhalten), Aufzählungszeichen (Bullets) oder keine stehen sollen.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Wähle die Kennzeichnung von Regeln und Kategorien. Geordnet wechselt zwischen Zahlen, Buchstaben und römischen Ziffern. Ungeordnet wechselt zwischen ausgefülltem Kreis, Kreis und Quadrat. Die Gliederungsnummerierung zeigt den vollständigen numerischen Pfad.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Alphanumerisch geordnet',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Ungeordnet (Punkt, Kreis, Quadrat)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Gliederungsnummerierung (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Keines',
 
 	// Manage page

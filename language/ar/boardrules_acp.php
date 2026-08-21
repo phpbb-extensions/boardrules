@@ -55,9 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'متأكد أنك تريد إرسال الإشعارات إلى جميع الأعضاء ?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'تم تغيير الإعدادات بنجاح.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'اختر كيفية ترقيم عناصر القواعد والفئات. تتناوب القائمة المرتبة بين الأرقام والحروف والأرقام الرومانية. وتتناوب القائمة غير المرتبة بين رموز القرص والدائرة والمربع. ويعرض الترقيم المركب المسار الرقمي الكامل.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'غير مرتبة (قرص، دائرة، مربع)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'ترقيم مركب (1، 1.1، 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

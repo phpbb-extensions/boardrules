@@ -25,6 +25,52 @@ class boardrules_controller_test extends boardrules_functional_base
 
 		self::assertEquals(1, $crawler->filter('#example-category')->count());
 		self::assertEquals(1, $crawler->filter('#example-rule')->count());
+		self::assertCount(1, $crawler->filter('ol.boardrules-rules.br-list-style-decimal'));
+		self::assertCount(1, $crawler->filter('ol.boardrules-rules > li > ol.br-list-style-lower-alpha'));
+	}
+
+	public function test_alternative_list_styles()
+	{
+		$this->get_db();
+		$styles = array(
+			array('unordered', 'ul', 'disc', 'circle'),
+			array('compound', 'ol', 'compound', 'compound'),
+			array('none', 'ol', 'none', 'none'),
+		);
+
+		try
+		{
+			foreach ($styles as $style)
+			{
+				$sql = "UPDATE phpbb_config
+					SET config_value = '" . $this->db->sql_escape($style[0]) . "'
+					WHERE config_name = 'boardrules_list_style'";
+				$this->db->sql_query($sql);
+				$this->purge_cache();
+
+				$crawler = self::request('GET', 'app.php/rules');
+				self::assertCount(1, $crawler->filter("{$style[1]}.boardrules-rules.br-list-style-{$style[2]}"));
+				self::assertCount(1, $crawler->filter("{$style[1]}.boardrules-rules > li > {$style[1]}.br-list-style-{$style[3]}"));
+				if ($style[0] === 'compound')
+				{
+					self::assertSame(array('1.', '1.1.'), $crawler->filter('.boardrules-compound-prefix')->each(function ($node) {
+						return $node->text();
+					}));
+				}
+				else
+				{
+					self::assertCount(0, $crawler->filter('.boardrules-compound-prefix'));
+				}
+			}
+		}
+		finally
+		{
+			$sql = "UPDATE phpbb_config
+				SET config_value = ''
+				WHERE config_name = 'boardrules_list_style'";
+			$this->db->sql_query($sql);
+			$this->purge_cache();
+		}
 	}
 
 	/**

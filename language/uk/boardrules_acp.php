@@ -54,9 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Ви впевнені, що хочете оповістити всіх користувачів?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Налаштування правил форуму успішно оновлено.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Стиль списку правил форуму',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Правила форуму представлені у вигляді списку. Вирішіть, чи ви хочете, щоб елементам правил і категорій передували буквено-цифрові порядкові номери (це поведінка за замовчуванням), маркери або нічого.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Виберіть спосіб позначення правил і категорій. Упорядкований список чергує числа, літери та римські цифри. Невпорядкований список чергує зафарбоване коло, коло та квадрат. Складена нумерація показує повний числовий шлях.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Впорядкований буквено-цифровий',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Маркер Куля',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Невпорядкований (круг, коло, квадрат)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Складена нумерація (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Нічого',
 
 	// Manage page

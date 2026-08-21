@@ -55,9 +55,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Sei sicuro di voler inviare le notifiche a tutti gli utenti?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Le impostazioni delle regole del Forum sono state modificate.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Scegli come contrassegnare regole e categorie. L’elenco ordinato alterna numeri, lettere e numeri romani. L’elenco non ordinato alterna disco, cerchio e quadrato. La numerazione composta mostra il percorso numerico completo.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Non ordinato (disco, cerchio, quadrato)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Numerazione composta (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page

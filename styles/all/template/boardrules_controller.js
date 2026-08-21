@@ -3,7 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Function to apply highlight class to an element identifier
 	const highlight = (id) => {
 		if (id) {
-			document.getElementById(decodeURIComponent(id)).classList.add('highlight');
+			try {
+				id = decodeURIComponent(id);
+			} catch (e) {
+				return;
+			}
+
+			document.getElementById(id).classList.add('highlight');
 		}
 	};
 

@@ -54,9 +54,10 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Esti sigur ca vrei sa trimiti o notificare catre toti utilizatorii?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Setarile de reguli au fost modificate.',
 	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
-	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Board rules are presented in a list format. Decide if you want rule and category items to be preceded by ordered alpha-numeric ordinals (this is the default behavior), bullets or nothing.',
+	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Alegeți modul de marcare a regulilor și categoriilor. Lista ordonată alternează între numere, litere și cifre romane. Lista neordonată alternează între disc, cerc și pătrat. Numerotarea compusă afișează calea numerică completă.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
-	'ACP_BOARDRULES_LIST_STYLE_BULLET'		=> 'Bullet',
+	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Neordonată (disc, cerc, pătrat)',
+	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Numerotare compusă (1, 1.1, 1.1.1)',
 	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
 
 	// Manage page
