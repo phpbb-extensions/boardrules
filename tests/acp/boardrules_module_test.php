@@ -193,7 +193,7 @@ class boardrules_module_test extends \phpbb_test_case
 		$this->executeModeAndAssert('manage', self::TEMPLATE_MANAGE, 'ACP_BOARDRULES_MANAGE');
 	}
 
-	public function ruleset_status_data(): array
+	public static function ruleset_status_data(): array
 	{
 		return [
 			['publish', true],

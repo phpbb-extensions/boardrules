@@ -692,7 +692,6 @@ class admin_controller_test extends \phpbb_database_test_case
 	protected function invoke_protected($method, array $arguments = array())
 	{
 		$reflection = new \ReflectionMethod($this->controller, $method);
-		$reflection->setAccessible(true);
 		return $reflection->invokeArgs($this->controller, $arguments);
 	}
 }

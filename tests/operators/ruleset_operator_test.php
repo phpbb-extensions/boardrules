@@ -199,7 +199,6 @@ class ruleset_operator_test extends \phpbb_database_test_case
 	public function test_empty_anchor_remains_empty(): void
 	{
 		$method = new \ReflectionMethod($this->operator, 'make_unique_anchor');
-		$method->setAccessible(true);
 		$used = array();
 		self::assertSame('', $method->invokeArgs($this->operator, array('', &$used, array())));
 		self::assertSame(array(), $used);

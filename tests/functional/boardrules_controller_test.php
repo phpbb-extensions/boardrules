@@ -48,7 +48,7 @@ class boardrules_controller_test extends boardrules_functional_base
 				$this->db->sql_query($sql);
 				$this->purge_cache();
 
-				$crawler = self::request('GET', 'app.php/rules');
+				$crawler = self::request('GET', 'index.php/rules');
 				self::assertCount(1, $crawler->filter("{$style[1]}.boardrules-rules.br-list-style-{$style[2]}"));
 				self::assertCount(1, $crawler->filter("{$style[1]}.boardrules-rules > li > {$style[1]}.br-list-style-{$style[3]}"));
 				if ($style[0] === 'compound')
