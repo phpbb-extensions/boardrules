@@ -86,6 +86,7 @@ class admin_controller_test extends \phpbb_database_test_case
 			'boardrules_notification' => 4,
 			'boardrules.table_lock.boardrules_table' => 0,
 			'default_lang' => 'en',
+			'sitename' => 'Test board',
 		));
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$cache = new \phpbb_mock_cache();
@@ -103,6 +104,11 @@ class admin_controller_test extends \phpbb_database_test_case
 		$language->set_default_language('en');
 		$language->set_user_language('en');
 		$language->add_lang('boardrules_acp', 'phpbb/boardrules');
+		$language_loader = $this->createMock(\phpbb\language\language_file_loader::class);
+		$language_loader->method('load_extension')
+			->willReturnCallback(function ($extension, $component, $locales, &$lang) {
+				$lang['BOARDRULES_EXPLAIN'] = 'Fallback for %s.';
+			});
 		$user = new \phpbb\user($language, '\\phpbb\\datetime');
 		$user->data['user_id'] = 2;
 		$user->data['user_options'] = 230271;
@@ -163,6 +169,7 @@ class admin_controller_test extends \phpbb_database_test_case
 			$helper,
 			$this->db,
 			$language,
+			$language_loader,
 			$this->log,
 			$this->notification_manager,
 			$this->request,
@@ -300,6 +307,18 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame('English', $this->assigned_vars['CURRENT_LANGUAGE']);
 		self::assertSame(3, $this->assigned_vars['CURRENT_RULE_COUNT']);
 		self::assertTrue($this->assigned_vars['S_DEFAULT_LANGUAGE']);
+		self::assertTrue($this->assigned_vars['S_RULESET_ROOT']);
+		self::assertSame('', $this->assigned_vars['BOARDRULES_INTRO_TEXT']);
+		self::assertSame('Fallback for Test board.', $this->assigned_vars['BOARDRULES_INTRO_FALLBACK']);
+	}
+
+	public function test_display_rules_escapes_encoded_sitename_once(): void
+	{
+		$this->config->set('sitename', 'Extension &quot;Development&quot;');
+
+		$this->controller->display_rules('en');
+
+		self::assertSame('Fallback for Extension "Development".', $this->assigned_vars['BOARDRULES_INTRO_FALLBACK']);
 	}
 
 	public function test_display_rules_for_parent_builds_breadcrumb_and_direct_children(): void
@@ -310,6 +329,42 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame(array('Be kind', 'Stay on topic'), array_column($this->blocks['rules'], 'RULE_TITLE'));
 		self::assertSame('General', $this->blocks['breadcrumb'][0]['RULE_TITLE']);
 		self::assertTrue($this->blocks['breadcrumb'][0]['S_CURRENT_LEVEL']);
+		self::assertFalse($this->assigned_vars['S_RULESET_ROOT']);
+	}
+
+	public function test_save_ruleset_intro_persists_and_logs(): void
+	{
+		$this->variables['boardrules_intro_text'] = '  Custom introduction.  ';
+		$this->log->expects(self::once())
+			->method('add')
+			->with('admin', 2, '127.0.0.1', 'ACP_BOARDRULES_INTRO_LOG', false, array('fr'));
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'ACP_BOARDRULES_INTRO_SAVED');
+
+		$this->controller->save_ruleset_intro('fr');
+	}
+
+	public function test_save_empty_ruleset_intro_restores_fallback(): void
+	{
+		$this->ruleset_operator->set_intro_text('fr', 'Custom');
+		$this->variables['boardrules_intro_text'] = '   ';
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'ACP_BOARDRULES_INTRO_SAVED');
+
+		$this->controller->save_ruleset_intro('fr');
+	}
+
+	public function test_save_ruleset_intro_rejects_invalid_form(): void
+	{
+		admin_test_state::$valid_form = false;
+		$this->setExpectedTriggerError(E_USER_WARNING, 'The submitted form was invalid. Try submitting again.');
+
+		$this->controller->save_ruleset_intro('fr');
+	}
+
+	public function test_save_ruleset_intro_rejects_unknown_language(): void
+	{
+		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_INVALID_LANGUAGE');
+
+		$this->controller->save_ruleset_intro('xx');
 	}
 
 	public function test_display_rules_rejects_unknown_language(): void

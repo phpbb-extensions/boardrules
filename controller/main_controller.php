@@ -94,12 +94,14 @@ class main_controller implements main_interface
 
 		// Grab all published rules in the current user's language
 		$used_language = $this->lang->get_used_language();
+		$display_language = $used_language;
 		$entities = $this->ruleset_operator->is_published($used_language) ? $this->rule_operator->get_rules($used_language) : array();
 
 		// If no rules were found, it may be because no rules exist in the current user's
 		// language, so let's look for rules in the board's default language as a fallback.
 		if (empty($entities) && $used_language !== $this->config['default_lang'] && $this->ruleset_operator->is_published($this->config['default_lang']))
 		{
+			$display_language = $this->config['default_lang'];
 			$entities = $this->rule_operator->get_rules($this->config['default_lang']);
 		}
 
@@ -174,13 +176,15 @@ class main_controller implements main_interface
 		}
 
 		// Assign values to template vars for the rules page
+		$intro_text = (string) $this->ruleset_operator->get_intro_text($display_language);
+
 		$this->template->assign_vars(array(
 			'S_BOARD_RULES'			=> true,
 			'S_CATEGORIES'			=> $cat_counter > 1,
 			'S_LIST_UNORDERED'		=> $list_style === 'unordered',
 			'S_LIST_COMPOUND'		=> $list_style === 'compound',
 			'S_LIST_UNSTYLED'		=> $list_style === 'none',
-			'BOARDRULES_EXPLAIN'	=> $this->lang->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
+			'BOARDRULES_EXPLAIN'	=> $intro_text !== '' ? nl2br(utf8_htmlspecialchars($intro_text)) : $this->lang->lang('BOARDRULES_EXPLAIN', $this->config['sitename']),
 		));
 
 		// Assign breadcrumb template vars for the rules page

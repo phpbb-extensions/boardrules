@@ -29,6 +29,49 @@ class boardrules_controller_test extends boardrules_functional_base
 		self::assertCount(1, $crawler->filter('ol.boardrules-rules > li > ol.br-list-style-lower-alpha'));
 	}
 
+	public function test_custom_ruleset_intro()
+	{
+		$this->get_db();
+		$intro_text = "Welcome to our community.\n<strong>This is plain text.</strong>";
+		$result = $this->db->sql_query("SELECT rules_published, rules_intro_text FROM phpbb_boardrules_rulesets WHERE language_iso = 'en'");
+		$original_ruleset = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		try
+		{
+			$sql = $original_ruleset
+				? "UPDATE phpbb_boardrules_rulesets SET rules_intro_text = '" . $this->db->sql_escape($intro_text) . "' WHERE language_iso = 'en'"
+				: 'INSERT INTO phpbb_boardrules_rulesets ' . $this->db->sql_build_array('INSERT', array(
+					'language_iso' => 'en',
+					'rules_published' => 1,
+					'rules_intro_text' => $intro_text,
+				));
+			$this->db->sql_query($sql);
+			$this->purge_cache();
+
+			$crawler = self::request('GET', 'app.php/rules');
+			$intro = $crawler->filter('#main p')->first();
+			self::assertCount(1, $intro);
+			self::assertStringContainsString('Welcome to our community.', $intro->text());
+			self::assertStringContainsString('<strong>This is plain text.</strong>', $intro->text());
+			self::assertCount(0, $intro->filter('strong'));
+			self::assertStringContainsString('<br', $intro->html());
+		}
+		finally
+		{
+			if ($original_ruleset)
+			{
+				$sql = 'UPDATE phpbb_boardrules_rulesets SET ' . $this->db->sql_build_array('UPDATE', $original_ruleset) . " WHERE language_iso = 'en'";
+				$this->db->sql_query($sql);
+			}
+			else
+			{
+				$this->db->sql_query("DELETE FROM phpbb_boardrules_rulesets WHERE language_iso = 'en'");
+			}
+			$this->purge_cache();
+		}
+	}
+
 	public function test_alternative_list_styles()
 	{
 		$this->get_db();

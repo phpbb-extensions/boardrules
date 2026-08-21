@@ -63,6 +63,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Manage rules',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'From this page you can add, edit, delete and re-order categories and rules. A category is a group of related rules. Each category can have an unlimited number of rules.',
+	'ACP_BOARDRULES_INTRO'					=> 'Rules page introduction',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Enter the introduction shown above the rules for users viewing the <strong>%s</strong> ruleset. Leave this empty to use the translated default shown as the placeholder.',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Save introduction',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Rules page introduction saved.',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Rule category',
 	'ACP_BOARDRULES_RULE'					=> 'Rule',

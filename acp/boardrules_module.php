@@ -130,6 +130,11 @@ class boardrules_module
 					case 'draft':
 						$admin_controller->set_ruleset_published($language, false, $return_to);
 					break;
+
+					case 'save_intro':
+						$admin_controller->save_ruleset_intro($language);
+						return;
+					break;
 				}
 
 				// Check if a language variable was submitted and display

@@ -33,6 +33,7 @@ class m18_ruleset_status extends \phpbb\db\migration\migration
 					'COLUMNS' => array(
 						'language_iso' => array('VCHAR:30', ''),
 						'rules_published' => array('BOOL', 1),
+						'rules_intro_text' => array('TEXT_UNI', ''),
 					),
 					'PRIMARY_KEY' => 'language_iso',
 				),

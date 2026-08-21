@@ -32,6 +32,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\language\language */
 	protected $lang;
 
+	/** @var \phpbb\language\language_file_loader */
+	protected $language_loader;
+
 	/** @var \phpbb\log\log */
 	protected $log;
 
@@ -70,6 +73,7 @@ class admin_controller implements admin_interface
 	* @param \phpbb\controller\helper          $controller_helper    Controller helper object
 	* @param \phpbb\db\driver\driver_interface $db                   Database object
 	* @param \phpbb\language\language          $lang                 Language object
+	* @param \phpbb\language\language_file_loader $language_loader  Language file loader
 	* @param \phpbb\log\log                    $log                  Log object
 	* @param \phpbb\notification\manager       $notification_manager Notification manager
 	* @param \phpbb\request\request            $request              Request object
@@ -81,13 +85,14 @@ class admin_controller implements admin_interface
 	* @param string                            $php_ext              phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\language\language_file_loader $language_loader, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->container = $container;
 		$this->controller_helper = $controller_helper;
 		$this->db = $db;
 		$this->lang = $lang;
+		$this->language_loader = $language_loader;
 		$this->log = $log;
 		$this->notification_manager = $notification_manager;
 		$this->request = $request;
@@ -237,6 +242,9 @@ class admin_controller implements admin_interface
 	*/
 	public function display_rules($language, $parent_id = 0)
 	{
+		add_form_key('boardrules_intro');
+		$this->lang->add_lang('boardrules_controller', 'phpbb/boardrules');
+
 		$languages = $this->assign_language_options($language);
 		$current_language = $this->find_language($languages, $language);
 		if ($current_language === null)
@@ -302,6 +310,9 @@ class admin_controller implements admin_interface
 			'U_COPY_RULESET' => "{$this->u_action}&amp;action=copy&amp;language={$language}",
 			'U_PUBLISH_RULESET' => "{$this->u_action}&amp;action=publish&amp;language={$language}",
 			'U_DRAFT_RULESET' => "{$this->u_action}&amp;action=draft&amp;language={$language}",
+			'U_INTRO_ACTION' => "{$this->u_action}&amp;action=save_intro&amp;language={$language}&amp;parent_id={$parent_id}",
+			'BOARDRULES_INTRO_TEXT' => $this->ruleset_operator->get_intro_text($language),
+			'BOARDRULES_INTRO_FALLBACK' => $this->get_intro_fallback($language),
 			'CURRENT_LANGUAGE' => $current_language['lang_local_name'],
 			'CURRENT_RULE_COUNT' => $current_language['rule_count'],
 			'S_RULESET_EMPTY' => $current_language['rule_count'] === 0,
@@ -310,7 +321,55 @@ class admin_controller implements admin_interface
 			'S_RULESET_DRAFT' => $current_language['rule_count'] > 0 && !$current_language['published'],
 			'S_CAN_DRAFT_RULESET' => $current_language['rule_count'] > 0 && $current_language['published'] && $language !== $this->config['default_lang'],
 			'S_CAN_COPY_RULESET' => $this->has_copy_source($languages, $language),
+			'S_RULESET_ROOT' => $parent_id === 0,
 		));
+	}
+
+	/**
+	 * Get the translated built-in introduction for a selected ruleset language.
+	 *
+	 * @param string $language
+	 * @return string
+	 */
+	protected function get_intro_fallback($language)
+	{
+		$lang = array();
+		$locales = array_values(array_unique(array($language, $this->config['default_lang'], \phpbb\language\language::FALLBACK_LANGUAGE)));
+		$this->language_loader->load_extension('phpbb/boardrules', 'boardrules_controller', $locales, $lang);
+		$sitename = html_entity_decode($this->config['sitename'], ENT_QUOTES);
+
+		return isset($lang['BOARDRULES_EXPLAIN'])
+			? sprintf($lang['BOARDRULES_EXPLAIN'], $sitename)
+			: $this->lang->lang('BOARDRULES_EXPLAIN', $sitename);
+	}
+
+	/**
+	 * Save a language ruleset's custom introduction.
+	 *
+	 * @param string $language
+	 * @return void
+	 */
+	public function save_ruleset_intro($language)
+	{
+		if (!check_form_key('boardrules_intro'))
+		{
+			trigger_error($this->lang->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+		}
+
+		$intro_text = trim(html_entity_decode($this->request->variable('boardrules_intro_text', '', true), ENT_COMPAT));
+
+		try
+		{
+			$this->ruleset_operator->set_intro_text($language, $intro_text);
+		}
+		catch (\InvalidArgumentException $e)
+		{
+			trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+		}
+
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_INTRO_LOG', false, array($language));
+
+		trigger_error($this->lang->lang('ACP_BOARDRULES_INTRO_SAVED') . adm_back_link("{$this->u_action}&amp;language={$language}"));
 	}
 
 	/**

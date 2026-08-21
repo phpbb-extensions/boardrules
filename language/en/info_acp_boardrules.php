@@ -49,4 +49,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Copied board rules language set</strong><br />» %1$s → %2$s (%3$d rules)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Published board rules language set</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Changed board rules language set to draft</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Changed board rules page introduction</strong><br />» %s',
 ));

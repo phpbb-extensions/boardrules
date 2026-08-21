@@ -20,6 +20,28 @@
 	</fieldset>
 </form>
 
+{% if S_RULESET_ROOT %}
+	<form id="boardrules_intro_form" method="post" action="{{ U_INTRO_ACTION }}" data-ajax="true">
+		<fieldset>
+			<legend>{{ lang('ACP_BOARDRULES_INTRO') }}</legend>
+			<dl>
+				<dt>
+					<label for="boardrules_intro_text">{{ lang('ACP_BOARDRULES_INTRO') ~ lang('COLON') }}</label><br>
+					<span>{{ lang('ACP_BOARDRULES_INTRO_EXPLAIN', CURRENT_LANGUAGE) }}</span>
+				</dt>
+				<dd>
+					<textarea id="boardrules_intro_text" name="boardrules_intro_text" rows="4" cols="60" placeholder="{{ BOARDRULES_INTRO_FALLBACK|e('html_attr') }}">{{ BOARDRULES_INTRO_TEXT|e('html') }}</textarea>
+				</dd>
+			</dl>
+			<p class="quick">
+				<input type="submit" name="submit_intro" class="button1" value="{{ lang('ACP_BOARDRULES_INTRO_SAVE') }}">
+				<input type="reset" class="button2" value="{{ lang('RESET') }}">
+			</p>
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+	</form>
+{% endif %}
+
 {% if S_CAN_COPY_RULESET or S_RULESET_DRAFT or S_CAN_DRAFT_RULESET %}
 	<p class="boardrules-action-bar">
 		{% if S_CAN_COPY_RULESET %}<a href="{{ U_COPY_RULESET }}" class="button2 boardrules-button"><i class="icon fa-copy fa-fw" aria-hidden="true"></i> {{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
