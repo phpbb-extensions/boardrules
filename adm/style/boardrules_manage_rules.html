@@ -5,8 +5,9 @@
 
 <form id="language_form" method="post" action="{{ U_LANGUAGE_ACTION }}">
 	<fieldset class="boardrules-language-toolbar">
+		<legend>{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') }}</legend>
 		<div class="boardrules-language-picker">
-			<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') ~ lang('COLON') }}</label>
+			<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') }}</label>
 			<select name="language" id="language">
 				{% for option in loops.language_options %}
 					<option value="{{ option.LANG_ISO }}"{% if option.S_SELECTED %} selected="selected"{% endif %}>{{ option.LANG_LOCAL_NAME }}</option>
