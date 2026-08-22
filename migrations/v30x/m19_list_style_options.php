@@ -12,11 +12,17 @@ namespace phpbb\boardrules\migrations\v30x;
 
 class m19_list_style_options extends \phpbb\db\migration\migration
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function effectively_installed()
 	{
 		return $this->config['boardrules_list_style'] !== 'disc';
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public static function depends_on()
 	{
 		return array(
@@ -25,6 +31,9 @@ class m19_list_style_options extends \phpbb\db\migration\migration
 		);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function update_data()
 	{
 		return array(
@@ -32,6 +41,9 @@ class m19_list_style_options extends \phpbb\db\migration\migration
 		);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function revert_data()
 	{
 		return array(

@@ -348,7 +348,7 @@ class rule implements rule_interface
 	/**
 	* Check if bbcode is enabled on the message
 	*
-	* @return int
+	* @return int OPTION_FLAG_BBCODE when enabled, otherwise 0
 	* @access public
 	*/
 	public function message_bbcode_enabled()
@@ -385,7 +385,7 @@ class rule implements rule_interface
 	/**
 	* Check if magic_url is enabled on the message
 	*
-	* @return int
+	* @return int OPTION_FLAG_LINKS when enabled, otherwise 0
 	* @access public
 	*/
 	public function message_magic_url_enabled()
@@ -422,7 +422,7 @@ class rule implements rule_interface
 	/**
 	* Check if smilies are enabled on the message
 	*
-	* @return int
+	* @return int OPTION_FLAG_SMILIES when enabled, otherwise 0
 	* @access public
 	*/
 	public function message_smilies_enabled()
