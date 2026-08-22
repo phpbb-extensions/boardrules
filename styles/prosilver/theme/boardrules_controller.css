@@ -10,14 +10,16 @@
 }
 
 .boardrules-list > li > h3 {
+	font-size: 1rem;
 	text-transform: none;
 	border-bottom: none;
 	margin-top: 5px;
 }
 
 .content .boardrules-list {
-	font-size: 120%;
+	font-size: var(--ps-font-small);
 	margin-left: 2rem;
+	line-height: initial;
 }
 
 .rtl .content .boardrules-list {
@@ -96,6 +98,7 @@
 
 .mini-panel h3 {
 	margin: 5px 0 0;
+	font-size: var(--ps-font-small);
 }
 
 .boardrules-menu {
@@ -108,6 +111,7 @@
 	border-bottom: 1px solid #cccccc;
 	margin: 0;
 	padding: 5px 0 4px;
+	font-size: 0.7em;
 }
 
 .boardrules-menu li:last-child {
