@@ -78,6 +78,8 @@ class m15_update_lang_schema extends \phpbb\db\migration\migration
 
 	/**
 	 * Change rule_language values from lang_id to lang_iso
+	 *
+	 * @return void
 	 */
 	public function change_rule_language()
 	{

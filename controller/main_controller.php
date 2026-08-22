@@ -74,6 +74,7 @@ class main_controller implements main_interface
 	*
 	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	* @access public
+	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function display()
 	{
@@ -176,7 +177,7 @@ class main_controller implements main_interface
 		}
 
 		// Assign values to template vars for the rules page
-		$intro_text = (string) $this->ruleset_operator->get_intro_text($display_language);
+		$intro_text = $this->ruleset_operator->get_intro_text($display_language);
 
 		$this->template->assign_vars(array(
 			'S_BOARD_RULES'			=> true,
