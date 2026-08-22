@@ -89,7 +89,7 @@ class boardrules_module
 
 						// Return to stop execution of this script
 						return;
-					break;
+					// no break;
 
 					case 'edit':
 						// Set the page title for our ACP page
@@ -100,7 +100,7 @@ class boardrules_module
 
 						// Return to stop execution of this script
 						return;
-					break;
+					// no break;
 
 					case 'move_down':
 						// Move a rule down one position
@@ -121,7 +121,7 @@ class boardrules_module
 						$this->page_title = 'ACP_BOARDRULES_COPY_RULESET';
 						$admin_controller->copy_ruleset($language, $return_to);
 						return;
-					break;
+					// no break;
 
 					case 'publish':
 						$admin_controller->set_ruleset_published($language, true, $return_to);
@@ -130,6 +130,11 @@ class boardrules_module
 					case 'draft':
 						$admin_controller->set_ruleset_published($language, false, $return_to);
 					break;
+
+					case 'save_intro':
+						$admin_controller->save_ruleset_intro($language);
+						return;
+					// no break;
 				}
 
 				// Check if a language variable was submitted and display

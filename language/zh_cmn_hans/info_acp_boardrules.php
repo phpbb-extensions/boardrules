@@ -49,4 +49,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>已复制论坛章程语言集</strong><br />» %1$s → %2$s（%3$d 条章程）',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>已发布论坛章程语言集</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>已将论坛章程语言集改为草稿</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>已更改论坛章程页面介绍</strong><br />» %s',
 ));

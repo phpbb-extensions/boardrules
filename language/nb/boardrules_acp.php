@@ -64,6 +64,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Behandle regler',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'På denne siden kan du opprette, oppdatere, slette og omorganisere kategorier og regler. En kategori er en gruppe av lignende regler. Hver kategori kan inneholde et ubegrenset antall regler.',
+	'ACP_BOARDRULES_INTRO'					=> 'Introduksjon til regelsiden',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Tilpass introduksjonen som vises til brukere av regelsiden <strong>%s</strong>. La dette feltet stå tomt for å bruke standardintroduksjonen som vises som plassholdertekst.',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Lagre introduksjon',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Introduksjonen til regelsiden ble lagret.',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regelkategori',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',

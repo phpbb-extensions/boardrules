@@ -63,6 +63,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Editeza Reguli',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'De aici poti edita ,adauga si sterge regurile impuse de tine, le poti pune pe categorii ele fiind nelimitate',
+	'ACP_BOARDRULES_INTRO'					=> 'Introducerea paginii cu reguli',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Personalizați introducerea afișată utilizatorilor care consultă pagina de reguli <strong>%s</strong>. Lăsați acest câmp necompletat pentru a utiliza introducerea implicită afișată ca substituent.',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Salvează introducerea',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Introducerea paginii cu reguli a fost salvată.',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Caterorie Regula',
 	'ACP_BOARDRULES_RULE'					=> 'Regula',

@@ -104,6 +104,7 @@ class main_controller_test extends \phpbb_test_case
 			->willReturnCallback(function ($language) use ($language_published) {
 				return $language === 'fr' ? $language_published : true;
 			});
+		$ruleset_operator->method('get_intro_text')->willReturn('Custom <intro> & details');
 
 		// Mock the controller helper and return render response object
 		$controller_helper = $this->getMockBuilder('\phpbb\controller\helper')
@@ -118,6 +119,11 @@ class main_controller_test extends \phpbb_test_case
 		// Mock the template
 		$template = $this->getMockBuilder('\phpbb\template\template')
 			->getMock();
+		$template->expects(self::once())
+			->method('assign_vars')
+			->with(self::callback(function ($vars) {
+				return $vars['BOARDRULES_EXPLAIN'] === 'Custom &lt;intro&gt; &amp; details';
+			}));
 
 		/** @var \phpbb\controller\helper $controller_helper */
 		/** @var \phpbb\boardrules\operators\rule $rule_operator */

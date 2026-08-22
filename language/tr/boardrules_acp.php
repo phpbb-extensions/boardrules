@@ -64,6 +64,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Kuralları yönet',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Bu sayfadan kurallar ve kategoriler ekleyebilir, düzenleyebilir, silebilir ve yeniden sıralayabilirsiniz. Kategori, kurallar ile bağlantılı olan bir gruptur. Her kategori sınırsız sayıda mesaja sahip olabilir.',
+	'ACP_BOARDRULES_INTRO'					=> 'Kurallar sayfası giriş metni',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> '<strong>%s</strong> kurallar sayfasını görüntüleyen kullanıcılara gösterilen giriş metnini özelleştirin. Yer tutucu metin olarak gösterilen varsayılan girişi kullanmak için bu alanı boş bırakın.',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Giriş metnini kaydet',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Kurallar sayfası giriş metni kaydedildi.',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Mesaj Panosu kurallarınız için bir dil seçin. Kullanıcılar, tercih ettikleri dil için oluşturduğunuz kuralları göreceklerdir. Eğer kullanıcıların tercih ettikleri dilde herhangi bir kural oluşturmazsanız, o zaman kullanıcılar mesaj panosunun varsayılan dili kullanılarak oluşturulan kuralları görürler.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Kural kategorisi',
 	'ACP_BOARDRULES_RULE'					=> 'Kural',

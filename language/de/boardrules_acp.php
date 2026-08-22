@@ -64,6 +64,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Regeln verwalten',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'Hier kannst du Kategorien und Regeln hinzufügen, ändern und löschen. Kategorien sind Regelblöcke mit ähnlichen Regeln. Jede Kategorie kann unendlich viele Regeln enthalten.',
+	'ACP_BOARDRULES_INTRO'					=> 'Einleitung der Regelseite',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Passe die Einleitung an, die Benutzern auf der Regelseite <strong>%s</strong> angezeigt wird. Lasse dieses Feld leer, um die als Platzhalter angezeigte Standardeinleitung zu verwenden.',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Einleitung speichern',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Einleitung der Regelseite gespeichert.',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Wählen Sie eine Sprache für Ihre Boardregeln. Die Benutzer sehen die Regeln, die Sie für ihre bevorzugte Sprache erstellen. Wenn Sie keine Regeln in der bevorzugten Sprache erstellen, sehen die Benutzer die Regeln, die in der Standardsprache des Forums erstellt wurden.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regel-Kategorie',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',

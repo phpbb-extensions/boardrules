@@ -50,4 +50,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>تم نسخ مجموعة قوانين المنتدى للغة</strong><br />» %1$s → %2$s (%3$d قانون)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>تم نشر مجموعة قوانين المنتدى للغة</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>تم تحويل مجموعة قوانين المنتدى للغة إلى مسودة</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>تم تغيير مقدمة صفحة قوانين المنتدى</strong><br />» %s',
 ));

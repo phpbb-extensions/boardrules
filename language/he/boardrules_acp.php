@@ -63,6 +63,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'נהל חוקים',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> 'בעמוד זה אתה יכול לשנות חוקים וקטגוריות. קטגוריה היא אוסף של חוקים קשורים. בכל קטגוריה יכול להיות מספר לא מוגבל של חוקים.',
+	'ACP_BOARDRULES_INTRO'					=> 'מבוא לדף החוקים',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'התאם את המבוא המוצג למשתמשים הצופים בדף החוקים <strong>%s</strong>. השאר שדה זה ריק כדי להשתמש במבוא ברירת המחדל המוצג כטקסט מציין מקום.',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> 'שמור מבוא',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> 'המבוא לדף החוקים נשמר.',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'קטגורית חוקים',
 	'ACP_BOARDRULES_RULE'					=> 'חוק',

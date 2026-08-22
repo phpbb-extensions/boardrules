@@ -50,4 +50,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Taalregelset voor forumregels gekopieerd</strong><br />» %1$s → %2$s (%3$d regels)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Taalregelset voor forumregels gepubliceerd</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Taalregelset voor forumregels gewijzigd naar concept</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Inleiding van de regelspagina gewijzigd</strong><br />» %s',
 ));

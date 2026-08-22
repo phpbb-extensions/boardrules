@@ -178,6 +178,20 @@ class boardrules_module_test extends \phpbb_test_case
 		$this->executeModeAndAssert('manage', self::TEMPLATE_MANAGE, 'ACP_BOARDRULES_COPY_RULESET');
 	}
 
+	public function test_manage_mode_save_intro_action(): void
+	{
+		$this->setupLanguageExpectation();
+		$this->setupManageRequestVariables('save_intro', 'fr', 0, 0);
+
+		$this->admin_controller->expects($this->once())
+			->method('save_ruleset_intro')
+			->with('fr');
+		$this->admin_controller->expects($this->never())
+			->method('display_rules');
+
+		$this->executeModeAndAssert('manage', self::TEMPLATE_MANAGE, 'ACP_BOARDRULES_MANAGE');
+	}
+
 	/**
 	 * @dataProvider ruleset_status_data
 	 */
