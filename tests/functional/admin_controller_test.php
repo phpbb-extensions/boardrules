@@ -71,7 +71,7 @@ class admin_controller_test extends boardrules_functional_base
 			$this->db->sql_freeresult($result);
 
 			$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&sid={$this->sid}");
-			self::assertSame($intro_text, $crawler->filter('#boardrules_intro_text')->text());
+			self::assertSame($intro_text, $crawler->filter('#boardrules_intro_text')->text(null, false));
 
 		}
 		finally

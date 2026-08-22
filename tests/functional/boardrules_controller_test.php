@@ -49,7 +49,7 @@ class boardrules_controller_test extends boardrules_functional_base
 			$this->db->sql_query($sql);
 			$this->purge_cache();
 
-			$crawler = self::request('GET', 'app.php/rules');
+			$crawler = self::request('GET', 'index.php/rules');
 			$intro = $crawler->filter('#main p')->first();
 			self::assertCount(1, $intro);
 			self::assertStringContainsString('Welcome to our community.', $intro->text());

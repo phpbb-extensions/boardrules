@@ -91,9 +91,9 @@ class admin_controller_test extends \phpbb_database_test_case
 		$phpbb_dispatcher = new \phpbb_mock_event_dispatcher();
 		$cache = new \phpbb_mock_cache();
 		$request = new \phpbb_mock_request();
-		$request->overwrite('SCRIPT_NAME', '/app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('SCRIPT_FILENAME', 'app.php', \phpbb\request\request_interface::SERVER);
-		$request->overwrite('REQUEST_URI', '/app.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('SCRIPT_NAME', '/index.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('SCRIPT_FILENAME', 'index.php', \phpbb\request\request_interface::SERVER);
+		$request->overwrite('REQUEST_URI', '/index.php', \phpbb\request\request_interface::SERVER);
 		$phpbb_path_helper = $this->getMockBuilder(\phpbb\path_helper::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -424,7 +424,7 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
 			->disableOriginalConstructor()
-			->setMethods(array('get_languages', 'copy'))
+			->onlyMethods(array('get_languages', 'copy'))
 			->getMock();
 		$ruleset_operator->method('get_languages')->willReturn(array(
 			array('lang_iso' => 'en', 'lang_local_name' => 'English', 'rule_count' => 3),
@@ -767,7 +767,6 @@ class admin_controller_test extends \phpbb_database_test_case
 	protected function replace_controller_service($property, $value): void
 	{
 		$reflection = new \ReflectionProperty($this->controller, $property);
-		$reflection->setAccessible(true);
 		$reflection->setValue($this->controller, $value);
 	}
 
