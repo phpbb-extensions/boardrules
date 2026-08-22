@@ -12,11 +12,17 @@ namespace phpbb\boardrules\migrations\v30x;
 
 class m18_ruleset_status extends \phpbb\db\migration\migration
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function effectively_installed()
 	{
 		return $this->db_tools->sql_table_exists($this->table_prefix . 'boardrules_rulesets');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public static function depends_on()
 	{
 		return array(
@@ -25,6 +31,9 @@ class m18_ruleset_status extends \phpbb\db\migration\migration
 		);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function update_schema()
 	{
 		return array(
@@ -41,6 +50,9 @@ class m18_ruleset_status extends \phpbb\db\migration\migration
 		);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function revert_schema()
 	{
 		return array(

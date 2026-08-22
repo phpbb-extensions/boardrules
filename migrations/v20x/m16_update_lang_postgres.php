@@ -52,6 +52,7 @@ class m16_update_lang_postgres extends \phpbb\db\migration\migration
 	 * To work around this, we re-create a new rule_language column with
 	 * the new data type and copy the new data to it via specific queries.
 	 *
+	 * @return void
 	 * @throws \RuntimeException
 	 */
 	public function alter_rule_language()

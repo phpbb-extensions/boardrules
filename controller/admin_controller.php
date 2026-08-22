@@ -239,6 +239,7 @@ class admin_controller implements admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
+	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function display_rules($language, $parent_id = 0)
 	{
@@ -295,7 +296,7 @@ class admin_controller implements admin_interface
 			$this->template->assign_block_vars('breadcrumb', array(
 				'RULE_TITLE'		=> $entity->get_title(),
 
-				'S_CURRENT_LEVEL'	=> $entity->get_id() == $parent_id,
+				'S_CURRENT_LEVEL'	=> $entity->get_id() === (int) $parent_id,
 
 				'U_RULE'			=> "{$this->u_action}&amp;language={$language}&amp;parent_id=" . $entity->get_id(),
 			));
@@ -405,7 +406,7 @@ class admin_controller implements admin_interface
 			{
 				$copy_result = $this->ruleset_operator->copy($source_language, $target_language);
 			}
-			catch (\InvalidArgumentException | \RuntimeException $e)
+			catch (\Exception $e)
 			{
 				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($return_url), E_USER_WARNING);
 			}
@@ -508,6 +509,7 @@ class admin_controller implements admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
+	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function add_rule($language, $parent_id = 0)
 	{
@@ -548,6 +550,7 @@ class admin_controller implements admin_interface
 	* @param int $rule_id The rule identifier to edit
 	* @return void
 	* @access public
+	* @throws \phpbb\boardrules\exception\base If the rule does not exist or stored rule data is invalid
 	*/
 	public function edit_rule($rule_id)
 	{
@@ -590,6 +593,7 @@ class admin_controller implements admin_interface
 	* @param array $data The form data to be processed
 	* @return void
 	* @access protected
+	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	protected function add_edit_rule_data($entity, $data)
 	{
@@ -686,7 +690,7 @@ class admin_controller implements admin_interface
 				}
 
 				// Change rule parent
-				if (isset($data['rule_parent_id']) && ($data['rule_parent_id'] != $entity->get_parent_id()))
+				if (isset($data['rule_parent_id']) && ($entity->get_parent_id() !== (int) $data['rule_parent_id']))
 				{
 					try
 					{
@@ -765,6 +769,7 @@ class admin_controller implements admin_interface
 	* @param int $rule_id The rule identifier to delete
 	* @return void
 	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds If the rule does not exist
 	*/
 	public function delete_rule($rule_id)
 	{
@@ -813,6 +818,7 @@ class admin_controller implements admin_interface
 	* @param int $amount The number of places to move the rule
 	* @return void
 	* @access public
+	* @throws \phpbb\boardrules\exception\out_of_bounds If the rule does not exist after moving
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1)
 	{
@@ -955,13 +961,14 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Build pull down menu options of available rule parents
-	*
-	* @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
-	* @param int $parent_id Category to display rules from; default: 0
-	* @return void
-	* @access protected
-	*/
+	 * Build pull down menu options of available rule parents
+	 *
+	 * @param \phpbb\boardrules\entity\rule_interface $entity The rule entity object
+	 * @param int $parent_id Category to display rules from; default: 0
+	 * @return void
+	 * @access protected
+	 * @throws \phpbb\boardrules\exception\base If stored rule data is invalid
+	 */
 	protected function build_parent_select_menu($entity, $parent_id = 0)
 	{
 		// Prepare rule pull-down field
@@ -992,8 +999,8 @@ class admin_controller implements admin_interface
 				'RULE_ID'			=> $rule_menu_item->get_id(),
 				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
-				'S_DISABLED'		=> ($rule_menu_item->get_left_id() > $entity->get_left_id() && $rule_menu_item->get_right_id() < $entity->get_right_id()) || $rule_menu_item->get_id() == $entity->get_id(),
-				'S_RULE_PARENT'		=> $rule_menu_item->get_id() == $parent_id,
+				'S_DISABLED'		=> ($rule_menu_item->get_left_id() > $entity->get_left_id() && $rule_menu_item->get_right_id() < $entity->get_right_id()) || $rule_menu_item->get_id() === $entity->get_id(),
+				'S_RULE_PARENT'		=> $rule_menu_item->get_id() === (int) $parent_id,
 			));
 		}
 	}

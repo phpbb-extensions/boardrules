@@ -56,6 +56,7 @@ class helper
 	 *
 	 * @param string $new_column Name of the column to be updated
 	 * @param string $old_column Name of the column with old data
+	 * @return void
 	 */
 	public function change_rule_language($new_column, $old_column)
 	{

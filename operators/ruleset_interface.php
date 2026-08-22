@@ -25,7 +25,9 @@ interface ruleset_interface
 	 * @param string $source_language
 	 * @param string $target_language
 	 * @return array Copy result containing rule and renamed-anchor counts
-	 * @throws \Exception
+	 * @throws \InvalidArgumentException If either language is invalid or source ruleset is empty
+	 * @throws \RuntimeException If nested-set lock cannot be acquired
+	 * @throws \Exception If ruleset persistence fails
 	 */
 	public function copy($source_language, $target_language);
 
@@ -55,6 +57,7 @@ interface ruleset_interface
 	 * @param string $language
 	 * @param string $intro_text
 	 * @return void
+	 * @throws \InvalidArgumentException If the language is not installed
 	 */
 	public function set_intro_text($language, $intro_text);
 
@@ -64,6 +67,7 @@ interface ruleset_interface
 	 * @param string $language
 	 * @param bool $published
 	 * @return void
+	 * @throws \InvalidArgumentException If the language is not installed or its ruleset is empty
 	 */
 	public function set_published($language, $published);
 }

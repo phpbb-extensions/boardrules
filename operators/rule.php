@@ -50,8 +50,9 @@ class rule implements rule_interface
 	*
 	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from; default: 0
-	* @return array Array of rule data entities
+	* @return \phpbb\boardrules\entity\rule_interface[] Rule entities
 	* @access public
+	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function get_rules($language, $parent_id = 0)
 	{
@@ -81,6 +82,7 @@ class rule implements rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function add_rule($entity, $language, $parent_id = 0)
@@ -122,6 +124,7 @@ class rule implements rule_interface
 	* @param int $rule_id The rule identifier to delete
 	* @return void
 	* @access public
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function delete_rule($rule_id)
@@ -147,6 +150,7 @@ class rule implements rule_interface
 	* @param int $amount The number of places to move the rule
 	* @return void
 	* @access public
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function move($rule_id, $direction = 'up', $amount = 1)
@@ -172,6 +176,7 @@ class rule implements rule_interface
 	* @param int $new_parent_id The new rule parent identifier
 	* @return void
 	* @access public
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function change_parent($rule_id, $new_parent_id)
@@ -197,8 +202,9 @@ class rule implements rule_interface
 	*
 	* @param string $language Language selection iso
 	* @param int $parent_id Category to display rules from
-	* @return array Array of rule data for a rule's parent rules
+	* @return \phpbb\boardrules\entity\rule_interface[] Parent rule entities
 	* @access public
+	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function get_rule_parents($language, $parent_id)
 	{

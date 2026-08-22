@@ -420,6 +420,28 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->copy_ruleset('fr');
 	}
 
+	public function test_copy_ruleset_handles_general_operator_exception(): void
+	{
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->setMethods(array('get_languages', 'copy'))
+			->getMock();
+		$ruleset_operator->method('get_languages')->willReturn(array(
+			array('lang_iso' => 'en', 'lang_local_name' => 'English', 'rule_count' => 3),
+			array('lang_iso' => 'fr', 'lang_local_name' => 'Français', 'rule_count' => 0),
+		));
+		$ruleset_operator->expects(self::once())
+			->method('copy')
+			->with('en', 'fr')
+			->willThrowException(new \Exception('ACP_BOARDRULES_COPY_FAILED'));
+		$this->replace_controller_service('ruleset_operator', $ruleset_operator);
+		$this->post['submit'] = true;
+		$this->variables['source_language'] = 'en';
+		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_COPY_FAILED');
+
+		$this->controller->copy_ruleset('fr');
+	}
+
 	public function test_copy_ruleset_rejects_invalid_form(): void
 	{
 		admin_test_state::$valid_form = false;

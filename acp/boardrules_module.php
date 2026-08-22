@@ -12,8 +12,13 @@ namespace phpbb\boardrules\acp;
 
 class boardrules_module
 {
+	/** @var string */
 	public $page_title;
+
+	/** @var string */
 	public $tpl_name;
+
+	/** @var string */
 	public $u_action;
 
 	/**
@@ -21,6 +26,7 @@ class boardrules_module
 	 *
 	 * @param int $id
 	 * @param string $mode
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function main($id, $mode)

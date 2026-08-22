@@ -12,6 +12,11 @@ namespace phpbb\boardrules\acp;
 
 class boardrules_info
 {
+	/**
+	 * Return ACP module configuration.
+	 *
+	 * @return array
+	 */
 	public function module()
 	{
 		return array(

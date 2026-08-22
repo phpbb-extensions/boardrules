@@ -70,11 +70,13 @@ class listener_test extends \phpbb_test_case
 				{
 					return array('_route' => 'phpbb_boardrules_main_controller');
 				}
-				else if ($path === '/runtime-error')
+
+				if ($path === '/runtime-error')
 				{
 					throw new \RuntimeException('Unable to match route.');
 				}
-				else if ($path === '/missing-route-name')
+
+				if ($path === '/missing-route-name')
 				{
 					return array();
 				}

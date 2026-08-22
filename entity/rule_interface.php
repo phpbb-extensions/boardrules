@@ -120,7 +120,7 @@ interface rule_interface
 	/**
 	* Check if bbcode is enabled on the message
 	*
-	* @return bool
+	* @return int OPTION_FLAG_BBCODE when enabled, otherwise 0
 	* @access public
 	*/
 	public function message_bbcode_enabled();
@@ -144,7 +144,7 @@ interface rule_interface
 	/**
 	* Check if magic_url is enabled on the message
 	*
-	* @return bool
+	* @return int OPTION_FLAG_LINKS when enabled, otherwise 0
 	* @access public
 	*/
 	public function message_magic_url_enabled();
@@ -168,7 +168,7 @@ interface rule_interface
 	/**
 	* Check if smilies are enabled on the message
 	*
-	* @return bool
+	* @return int OPTION_FLAG_SMILIES when enabled, otherwise 0
 	* @access public
 	*/
 	public function message_smilies_enabled();
@@ -221,6 +221,7 @@ interface rule_interface
 	 * @param string $language language iso
 	 * @return rule_interface $this object for chaining calls; load()->set()->save()
 	 * @access public
+	 * @throws \phpbb\boardrules\exception\unexpected_value If the language is not installed
 	 */
 	public function set_language($language);
 
