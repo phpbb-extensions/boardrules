@@ -41,6 +41,9 @@ class rule_operator_add_rule_test extends rule_operator_base
 		$test_id = 6;
 		$language = 'en';
 		$parent_id = 1; // using 1 allows us to test the nestability
+		$this->ruleset_operator->expects(self::once())
+			->method('draft_if_empty')
+			->with($language);
 
 		// Setup the operator class
 		$operator = $this->get_rule_operator();
@@ -73,6 +76,7 @@ class rule_operator_add_rule_test extends rule_operator_base
 
 		$competing_lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
 		self::assertTrue($competing_lock->acquire());
+		$this->ruleset_operator->expects(self::never())->method('draft_if_empty');
 
 		try
 		{

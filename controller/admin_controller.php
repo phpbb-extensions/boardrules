@@ -712,13 +712,13 @@ class admin_controller implements admin_interface
 				{
 					$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
 				}
+				catch (\InvalidArgumentException|\RuntimeException $e)
+				{
+					trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+				}
 				catch (\phpbb\boardrules\exception\out_of_bounds $e)
 				{
 					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
-				}
-				catch (\RuntimeException $e)
-				{
-					trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
 				// Show user confirmation of the added rule and provide link back to the previous page

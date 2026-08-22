@@ -42,6 +42,15 @@ interface ruleset_interface
 	public function is_published($language);
 
 	/**
+	 * Ensure an empty ruleset starts in draft before its first rule is added.
+	 *
+	 * @param string $language
+	 * @return bool True when draft state was saved
+	 * @throws \InvalidArgumentException If the language is not installed
+	 */
+	public function draft_if_empty($language);
+
+	/**
 	 * Get the custom introduction for a language ruleset.
 	 *
 	 * An empty value means the translated language string should be used.

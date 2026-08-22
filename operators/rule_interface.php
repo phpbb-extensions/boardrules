@@ -36,6 +36,7 @@ interface rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
+	* @throws \InvalidArgumentException If the language is not installed
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds If the entity was already inserted
 	*/

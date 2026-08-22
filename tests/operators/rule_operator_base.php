@@ -37,6 +37,9 @@ class rule_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\boardrules\operators\nestedset_rules */
 	protected $nestedset_rules;
 
+	/** @var \PHPUnit\Framework\MockObject\MockObject|\phpbb\boardrules\operators\ruleset_interface */
+	protected $ruleset_operator;
+
 	/** @var \phpbb\lock\db */
 	protected $lock;
 
@@ -68,6 +71,7 @@ class rule_operator_base extends \phpbb_database_test_case
 
 		$this->lock = new \phpbb\lock\db('nestedset_rules_lock', $this->config, $this->db);
 		$this->nestedset_rules = new \phpbb\boardrules\operators\nestedset_rules($this->db, $this->lock, 'phpbb_boardrules');
+		$this->ruleset_operator = $this->createMock(\phpbb\boardrules\operators\ruleset_interface::class);
 	}
 
 	/**
@@ -77,6 +81,6 @@ class rule_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_rule_operator()
 	{
-		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules, $this->lock);
+		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules, $this->ruleset_operator, $this->lock);
 	}
 }

@@ -197,6 +197,26 @@ class ruleset implements ruleset_interface
 	/**
 	 * {@inheritdoc}
 	 */
+	public function draft_if_empty($language)
+	{
+		if (!$this->language_exists($language))
+		{
+			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
+		}
+
+		if ($this->get_rule_count($language) > 0)
+		{
+			return false;
+		}
+
+		$this->save_published_state($language, false);
+
+		return true;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function get_intro_text($language)
 	{
 		$sql = 'SELECT rules_intro_text

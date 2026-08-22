@@ -124,13 +124,13 @@ class admin_controller_test extends \phpbb_database_test_case
 
 		$lock = new \phpbb\lock\db('boardrules.table_lock.boardrules_table', $this->config, $this->db);
 		$nestedset = new \phpbb\boardrules\operators\nestedset_rules($this->db, $lock, 'phpbb_boardrules');
-		$this->rule_operator = new \phpbb\boardrules\operators\rule($container, $nestedset, $lock);
 		$this->ruleset_operator = new \phpbb\boardrules\operators\ruleset(
 			$this->db,
 			$lock,
 			'phpbb_boardrules',
 			'phpbb_boardrules_rulesets'
 		);
+		$this->rule_operator = new \phpbb\boardrules\operators\rule($container, $nestedset, $this->ruleset_operator, $lock);
 
 		$this->request = $this->createMock(\phpbb\request\request::class);
 		$this->request->method('variable')

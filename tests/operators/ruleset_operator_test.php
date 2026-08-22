@@ -92,6 +92,23 @@ class ruleset_operator_test extends \phpbb_database_test_case
 		self::assertCount(count($bounds), array_unique($bounds));
 	}
 
+	public function test_empty_ruleset_is_forced_to_draft_before_first_rule(): void
+	{
+		self::assertTrue($this->operator->draft_if_empty('fr'));
+		self::assertFalse($this->operator->is_published('fr'));
+
+		$this->operator->set_published('en', true);
+		self::assertFalse($this->operator->draft_if_empty('en'));
+		self::assertTrue($this->operator->is_published('en'));
+	}
+
+	public function test_unknown_ruleset_cannot_be_prepared_for_first_rule(): void
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('ACP_BOARDRULES_INVALID_LANGUAGE');
+		$this->operator->draft_if_empty('xx');
+	}
+
 	public function test_copy_appends_to_non_empty_target(): void
 	{
 		$this->operator->copy('en', 'fr');
