@@ -63,6 +63,14 @@ interface admin_interface
 	public function display_rules($language, $parent_id = 0);
 
 	/**
+	 * Save a language ruleset's custom introduction.
+	 *
+	 * @param string $language
+	 * @return void
+	 */
+	public function save_ruleset_intro($language);
+
+	/**
 	* Add a rule
 	*
 	* @param string $language Language selection iso

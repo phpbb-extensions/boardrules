@@ -8,6 +8,7 @@ class admin_test_state
 	public static $confirm = true;
 	public static $valid_link_hash = true;
 	public static $form_keys = array();
+	public static $form_key_suffixes = array();
 	public static $confirmations = array();
 	public static $redirects = array();
 	public static $custom_bbcodes_displayed = 0;
@@ -18,15 +19,17 @@ class admin_test_state
 		self::$confirm = true;
 		self::$valid_link_hash = true;
 		self::$form_keys = array();
+		self::$form_key_suffixes = array();
 		self::$confirmations = array();
 		self::$redirects = array();
 		self::$custom_bbcodes_displayed = 0;
 	}
 }
 
-function add_form_key($name)
+function add_form_key($name, $template_variable_suffix = '')
 {
 	admin_test_state::$form_keys[] = $name;
+	admin_test_state::$form_key_suffixes[$name] = $template_variable_suffix;
 }
 
 function check_form_key($name)

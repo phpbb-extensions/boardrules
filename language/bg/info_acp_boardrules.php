@@ -49,4 +49,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Копиран езиков набор от правила на форума</strong><br />» %1$s → %2$s (%3$d правила)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Публикуван езиков набор от правила на форума</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Езиковият набор от правила на форума е променен на чернова</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Променено въведение на страницата с правила</strong><br />» %s',
 ));

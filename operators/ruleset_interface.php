@@ -40,6 +40,25 @@ interface ruleset_interface
 	public function is_published($language);
 
 	/**
+	 * Get the custom introduction for a language ruleset.
+	 *
+	 * An empty value means the translated language string should be used.
+	 *
+	 * @param string $language
+	 * @return string
+	 */
+	public function get_intro_text($language);
+
+	/**
+	 * Set the custom introduction for a language ruleset.
+	 *
+	 * @param string $language
+	 * @param string $intro_text
+	 * @return void
+	 */
+	public function set_intro_text($language, $intro_text);
+
+	/**
 	 * Set publication state for a populated language ruleset.
 	 *
 	 * @param string $language

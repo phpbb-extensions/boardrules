@@ -63,6 +63,10 @@ $lang = array_merge($lang, array(
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> '管理章程',
 	'ACP_BOARDRULES_MANAGE_EXPLAIN'			=> '在此页，您可以增加，编辑，删除或重新排序分类和章程。一个分类包含一组章程。分类内可以包含无限条章程。',
+	'ACP_BOARDRULES_INTRO'					=> '章程页面介绍',
+	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> '自定义向查看 <strong>%s</strong> 章程页面的用户显示的介绍。留空此字段可使用占位文本中显示的默认介绍。',
+	'ACP_BOARDRULES_INTRO_SAVE'				=> '保存介绍',
+	'ACP_BOARDRULES_INTRO_SAVED'			=> '章程页面介绍已保存。',
 	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> '给你的论坛章程选择一个语言。用户会看到您用他们的首选语言所创建的论坛章程。如果您没有用他们的首选语言创建论坛章程，那么他们看到的就是以论坛的默认语言写的章程。',
 	'ACP_BOARDRULES_CATEGORY'				=> '章程分类',
 	'ACP_BOARDRULES_RULE'					=> '章程',

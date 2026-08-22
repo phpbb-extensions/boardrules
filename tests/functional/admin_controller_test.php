@@ -39,6 +39,48 @@ class admin_controller_test extends boardrules_functional_base
 	}
 
 	/**
+	 * Test the per-language rules page introduction editor and public output.
+	 */
+	public function test_acp_ruleset_intro()
+	{
+		$this->login();
+		$this->admin_login();
+		$this->get_db();
+
+		$intro_text = "Welcome to our community. 👋 مرحبًا こんにちは\n<strong>This is plain text.</strong>";
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&sid={$this->sid}");
+		$form_node = $crawler->filter('#boardrules_intro_form');
+		self::assertCount(1, $form_node);
+		self::assertSame('true', $form_node->attr('data-ajax'));
+		self::assertNotSame('', $form_node->filter('#boardrules_intro_text')->attr('placeholder'));
+		self::assertNotSame(
+			$form_node->filter('input[name="form_token"]')->attr('value'),
+			$crawler->filter('#rules input[name="form_token"]')->attr('value')
+		);
+
+		try
+		{
+			$form = $form_node->selectButton($this->lang('ACP_BOARDRULES_INTRO_SAVE'))->form(array(
+				'boardrules_intro_text' => $intro_text,
+			));
+			$crawler = self::submit($form);
+			$this->assertContainsLang('ACP_BOARDRULES_INTRO_SAVED', $crawler->text());
+
+			$result = $this->db->sql_query("SELECT rules_intro_text FROM phpbb_boardrules_rulesets WHERE language_iso = 'en'");
+			self::assertSame(utf8_encode_ncr($intro_text), $this->db->sql_fetchfield('rules_intro_text'));
+			$this->db->sql_freeresult($result);
+
+			$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&sid={$this->sid}");
+			self::assertSame($intro_text, $crawler->filter('#boardrules_intro_text')->text());
+
+		}
+		finally
+		{
+			$this->db->sql_query("UPDATE phpbb_boardrules_rulesets SET rules_intro_text = '' WHERE language_iso = 'en'");
+		}
+	}
+
+	/**
 	 * Test Board Rules ACP Create Rule
 	 * @param $crawler \Symfony\Component\DomCrawler\Crawler
 	 *

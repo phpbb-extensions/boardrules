@@ -197,6 +197,34 @@ class ruleset implements ruleset_interface
 	/**
 	 * {@inheritdoc}
 	 */
+	public function get_intro_text($language)
+	{
+		$sql = 'SELECT rules_intro_text
+			FROM ' . $this->rulesets_table . "
+			WHERE language_iso = '" . $this->db->sql_escape($language) . "'";
+		$result = $this->db->sql_query_limit($sql, 1);
+		$intro_text = $this->db->sql_fetchfield('rules_intro_text');
+		$this->db->sql_freeresult($result);
+
+		return $intro_text === false ? '' : utf8_decode_ncr((string) $intro_text);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function set_intro_text($language, $intro_text)
+	{
+		if (!$this->language_exists($language))
+		{
+			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
+		}
+
+		$this->save_ruleset_value($language, 'rules_intro_text', utf8_encode_ncr((string) $intro_text));
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function set_published($language, $published)
 	{
 		if (!$this->language_exists($language))
@@ -335,6 +363,19 @@ class ruleset implements ruleset_interface
 	 */
 	protected function save_published_state($language, $published)
 	{
+		$this->save_ruleset_value($language, 'rules_published', (int) $published);
+	}
+
+	/**
+	 * Save one language-level ruleset value without changing the others.
+	 *
+	 * @param string $language
+	 * @param string $column
+	 * @param mixed $value
+	 * @return void
+	 */
+	protected function save_ruleset_value($language, $column, $value)
+	{
 		$sql = 'SELECT language_iso
 			FROM ' . $this->rulesets_table . "
 			WHERE language_iso = '" . $this->db->sql_escape($language) . "'";
@@ -342,19 +383,20 @@ class ruleset implements ruleset_interface
 		$exists = (bool) $this->db->sql_fetchfield('language_iso');
 		$this->db->sql_freeresult($result);
 
-		$sql_data = array(
-			'language_iso' => $language,
-			'rules_published' => (int) $published,
-		);
-
 		if ($exists)
 		{
 			$sql = 'UPDATE ' . $this->rulesets_table . '
-				SET ' . $this->db->sql_build_array('UPDATE', array('rules_published' => (int) $published)) . "
+				SET ' . $this->db->sql_build_array('UPDATE', array($column => $value)) . "
 				WHERE language_iso = '" . $this->db->sql_escape($language) . "'";
 		}
 		else
 		{
+			$sql_data = array(
+				'language_iso' => $language,
+				'rules_published' => 1,
+				'rules_intro_text' => '',
+			);
+			$sql_data[$column] = $value;
 			$sql = 'INSERT INTO ' . $this->rulesets_table . ' ' . $this->db->sql_build_array('INSERT', $sql_data);
 		}
 

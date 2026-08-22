@@ -50,4 +50,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Sprachregelsatz der Board-Regeln kopiert</strong><br />» %1$s → %2$s (%3$d Regeln)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Sprachregelsatz der Board-Regeln veröffentlicht</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Sprachregelsatz der Board-Regeln auf Entwurf gesetzt</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Einleitung der Regelseite geändert</strong><br />» %s',
 ));

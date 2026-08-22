@@ -50,4 +50,5 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_LOG'		=> '<strong>Mesaj panosu kuralları dil kümesi kopyalandı</strong><br />» %1$s → %2$s (%3$d kural)',
 	'ACP_BOARDRULES_PUBLISH_LOG'	=> '<strong>Mesaj panosu kuralları dil kümesi yayınlandı</strong><br />» %s',
 	'ACP_BOARDRULES_DRAFT_LOG'		=> '<strong>Mesaj panosu kuralları dil kümesi taslak olarak değiştirildi</strong><br />» %s',
+	'ACP_BOARDRULES_INTRO_LOG'		=> '<strong>Kurallar sayfası giriş metni değiştirildi</strong><br />» %s',
 ));

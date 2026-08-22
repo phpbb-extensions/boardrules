@@ -5,8 +5,9 @@
 
 <form id="language_form" method="post" action="{{ U_LANGUAGE_ACTION }}">
 	<fieldset class="boardrules-language-toolbar">
+		<legend>{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') }}</legend>
 		<div class="boardrules-language-picker">
-			<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') ~ lang('COLON') }}</label>
+			<label for="language">{{ lang('ACP_BOARDRULES_SELECT_LANGUAGE') }}</label>
 			<select name="language" id="language">
 				{% for option in loops.language_options %}
 					<option value="{{ option.LANG_ISO }}"{% if option.S_SELECTED %} selected="selected"{% endif %}>{{ option.LANG_LOCAL_NAME }}</option>
@@ -19,6 +20,28 @@
 		</div>
 	</fieldset>
 </form>
+
+{% if S_RULESET_ROOT %}
+	<form id="boardrules_intro_form" method="post" action="{{ U_INTRO_ACTION }}" data-ajax="true">
+		<fieldset>
+			<legend>{{ lang('ACP_BOARDRULES_INTRO') }}</legend>
+			<dl>
+				<dt>
+					<label for="boardrules_intro_text">{{ lang('ACP_BOARDRULES_INTRO') ~ lang('COLON') }}</label><br>
+					<span>{{ lang('ACP_BOARDRULES_INTRO_EXPLAIN', CURRENT_LANGUAGE) }}</span>
+				</dt>
+				<dd>
+					<textarea id="boardrules_intro_text" name="boardrules_intro_text" rows="4" cols="60" placeholder="{{ BOARDRULES_INTRO_FALLBACK|e('html_attr') }}">{{ BOARDRULES_INTRO_TEXT|e('html') }}</textarea>
+				</dd>
+			</dl>
+			<p class="quick">
+				<input type="submit" name="submit_intro" class="button1" value="{{ lang('ACP_BOARDRULES_INTRO_SAVE') }}">
+				<input type="reset" class="button2" value="{{ lang('RESET') }}">
+			</p>
+			{{ S_FORM_TOKEN_INTRO }}
+		</fieldset>
+	</form>
+{% endif %}
 
 {% if S_CAN_COPY_RULESET or S_RULESET_DRAFT or S_CAN_DRAFT_RULESET %}
 	<p class="boardrules-action-bar">
@@ -103,6 +126,6 @@
 		</label>
 		<input type="submit" name="addrule" class="button2" value="{{ lang('SUBMIT') }}">
 		<input type="hidden" name="action" value="add">
-		{{ S_FORM_TOKEN }}
+		{{ S_FORM_TOKEN_ADD_RULE }}
 	</fieldset>
 </form>
