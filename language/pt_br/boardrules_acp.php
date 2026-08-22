@@ -54,12 +54,12 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Enviar uma notificação a todos os usuários registrados que as regras da comunidade foram atualizadas. (Esta ação pode demorar alguns segundos para ser concluída em fóruns com muitos membros.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Tem certeza que deseja enviar notificações a todos os usuários?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'A configuração das regras do fórum foi alterada.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Estilo da lista de regras',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Escolha como identificar as regras e categorias. A lista ordenada alterna entre números, letras e algarismos romanos. A lista não ordenada alterna entre disco, círculo e quadrado. A numeração composta mostra o caminho numérico completo.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Não ordenada (disco, círculo, quadrado)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Numeração composta (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Nenhum',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Gerenciar regras',
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Personalize a introdução exibida aos usuários que acessam a página de regras <strong>%s</strong>. Deixe este campo vazio para usar a introdução padrão exibida como texto de exemplo.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Salvar introdução',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'A introdução da página de regras foi salva.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Escolha o idioma das regras. Os usuários verão as regras no idioma preferido ou no idioma padrão do fórum quando não houver regras em seu idioma.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Categoria de regras',
 	'ACP_BOARDRULES_RULE'					=> 'Regra',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Escolha um idioma',

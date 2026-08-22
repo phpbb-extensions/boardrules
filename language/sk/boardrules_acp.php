@@ -44,21 +44,21 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Táto stránka obsahuje hlavné nastavenia pravidiel fóra.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Povoliť pravidlá fóra',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Zobraziť odkaz na pravidlá v hlavičke fóra',
-	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
-	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Ikona odkazu na pravidlá',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Zadajte názov ikony <strong><a href="%s" target="_blank">Font Awesome</a></strong> pre odkaz na pravidlá v hlavičke. Ak nechcete ikonu, nechajte pole prázdne.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Ikona odkazu na pravidlá obsahovala neplatné znaky.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Vyžadovať schválenie pravidiel pri registrácii na fórum',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Toto nastavenie pridá do podmienok použitia fóra vetu, ktorá novo registrovaných užívateľov zaväzuje prečítať si pravidlá fóra.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Upozorniť užívateľa',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Všetkým registrovaným užívateľom poslať informáciu o zmene v pravidlách. (To môže trvať niekoľko sekúnd v závislosti od počtu registrovaných užívateľov)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Naozaj chceš poslať oznámenie všetkým užívateľom fóra?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Nastavenia pravidiel fóra boli zmenené.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Štýl zoznamu pravidiel',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Vyberte spôsob označenia pravidiel a kategórií. Zoradený zoznam strieda čísla, písmená a rímske číslice. Nezoradený zoznam strieda plný kruh, kružnicu a štvorec. Zložené číslovanie zobrazuje úplnú číselnú cestu.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Nezoradený (kruh, kružnica, štvorec)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Zložené číslovanie (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Žiadny',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Spravovať pravidlá',
@@ -67,7 +67,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Upravte úvod zobrazený používateľom stránky pravidiel <strong>%s</strong>. Ponechajte toto pole prázdne, ak chcete použiť predvolený úvod zobrazený ako zástupný text.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Uložiť úvod',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Úvod stránky s pravidlami bol uložený.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Vyberte jazyk pravidiel. Používatelia uvidia pravidlá v preferovanom jazyku alebo v predvolenom jazyku fóra, ak preklad neexistuje.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Kategória pravidiel',
 	'ACP_BOARDRULES_RULE'					=> 'Pravidlo',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Vyberte jazyk pravidiel',
@@ -139,7 +139,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Pravidlám rady sa nepodarilo získať zámok tabuľky. Ďalším procesom môže byť držanie zámku. Zámky sa násilne uvoľnia po uplynutí 1 hodiny.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Požadované pravidlo neexistuje.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Požadované pravidlo nemá rodiča.',
 ));

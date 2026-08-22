@@ -42,6 +42,6 @@ $lang = array_merge($lang, array(
 	'BOARDRULES_HEADER'			=> 'Regulamin witryny',
 	'BOARDRULES_EXPLAIN'		=> 'Poniższe zasady zostały ujawnione celem wyjaśnienia poszczególnych obowiązków wszystkich członków społeczności %s. Zasady te powinny być przestrzegane przez wszystkich, aby zapewnić, iż nasza witryna działa sprawnie i zapewnia zabawę oraz produktywne doświadczenia dla wszystkich członków naszej społeczności i odwiedzających.',
 	'BOARDRULES_CATEGORIES'		=> 'Rozdziały',
-	'BOARDRULES_CATEGORY_ANCHOR'=> 'rozdzial-%s',
-	'BOARDRULES_RULE_ANCHOR'	=> 'przepis-%s',
+	'BOARDRULES_CATEGORY_ANCHOR'=> 'rozdział-%s',
+	'BOARDRULES_RULE_ANCHOR'	=> 'reguła-%s',
 ));

@@ -53,12 +53,12 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Отправить всем пользователям Оповещение об изменении правил. (Это может занять несколько секунд на форумах с тысячами участников)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'ВЫ уверены, что хотете оповестить всех пользователей?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Настройки правил форума успешно обновлены.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Стиль списка правил',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Выберите способ обозначения правил и категорий. Упорядоченный список чередует числа, буквы и римские цифры. Неупорядоченный список чередует закрашенный круг, окружность и квадрат. Составная нумерация показывает полный числовой путь.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Неупорядоченный (круг, окружность, квадрат)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Составная нумерация (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Нет',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Редактирование правил',
@@ -67,7 +67,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Настройте введение, отображаемое пользователям страницы правил <strong>%s</strong>. Оставьте это поле пустым, чтобы использовать введение по умолчанию, показанное в качестве заполнителя.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Сохранить введение',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Введение на странице правил сохранено.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Выберите язык правил. Пользователи увидят правила на предпочитаемом языке или на языке форума по умолчанию, если перевода нет.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Категория правил',
 	'ACP_BOARDRULES_RULE'					=> 'Правило',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Выберете язык',

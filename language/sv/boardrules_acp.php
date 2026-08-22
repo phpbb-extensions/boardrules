@@ -54,12 +54,12 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Skickar ett meddelande till alla registrerade användare om att forumreglerna har uppdaterats (detta kan ta längre tid att utföra).',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Är du säker på att du vill skicka ett meddelande till alla användre?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Inställningarna för forumreglerna har ändrats.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Liststil för forumregler',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Välj hur regler och kategorier ska markeras. Ordnad växlar mellan siffror, bokstäver och romerska siffror. Oordnad växlar mellan fylld cirkel, cirkel och fyrkant. Sammansatt numrering visar hela den numeriska sökvägen.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Oordnad (fylld cirkel, cirkel, fyrkant)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Sammansatt numrering (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Ingen',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Hantera reglerna',
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Anpassa introduktionen som visas för användare av regelsidan <strong>%s</strong>. Lämna detta fält tomt för att använda standardintroduktionen som visas som platshållartext.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Spara introduktion',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Introduktionen till regelsidan har sparats.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Välj språk för forumreglerna. Användare ser reglerna på önskat språk eller på forumets standardspråk om regler på deras språk saknas.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regelkategori',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Välj språk',

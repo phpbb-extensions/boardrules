@@ -53,12 +53,12 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Send en notifikation til alle tilmeldte brugere om at boardreglerne er blevet opdateret. (Det kan tage adskillige sekunder at fuldføre på boards med tusindvis af medlemmer).',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Er du sikker på, at du vil sende notifikationer til alle brugere?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Ændret indstillinger for boardregler.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Listestil for forumregler',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Vælg, hvordan regler og kategorier skal markeres. Ordnet skifter mellem tal, bogstaver og romertal. Uordnet skifter mellem udfyldte cirkler, cirkler og firkanter. Sammensat nummerering viser hele den numeriske sti.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Uordnet (udfyldt cirkel, cirkel, firkant)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Sammensat nummerering (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Ingen',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Håndter regler',
@@ -67,7 +67,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Tilpas introduktionen, der vises til brugere af regelsiden <strong>%s</strong>. Lad dette felt være tomt for at bruge standardintroduktionen, der vises som pladsholdertekst.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Gem introduktion',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Introduktionen til regelsiden blev gemt.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Vælg et sprog til forumreglerne. Brugere ser regler på deres foretrukne sprog eller regler på forumets standardsprog, hvis deres sprog ikke findes.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regelkategori',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Vælg sprog',

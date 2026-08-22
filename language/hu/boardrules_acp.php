@@ -53,12 +53,12 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Értesítést küldünk minden regisztrált felhasználónak, hogy frissítve lett a Fórum Szabályzat. (Ez több másodpercig is eltarthat, ha több ezer tagja van a Fórumnak.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Biztos értesítéseket szeretne küldeni minden felhasználónak?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Fórum szabályzat beállítások mentésre kerültek.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Fórumszabályzat listastílusa',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Válaszd ki a szabályok és kategóriák előtagját. A rendezett lista számokat, betűket és római számokat váltogat. A rendezetlen lista teli kört, körvonalat és négyzetet váltogat. Az összetett számozás a teljes numerikus útvonalat mutatja.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Rendezetlen (teli kör, kör, négyzet)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Összetett számozás (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Nincs',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Szabályzat kezelése',
@@ -67,7 +67,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Szabja testre a <strong>%s</strong> szabályoldalt megtekintő felhasználóknak megjelenő bevezetőt. Hagyja üresen ezt a mezőt a helyőrzőként megjelenő alapértelmezett bevezető használatához.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Bevezető mentése',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'A szabályzat oldalának bevezetője mentve.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Válassza ki a fórumszabályzat nyelvét. A felhasználók a kívánt nyelven, ennek hiányában pedig a fórum alapértelmezett nyelvén látják a szabályokat.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Szabályzat kategória',
 	'ACP_BOARDRULES_RULE'					=> 'Szabályzat',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Nyelv kiválasztás',

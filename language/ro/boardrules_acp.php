@@ -44,21 +44,21 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'De aici poti administra regurile impuse de tine pe acest site.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Activeaza reguli forum',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Arata link in header catre reguli',
-	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
-	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Pictograma legăturii către reguli',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Introdu numele unei pictograme <strong><a href="%s" target="_blank">Font Awesome</a></strong> pentru legătura către reguli din antet. Lasă câmpul gol pentru a nu afișa o pictogramă.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Pictograma legăturii către reguli conține caractere nevalide.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Utilizatorii noi trebuie sa confirme ca sunt de acord cu regurile',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Utilizatorii noi trebuie sa confirme ca sunt de acord cu regurile impuse pe aceste site.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Informeaza utilizatori',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Trimite notificare catre utilizatori precum ai introdus un regulament nou',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Esti sigur ca vrei sa trimiti o notificare catre toti utilizatorii?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Setarile de reguli au fost modificate.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Stilul listei de reguli',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Alegeți modul de marcare a regulilor și categoriilor. Lista ordonată alternează între numere, litere și cifre romane. Lista neordonată alternează între disc, cerc și pătrat. Numerotarea compusă afișează calea numerică completă.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Neordonată (disc, cerc, pătrat)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Numerotare compusă (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Niciunul',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Editeza Reguli',
@@ -67,7 +67,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Personalizați introducerea afișată utilizatorilor care consultă pagina de reguli <strong>%s</strong>. Lăsați acest câmp necompletat pentru a utiliza introducerea implicită afișată ca substituent.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Salvează introducerea',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Introducerea paginii cu reguli a fost salvată.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Alege limba regulilor. Utilizatorii vor vedea regulile în limba preferată sau în limba implicită a forumului dacă regulile nu există în limba lor.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Caterorie Regula',
 	'ACP_BOARDRULES_RULE'					=> 'Regula',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Selecteaza limba',
@@ -138,7 +138,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Regulile consiliului nu au reușit să obțină blocarea mesei. Un alt proces poate fi ținerea lacătului. Încuietorile sunt eliberate forțat după un timeout de 1 oră.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Regula solicitată nu există.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Regula solicitată nu are părinte.',
 ));

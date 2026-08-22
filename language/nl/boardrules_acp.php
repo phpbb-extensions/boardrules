@@ -54,12 +54,12 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Verstuurt een melding naar alle geregistreerde gebruikers dat de forumregels zijn bijgewerkt. (Dit kan enkele secondes in beslag nemen om te voltooien bij forums met duizenden gebruikers.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Weet je zeker dat je meldingen wilt versturen naar alle gebruikers?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Forumregels-instellingen veranderd.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Lijststijl voor forumregels',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Kies hoe regels en categorieën worden gemarkeerd. Geordend wisselt tussen cijfers, letters en Romeinse cijfers. Ongeordend wisselt tussen een gevulde cirkel, cirkel en vierkant. Samengestelde nummering toont het volledige numerieke pad.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Ongeordend (stip, cirkel, vierkant)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Samengestelde nummering (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Geen',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Beheer regels',
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Pas de inleiding aan die wordt getoond aan gebruikers van de regelspagina <strong>%s</strong>. Laat dit veld leeg om de standaardinleiding te gebruiken die als tijdelijke aanduiding wordt weergegeven.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Inleiding opslaan',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Inleiding van de regelspagina opgeslagen.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Kies een taal voor de forumregels. Gebruikers zien de regels in hun voorkeurstaal of in de standaardtaal van het forum wanneer hun taal niet beschikbaar is.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regelcategorie',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Selecteer taal',

@@ -45,21 +45,21 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Her kan du endre innstillingene for forumregler.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Aktiver forumregler',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Vis en lenke til forumreglene i toppen av siden',
-	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
-	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Ikon for lenke til forumregler',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Skriv inn navnet på et <strong><a href="%s" target="_blank">Font Awesome</a></strong>-ikon for lenken til forumreglene i toppteksten. La feltet stå tomt for ingen ikon.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Ikonet for lenken til forumreglene inneholdt ugyldige tegn.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Tving nye brukere til å akseptere reglene under registreringen',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Denna instillingen legger till et punkt i vilkårene som krever at nye brukere leser og aksepterer forumreglene ila. registreringen.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Send melding til brukerne',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Sendere en melding til alle registrerte brukere om at forumreglene har blitt oppdatert (dette kan ta noe tid).',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Er du sikker på at du vil sende en melding til alle brukere?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Innstillingene for forumreglene har blitt endret.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Listestil for forumregler',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Velg hvordan regler og kategorier skal merkes. Ordnet veksler mellom tall, bokstaver og romertall. Uordnet veksler mellom fylt sirkel, sirkel og firkant. Sammensatt nummerering viser hele den numeriske banen.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Uordnet (fylt sirkel, sirkel, firkant)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Sammensatt nummerering (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Ingen',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Behandle regler',
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Tilpass introduksjonen som vises til brukere av regelsiden <strong>%s</strong>. La dette feltet stå tomt for å bruke standardintroduksjonen som vises som plassholdertekst.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Lagre introduksjon',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Introduksjonen til regelsiden ble lagret.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Velg språk for forumreglene. Brukere ser reglene på foretrukket språk, eller på forumets standardspråk dersom regler på språket deres ikke finnes.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Regelkategori',
 	'ACP_BOARDRULES_RULE'					=> 'Regel',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Velg språk',
@@ -140,7 +140,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Styrets regler klarte ikke å skaffe bordlåsen. En annen prosess kan være å holde låsen. Låser tvangsutløses etter en timeout på 1 time.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Den forespurte regelen eksisterer ikke.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Den forespurte regelen har ingen forelder.',
 ));

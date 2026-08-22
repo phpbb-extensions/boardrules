@@ -45,21 +45,21 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_SETTINGS_EXPLAIN'		=> 'Qui è possibile configurare le impostazioni principali per le regole del forum.',
 	'ACP_BOARDRULES_ENABLE'					=> 'Abilita regole del forum',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Visualizza un link alle regole del forum nell´header',
-	'ACP_BOARDRULES_FONT_ICON'				=> 'Board rules link icon',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use for the board rules link in the header. Leave this field blank for no board rules icon.',
-	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'The board rules link icon contained invalid characters.',
+	'ACP_BOARDRULES_FONT_ICON'				=> 'Icona del collegamento al regolamento',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Inserisci il nome di un’icona <strong><a href="%s" target="_blank">Font Awesome</a></strong> per il collegamento al regolamento nell’intestazione. Lascia vuoto il campo per non mostrare alcuna icona.',
+	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'L’icona del collegamento al regolamento contiene caratteri non validi.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Richiedere ai nuovi utenti di accettare le regole al momento della registrazione',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Questa opzione aggiunge una clausola per le "Condizioni Generali di Contratto" che richiedono ai nuovi utenti di leggere e accettare le regole del forum al momento della registrazione.',
 	'ACP_BOARDRULES_NOTIFY'					=> 'Notifica agli utenti',
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Invia una notifica a tutti gli utenti registrati che le regole del forum sono state aggiornate. (Questo potrebbe richiedere alcuni secondi per completare su forum  con molte migliaia di iscritti.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Sei sicuro di voler inviare le notifiche a tutti gli utenti?',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Le impostazioni delle regole del Forum sono state modificate.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Stile dell’elenco delle regole',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Scegli come contrassegnare regole e categorie. L’elenco ordinato alterna numeri, lettere e numeri romani. L’elenco non ordinato alterna disco, cerchio e quadrato. La numerazione composta mostra il percorso numerico completo.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Non ordinato (disco, cerchio, quadrato)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Numerazione composta (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Nessuno',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Gestisci Regole',
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Personalizza l’introduzione mostrata agli utenti che visualizzano la pagina delle regole <strong>%s</strong>. Lascia vuoto questo campo per usare l’introduzione predefinita mostrata come segnaposto.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Salva introduzione',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Introduzione alla pagina delle regole salvata.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Scegli una lingua per il regolamento. Gli utenti vedranno le regole nella lingua preferita o nella lingua predefinita della board se non esistono regole nella loro lingua.',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Categoria Regola',
 	'ACP_BOARDRULES_RULE'					=> 'Regola',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Seleziona lingua',
@@ -140,7 +140,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Le regole del forum non sono riuscite ad acquisire il blocco del tavolo. Un altro processo potrebbe trattenere il blocco. I blocchi vengono rilasciati forzatamente dopo un timeout di 1 ora.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'La regola richiesta non esiste.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'La regola richiesta non ha alcun genitore.',
 ));
