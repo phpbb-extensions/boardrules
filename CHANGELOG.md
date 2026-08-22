@@ -2,6 +2,19 @@
 
 ## Version 3.x (for phpBB 3.3)
 
+### 3.1.0 - 2026-09-02
+
+- Added a language dashboard for managing every installed language and viewing each ruleset's rule count and publication status.
+- Added support for copying complete rulesets between languages, including their hierarchy, order, titles, messages, anchors, and formatting settings.
+- Added draft and published states for translated rulesets, allowing translations to be prepared privately before publication.
+- Added a customisable introduction for each language's rules page.
+- Added compound list numbering (for example, 1, 1.1, and 1.1.1) and improved ordered and unordered prefixes across deeply nested rules.
+- Improved rules-page responsiveness and indented nested categories in the category navigation panel.
+- Improved compatibility with phpBB configuration-menu and Who Is Online route API changes.
+- Improved Unicode handling for rule titles and anchors, including emoji-safe title storage and stricter anchor validation.
+- Updated missing language keys and added correct plural forms across language packs.
+- Added Portuguese language pack.
+
 ### 3.0.1 - 2024-01-18
 
 - Rules in the ACP are clickable again, fixes an issue introduced in v3.0.0..
