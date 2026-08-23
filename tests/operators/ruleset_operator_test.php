@@ -104,7 +104,7 @@ class ruleset_operator_test extends \phpbb_database_test_case
 
 	public function test_unknown_ruleset_cannot_be_prepared_for_first_rule(): void
 	{
-		$this->expectException(\phpbb\exception\runtime_exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('ACP_BOARDRULES_INVALID_LANGUAGE');
 		$this->operator->draft_if_empty('xx');
 	}
@@ -143,7 +143,7 @@ class ruleset_operator_test extends \phpbb_database_test_case
 			$this->operator->copy('en', 'fr');
 			self::fail('Copy should not run while the nested-set lock is held.');
 		}
-		catch (\phpbb\exception\runtime_exception $e)
+		catch (\RuntimeException $e)
 		{
 			self::assertSame('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE', $e->getMessage());
 		}
@@ -164,7 +164,7 @@ class ruleset_operator_test extends \phpbb_database_test_case
 
 	public function test_copy_rejects_empty_source(): void
 	{
-		$this->expectException(\phpbb\exception\runtime_exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('ACP_BOARDRULES_COPY_SOURCE_EMPTY');
 		$this->operator->copy('de', 'fr');
 	}
@@ -203,7 +203,7 @@ class ruleset_operator_test extends \phpbb_database_test_case
 
 	public function test_unknown_ruleset_intro_language_is_rejected(): void
 	{
-		$this->expectException(\phpbb\exception\runtime_exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('ACP_BOARDRULES_INVALID_LANGUAGE');
 
 		$this->operator->set_intro_text('xx', 'Unknown');
@@ -211,7 +211,7 @@ class ruleset_operator_test extends \phpbb_database_test_case
 
 	public function test_empty_ruleset_cannot_be_published(): void
 	{
-		$this->expectException(\phpbb\exception\runtime_exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
 		$this->operator->set_published('fr', true);
 	}
@@ -221,7 +221,7 @@ class ruleset_operator_test extends \phpbb_database_test_case
 	 */
 	public function test_copy_rejects_invalid_languages($source, $target): void
 	{
-		$this->expectException(\phpbb\exception\runtime_exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('ACP_BOARDRULES_COPY_INVALID_LANGUAGE');
 		$this->operator->copy($source, $target);
 	}
@@ -238,7 +238,7 @@ class ruleset_operator_test extends \phpbb_database_test_case
 
 	public function test_unknown_ruleset_cannot_change_publication_state(): void
 	{
-		$this->expectException(\phpbb\exception\runtime_exception::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('ACP_BOARDRULES_INVALID_LANGUAGE');
 		$this->operator->set_published('xx', true);
 	}

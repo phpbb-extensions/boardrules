@@ -95,12 +95,12 @@ class ruleset implements ruleset_interface
 
 		if ($source_language === $target_language || !$this->language_exists($source_language) || !$this->language_exists($target_language))
 		{
-			throw new \phpbb\exception\runtime_exception('ACP_BOARDRULES_COPY_INVALID_LANGUAGE');
+			throw new \InvalidArgumentException('ACP_BOARDRULES_COPY_INVALID_LANGUAGE');
 		}
 
 		if (!$this->lock->acquire())
 		{
-			throw new \phpbb\exception\runtime_exception('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
+			throw new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
 		}
 
 		$transaction_started = false;
@@ -112,7 +112,7 @@ class ruleset implements ruleset_interface
 			$source_rules = $this->get_rules_data($source_language);
 			if (empty($source_rules))
 			{
-				throw new \phpbb\exception\runtime_exception('ACP_BOARDRULES_COPY_SOURCE_EMPTY');
+				throw new \InvalidArgumentException('ACP_BOARDRULES_COPY_SOURCE_EMPTY');
 			}
 
 			$id_map = array();
@@ -201,7 +201,7 @@ class ruleset implements ruleset_interface
 	{
 		if (!$this->language_exists($language))
 		{
-			throw new \phpbb\exception\runtime_exception('ACP_BOARDRULES_INVALID_LANGUAGE');
+			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
 		}
 
 		if ($this->get_rule_count($language) > 0)
@@ -236,7 +236,7 @@ class ruleset implements ruleset_interface
 	{
 		if (!$this->language_exists($language))
 		{
-			throw new \phpbb\exception\runtime_exception('ACP_BOARDRULES_INVALID_LANGUAGE');
+			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
 		}
 
 		$this->save_ruleset_value($language, 'rules_intro_text', utf8_encode_ncr((string) $intro_text));
@@ -249,12 +249,12 @@ class ruleset implements ruleset_interface
 	{
 		if (!$this->language_exists($language))
 		{
-			throw new \phpbb\exception\runtime_exception('ACP_BOARDRULES_INVALID_LANGUAGE');
+			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
 		}
 
 		if ($this->get_rule_count($language) === 0)
 		{
-			throw new \phpbb\exception\runtime_exception('ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
+			throw new \InvalidArgumentException('ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
 		}
 
 		$this->save_published_state($language, (bool) $published);

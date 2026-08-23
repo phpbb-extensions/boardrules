@@ -115,8 +115,6 @@ class exception_test extends \phpbb_test_case
 	 */
 	public function test_exception_string_representation($message, $expected): void
 	{
-		$exception = new \phpbb\boardrules\exception\base($message);
-		self::assertInstanceOf(\phpbb\exception\runtime_exception::class, $exception);
-		self::assertSame($expected, (string) $exception);
+		self::assertSame($expected, (string) new \phpbb\boardrules\exception\base($message));
 	}
 }

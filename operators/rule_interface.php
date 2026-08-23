@@ -36,7 +36,8 @@ interface rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
-	* @throws \phpbb\exception\runtime_exception If the language is invalid or the nested-set lock cannot be acquired
+	* @throws \InvalidArgumentException If the language is not installed
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds If the entity was already inserted
 	*/
 	public function add_rule($entity, $language, $parent_id = 0);
@@ -47,7 +48,7 @@ interface rule_interface
 	* @param int $rule_id The rule identifier to delete
 	* @return void
 	* @access public
-	* @throws \phpbb\exception\runtime_exception If the nested-set lock cannot be acquired
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function delete_rule($rule_id);
@@ -60,7 +61,7 @@ interface rule_interface
 	* @param int $amount The number of places to move the rule
 	* @return void
 	* @access public
-	* @throws \phpbb\exception\runtime_exception If the nested-set lock cannot be acquired
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function move($rule_id, $direction, $amount = 1);
@@ -72,7 +73,7 @@ interface rule_interface
 	* @param int $new_parent_id The new rule parent identifier
 	* @return void
 	* @access public
-	* @throws \phpbb\exception\runtime_exception If the nested-set lock cannot be acquired
+	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
 	public function change_parent($rule_id, $new_parent_id);

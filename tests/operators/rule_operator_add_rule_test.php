@@ -83,7 +83,7 @@ class rule_operator_add_rule_test extends rule_operator_base
 			$this->get_rule_operator()->add_rule($entity, 'en');
 			self::fail('Rule insertion should not run while the nested-set lock is held.');
 		}
-		catch (\phpbb\exception\runtime_exception $e)
+		catch (\RuntimeException $e)
 		{
 			self::assertSame('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE', $e->getMessage());
 		}
