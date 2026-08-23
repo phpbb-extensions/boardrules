@@ -404,7 +404,7 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
 			->disableOriginalConstructor()
-			->setMethods(array('set_intro_text'))
+			->onlyMethods(array('set_intro_text'))
 			->getMock();
 		$ruleset_operator->method('set_intro_text')
 			->willThrowException(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'));
@@ -556,7 +556,7 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
 			->disableOriginalConstructor()
-			->setMethods(array('set_published'))
+			->onlyMethods(array('set_published'))
 			->getMock();
 		$ruleset_operator->method('set_published')
 			->willThrowException(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'));
