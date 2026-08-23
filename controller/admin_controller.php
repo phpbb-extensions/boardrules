@@ -364,9 +364,9 @@ class admin_controller implements admin_interface
 		{
 			$this->ruleset_operator->set_intro_text($language, $intro_text);
 		}
-		catch (\InvalidArgumentException $e)
+		catch (\phpbb\exception\runtime_exception $e)
 		{
-			trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->get_exception_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_INTRO_LOG', false, array($language));
@@ -406,9 +406,9 @@ class admin_controller implements admin_interface
 			{
 				$copy_result = $this->ruleset_operator->copy($source_language, $target_language);
 			}
-			catch (\Exception $e)
+			catch (\phpbb\exception\runtime_exception $e)
 			{
-				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($return_url), E_USER_WARNING);
+				trigger_error($this->get_exception_message($e) . adm_back_link($return_url), E_USER_WARNING);
 			}
 
 			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_BOARDRULES_COPY_LOG', false, array($source_language, $target_language, $copy_result['rule_count']));
@@ -466,9 +466,9 @@ class admin_controller implements admin_interface
 			{
 				$this->ruleset_operator->set_published($language, $published);
 			}
-			catch (\InvalidArgumentException $e)
+			catch (\phpbb\exception\runtime_exception $e)
 			{
-				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($return_url), E_USER_WARNING);
+				trigger_error($this->get_exception_message($e) . adm_back_link($return_url), E_USER_WARNING);
 			}
 
 			$log_key = $published ? 'ACP_BOARDRULES_PUBLISH_LOG' : 'ACP_BOARDRULES_DRAFT_LOG';
@@ -684,9 +684,9 @@ class admin_controller implements admin_interface
 				{
 					$entity->save();
 				}
-				catch (\phpbb\boardrules\exception\out_of_bounds $e)
+				catch (\phpbb\exception\runtime_exception $e)
 				{
-					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+					trigger_error($this->get_exception_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
 				// Change rule parent
@@ -696,9 +696,9 @@ class admin_controller implements admin_interface
 					{
 						$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
 					}
-					catch (\Exception $e)
+					catch (\phpbb\exception\runtime_exception $e)
 					{
-						trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+						trigger_error($this->get_exception_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 					}
 				}
 
@@ -712,13 +712,9 @@ class admin_controller implements admin_interface
 				{
 					$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
 				}
-				catch (\InvalidArgumentException|\RuntimeException $e)
+				catch (\phpbb\exception\runtime_exception $e)
 				{
-					trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
-				}
-				catch (\phpbb\boardrules\exception\out_of_bounds $e)
-				{
-					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+					trigger_error($this->get_exception_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
 				// Show user confirmation of the added rule and provide link back to the previous page
@@ -785,9 +781,9 @@ class admin_controller implements admin_interface
 			{
 				$this->rule_operator->delete_rule($rule_id);
 			}
-			catch (\Exception $e)
+			catch (\phpbb\exception\runtime_exception $e)
 			{
-				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+				trigger_error($this->get_exception_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 
 			// Show user confirmation of the deleted rule and provide link back to the previous page
@@ -833,9 +829,9 @@ class admin_controller implements admin_interface
 		{
 			$this->rule_operator->move($rule_id, $direction, $amount);
 		}
-		catch (\Exception $e)
+		catch (\phpbb\exception\runtime_exception $e)
 		{
-			trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->get_exception_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		// Send a JSON response if an AJAX request was used
@@ -1003,5 +999,21 @@ class admin_controller implements admin_interface
 				'S_RULE_PARENT'		=> $rule_menu_item->get_id() === (int) $parent_id,
 			));
 		}
+	}
+
+	/**
+	 * Translate an expected Board Rules or phpBB runtime exception.
+	 *
+	 * @param \phpbb\exception\runtime_exception $exception
+	 * @return string
+	 */
+	protected function get_exception_message(\phpbb\exception\runtime_exception $exception)
+	{
+		if ($exception instanceof \phpbb\boardrules\exception\base)
+		{
+			return $exception->get_message($this->lang);
+		}
+
+		return $this->lang->lang_array($exception->getMessage(), $exception->get_parameters());
 	}
 }

@@ -420,7 +420,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->copy_ruleset('fr');
 	}
 
-	public function test_copy_ruleset_handles_general_operator_exception(): void
+	public function test_copy_ruleset_does_not_swallow_unexpected_operator_exception(): void
 	{
 		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
 			->disableOriginalConstructor()
@@ -437,7 +437,8 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->replace_controller_service('ruleset_operator', $ruleset_operator);
 		$this->post['submit'] = true;
 		$this->variables['source_language'] = 'en';
-		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_COPY_FAILED');
+		$this->expectException(\Exception::class);
+		$this->expectExceptionMessage('ACP_BOARDRULES_COPY_FAILED');
 
 		$this->controller->copy_ruleset('fr');
 	}
@@ -585,7 +586,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$operator->method('change_parent')->willThrowException(new \RuntimeException('PARENT_CHANGE_FAILED'));
+		$operator->method('change_parent')->willThrowException(new \phpbb\exception\runtime_exception('PARENT_CHANGE_FAILED'));
 		$this->replace_controller_service('container', $this->entity_container($entity));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->post['submit'] = true;
@@ -618,7 +619,7 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		return array(
 			'entity bounds failure' => array(new \phpbb\boardrules\exception\out_of_bounds('rule_id'), 'EXCEPTION_OUT_OF_BOUNDS'),
-			'nested-set lock failure' => array(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'), 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'),
+			'nested-set lock failure' => array(new \phpbb\exception\runtime_exception('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'), 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'),
 		);
 	}
 
@@ -643,7 +644,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$operator->method('delete_rule')->willThrowException(new \RuntimeException('DELETE_FAILED'));
+		$operator->method('delete_rule')->willThrowException(new \phpbb\exception\runtime_exception('DELETE_FAILED'));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->setExpectedTriggerError(E_USER_WARNING, 'DELETE_FAILED');
 
@@ -680,7 +681,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$operator->method('move')->willThrowException(new \RuntimeException('MOVE_FAILED'));
+		$operator->method('move')->willThrowException(new \phpbb\exception\runtime_exception('MOVE_FAILED'));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->setExpectedTriggerError(E_USER_WARNING, 'MOVE_FAILED');
 

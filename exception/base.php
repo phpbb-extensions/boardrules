@@ -13,15 +13,13 @@ namespace phpbb\boardrules\exception;
 /**
 * Base exception
 */
-class base extends \Exception
+class base extends \phpbb\exception\runtime_exception
 {
 	/**
 	* Null if the message is a string, array if the message was submitted as an array
 	* @var string|array
 	*/
 	protected $message_full;
-
-	protected $previous;
 
 	/**
 	* Constructor
@@ -35,22 +33,11 @@ class base extends \Exception
 	*/
 	public function __construct($message = null, $code = 0, \Exception $previous = null)
 	{
-		parent::__construct();
-
-		$this->message = $message;
-
-		if (is_array($message))
-		{
-			$this->message = (string) $message[0];
-		}
-
-		// We're slightly changing the way exceptions work
-		// Tools, such as xDebug, expect the message to be a string, so to prevent errors
-		// with those tools, we store our full message in message_full and only a string in message
 		$this->message_full = $message;
+		$message_parts = is_array($message) ? $message : array($message);
+		$message_key = (string) array_shift($message_parts);
 
-		$this->code = $code;
-		$this->previous = $previous;
+		parent::__construct($message_key, $message_parts, $previous, $code);
 	}
 
 	/**
