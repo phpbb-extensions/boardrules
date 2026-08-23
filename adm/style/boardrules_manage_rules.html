@@ -43,23 +43,23 @@
 	</form>
 {% endif %}
 
-{% if S_CAN_COPY_RULESET or S_RULESET_DRAFT or S_CAN_DRAFT_RULESET %}
+{% if S_CAN_COPY_RULESET or S_RULESET_DRAFT or S_RULESET_PUBLISHED %}
 	<p class="boardrules-action-bar">
 		{% if S_CAN_COPY_RULESET %}<a href="{{ U_COPY_RULESET }}" class="button2 boardrules-button">{{ Icon('font', 'copy', lang('ACP_BOARDRULES_COPY_ACTION'), false, 'fas') }}</a>{% endif %}
 		{% if S_RULESET_DRAFT %}<a href="{{ U_PUBLISH_RULESET }}" class="button2 boardrules-button">{{ Icon('font', 'eye', lang('ACP_BOARDRULES_PUBLISH'), false, 'fas') }}</a>{% endif %}
-		{% if S_CAN_DRAFT_RULESET %}<a href="{{ U_DRAFT_RULESET }}" class="button2 boardrules-button">{{ Icon('font', 'eye-slash', lang('ACP_BOARDRULES_SET_DRAFT'), false, 'fas') }}</a>{% endif %}
+		{% if S_RULESET_PUBLISHED %}<a href="{{ U_DRAFT_RULESET }}" class="button2 boardrules-button">{{ Icon('font', 'eye-slash', lang('ACP_BOARDRULES_SET_DRAFT'), false, 'fas') }}</a>{% endif %}
 	</p>
 {% endif %}
 
 {% if S_RULESET_DRAFT %}
 	<div class="errorbox notice">
 		<h3>{{ lang('ACP_BOARDRULES_STATUS_DRAFT') }}</h3>
-		<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_DRAFT_DEFAULT_NOTICE' : 'ACP_BOARDRULES_DRAFT_NOTICE') }}</p>
+		<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_DRAFT_DEFAULT_NOTICE' : (S_FALLBACK_AVAILABLE ? 'ACP_BOARDRULES_DRAFT_NOTICE' : 'ACP_BOARDRULES_FALLBACK_UNAVAILABLE')) }}</p>
 	</div>
 {% elseif S_RULESET_EMPTY %}
 	<div class="errorbox notice">
-		<h3>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</h3>
-		<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_EMPTY_DEFAULT_NOTICE' : 'ACP_BOARDRULES_EMPTY_NOTICE') }}</p>
+		<h3>{{ lang(S_DEFAULT_LANGUAGE or not S_FALLBACK_AVAILABLE ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</h3>
+		<p>{{ lang(S_DEFAULT_LANGUAGE ? 'ACP_BOARDRULES_EMPTY_DEFAULT_NOTICE' : (S_FALLBACK_AVAILABLE ? 'ACP_BOARDRULES_EMPTY_NOTICE' : 'ACP_BOARDRULES_FALLBACK_UNAVAILABLE')) }}</p>
 	</div>
 {% endif %}
 

@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Halda kõiki paigaldatud keeli ühes kohas. Kopeeri kogu reeglistik teise keelde, tõlgi see mustandina ja avalda, kui see on valmis.',
 	'ACP_BOARDRULES_RULES'					=> 'Reeglid',
 	'ACP_BOARDRULES_STATUS'					=> 'Olek',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Kasutatakse vaikekeelt',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Kasutatakse vaikekeele reegleid',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Reeglid puuduvad',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Mustand',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Avaldatud',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d konfliktset ankrut nimetati ümber numbriliste järelliidetega.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Valitud keel pole paigaldatud.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Tühja reeglistikku ei saa avaldada ega mustandiks muuta.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Foorumi vaikekeelt ei saa mustandiks muuta.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Kas avaldada selle keele täielik reeglistik? Selle keele kasutajad näevad seda kohe.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Kas muuta selle keele täielik reeglistik mustandiks? Selle keele kasutajad näevad selle asemel foorumi vaikekeele reegleid.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Keele reeglistik avaldati.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Reegel on edukalt kustutatud.',
 	'ACP_RULE_EDITED'						=> 'Reegel on edukalt muudetud.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Sa pead sisestama pealkirja antud reeglile.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Avaldatud vaikekeele reeglid pole saadaval.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Kas muuta vaikekeele reeglistik mustandiks? Kasutajatel, kellel pole teist avaldatud reeglistikku, pole reegleid saadaval.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Kas muuta see täielik keelereeglite komplekt mustandiks? Avaldatud vaikekeele reeglid pole varuvariandina saadaval.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

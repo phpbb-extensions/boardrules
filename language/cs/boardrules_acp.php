@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Spravujte všechny nainstalované jazyky na jednom místě. Zkopírujte kompletní sadu pravidel do jiného jazyka, přeložte ji jako koncept a po dokončení ji zveřejněte.',
 	'ACP_BOARDRULES_RULES'					=> 'Pravidla',
 	'ACP_BOARDRULES_STATUS'					=> 'Stav',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Používá se výchozí jazyk',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Používají se pravidla výchozího jazyka',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Žádná pravidla',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Koncept',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Zveřejněno',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d konfliktních odkazů bylo přejmenováno pomocí číselných přípon.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Vybraný jazyk není nainstalován.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Prázdnou sadu pravidel nelze zveřejnit ani nastavit jako koncept.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Výchozí jazyk fóra nelze nastavit jako koncept.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Zveřejnit tuto kompletní jazykovou sadu pravidel? Uživatelé tohoto jazyka ji uvidí okamžitě.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Nastavit tuto kompletní jazykovou sadu pravidel jako koncept? Uživatelé tohoto jazyka místo ní uvidí pravidla ve výchozím jazyce fóra.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Jazyková sada pravidel byla zveřejněna.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Pravidlo úspěšně odstraněno.',
 	'ACP_RULE_EDITED'						=> 'Pravidlo úspěšně upraveno.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Musíš zadat název pravidla.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Nejsou k dispozici žádná publikovaná pravidla výchozího jazyka.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Změnit sadu pravidel výchozího jazyka na koncept? Uživatelé bez další publikované sady pravidel nebudou mít žádná pravidla k dispozici.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Změnit tuto úplnou sadu jazykových pravidel na koncept? Žádná publikovaná pravidla výchozího jazyka nejsou k dispozici jako záložní.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

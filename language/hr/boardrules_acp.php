@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Upravljajte svim instaliranim jezicima na jednom mjestu. Kopirajte cijeli skup pravila na drugi jezik, prevedite ga kao skicu, a zatim ga objavite kada bude spreman.',
 	'ACP_BOARDRULES_RULES'					=> 'Pravila',
 	'ACP_BOARDRULES_STATUS'					=> 'Status',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Koristi se zadani jezik',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Koriste se pravila zadanog jezika',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Nema pravila',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Skica',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Objavljeno',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d podudarnih sidara preimenovano je pomoću brojčanih sufiksa.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Odabrani jezik nije instaliran.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Prazan skup pravila ne može se objaviti niti postaviti kao skica.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Zadani jezik foruma ne može se postaviti kao skica.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Objaviti cijeli skup pravila za ovaj jezik? Korisnici ovog jezika odmah će ga vidjeti.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Postaviti cijeli skup pravila za ovaj jezik kao skicu? Korisnici ovog jezika umjesto njega vidjet će pravila na zadanom jeziku foruma.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Skup pravila jezika je objavljen.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Pravilo je izbrisano.',
 	'ACP_RULE_EDITED'						=> 'Pravilo je uređeno.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Moraš upisati naslov pravila.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Nisu dostupna objavljena pravila zadanog jezika.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Promijeniti skup pravila zadanog jezika u nacrt? Korisnici bez drugog objavljenog skupa pravila neće imati dostupna pravila.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Promijeniti kompletan skup jezičnih pravila u nacrt? Nisu dostupna objavljena pravila zadanog jezika kao zamjena.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Gestione todos los idiomas instalados desde un solo lugar. Copie un conjunto completo de normas a otro idioma, tradúzcalo como borrador y publíquelo cuando esté listo.',
 	'ACP_BOARDRULES_RULES'					=> 'Normas',
 	'ACP_BOARDRULES_STATUS'					=> 'Estado',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Usando idioma alternativo',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Usando las reglas del idioma predeterminado',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Sin normas',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Borrador',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Publicado',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> 'Se cambiaron los nombres de %d anclajes en conflicto con sufijos numéricos.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'El idioma seleccionado no está instalado.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Un conjunto de normas vacío no se puede publicar ni establecer como borrador.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'El idioma predeterminado del sitio no se puede establecer como borrador.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> '¿Publicar este conjunto completo de normas del idioma? Los usuarios de este idioma lo verán inmediatamente.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> '¿Establecer este conjunto completo de normas del idioma como borrador? Los usuarios de este idioma verán en su lugar las normas del idioma predeterminado del sitio.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Conjunto de normas del idioma publicado.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Norma eliminada correctamente.',
 	'ACP_RULE_EDITED'						=> 'Norma editada correctamente.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Debe especificar un título para esta norma.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'No hay reglas publicadas disponibles en el idioma predeterminado.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> '¿Cambiar el conjunto de reglas del idioma predeterminado a borrador? Los usuarios sin otro conjunto de reglas publicado no tendrán reglas disponibles.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => '¿Cambiar este conjunto completo de reglas de idioma a borrador? No hay reglas publicadas disponibles en el idioma predeterminado como alternativa.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

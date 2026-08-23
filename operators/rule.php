@@ -27,6 +27,9 @@ class rule implements rule_interface
 	*/
 	protected $nestedset_rules;
 
+	/** @var \phpbb\boardrules\operators\ruleset_interface */
+	protected $ruleset_operator;
+
 	/** @var \phpbb\lock\db */
 	protected $lock;
 
@@ -35,13 +38,15 @@ class rule implements rule_interface
 	*
 	* @param ContainerInterface $container Service container interface
 	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
+	* @param \phpbb\boardrules\operators\ruleset_interface $ruleset_operator Ruleset operator object
 	* @param \phpbb\lock\db $lock Shared Board Rules tree lock
 	* @access public
 	*/
-	public function __construct(ContainerInterface $container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, \phpbb\lock\db $lock)
+	public function __construct(ContainerInterface $container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, \phpbb\boardrules\operators\ruleset_interface $ruleset_operator, \phpbb\lock\db $lock)
 	{
 		$this->container = $container;
 		$this->nestedset_rules = $nestedset_rules;
+		$this->ruleset_operator = $ruleset_operator;
 		$this->lock = $lock;
 	}
 
@@ -82,6 +87,7 @@ class rule implements rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
+	* @throws \InvalidArgumentException If the language is not installed
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds
 	*/
@@ -94,6 +100,9 @@ class rule implements rule_interface
 
 		try
 		{
+			// An empty ruleset must enter draft before its first rule is visible.
+			$this->ruleset_operator->draft_if_empty($language);
+
 			// Insert the rule data to the database for the given language selection
 			$entity->insert($language);
 

@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Διαχειριστείτε όλες τις εγκατεστημένες γλώσσες από ένα σημείο. Αντιγράψτε ένα πλήρες σύνολο κανόνων σε άλλη γλώσσα, μεταφράστε το ως πρόχειρο και δημοσιεύστε το όταν είναι έτοιμο.',
 	'ACP_BOARDRULES_RULES'					=> 'Κανόνες',
 	'ACP_BOARDRULES_STATUS'					=> 'Κατάσταση',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Χρήση προεπιλεγμένης γλώσσας',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Χρήση κανόνων προεπιλεγμένης γλώσσας',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Χωρίς κανόνες',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Πρόχειρο',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Δημοσιευμένο',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d άγκυρες με διένεξη μετονομάστηκαν με αριθμητικά επιθήματα.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Η επιλεγμένη γλώσσα δεν είναι εγκατεστημένη.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Ένα κενό σύνολο κανόνων δεν μπορεί να δημοσιευτεί ή να μετατραπεί σε πρόχειρο.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Η προεπιλεγμένη γλώσσα της κοινότητας δεν μπορεί να μετατραπεί σε πρόχειρο.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Να δημοσιευτεί το πλήρες σύνολο κανόνων αυτής της γλώσσας; Οι χρήστες αυτής της γλώσσας θα το δουν αμέσως.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Να μετατραπεί το πλήρες σύνολο κανόνων αυτής της γλώσσας σε πρόχειρο; Οι χρήστες αυτής της γλώσσας θα βλέπουν αντί γι’ αυτό τους κανόνες στην προεπιλεγμένη γλώσσα της κοινότητας.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Το σύνολο κανόνων της γλώσσας δημοσιεύτηκε.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Ο όρος διαγράφηκε με επιτυχία.',
 	'ACP_RULE_EDITED'						=> 'Ο όρος επεξεργάστηκε με επιτυχία.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Πρέπει να εισάγετε ένα τίτλο για αυτό τον όρο.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Δεν υπάρχουν διαθέσιμοι δημοσιευμένοι κανόνες προεπιλεγμένης γλώσσας.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Αλλαγή του συνόλου κανόνων προεπιλεγμένης γλώσσας σε πρόχειρο; Οι χρήστες χωρίς άλλο δημοσιευμένο σύνολο κανόνων δεν θα έχουν διαθέσιμους κανόνες.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Να αλλάξει αυτό το πλήρες σύνολο κανόνων γλώσσας σε πρόχειρο; Δεν υπάρχουν δημοσιευμένοι κανόνες προεπιλεγμένης γλώσσας διαθέσιμοι ως εναλλακτικοί.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

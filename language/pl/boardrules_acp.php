@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Zarządzaj wszystkimi zainstalowanymi językami w jednym miejscu. Skopiuj kompletny regulamin do innego języka, przetłumacz go jako szkic, a następnie opublikuj, gdy będzie gotowy.',
 	'ACP_BOARDRULES_RULES'					=> 'Przepisy',
 	'ACP_BOARDRULES_STATUS'					=> 'Stan',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Używany jest język domyślny',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Używane są zasady w języku domyślnym',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Brak przepisów',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Szkic',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Opublikowano',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> 'Zmieniono nazwy %d zakotwiczeń powodujących konflikt, dodając przyrostki liczbowe.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Wybrany język nie jest zainstalowany.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Pustego regulaminu nie można opublikować ani ustawić jako szkic.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Domyślnego języka forum nie można ustawić jako szkic.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Opublikować ten kompletny regulamin języka? Użytkownicy tego języka zobaczą go natychmiast.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Ustawić ten kompletny regulamin języka jako szkic? Użytkownicy tego języka zobaczą zamiast niego regulamin w domyślnym języku forum.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Regulamin języka został opublikowany.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Przepis został usunięty.',
 	'ACP_RULE_EDITED'						=> 'Przepis został zaktualizowany.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Należy wprowadzić tytuł dla tego przepisu.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Brak opublikowanych zasad w języku domyślnym.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Zmienić zestaw zasad języka domyślnego na wersję roboczą? Użytkownicy bez innego opublikowanego zestawu zasad nie będą mieli dostępnych żadnych zasad.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Zmienić ten kompletny zestaw zasad językowych na wersję roboczą? Brak opublikowanych zasad w języku domyślnym jako rozwiązania awaryjnego.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

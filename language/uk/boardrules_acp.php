@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Керуйте всіма встановленими мовами в одному місці. Скопіюйте повний набір правил іншою мовою, перекладіть його як чернетку та опублікуйте, коли він буде готовий.',
 	'ACP_BOARDRULES_RULES'					=> 'Правила',
 	'ACP_BOARDRULES_STATUS'					=> 'Статус',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Використовується типова мова',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Використовуються правила типовою мовою',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Немає правил',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Чернетка',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Опубліковано',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d конфліктних якорів перейменовано з додаванням числових суфіксів.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Вибрану мову не встановлено.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Порожній набір правил не можна опублікувати або зробити чернеткою.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Типову мову форуму не можна зробити чернеткою.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Опублікувати цей повний набір правил мови? Користувачі цієї мови побачать його негайно.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Зробити цей повний набір правил мови чернеткою? Користувачі цієї мови натомість побачать правила типовою мовою форуму.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Набір правил мови опубліковано.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Правило успішно видалено.',
 	'ACP_RULE_EDITED'						=> 'Правило успішно відредаговано.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Ви повинні ввести заголовок для правила',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Опубліковані правила типовою мовою недоступні.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Змінити набір правил типової мови на чернетку? Користувачі без іншого опублікованого набору правил не матимуть доступних правил.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Змінити цей повний набір мовних правил на чернетку? Опубліковані правила типовою мовою недоступні як запасний варіант.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

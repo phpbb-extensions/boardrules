@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Gestisci tutte le lingue installate da un unico punto. Copia un set completo di regole in un’altra lingua, traducilo come bozza e pubblicalo quando è pronto.',
 	'ACP_BOARDRULES_RULES'					=> 'Regole',
 	'ACP_BOARDRULES_STATUS'					=> 'Stato',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Uso della lingua predefinita',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Uso delle regole della lingua predefinita',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Nessuna regola',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Bozza',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Pubblicato',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ancoraggi in conflitto sono stati rinominati con suffissi numerici.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'La lingua selezionata non è installata.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Un set di regole vuoto non può essere pubblicato né impostato come bozza.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'La lingua predefinita della board non può essere impostata come bozza.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Pubblicare questo set completo di regole della lingua? Gli utenti di questa lingua lo vedranno immediatamente.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Impostare questo set completo di regole della lingua come bozza? Gli utenti di questa lingua vedranno invece le regole nella lingua predefinita della board.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Set di regole della lingua pubblicato.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regola rimossa con successo.',
 	'ACP_RULE_EDITED'						=> 'Regola modificata con successo.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Devi inserire un titolo per questa regola.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Non sono disponibili regole pubblicate per la lingua predefinita.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Cambiare il set di regole della lingua predefinita in bozza? Gli utenti senza un altro set di regole pubblicato non avranno regole disponibili.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Cambiare questo set completo di regole linguistiche in bozza? Nessuna regola pubblicata per la lingua predefinita è disponibile come alternativa.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

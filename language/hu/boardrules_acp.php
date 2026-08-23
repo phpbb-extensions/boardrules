@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Kezelje az összes telepített nyelvet egy helyen. Másolja át a teljes szabálykészletet egy másik nyelvre, fordítsa le piszkozatként, majd tegye közzé, amikor elkészült.',
 	'ACP_BOARDRULES_RULES'					=> 'Szabályok',
 	'ACP_BOARDRULES_STATUS'					=> 'Állapot',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Az alapértelmezett nyelv használata',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Az alapértelmezett nyelv szabályainak használata',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Nincsenek szabályok',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Piszkozat',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Közzétéve',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ütköző horgony számozott utótaggal lett átnevezve.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'A kiválasztott nyelv nincs telepítve.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Üres szabálykészlet nem tehető közzé és nem állítható piszkozatként.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'A fórum alapértelmezett nyelve nem állítható piszkozatként.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Közzéteszi a teljes szabálykészletet ezen a nyelven? Az ezt a nyelvet használók azonnal látni fogják.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Piszkozattá teszi a teljes szabálykészletet ezen a nyelven? Az ezt a nyelvet használók helyette a fórum alapértelmezett nyelvén létrehozott szabályokat fogják látni.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'A nyelvi szabálykészlet közzétéve.',
@@ -132,6 +131,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Szabályzat sikeresen törölve.',
 	'ACP_RULE_EDITED'						=> 'Szabályzat sikeresen szerkesztve.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Adja meg a szabályzat nevét.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Nem állnak rendelkezésre közzétett alapértelmezett nyelvi szabályok.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Módosítja az alapértelmezett nyelvi szabálykészletet vázlatra? Azoknak a felhasználóknak, akik nem rendelkeznek másik közzétett szabálykészlettel, nem állnak rendelkezésre szabályok.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Vázlatra módosítja ezt a teljes nyelvi szabálykészletet? Nincsenek közzétett alapértelmezett nyelvi szabályok tartalékként.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

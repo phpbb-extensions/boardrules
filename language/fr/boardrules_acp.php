@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Gérez toutes les langues installées depuis un seul endroit. Copiez un ensemble complet de règles vers une autre langue, traduisez-le comme brouillon, puis publiez-le lorsqu’il est prêt.',
 	'ACP_BOARDRULES_RULES'					=> 'Règles',
 	'ACP_BOARDRULES_STATUS'					=> 'Statut',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Langue par défaut utilisée',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Règles de la langue par défaut utilisées',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Aucune règle',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Brouillon',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Publié',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ancres en conflit ont été renommées avec des suffixes numériques.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'La langue sélectionnée n’est pas installée.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Un ensemble de règles vide ne peut être ni publié ni défini comme brouillon.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'La langue par défaut du forum ne peut pas être définie comme brouillon.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publier cet ensemble complet de règles linguistiques ? Les utilisateurs de cette langue le verront immédiatement.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Définir cet ensemble complet de règles linguistiques comme brouillon ? Les utilisateurs de cette langue verront à la place les règles dans la langue par défaut du forum.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'L’ensemble de règles linguistiques a été publié.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Règle supprimée avec succès.',
 	'ACP_RULE_EDITED'						=> 'Règle modifiée avec succès.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Vous devez saisir un intitulé pour cette règle.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Aucune règle publiée dans la langue par défaut n’est disponible.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Définir l’ensemble de règles de la langue par défaut comme brouillon ? Les utilisateurs sans autre ensemble de règles publié n’auront aucune règle disponible.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Définir cet ensemble complet de règles linguistiques comme brouillon ? Aucune règle publiée dans la langue par défaut n’est disponible comme solution de secours.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

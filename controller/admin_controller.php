@@ -217,8 +217,8 @@ class admin_controller implements admin_interface
 				'S_EMPTY' => $is_empty,
 				'S_PUBLISHED' => !$is_empty && $language['published'],
 				'S_DRAFT' => !$is_empty && !$language['published'],
+				'S_FALLBACK_AVAILABLE' => !$is_default && $this->default_ruleset_is_available($languages),
 				'S_CAN_COPY' => $this->has_copy_source($languages, $language['lang_iso']),
-				'S_CAN_DRAFT' => !$is_empty && $language['published'] && !$is_default,
 				'U_MANAGE' => "{$this->u_action}&amp;language={$language['lang_iso']}",
 				'U_COPY' => "{$this->u_action}&amp;action=copy&amp;language={$language['lang_iso']}&amp;return_to=dashboard",
 				'U_PUBLISH' => "{$this->u_action}&amp;action=publish&amp;language={$language['lang_iso']}&amp;return_to=dashboard",
@@ -249,6 +249,7 @@ class admin_controller implements admin_interface
 
 		$languages = $this->assign_language_options($language);
 		$current_language = $this->find_language($languages, $language);
+		$fallback_available = $this->default_ruleset_is_available($languages);
 		if ($current_language === null)
 		{
 			trigger_error($this->lang->lang('ACP_BOARDRULES_INVALID_LANGUAGE') . adm_back_link($this->u_action), E_USER_WARNING);
@@ -321,7 +322,7 @@ class admin_controller implements admin_interface
 			'S_DEFAULT_LANGUAGE' => $language === $this->config['default_lang'],
 			'S_RULESET_PUBLISHED' => $current_language['rule_count'] > 0 && $current_language['published'],
 			'S_RULESET_DRAFT' => $current_language['rule_count'] > 0 && !$current_language['published'],
-			'S_CAN_DRAFT_RULESET' => $current_language['rule_count'] > 0 && $current_language['published'] && $language !== $this->config['default_lang'],
+			'S_FALLBACK_AVAILABLE' => $language !== $this->config['default_lang'] && $fallback_available,
 			'S_CAN_COPY_RULESET' => $this->has_copy_source($languages, $language),
 			'S_RULESET_ROOT' => $parent_id === 0,
 		));
@@ -364,7 +365,7 @@ class admin_controller implements admin_interface
 		{
 			$this->ruleset_operator->set_intro_text($language, $intro_text);
 		}
-		catch (\InvalidArgumentException $e)
+		catch (\InvalidArgumentException|\RuntimeException $e)
 		{
 			trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 		}
@@ -455,18 +456,13 @@ class admin_controller implements admin_interface
 	{
 		$return_url = $this->get_ruleset_return_url($language, $return_to);
 
-		if (!$published && $language === $this->config['default_lang'])
-		{
-			trigger_error($this->lang->lang('ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT') . adm_back_link($return_url), E_USER_WARNING);
-		}
-
 		if (confirm_box(true))
 		{
 			try
 			{
 				$this->ruleset_operator->set_published($language, $published);
 			}
-			catch (\InvalidArgumentException $e)
+			catch (\InvalidArgumentException|\RuntimeException $e)
 			{
 				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($return_url), E_USER_WARNING);
 			}
@@ -477,7 +473,21 @@ class admin_controller implements admin_interface
 			trigger_error($this->lang->lang($message) . adm_back_link($return_url));
 		}
 
-		$confirm_key = $published ? 'ACP_BOARDRULES_PUBLISH_CONFIRM' : 'ACP_BOARDRULES_DRAFT_CONFIRM';
+		if ($published)
+		{
+			$confirm_key = 'ACP_BOARDRULES_PUBLISH_CONFIRM';
+		}
+		else if ($language === $this->config['default_lang'])
+		{
+			$confirm_key = 'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM';
+		}
+		else
+		{
+			$confirm_key = $this->default_ruleset_is_available($this->ruleset_operator->get_languages())
+				? 'ACP_BOARDRULES_DRAFT_CONFIRM'
+				: 'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM';
+		}
+
 		confirm_box(false, $this->lang->lang($confirm_key), build_hidden_fields(array(
 			'mode' => 'manage',
 			'action' => $published ? 'publish' : 'draft',
@@ -696,6 +706,10 @@ class admin_controller implements admin_interface
 					{
 						$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
 					}
+					catch (\phpbb\boardrules\exception\out_of_bounds $e)
+					{
+						trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 					catch (\Exception $e)
 					{
 						trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
@@ -716,7 +730,7 @@ class admin_controller implements admin_interface
 				{
 					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
-				catch (\RuntimeException $e)
+				catch (\InvalidArgumentException|\RuntimeException $e)
 				{
 					trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
@@ -785,6 +799,10 @@ class admin_controller implements admin_interface
 			{
 				$this->rule_operator->delete_rule($rule_id);
 			}
+			catch (\phpbb\boardrules\exception\out_of_bounds $e)
+			{
+				trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+			}
 			catch (\Exception $e)
 			{
 				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
@@ -832,6 +850,10 @@ class admin_controller implements admin_interface
 		try
 		{
 			$this->rule_operator->move($rule_id, $direction, $amount);
+		}
+		catch (\phpbb\boardrules\exception\out_of_bounds $e)
+		{
+			trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 		catch (\Exception $e)
 		{
@@ -940,6 +962,19 @@ class admin_controller implements admin_interface
 		}
 
 		return null;
+	}
+
+	/**
+	 * Test whether published default-language rules are available as a fallback.
+	 *
+	 * @param array $languages
+	 * @return bool
+	 */
+	protected function default_ruleset_is_available(array $languages)
+	{
+		$default = $this->find_language($languages, $this->config['default_lang']);
+
+		return $default !== null && $default['rule_count'] > 0 && $default['published'];
 	}
 
 	/**

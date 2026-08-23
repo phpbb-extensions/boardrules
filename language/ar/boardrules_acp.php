@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'أدر جميع اللغات المثبتة من مكان واحد. انسخ مجموعة قوانين كاملة إلى لغة أخرى، وترجمها كمسودة، ثم انشرها عندما تصبح جاهزة.',
 	'ACP_BOARDRULES_RULES'					=> 'القوانين',
 	'ACP_BOARDRULES_STATUS'					=> 'الحالة',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'استخدام اللغة الافتراضية',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'استخدام قواعد اللغة الافتراضية',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'لا توجد قوانين',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'مسودة',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'منشور',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> 'أُعيدت تسمية %d من المراسي المتعارضة باستخدام لواحق رقمية.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'اللغة المحددة غير مثبتة.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'لا يمكن نشر مجموعة قوانين فارغة أو تغييرها إلى مسودة.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'لا يمكن تغيير لغة المنتدى الافتراضية إلى مسودة.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'هل تريد نشر مجموعة القوانين الكاملة لهذه اللغة؟ سيراها مستخدمو هذه اللغة فوراً.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'هل تريد تغيير مجموعة القوانين الكاملة لهذه اللغة إلى مسودة؟ سيرى مستخدمو هذه اللغة قوانين اللغة الافتراضية للمنتدى بدلاً منها.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'نُشرت مجموعة قوانين اللغة.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'تم حذف القانون بنجاح.',
 	'ACP_RULE_EDITED'						=> 'تم تعديل القانون بنجاح.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'يجب إضافة عنوان لهذه القانون.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'لا تتوفر أية قواعد لغة افتراضية منشورة.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'هل تريد تغيير مجموعة قواعد اللغة الافتراضية إلى مسودة؟ لن يكون لدى المستخدمين الذين ليس لديهم مجموعة قواعد منشورة أخرى أي قواعد متاحة.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'هل تريد تغيير مجموعة قواعد اللغة الكاملة هذه إلى مسودة؟ لا تتوفر أي قواعد لغة افتراضية منشورة كبديل.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

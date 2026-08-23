@@ -17,15 +17,15 @@
 				<td><strong>{{ language.LANG_LOCAL_NAME }}</strong><br><span>{{ language.LANG_ENGLISH_NAME }}{% if language.S_DEFAULT %} · {{ lang('ACP_BOARDRULES_DEFAULT_LANGUAGE') }}{% endif %}</span></td>
 				<td>{{ language.RULE_COUNT }}</td>
 				<td>
-					{% if language.S_EMPTY %}<span class="error">{{ lang(language.S_DEFAULT ? 'ACP_BOARDRULES_STATUS_NO_RULES' : 'ACP_BOARDRULES_STATUS_EMPTY') }}</span>
-					{% elseif language.S_DRAFT %}<strong>{{ lang('ACP_BOARDRULES_STATUS_DRAFT') }}</strong>
+					{% if language.S_EMPTY %}<span class="error">{{ lang(language.S_DEFAULT ? 'ACP_BOARDRULES_STATUS_NO_RULES' : (language.S_FALLBACK_AVAILABLE ? 'ACP_BOARDRULES_STATUS_EMPTY' : 'ACP_BOARDRULES_FALLBACK_UNAVAILABLE')) }}</span>
+					{% elseif language.S_DRAFT %}<strong>{{ lang('ACP_BOARDRULES_STATUS_DRAFT') }}</strong>{% if not language.S_DEFAULT %}<br><span{% if not language.S_FALLBACK_AVAILABLE %} class="error"{% endif %}>{{ lang(language.S_FALLBACK_AVAILABLE ? 'ACP_BOARDRULES_STATUS_EMPTY' : 'ACP_BOARDRULES_FALLBACK_UNAVAILABLE') }}</span>{% endif %}
 					{% else %}<strong class="success">{{ lang('ACP_BOARDRULES_STATUS_PUBLISHED') }}</strong>{% endif %}
 				</td>
 				<td class="actions">
 					<a href="{{ language.U_MANAGE }}">{{ lang('ACP_BOARDRULES_MANAGE_ACTION') }}</a>
 					{% if language.S_CAN_COPY %} &middot; <a href="{{ language.U_COPY }}">{{ lang('ACP_BOARDRULES_COPY_ACTION') }}</a>{% endif %}
 					{% if language.S_DRAFT %} &middot; <a href="{{ language.U_PUBLISH }}">{{ lang('ACP_BOARDRULES_PUBLISH') }}</a>{% endif %}
-					{% if language.S_CAN_DRAFT %} &middot; <a href="{{ language.U_DRAFT }}">{{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
+					{% if language.S_PUBLISHED %} &middot; <a href="{{ language.U_DRAFT }}">{{ lang('ACP_BOARDRULES_SET_DRAFT') }}</a>{% endif %}
 				</td>
 			</tr>
 		{% endfor %}

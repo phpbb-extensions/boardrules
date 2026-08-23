@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Administrer alle installerede sprog ét sted. Kopiér et komplet regelsæt til et andet sprog, oversæt det som en kladde, og udgiv det, når det er klar.',
 	'ACP_BOARDRULES_RULES'					=> 'Regler',
 	'ACP_BOARDRULES_STATUS'					=> 'Status',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Bruger standardsprog',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Bruger regler på standardsproget',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Ingen regler',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Kladde',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Udgivet',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ankre med konflikter blev omdøbt med numeriske suffikser.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Det valgte sprog er ikke installeret.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Et tomt regelsæt kan ikke udgives eller angives som kladde.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Boardets standardsprog kan ikke angives som kladde.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Vil du udgive hele dette regelsæt? Brugere af dette sprog vil se det med det samme.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Vil du ændre hele dette regelsæt til en kladde? Brugere af dette sprog vil i stedet se reglerne på boardets standardsprog.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Sprogets regelsæt blev udgivet.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regel fjernet.',
 	'ACP_RULE_EDITED'						=> 'Regel redigeret.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Du skal indtaste en titel til reglen.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Ingen offentliggjorte standardsprogsregler er tilgængelige.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Vil du ændre standardsprogets regelsæt til kladde? Brugere uden et andet offentliggjort regelsæt har ingen tilgængelige regler.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Vil du ændre dette komplette sprogregelsæt til kladde? Ingen offentliggjorte standardsprogsregler er tilgængelige som en reserve.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

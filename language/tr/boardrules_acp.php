@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Yüklü tüm dilleri tek bir yerden yönetin. Tam bir kural kümesini başka bir dile kopyalayın, taslak olarak çevirin ve hazır olduğunda yayınlayın.',
 	'ACP_BOARDRULES_RULES'					=> 'Kurallar',
 	'ACP_BOARDRULES_STATUS'					=> 'Durum',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Varsayılan dil kullanılıyor',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Varsayılan dil kuralları kullanılıyor',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Kural yok',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Taslak',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Yayınlandı',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d çakışan bağlantı çapası sayısal son eklerle yeniden adlandırıldı.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Seçilen dil yüklü değil.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Boş bir kural kümesi yayınlanamaz veya taslak olarak değiştirilemez.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Forumun varsayılan dili taslak olarak değiştirilemez.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Bu dilin tüm kural kümesi yayınlansın mı? Bu dili kullananlar kural kümesini hemen görecek.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Bu dilin tüm kural kümesi taslak olarak değiştirilsin mi? Bu dili kullananlar bunun yerine forumun varsayılan dilindeki kuralları görecek.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Dil kural kümesi yayınlandı.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Kural başarıyla kaldırıldı.',
 	'ACP_RULE_EDITED'						=> 'Kural başarıyla düzenlendi.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Bu kural için bir başlık girmelisiniz.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Yayınlanmış varsayılan dil kuralları mevcut değil.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Varsayılan dil kural seti taslak olarak değiştirilsin mi? Yayınlanmış başka bir kural seti olmayan kullanıcılar için hiçbir kural mevcut olmayacaktır.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Bu dil kural setinin tamamı taslak olarak değiştirilsin mi? Geri dönüş olarak yayınlanmış hiçbir varsayılan dil kuralı mevcut değildir.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

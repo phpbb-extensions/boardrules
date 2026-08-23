@@ -197,6 +197,34 @@ class ruleset implements ruleset_interface
 	/**
 	 * {@inheritdoc}
 	 */
+	public function draft_if_empty($language)
+	{
+		if (!$this->language_exists($language))
+		{
+			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
+		}
+
+		$acquired_lock = $this->acquire_write_lock();
+		try
+		{
+			if ($this->get_rule_count($language) > 0)
+			{
+				return false;
+			}
+
+			$this->save_published_state($language, false);
+
+			return true;
+		}
+		finally
+		{
+			$this->release_write_lock($acquired_lock);
+		}
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function get_intro_text($language)
 	{
 		$sql = 'SELECT rules_intro_text
@@ -232,12 +260,20 @@ class ruleset implements ruleset_interface
 			throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
 		}
 
-		if ($this->get_rule_count($language) === 0)
+		$acquired_lock = $this->acquire_write_lock();
+		try
 		{
-			throw new \InvalidArgumentException('ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
-		}
+			if ($this->get_rule_count($language) === 0)
+			{
+				throw new \InvalidArgumentException('ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
+			}
 
-		$this->save_published_state($language, (bool) $published);
+			$this->save_published_state($language, (bool) $published);
+		}
+		finally
+		{
+			$this->release_write_lock($acquired_lock);
+		}
 	}
 
 	/**
@@ -376,30 +412,73 @@ class ruleset implements ruleset_interface
 	 */
 	protected function save_ruleset_value($language, $column, $value)
 	{
-		$sql = 'SELECT language_iso
-			FROM ' . $this->rulesets_table . "
-			WHERE language_iso = '" . $this->db->sql_escape($language) . "'";
-		$result = $this->db->sql_query_limit($sql, 1);
-		$exists = (bool) $this->db->sql_fetchfield('language_iso');
-		$this->db->sql_freeresult($result);
-
-		if ($exists)
+		$acquired_lock = $this->acquire_write_lock();
+		try
 		{
-			$sql = 'UPDATE ' . $this->rulesets_table . '
-				SET ' . $this->db->sql_build_array('UPDATE', array($column => $value)) . "
+			$sql = 'SELECT language_iso
+				FROM ' . $this->rulesets_table . "
 				WHERE language_iso = '" . $this->db->sql_escape($language) . "'";
+			$result = $this->db->sql_query_limit($sql, 1);
+			$exists = (bool) $this->db->sql_fetchfield('language_iso');
+			$this->db->sql_freeresult($result);
+
+			if ($exists)
+			{
+				$sql = 'UPDATE ' . $this->rulesets_table . '
+					SET ' . $this->db->sql_build_array('UPDATE', array($column => $value)) . "
+					WHERE language_iso = '" . $this->db->sql_escape($language) . "'";
+			}
+			else
+			{
+				$sql_data = array(
+					'language_iso' => $language,
+					'rules_published' => 1,
+					'rules_intro_text' => '',
+				);
+				$sql_data[$column] = $value;
+				$sql = 'INSERT INTO ' . $this->rulesets_table . ' ' . $this->db->sql_build_array('INSERT', $sql_data);
+			}
+
+			$this->db->sql_query($sql);
 		}
-		else
+		finally
 		{
-			$sql_data = array(
-				'language_iso' => $language,
-				'rules_published' => 1,
-				'rules_intro_text' => '',
-			);
-			$sql_data[$column] = $value;
-			$sql = 'INSERT INTO ' . $this->rulesets_table . ' ' . $this->db->sql_build_array('INSERT', $sql_data);
+			$this->release_write_lock($acquired_lock);
+		}
+	}
+
+	/**
+	 * Acquire the shared write lock unless this request already owns it.
+	 *
+	 * @return bool True when this method acquired the lock
+	 * @throws \RuntimeException If another request owns the lock
+	 */
+	protected function acquire_write_lock()
+	{
+		if ($this->lock->owns_lock())
+		{
+			return false;
 		}
 
-		$this->db->sql_query($sql);
+		if (!$this->lock->acquire())
+		{
+			throw new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
+		}
+
+		return true;
+	}
+
+	/**
+	 * Release the shared write lock only when acquired by the current method.
+	 *
+	 * @param bool $acquired_lock
+	 * @return void
+	 */
+	protected function release_write_lock($acquired_lock)
+	{
+		if ($acquired_lock)
+		{
+			$this->lock->release();
+		}
 	}
 }

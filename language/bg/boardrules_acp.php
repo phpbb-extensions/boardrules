@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Управлявайте всички инсталирани езици от едно място. Копирайте пълен набор от правила на друг език, преведете го като чернова и го публикувайте, когато е готов.',
 	'ACP_BOARDRULES_RULES'					=> 'Правила',
 	'ACP_BOARDRULES_STATUS'					=> 'Състояние',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Използва се езикът по подразбиране',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Използват се правилата на езика по подразбиране',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Няма правила',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Чернова',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Публикувано',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d конфликтни котви бяха преименувани с цифрови суфикси.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Избраният език не е инсталиран.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Празен набор от правила не може да бъде публикуван или зададен като чернова.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Езикът по подразбиране на форума не може да бъде зададен като чернова.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Да се публикува ли този пълен набор от правила? Потребителите на този език ще го видят веднага.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Да се зададе ли този пълен набор от правила като чернова? Потребителите на този език вместо него ще виждат правилата на езика по подразбиране на форума.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Наборът от правила на езика е публикуван.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Правилото успешно изтрито.',
 	'ACP_RULE_EDITED'						=> 'Правилото успешно редактирано.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Трябва да въведете заглавие за това Правило.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Няма публикувани правила за език по подразбиране.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Промяна на набора от правила за език по подразбиране на чернова? Потребителите без друг публикуван набор от правила няма да имат налични правила.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Да промените този пълен набор от езикови правила на чернова? Няма публикувани правила за език по подразбиране, налични като резервен вариант.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

@@ -58,6 +58,7 @@ services:
         arguments:
             - '@service_container'
             - '@phpbb.boardrules.nestedset_rules'
+            - '@phpbb.boardrules.ruleset_operator'
             - '@phpbb.boardrules.table_lock'
 
     phpbb.boardrules.ruleset_operator:

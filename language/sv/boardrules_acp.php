@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Hantera alla installerade språk på ett ställe. Kopiera en fullständig regeluppsättning till ett annat språk, översätt den som ett utkast och publicera den när den är klar.',
 	'ACP_BOARDRULES_RULES'					=> 'Regler',
 	'ACP_BOARDRULES_STATUS'					=> 'Status',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Använder standardspråk',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Använder regler på standardspråket',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Inga regler',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Utkast',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Publicerad',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ankare med konflikter döptes om med numeriska suffix.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Det valda språket är inte installerat.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'En tom regeluppsättning kan inte publiceras eller anges som utkast.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Forumets standardspråk kan inte anges som utkast.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publicera hela denna regeluppsättning? Användare av detta språk ser den omedelbart.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Ändra hela denna regeluppsättning till utkast? Användare av detta språk ser i stället reglerna på forumets standardspråk.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Språkets regeluppsättning publicerades.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regeln har raderats.',
 	'ACP_RULE_EDITED'						=> 'Regeln har uppdaterats.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Du måste ange en rubrik för denna regel.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Det finns inga publicerade regler på standardspråket.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Ändra regeluppsättningen för standardspråket till utkast? Användare utan en annan publicerad regeluppsättning har inga tillgängliga regler.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Ändra denna fullständiga språkregeluppsättning till utkast? Det finns inga publicerade regler på standardspråket som reserv.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

@@ -124,13 +124,13 @@ class admin_controller_test extends \phpbb_database_test_case
 
 		$lock = new \phpbb\lock\db('boardrules.table_lock.boardrules_table', $this->config, $this->db);
 		$nestedset = new \phpbb\boardrules\operators\nestedset_rules($this->db, $lock, 'phpbb_boardrules');
-		$this->rule_operator = new \phpbb\boardrules\operators\rule($container, $nestedset, $lock);
 		$this->ruleset_operator = new \phpbb\boardrules\operators\ruleset(
 			$this->db,
 			$lock,
 			'phpbb_boardrules',
 			'phpbb_boardrules_rulesets'
 		);
+		$this->rule_operator = new \phpbb\boardrules\operators\rule($container, $nestedset, $this->ruleset_operator, $lock);
 
 		$this->request = $this->createMock(\phpbb\request\request::class);
 		$this->request->method('variable')
@@ -291,8 +291,19 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertTrue($this->blocks['languages'][0]['S_PUBLISHED']);
 		self::assertFalse($this->blocks['languages'][0]['S_DRAFT']);
 		self::assertTrue($this->blocks['languages'][1]['S_EMPTY']);
+		self::assertTrue($this->blocks['languages'][1]['S_FALLBACK_AVAILABLE']);
 		self::assertTrue($this->blocks['languages'][1]['S_CAN_COPY']);
 		self::assertTrue($this->assigned_vars['S_LANGUAGE_DASHBOARD']);
+	}
+
+	public function test_language_dashboard_reports_unavailable_fallback_when_default_is_draft(): void
+	{
+		$this->ruleset_operator->set_published('en', false);
+		$this->controller->display_language_dashboard();
+
+		self::assertTrue($this->blocks['languages'][0]['S_DRAFT']);
+		self::assertFalse($this->blocks['languages'][1]['S_FALLBACK_AVAILABLE']);
+		self::assertFalse($this->blocks['languages'][2]['S_FALLBACK_AVAILABLE']);
 	}
 
 	public function test_display_rules_uses_real_tree_and_skips_nested_children(): void
@@ -315,6 +326,23 @@ class admin_controller_test extends \phpbb_database_test_case
 			'boardrules_intro' => '_INTRO',
 			'add_edit_rule' => '_ADD_RULE',
 		), admin_test_state::$form_key_suffixes);
+	}
+
+	public function test_display_rules_reports_available_default_fallback(): void
+	{
+		$this->controller->display_rules('fr');
+
+		self::assertTrue($this->assigned_vars['S_RULESET_EMPTY']);
+		self::assertTrue($this->assigned_vars['S_FALLBACK_AVAILABLE']);
+	}
+
+	public function test_display_rules_reports_unavailable_fallback_when_default_is_draft(): void
+	{
+		$this->ruleset_operator->set_published('en', false);
+		$this->controller->display_rules('fr');
+
+		self::assertTrue($this->assigned_vars['S_RULESET_EMPTY']);
+		self::assertFalse($this->assigned_vars['S_FALLBACK_AVAILABLE']);
 	}
 
 	public function test_display_rules_escapes_encoded_sitename_once(): void
@@ -370,6 +398,20 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_INVALID_LANGUAGE');
 
 		$this->controller->save_ruleset_intro('xx');
+	}
+
+	public function test_save_ruleset_intro_reports_lock_failure(): void
+	{
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->setMethods(array('set_intro_text'))
+			->getMock();
+		$ruleset_operator->method('set_intro_text')
+			->willThrowException(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'));
+		$this->replace_controller_service('ruleset_operator', $ruleset_operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
+
+		$this->controller->save_ruleset_intro('fr');
 	}
 
 	public function test_display_rules_rejects_unknown_language(): void
@@ -467,6 +509,29 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame(array('adm.php?i=boardrules'), admin_test_state::$redirects);
 	}
 
+	public function test_default_draft_confirmation_warns_about_fallback_impact(): void
+	{
+		admin_test_state::$confirm = false;
+		$this->controller->set_ruleset_published('en', false);
+
+		self::assertSame(
+			'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM',
+			admin_test_state::$confirmations[0]['title']
+		);
+	}
+
+	public function test_draft_confirmation_reports_unavailable_fallback(): void
+	{
+		$this->ruleset_operator->set_published('en', false);
+		admin_test_state::$confirm = false;
+		$this->controller->set_ruleset_published('fr', false);
+
+		self::assertSame(
+			'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM',
+			admin_test_state::$confirmations[0]['title']
+		);
+	}
+
 	public function test_ruleset_can_be_published(): void
 	{
 		$this->log->expects(self::once())->method('add');
@@ -474,9 +539,10 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->set_ruleset_published('en', true);
 	}
 
-	public function test_default_ruleset_cannot_be_drafted(): void
+	public function test_default_ruleset_can_be_returned_to_draft(): void
 	{
-		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT');
+		$this->log->expects(self::once())->method('add');
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'ACP_BOARDRULES_DRAFT_SUCCESS');
 		$this->controller->set_ruleset_published('en', false);
 	}
 
@@ -484,6 +550,20 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
 		$this->controller->set_ruleset_published('fr', true);
+	}
+
+	public function test_ruleset_status_reports_lock_failure(): void
+	{
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->setMethods(array('set_published'))
+			->getMock();
+		$ruleset_operator->method('set_published')
+			->willThrowException(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'));
+		$this->replace_controller_service('ruleset_operator', $ruleset_operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
+
+		$this->controller->set_ruleset_published('en', true);
 	}
 
 	public function test_add_rule_initial_form_uses_real_entity(): void
@@ -595,6 +675,22 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->edit_rule(2);
 	}
 
+	public function test_edit_rule_translates_parent_change_bounds_failure(): void
+	{
+		$entity = $this->mock_entity(2);
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('change_parent')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('new_parent_id'));
+		$this->replace_controller_service('container', $this->entity_container($entity));
+		$this->replace_controller_service('rule_operator', $operator);
+		$this->post['submit'] = true;
+		$this->variables['rule_parent'] = 3;
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+
+		$this->controller->edit_rule(2);
+	}
+
 	/**
 	 * @dataProvider add_rule_operator_error_data
 	 */
@@ -650,6 +746,18 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->delete_rule(3);
 	}
 
+	public function test_delete_rule_translates_bounds_failure(): void
+	{
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('delete_rule')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$this->replace_controller_service('rule_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+
+		$this->controller->delete_rule(3);
+	}
+
 	public function test_move_rule_rejects_invalid_hash(): void
 	{
 		admin_test_state::$valid_link_hash = false;
@@ -683,6 +791,18 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator->method('move')->willThrowException(new \RuntimeException('MOVE_FAILED'));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->setExpectedTriggerError(E_USER_WARNING, 'MOVE_FAILED');
+
+		$this->controller->move_rule(2, 'down');
+	}
+
+	public function test_move_rule_translates_bounds_failure(): void
+	{
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('move')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$this->replace_controller_service('rule_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
 
 		$this->controller->move_rule(2, 'down');
 	}
