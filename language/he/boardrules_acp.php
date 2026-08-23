@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'נהל את כל השפות המותקנות ממקום אחד. העתק מערכת חוקים מלאה לשפה אחרת, תרגם אותה כטיוטה ולאחר מכן פרסם אותה כשהיא מוכנה.',
 	'ACP_BOARDRULES_RULES'					=> 'חוקים',
 	'ACP_BOARDRULES_STATUS'					=> 'מצב',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'נעשה שימוש בשפת ברירת המחדל',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'נעשה שימוש בכללים בשפת ברירת המחדל',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'אין חוקים',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'טיוטה',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'פורסם',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d עוגנים מתנגשים קיבלו שמות חדשים עם סיומות מספריות.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'השפה שנבחרה אינה מותקנת.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'אי אפשר לפרסם מערכת חוקים ריקה או להפוך אותה לטיוטה.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'אי אפשר להפוך את שפת ברירת המחדל של הפורום לטיוטה.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'לפרסם את מערכת החוקים המלאה בשפה זו? משתמשי השפה יראו אותה מיד.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'להפוך את מערכת החוקים המלאה בשפה זו לטיוטה? משתמשי השפה יראו במקומה את החוקים בשפת ברירת המחדל של הפורום.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'מערכת החוקים של השפה פורסמה.',
@@ -132,6 +131,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'החוק הוסר בהצלחה.',
 	'ACP_RULE_EDITED'						=> 'החוק נערך בהצלחה.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'אתה חייב לתת כותרת לחוק.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'אין כללים שפורסמו בשפת ברירת המחדל.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'לשנות את מערכת הכללים של שפת ברירת המחדל לטיוטה? למשתמשים ללא מערכת כללים אחרת שפורסמה לא יהיו כללים זמינים.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'לשנות את מערכת כללי השפה המלאה הזו לטיוטה? אין כללים שפורסמו בשפת ברירת המחדל כחלופה.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

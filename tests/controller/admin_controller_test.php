@@ -291,8 +291,19 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertTrue($this->blocks['languages'][0]['S_PUBLISHED']);
 		self::assertFalse($this->blocks['languages'][0]['S_DRAFT']);
 		self::assertTrue($this->blocks['languages'][1]['S_EMPTY']);
+		self::assertTrue($this->blocks['languages'][1]['S_FALLBACK_AVAILABLE']);
 		self::assertTrue($this->blocks['languages'][1]['S_CAN_COPY']);
 		self::assertTrue($this->assigned_vars['S_LANGUAGE_DASHBOARD']);
+	}
+
+	public function test_language_dashboard_reports_unavailable_fallback_when_default_is_draft(): void
+	{
+		$this->ruleset_operator->set_published('en', false);
+		$this->controller->display_language_dashboard();
+
+		self::assertTrue($this->blocks['languages'][0]['S_DRAFT']);
+		self::assertFalse($this->blocks['languages'][1]['S_FALLBACK_AVAILABLE']);
+		self::assertFalse($this->blocks['languages'][2]['S_FALLBACK_AVAILABLE']);
 	}
 
 	public function test_display_rules_uses_real_tree_and_skips_nested_children(): void
@@ -315,6 +326,23 @@ class admin_controller_test extends \phpbb_database_test_case
 			'boardrules_intro' => '_INTRO',
 			'add_edit_rule' => '_ADD_RULE',
 		), admin_test_state::$form_key_suffixes);
+	}
+
+	public function test_display_rules_reports_available_default_fallback(): void
+	{
+		$this->controller->display_rules('fr');
+
+		self::assertTrue($this->assigned_vars['S_RULESET_EMPTY']);
+		self::assertTrue($this->assigned_vars['S_FALLBACK_AVAILABLE']);
+	}
+
+	public function test_display_rules_reports_unavailable_fallback_when_default_is_draft(): void
+	{
+		$this->ruleset_operator->set_published('en', false);
+		$this->controller->display_rules('fr');
+
+		self::assertTrue($this->assigned_vars['S_RULESET_EMPTY']);
+		self::assertFalse($this->assigned_vars['S_FALLBACK_AVAILABLE']);
 	}
 
 	public function test_display_rules_escapes_encoded_sitename_once(): void
@@ -481,6 +509,29 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame(array('adm.php?i=boardrules'), admin_test_state::$redirects);
 	}
 
+	public function test_default_draft_confirmation_warns_about_fallback_impact(): void
+	{
+		admin_test_state::$confirm = false;
+		$this->controller->set_ruleset_published('en', false);
+
+		self::assertSame(
+			'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM',
+			admin_test_state::$confirmations[0]['title']
+		);
+	}
+
+	public function test_draft_confirmation_reports_unavailable_fallback(): void
+	{
+		$this->ruleset_operator->set_published('en', false);
+		admin_test_state::$confirm = false;
+		$this->controller->set_ruleset_published('fr', false);
+
+		self::assertSame(
+			'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM',
+			admin_test_state::$confirmations[0]['title']
+		);
+	}
+
 	public function test_ruleset_can_be_published(): void
 	{
 		$this->log->expects(self::once())->method('add');
@@ -488,9 +539,10 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->set_ruleset_published('en', true);
 	}
 
-	public function test_default_ruleset_cannot_be_drafted(): void
+	public function test_default_ruleset_can_be_returned_to_draft(): void
 	{
-		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT');
+		$this->log->expects(self::once())->method('add');
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'ACP_BOARDRULES_DRAFT_SUCCESS');
 		$this->controller->set_ruleset_published('en', false);
 	}
 

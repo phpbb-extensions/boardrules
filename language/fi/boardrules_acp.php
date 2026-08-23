@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Hallitse kaikkia asennettuja kieliä yhdessä paikassa. Kopioi koko sääntökokonaisuus toiselle kielelle, käännä se luonnoksena ja julkaise se, kun se on valmis.',
 	'ACP_BOARDRULES_RULES'					=> 'Säännöt',
 	'ACP_BOARDRULES_STATUS'					=> 'Tila',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Käytetään oletuskieltä',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Käytetään oletuskielen sääntöjä',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Ei sääntöjä',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Luonnos',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Julkaistu',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ristiriitaista ankkuria nimettiin uudelleen numeerisilla jälkiliitteillä.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Valittua kieltä ei ole asennettu.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Tyhjää sääntökokonaisuutta ei voi julkaista tai muuttaa luonnokseksi.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Foorumin oletuskieltä ei voi muuttaa luonnokseksi.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Julkaistaanko tämän kielen koko sääntökokonaisuus? Tämän kielen käyttäjät näkevät sen heti.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Muutetaanko tämän kielen koko sääntökokonaisuus luonnokseksi? Tämän kielen käyttäjät näkevät sen sijaan foorumin oletuskielen säännöt.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Kielen sääntökokonaisuus julkaistu.',
@@ -132,6 +131,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Sääntö poistettu onnistuneesti.',
 	'ACP_RULE_EDITED'						=> 'Sääntöä muokattu onnistuneesti.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Sinun on annettava tälle säännölle otsikko.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Julkaistuja oletuskielisiä sääntöjä ei ole saatavilla.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Muutetaanko oletuskielen sääntöjoukko luonnokseksi? Käyttäjillä, joilla ei ole toista julkaistua sääntöjoukkoa, ei ole sääntöjä saatavilla.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Muutetaanko tämä täydellinen kielisääntöjoukko luonnokseksi? Julkaistuja oletuskielisiä sääntöjä ei ole saatavilla varavaihtoehtona.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

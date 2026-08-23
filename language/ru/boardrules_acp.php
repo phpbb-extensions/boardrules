@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Управляйте всеми установленными языками в одном месте. Скопируйте полный набор правил на другой язык, переведите его как черновик и опубликуйте, когда он будет готов.',
 	'ACP_BOARDRULES_RULES'					=> 'Правила',
 	'ACP_BOARDRULES_STATUS'					=> 'Статус',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Используется язык по умолчанию',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Используются правила на языке по умолчанию',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Нет правил',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Черновик',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Опубликовано',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d конфликтующих якорей переименовано с добавлением числовых суффиксов.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Выбранный язык не установлен.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Пустой набор правил нельзя опубликовать или сделать черновиком.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Язык форума по умолчанию нельзя сделать черновиком.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Опубликовать этот полный набор правил языка? Пользователи этого языка увидят его немедленно.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Сделать этот полный набор правил языка черновиком? Пользователи этого языка вместо него увидят правила на языке форума по умолчанию.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Набор правил языка опубликован.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Правило успешно удалено.',
 	'ACP_RULE_EDITED'						=> 'Правило успешно отредактировано.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Вы должны ввести заголовок для правила',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Опубликованные правила на языке по умолчанию недоступны.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Изменить набор правил языка по умолчанию на черновик? Пользователям, у которых нет другого опубликованного набора правил, правила будут недоступны.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Изменить этот полный набор языковых правил на черновик? Опубликованные правила языка по умолчанию недоступны в качестве резервного варианта.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

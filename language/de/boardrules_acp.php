@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Verwalten Sie alle installierten Sprachen an einem zentralen Ort. Kopieren Sie einen vollständigen Regelsatz in eine andere Sprache, übersetzen Sie ihn als Entwurf und veröffentlichen Sie ihn anschließend.',
 	'ACP_BOARDRULES_RULES'					=> 'Regeln',
 	'ACP_BOARDRULES_STATUS'					=> 'Status',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Standardsprache wird verwendet',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Regeln in der Standardsprache werden verwendet',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Keine Regeln',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Entwurf',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Veröffentlicht',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d Anker mit Konflikten wurden mit numerischen Suffixen umbenannt.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Die ausgewählte Sprache ist nicht installiert.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Ein leerer Regelsatz kann weder veröffentlicht noch als Entwurf festgelegt werden.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Die Standardsprache des Forums kann nicht als Entwurf festgelegt werden.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Diesen vollständigen Sprachregelsatz veröffentlichen? Benutzer dieser Sprache sehen ihn sofort.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Diesen vollständigen Sprachregelsatz als Entwurf festlegen? Benutzer dieser Sprache sehen stattdessen die Regeln in der Standardsprache des Forums.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Der Sprachregelsatz wurde veröffentlicht.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regel gelöscht.',
 	'ACP_RULE_EDITED'						=> 'Regel bearbeitet.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Für die Regel muss ein Regel-Name vergeben werden.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Es sind keine veröffentlichten Regeln in der Standardsprache verfügbar.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Den Regelsatz der Standardsprache in einen Entwurf ändern? Für Benutzer ohne einen anderen veröffentlichten Regelsatz sind keine Regeln verfügbar.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Diesen kompletten Sprachregelsatz in einen Entwurf ändern? Als Rückgriff stehen keine veröffentlichten Regeln in der Standardsprache zur Verfügung.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> '在一个位置管理所有已安装的语言。将整套章程复制到另一种语言，以草稿形式翻译，准备好后再发布。',
 	'ACP_BOARDRULES_RULES'					=> '章程',
 	'ACP_BOARDRULES_STATUS'					=> '状态',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> '正在使用默认语言',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> '正在使用默认语言规则',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> '无章程',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> '草稿',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> '已发布',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d 个冲突的锚点已使用数字后缀重命名。',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> '所选语言尚未安装。',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> '空章程集不能发布或改为草稿。',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> '论坛默认语言不能改为草稿。',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> '发布此语言的完整章程集吗？使用此语言的用户将立即看到它。',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> '将此语言的完整章程集改为草稿吗？使用此语言的用户将改为看到论坛默认语言的章程。',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> '语言章程集已发布。',
@@ -132,6 +131,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> '成功删除了章程。',
 	'ACP_RULE_EDITED'						=> '章程编辑成功。',
 	'ACP_RULE_TITLE_EMPTY'					=> '您必须输入一个标题。',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> '没有可用的默认语言已发布规则。',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> '将默认语言规则集改为草稿吗？没有其他已发布规则集的用户将没有可用规则。',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => '将这个完整的语言规则集改为草稿吗？没有已发布的默认语言规则可用作后备。',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

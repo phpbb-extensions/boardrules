@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Spravujte všetky nainštalované jazyky na jednom mieste. Skopírujte kompletnú sadu pravidiel do iného jazyka, preložte ju ako koncept a po dokončení ju zverejnite.',
 	'ACP_BOARDRULES_RULES'					=> 'Pravidlá',
 	'ACP_BOARDRULES_STATUS'					=> 'Stav',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Používa sa predvolený jazyk',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Používajú sa pravidlá v predvolenom jazyku',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Žiadne pravidlá',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Koncept',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Zverejnené',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d konfliktných odkazov bolo premenovaných pomocou číselných prípon.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Vybraný jazyk nie je nainštalovaný.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Prázdnu sadu pravidiel nemožno zverejniť ani nastaviť ako koncept.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Predvolený jazyk fóra nemožno nastaviť ako koncept.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Zverejniť túto kompletnú jazykovú sadu pravidiel? Používatelia tohto jazyka ju uvidia okamžite.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Nastaviť túto kompletnú jazykovú sadu pravidiel ako koncept? Používatelia tohto jazyka namiesto nej uvidia pravidlá v predvolenom jazyku fóra.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Jazyková sada pravidiel bola zverejnená.',
@@ -133,6 +132,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Pravidlo bolo úspešne odstránené.',
 	'ACP_RULE_EDITED'						=> 'Pravidlo bolo úspešne upravené.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Musíš zadať názov pravidla.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Nie sú k dispozícii žiadne zverejnené pravidlá v predvolenom jazyku.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Zmeniť sadu pravidiel predvoleného jazyka na koncept? Používatelia bez inej zverejnenej sady pravidiel nebudú mať k dispozícii žiadne pravidlá.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Zmeniť túto úplnú sadu jazykových pravidiel na koncept? Nie sú k dispozícii žiadne zverejnené pravidlá predvoleného jazyka ako náhrada.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
