@@ -39,6 +39,50 @@ class admin_controller_test extends boardrules_functional_base
 	}
 
 	/**
+	 * Test drafting default rules removes fallback availability without exposing drafts.
+	 */
+	public function test_default_ruleset_draft_reports_unavailable_fallback()
+	{
+		$this->login();
+		$this->admin_login();
+		$this->get_db();
+
+		$test_language = 'zz_boardrules_test';
+		$this->db->sql_query("DELETE FROM phpbb_lang
+			WHERE lang_iso = '" . $this->db->sql_escape($test_language) . "'");
+		$sql = 'INSERT INTO phpbb_lang ' . $this->db->sql_build_array('INSERT', array(
+			'lang_iso' => $test_language,
+			'lang_dir' => 'en',
+			'lang_english_name' => 'Board Rules Test',
+			'lang_local_name' => 'Board Rules Test',
+			'lang_author' => 'phpBB Limited',
+		));
+		$this->db->sql_query($sql);
+
+		try
+		{
+			$draft_url = "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&action=draft&language=en&sid={$this->sid}";
+			$crawler = self::request('GET', $draft_url);
+			$this->assertContainsLang('ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM', $crawler->text());
+
+			$form = $crawler->selectButton('confirm')->form();
+			$crawler = self::submit($form);
+			$this->assertContainsLang('ACP_BOARDRULES_DRAFT_SUCCESS', $crawler->text());
+
+			$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&sid={$this->sid}");
+			$this->assertContainsLang('ACP_BOARDRULES_FALLBACK_UNAVAILABLE', $crawler->filter('#main')->text());
+		}
+		finally
+		{
+			$this->db->sql_query("UPDATE phpbb_boardrules_rulesets
+				SET rules_published = 1
+				WHERE language_iso = 'en'");
+			$this->db->sql_query("DELETE FROM phpbb_lang
+				WHERE lang_iso = '" . $this->db->sql_escape($test_language) . "'");
+		}
+	}
+
+	/**
 	 * Test the per-language rules page introduction editor and public output.
 	 */
 	public function test_acp_ruleset_intro()

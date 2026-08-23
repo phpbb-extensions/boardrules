@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Administrer alle installerte språk fra ett sted. Kopier et komplett regelsett til et annet språk, oversett det som et utkast, og publiser det når det er klart.',
 	'ACP_BOARDRULES_RULES'					=> 'Regler',
 	'ACP_BOARDRULES_STATUS'					=> 'Status',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Bruker standardspråk',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Bruker regler på standardspråket',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Ingen regler',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Utkast',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Publisert',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ankere med konflikter fikk nye navn med numeriske suffikser.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Det valgte språket er ikke installert.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Et tomt regelsett kan ikke publiseres eller angis som utkast.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Forumets standardspråk kan ikke angis som utkast.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publisere hele dette regelsettet? Brukere av dette språket vil se det umiddelbart.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Endre hele dette regelsettet til utkast? Brukere av dette språket vil i stedet se reglene på forumets standardspråk.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Språkets regelsett ble publisert.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regelen har blitt slettet.',
 	'ACP_RULE_EDITED'						=> 'Regelen har blitt oppdatert.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Du må angi en tittel for denne regelen.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Ingen publiserte regler på standardspråket er tilgjengelige.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Endre regelsettet for standardspråket til utkast? Brukere uten et annet publisert regelsett har ingen regler tilgjengelig.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Endre dette komplette språkregelsettet til utkast? Ingen publiserte regler på standardspråket er tilgjengelige som reserve.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

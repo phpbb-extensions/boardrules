@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Gestionați toate limbile instalate dintr-un singur loc. Copiați un set complet de reguli într-o altă limbă, traduceți-l ca ciornă, apoi publicați-l când este gata.',
 	'ACP_BOARDRULES_RULES'					=> 'Reguli',
 	'ACP_BOARDRULES_STATUS'					=> 'Stare',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Se utilizează limba implicită',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Se utilizează regulile în limba implicită',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Nicio regulă',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Ciornă',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Publicat',
@@ -104,7 +104,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d ancore aflate în conflict au fost redenumite cu sufixe numerice.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Limba selectată nu este instalată.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Un set de reguli gol nu poate fi publicat sau schimbat în ciornă.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'Limba implicită a forumului nu poate fi schimbată în ciornă.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publicați setul complet de reguli al acestei limbi? Utilizatorii acestei limbi îl vor vedea imediat.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Schimbați setul complet de reguli al acestei limbi în ciornă? Utilizatorii acestei limbi vor vedea în schimb regulile în limba implicită a forumului.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Setul de reguli al limbii a fost publicat.',
@@ -132,6 +131,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regula a fost stearsa cu succes.',
 	'ACP_RULE_EDITED'						=> 'Regula a fost editata cu succes.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Trbuie sa introduci un titlu.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Nu sunt disponibile reguli publicate pentru limba implicită.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Schimbați setul de reguli pentru limba implicită în ciornă? Utilizatorii fără un alt set de reguli publicat nu vor avea reguli disponibile.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Schimbați acest set complet de reguli de limbă în ciornă? Nu sunt disponibile reguli publicate pentru limba implicită ca alternativă.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

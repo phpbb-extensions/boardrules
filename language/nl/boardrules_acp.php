@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Beheer alle geïnstalleerde talen vanuit één plek. Kopieer een volledige regelset naar een andere taal, vertaal deze als concept en publiceer deze wanneer hij klaar is.',
 	'ACP_BOARDRULES_RULES'					=> 'Regels',
 	'ACP_BOARDRULES_STATUS'					=> 'Status',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Standaardtaal wordt gebruikt',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Regels in de standaardtaal worden gebruikt',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Geen regels',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Concept',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Gepubliceerd',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d conflicterende ankers zijn hernoemd met numerieke achtervoegsels.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'De geselecteerde taal is niet geïnstalleerd.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Een lege regelset kan niet worden gepubliceerd of als concept worden ingesteld.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'De standaardtaal van het forum kan niet als concept worden ingesteld.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Deze volledige regelset publiceren? Gebruikers van deze taal zien deze onmiddellijk.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Deze volledige regelset als concept instellen? Gebruikers van deze taal zien in plaats daarvan de regels in de standaardtaal van het forum.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Regelset van taal gepubliceerd.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regel succesvol verwijderd.',
 	'ACP_RULE_EDITED'						=> 'Regel succesvol gewijzigd.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Je moet een titel invullen voor deze regel.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Er zijn geen gepubliceerde regels in de standaardtaal beschikbaar.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'De regelset van de standaardtaal wijzigen in concept? Voor gebruikers zonder een andere gepubliceerde regelset zijn geen regels beschikbaar.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Deze volledige taalregelset wijzigen in concept? Er zijn geen gepubliceerde regels in de standaardtaal beschikbaar als reserve.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

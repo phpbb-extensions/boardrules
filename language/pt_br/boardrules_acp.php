@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_LANGUAGES_EXPLAIN'		=> 'Gerencie todos os idiomas instalados em um só lugar. Copie um conjunto completo de regras para outro idioma, traduza-o como rascunho e publique-o quando estiver pronto.',
 	'ACP_BOARDRULES_RULES'					=> 'Regras',
 	'ACP_BOARDRULES_STATUS'					=> 'Status',
-	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Usando o idioma padrão',
+	'ACP_BOARDRULES_STATUS_EMPTY'			=> 'Usando as regras do idioma padrão',
 	'ACP_BOARDRULES_STATUS_NO_RULES'		=> 'Sem regras',
 	'ACP_BOARDRULES_STATUS_DRAFT'			=> 'Rascunho',
 	'ACP_BOARDRULES_STATUS_PUBLISHED'		=> 'Publicado',
@@ -105,7 +105,6 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d âncoras em conflito foram renomeadas com sufixos numéricos.',
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'O idioma selecionado não está instalado.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Um conjunto de regras vazio não pode ser publicado nem definido como rascunho.',
-	'ACP_BOARDRULES_DEFAULT_CANNOT_DRAFT'	=> 'O idioma padrão do fórum não pode ser definido como rascunho.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publicar este conjunto completo de regras do idioma? Os usuários deste idioma o verão imediatamente.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Definir este conjunto completo de regras do idioma como rascunho? Os usuários deste idioma verão as regras no idioma padrão do fórum.',
 	'ACP_BOARDRULES_PUBLISH_SUCCESS'		=> 'Conjunto de regras do idioma publicado.',
@@ -134,6 +133,10 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_DELETED'						=> 'Regra removida com sucesso.',
 	'ACP_RULE_EDITED'						=> 'Regra editada com sucesso.',
 	'ACP_RULE_TITLE_EMPTY'					=> 'Dê um titulo à regra.',
+
+	'ACP_BOARDRULES_FALLBACK_UNAVAILABLE'	=> 'Não há regras publicadas disponíveis no idioma padrão.',
+	'ACP_BOARDRULES_DRAFT_DEFAULT_CONFIRM'	=> 'Definir o conjunto de regras do idioma padrão como rascunho? Os usuários sem outro conjunto de regras publicado não terão regras disponíveis.',
+	'ACP_BOARDRULES_DRAFT_NO_FALLBACK_CONFIRM' => 'Definir este conjunto completo de regras do idioma como rascunho? Não há regras publicadas disponíveis no idioma padrão como alternativa.',
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings

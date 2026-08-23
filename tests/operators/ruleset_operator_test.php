@@ -92,6 +92,62 @@ class ruleset_operator_test extends \phpbb_database_test_case
 		self::assertCount(count($bounds), array_unique($bounds));
 	}
 
+	public function test_empty_ruleset_is_forced_to_draft_before_first_rule(): void
+	{
+		self::assertTrue($this->operator->draft_if_empty('fr'));
+		self::assertFalse($this->operator->is_published('fr'));
+
+		$this->operator->set_published('en', true);
+		self::assertFalse($this->operator->draft_if_empty('en'));
+		self::assertTrue($this->operator->is_published('en'));
+	}
+
+	public function test_draft_write_reuses_and_preserves_caller_owned_lock(): void
+	{
+		self::assertTrue($this->lock->acquire());
+
+		try
+		{
+			self::assertTrue($this->operator->draft_if_empty('fr'));
+			self::assertTrue($this->lock->owns_lock());
+		}
+		finally
+		{
+			$this->lock->release();
+		}
+
+		self::assertFalse($this->operator->is_published('fr'));
+	}
+
+	public function test_intro_write_rejects_competing_ruleset_creation(): void
+	{
+		$competing_lock = new \phpbb\lock\db('boardrules.table_lock.boardrules_table', $this->config, $this->db);
+		self::assertTrue($competing_lock->acquire());
+
+		try
+		{
+			$this->operator->set_intro_text('fr', 'Bienvenue.');
+			self::fail('Ruleset creation should not run while the shared lock is held.');
+		}
+		catch (\RuntimeException $e)
+		{
+			self::assertSame('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE', $e->getMessage());
+		}
+		finally
+		{
+			$competing_lock->release();
+		}
+
+		self::assertSame('', $this->operator->get_intro_text('fr'));
+	}
+
+	public function test_unknown_ruleset_cannot_be_prepared_for_first_rule(): void
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('ACP_BOARDRULES_INVALID_LANGUAGE');
+		$this->operator->draft_if_empty('xx');
+	}
+
 	public function test_copy_appends_to_non_empty_target(): void
 	{
 		$this->operator->copy('en', 'fr');

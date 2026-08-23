@@ -33,6 +33,7 @@ class main_controller_test extends \phpbb_test_case
 					'get_message_for_display' => 'content',
 				],
 				true,
+				true,
 			),
 			'A category' => array(
 				200,
@@ -44,6 +45,7 @@ class main_controller_test extends \phpbb_test_case
 					'get_title' => 'title',
 					'get_message_for_display' => 'content',
 				],
+				true,
 				true,
 			),
 			'A draft language falls back to published default rules' => array(
@@ -57,6 +59,20 @@ class main_controller_test extends \phpbb_test_case
 					'get_message_for_display' => 'fallback content',
 				],
 				false,
+				true,
+			),
+			'A draft language has no fallback when default rules are draft' => array(
+				200,
+				'@phpbb_boardrules/boardrules_controller.html',
+				[
+					'get_left_id' => 1,
+					'get_right_id' => 2,
+					'get_anchor' => '',
+					'get_title' => 'hidden fallback title',
+					'get_message_for_display' => 'hidden fallback content',
+				],
+				false,
+				false,
 			),
 		);
 	}
@@ -66,7 +82,7 @@ class main_controller_test extends \phpbb_test_case
 	*
 	* @dataProvider display_data
 	*/
-	public function test_display($status_code, $page_content, $rule_data, $language_published)
+	public function test_display($status_code, $page_content, $rule_data, $language_published, $default_published)
 	{
 		global $config, $user, $phpbb_root_path, $phpEx;
 
@@ -91,7 +107,8 @@ class main_controller_test extends \phpbb_test_case
 		$rule_operator = $this->getMockBuilder('\phpbb\boardrules\operators\rule')
 			->disableOriginalConstructor()
 			->getMock();
-		$rule_operator->expects($language_published ? self::exactly(2) : self::once())
+		$rule_calls = $language_published ? self::exactly(2) : ($default_published ? self::once() : self::never());
+		$rule_operator->expects($rule_calls)
 			->method('get_rules')
 			->willReturnCallback(function ($language) use ($entity) {
 				return $language === 'fr' ? array() : array($entity);
@@ -101,8 +118,8 @@ class main_controller_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 		$ruleset_operator->method('is_published')
-			->willReturnCallback(function ($language) use ($language_published) {
-				return $language === 'fr' ? $language_published : true;
+			->willReturnCallback(function ($language) use ($language_published, $default_published) {
+				return $language === 'fr' ? $language_published : $default_published;
 			});
 		$ruleset_operator->method('get_intro_text')->willReturn('Custom <intro> & details');
 
