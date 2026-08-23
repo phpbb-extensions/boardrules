@@ -364,7 +364,7 @@ class admin_controller implements admin_interface
 		{
 			$this->ruleset_operator->set_intro_text($language, $intro_text);
 		}
-		catch (\InvalidArgumentException $e)
+		catch (\InvalidArgumentException|\RuntimeException $e)
 		{
 			trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 		}
@@ -466,7 +466,7 @@ class admin_controller implements admin_interface
 			{
 				$this->ruleset_operator->set_published($language, $published);
 			}
-			catch (\InvalidArgumentException $e)
+			catch (\InvalidArgumentException|\RuntimeException $e)
 			{
 				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($return_url), E_USER_WARNING);
 			}

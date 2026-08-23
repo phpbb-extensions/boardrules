@@ -372,6 +372,20 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->save_ruleset_intro('xx');
 	}
 
+	public function test_save_ruleset_intro_reports_lock_failure(): void
+	{
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->setMethods(array('set_intro_text'))
+			->getMock();
+		$ruleset_operator->method('set_intro_text')
+			->willThrowException(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'));
+		$this->replace_controller_service('ruleset_operator', $ruleset_operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
+
+		$this->controller->save_ruleset_intro('fr');
+	}
+
 	public function test_display_rules_rejects_unknown_language(): void
 	{
 		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_INVALID_LANGUAGE|back:adm.php?i=boardrules');
@@ -484,6 +498,20 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		$this->setExpectedTriggerError(E_USER_WARNING, 'ACP_BOARDRULES_STATUS_CHANGE_EMPTY');
 		$this->controller->set_ruleset_published('fr', true);
+	}
+
+	public function test_ruleset_status_reports_lock_failure(): void
+	{
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->setMethods(array('set_published'))
+			->getMock();
+		$ruleset_operator->method('set_published')
+			->willThrowException(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'));
+		$this->replace_controller_service('ruleset_operator', $ruleset_operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
+
+		$this->controller->set_ruleset_published('en', true);
 	}
 
 	public function test_add_rule_initial_form_uses_real_entity(): void

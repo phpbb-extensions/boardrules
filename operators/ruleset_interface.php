@@ -47,6 +47,7 @@ interface ruleset_interface
 	 * @param string $language
 	 * @return bool True when draft state was saved
 	 * @throws \InvalidArgumentException If the language is not installed
+	 * @throws \RuntimeException If the shared write lock cannot be acquired
 	 */
 	public function draft_if_empty($language);
 
@@ -67,6 +68,7 @@ interface ruleset_interface
 	 * @param string $intro_text
 	 * @return void
 	 * @throws \InvalidArgumentException If the language is not installed
+	 * @throws \RuntimeException If the shared write lock cannot be acquired
 	 */
 	public function set_intro_text($language, $intro_text);
 
@@ -77,6 +79,7 @@ interface ruleset_interface
 	 * @param bool $published
 	 * @return void
 	 * @throws \InvalidArgumentException If the language is not installed or its ruleset is empty
+	 * @throws \RuntimeException If the shared write lock cannot be acquired
 	 */
 	public function set_published($language, $published);
 }
