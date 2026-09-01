@@ -19,13 +19,13 @@ class rule_operator_move_test extends rule_operator_base
 		$operator = $this->get_rule_operator();
 		self::assertTrue($operator->move(3, 'up'));
 
-		$result = $this->db->sql_query("SELECT rule_id, rule_left_id, rule_right_id
+		$result = $this->db->sql_query("SELECT rule_left_id, rule_right_id
 			FROM phpbb_boardrules
 			WHERE rule_language = 'de'
-			ORDER BY rule_id");
+			ORDER BY rule_left_id");
 		self::assertEquals(array(
-			array('rule_id' => 6, 'rule_left_id' => 1, 'rule_right_id' => 2),
-			array('rule_id' => 7, 'rule_left_id' => 3, 'rule_right_id' => 4),
+			array('rule_left_id' => 1, 'rule_right_id' => 2),
+			array('rule_left_id' => 3, 'rule_right_id' => 4),
 		), $this->db->sql_fetchrowset($result));
 		$this->db->sql_freeresult($result);
 	}
@@ -39,17 +39,16 @@ class rule_operator_move_test extends rule_operator_base
 
 	private function insert_german_roots()
 	{
-		foreach (array(6 => 1, 7 => 3) as $rule_id => $left_id)
+		foreach (array(1, 3) as $left_id)
 		{
 			$sql = 'INSERT INTO phpbb_boardrules ' . $this->db->sql_build_array('INSERT', array(
-				'rule_id' => $rule_id,
 				'rule_language' => 'de',
 				'rule_left_id' => $left_id,
 				'rule_right_id' => $left_id + 1,
 				'rule_parent_id' => 0,
 				'rule_parents' => '',
-				'rule_anchor' => 'de-' . $rule_id,
-				'rule_title' => 'German ' . $rule_id,
+				'rule_anchor' => 'de-' . $left_id,
+				'rule_title' => 'German ' . $left_id,
 				'rule_message' => '',
 				'rule_message_bbcode_uid' => '',
 				'rule_message_bbcode_bitfield' => '',

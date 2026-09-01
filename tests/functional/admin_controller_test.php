@@ -330,8 +330,8 @@ class admin_controller_test extends boardrules_functional_base
 		));
 		$crawler = self::submit($form);
 		self::assertGreaterThan(0, $crawler->filter('.successbox')->count());
-		self::assertStringContainsString($this->lang('ACP_BOARDRULES_COPY_SUCCESS', $source_count, 'Français'), $crawler->text());
-		self::assertStringContainsString($this->lang('ACP_BOARDRULES_COPY_ANCHORS_RENAMED', 1), $crawler->text());
+		self::assertStringContainsString(sprintf($this->lang['ACP_BOARDRULES_COPY_SUCCESS'][$source_count === 1 ? 1 : 2], $source_count, 'Français'), $crawler->text());
+		self::assertStringContainsString(sprintf($this->lang['ACP_BOARDRULES_COPY_ANCHORS_RENAMED'][1], 1), $crawler->text());
 		self::assertStringNotContainsString('language=fr', html_entity_decode($crawler->filter('.successbox a')->attr('href')));
 
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=fr&sid={$this->sid}");

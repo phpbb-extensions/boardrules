@@ -67,7 +67,6 @@ class v310_upgrade_test extends \phpbb_database_test_case
 	public function test_language_trees_are_renumbered_independently(): void
 	{
 		$sql = 'INSERT INTO phpbb_boardrules ' . $this->db->sql_build_array('INSERT', array(
-			'rule_id' => 4,
 			'rule_language' => 'de',
 			'rule_left_id' => 7,
 			'rule_right_id' => 10,
@@ -81,12 +80,12 @@ class v310_upgrade_test extends \phpbb_database_test_case
 			'rule_message_bbcode_options' => 7,
 		));
 		$this->db->sql_query($sql);
+		$german_parent_id = (int) $this->db->sql_nextid();
 		$sql = 'INSERT INTO phpbb_boardrules ' . $this->db->sql_build_array('INSERT', array(
-			'rule_id' => 5,
 			'rule_language' => 'de',
 			'rule_left_id' => 8,
 			'rule_right_id' => 9,
-			'rule_parent_id' => 4,
+			'rule_parent_id' => $german_parent_id,
 			'rule_parents' => 'cached',
 			'rule_anchor' => 'kind',
 			'rule_title' => 'Freundlich',
