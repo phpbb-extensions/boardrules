@@ -57,6 +57,44 @@ class rule_operator_add_rule_test extends rule_operator_base
 	}
 
 	/**
+	 * Test adding a rule rejects a parent from another language.
+	 */
+	public function test_add_rule_rejects_parent_from_another_language()
+	{
+		$sql = 'INSERT INTO phpbb_boardrules ' . $this->db->sql_build_array('INSERT', array(
+			'rule_language' => 'de',
+			'rule_left_id' => 1,
+			'rule_right_id' => 2,
+			'rule_parent_id' => 0,
+			'rule_parents' => '',
+			'rule_anchor' => 'de-category',
+			'rule_title' => 'German category',
+			'rule_message' => '',
+			'rule_message_bbcode_uid' => '',
+			'rule_message_bbcode_bitfield' => '',
+			'rule_message_bbcode_options' => 7,
+		));
+		$this->db->sql_query($sql);
+		$german_parent_id = (int) $this->db->sql_nextid();
+
+		$entity = $this->createMock(\phpbb\boardrules\entity\rule_interface::class);
+		$entity->expects(self::never())->method('insert');
+		$this->ruleset_operator->expects(self::never())->method('draft_if_empty');
+
+		try
+		{
+			$this->get_rule_operator()->add_rule($entity, 'en', $german_parent_id);
+			self::fail('A parent from another language should be rejected.');
+		}
+		catch (\phpbb\boardrules\exception\out_of_bounds $e)
+		{
+			self::assertSame('new_parent_id', $e->getMessage());
+		}
+
+		self::assertSame('0', (string) $this->config['nestedset_rules_lock']);
+	}
+
+	/**
 	 * Test adding a rule cannot race another nested-set write.
 	 */
 	public function test_add_rule_rejects_when_nestedset_lock_is_held()
