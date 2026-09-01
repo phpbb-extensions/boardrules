@@ -12,6 +12,28 @@ namespace phpbb\boardrules\tests\operators;
 
 class rule_operator_change_parent_test extends rule_operator_base
 {
+	public function test_change_parent_rejects_another_language()
+	{
+		$sql = 'INSERT INTO phpbb_boardrules ' . $this->db->sql_build_array('INSERT', array(
+			'rule_id' => 6,
+			'rule_language' => 'de',
+			'rule_left_id' => 1,
+			'rule_right_id' => 2,
+			'rule_parent_id' => 0,
+			'rule_parents' => '',
+			'rule_anchor' => 'de-category',
+			'rule_title' => 'German category',
+			'rule_message' => '',
+			'rule_message_bbcode_uid' => '',
+			'rule_message_bbcode_bitfield' => '',
+			'rule_message_bbcode_options' => 7,
+		));
+		$this->db->sql_query($sql);
+
+		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+		$this->get_rule_operator()->change_parent(1, 6);
+	}
+
 	/**
 	* Test data for the test_change_parent() function
 	*

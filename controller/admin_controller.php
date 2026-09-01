@@ -849,7 +849,7 @@ class admin_controller implements admin_interface
 		// Move the rule
 		try
 		{
-			$this->rule_operator->move($rule_id, $direction, $amount);
+			$moved = $this->rule_operator->move($rule_id, $direction, $amount);
 		}
 		catch (\phpbb\boardrules\exception\out_of_bounds $e)
 		{
@@ -864,7 +864,7 @@ class admin_controller implements admin_interface
 		if ($this->request->is_ajax())
 		{
 			$json_response = new \phpbb\json_response;
-			$json_response->send(array('success' => true));
+			$json_response->send(array('success' => $moved));
 		}
 
 		// Initiate and load the rule entity for no AJAX request

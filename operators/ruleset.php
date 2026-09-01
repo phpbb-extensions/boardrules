@@ -116,9 +116,9 @@ class ruleset implements ruleset_interface
 			}
 
 			$id_map = array();
-			// Board Rules uses one nested-set coordinate space for all languages.
-			// Append copied rules after the table's final bound to keep IDs unique.
-			$right_id_offset = $this->get_max_right_id();
+			// Each language has its own nested-set coordinate space. Append copied
+			// rules after the target language's final bound.
+			$right_id_offset = $this->get_max_right_id($target_language);
 			$used_anchors = $this->get_anchors($target_language);
 			$reserved_anchors = array();
 			foreach ($source_rules as $source_rule)
@@ -309,12 +309,14 @@ class ruleset implements ruleset_interface
 	}
 
 	/**
+	 * @param string $language
 	 * @return int
 	 */
-	protected function get_max_right_id()
+	protected function get_max_right_id($language)
 	{
 		$sql = 'SELECT MAX(rule_right_id) AS max_right_id
-			FROM ' . $this->boardrules_table;
+			FROM ' . $this->boardrules_table . "
+			WHERE rule_language = '" . $this->db->sql_escape($language) . "'";
 		$result = $this->db->sql_query($sql);
 		$max_right_id = (int) $this->db->sql_fetchfield('max_right_id');
 		$this->db->sql_freeresult($result);

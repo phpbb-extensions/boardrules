@@ -77,19 +77,14 @@ class ruleset_operator_test extends \phpbb_database_test_case
 
 		self::assertCount(3, $rules);
 		self::assertSame(array('General', 'Be kind', 'Stay on topic'), array_column($rules, 'rule_title'));
-		self::assertSame(array(7, 8, 10), array_map('intval', array_column($rules, 'rule_left_id')));
-		self::assertSame(array(12, 9, 11), array_map('intval', array_column($rules, 'rule_right_id')));
+		self::assertSame(array(1, 2, 4), array_map('intval', array_column($rules, 'rule_left_id')));
+		self::assertSame(array(6, 3, 5), array_map('intval', array_column($rules, 'rule_right_id')));
 		self::assertSame((int) $rules[0]['rule_id'], (int) $rules[1]['rule_parent_id']);
 		self::assertSame((int) $rules[0]['rule_id'], (int) $rules[2]['rule_parent_id']);
 		self::assertSame('', $rules[1]['rule_parents']);
 		self::assertSame('Be [b:abcd1234]kind[/b:abcd1234].', $rules[1]['rule_message']);
 		self::assertSame('abcd1234', $rules[1]['rule_message_bbcode_uid']);
 
-		$result = $this->db->sql_query('SELECT rule_left_id, rule_right_id FROM phpbb_boardrules');
-		$all_rules = $this->db->sql_fetchrowset($result);
-		$this->db->sql_freeresult($result);
-		$bounds = array_merge(array_column($all_rules, 'rule_left_id'), array_column($all_rules, 'rule_right_id'));
-		self::assertCount(count($bounds), array_unique($bounds));
 	}
 
 	public function test_empty_ruleset_is_forced_to_draft_before_first_rule(): void
@@ -165,8 +160,8 @@ class ruleset_operator_test extends \phpbb_database_test_case
 		$this->db->sql_freeresult($result);
 
 		self::assertCount(6, $rules);
-		self::assertSame(array(7, 8, 10, 13, 14, 16), array_map('intval', array_column($rules, 'rule_left_id')));
-		self::assertSame(array(12, 9, 11, 18, 15, 17), array_map('intval', array_column($rules, 'rule_right_id')));
+		self::assertSame(array(1, 2, 4, 7, 8, 10), array_map('intval', array_column($rules, 'rule_left_id')));
+		self::assertSame(array(6, 3, 5, 12, 9, 11), array_map('intval', array_column($rules, 'rule_right_id')));
 		self::assertSame(array('general', 'be-kind', 'stay-topic', 'general-2', 'be-kind-2', 'stay-topic-2'), array_column($rules, 'rule_anchor'));
 		self::assertSame((int) $rules[3]['rule_id'], (int) $rules[4]['rule_parent_id']);
 		self::assertSame((int) $rules[3]['rule_id'], (int) $rules[5]['rule_parent_id']);
