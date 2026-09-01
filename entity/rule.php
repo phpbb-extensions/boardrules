@@ -467,7 +467,7 @@ class rule implements rule_interface
 	*/
 	public function get_anchor()
 	{
-		return isset($this->data['rule_anchor']) ? utf8_decode_ncr((string) $this->data['rule_anchor']) : '';
+		return isset($this->data['rule_anchor']) ? (string) $this->data['rule_anchor'] : '';
 	}
 
 	/**
@@ -483,15 +483,13 @@ class rule implements rule_interface
 		// Enforce a string
 		$anchor = (string) $anchor;
 
-		// Anchor should not contain any special characters
-		if (($anchor !== '') && !preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/', $anchor))
+		// Anchors must begin with a letter and contain only URL-friendly
+		// letters, marks, numbers, hyphens, and underscores. Four-byte
+		// characters are rejected even when their Unicode category matches.
+		if ($anchor !== '' && !preg_match('/^(?!.*[\x{10000}-\x{10FFFF}])\p{L}[\p{L}\p{M}\p{N}_-]*$/u', $anchor))
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}
-		$display_anchor = $anchor;
-
-		// Replace four-byte UTF-8 characters before storing in utf8mb3 columns.
-		$anchor = utf8_encode_ucr($anchor);
 
 		// Limit both the displayed and stored anchor lengths to the column size.
 		if (truncate_string($anchor, 255, 255) !== $anchor)
@@ -502,12 +500,12 @@ class rule implements rule_interface
 		// Make sure rule anchors are unique for the current language
 		// Test if new page and anchor field has data or...
 		//    if existing page and anchor field has new data not equal to existing anchor data
-		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $display_anchor))
+		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
 		{
 			$sql = 'SELECT 1
-				FROM ' . $this->boardrules_table . '
-				WHERE ' . $this->db->sql_in_set('rule_anchor', array_unique(array($anchor, $display_anchor))) . '
-					AND rule_id <> ' . $this->get_id() .
+				FROM ' . $this->boardrules_table . "
+				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
+					AND rule_id <> " . $this->get_id() .
 					($this->get_language() ? " AND rule_language = '" . $this->db->sql_escape($this->get_language()) . "'" : '');
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);

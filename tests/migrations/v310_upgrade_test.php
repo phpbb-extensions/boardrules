@@ -72,7 +72,7 @@ class v310_upgrade_test extends \phpbb_database_test_case
 			'rule_right_id' => 10,
 			'rule_parent_id' => 0,
 			'rule_parents' => 'cached',
-			'rule_anchor' => 'emoji-&#128512;',
+			'rule_anchor' => 'regeln-ä',
 			'rule_title' => 'Regeln &#128512;',
 			'rule_message' => '',
 			'rule_message_bbcode_uid' => '',
@@ -118,7 +118,7 @@ class v310_upgrade_test extends \phpbb_database_test_case
 		self::assertSame(array(1, 2, 1, 2, 4), array_map('intval', array_column($rules, 'rule_left_id')));
 		self::assertSame(array(4, 3, 6, 3, 5), array_map('intval', array_column($rules, 'rule_right_id')));
 		self::assertSame('Regeln &#128512;', $rules[0]['rule_title']);
-		self::assertSame('emoji-&#128512;', $rules[0]['rule_anchor']);
+		self::assertSame('regeln-ä', $rules[0]['rule_anchor']);
 		self::assertSame(array('', '', '', '', ''), array_column($rules, 'rule_parents'));
 	}
 

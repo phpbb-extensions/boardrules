@@ -137,7 +137,17 @@ class admin_controller_test extends boardrules_functional_base
 		$crawler = self::submit($form);
 		$this->assertContainsLang('ACP_BOARDRULES_CREATE_RULE', $crawler->filter('#main h1')->text());
 
-		// Submit new rule data
+		// Reject an anchor containing a four-byte character without reaching SQL
+		$form = $crawler->selectButton($this->lang('SUBMIT'))->form(array(
+			'rule_title'	=> 'Invalid Anchor Rule',
+			'rule_anchor'	=> 'emoji-😀',
+			'rule_message'	=> 'Invalid anchor test',
+		));
+		$crawler = self::submit($form);
+		self::assertCount(1, $crawler->filter('.errorbox'));
+		self::assertCount(0, $crawler->filter('.successbox'));
+
+		// Submit valid rule data
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form(array(
 			'rule_title'	=> 'Test Rule',
 			'rule_anchor'	=> 'test-rule',
