@@ -27,6 +27,7 @@ class rule_entity_anchor_test extends rule_entity_base
 			array('foo', 'foo'),
 			array('foø-bar', 'foø-bar'),
 			array('foó-bar', 'foó-bar'),
+			array('emoji-😀', 'emoji-😀'),
 			array('', ''),
 			array(null, ''),
 

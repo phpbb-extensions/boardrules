@@ -257,7 +257,7 @@ class rule implements rule_interface
 	*/
 	public function get_title()
 	{
-		return isset($this->data['rule_title']) ? (string) $this->data['rule_title'] : '';
+		return isset($this->data['rule_title']) ? utf8_decode_ncr((string) $this->data['rule_title']) : '';
 	}
 
 	/**
@@ -273,8 +273,11 @@ class rule implements rule_interface
 		// Enforce a string
 		$title = (string) $title;
 
-		// We limit the title length to 200 characters
-		if (truncate_string($title, 200) !== $title)
+		// Replace four-byte UTF-8 characters before storing in utf8mb3 columns.
+		$title = utf8_encode_ucr($title);
+
+		// Limit both the displayed and stored title lengths to the column size.
+		if (truncate_string($title, 200, 200) !== $title)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
@@ -464,7 +467,7 @@ class rule implements rule_interface
 	*/
 	public function get_anchor()
 	{
-		return isset($this->data['rule_anchor']) ? (string) $this->data['rule_anchor'] : '';
+		return isset($this->data['rule_anchor']) ? utf8_decode_ncr((string) $this->data['rule_anchor']) : '';
 	}
 
 	/**
@@ -485,9 +488,13 @@ class rule implements rule_interface
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}
+		$display_anchor = $anchor;
 
-		// We limit the anchor length to 255 characters
-		if (truncate_string($anchor, 255) !== $anchor)
+		// Replace four-byte UTF-8 characters before storing in utf8mb3 columns.
+		$anchor = utf8_encode_ucr($anchor);
+
+		// Limit both the displayed and stored anchor lengths to the column size.
+		if (truncate_string($anchor, 255, 255) !== $anchor)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
 		}
@@ -495,12 +502,12 @@ class rule implements rule_interface
 		// Make sure rule anchors are unique for the current language
 		// Test if new page and anchor field has data or...
 		//    if existing page and anchor field has new data not equal to existing anchor data
-		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
+		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $display_anchor))
 		{
 			$sql = 'SELECT 1
-				FROM ' . $this->boardrules_table . "
-				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
-					AND rule_id <> " . $this->get_id() .
+				FROM ' . $this->boardrules_table . '
+				WHERE ' . $this->db->sql_in_set('rule_anchor', array_unique(array($anchor, $display_anchor))) . '
+					AND rule_id <> ' . $this->get_id() .
 					($this->get_language() ? " AND rule_language = '" . $this->db->sql_escape($this->get_language()) . "'" : '');
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
