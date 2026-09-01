@@ -11,7 +11,7 @@
 <a href="{{ U_BACK }}" style="float: {{ S_CONTENT_FLOW_END }};">&laquo; {{ lang('BACK') }}</a>
 
 {% if S_ADD_RULE %}
-	<h1>{{ lang('ACP_BOARDRULES_CREATE_RULE') }} :: {{ RULE_TITLE }}</h1>
+	<h1>{{ lang('ACP_BOARDRULES_CREATE_RULE') }}{% if RULE_TITLE %} :: {{ RULE_TITLE }}{% endif %}</h1>
 
 	<p>{{ lang('ACP_BOARDRULES_CREATE_RULE_EXPLAIN') }}</p>
 {% else %}
@@ -95,8 +95,10 @@
 
 <script>
 	const textarea = document.querySelector("textarea[name='rule_message']");
-	textarea.addEventListener("select", (e) => storeCaret(e.target));
-	textarea.addEventListener("click", (e) => storeCaret(e.target));
-	textarea.addEventListener("keyup", (e) => storeCaret(e.target));
-	textarea.addEventListener("focus", () => initInsertions());
+	if (textarea) {
+		textarea.addEventListener("select", (e) => storeCaret(e.target));
+		textarea.addEventListener("click", (e) => storeCaret(e.target));
+		textarea.addEventListener("keyup", (e) => storeCaret(e.target));
+		textarea.addEventListener("focus", () => initInsertions());
+	}
 </script>
