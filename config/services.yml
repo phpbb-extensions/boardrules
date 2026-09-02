@@ -20,7 +20,6 @@ services:
             - '@config'
             - '@service_container'
             - '@controller.helper'
-            - '@dbal.conn'
             - '@language'
             - '@language.loader'
             - '@log'
@@ -42,7 +41,6 @@ services:
             - '@phpbb.boardrules.operator'
             - '@phpbb.boardrules.ruleset_operator'
             - '@template'
-            - '@user'
             - '%core.root_path%'
             - '%core.php_ext%'
 

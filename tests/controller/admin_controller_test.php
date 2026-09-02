@@ -167,7 +167,6 @@ class admin_controller_test extends \phpbb_database_test_case
 			$this->config,
 			$container,
 			$helper,
-			$this->db,
 			$language,
 			$language_loader,
 			$this->log,
