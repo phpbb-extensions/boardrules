@@ -39,18 +39,14 @@ class m20_unicode_language_trees extends \phpbb\db\migration\migration
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * Keep the changed columns until the initial schema migration drops the table.
+	 * Reverting them could fail when existing data no longer fits the old types.
+	 *
+	 * @return array Array of table schema changes
 	 */
 	public function revert_schema()
 	{
-		return array(
-			'change_columns' => array(
-				$this->table_prefix . 'boardrules' => array(
-					'rule_title' => array('VCHAR:200', ''),
-					'rule_anchor' => array('VCHAR:255', ''),
-				),
-			),
-		);
+		return array();
 	}
 
 	/**

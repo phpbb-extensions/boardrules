@@ -190,27 +190,4 @@ class v310_upgrade_test extends \phpbb_database_test_case
 			array('config.remove', array('boardrules.table_lock.boardrules_table')),
 		), $migration->revert_data());
 	}
-
-	public function test_unicode_schema_is_reversible(): void
-	{
-		global $phpbb_root_path, $phpEx;
-		$factory = new \phpbb\db\tools\factory();
-		$migration = new \phpbb\boardrules\migrations\v30x\m20_unicode_language_trees(
-			new \phpbb\config\config(array()),
-			$this->db,
-			$factory->get($this->db, true),
-			$phpbb_root_path,
-			$phpEx,
-			'phpbb_'
-		);
-
-		self::assertSame(array(
-			'change_columns' => array(
-				'phpbb_boardrules' => array(
-					'rule_title' => array('VCHAR:200', ''),
-					'rule_anchor' => array('VCHAR:255', ''),
-				),
-			),
-		), $migration->revert_schema());
-	}
 }
