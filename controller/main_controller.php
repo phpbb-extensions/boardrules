@@ -33,9 +33,6 @@ class main_controller implements main_interface
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\user */
-	protected $user;
-
 	/** @var string phpBB root path */
 	protected $root_path;
 
@@ -51,12 +48,11 @@ class main_controller implements main_interface
 	* @param \phpbb\boardrules\operators\rule $rule_operator Rule operator object
 	* @param \phpbb\boardrules\operators\ruleset $ruleset_operator Ruleset operator object
 	* @param \phpbb\template\template         $template      Template object
-	* @param \phpbb\user                      $user          User object
 	* @param string                           $root_path     phpBB root path
 	* @param string                           $php_ext       phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
@@ -64,7 +60,6 @@ class main_controller implements main_interface
 		$this->rule_operator = $rule_operator;
 		$this->ruleset_operator = $ruleset_operator;
 		$this->template = $template;
-		$this->user = $user;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}

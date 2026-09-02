@@ -12,6 +12,52 @@ namespace phpbb\boardrules\tests\operators;
 
 class rule_operator_move_test extends rule_operator_base
 {
+	public function test_move_only_renumbers_the_rule_language()
+	{
+		$this->insert_german_roots();
+
+		$operator = $this->get_rule_operator();
+		self::assertTrue($operator->move(3, 'up'));
+
+		$result = $this->db->sql_query("SELECT rule_left_id, rule_right_id
+			FROM phpbb_boardrules
+			WHERE rule_language = 'de'
+			ORDER BY rule_left_id");
+		self::assertEquals(array(
+			array('rule_left_id' => 1, 'rule_right_id' => 2),
+			array('rule_left_id' => 3, 'rule_right_id' => 4),
+		), $this->db->sql_fetchrowset($result));
+		$this->db->sql_freeresult($result);
+	}
+
+	public function test_move_returns_false_at_language_boundary()
+	{
+		$this->insert_german_roots();
+
+		self::assertFalse($this->get_rule_operator()->move(1, 'up'));
+	}
+
+	private function insert_german_roots()
+	{
+		foreach (array(1, 3) as $left_id)
+		{
+			$sql = 'INSERT INTO phpbb_boardrules ' . $this->db->sql_build_array('INSERT', array(
+				'rule_language' => 'de',
+				'rule_left_id' => $left_id,
+				'rule_right_id' => $left_id + 1,
+				'rule_parent_id' => 0,
+				'rule_parents' => '',
+				'rule_anchor' => 'de-' . $left_id,
+				'rule_title' => 'German ' . $left_id,
+				'rule_message' => '',
+				'rule_message_bbcode_uid' => '',
+				'rule_message_bbcode_bitfield' => '',
+				'rule_message_bbcode_options' => 7,
+			));
+			$this->db->sql_query($sql);
+		}
+	}
+
 	/**
 	* Test data for the test_move_rules() function
 	*

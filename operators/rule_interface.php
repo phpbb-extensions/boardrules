@@ -59,7 +59,7 @@ interface rule_interface
 	* @param int $rule_id The rule identifier to move
 	* @param string $direction The direction (up|down)
 	* @param int $amount The number of places to move the rule
-	* @return void
+	* @return bool True if the rule moved, false if it was already at the boundary
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
 	* @throws \phpbb\boardrules\exception\out_of_bounds

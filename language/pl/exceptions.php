@@ -53,7 +53,7 @@ $lang = array_merge($lang, array(
 	'EXCEPTION_INVALID_ARGUMENT'	=> 'Nieprawidłowy argument określony dla `%1$s`. Powód: %2$s',
 	'EXCEPTION_OUT_OF_BOUNDS'		=> 'Pole `%1$s` odebrało dane poza jego granicami',
 	'EXCEPTION_TOO_LONG'			=> 'Wprowadzone dane były dłuższe niż maksymalna długość.',
-	'EXCEPTION_NOT_UNIQUE'			=> 'Wprowadzone dane nie były wyjątkowe.',
+	'EXCEPTION_NOT_UNIQUE'			=> 'Wprowadzone dane nie były unikalne.',
 	'EXCEPTION_UNEXPECTED_VALUE'	=> 'Pole `%1$s` odebrało nieoczekiwane dane. Powód: %2$s',
 	'EXCEPTION_ILLEGAL_CHARACTERS'	=> 'Wprowadzone dane zawierały niedozwolone znaki.',
 

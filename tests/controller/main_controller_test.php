@@ -152,7 +152,6 @@ class main_controller_test extends \phpbb_test_case
 			$rule_operator,
 			$ruleset_operator,
 			$template,
-			$user,
 			$phpbb_root_path,
 			$phpEx
 		);
@@ -241,7 +240,6 @@ class main_controller_test extends \phpbb_test_case
 			$rule_operator,
 			$ruleset_operator,
 			$template,
-			$user,
 			$phpbb_root_path,
 			$phpEx
 		);
@@ -365,7 +363,6 @@ class main_controller_test extends \phpbb_test_case
 			$rule_operator,
 			$ruleset_operator,
 			$template,
-			$user,
 			$phpbb_root_path,
 			$phpEx
 		);

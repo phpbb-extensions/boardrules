@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// ACP modules
 	'ACP_BOARDRULES'				=> 'Regulamin witryny',
-	'ACP_BOARDRULES_MANAGE'			=> 'Zarządzanie przepisami',
+	'ACP_BOARDRULES_MANAGE'			=> 'Zarządzanie regułami',
 	'ACP_BOARDRULES_SETTINGS'		=> 'Ustawienia regulaminu',
 
 	// ACP Logs

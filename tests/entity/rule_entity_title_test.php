@@ -27,6 +27,7 @@ class rule_entity_title_test extends rule_entity_base
 			array('foo', 'foo'),
 			array(1, '1'),
 			array(null, ''),
+			array('Emoji 😀 title', 'Emoji 😀 title'),
 
 			// Maximum length
 			array(
@@ -69,6 +70,11 @@ class rule_entity_title_test extends rule_entity_base
 			// One character more than maximum length
 			array(
 				str_repeat('a', 201),
+			),
+
+			// Escaped request value exceeds the stored column length.
+			array(
+				str_repeat('a', 194) . '&amp;&amp;',
 			),
 		);
 	}

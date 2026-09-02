@@ -73,6 +73,28 @@ class rule_entity_save_test extends rule_entity_base
 		self::assertEquals($expected['rule_title'], $result->get_title());
 	}
 
+	public function test_four_byte_title_characters_are_encoded_for_storage_and_decoded_on_read()
+	{
+		$entity = $this->get_rule_entity();
+		$entity->load(1)
+			->set_anchor('emoji-title')
+			->set_title('Emoji 😀 title')
+			->save();
+
+		$result = $this->db->sql_query('SELECT rule_anchor, rule_title
+			FROM phpbb_boardrules
+			WHERE rule_id = 1');
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		self::assertSame('emoji-title', $row['rule_anchor']);
+		self::assertSame('Emoji &#128512; title', $row['rule_title']);
+
+		$entity->load(1);
+		self::assertSame('emoji-title', $entity->get_anchor());
+		self::assertSame('Emoji 😀 title', $entity->get_title());
+	}
+
 	/**
 	* Test saving to (non-existant) rules from the database
 	*

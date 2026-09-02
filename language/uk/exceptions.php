@@ -48,7 +48,7 @@ if (empty($lang) || !is_array($lang))
 * Translators: Feel free to not translate these language strings
 */
 $lang = array_merge($lang, array(
-	'EXCEPTION_FIELD_MISSING'		=> 'Обов\'язкове поле незаповнене',
+	'EXCEPTION_FIELD_MISSING'		=> 'Обов’язкове поле незаповнене',
 	'EXCEPTION_INVALID_ARGUMENT'	=> 'Некоректне значення у полі `%1$s`. Причина: %2$s',
 	'EXCEPTION_OUT_OF_BOUNDS'		=> 'В полі `%1$s` знаходиться значення, що виходить за допустимі рамки',
 	'EXCEPTION_TOO_LONG'			=> 'Введений рядок довший за максимум.',

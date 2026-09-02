@@ -26,9 +26,6 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
-	/** @var \phpbb\db\driver\driver_interface */
-	protected $db;
-
 	/** @var \phpbb\language\language */
 	protected $lang;
 
@@ -71,7 +68,6 @@ class admin_controller implements admin_interface
 	* @param \phpbb\config\config              $config               Config object
 	* @param ContainerInterface                $container            Service container interface
 	* @param \phpbb\controller\helper          $controller_helper    Controller helper object
-	* @param \phpbb\db\driver\driver_interface $db                   Database object
 	* @param \phpbb\language\language          $lang                 Language object
 	* @param \phpbb\language\language_file_loader $language_loader  Language file loader
 	* @param \phpbb\log\log                    $log                  Log object
@@ -85,12 +81,11 @@ class admin_controller implements admin_interface
 	* @param string                            $php_ext              phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\db\driver\driver_interface $db, \phpbb\language\language $lang, \phpbb\language\language_file_loader $language_loader, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\language\language $lang, \phpbb\language\language_file_loader $language_loader, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
 		$this->container = $container;
 		$this->controller_helper = $controller_helper;
-		$this->db = $db;
 		$this->lang = $lang;
 		$this->language_loader = $language_loader;
 		$this->log = $log;
@@ -849,7 +844,7 @@ class admin_controller implements admin_interface
 		// Move the rule
 		try
 		{
-			$this->rule_operator->move($rule_id, $direction, $amount);
+			$moved = $this->rule_operator->move($rule_id, $direction, $amount);
 		}
 		catch (\phpbb\boardrules\exception\out_of_bounds $e)
 		{
@@ -864,7 +859,7 @@ class admin_controller implements admin_interface
 		if ($this->request->is_ajax())
 		{
 			$json_response = new \phpbb\json_response;
-			$json_response->send(array('success' => true));
+			$json_response->send(array('success' => $moved));
 		}
 
 		// Initiate and load the rule entity for no AJAX request

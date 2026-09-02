@@ -54,12 +54,12 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_NOTIFY_EXPLAIN'			=> 'Αποστέλει μια ειδοποίηση σε όλα τα μέλη ότι οι όροι συμμετοχής της Δ. Συζήτησης έχουν ανανεωθεί. (Αυτό θα διαρκέσει μερικά δευτερόλεπτα να ολοκληρωθεί σε Δ. Συζητήσεις με αρκετές χιλιάδες μέλη.)',
 	'ACP_BOARDRULES_NOTIFY_CONFIRM'			=> 'Είστε σίγουρος (-η) ότι θέλετε να στείλετε ειδοποίηση σε όλα τα μέλη;',
 	'ACP_BOARDRULES_SETTINGS_CHANGED'		=> 'Οι ρυθμίσεις των Όρων Συμμετοχής Δ. Συζήτησης άλλαξαν.',
-	'ACP_BOARDRULES_LIST_STYLE'				=> 'Board rules list style',
+	'ACP_BOARDRULES_LIST_STYLE'				=> 'Στυλ λίστας κανόνων',
 	'ACP_BOARDRULES_LIST_STYLE_EXPLAIN'		=> 'Επιλέξτε τον τρόπο αρίθμησης των κανόνων και των κατηγοριών. Η ταξινομημένη λίστα εναλλάσσεται μεταξύ αριθμών, γραμμάτων και λατινικών αριθμών. Η μη ταξινομημένη λίστα εναλλάσσεται μεταξύ δίσκου, κύκλου και τετραγώνου. Η σύνθετη αρίθμηση εμφανίζει την πλήρη αριθμητική διαδρομή.',
 	'ACP_BOARDRULES_LIST_STYLE_ORDERED'		=> 'Ordered alpha-numeric',
 	'ACP_BOARDRULES_LIST_STYLE_UNORDERED'	=> 'Μη ταξινομημένη (δίσκος, κύκλος, τετράγωνο)',
 	'ACP_BOARDRULES_LIST_STYLE_COMPOUND'	=> 'Σύνθετη αρίθμηση (1, 1.1, 1.1.1)',
-	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'None',
+	'ACP_BOARDRULES_LIST_STYLE_NONE'		=> 'Κανένα',
 
 	// Manage page
 	'ACP_BOARDRULES_MANAGE'					=> 'Διαχείριση Όρων Συμμετοχής',
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_INTRO_EXPLAIN'			=> 'Προσαρμόστε την εισαγωγή που εμφανίζεται στους χρήστες της σελίδας όρων <strong>%s</strong>. Αφήστε αυτό το πεδίο κενό για να χρησιμοποιήσετε την προεπιλεγμένη εισαγωγή που εμφανίζεται ως κείμενο υπόδειξης.',
 	'ACP_BOARDRULES_INTRO_SAVE'				=> 'Αποθήκευση εισαγωγής',
 	'ACP_BOARDRULES_INTRO_SAVED'			=> 'Η εισαγωγή της σελίδας όρων αποθηκεύτηκε.',
-	'ACP_BOARDRULES_LANGUAGE_EXPLAIN'		=> 'Choose a language for your Board Rules. Users will see the rules you create for their preferred language. If you do not create any rules in their preferred language, then users will see rules created using the board’s default language.',
+	'ACP_BOARDRULES_LANGUAGE'				=> 'Γλώσσα',
 	'ACP_BOARDRULES_CATEGORY'				=> 'Κατηγορία όρων',
 	'ACP_BOARDRULES_RULE'					=> 'Όρος',
 	'ACP_BOARDRULES_SELECT_LANGUAGE'		=> 'Επιλογή γλώσσας',
@@ -93,16 +93,28 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_COPY_RULESET'			=> 'Αντιγραφή συνόλου κανόνων γλώσσας',
 	'ACP_BOARDRULES_COPY_RULESET_EXPLAIN'	=> 'Αντιγράψτε κάθε κατηγορία και κανόνα στη γλώσσα <strong>%s</strong>. Οι αντιγραμμένοι κανόνες προστίθενται μετά από τυχόν υπάρχοντες και ολόκληρο το σύνολο κανόνων προορισμού παραμένει πρόχειρο μέχρι να το δημοσιεύσετε.',
 	'ACP_BOARDRULES_COPY_APPEND'			=> 'Προσθήκη στους υπάρχοντες κανόνες',
-	'ACP_BOARDRULES_COPY_APPEND_EXPLAIN'	=> 'Ο προορισμός περιέχει αυτή τη στιγμή %d κανόνες. Θα παραμείνουν αμετάβλητοι και οι αντιγραμμένοι κανόνες θα προστεθούν μετά από αυτούς. Οι αντιγραμμένες άγκυρες που συγκρούονται θα λάβουν αριθμητικό επίθημα.',
+	'ACP_BOARDRULES_COPY_APPEND_EXPLAIN'	=> array(
+		1 => 'Ο προορισμός περιέχει αυτή τη στιγμή %d κανόνα. Θα παραμείνει αμετάβλητος και οι αντιγραμμένοι κανόνες θα προστεθούν μετά από αυτόν. Οι αντιγραμμένες άγκυρες που συγκρούονται θα λάβουν αριθμητικό επίθημα.',
+		2 => 'Ο προορισμός περιέχει αυτή τη στιγμή %d κανόνες. Θα παραμείνουν αμετάβλητοι και οι αντιγραμμένοι κανόνες θα προστεθούν μετά από αυτούς. Οι αντιγραμμένες άγκυρες που συγκρούονται θα λάβουν αριθμητικό επίθημα.',
+	),
 	'ACP_BOARDRULES_COPY_SETTINGS'			=> 'Ρυθμίσεις αντιγραφής',
 	'ACP_BOARDRULES_COPY_SOURCE'			=> 'Αντιγραφή από',
 	'ACP_BOARDRULES_COPY_SOURCE_EXPLAIN'	=> 'Θα αντιγραφούν ολόκληρη η ιεραρχία, η σειρά, οι τίτλοι, τα μηνύματα, οι άγκυρες και οι ρυθμίσεις μορφοποίησης.',
 	'ACP_BOARDRULES_COPY_TARGET'			=> 'Αντιγραφή σε',
-	'ACP_BOARDRULES_RULE_COUNT'				=> '%d κανόνες',
+	'ACP_BOARDRULES_RULE_COUNT'				=> array(
+		1 => '%d κανόνας',
+		2 => '%d κανόνες',
+	),
 	'ACP_BOARDRULES_COPY_INVALID_LANGUAGE'	=> 'Η προέλευση και ο προορισμός πρέπει να είναι διαφορετικές εγκατεστημένες γλώσσες.',
 	'ACP_BOARDRULES_COPY_SOURCE_EMPTY'		=> 'Η επιλεγμένη γλώσσα προέλευσης δεν έχει κανόνες για αντιγραφή.',
-	'ACP_BOARDRULES_COPY_SUCCESS'			=> '%1$d κανόνες αντιγράφηκαν στη γλώσσα %2$s ως πρόχειρο.',
-	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> '%d άγκυρες με διένεξη μετονομάστηκαν με αριθμητικά επιθήματα.',
+	'ACP_BOARDRULES_COPY_SUCCESS'			=> array(
+		1 => '%1$d κανόνας αντιγράφηκε στη γλώσσα %2$s ως πρόχειρο.',
+		2 => '%1$d κανόνες αντιγράφηκαν στη γλώσσα %2$s ως πρόχειρο.',
+	),
+	'ACP_BOARDRULES_COPY_ANCHORS_RENAMED'	=> array(
+		1 => '%d άγκυρα με διένεξη μετονομάστηκε με αριθμητικό επίθημα.',
+		2 => '%d άγκυρες με διένεξη μετονομάστηκαν με αριθμητικά επιθήματα.',
+	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Η επιλεγμένη γλώσσα δεν είναι εγκατεστημένη.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Ένα κενό σύνολο κανόνων δεν μπορεί να δημοσιευτεί ή να μετατραπεί σε πρόχειρο.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Να δημοσιευτεί το πλήρες σύνολο κανόνων αυτής της γλώσσας; Οι χρήστες αυτής της γλώσσας θα το δουν αμέσως.',
@@ -139,7 +151,7 @@ $lang = array_merge($lang, array(
 
 	// Nested set exception messages (only appears in PHP error logging)
 	// Translators: Feel free to not translate these language strings
-	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Board rules failed to acquire the table lock. Another process may be holding the lock. Locks are forcibly released after a timeout of 1 hour.',
-	'RULES_NESTEDSET_INVALID_ITEM'			=> 'The requested rule does not exist.',
-	'RULES_NESTEDSET_INVALID_PARENT'		=> 'The requested rule has no parent.',
+	'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'	=> 'Οι κανόνες του πίνακα απέτυχαν να αποκτήσουν το κλείδωμα του τραπεζιού. Μια άλλη διαδικασία μπορεί να είναι το κράτημα της κλειδαριάς. Οι κλειδαριές απελευθερώνονται αναγκαστικά μετά από ένα τάιμ άουτ 1 ώρας.',
+	'RULES_NESTEDSET_INVALID_ITEM'			=> 'Ο ζητούμενος κανόνας δεν υπάρχει.',
+	'RULES_NESTEDSET_INVALID_PARENT'		=> 'Ο κανόνας που ζητήθηκε δεν έχει γονικό.',
 ));
