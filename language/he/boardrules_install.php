@@ -38,7 +38,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'קטגורית חוק לדוגמא Rule Category',
+	'BOARDRULES_SAMPLE_CATEGORY_TITLE'		=> 'קטגוריית כללים לדוגמה',
 	'BOARDRULES_SAMPLE_CATEGORY_MESSAGE'	=> 'זוהי קטגורית חוקים לדוגמא בהתקנת חוקי הפורום שלך. קטגוריה מכילה אוסף אל חוקים מקושרים. הודעות בקטגוריה כגון זו לא מוצגות בעמוד החוקים.',
 	'BOARDRULES_SAMPLE_CATEGORY_ANCHOR'		=> 'דוגמא-קטגוריה',
 

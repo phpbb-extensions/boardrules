@@ -27,6 +27,7 @@ class rule_entity_anchor_test extends rule_entity_base
 			array('foo', 'foo'),
 			array('foø-bar', 'foø-bar'),
 			array('foó-bar', 'foó-bar'),
+			array('παράδειγμα-1', 'παράδειγμα-1'),
 			array('', ''),
 			array(null, ''),
 
@@ -69,6 +70,9 @@ class rule_entity_anchor_test extends rule_entity_base
 			// Starts with illegal characters
 			array('#foo'),
 			array(' foo'),
+			array('1foo'),
+			array('-foo'),
+			array('_foo'),
 
 			// Contains illegal characters
 			array('foo bar'),
@@ -84,6 +88,12 @@ class rule_entity_anchor_test extends rule_entity_base
 			array('foo*bar'),
 			array('foo\'bar'),
 			array('foo\\bar'),
+			array("foo\nbar"),
+
+			// Emoji, symbols, and all four-byte characters
+			array('emoji-😀'),
+			array('symbol-❤'),
+			array('letter-𠀀'),
 
 			// Only illegal chars
 			array('%'),

@@ -257,7 +257,7 @@ class rule implements rule_interface
 	*/
 	public function get_title()
 	{
-		return isset($this->data['rule_title']) ? (string) $this->data['rule_title'] : '';
+		return isset($this->data['rule_title']) ? utf8_decode_ncr((string) $this->data['rule_title']) : '';
 	}
 
 	/**
@@ -273,8 +273,11 @@ class rule implements rule_interface
 		// Enforce a string
 		$title = (string) $title;
 
-		// We limit the title length to 200 characters
-		if (truncate_string($title, 200) !== $title)
+		// Replace four-byte UTF-8 characters before storing in utf8mb3 columns.
+		$title = utf8_encode_ucr($title);
+
+		// Limit both the displayed and stored title lengths to the column size.
+		if (truncate_string($title, 200, 200) !== $title)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
@@ -480,14 +483,16 @@ class rule implements rule_interface
 		// Enforce a string
 		$anchor = (string) $anchor;
 
-		// Anchor should not contain any special characters
-		if (($anchor !== '') && !preg_match('/^[^!"#$%&*\'()+,.\/\\\\:;<=>?@\[\]^`{|}~ ]*$/', $anchor))
+		// Anchors must begin with a letter and contain only URL-friendly
+		// letters, marks, numbers, hyphens, and underscores. Four-byte
+		// characters are rejected even when their Unicode category matches.
+		if ($anchor !== '' && !preg_match('/^(?!.*[\x{10000}-\x{10FFFF}])\p{L}[\p{L}\p{M}\p{N}_-]*$/u', $anchor))
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
 		}
 
-		// We limit the anchor length to 255 characters
-		if (truncate_string($anchor, 255) !== $anchor)
+		// Limit both the displayed and stored anchor lengths to the column size.
+		if (truncate_string($anchor, 255, 255) !== $anchor)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
 		}
