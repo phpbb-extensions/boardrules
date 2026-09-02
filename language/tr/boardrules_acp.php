@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARDRULES_ENABLE'					=> 'Mesaj panosu kurallarını aç',
 	'ACP_BOARDRULES_HEADER_LINK'			=> 'Mesaj panosu kuralları bağlantısını sayfa üstlerinde göster',
 	'ACP_BOARDRULES_FONT_ICON'				=> 'Mesaj panosu kuralları bağlantı ikonu',
-	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Tüm sayfa üstlerindeki mesaj panosu kuralları bağlantısında kullanılması için bir <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> ikonunun adını girin. Eğer mesaj panosu kuralları için bir ikon kullanmak istemiyorsanız bu alanı boş bırakın.',
+	'ACP_BOARDRULES_FONT_ICON_EXPLAIN'		=> 'Tüm sayfa üstlerindeki mesaj panosu kuralları bağlantısında kullanılması için bir <a href="%s" target="_blank">Font Awesome</a> ikonunun adını girin. Eğer mesaj panosu kuralları için bir ikon kullanmak istemiyorsanız bu alanı boş bırakın.',
 	'ACP_BOARDRULES_FONT_ICON_INVALID'		=> 'Mesaj panosu kuralları ikonu geçersiz karakterler içeriyor.',
 	'ACP_BOARDRULES_AT_REGISTRATION'		=> 'Yeni kullanıcılara kayıt sırasında kuralları kabul etmelerini zorunlu tut',
 	'ACP_BOARDRULES_AT_REGISTRATION_EXPLAIN'=> 'Bu seçenek, yeni kayıt olan kullanıcıların kayıt sırasında mesaj panosu kurallarını okuyup kabul etmelerini zorunlu tutmak için “Anlaşma Şartları” na bir madde ekleyecektir.',
