@@ -12,6 +12,9 @@ namespace phpbb\boardrules\migrations\v30x;
 
 class m20_unicode_language_trees extends \phpbb\db\migration\migration
 {
+	/** @var int Maximum rules updated by one query */
+	const UPDATE_BATCH_SIZE = 100;
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -147,23 +150,56 @@ class m20_unicode_language_trees extends \phpbb\db\migration\migration
 				}
 			}
 
-			foreach ($bounds as $rule_id => $rule_bounds)
+			$this->apply_bounds($table, $bounds, $normalised_roots);
+		}
+	}
+
+	/**
+	 * Apply calculated nested-set bounds using portable, bounded updates.
+	 *
+	 * @param string $table
+	 * @param array $bounds
+	 * @param array $normalised_roots
+	 * @return void
+	 */
+	protected function apply_bounds($table, array $bounds, array $normalised_roots)
+	{
+		foreach (array_chunk($bounds, self::UPDATE_BATCH_SIZE, true) as $batch)
+		{
+			$rule_ids = array();
+			$left_cases = array();
+			$right_cases = array();
+			$normalised_root_ids = array();
+			foreach ($batch as $rule_id => $rule_bounds)
 			{
-				$sql_data = array(
-					'rule_left_id' => $rule_bounds['left_id'],
-					'rule_right_id' => $rule_bounds['right_id'],
-					'rule_parents' => '',
-				);
+				$rule_id = (int) $rule_id;
+				$rule_ids[] = $rule_id;
+				$left_cases[] = 'WHEN ' . $rule_id . ' THEN ' . (int) $rule_bounds['left_id'];
+				$right_cases[] = 'WHEN ' . $rule_id . ' THEN ' . (int) $rule_bounds['right_id'];
 				if (isset($normalised_roots[$rule_id]))
 				{
-					$sql_data['rule_parent_id'] = 0;
+					$normalised_root_ids[] = $rule_id;
 				}
-
-				$sql = 'UPDATE ' . $table . '
-					SET ' . $this->db->sql_build_array('UPDATE', $sql_data) . '
-					WHERE rule_id = ' . (int) $rule_id;
-				$this->db->sql_query($sql);
 			}
+
+			$set = array(
+				'rule_left_id = CASE rule_id ' . implode(' ', $left_cases) . ' ELSE rule_left_id END',
+				'rule_right_id = CASE rule_id ' . implode(' ', $right_cases) . ' ELSE rule_right_id END',
+				"rule_parents = ''",
+			);
+			if (!empty($normalised_root_ids))
+			{
+				$set[] = 'rule_parent_id = ' . $this->db->sql_case(
+					$this->db->sql_in_set('rule_id', $normalised_root_ids),
+					0,
+					'rule_parent_id'
+				);
+			}
+
+			$sql = 'UPDATE ' . $table . '
+				SET ' . implode(', ', $set) . '
+				WHERE ' . $this->db->sql_in_set('rule_id', $rule_ids);
+			$this->db->sql_query($sql);
 		}
 	}
 }

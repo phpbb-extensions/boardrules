@@ -122,6 +122,53 @@ class v310_upgrade_test extends \phpbb_database_test_case
 		self::assertSame(array('', '', '', '', ''), array_column($rules, 'rule_parents'));
 	}
 
+	public function test_language_tree_renumbering_crosses_update_batch_boundary(): void
+	{
+		$rows = array();
+		for ($i = 0; $i < 101; $i++)
+		{
+			$left_id = 7 + ($i * 2);
+			$rows[] = array(
+				'rule_language' => 'de',
+				'rule_left_id' => $left_id,
+				'rule_right_id' => $left_id + 1,
+				'rule_parent_id' => 0,
+				'rule_parents' => 'cached',
+				'rule_anchor' => 'regel-' . $i,
+				'rule_title' => 'Regel ' . $i,
+				'rule_message' => '',
+				'rule_message_bbcode_uid' => '',
+				'rule_message_bbcode_bitfield' => '',
+				'rule_message_bbcode_options' => 7,
+			);
+		}
+		$this->db->sql_multi_insert('phpbb_boardrules', $rows);
+
+		global $phpbb_root_path, $phpEx;
+		$factory = new \phpbb\db\tools\factory();
+		$migration = new \phpbb\boardrules\migrations\v30x\m20_unicode_language_trees(
+			new \phpbb\config\config(array()),
+			$this->db,
+			$factory->get($this->db, true),
+			$phpbb_root_path,
+			$phpEx,
+			'phpbb_'
+		);
+		$migration->renumber_language_trees();
+
+		$result = $this->db->sql_query("SELECT rule_left_id, rule_right_id, rule_parents
+			FROM phpbb_boardrules
+			WHERE rule_language = 'de'
+			ORDER BY rule_left_id");
+		$rules = $this->db->sql_fetchrowset($result);
+		$this->db->sql_freeresult($result);
+
+		self::assertCount(101, $rules);
+		self::assertSame(1, (int) $rules[0]['rule_left_id']);
+		self::assertSame(202, (int) $rules[100]['rule_right_id']);
+		self::assertSame(array(''), array_values(array_unique(array_column($rules, 'rule_parents'))));
+	}
+
 	public function test_table_lock_config_is_removed_only_on_revert(): void
 	{
 		global $phpbb_root_path, $phpEx;
