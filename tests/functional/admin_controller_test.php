@@ -151,8 +151,9 @@ class admin_controller_test extends boardrules_functional_base
 		self::assertCount(0, $crawler->filter('.successbox'));
 
 		// Submit valid rule data
+		$rule_title = 'Test 😀 中文 Кириллица Rule';
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form(array(
-			'rule_title'	=> 'Test Rule',
+			'rule_title'	=> $rule_title,
 			'rule_anchor'	=> 'test-rule',
 			'rule_message'	=> str_repeat('test ', 1000), // 5000 character message
 		));
@@ -161,6 +162,19 @@ class admin_controller_test extends boardrules_functional_base
 		// Assert addition was success
 		self::assertGreaterThan(0, $crawler->filter('.successbox')->count());
 		$this->assertContainsLang('ACP_RULE_ADDED', $crawler->text());
+
+		$this->get_db();
+		$result = $this->db->sql_query("SELECT rule_title
+			FROM phpbb_boardrules
+			WHERE rule_anchor = 'test-rule'");
+		$stored_title = $this->db->sql_fetchfield('rule_title', false, $result);
+		$this->db->sql_freeresult($result);
+
+		$expected_title = strpos($this->db->get_sql_layer(), 'mssql') === 0
+			? 'Test &#128512; &#20013;&#25991; &#1050;&#1080;&#1088;&#1080;&#1083;&#1083;&#1080;&#1094;&#1072; Rule'
+			: 'Test &#128512; 中文 Кириллица Rule';
+		self::assertSame($expected_title, $stored_title);
+		self::assertSame($rule_title, utf8_decode_ncr($stored_title));
 	}
 
 	/**
