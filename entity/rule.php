@@ -273,8 +273,7 @@ class rule implements rule_interface
 		// Enforce a string
 		$title = (string) $title;
 
-		// Replace four-byte UTF-8 characters before storing in utf8mb3 columns.
-		$title = utf8_encode_ucr($title);
+		$title = $this->encode_unicode_for_storage($title);
 
 		// Limit both the displayed and stored title lengths to the column size.
 		if (truncate_string($title, 200, 200) !== $title)
@@ -286,6 +285,22 @@ class rule implements rule_interface
 		$this->data['rule_title'] = $title;
 
 		return $this;
+	}
+
+	/**
+	 * Encode Unicode characters that cannot be stored safely by the DBMS.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
+	protected function encode_unicode_for_storage($text)
+	{
+		if (strpos($this->db->get_sql_layer(), 'mssql') === 0)
+		{
+			return utf8_encode_ncr($text);
+		}
+
+		return utf8_encode_ucr($text);
 	}
 
 	/**
