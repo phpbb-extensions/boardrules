@@ -81,8 +81,8 @@ class m7_sample_rule_data extends container_aware_migration
 		// Define sample rule data
 		$sample_rule_data = array(
 			array(
-				'rule_title'     => $lang->lang('BOARDRULES_SAMPLE_CATEGORY_TITLE'),
-				'rule_message'   => $lang->lang('BOARDRULES_SAMPLE_CATEGORY_MESSAGE'),
+				'rule_title'     => utf8_encode_ncr($lang->lang('BOARDRULES_SAMPLE_CATEGORY_TITLE')),
+				'rule_message'   => utf8_encode_ncr($lang->lang('BOARDRULES_SAMPLE_CATEGORY_MESSAGE')),
 				'rule_anchor'    => $lang->lang('BOARDRULES_SAMPLE_CATEGORY_ANCHOR'),
 				'rule_left_id'   => 1,
 				'rule_right_id'  => 4,
@@ -91,8 +91,8 @@ class m7_sample_rule_data extends container_aware_migration
 				'rule_parents'   => '',
 			),
 			array(
-				'rule_title'     => $lang->lang('BOARDRULES_SAMPLE_RULE_TITLE'),
-				'rule_message'   => $lang->lang('BOARDRULES_SAMPLE_RULE_MESSAGE'),
+				'rule_title'     => utf8_encode_ncr($lang->lang('BOARDRULES_SAMPLE_RULE_TITLE')),
+				'rule_message'   => utf8_encode_ncr($lang->lang('BOARDRULES_SAMPLE_RULE_MESSAGE')),
 				'rule_anchor'    => $lang->lang('BOARDRULES_SAMPLE_RULE_ANCHOR'),
 				'rule_left_id'   => 2,
 				'rule_right_id'  => 3,
