@@ -34,6 +34,10 @@ class rule_entity_title_test extends rule_entity_base
 				str_repeat('a', 200),
 				str_repeat('a', 200),
 			),
+			array(
+				str_repeat('К', 200),
+				str_repeat('К', 200),
+			),
 		);
 	}
 

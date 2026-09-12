@@ -89,7 +89,8 @@ class rule implements rule_interface
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this rule is over-written.
-	* All data is validated and an exception is thrown if any data is invalid.
+	* Required fields and basic data types are validated. Values already loaded
+	* from storage are not passed through write-time transformations again.
 	*
 	* @param array $data Data array, typically from the database
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
@@ -111,7 +112,7 @@ class rule implements rule_interface
 			'rule_parent_id'					=> 'integer',
 			'rule_parents'						=> 'string',
 			'rule_anchor'						=> 'string',
-			'rule_title'						=> 'set_title', // call set_title()
+			'rule_title'						=> 'string',
 
 			// We do not pass to set_message() as generate_text_for_storage would run twice
 			'rule_message'						=> 'string',
@@ -273,7 +274,8 @@ class rule implements rule_interface
 		// Enforce a string
 		$title = (string) $title;
 
-		$title = $this->encode_unicode_for_storage($title);
+		// Replace four-byte UTF-8 characters before storing in utf8mb3 columns.
+		$title = utf8_encode_ucr($title);
 
 		// Limit both the displayed and stored title lengths to the column size.
 		if (truncate_string($title, 200, 200) !== $title)
@@ -285,22 +287,6 @@ class rule implements rule_interface
 		$this->data['rule_title'] = $title;
 
 		return $this;
-	}
-
-	/**
-	 * Encode Unicode characters that cannot be stored safely by the DBMS.
-	 *
-	 * @param string $text
-	 * @return string
-	 */
-	protected function encode_unicode_for_storage($text)
-	{
-		if (strpos($this->db->get_sql_layer(), 'mssql') === 0)
-		{
-			return utf8_encode_ncr($text);
-		}
-
-		return utf8_encode_ucr($text);
 	}
 
 	/**
