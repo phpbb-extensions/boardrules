@@ -136,10 +136,8 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Regelbeskeden vises på regler-siden for hver regel (kategorier viser ikke en regelbesked).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Dette er en kategori som indeholder regler, beskededitoren er blevet deaktiveret.',
 	'ACP_ADD_RULE'							=> 'Opret ny regel',
-	'ACP_DELETE_RULE_CONFIRM'				=> array(
-		0 => 'Er du sikker på, at du vil fjerne reglen?',
-		1 => 'Er du sikker på, at du vil fjerne regelkategorien?<br />Advarsel: Når en regelkategori fjernes, så fjernes også alle reglerne i den.',
-	),
+	'ACP_DELETE_RULE_CONFIRM'				=> 'Er du sikker på, at du vil fjerne reglen?',
+	'ACP_DELETE_RULE_CATEGORY_CONFIRM'	=> 'Er du sikker på, at du vil fjerne regelkategorien?<br />Advarsel: Når en regelkategori fjernes, så fjernes også alle reglerne i den.',
 	'ACP_RULE_ADDED'						=> 'Regel tilføjet.',
 	'ACP_RULE_DELETED'						=> 'Regel fjernet.',
 	'ACP_RULE_EDITED'						=> 'Regel redigeret.',

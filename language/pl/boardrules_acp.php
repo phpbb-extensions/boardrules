@@ -141,10 +141,8 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Treść przepisu jest wyświetlana na stronie regulaminu dla każdego przepisu (rozdziały nie wyświetlają treści przepisu).',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'To jest rozdział zawierający przepisy - edytor treści przepisu został wyłączony.',
 	'ACP_ADD_RULE'							=> 'Utwórz nowy przepis',
-	'ACP_DELETE_RULE_CONFIRM'				=> array(
-		0 => 'Czy na pewno chcesz usunąć ten przepis?',
-		1 => 'Czy na pewno chcesz usunąć ten kategorii reguły?<br />Uwaga: Usunięcie kategorii reguły spowoduje także usunięcie wszystkich zawartych w nim zasad.',
-	),
+	'ACP_DELETE_RULE_CONFIRM'				=> 'Czy na pewno chcesz usunąć ten przepis?',
+	'ACP_DELETE_RULE_CATEGORY_CONFIRM'	=> 'Czy na pewno chcesz usunąć ten kategorii reguły?<br />Uwaga: Usunięcie kategorii reguły spowoduje także usunięcie wszystkich zawartych w nim zasad.',
 	'ACP_RULE_ADDED'						=> 'Reguła została dodana.',
 	'ACP_RULE_DELETED'						=> 'Reguła została usunięta.',
 	'ACP_RULE_EDITED'						=> 'Reguła została zaktualizowana.',

@@ -137,10 +137,8 @@ $lang = array_merge($lang, array(
 	'ACP_RULE_MESSAGE_EXPLAIN'				=> 'Het regelbericht wordt weergegeven op de regelspagina voor iedere regel (categorieën geven geen regelbericht weer.)',
 	'ACP_RULE_MESSAGE_DISABLED'				=> 'Deze categrie bevat onderregels. Je kan hier geen bericht tevegen.',
 	'ACP_ADD_RULE'							=> 'Nieuwe regel aanmaken',
-	'ACP_DELETE_RULE_CONFIRM'				=> array(
-		0 => 'Weet je zeker dat je deze regel wilt verwijderen?',
-		1 => 'Weet je zeker dat je deze regel categorie wilt verwijderen?<br />Let op: Als je deze regel categorie verwijdert, verwijder je ook de onderliggende regels.',
-	),
+	'ACP_DELETE_RULE_CONFIRM'				=> 'Weet je zeker dat je deze regel wilt verwijderen?',
+	'ACP_DELETE_RULE_CATEGORY_CONFIRM'	=> 'Weet je zeker dat je deze regel categorie wilt verwijderen?<br />Let op: Als je deze regel categorie verwijdert, verwijder je ook de onderliggende regels.',
 	'ACP_RULE_ADDED'						=> 'Regel succesvol toegevoegd.',
 	'ACP_RULE_DELETED'						=> 'Regel succesvol verwijderd.',
 	'ACP_RULE_EDITED'						=> 'Regel succesvol gewijzigd.',
