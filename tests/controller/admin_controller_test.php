@@ -633,6 +633,35 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertTrue($this->blocks['rulemenu'][1]['S_DISABLED']);
 	}
 
+	public function test_edit_rule_initial_form_accepts_unchanged_legacy_anchor(): void
+	{
+		$this->db->sql_query("UPDATE phpbb_boardrules
+			SET rule_anchor = '1-general'
+			WHERE rule_id = 2");
+
+		$this->controller->edit_rule(2);
+
+		self::assertFalse($this->assigned_vars['S_ERROR']);
+		self::assertSame('1-general', $this->assigned_vars['RULE_ANCHOR']);
+	}
+
+	public function test_edit_rule_submit_preserves_unchanged_legacy_anchor(): void
+	{
+		$this->db->sql_query("UPDATE phpbb_boardrules
+			SET rule_anchor = '1-general'
+			WHERE rule_id = 2");
+		$this->post['submit'] = true;
+		$this->variables = array(
+			'rule_title' => 'Updated legacy rule',
+			'rule_anchor' => '1-general',
+			'rule_message' => 'Updated',
+			'rule_parent' => 1,
+		);
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'ACP_RULE_EDITED');
+
+		$this->controller->edit_rule(2);
+	}
+
 	public function test_edit_rule_submit_saves_changes(): void
 	{
 		$this->post['submit'] = true;
