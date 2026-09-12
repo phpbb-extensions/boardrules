@@ -555,16 +555,14 @@ class admin_controller implements admin_interface
 	* @param int $rule_id The rule identifier to edit
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If the rule does not exist or stored rule data is invalid
+	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function edit_rule($rule_id)
 	{
 		// Add form key
 		add_form_key('add_edit_rule');
 
-		// Initiate and load the rule entity
-		/* @var $entity \phpbb\boardrules\entity\rule */
-		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
+		$entity = $this->load_rule($rule_id);
 
 		// Collect the form data
 		$data = array(
@@ -778,13 +776,10 @@ class admin_controller implements admin_interface
 	* @param int $rule_id The rule identifier to delete
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds If the rule does not exist
 	*/
 	public function delete_rule($rule_id)
 	{
-		// Initiate and load the rule entity
-		/* @var $entity \phpbb\boardrules\entity\rule */
-		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
+		$entity = $this->load_rule($rule_id);
 
 		// Use a confirmation box routine when deleting a rule
 		if (confirm_box(true))
@@ -831,10 +826,11 @@ class admin_controller implements admin_interface
 	* @param int $amount The number of places to move the rule
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds If the rule does not exist after moving
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1)
 	{
+		$moved = false;
+
 		// If the link hash is invalid, stop and show an error message to the user
 		if (!check_link_hash($this->request->variable('hash', ''), $direction . $rule_id))
 		{
@@ -862,9 +858,7 @@ class admin_controller implements admin_interface
 			$json_response->send(array('success' => $moved));
 		}
 
-		// Initiate and load the rule entity for no AJAX request
-		/* @var $entity \phpbb\boardrules\entity\rule */
-		$entity = $this->container->get('phpbb.boardrules.entity')->load($rule_id);
+		$entity = $this->load_rule($rule_id);
 
 		// Use a redirect to reload the current page
 		redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
@@ -918,6 +912,24 @@ class admin_controller implements admin_interface
 	public function set_page_url($u_action)
 	{
 		$this->u_action = $u_action;
+	}
+
+	/**
+	 * Load a rule or display a recoverable ACP error when it no longer exists.
+	 *
+	 * @param int $rule_id Rule identifier
+	 * @return \phpbb\boardrules\entity\rule_interface
+	 */
+	protected function load_rule($rule_id)
+	{
+		try
+		{
+			return $this->container->get('phpbb.boardrules.entity')->load($rule_id);
+		}
+		catch (\phpbb\boardrules\exception\out_of_bounds $e)
+		{
+			trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+		}
 	}
 
 	/**
