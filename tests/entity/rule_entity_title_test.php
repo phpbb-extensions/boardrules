@@ -35,8 +35,8 @@ class rule_entity_title_test extends rule_entity_base
 				str_repeat('a', 200),
 			),
 			array(
-				str_repeat('К', 200),
-				str_repeat('К', 200),
+				str_repeat('😀', 22),
+				str_repeat('😀', 22),
 			),
 		);
 	}
@@ -76,9 +76,12 @@ class rule_entity_title_test extends rule_entity_base
 				str_repeat('a', 201),
 			),
 
-			// Escaped request value exceeds the stored column length.
+			// Encoded request value exceeds the stored column length.
 			array(
 				str_repeat('a', 194) . '&amp;&amp;',
+			),
+			array(
+				str_repeat('😀', 23),
 			),
 		);
 	}

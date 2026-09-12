@@ -88,7 +88,12 @@ class rule_entity_save_test extends rule_entity_base
 		$this->db->sql_freeresult($result);
 
 		self::assertSame('emoji-title', $row['rule_anchor']);
-		self::assertSame('Emoji &#128512; 中文 Кириллица title', $row['rule_title']);
+		self::assertSame(
+			strpos($this->db->get_sql_layer(), 'mssql') === 0
+				? 'Emoji &#128512; &#20013;&#25991; &#1050;&#1080;&#1088;&#1080;&#1083;&#1083;&#1080;&#1094;&#1072; title'
+				: 'Emoji &#128512; 中文 Кириллица title',
+			$row['rule_title']
+		);
 
 		$entity->load(1);
 		self::assertSame('emoji-title', $entity->get_anchor());

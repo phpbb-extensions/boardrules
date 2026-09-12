@@ -274,11 +274,13 @@ class rule implements rule_interface
 		// Enforce a string
 		$title = (string) $title;
 
-		// Replace four-byte UTF-8 characters before storing in utf8mb3 columns.
-		$title = utf8_encode_ucr($title);
+		// MSSQL string literals cannot safely preserve every BMP character.
+		$title = strpos($this->db->get_sql_layer(), 'mssql') === 0
+			? utf8_encode_ncr($title)
+			: utf8_encode_ucr($title);
 
-		// Limit both the displayed and stored title lengths to the column size.
-		if (truncate_string($title, 200, 200) !== $title)
+		// Enforce the database column length after storage encoding.
+		if (utf8_strlen($title) > 200)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}

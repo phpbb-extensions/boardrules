@@ -167,7 +167,9 @@ class admin_controller_test extends boardrules_functional_base
 		$stored_title = $this->db->sql_fetchfield('rule_title', false, $result);
 		$this->db->sql_freeresult($result);
 
-		$expected_title = 'Test &#128512; 中文 Кириллица Rule';
+		$expected_title = strpos($this->db->get_sql_layer(), 'mssql') === 0
+			? 'Test &#128512; &#20013;&#25991; &#1050;&#1080;&#1088;&#1080;&#1083;&#1083;&#1080;&#1094;&#1072; Rule'
+			: 'Test &#128512; 中文 Кириллица Rule';
 		self::assertSame($expected_title, $stored_title);
 		self::assertSame($rule_title, utf8_decode_ncr($stored_title));
 	}
