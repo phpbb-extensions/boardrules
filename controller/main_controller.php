@@ -116,6 +116,11 @@ class main_controller implements main_interface
 
 			$item_depth = count($open_categories);
 
+			// Build a stable compound number from sibling positions at every nesting level
+			$compound_counters = array_slice($compound_counters, 0, $item_depth + 1);
+			$compound_counters[$item_depth] = isset($compound_counters[$item_depth]) ? $compound_counters[$item_depth] + 1 : 1;
+			$compound_number = implode('.', $compound_counters);
+
 			if ($entity->get_right_id() - $entity->get_left_id() > 1)
 			{
 				// Rule categories
@@ -131,7 +136,7 @@ class main_controller implements main_interface
 			{
 				// Rules
 				$is_category = false;
-				$anchor = $entity->get_anchor() ?: $this->lang->lang('BOARDRULES_RULE_ANCHOR', ($cat_counter - 1) . $rule_counter);
+				$anchor = $entity->get_anchor() ?: $this->lang->lang('BOARDRULES_RULE_ANCHOR', $item_depth ? ($cat_counter - 1) . $rule_counter : $compound_number);
 
 				// Increment rule counter
 				$rule_counter++;
@@ -140,11 +145,6 @@ class main_controller implements main_interface
 			// Categories open the list containing their children. Keep their existing
 			// one-based display depth; rules use the containing category count.
 			$depth = $is_category ? $item_depth + 1 : $item_depth;
-
-			// Build a stable compound number from sibling positions at every nesting level
-			$compound_counters = array_slice($compound_counters, 0, $item_depth + 1);
-			$compound_counters[$item_depth] = isset($compound_counters[$item_depth]) ? $compound_counters[$item_depth] + 1 : 1;
-			$compound_number = implode('.', $compound_counters);
 
 			// Assign values to template vars for this rule entity
 			$this->template->assign_block_vars('rules', array(
