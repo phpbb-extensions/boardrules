@@ -213,11 +213,10 @@ class main_controller_test extends \phpbb_test_case
 		$ruleset_operator->method('is_published')->with('en')->willReturn(true);
 		$assigned_rules = array();
 		$template = $this->createMock(\phpbb\template\template::class);
-<<<<<<< HEAD
 		$block_var_call = 0;
 		$template->expects(self::exactly(5))
 			->method('assign_block_vars')
-			->willReturnCallback(function ($block, $variables) use (&$block_var_call) {
+			->willReturnCallback(function ($block, $variables) use (&$block_var_call, &$assigned_rules) {
 				$expected = array(
 					array('rules', 'TITLE'),
 					array('rules', 'TITLE'),
@@ -232,22 +231,12 @@ class main_controller_test extends \phpbb_test_case
 				{
 					self::assertSame(array('S_CLOSE_LIST' => true), $variables);
 				}
+				if ($block === 'rules' && isset($variables['U_ANCHOR']))
+				{
+					$assigned_rules[] = $variables;
+				}
 				$block_var_call++;
 			});
-=======
-		$template->expects(self::exactly(5))->method('assign_block_vars')->withConsecutive(
-			array('rules', self::arrayHasKey('TITLE')),
-			array('rules', self::arrayHasKey('TITLE')),
-			array('rules', array('S_CLOSE_LIST' => true)),
-			array('rules', self::arrayHasKey('TITLE')),
-			array('navlinks', self::arrayHasKey('U_VIEW_FORUM'))
-		)->willReturnCallback(function ($block, $vars) use (&$assigned_rules) {
-			if ($block === 'rules' && isset($vars['U_ANCHOR']))
-			{
-				$assigned_rules[] = $vars;
-			}
-		});
->>>>>>> master
 		$helper = $this->getMockBuilder(\phpbb\controller\helper::class)
 			->disableOriginalConstructor()
 			->getMock();

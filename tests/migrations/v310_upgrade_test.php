@@ -101,10 +101,11 @@ class v310_upgrade_test extends \phpbb_database_test_case
 		$migration = new \phpbb\boardrules\migrations\v30x\m20_unicode_language_trees(
 			new \phpbb\config\config(array()),
 			$this->db,
-			$factory->get($this->db, true),
+			$factory->get($this->new_doctrine_dbal(), true),
 			$phpbb_root_path,
 			$phpEx,
-			'phpbb_'
+			'phpbb_',
+			self::get_core_tables()
 		);
 		$migration->renumber_language_trees();
 
@@ -149,10 +150,11 @@ class v310_upgrade_test extends \phpbb_database_test_case
 		$migration = new \phpbb\boardrules\migrations\v30x\m20_unicode_language_trees(
 			new \phpbb\config\config(array()),
 			$this->db,
-			$factory->get($this->db, true),
+			$factory->get($this->new_doctrine_dbal(), true),
 			$phpbb_root_path,
 			$phpEx,
-			'phpbb_'
+			'phpbb_',
+			self::get_core_tables()
 		);
 		$migration->renumber_language_trees();
 
@@ -176,10 +178,11 @@ class v310_upgrade_test extends \phpbb_database_test_case
 		$migration = new \phpbb\boardrules\migrations\v30x\m20_unicode_language_trees(
 			new \phpbb\config\config(array()),
 			$this->db,
-			$factory->get($this->db, true),
+			$factory->get($this->new_doctrine_dbal(), true),
 			$phpbb_root_path,
 			$phpEx,
-			'phpbb_'
+			'phpbb_',
+			self::get_core_tables()
 		);
 
 		foreach ($migration->update_data() as $instruction)
