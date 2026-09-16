@@ -633,6 +633,42 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertTrue($this->blocks['rulemenu'][1]['S_DISABLED']);
 	}
 
+	public function test_edit_rule_reports_missing_rule(): void
+	{
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+
+		$this->controller->edit_rule(999);
+	}
+
+	public function test_edit_rule_initial_form_accepts_unchanged_legacy_anchor(): void
+	{
+		$this->db->sql_query("UPDATE phpbb_boardrules
+			SET rule_anchor = '1-general'
+			WHERE rule_id = 2");
+
+		$this->controller->edit_rule(2);
+
+		self::assertFalse($this->assigned_vars['S_ERROR']);
+		self::assertSame('1-general', $this->assigned_vars['RULE_ANCHOR']);
+	}
+
+	public function test_edit_rule_submit_preserves_unchanged_legacy_anchor(): void
+	{
+		$this->db->sql_query("UPDATE phpbb_boardrules
+			SET rule_anchor = '1-general'
+			WHERE rule_id = 2");
+		$this->post['submit'] = true;
+		$this->variables = array(
+			'rule_title' => 'Updated legacy rule',
+			'rule_anchor' => '1-general',
+			'rule_message' => 'Updated',
+			'rule_parent' => 1,
+		);
+		$this->setExpectedTriggerError(E_USER_NOTICE, 'ACP_RULE_EDITED');
+
+		$this->controller->edit_rule(2);
+	}
+
 	public function test_edit_rule_submit_saves_changes(): void
 	{
 		$this->post['submit'] = true;
@@ -727,6 +763,13 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertSame(array('adm.php?i=boardrules&amp;language=en&amp;parent_id=0'), admin_test_state::$redirects);
 	}
 
+	public function test_delete_rule_reports_missing_rule(): void
+	{
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+
+		$this->controller->delete_rule(999);
+	}
+
 	public function test_delete_rule_confirmed_deletes_real_tree(): void
 	{
 		$this->setExpectedTriggerError(E_USER_NOTICE, 'ACP_RULE_DELETED');
@@ -770,6 +813,23 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->move_rule(2, 'down');
 
 		self::assertSame(array('adm.php?i=boardrules&amp;language=en&amp;parent_id=1'), admin_test_state::$redirects);
+	}
+
+	public function test_move_rule_reports_rule_removed_after_move(): void
+	{
+		$entity = $this->getMockBuilder(\phpbb\boardrules\entity\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$entity->method('load')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('move')->willReturn(true);
+		$this->replace_controller_service('container', $this->entity_container($entity));
+		$this->replace_controller_service('rule_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+
+		$this->controller->move_rule(2, 'down');
 	}
 
 	public function test_move_rule_returns_success_for_ajax_request(): void

@@ -173,7 +173,12 @@ class main_controller_test extends \phpbb_test_case
 			'default_lang' => 'en',
 			'sitename' => 'Board',
 		));
-		$loader = new \phpbb\language\language_file_loader($phpbb_root_path, $phpEx);
+		$loader = $this->createMock(\phpbb\language\language_file_loader::class);
+		$loader->method('load_extension')
+			->willReturnCallback(function ($extension, $component, $locales, &$lang) {
+				$lang['BOARDRULES_CATEGORY_ANCHOR'] = 'section-%s';
+				$lang['BOARDRULES_RULE_ANCHOR'] = 'rule-%s';
+			});
 		$lang = new \phpbb\language\language($loader);
 		$lang->set_default_language('en');
 		$lang->set_user_language('en');
@@ -206,7 +211,9 @@ class main_controller_test extends \phpbb_test_case
 			->disableOriginalConstructor()
 			->getMock();
 		$ruleset_operator->method('is_published')->with('en')->willReturn(true);
+		$assigned_rules = array();
 		$template = $this->createMock(\phpbb\template\template::class);
+<<<<<<< HEAD
 		$block_var_call = 0;
 		$template->expects(self::exactly(5))
 			->method('assign_block_vars')
@@ -227,6 +234,20 @@ class main_controller_test extends \phpbb_test_case
 				}
 				$block_var_call++;
 			});
+=======
+		$template->expects(self::exactly(5))->method('assign_block_vars')->withConsecutive(
+			array('rules', self::arrayHasKey('TITLE')),
+			array('rules', self::arrayHasKey('TITLE')),
+			array('rules', array('S_CLOSE_LIST' => true)),
+			array('rules', self::arrayHasKey('TITLE')),
+			array('navlinks', self::arrayHasKey('U_VIEW_FORUM'))
+		)->willReturnCallback(function ($block, $vars) use (&$assigned_rules) {
+			if ($block === 'rules' && isset($vars['U_ANCHOR']))
+			{
+				$assigned_rules[] = $vars;
+			}
+		});
+>>>>>>> master
 		$helper = $this->getMockBuilder(\phpbb\controller\helper::class)
 			->disableOriginalConstructor()
 			->getMock();
@@ -245,6 +266,7 @@ class main_controller_test extends \phpbb_test_case
 		);
 
 		self::assertSame('rules', $controller->display()->getContent());
+		self::assertSame(array('section-1', 'rule-1a', 'rule-2'), array_column($assigned_rules, 'U_ANCHOR'));
 		self::assertCount(1, \phpbb\boardrules\controller\admin_test_state::$redirects);
 		self::assertStringContainsString('index.' . $phpEx, \phpbb\boardrules\controller\admin_test_state::$redirects[0]);
 	}
