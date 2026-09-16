@@ -73,7 +73,7 @@ class rule_entity_save_test extends rule_entity_base
 		self::assertEquals($expected['rule_title'], $result->get_title());
 	}
 
-	public function test_unicode_title_characters_are_encoded_for_storage_and_decoded_on_read()
+	public function test_four_byte_title_characters_are_encoded_and_other_unicode_is_preserved()
 	{
 		$entity = $this->get_rule_entity();
 		$entity->load(1)
@@ -88,10 +88,12 @@ class rule_entity_save_test extends rule_entity_base
 		$this->db->sql_freeresult($result);
 
 		self::assertSame('emoji-title', $row['rule_anchor']);
-		$expected_title = strpos($this->db->get_sql_layer(), 'mssql') === 0
-			? 'Emoji &#128512; &#20013;&#25991; &#1050;&#1080;&#1088;&#1080;&#1083;&#1083;&#1080;&#1094;&#1072; title'
-			: 'Emoji &#128512; 中文 Кириллица title';
-		self::assertSame($expected_title, $row['rule_title']);
+		self::assertSame(
+			strpos($this->db->get_sql_layer(), 'mssql') === 0
+				? 'Emoji &#128512; &#20013;&#25991; &#1050;&#1080;&#1088;&#1080;&#1083;&#1083;&#1080;&#1094;&#1072; title'
+				: 'Emoji &#128512; 中文 Кириллица title',
+			$row['rule_title']
+		);
 
 		$entity->load(1);
 		self::assertSame('emoji-title', $entity->get_anchor());

@@ -68,6 +68,20 @@ class rule_entity_import_test extends rule_entity_base
 	}
 
 	/**
+	 * Stored titles are imported without write-time encoding or validation.
+	 */
+	public function test_import_accepts_existing_unicode_title()
+	{
+		$data = $this->get_import_data()[1];
+		$data['rule_title'] = str_repeat('К', 200);
+
+		$entity = $this->get_rule_entity();
+		$entity->import($data);
+
+		self::assertSame($data['rule_title'], $entity->get_title());
+	}
+
+	/**
 	* Test data for the test_import_fail() function
 	*
 	* @return array Array of test data
@@ -107,11 +121,6 @@ class rule_entity_import_test extends rule_entity_base
 //		$data[] = array_merge($import_data[1], array(
 //			'rule_anchor'	=> str_repeat('a', 256),
 //		));
-
-		// Too long
-		$data[] = array_merge($import_data[1], array(
-			'rule_title'	=> str_repeat('a', 201),
-		));
 
 		// Go through every field and unset it while submitting everything else
 		foreach ($import_data[1] as $field => $value)

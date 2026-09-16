@@ -89,7 +89,8 @@ class rule implements rule_interface
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this rule is over-written.
-	* All data is validated and an exception is thrown if any data is invalid.
+	* Required fields and basic data types are validated. Values already loaded
+	* from storage are not passed through write-time transformations again.
 	*
 	* @param array $data Data array, typically from the database
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
@@ -111,7 +112,7 @@ class rule implements rule_interface
 			'rule_parent_id'					=> 'integer',
 			'rule_parents'						=> 'string',
 			'rule_anchor'						=> 'string',
-			'rule_title'						=> 'set_title', // call set_title()
+			'rule_title'						=> 'string',
 
 			// We do not pass to set_message() as generate_text_for_storage would run twice
 			'rule_message'						=> 'string',
@@ -273,10 +274,13 @@ class rule implements rule_interface
 		// Enforce a string
 		$title = (string) $title;
 
-		$title = $this->encode_unicode_for_storage($title);
+		// MSSQL string literals cannot safely preserve every BMP character.
+		$title = strpos($this->db->get_sql_layer(), 'mssql') === 0
+			? utf8_encode_ncr($title)
+			: utf8_encode_ucr($title);
 
-		// Limit both the displayed and stored title lengths to the column size.
-		if (truncate_string($title, 200, 200) !== $title)
+		// Enforce the database column length after storage encoding.
+		if (utf8_strlen($title) > 200)
 		{
 			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
 		}
@@ -285,22 +289,6 @@ class rule implements rule_interface
 		$this->data['rule_title'] = $title;
 
 		return $this;
-	}
-
-	/**
-	 * Encode Unicode characters that cannot be stored safely by the DBMS.
-	 *
-	 * @param string $text
-	 * @return string
-	 */
-	protected function encode_unicode_for_storage($text)
-	{
-		if (strpos($this->db->get_sql_layer(), 'mssql') === 0)
-		{
-			return utf8_encode_ncr($text);
-		}
-
-		return utf8_encode_ucr($text);
 	}
 
 	/**
@@ -497,31 +485,39 @@ class rule implements rule_interface
 	{
 		// Enforce a string
 		$anchor = (string) $anchor;
+		$rule_id = $this->get_id();
 
-		// Anchors must begin with a letter and contain only URL-friendly
-		// letters, marks, numbers, hyphens, and underscores. Four-byte
-		// characters are rejected even when their Unicode category matches.
-		if ($anchor !== '' && !preg_match('/^(?!.*[\x{10000}-\x{10FFFF}])\p{L}[\p{L}\p{M}\p{N}_-]*$/u', $anchor))
+		// Existing anchors may predate current validation rules.
+		if ($rule_id && $this->get_anchor() === $anchor)
 		{
-			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
+			return $this;
 		}
 
-		// Limit both the displayed and stored anchor lengths to the column size.
-		if (truncate_string($anchor, 255, 255) !== $anchor)
+		if ($anchor !== '')
 		{
-			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
-		}
+			// HTML5 IDs allow broader values, but these are also URL fragments.
+			// Restrict them to BMP letters, marks, numbers, hyphens, and underscores.
+			if (!preg_match('/^(?!.*[\x{10000}-\x{10FFFF}])[\p{L}\p{N}_-][\p{L}\p{M}\p{N}_-]*$/u', $anchor))
+			{
+				throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
+			}
 
-		// Make sure rule anchors are unique for the current language
-		// Test if new page and anchor field has data or...
-		//    if existing page and anchor field has new data not equal to existing anchor data
-		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
-		{
+			if (utf8_strlen($anchor) > 255)
+			{
+				throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
+			}
+
+			// Make sure the anchor is unique for the current language.
 			$sql = 'SELECT 1
 				FROM ' . $this->boardrules_table . "
 				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
-					AND rule_id <> " . $this->get_id() .
-					($this->get_language() ? " AND rule_language = '" . $this->db->sql_escape($this->get_language()) . "'" : '');
+					AND rule_id <> " . $rule_id;
+			$language = $this->get_language();
+			if ($language !== '')
+			{
+				$sql .= " AND rule_language = '" . $this->db->sql_escape($language) . "'";
+			}
+
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
