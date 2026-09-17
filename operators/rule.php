@@ -10,15 +10,19 @@
 
 namespace phpbb\boardrules\operators;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
 * Operator for a set of rules
 */
 class rule implements rule_interface
 {
-	/** @var ContainerInterface */
-	protected $container;
+	/** @var \phpbb\boardrules\entity\factory */
+	protected $entity_factory;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var string */
+	protected $boardrules_table;
 
 	/**
 	* Nestedset for board rules
@@ -36,18 +40,56 @@ class rule implements rule_interface
 	/**
 	* Constructor
 	*
-	* @param ContainerInterface $container Service container interface
+	* @param \phpbb\boardrules\entity\factory $entity_factory Rule entity factory
+	* @param \phpbb\db\driver\driver_interface $db Database connection
 	* @param \phpbb\boardrules\operators\nestedset_rules $nestedset_rules Nestedset object for tree functionality
 	* @param \phpbb\boardrules\operators\ruleset_interface $ruleset_operator Ruleset operator object
 	* @param \phpbb\lock\db $lock Shared Board Rules tree lock
+	* @param string $boardrules_table Board Rules table name
 	* @access public
 	*/
-	public function __construct(ContainerInterface $container, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, \phpbb\boardrules\operators\ruleset_interface $ruleset_operator, \phpbb\lock\db $lock)
+	public function __construct(\phpbb\boardrules\entity\factory $entity_factory, \phpbb\db\driver\driver_interface $db, \phpbb\boardrules\operators\nestedset_rules $nestedset_rules, \phpbb\boardrules\operators\ruleset_interface $ruleset_operator, \phpbb\lock\db $lock, $boardrules_table)
 	{
-		$this->container = $container;
+		$this->entity_factory = $entity_factory;
+		$this->db = $db;
 		$this->nestedset_rules = $nestedset_rules;
 		$this->ruleset_operator = $ruleset_operator;
 		$this->lock = $lock;
+		$this->boardrules_table = $boardrules_table;
+	}
+
+	/**
+	 * Create an empty rule entity.
+	 *
+	 * @return \phpbb\boardrules\entity\rule_interface
+	 */
+	public function create_rule()
+	{
+		return $this->entity_factory->create();
+	}
+
+	/**
+	 * Get one rule by identifier.
+	 *
+	 * @param int $rule_id Rule identifier
+	 * @return \phpbb\boardrules\entity\rule_interface
+	 * @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
+	 */
+	public function get_rule($rule_id)
+	{
+		$sql = 'SELECT *
+			FROM ' . $this->boardrules_table . '
+			WHERE rule_id = ' . (int) $rule_id;
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		if ($row === false)
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+		}
+
+		return $this->create_rule()->import($row);
 	}
 
 	/**
@@ -71,8 +113,7 @@ class rule implements rule_interface
 		// Import each rule into an entity, and store them in an array
 		foreach ($rowset as $row)
 		{
-			$entities[] = $this->container->get('phpbb.boardrules.entity')
-				->import($row);
+			$entities[] = $this->create_rule()->import($row);
 		}
 
 		// Return all rule entities
@@ -89,10 +130,15 @@ class rule implements rule_interface
 	* @access public
 	* @throws \InvalidArgumentException If the language is not installed
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If the entity or stored data is invalid
 	*/
 	public function add_rule($entity, $language, $parent_id = 0)
 	{
+		if ($entity->get_id())
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+		}
+
 		if (!$this->lock->acquire())
 		{
 			throw new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE');
@@ -108,11 +154,16 @@ class rule implements rule_interface
 			// An empty ruleset must enter draft before its first rule is visible.
 			$this->ruleset_operator->draft_if_empty($language);
 
-			// Insert the rule data to the database for the given language selection
-			$entity->insert($language);
+			$data = array_diff_key($entity->get_data(), array('rule_id' => null));
+			$data['rule_parent_id'] = 0;
+			$data['rule_left_id'] = 0;
+			$data['rule_right_id'] = 0;
+			$data['rule_parents'] = '';
+			$data['rule_language'] = (string) $language;
 
-			// Get the newly inserted rule's identifier
-			$rule_id = $entity->get_id();
+			$sql = 'INSERT INTO ' . $this->boardrules_table . ' ' . $this->db->sql_build_array('INSERT', $data);
+			$this->db->sql_query($sql);
+			$rule_id = (int) $this->db->sql_last_inserted_id();
 
 			// Update the tree for the rule in the database
 			$this->nestedset_rules
@@ -125,13 +176,39 @@ class rule implements rule_interface
 				$this->nestedset_rules->change_parent($rule_id, $parent_id);
 			}
 
-			// Reload the data to return a fresh rule entity
-			return $entity->load($rule_id);
+			return $this->get_rule($rule_id);
 		}
 		finally
 		{
 			$this->lock->release();
 		}
+	}
+
+	/**
+	 * Persist changes to an existing rule.
+	 *
+	 * @param \phpbb\boardrules\entity\rule_interface $entity Rule entity
+	 * @return \phpbb\boardrules\entity\rule_interface Persisted rule entity
+	 * @throws \phpbb\boardrules\exception\base If the entity is missing or persisted data is invalid
+	 */
+	public function save_rule($entity)
+	{
+		$rule_id = $entity->get_id();
+		if (!$rule_id)
+		{
+			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+		}
+
+		$changes = array_diff_key($entity->get_changes(), array('rule_id' => null));
+		if (!empty($changes))
+		{
+			$sql = 'UPDATE ' . $this->boardrules_table . '
+				SET ' . $this->db->sql_build_array('UPDATE', $changes) . '
+				WHERE rule_id = ' . $rule_id;
+			$this->db->sql_query($sql);
+		}
+
+		return $this->get_rule($rule_id);
 	}
 
 	/**
@@ -141,7 +218,7 @@ class rule implements rule_interface
 	* @return void
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
 	*/
 	public function delete_rule($rule_id)
 	{
@@ -170,7 +247,7 @@ class rule implements rule_interface
 	* @return bool True if the rule moved, false if it was already at the boundary
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
 	*/
 	public function move($rule_id, $direction = 'up', $amount = 1)
 	{
@@ -200,7 +277,7 @@ class rule implements rule_interface
 	* @return void
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If either rule is missing or stored data is invalid
 	*/
 	public function change_parent($rule_id, $new_parent_id)
 	{
@@ -233,13 +310,11 @@ class rule implements rule_interface
 	*
 	* @param int $rule_id Rule identifier
 	* @return string Language ISO code
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
 	*/
 	protected function get_rule_language($rule_id)
 	{
-		return $this->container->get('phpbb.boardrules.entity')
-			->load($rule_id)
-			->get_language();
+		return $this->get_rule($rule_id)->get_language();
 	}
 
 	/**
@@ -263,8 +338,7 @@ class rule implements rule_interface
 		// Import each rule into an entity, and store them in an array
 		foreach ($rowset as $row)
 		{
-			$entities[] = $this->container->get('phpbb.boardrules.entity')
-				->import($row);
+			$entities[] = $this->create_rule()->import($row);
 		}
 		return $entities;
 	}

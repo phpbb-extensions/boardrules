@@ -174,7 +174,7 @@ class rule_entity_anchor_test extends rule_entity_base
 		// Load the rule from the db if it exists
 		if (null !== $id)
 		{
-			$entity->load($id);
+			$entity->import($this->get_import_data()[$id]);
 		}
 
 		// Set the anchor for the given language
@@ -251,7 +251,7 @@ class rule_entity_anchor_test extends rule_entity_base
 		// Load the rule from the db if it exists
 		if (null !== $id)
 		{
-			$entity->load($id);
+			$entity->import($this->get_import_data()[$id]);
 		}
 
 		// Set the anchor for the given language

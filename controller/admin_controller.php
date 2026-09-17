@@ -10,8 +10,6 @@
 
 namespace phpbb\boardrules\controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
 * Admin controller
 */
@@ -19,9 +17,6 @@ class admin_controller implements admin_interface
 {
 	/** @var \phpbb\config\config */
 	protected $config;
-
-	/** @var ContainerInterface */
-	protected $container;
 
 	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
@@ -66,7 +61,6 @@ class admin_controller implements admin_interface
 	* Constructor
 	*
 	* @param \phpbb\config\config              $config               Config object
-	* @param ContainerInterface                $container            Service container interface
 	* @param \phpbb\controller\helper          $controller_helper    Controller helper object
 	* @param \phpbb\language\language          $lang                 Language object
 	* @param \phpbb\language\language_file_loader $language_loader  Language file loader
@@ -81,10 +75,9 @@ class admin_controller implements admin_interface
 	* @param string                            $php_ext              phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config, ContainerInterface $container, \phpbb\controller\helper $controller_helper, \phpbb\language\language $lang, \phpbb\language\language_file_loader $language_loader, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\language\language $lang, \phpbb\language\language_file_loader $language_loader, \phpbb\log\log $log, \phpbb\notification\manager $notification_manager, \phpbb\request\request $request, \phpbb\boardrules\operators\rule $rule_operator, \phpbb\boardrules\operators\ruleset $ruleset_operator, \phpbb\template\template $template, \phpbb\user $user, $root_path, $php_ext)
 	{
 		$this->config = $config;
-		$this->container = $container;
 		$this->controller_helper = $controller_helper;
 		$this->lang = $lang;
 		$this->language_loader = $language_loader;
@@ -234,7 +227,6 @@ class admin_controller implements admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function display_rules($language, $parent_id = 0)
 	{
@@ -250,8 +242,18 @@ class admin_controller implements admin_interface
 			trigger_error($this->lang->lang('ACP_BOARDRULES_INVALID_LANGUAGE') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
-		// Grab all the rules in the current user's language
-		$entities = $this->rule_operator->get_rules($language, $parent_id);
+		try
+		{
+			// Load both result sets before assigning template data, so a malformed
+			// stored rule cannot leave a partially rendered ACP page.
+			$entities = $this->rule_operator->get_rules($language, $parent_id);
+			$parent_entities = $this->rule_operator->get_rule_parents($language, $parent_id);
+		}
+		catch (\phpbb\boardrules\exception\base $e)
+		{
+			$this->display_rule_error($e);
+			return;
+		}
 
 		// Initialize a variable to hold the right_id value
 		$last_right_id = 0;
@@ -282,11 +284,8 @@ class admin_controller implements admin_interface
 			$last_right_id = $entity->get_right_id();
 		}
 
-		// Prepare rule breadcrumb path navigation
-		$entities = $this->rule_operator->get_rule_parents($language, $parent_id);
-
 		// Process each rule entity for breadcrumb display
-		foreach ($entities as $entity)
+		foreach ($parent_entities as $entity)
 		{
 			// Set output block vars for display in the template
 			$this->template->assign_block_vars('breadcrumb', array(
@@ -514,7 +513,6 @@ class admin_controller implements admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function add_rule($language, $parent_id = 0)
 	{
@@ -523,7 +521,7 @@ class admin_controller implements admin_interface
 
 		// Initiate a rule entity
 		/* @var $entity \phpbb\boardrules\entity\rule */
-		$entity = $this->container->get('phpbb.boardrules.entity');
+		$entity = $this->rule_operator->create_rule();
 
 		// Collect the form data
 		$data = array(
@@ -538,7 +536,15 @@ class admin_controller implements admin_interface
 		);
 
 		// Process the new rule
-		$this->add_edit_rule_data($entity, $data);
+		try
+		{
+			$this->add_edit_rule_data($entity, $data);
+		}
+		catch (\phpbb\boardrules\exception\base $e)
+		{
+			$this->display_rule_error($e);
+			return;
+		}
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -555,14 +561,21 @@ class admin_controller implements admin_interface
 	* @param int $rule_id The rule identifier to edit
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function edit_rule($rule_id)
 	{
 		// Add form key
 		add_form_key('add_edit_rule');
 
-		$entity = $this->load_rule($rule_id);
+		try
+		{
+			$entity = $this->load_rule($rule_id);
+		}
+		catch (\phpbb\boardrules\exception\base $e)
+		{
+			$this->display_rule_error($e);
+			return;
+		}
 
 		// Collect the form data
 		$data = array(
@@ -577,7 +590,15 @@ class admin_controller implements admin_interface
 		);
 
 		// Process the edited rule
-		$this->add_edit_rule_data($entity, $data);
+		try
+		{
+			$this->add_edit_rule_data($entity, $data);
+		}
+		catch (\phpbb\boardrules\exception\base $e)
+		{
+			$this->display_rule_error($e);
+			return;
+		}
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -683,14 +704,7 @@ class admin_controller implements admin_interface
 			if ($entity->get_id())
 			{
 				// Save the edited rule entity to the database
-				try
-				{
-					$entity->save();
-				}
-				catch (\phpbb\boardrules\exception\out_of_bounds $e)
-				{
-					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
-				}
+				$entity = $this->rule_operator->save_rule($entity);
 
 				// Change rule parent
 				if (isset($data['rule_parent_id']) && ($entity->get_parent_id() !== (int) $data['rule_parent_id']))
@@ -699,11 +713,7 @@ class admin_controller implements admin_interface
 					{
 						$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
 					}
-					catch (\phpbb\boardrules\exception\out_of_bounds $e)
-					{
-						trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
-					}
-					catch (\Exception $e)
+					catch (\InvalidArgumentException|\RuntimeException $e)
 					{
 						trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
 					}
@@ -718,10 +728,6 @@ class admin_controller implements admin_interface
 				try
 				{
 					$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
-				}
-				catch (\phpbb\boardrules\exception\out_of_bounds $e)
-				{
-					trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 				catch (\InvalidArgumentException|\RuntimeException $e)
 				{
@@ -779,7 +785,15 @@ class admin_controller implements admin_interface
 	*/
 	public function delete_rule($rule_id)
 	{
-		$entity = $this->load_rule($rule_id);
+		try
+		{
+			$entity = $this->load_rule($rule_id);
+		}
+		catch (\phpbb\boardrules\exception\base $e)
+		{
+			$this->display_rule_error($e);
+			return;
+		}
 
 		// Use a confirmation box routine when deleting a rule
 		if (confirm_box(true))
@@ -789,13 +803,15 @@ class admin_controller implements admin_interface
 			{
 				$this->rule_operator->delete_rule($rule_id);
 			}
-			catch (\phpbb\boardrules\exception\out_of_bounds $e)
+			catch (\phpbb\boardrules\exception\base $e)
 			{
-				trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+				$this->display_rule_error($e);
+				return;
 			}
 			catch (\Exception $e)
 			{
 				trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+				return;
 			}
 
 			// Show user confirmation of the deleted rule and provide link back to the previous page
@@ -842,13 +858,15 @@ class admin_controller implements admin_interface
 		{
 			$moved = $this->rule_operator->move($rule_id, $direction, $amount);
 		}
-		catch (\phpbb\boardrules\exception\out_of_bounds $e)
+		catch (\phpbb\boardrules\exception\base $e)
 		{
-			trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+			$this->display_rule_error($e);
+			return;
 		}
 		catch (\Exception $e)
 		{
 			trigger_error($this->lang->lang($e->getMessage()) . adm_back_link($this->u_action), E_USER_WARNING);
+			return;
 		}
 
 		// Send a JSON response if an AJAX request was used
@@ -858,7 +876,15 @@ class admin_controller implements admin_interface
 			$json_response->send(array('success' => $moved));
 		}
 
-		$entity = $this->load_rule($rule_id);
+		try
+		{
+			$entity = $this->load_rule($rule_id);
+		}
+		catch (\phpbb\boardrules\exception\base $e)
+		{
+			$this->display_rule_error($e);
+			return;
+		}
 
 		// Use a redirect to reload the current page
 		redirect("{$this->u_action}&amp;language={$entity->get_language()}&amp;parent_id={$entity->get_parent_id()}");
@@ -915,21 +941,26 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	 * Load a rule or display a recoverable ACP error when it no longer exists.
+	 * Load a rule.
 	 *
 	 * @param int $rule_id Rule identifier
 	 * @return \phpbb\boardrules\entity\rule_interface
+	 * @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
 	 */
 	protected function load_rule($rule_id)
 	{
-		try
-		{
-			return $this->container->get('phpbb.boardrules.entity')->load($rule_id);
-		}
-		catch (\phpbb\boardrules\exception\out_of_bounds $e)
-		{
-			trigger_error($e->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
-		}
+		return $this->rule_operator->get_rule($rule_id);
+	}
+
+	/**
+	 * Display a translated entity or operator failure in the ACP.
+	 *
+	 * @param \phpbb\boardrules\exception\base $exception
+	 * @return void
+	 */
+	protected function display_rule_error(\phpbb\boardrules\exception\base $exception)
+	{
+		trigger_error($exception->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
 	}
 
 	/**
