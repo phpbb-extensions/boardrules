@@ -33,7 +33,14 @@ class rule implements rule_interface
 	*	rule_message_bbcode_options
 	* @access protected
 	*/
-	protected $data;
+	protected $data = array();
+
+	/**
+	 * Storage-form data captured when this entity was hydrated.
+	 *
+	 * @var array
+	 */
+	protected $original_data = array();
 
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
@@ -59,49 +66,20 @@ class rule implements rule_interface
 	}
 
 	/**
-	* Load the data from the database for this rule
-	*
-	* @param int $id Rule identifier
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
-	*/
-	public function load($id)
-	{
-		$sql = 'SELECT *
-			FROM ' . $this->boardrules_table . '
-			WHERE rule_id = ' . (int) $id;
-		$result = $this->db->sql_query($sql);
-		$this->data = $this->db->sql_fetchrow($result);
-		$this->db->sql_freeresult($result);
-
-		if ($this->data === false)
-		{
-			// A rule does not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
-		}
-
-		return $this;
-	}
-
-	/**
 	* Import data for this rule
 	*
 	* Used when the data is already loaded externally.
 	* Any existing data on this rule is over-written.
-	* Required fields and basic data types are validated. Values already loaded
+	* Required fields are checked and storage types are normalized. Values already loaded
 	* from storage are not passed through write-time transformations again.
 	*
 	* @param array $data Data array, typically from the database
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\boardrules\exception\base
 	*/
 	public function import($data)
 	{
-		// Clear out any saved data
-		$this->data = array();
-
 		// All of our fields
 		$fields = array(
 			// column							=> data type (see settype())
@@ -121,7 +99,9 @@ class rule implements rule_interface
 			'rule_message_bbcode_options'		=> 'integer',
 		);
 
-		// Go through the basic fields and set them to our data array
+		$hydrated = array();
+
+		// Cast storage values without invoking write-time setters.
 		foreach ($fields as $field => $type)
 		{
 			// If the data wasn't sent to us, throw an exception
@@ -130,21 +110,10 @@ class rule implements rule_interface
 				throw new \phpbb\boardrules\exception\invalid_argument(array($field, 'FIELD_MISSING'));
 			}
 
-			// If the type is a method on this class, call it
-			if (method_exists($this, $type))
-			{
-				$this->$type($data[$field]);
-			}
-			else
-			{
-				// settype passes values by reference
-				$value = $data[$field];
-
-				// We're using settype to enforce data types
-				settype($value, $type);
-
-				$this->data[$field] = $value;
-			}
+			// settype passes values by reference
+			$value = $data[$field];
+			settype($value, $type);
+			$hydrated[$field] = $value;
 		}
 
 		// Some fields must be unsigned (>= 0)
@@ -158,85 +127,38 @@ class rule implements rule_interface
 
 		foreach ($validate_unsigned as $field)
 		{
-			// If the data is less than 0, it's not unsigned and we'll throw an exception
-			if ($this->data[$field] < 0)
+			// If the data is less than 0, it's not unsigned, and we'll throw an exception
+			if ($hydrated[$field] < 0)
 			{
 				throw new \phpbb\boardrules\exception\out_of_bounds($field);
 			}
 		}
 
-		return $this;
-	}
-
-	/**
-	* Insert the rule for the first time
-	*
-	* Will throw an exception if the rule was already inserted (call save() instead)
-	*
-	* @param string $language The language iso
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
-	*/
-	public function insert($language)
-	{
-		if (!empty($this->data['rule_id']))
-		{
-			// The rule already exists
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
-		}
-
-		// Resets values required for the nested set system
-		$this->data['rule_parent_id'] = 0;
-		$this->data['rule_left_id'] = 0;
-		$this->data['rule_right_id'] = 0;
-		$this->data['rule_parents'] = '';
-
-		// Make extra sure there is no rule_id set
-		unset($this->data['rule_id']);
-
-		// Add the language identifier to the data array
-		$this->data['rule_language'] = $language;
-
-		// Insert the rule data to the database
-		$sql = 'INSERT INTO ' . $this->boardrules_table . ' ' . $this->db->sql_build_array('INSERT', $this->data);
-		$this->db->sql_query($sql);
-
-		// Set the rule_id using the id created by the SQL insert
-		$this->data['rule_id'] = (int) $this->db->sql_last_inserted_id();
+		// Replace state only after the entire row has passed hydration checks.
+		$this->data = $hydrated;
+		$this->original_data = $hydrated;
 
 		return $this;
 	}
 
 	/**
-	* Save the current settings to the database
-	*
-	* This must be called before closing or any changes will not be saved!
-	* If adding a rule (saving for the first time), you must call insert() or an exception will be thrown
-	*
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
-	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
-	*/
-	public function save()
+	 * Export current storage-form data.
+	 *
+	 * @return array
+	 */
+	public function get_data()
 	{
-		if (empty($this->data['rule_id']))
-		{
-			// The rule does not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
-		}
+		return $this->data;
+	}
 
-		// Copy the data array, filtering out the rule_id identifier
-		// so we do not attempt to update the row's identity column.
-		$sql_array = array_diff_key($this->data, array('rule_id' => null));
-
-		// Update the page data in the database
-		$sql = 'UPDATE ' . $this->boardrules_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . '
-			WHERE rule_id = ' . $this->get_id();
-		$this->db->sql_query($sql);
-
-		return $this;
+	/**
+	 * Export storage-form fields changed since hydration.
+	 *
+	 * @return array
+	 */
+	public function get_changes()
+	{
+		return array_diff_assoc($this->data, $this->original_data);
 	}
 
 	/**
@@ -265,7 +187,7 @@ class rule implements rule_interface
 	* Set title
 	*
 	* @param string $title
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\boardrules\exception\unexpected_value
 	*/
@@ -333,7 +255,7 @@ class rule implements rule_interface
 	* Set message
 	*
 	* @param string $message
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	*/
 	public function set_message($message)
@@ -365,7 +287,7 @@ class rule implements rule_interface
 	/**
 	* Enable bbcode on the message
 	*
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	*/
 	public function message_enable_bbcode()
@@ -378,7 +300,7 @@ class rule implements rule_interface
 	/**
 	* Disable bbcode on the message
 	*
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	*/
 	public function message_disable_bbcode()
@@ -402,7 +324,7 @@ class rule implements rule_interface
 	/**
 	* Enable magic url on the message
 	*
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	*/
 	public function message_enable_magic_url()
@@ -415,7 +337,7 @@ class rule implements rule_interface
 	/**
 	* Disable magic url on the message
 	*
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	*/
 	public function message_disable_magic_url()
@@ -439,7 +361,7 @@ class rule implements rule_interface
 	/**
 	* Enable smilies on the message
 	*
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	*/
 	public function message_enable_smilies()
@@ -452,7 +374,7 @@ class rule implements rule_interface
 	/**
 	* Disable smilies on the message
 	*
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	*/
 	public function message_disable_smilies()
@@ -477,7 +399,7 @@ class rule implements rule_interface
 	* Set anchor
 	*
 	* @param string $anchor Anchor text
-	* @return rule_interface $this object for chaining calls; load()->set()->save()
+	* @return rule_interface $this object for chaining calls
 	* @access public
 	* @throws \phpbb\boardrules\exception\unexpected_value
 	*/
@@ -549,7 +471,7 @@ class rule implements rule_interface
 	 * Set the language iso
 	 *
 	 * @param string $language language iso
-	 * @return rule_interface $this object for chaining calls; load()->set()->save()
+	 * @return rule_interface $this object for chaining calls
 	 * @access public
 	 * @throws \phpbb\boardrules\exception\unexpected_value
 	 */
@@ -640,7 +562,7 @@ class rule implements rule_interface
 			$this->data['rule_message_bbcode_options'] -= $option_value;
 		}
 
-		// Re-parse the message
+		// Reparse the message
 		if ($reparse_message && !empty($this->data['rule_message']))
 		{
 			$message = $this->data['rule_message'];

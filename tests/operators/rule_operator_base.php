@@ -28,8 +28,8 @@ class rule_operator_base extends \phpbb_database_test_case
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\DependencyInjection\ContainerInterface */
-	protected $container;
+	/** @var \phpbb\boardrules\entity\factory */
+	protected $entity_factory;
 
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
@@ -55,17 +55,7 @@ class rule_operator_base extends \phpbb_database_test_case
 		global $config;
 
 		$this->db = $this->new_dbal();
-		$db = $this->db;
-
-		// mock container for the entity service
-		$this->container = $this->getMockBuilder('\Symfony\Component\DependencyInjection\ContainerInterface')
-			->getMock();
-		$this->container
-			->method('get')
-			->with('phpbb.boardrules.entity')
-			->willReturnCallback(function () use ($db) {
-				return new \phpbb\boardrules\entity\rule($db, 'phpbb_boardrules');
-			});
+		$this->entity_factory = new \phpbb\boardrules\entity\factory($this->db, 'phpbb_boardrules');
 
 		$config = $this->config = new \phpbb\config\config(array('nestedset_rules_lock' => 0));
 
@@ -81,6 +71,13 @@ class rule_operator_base extends \phpbb_database_test_case
 	*/
 	protected function get_rule_operator()
 	{
-		return new \phpbb\boardrules\operators\rule($this->container, $this->nestedset_rules, $this->ruleset_operator, $this->lock);
+		return new \phpbb\boardrules\operators\rule(
+			$this->entity_factory,
+			$this->db,
+			$this->nestedset_rules,
+			$this->ruleset_operator,
+			$this->lock,
+			'phpbb_boardrules'
+		);
 	}
 }

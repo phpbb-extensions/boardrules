@@ -22,7 +22,7 @@ interface main_interface
 	*
 	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
+	* @throws \phpbb\exception\http_exception If stored rule data is invalid
 	*/
 	public function display();
 }

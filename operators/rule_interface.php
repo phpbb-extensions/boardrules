@@ -18,6 +18,22 @@ namespace phpbb\boardrules\operators;
 interface rule_interface
 {
 	/**
+	 * Create an empty rule entity.
+	 *
+	 * @return \phpbb\boardrules\entity\rule_interface
+	 */
+	public function create_rule();
+
+	/**
+	 * Get one rule by identifier.
+	 *
+	 * @param int $rule_id Rule identifier
+	 * @return \phpbb\boardrules\entity\rule_interface
+	 * @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
+	 */
+	public function get_rule($rule_id);
+
+	/**
 	* Get the rules
 	*
 	* @param string $language Language selection iso
@@ -38,9 +54,18 @@ interface rule_interface
 	* @access public
 	* @throws \InvalidArgumentException If the language is not installed
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds If the entity was already inserted
+	* @throws \phpbb\boardrules\exception\base If the entity or stored data is invalid
 	*/
 	public function add_rule($entity, $language, $parent_id = 0);
+
+	/**
+	 * Persist changes to an existing rule.
+	 *
+	 * @param \phpbb\boardrules\entity\rule_interface $entity Rule entity
+	 * @return \phpbb\boardrules\entity\rule_interface Persisted rule entity
+	 * @throws \phpbb\boardrules\exception\base If the entity is missing or persisted data is invalid
+	 */
+	public function save_rule($entity);
 
 	/**
 	* Delete a rule
@@ -49,7 +74,7 @@ interface rule_interface
 	* @return void
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
 	*/
 	public function delete_rule($rule_id);
 
@@ -62,7 +87,7 @@ interface rule_interface
 	* @return bool True if the rule moved, false if it was already at the boundary
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
 	*/
 	public function move($rule_id, $direction, $amount = 1);
 
@@ -74,7 +99,7 @@ interface rule_interface
 	* @return void
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \phpbb\boardrules\exception\base If either rule is missing or stored data is invalid
 	*/
 	public function change_parent($rule_id, $new_parent_id);
 

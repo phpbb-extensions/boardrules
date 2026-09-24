@@ -57,6 +57,20 @@ class rule_operator_add_rule_test extends rule_operator_base
 	}
 
 	/**
+	 * Test adding an existing rule fails before side effects.
+	 */
+	public function test_add_rule_rejects_existing_rule()
+	{
+		$entity = $this->get_rule_operator()->get_rule(1);
+		$this->ruleset_operator->expects(self::never())->method('draft_if_empty');
+
+		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+		$this->expectExceptionMessage('rule_id');
+
+		$this->get_rule_operator()->add_rule($entity, 'en');
+	}
+
+	/**
 	 * Test adding a rule rejects a parent from another language.
 	 */
 	public function test_add_rule_rejects_parent_from_another_language()
@@ -78,7 +92,6 @@ class rule_operator_add_rule_test extends rule_operator_base
 		$german_parent_id = (int) $this->db->sql_nextid();
 
 		$entity = $this->createMock(\phpbb\boardrules\entity\rule_interface::class);
-		$entity->expects(self::never())->method('insert');
 		$this->ruleset_operator->expects(self::never())->method('draft_if_empty');
 
 		try

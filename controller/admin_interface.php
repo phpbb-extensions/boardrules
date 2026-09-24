@@ -13,7 +13,7 @@ namespace phpbb\boardrules\controller;
 /**
 * Interface for our admin controller
 *
-* This describes all of the methods we'll use for the admin front-end of this extension
+* This describes all the methods we'll use for the admin front-end of this extension
 */
 interface admin_interface
 {
@@ -59,7 +59,6 @@ interface admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function display_rules($language, $parent_id = 0);
 
@@ -78,7 +77,6 @@ interface admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
 	*/
 	public function add_rule($language, $parent_id = 0);
 
@@ -88,7 +86,6 @@ interface admin_interface
 	* @param int $rule_id The rule identifier to edit
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If the rule does not exist or stored rule data is invalid
 	*/
 	public function edit_rule($rule_id);
 
@@ -98,7 +95,6 @@ interface admin_interface
 	* @param int $rule_id The rule identifier to delete
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds If the rule does not exist
 	*/
 	public function delete_rule($rule_id);
 
@@ -110,7 +106,6 @@ interface admin_interface
 	* @param int $amount The number of places to move the rule
 	* @return void
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds If the rule does not exist after moving
 	*/
 	public function move_rule($rule_id, $direction, $amount = 1);
 

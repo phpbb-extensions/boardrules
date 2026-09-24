@@ -79,6 +79,32 @@ class rule_entity_import_test extends rule_entity_base
 		$entity->import($data);
 
 		self::assertSame($data['rule_title'], $entity->get_title());
+		self::assertSame($data['rule_title'], $entity->get_data()['rule_title']);
+		self::assertSame(array(), $entity->get_changes());
+
+		$entity->set_title('Changed title');
+		self::assertSame(array('rule_title' => 'Changed title'), $entity->get_changes());
+	}
+
+	/**
+	 * Failed hydration does not leave partially replaced entity state.
+	 */
+	public function test_import_is_atomic()
+	{
+		$data = $this->get_import_data()[1];
+		$entity = $this->get_rule_entity()->import($data);
+		unset($data['rule_anchor']);
+
+		try
+		{
+			$entity->import($data);
+			self::fail('Expected invalid_argument exception was not thrown.');
+		}
+		catch (\phpbb\boardrules\exception\invalid_argument $e)
+		{
+			self::assertSame(1, $entity->get_id());
+			self::assertSame('anchor1', $entity->get_anchor());
+		}
 	}
 
 	/**
@@ -116,11 +142,6 @@ class rule_entity_import_test extends rule_entity_base
 		$data[] = array_merge($import_data[1], array(
 			'rule_message_bbcode_options'	=> -1,
 		));
-
-//		// Too long (no longer tested inside in the import method)
-//		$data[] = array_merge($import_data[1], array(
-//			'rule_anchor'	=> str_repeat('a', 256),
-//		));
 
 		// Go through every field and unset it while submitting everything else
 		foreach ($import_data[1] as $field => $value)

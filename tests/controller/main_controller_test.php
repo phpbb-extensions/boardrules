@@ -14,6 +14,58 @@ require_once __DIR__ . '/admin_test_helpers.php';
 
 class main_controller_test extends \phpbb_test_case
 {
+	public function test_display_converts_invalid_stored_rule_to_http_error(): void
+	{
+		global $phpbb_root_path, $phpEx;
+
+		$config = new \phpbb\config\config(array(
+			'boardrules_enable' => 1,
+			'boardrules_list_style' => '',
+			'default_lang' => 'en',
+		));
+		$lang = $this->getMockBuilder(\phpbb\language\language::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$lang->method('get_used_language')->willReturn('en');
+
+		$rule_operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$domain_exception = new \phpbb\boardrules\exception\invalid_argument(array('rule_title', 'FIELD_MISSING'));
+		$rule_operator->method('get_rules')->willThrowException($domain_exception);
+
+		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$ruleset_operator->method('is_published')->willReturn(true);
+
+		$helper = $this->getMockBuilder(\phpbb\controller\helper::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$template = $this->createMock(\phpbb\template\template::class);
+		$controller = new \phpbb\boardrules\controller\main_controller(
+			$config,
+			$helper,
+			$lang,
+			$rule_operator,
+			$ruleset_operator,
+			$template,
+			$phpbb_root_path,
+			$phpEx
+		);
+
+		try
+		{
+			$controller->display();
+			self::fail('Expected invalid stored rule to produce an HTTP error.');
+		}
+		catch (\phpbb\exception\http_exception $e)
+		{
+			self::assertSame(500, $e->getStatusCode());
+			self::assertSame($domain_exception, $e->getPrevious());
+		}
+	}
+
 	/**
 	* Test data for the test_display() function
 	*

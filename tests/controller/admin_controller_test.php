@@ -115,12 +115,7 @@ class admin_controller_test extends \phpbb_database_test_case
 		$user->style['style_path'] = 'prosilver';
 		$user->ip = '127.0.0.1';
 
-		$container = $this->createMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
-		$container->method('get')
-			->with('phpbb.boardrules.entity')
-			->willReturnCallback(function () {
-				return new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules');
-			});
+		$entity_factory = new \phpbb\boardrules\entity\factory($this->db, 'phpbb_boardrules');
 
 		$lock = new \phpbb\lock\db('boardrules.table_lock.boardrules_table', $this->config, $this->db);
 		$nestedset = new \phpbb\boardrules\operators\nestedset_rules($this->db, $lock, 'phpbb_boardrules');
@@ -130,7 +125,14 @@ class admin_controller_test extends \phpbb_database_test_case
 			'phpbb_boardrules',
 			'phpbb_boardrules_rulesets'
 		);
-		$this->rule_operator = new \phpbb\boardrules\operators\rule($container, $nestedset, $this->ruleset_operator, $lock);
+		$this->rule_operator = new \phpbb\boardrules\operators\rule(
+			$entity_factory,
+			$this->db,
+			$nestedset,
+			$this->ruleset_operator,
+			$lock,
+			'phpbb_boardrules'
+		);
 
 		$this->request = $this->createMock(\phpbb\request\request::class);
 		$this->request->method('variable')
@@ -165,7 +167,6 @@ class admin_controller_test extends \phpbb_database_test_case
 
 		$this->controller = new admin_controller(
 			$this->config,
-			$container,
 			$helper,
 			$language,
 			$language_loader,
@@ -325,6 +326,18 @@ class admin_controller_test extends \phpbb_database_test_case
 			'boardrules_intro' => '_INTRO',
 			'add_edit_rule' => '_ADD_RULE',
 		), admin_test_state::$form_key_suffixes);
+	}
+
+	public function test_display_rules_reports_hydration_failure(): void
+	{
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('get_rules')->willThrowException(new \phpbb\boardrules\exception\invalid_argument(array('rule_title', 'FIELD_MISSING')));
+		$this->replace_controller_service('rule_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_INVALID_ARGUMENT');
+
+		$this->controller->display_rules('en');
 	}
 
 	public function test_display_rules_reports_available_default_fallback(): void
@@ -640,6 +653,18 @@ class admin_controller_test extends \phpbb_database_test_case
 		$this->controller->edit_rule(999);
 	}
 
+	public function test_edit_rule_reports_invalid_stored_rule(): void
+	{
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('get_rule')->willThrowException(new \phpbb\boardrules\exception\invalid_argument(array('rule_title', 'FIELD_MISSING')));
+		$this->replace_controller_service('rule_operator', $operator);
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_INVALID_ARGUMENT');
+
+		$this->controller->edit_rule(2);
+	}
+
 	public function test_edit_rule_initial_form_accepts_unchanged_legacy_anchor(): void
 	{
 		$this->db->sql_query("UPDATE phpbb_boardrules
@@ -686,10 +711,29 @@ class admin_controller_test extends \phpbb_database_test_case
 	public function test_edit_rule_reports_stale_entity_save(): void
 	{
 		$entity = $this->mock_entity(2);
-		$entity->method('save')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
-		$this->replace_controller_service('container', $this->entity_container($entity));
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('get_rule')->willReturn($entity);
+		$operator->method('save_rule')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$this->replace_controller_service('rule_operator', $operator);
 		$this->post['submit'] = true;
 		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+
+		$this->controller->edit_rule(2);
+	}
+
+	public function test_edit_rule_reports_invalid_persisted_entity(): void
+	{
+		$entity = $this->mock_entity(2);
+		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
+			->disableOriginalConstructor()
+			->getMock();
+		$operator->method('get_rule')->willReturn($entity);
+		$operator->method('save_rule')->willThrowException(new \phpbb\boardrules\exception\invalid_argument(array('rule_title', 'FIELD_MISSING')));
+		$this->replace_controller_service('rule_operator', $operator);
+		$this->post['submit'] = true;
+		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_INVALID_ARGUMENT');
 
 		$this->controller->edit_rule(2);
 	}
@@ -700,8 +744,9 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$operator->method('get_rule')->willReturn($entity);
+		$operator->method('save_rule')->willReturn($entity);
 		$operator->method('change_parent')->willThrowException(new \RuntimeException('PARENT_CHANGE_FAILED'));
-		$this->replace_controller_service('container', $this->entity_container($entity));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->post['submit'] = true;
 		$this->variables['rule_parent'] = 3;
@@ -716,8 +761,9 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$operator->method('get_rule')->willReturn($entity);
+		$operator->method('save_rule')->willReturn($entity);
 		$operator->method('change_parent')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('new_parent_id'));
-		$this->replace_controller_service('container', $this->entity_container($entity));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->post['submit'] = true;
 		$this->variables['rule_parent'] = 3;
@@ -735,8 +781,8 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
+		$operator->method('create_rule')->willReturn($entity);
 		$operator->method('add_rule')->willThrowException($exception);
-		$this->replace_controller_service('container', $this->entity_container($entity));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->post['submit'] = true;
 		$this->variables['rule_title'] = 'Valid title';
@@ -749,6 +795,7 @@ class admin_controller_test extends \phpbb_database_test_case
 	{
 		return array(
 			'entity bounds failure' => array(new \phpbb\boardrules\exception\out_of_bounds('rule_id'), 'EXCEPTION_OUT_OF_BOUNDS'),
+			'entity hydration failure' => array(new \phpbb\boardrules\exception\invalid_argument(array('rule_title', 'FIELD_MISSING')), 'EXCEPTION_INVALID_ARGUMENT'),
 			'nested-set lock failure' => array(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'), 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'),
 		);
 	}
@@ -817,15 +864,11 @@ class admin_controller_test extends \phpbb_database_test_case
 
 	public function test_move_rule_reports_rule_removed_after_move(): void
 	{
-		$entity = $this->getMockBuilder(\phpbb\boardrules\entity\rule::class)
-			->disableOriginalConstructor()
-			->getMock();
-		$entity->method('load')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$operator->method('move')->willReturn(true);
-		$this->replace_controller_service('container', $this->entity_container($entity));
+		$operator->method('get_rule')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
 
@@ -907,7 +950,7 @@ class admin_controller_test extends \phpbb_database_test_case
 			'rule_message_bbcode_options' => 0,
 		);
 		$this->db->sql_query('INSERT INTO phpbb_boardrules ' . $this->db->sql_build_array('INSERT', $sql_ary));
-		$entity = (new \phpbb\boardrules\entity\rule($this->db, 'phpbb_boardrules'))->load(2);
+		$entity = $this->rule_operator->get_rule(2);
 
 		$this->invoke_protected('build_parent_select_menu', array($entity, 1));
 
@@ -920,7 +963,6 @@ class admin_controller_test extends \phpbb_database_test_case
 		$entity = $this->getMockBuilder(\phpbb\boardrules\entity\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$entity->method('load')->willReturnSelf();
 		$entity->method('get_id')->willReturn($id);
 		$entity->method('get_language')->willReturn('en');
 		$entity->method('get_parent_id')->willReturn(0);
@@ -934,13 +976,6 @@ class admin_controller_test extends \phpbb_database_test_case
 		$entity->method('message_magic_url_enabled')->willReturn(true);
 		$entity->method('message_smilies_enabled')->willReturn(true);
 		return $entity;
-	}
-
-	protected function entity_container($entity)
-	{
-		$container = $this->createMock(\Symfony\Component\DependencyInjection\ContainerInterface::class);
-		$container->method('get')->with('phpbb.boardrules.entity')->willReturn($entity);
-		return $container;
 	}
 
 	protected function replace_controller_service($property, $value): void
