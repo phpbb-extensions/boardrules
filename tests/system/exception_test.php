@@ -117,4 +117,22 @@ class exception_test extends \phpbb_test_case
 	{
 		self::assertSame($expected, (string) new \phpbb\boardrules\exception\base($message));
 	}
+
+	public function test_array_exception_preserves_native_message(): void
+	{
+		$exception = new \phpbb\boardrules\exception\base(array('EXCEPTION_OUT_OF_BOUNDS', 'rule_id'));
+
+		self::assertSame('EXCEPTION_OUT_OF_BOUNDS', $exception->getMessage());
+		self::assertNull($exception->getPrevious());
+	}
+
+	public function test_exception_preserves_native_exception_data(): void
+	{
+		$previous = new \Error('Previous error');
+		$exception = new \phpbb\boardrules\exception\base('EXCEPTION_FIELD_MISSING', 42, $previous);
+
+		self::assertSame('EXCEPTION_FIELD_MISSING', $exception->getMessage());
+		self::assertSame(42, $exception->getCode());
+		self::assertSame($previous, $exception->getPrevious());
+	}
 }

@@ -21,36 +21,26 @@ class base extends \Exception
 	*/
 	protected $message_full;
 
-	protected $previous;
-
 	/**
-	* Constructor
-	*
-	* Different from normal exceptions in that we do not enforce $message to be a string.
-	*
-	* @param string|array|null $message
-	* @param int $code
-	* @param \Exception|null $previous
-	* @access public
-	*/
-	public function __construct($message = null, $code = 0, \Exception $previous = null)
+	 * Constructor
+	 *
+	 * Different from normal exceptions in that we do not enforce $message to be a string.
+	 *
+	 * @param string|array|null $message
+	 * @param int               $code
+	 * @param \Throwable|null   $previous
+	 * @access public
+	 */
+	public function __construct($message = null, $code = 0, ?\Throwable $previous = null)
 	{
-		parent::__construct();
-
-		$this->message = $message;
-
-		if (is_array($message))
-		{
-			$this->message = (string) $message[0];
-		}
-
 		// We're slightly changing the way exceptions work
-		// Tools, such as xDebug, expect the message to be a string, so to prevent errors
+		// Tools, such as xdebug, expect the message to be a string, so to prevent errors
 		// with those tools, we store our full message in message_full and only a string in message
 		$this->message_full = $message;
 
-		$this->code = $code;
-		$this->previous = $previous;
+		$message = is_array($message) ? (string) $message[0] : (string) $message;
+
+		parent::__construct($message, $code, $previous);
 	}
 
 	/**
