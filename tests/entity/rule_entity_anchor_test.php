@@ -131,7 +131,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	*/
 	public function test_anchor_fails($anchor)
 	{
-		$this->expectException(\phpbb\boardrules\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
@@ -216,7 +216,7 @@ class rule_entity_anchor_test extends rule_entity_base
 		$entity = $this->get_rule_entity();
 		$entity->import($data);
 
-		$this->expectException(\phpbb\boardrules\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 		$entity->set_anchor('another-❤');
 	}
 
@@ -243,7 +243,7 @@ class rule_entity_anchor_test extends rule_entity_base
 	*/
 	public function test_unique_anchor_fails($id, $language, $anchor)
 	{
-		$this->expectException(\phpbb\boardrules\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_rule_entity();

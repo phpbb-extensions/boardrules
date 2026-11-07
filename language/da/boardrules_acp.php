@@ -115,6 +115,8 @@ $lang = array_merge($lang, array(
 		2 => '%d ankre med konflikter blev omdøbt med numeriske suffikser.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Det valgte sprog er ikke installeret.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Inputtet indeholdt tegn som ikke er tilladt.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Inputtet var ikke unikt.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Et tomt regelsæt kan ikke udgives eller angives som kladde.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Vil du udgive hele dette regelsæt? Brugere af dette sprog vil se det med det samme.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Vil du ændre hele dette regelsæt til en kladde? Brugere af dette sprog vil i stedet se reglerne på boardets standardsprog.',

@@ -606,6 +606,18 @@ class admin_controller_test extends \phpbb_database_test_case
 		self::assertTrue($this->assigned_vars['S_ERROR']);
 		self::assertStringContainsString('The submitted form was invalid. Try submitting again.', $this->assigned_vars['ERROR_MSG']);
 		self::assertStringContainsString('ACP_RULE_TITLE_EMPTY', $this->assigned_vars['ERROR_MSG']);
+		self::assertStringContainsString('ACP_RULE_ANCHOR: ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS', $this->assigned_vars['ERROR_MSG']);
+	}
+
+	public function test_add_rule_reports_friendly_title_validation(): void
+	{
+		$this->post['submit'] = true;
+		$this->variables['rule_title'] = str_repeat('a', 201);
+
+		$this->controller->add_rule('fr');
+
+		self::assertTrue($this->assigned_vars['S_ERROR']);
+		self::assertStringContainsString('ACP_RULE_TITLE: The value you entered is too long.', $this->assigned_vars['ERROR_MSG']);
 	}
 
 	public function test_add_rule_submit_inserts_real_rule(): void
@@ -635,7 +647,7 @@ class admin_controller_test extends \phpbb_database_test_case
 
 	public function test_edit_rule_reports_missing_rule(): void
 	{
-		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_INVALID_ITEM');
 
 		$this->controller->edit_rule(999);
 	}
@@ -686,10 +698,10 @@ class admin_controller_test extends \phpbb_database_test_case
 	public function test_edit_rule_reports_stale_entity_save(): void
 	{
 		$entity = $this->mock_entity(2);
-		$entity->method('save')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$entity->method('save')->willThrowException(new \LogicException('RULE_NOT_INSERTED'));
 		$this->replace_controller_service('container', $this->entity_container($entity));
 		$this->post['submit'] = true;
-		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_INVALID_ITEM');
 
 		$this->controller->edit_rule(2);
 	}
@@ -716,12 +728,12 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$operator->method('change_parent')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('new_parent_id'));
+		$operator->method('change_parent')->willThrowException(new \OutOfBoundsException('RULE_PARENT_INVALID'));
 		$this->replace_controller_service('container', $this->entity_container($entity));
 		$this->replace_controller_service('rule_operator', $operator);
 		$this->post['submit'] = true;
 		$this->variables['rule_parent'] = 3;
-		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_INVALID_PARENT');
 
 		$this->controller->edit_rule(2);
 	}
@@ -748,7 +760,7 @@ class admin_controller_test extends \phpbb_database_test_case
 	public static function add_rule_operator_error_data(): array
 	{
 		return array(
-			'entity bounds failure' => array(new \phpbb\boardrules\exception\out_of_bounds('rule_id'), 'EXCEPTION_OUT_OF_BOUNDS'),
+			'entity bounds failure' => array(new \OutOfBoundsException('RULE_NOT_FOUND'), 'RULES_NESTEDSET_INVALID_ITEM'),
 			'nested-set lock failure' => array(new \RuntimeException('RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'), 'RULES_NESTEDSET_LOCK_FAILED_ACQUIRE'),
 		);
 	}
@@ -765,7 +777,7 @@ class admin_controller_test extends \phpbb_database_test_case
 
 	public function test_delete_rule_reports_missing_rule(): void
 	{
-		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_INVALID_ITEM');
 
 		$this->controller->delete_rule(999);
 	}
@@ -793,9 +805,9 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$operator->method('delete_rule')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$operator->method('delete_rule')->willThrowException(new \OutOfBoundsException('RULE_NOT_FOUND'));
 		$this->replace_controller_service('rule_operator', $operator);
-		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_INVALID_ITEM');
 
 		$this->controller->delete_rule(3);
 	}
@@ -820,14 +832,14 @@ class admin_controller_test extends \phpbb_database_test_case
 		$entity = $this->getMockBuilder(\phpbb\boardrules\entity\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$entity->method('load')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$entity->method('load')->willThrowException(new \OutOfBoundsException('RULE_NOT_FOUND'));
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$operator->method('move')->willReturn(true);
 		$this->replace_controller_service('container', $this->entity_container($entity));
 		$this->replace_controller_service('rule_operator', $operator);
-		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_INVALID_ITEM');
 
 		$this->controller->move_rule(2, 'down');
 	}
@@ -859,9 +871,9 @@ class admin_controller_test extends \phpbb_database_test_case
 		$operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$operator->method('move')->willThrowException(new \phpbb\boardrules\exception\out_of_bounds('rule_id'));
+		$operator->method('move')->willThrowException(new \OutOfBoundsException('RULE_NOT_FOUND'));
 		$this->replace_controller_service('rule_operator', $operator);
-		$this->setExpectedTriggerError(E_USER_WARNING, 'EXCEPTION_OUT_OF_BOUNDS');
+		$this->setExpectedTriggerError(E_USER_WARNING, 'RULES_NESTEDSET_INVALID_ITEM');
 
 		$this->controller->move_rule(2, 'down');
 	}

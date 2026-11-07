@@ -115,6 +115,8 @@ $lang = array_merge($lang, array(
 		2 => '%d ristiriitaista ankkuria nimettiin uudelleen numeerisilla jälkiliitteillä.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Valittua kieltä ei ole asennettu.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Syöte sisälsi ei-sallittuja merkkejä.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Syöte ei ollut ainutlaatuinen.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Tyhjää sääntökokonaisuutta ei voi julkaista tai muuttaa luonnokseksi.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Julkaistaanko tämän kielen koko sääntökokonaisuus? Tämän kielen käyttäjät näkevät sen heti.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Muutetaanko tämän kielen koko sääntökokonaisuus luonnokseksi? Tämän kielen käyttäjät näkevät sen sijaan foorumin oletuskielen säännöt.',

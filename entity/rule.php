@@ -64,7 +64,7 @@ class rule implements rule_interface
 	* @param int $id Rule identifier
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	public function load($id)
 	{
@@ -78,7 +78,7 @@ class rule implements rule_interface
 		if ($this->data === false)
 		{
 			// A rule does not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+			throw new \OutOfBoundsException('RULE_NOT_FOUND');
 		}
 
 		return $this;
@@ -95,7 +95,7 @@ class rule implements rule_interface
 	* @param array $data Data array, typically from the database
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \InvalidArgumentException
 	*/
 	public function import($data)
 	{
@@ -127,7 +127,7 @@ class rule implements rule_interface
 			// If the data wasn't sent to us, throw an exception
 			if (!isset($data[$field]))
 			{
-				throw new \phpbb\boardrules\exception\invalid_argument(array($field, 'FIELD_MISSING'));
+				throw new \InvalidArgumentException('RULE_FIELD_MISSING:' . $field);
 			}
 
 			// If the type is a method on this class, call it
@@ -161,7 +161,7 @@ class rule implements rule_interface
 			// If the data is less than 0, it's not unsigned and we'll throw an exception
 			if ($this->data[$field] < 0)
 			{
-				throw new \phpbb\boardrules\exception\out_of_bounds($field);
+				throw new \InvalidArgumentException('RULE_FIELD_NOT_UNSIGNED:' . $field);
 			}
 		}
 
@@ -176,14 +176,14 @@ class rule implements rule_interface
 	* @param string $language The language iso
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \LogicException
 	*/
 	public function insert($language)
 	{
 		if (!empty($this->data['rule_id']))
 		{
 			// The rule already exists
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+			throw new \LogicException('RULE_ALREADY_INSERTED');
 		}
 
 		// Resets values required for the nested set system
@@ -216,14 +216,14 @@ class rule implements rule_interface
 	*
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \LogicException
 	*/
 	public function save()
 	{
 		if (empty($this->data['rule_id']))
 		{
 			// The rule does not exist
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+			throw new \LogicException('RULE_NOT_INSERTED');
 		}
 
 		// Copy the data array, filtering out the rule_id identifier
@@ -267,7 +267,7 @@ class rule implements rule_interface
 	* @param string $title
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_title($title)
 	{
@@ -282,7 +282,7 @@ class rule implements rule_interface
 		// Enforce the database column length after storage encoding.
 		if (utf8_strlen($title) > 200)
 		{
-			throw new \phpbb\boardrules\exception\unexpected_value(array('title', 'TOO_LONG'));
+			throw new \InvalidArgumentException('TOO_LONG');
 		}
 
 		// Set the title on our data array
@@ -479,7 +479,7 @@ class rule implements rule_interface
 	* @param string $anchor Anchor text
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_anchor($anchor)
 	{
@@ -499,12 +499,12 @@ class rule implements rule_interface
 			// Restrict them to BMP letters, marks, numbers, hyphens, and underscores.
 			if (!preg_match('/^(?!.*[\x{10000}-\x{10FFFF}])[\p{L}\p{N}_-][\p{L}\p{M}\p{N}_-]*$/u', $anchor))
 			{
-				throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'ILLEGAL_CHARACTERS'));
+				throw new \InvalidArgumentException('ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS');
 			}
 
 			if (utf8_strlen($anchor) > 255)
 			{
-				throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
+				throw new \InvalidArgumentException('TOO_LONG');
 			}
 
 			// Make sure the anchor is unique for the current language.
@@ -524,7 +524,7 @@ class rule implements rule_interface
 
 			if ($row)
 			{
-				throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'NOT_UNIQUE'));
+				throw new \InvalidArgumentException('ACP_BOARDRULES_VALIDATION_NOT_UNIQUE');
 			}
 		}
 
@@ -551,7 +551,7 @@ class rule implements rule_interface
 	 * @param string $language language iso
 	 * @return rule_interface $this object for chaining calls; load()->set()->save()
 	 * @access public
-	 * @throws \phpbb\boardrules\exception\unexpected_value
+	 * @throws \InvalidArgumentException
 	 */
 	public function set_language($language)
 	{
@@ -569,7 +569,7 @@ class rule implements rule_interface
 
 				if (!$lang_id)
 				{
-					throw new \phpbb\boardrules\exception\unexpected_value(array('rule_language', 'WRONG_DATA_LANG', 'UNEXPECTED_VALUE'));
+					throw new \InvalidArgumentException('ACP_BOARDRULES_INVALID_LANGUAGE');
 				}
 			}
 

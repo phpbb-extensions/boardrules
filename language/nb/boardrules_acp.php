@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d ankere med konflikter fikk nye navn med numeriske suffikser.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Det valgte språket er ikke installert.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Inndata inneholdt tegn som ikke er tillatt.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Inndata var ikke unike.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Et tomt regelsett kan ikke publiseres eller angis som utkast.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publisere hele dette regelsettet? Brukere av dette språket vil se det umiddelbart.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Endre hele dette regelsettet til utkast? Brukere av dette språket vil i stedet se reglene på forumets standardspråk.',

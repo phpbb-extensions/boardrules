@@ -51,7 +51,8 @@ class rule_entity_insert_test extends rule_entity_base
 	*/
 	public function test_insert_fails()
 	{
-		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('RULE_ALREADY_INSERTED');
 
 		// Set a language variable
 		$language = 'en';

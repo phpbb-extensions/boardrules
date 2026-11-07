@@ -115,6 +115,8 @@ $lang = array_merge($lang, array(
 		2 => '%d ütköző horgony számozott utótaggal lett átnevezve.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'A kiválasztott nyelv nincs telepítve.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'A bemenet érvénytelen karaktereket tartalmazott.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'A bemenet nem volt egyedi.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Üres szabálykészlet nem tehető közzé és nem állítható piszkozatként.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Közzéteszi a teljes szabálykészletet ezen a nyelven? Az ezt a nyelvet használók azonnal látni fogják.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Piszkozattá teszi a teljes szabálykészletet ezen a nyelven? Az ezt a nyelvet használók helyette a fórum alapértelmezett nyelvén létrehozott szabályokat fogják látni.',

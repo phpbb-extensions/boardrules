@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d conflicterende ankers zijn hernoemd met numerieke achtervoegsels.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'De geselecteerde taal is niet geïnstalleerd.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'De invoer bevat ongeldige tekens.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'De invoer is niet uniek.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Een lege regelset kan niet worden gepubliceerd of als concept worden ingesteld.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Deze volledige regelset publiceren? Gebruikers van deze taal zien deze onmiddellijk.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Deze volledige regelset als concept instellen? Gebruikers van deze taal zien in plaats daarvan de regels in de standaardtaal van het forum.',

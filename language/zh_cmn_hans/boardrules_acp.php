@@ -111,6 +111,8 @@ $lang = array_merge($lang, array(
 		1 => '%d 个冲突的锚点已使用数字后缀重命名。',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> '所选语言尚未安装。',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => '输入值含有非法字符。',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> '输入值不是唯一。',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> '空章程集不能发布或改为草稿。',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> '发布此语言的完整章程集吗？使用此语言的用户将立即看到它。',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> '将此语言的完整章程集改为草稿吗？使用此语言的用户将改为看到论坛默认语言的章程。',

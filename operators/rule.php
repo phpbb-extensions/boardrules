@@ -57,7 +57,7 @@ class rule implements rule_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return \phpbb\boardrules\entity\rule_interface[] Rule entities
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
+	* @throws \InvalidArgumentException If stored rule data is invalid
 	*/
 	public function get_rules($language, $parent_id = 0)
 	{
@@ -88,8 +88,9 @@ class rule implements rule_interface
 	* @return \phpbb\boardrules\entity\rule_interface Added rule entity
 	* @access public
 	* @throws \InvalidArgumentException If the language is not installed
+	* @throws \LogicException If the entity was already inserted
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	public function add_rule($entity, $language, $parent_id = 0)
 	{
@@ -100,9 +101,21 @@ class rule implements rule_interface
 
 		try
 		{
-			if ($parent_id && $this->get_rule_language($parent_id) !== (string) $language)
+			if ($parent_id)
 			{
-				throw new \phpbb\boardrules\exception\out_of_bounds('new_parent_id');
+				try
+				{
+					$parent_language = $this->get_rule_language($parent_id);
+				}
+				catch (\OutOfBoundsException $e)
+				{
+					throw new \OutOfBoundsException('RULE_PARENT_INVALID', 0, $e);
+				}
+
+				if ($parent_language !== (string) $language)
+				{
+					throw new \OutOfBoundsException('RULE_PARENT_INVALID');
+				}
 			}
 
 			// An empty ruleset must enter draft before its first rule is visible.
@@ -141,7 +154,7 @@ class rule implements rule_interface
 	* @return void
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	public function delete_rule($rule_id)
 	{
@@ -157,7 +170,7 @@ class rule implements rule_interface
 		}
 		catch (\OutOfBoundsException $e)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+			throw new \OutOfBoundsException('RULE_NOT_FOUND', 0, $e);
 		}
 	}
 
@@ -170,7 +183,7 @@ class rule implements rule_interface
 	* @return bool True if the rule moved, false if it was already at the boundary
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	public function move($rule_id, $direction = 'up', $amount = 1)
 	{
@@ -188,7 +201,7 @@ class rule implements rule_interface
 		}
 		catch (\OutOfBoundsException $e)
 		{
-			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
+			throw new \OutOfBoundsException('RULE_NOT_FOUND', 0, $e);
 		}
 	}
 
@@ -200,31 +213,51 @@ class rule implements rule_interface
 	* @return void
 	* @access public
 	* @throws \RuntimeException If the nested-set lock cannot be acquired
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	public function change_parent($rule_id, $new_parent_id)
 	{
 		$rule_id = (int) $rule_id;
 		$new_parent_id = (int) $new_parent_id;
 
-		// Try to change rule parent
 		try
 		{
 			$language = $this->get_rule_language($rule_id);
-			if ($new_parent_id && $this->get_rule_language($new_parent_id) !== $language)
+		}
+		catch (\OutOfBoundsException $e)
+		{
+			throw new \OutOfBoundsException('RULE_NOT_FOUND', 0, $e);
+		}
+
+		if ($new_parent_id)
+		{
+			try
 			{
-				throw new \OutOfBoundsException('RULES_NESTEDSET_INVALID_PARENT');
+				$parent_language = $this->get_rule_language($new_parent_id);
+			}
+			catch (\OutOfBoundsException $e)
+			{
+				throw new \OutOfBoundsException('RULE_PARENT_INVALID', 0, $e);
 			}
 
+			if ($parent_language !== $language)
+			{
+				throw new \OutOfBoundsException('RULE_PARENT_INVALID');
+			}
+		}
+
+		// Try to change rule parent
+		try
+		{
 			$this->nestedset_rules
 				->use_language($language)
 				->change_parent($rule_id, $new_parent_id);
 		}
 		catch (\OutOfBoundsException $e)
 		{
-			$field = (strpos($e->getMessage(), 'INVALID_ITEM') !== false) ? 'rule_id' : 'new_parent_id';
+			$message = strpos($e->getMessage(), 'INVALID_ITEM') !== false ? 'RULE_NOT_FOUND' : 'RULE_PARENT_INVALID';
 
-			throw new \phpbb\boardrules\exception\out_of_bounds($field);
+			throw new \OutOfBoundsException($message, 0, $e);
 		}
 	}
 
@@ -233,7 +266,7 @@ class rule implements rule_interface
 	*
 	* @param int $rule_id Rule identifier
 	* @return string Language ISO code
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	protected function get_rule_language($rule_id)
 	{
@@ -249,7 +282,7 @@ class rule implements rule_interface
 	* @param int $parent_id Category to display rules from
 	* @return \phpbb\boardrules\entity\rule_interface[] Parent rule entities
 	* @access public
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
+	* @throws \InvalidArgumentException If stored rule data is invalid
 	*/
 	public function get_rule_parents($language, $parent_id)
 	{

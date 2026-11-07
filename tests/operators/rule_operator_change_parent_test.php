@@ -30,7 +30,8 @@ class rule_operator_change_parent_test extends rule_operator_base
 		$this->db->sql_query($sql);
 		$german_rule_id = (int) $this->db->sql_nextid();
 
-		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage('RULE_PARENT_INVALID');
 		$this->get_rule_operator()->change_parent(1, $german_rule_id);
 	}
 
@@ -106,9 +107,9 @@ class rule_operator_change_parent_test extends rule_operator_base
 	public function change_parent_fails_data()
 	{
 		return array(
-			array(1, 100),
-			array(100, 1),
-			array(null, 1),
+			array(1, 100, 'RULE_PARENT_INVALID'),
+			array(100, 1, 'RULE_NOT_FOUND'),
+			array(null, 1, 'RULE_NOT_FOUND'),
 		);
 	}
 
@@ -117,9 +118,10 @@ class rule_operator_change_parent_test extends rule_operator_base
 	*
 	* @dataProvider change_parent_fails_data
 	*/
-	public function test_change_parent_fails($rule_id, $new_parent_id)
+	public function test_change_parent_fails($rule_id, $new_parent_id, $message)
 	{
-		$this->expectException(\phpbb\boardrules\exception\base::class);
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage($message);
 
 		// Setup the operator class
 		$operator = $this->get_rule_operator();

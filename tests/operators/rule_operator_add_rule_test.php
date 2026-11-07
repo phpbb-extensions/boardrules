@@ -86,9 +86,9 @@ class rule_operator_add_rule_test extends rule_operator_base
 			$this->get_rule_operator()->add_rule($entity, 'en', $german_parent_id);
 			self::fail('A parent from another language should be rejected.');
 		}
-		catch (\phpbb\boardrules\exception\out_of_bounds $e)
+		catch (\OutOfBoundsException $e)
 		{
-			self::assertSame('new_parent_id', $e->getMessage());
+			self::assertSame('RULE_PARENT_INVALID', $e->getMessage());
 		}
 
 		self::assertSame('0', (string) $this->config['nestedset_rules_lock']);

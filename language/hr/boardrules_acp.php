@@ -120,6 +120,8 @@ $lang = array_merge($lang, array(
 		3 => '%d podudarnih sidara preimenovano je pomoću brojčanih sufiksa.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Odabrani jezik nije instaliran.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Upis sadrži nedopuštene znakove.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Upis nije jedinstven.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Prazan skup pravila ne može se objaviti niti postaviti kao skica.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Objaviti cijeli skup pravila za ovaj jezik? Korisnici ovog jezika odmah će ga vidjeti.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Postaviti cijeli skup pravila za ovaj jezik kao skicu? Korisnici ovog jezika umjesto njega vidjet će pravila na zadanom jeziku foruma.',

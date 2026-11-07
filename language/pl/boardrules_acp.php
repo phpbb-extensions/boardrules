@@ -120,6 +120,8 @@ $lang = array_merge($lang, array(
 		3 => 'Zmieniono nazwy %d zakotwiczeń powodujących konflikt, dodając przyrostki liczbowe.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Wybrany język nie jest zainstalowany.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Wprowadzone dane zawierały niedozwolone znaki.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Wprowadzone dane nie były unikalne.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Pustego regulaminu nie można opublikować ani ustawić jako szkic.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Opublikować ten kompletny regulamin języka? Użytkownicy tego języka zobaczą go natychmiast.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Ustawić ten kompletny regulamin języka jako szkic? Użytkownicy tego języka zobaczą zamiast niego regulamin w domyślnym języku forum.',

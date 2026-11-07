@@ -106,7 +106,8 @@ class rule_entity_save_test extends rule_entity_base
 	*/
 	public function test_save_fails()
 	{
-		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('RULE_NOT_INSERTED');
 
 		// Setup the entity class
 		$entity = $this->get_rule_entity();

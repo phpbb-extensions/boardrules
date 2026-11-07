@@ -112,6 +112,8 @@ $lang = array_merge($lang, array(
 		1 => '%d çakışan bağlantı çapası sayısal son eklerle yeniden adlandırıldı.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Seçilen dil yüklü değil.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Girdi illegal karakterler içeriyordu.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Girdi benzersiz değildi.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Boş bir kural kümesi yayınlanamaz veya taslak olarak değiştirilemez.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Bu dilin tüm kural kümesi yayınlansın mı? Bu dili kullananlar kural kümesini hemen görecek.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Bu dilin tüm kural kümesi taslak olarak değiştirilsin mi? Bu dili kullananlar bunun yerine forumun varsayılan dilindeki kuralları görecek.',

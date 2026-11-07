@@ -23,7 +23,7 @@ interface rule_interface
 	* @param int $id Rule identifier
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \OutOfBoundsException
 	*/
 	public function load($id);
 
@@ -37,7 +37,7 @@ interface rule_interface
 	* @param array $data Data array, typically from the database
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\base
+	* @throws \InvalidArgumentException
 	*/
 	public function import($data);
 
@@ -49,7 +49,7 @@ interface rule_interface
 	* @param string $language The language iso
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \LogicException
 	*/
 	public function insert($language);
 
@@ -61,7 +61,7 @@ interface rule_interface
 	*
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\out_of_bounds
+	* @throws \LogicException
 	*/
 	public function save();
 
@@ -87,7 +87,7 @@ interface rule_interface
 	* @param string $title
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_title($title);
 
@@ -203,7 +203,7 @@ interface rule_interface
 	* @param string $anchor Anchor text
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
-	* @throws \phpbb\boardrules\exception\unexpected_value
+	* @throws \InvalidArgumentException
 	*/
 	public function set_anchor($anchor);
 
@@ -221,7 +221,7 @@ interface rule_interface
 	 * @param string $language language iso
 	 * @return rule_interface $this object for chaining calls; load()->set()->save()
 	 * @access public
-	 * @throws \phpbb\boardrules\exception\unexpected_value If the language is not installed
+	 * @throws \InvalidArgumentException If the language is not installed
 	 */
 	public function set_language($language);
 
