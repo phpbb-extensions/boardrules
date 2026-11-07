@@ -115,6 +115,8 @@ $lang = array_merge($lang, array(
 		2 => '%d עוגנים מתנגשים קיבלו שמות חדשים עם סיומות מספריות.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'השפה שנבחרה אינה מותקנת.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'התוכן הכיל תווים לא חוקיים.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'התוכן לא היה ייחודי.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'אי אפשר לפרסם מערכת חוקים ריקה או להפוך אותה לטיוטה.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'לפרסם את מערכת החוקים המלאה בשפה זו? משתמשי השפה יראו אותה מיד.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'להפוך את מערכת החוקים המלאה בשפה זו לטיוטה? משתמשי השפה יראו במקומה את החוקים בשפת ברירת המחדל של הפורום.',

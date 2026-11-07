@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d âncoras em conflito foram renomeadas com sufixos numéricos.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'O idioma seleccionado não está instalado.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'A entrada tem caracteres inválidos.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'A entrada não é única.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Um conjunto de regras vazio não pode ser publicado nem definido como rascunho.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publicar este conjunto completo de regras do idioma? Os utilizadores deste idioma irão vê-lo imediatamente.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Definir este conjunto completo de regras do idioma como rascunho? Os utilizadores deste idioma verão as regras no idioma predefinido do fórum.',

@@ -119,6 +119,8 @@ $lang = array_merge($lang, array(
 		3 => '%d konfliktných odkazov bolo premenovaných pomocou číselných prípon.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Vybraný jazyk nie je nainštalovaný.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Vstup obsahuje neplatné znaky.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Vstup nebol jedinečný.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Prázdnu sadu pravidiel nemožno zverejniť ani nastaviť ako koncept.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Zverejniť túto kompletnú jazykovú sadu pravidiel? Používatelia tohto jazyka ju uvidia okamžite.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Nastaviť túto kompletnú jazykovú sadu pravidiel ako koncept? Používatelia tohto jazyka namiesto nej uvidia pravidlá v predvolenom jazyku fóra.',

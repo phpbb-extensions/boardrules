@@ -123,7 +123,8 @@ class rule_entity_load_test extends rule_entity_base
 	*/
 	public function test_load_fails($id)
 	{
-		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage('RULE_NOT_FOUND');
 
 		// Setup the entity class
 		$entity = $this->get_rule_entity();

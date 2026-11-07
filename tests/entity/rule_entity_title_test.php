@@ -93,7 +93,7 @@ class rule_entity_title_test extends rule_entity_base
 	*/
 	public function test_title_fails($title)
 	{
-		$this->expectException(\phpbb\boardrules\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
