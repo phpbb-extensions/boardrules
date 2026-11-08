@@ -106,7 +106,8 @@ class rule_operator_delete_rule_test extends rule_operator_base
 	*/
 	public function test_delete_rules_fails($rule_id)
 	{
-		$this->expectException(\phpbb\boardrules\exception\base::class);
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage('RULE_NOT_FOUND');
 
 		// Setup the operator class
 		$operator = $this->get_rule_operator();

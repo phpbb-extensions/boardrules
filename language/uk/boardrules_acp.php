@@ -119,6 +119,8 @@ $lang = array_merge($lang, array(
 		3 => '%d конфліктних якорів перейменовано з додаванням числових суфіксів.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Вибрану мову не встановлено.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Введений рядок містить некоректні символи.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Значення не унікальне.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Порожній набір правил не можна опублікувати або зробити чернеткою.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Опублікувати цей повний набір правил мови? Користувачі цієї мови побачать його негайно.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Зробити цей повний набір правил мови чернеткою? Користувачі цієї мови натомість побачать правила типовою мовою форуму.',

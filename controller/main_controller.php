@@ -103,7 +103,7 @@ class main_controller implements main_interface
 				$entities = $this->rule_operator->get_rules($this->config['default_lang']);
 			}
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\InvalidArgumentException $e)
 		{
 			throw new \phpbb\exception\http_exception(500, 'GENERAL_ERROR', array(), $e);
 		}

@@ -27,16 +27,16 @@ class rule_operator_save_rule_test extends rule_operator_base
 
 	public function test_save_rule_rejects_new_entity()
 	{
-		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
-		$this->expectExceptionMessage('rule_id');
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('RULE_NOT_INSERTED');
 
 		$this->get_rule_operator()->save_rule($this->entity_factory->create());
 	}
 
 	public function test_get_rule_rejects_unknown_id()
 	{
-		$this->expectException(\phpbb\boardrules\exception\out_of_bounds::class);
-		$this->expectExceptionMessage('rule_id');
+		$this->expectException(\OutOfBoundsException::class);
+		$this->expectExceptionMessage('RULE_NOT_FOUND');
 
 		$this->get_rule_operator()->get_rule(100);
 	}

@@ -100,7 +100,7 @@ class rule_entity_import_test extends rule_entity_base
 			$entity->import($data);
 			self::fail('Expected invalid_argument exception was not thrown.');
 		}
-		catch (\phpbb\boardrules\exception\invalid_argument $e)
+		catch (\InvalidArgumentException $e)
 		{
 			self::assertSame(1, $entity->get_id());
 			self::assertSame('anchor1', $entity->get_anchor());
@@ -170,12 +170,34 @@ class rule_entity_import_test extends rule_entity_base
 	*/
 	public function test_import_fail($data)
 	{
-		$this->expectException(\phpbb\boardrules\exception\base::class);
+		$this->expectException(\InvalidArgumentException::class);
 
 		// Setup the entity class
 		$entity = $this->get_rule_entity();
 
 		// Set the data
 		$entity->import($data);
+	}
+
+	public function test_import_missing_field_uses_symbolic_message()
+	{
+		$data = $this->get_import_data()[1];
+		unset($data['rule_title']);
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('RULE_FIELD_MISSING:rule_title');
+
+		$this->get_rule_entity()->import($data);
+	}
+
+	public function test_import_unsigned_field_uses_symbolic_message()
+	{
+		$data = $this->get_import_data()[1];
+		$data['rule_message_bbcode_options'] = -1;
+
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('RULE_FIELD_NOT_UNSIGNED:rule_message_bbcode_options');
+
+		$this->get_rule_entity()->import($data);
 	}
 }

@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d Anker mit Konflikten wurden mit numerischen Suffixen umbenannt.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Die ausgewählte Sprache ist nicht installiert.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Die Eingabe enthält für dieses Feld nicht zulässige Zeichen.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Uneindeutige Eingabe (Bezeichnung gegebenenfalls bereits vergeben).',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Ein leerer Regelsatz kann weder veröffentlicht noch als Entwurf festgelegt werden.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Diesen vollständigen Sprachregelsatz veröffentlichen? Benutzer dieser Sprache sehen ihn sofort.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Diesen vollständigen Sprachregelsatz als Entwurf festlegen? Benutzer dieser Sprache sehen stattdessen die Regeln in der Standardsprache des Forums.',

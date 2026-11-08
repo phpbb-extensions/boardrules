@@ -132,6 +132,8 @@ $lang = array_merge($lang, array(
 		6 => 'أُعيدت تسمية %d من المراسي المتعارضة باستخدام لواحق رقمية.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'اللغة المحددة غير مثبتة.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'البيانات التي أدخلتها تحتوي على حروف غير مقبولة.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'البيانات المُدخلة موجودة مُسبقاً.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'لا يمكن نشر مجموعة قوانين فارغة أو تغييرها إلى مسودة.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'هل تريد نشر مجموعة القوانين الكاملة لهذه اللغة؟ سيراها مستخدمو هذه اللغة فوراً.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'هل تريد تغيير مجموعة القوانين الكاملة لهذه اللغة إلى مسودة؟ سيرى مستخدمو هذه اللغة قوانين اللغة الافتراضية للمنتدى بدلاً منها.',

@@ -119,6 +119,8 @@ $lang = array_merge($lang, array(
 		3 => '%d ancore aflate în conflict au fost redenumite cu sufixe numerice.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Limba selectată nu este instalată.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Campurile contin caractere nepermise.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Campul nu este unic.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Un set de reguli gol nu poate fi publicat sau schimbat în ciornă.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publicați setul complet de reguli al acestei limbi? Utilizatorii acestei limbi îl vor vedea imediat.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Schimbați setul complet de reguli al acestei limbi în ciornă? Utilizatorii acestei limbi vor vedea în schimb regulile în limba implicită a forumului.',

@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d konfliktset ankrut nimetati ümber numbriliste järelliidetega.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Valitud keel pole paigaldatud.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Sisend sisaldab keelatuid sümboleid.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Sisend ei olnud unikaalne.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Tühja reeglistikku ei saa avaldada ega mustandiks muuta.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Kas avaldada selle keele täielik reeglistik? Selle keele kasutajad näevad seda kohe.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Kas muuta selle keele täielik reeglistik mustandiks? Selle keele kasutajad näevad selle asemel foorumi vaikekeele reegleid.',

@@ -78,7 +78,8 @@ class rule_entity_language_test extends rule_entity_base
 		// Assert that the anchor matches what's expected
 		if ($language !== 'en')
 		{
-			$this->expectException('\phpbb\boardrules\exception\unexpected_value');
+			$this->expectException(\InvalidArgumentException::class);
+			$this->expectExceptionMessage('ACP_BOARDRULES_INVALID_LANGUAGE');
 		}
 
 		// Set the anchor

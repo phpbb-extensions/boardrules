@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d ancoraggi in conflitto sono stati rinominati con suffissi numerici.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'La lingua selezionata non è installata.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'La voce contiene caratteri non validi.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'La voce non era unica.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Un set di regole vuoto non può essere pubblicato né impostato come bozza.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Pubblicare questo set completo di regole della lingua? Gli utenti di questa lingua lo vedranno immediatamente.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Impostare questo set completo di regole della lingua come bozza? Gli utenti di questa lingua vedranno invece le regole nella lingua predefinita della board.',

@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d conflicting anchors were renamed with numeric suffixes.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Selected language is not installed.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'The input contained illegal characters.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'The input was not unique.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'An empty ruleset cannot be published or changed to draft.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publish this complete language ruleset? Users of this language will see it immediately.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Change this complete language ruleset to draft? Users of this language will see rules from the board’s default language instead.',

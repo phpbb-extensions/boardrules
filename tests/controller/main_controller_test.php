@@ -31,7 +31,7 @@ class main_controller_test extends \phpbb_test_case
 		$rule_operator = $this->getMockBuilder(\phpbb\boardrules\operators\rule::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$domain_exception = new \phpbb\boardrules\exception\invalid_argument(array('rule_title', 'FIELD_MISSING'));
+		$domain_exception = new \InvalidArgumentException('RULE_FIELD_MISSING:rule_title');
 		$rule_operator->method('get_rules')->willThrowException($domain_exception);
 
 		$ruleset_operator = $this->getMockBuilder(\phpbb\boardrules\operators\ruleset::class)

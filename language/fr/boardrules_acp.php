@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d ancres en conflit ont été renommées avec des suffixes numériques.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'La langue sélectionnée n’est pas installée.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'La donnée contenait des caractères interdits.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'La donnée n’était pas unique.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'Un ensemble de règles vide ne peut être ni publié ni défini comme brouillon.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publier cet ensemble complet de règles linguistiques ? Les utilisateurs de cette langue le verront immédiatement.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Définir cet ensemble complet de règles linguistiques comme brouillon ? Les utilisateurs de cette langue verront à la place les règles dans la langue par défaut du forum.',

@@ -227,6 +227,7 @@ class admin_controller implements admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
+	* @throws \InvalidArgumentException If stored rule data is invalid
 	*/
 	public function display_rules($language, $parent_id = 0)
 	{
@@ -249,7 +250,7 @@ class admin_controller implements admin_interface
 			$entities = $this->rule_operator->get_rules($language, $parent_id);
 			$parent_entities = $this->rule_operator->get_rule_parents($language, $parent_id);
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\InvalidArgumentException $e)
 		{
 			$this->display_rule_error($e);
 			return;
@@ -513,6 +514,7 @@ class admin_controller implements admin_interface
 	* @param int $parent_id Category to display rules from; default: 0
 	* @return void
 	* @access public
+	* @throws \InvalidArgumentException If stored rule data is invalid
 	*/
 	public function add_rule($language, $parent_id = 0)
 	{
@@ -540,7 +542,7 @@ class admin_controller implements admin_interface
 		{
 			$this->add_edit_rule_data($entity, $data);
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\InvalidArgumentException $e)
 		{
 			$this->display_rule_error($e);
 			return;
@@ -561,6 +563,7 @@ class admin_controller implements admin_interface
 	* @param int $rule_id The rule identifier to edit
 	* @return void
 	* @access public
+	* @throws \InvalidArgumentException If stored rule data is invalid
 	*/
 	public function edit_rule($rule_id)
 	{
@@ -571,7 +574,7 @@ class admin_controller implements admin_interface
 		{
 			$entity = $this->load_rule($rule_id);
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\OutOfBoundsException|\InvalidArgumentException $e)
 		{
 			$this->display_rule_error($e);
 			return;
@@ -594,7 +597,7 @@ class admin_controller implements admin_interface
 		{
 			$this->add_edit_rule_data($entity, $data);
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\InvalidArgumentException $e)
 		{
 			$this->display_rule_error($e);
 			return;
@@ -617,7 +620,7 @@ class admin_controller implements admin_interface
 	* @param array $data The form data to be processed
 	* @return void
 	* @access protected
-	* @throws \phpbb\boardrules\exception\base If stored rule data is invalid
+	* @throws \InvalidArgumentException If stored rule data is invalid
 	*/
 	protected function add_edit_rule_data($entity, $data)
 	{
@@ -653,6 +656,12 @@ class admin_controller implements admin_interface
 			'anchor'	=> $data['rule_anchor'],
 			'message'	=> $data['rule_message'],
 		);
+		$field_labels = array(
+			'language'	=> 'ACP_BOARDRULES_LANGUAGE',
+			'title'		=> 'ACP_RULE_TITLE',
+			'anchor'	=> 'ACP_RULE_ANCHOR',
+			'message'	=> 'ACP_RULE_MESSAGE',
+		);
 
 		// Set the rule's data in the entity
 		foreach ($rule_fields as $entity_function => $rule_data)
@@ -661,10 +670,10 @@ class admin_controller implements admin_interface
 			{
 				$entity->{'set_' . $entity_function}($rule_data);
 			}
-			catch (\phpbb\boardrules\exception\base $e)
+			catch (\InvalidArgumentException $e)
 			{
 				// Catch exceptions and add them to errors array
-				$errors[] = $e->get_message($this->lang);
+				$errors[] = $this->lang->lang($field_labels[$entity_function]) . $this->lang->lang('COLON') . ' ' . $this->lang->lang($e->getMessage());
 			}
 		}
 
@@ -704,7 +713,14 @@ class admin_controller implements admin_interface
 			if ($entity->get_id())
 			{
 				// Save the edited rule entity to the database
-				$entity = $this->rule_operator->save_rule($entity);
+				try
+				{
+					$entity = $this->rule_operator->save_rule($entity);
+				}
+				catch (\LogicException|\OutOfBoundsException|\InvalidArgumentException $e)
+				{
+					$this->display_rule_error($e);
+				}
 
 				// Change rule parent
 				if (isset($data['rule_parent_id']) && ($entity->get_parent_id() !== (int) $data['rule_parent_id']))
@@ -712,6 +728,10 @@ class admin_controller implements admin_interface
 					try
 					{
 						$this->rule_operator->change_parent($entity->get_id(), $data['rule_parent_id']);
+					}
+					catch (\OutOfBoundsException $e)
+					{
+						trigger_error($this->get_rule_error_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 					}
 					catch (\InvalidArgumentException|\RuntimeException $e)
 					{
@@ -728,6 +748,13 @@ class admin_controller implements admin_interface
 				try
 				{
 					$this->rule_operator->add_rule($entity, $data['rule_language'], $data['rule_parent_id']);
+				}
+				catch (\OutOfBoundsException|\LogicException $e)
+				{
+					$message = $e instanceof \OutOfBoundsException
+						? $this->get_rule_error_message($e)
+						: $this->lang->lang('RULES_NESTEDSET_INVALID_ITEM');
+					trigger_error($message . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 				catch (\InvalidArgumentException|\RuntimeException $e)
 				{
@@ -760,13 +787,11 @@ class admin_controller implements admin_interface
 			'BBCODE_STATUS'			=> $this->lang->lang('BBCODE_IS_ON', '<a href="' . $this->controller_helper->route('phpbb_help_bbcode_controller') . '">', '</a>'),
 			'SMILIES_STATUS'		=> $this->lang->lang('SMILIES_ARE_ON'),
 			'IMG_STATUS'			=> $this->lang->lang('IMAGES_ARE_ON'),
-			'FLASH_STATUS'			=> $this->lang->lang('FLASH_IS_ON'),
 			'URL_STATUS'			=> $this->lang->lang('URL_IS_ON'),
 
 			'S_BBCODE_ALLOWED'		=> true,
 			'S_SMILIES_ALLOWED'		=> true,
 			'S_BBCODE_IMG'			=> true,
-			'S_BBCODE_FLASH'		=> true,
 			'S_LINKS_ALLOWED'		=> true,
 		));
 
@@ -789,7 +814,7 @@ class admin_controller implements admin_interface
 		{
 			$entity = $this->load_rule($rule_id);
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\OutOfBoundsException|\InvalidArgumentException $e)
 		{
 			$this->display_rule_error($e);
 			return;
@@ -803,10 +828,9 @@ class admin_controller implements admin_interface
 			{
 				$this->rule_operator->delete_rule($rule_id);
 			}
-			catch (\phpbb\boardrules\exception\base $e)
+			catch (\OutOfBoundsException $e)
 			{
-				$this->display_rule_error($e);
-				return;
+				trigger_error($this->get_rule_error_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 			catch (\Exception $e)
 			{
@@ -858,10 +882,9 @@ class admin_controller implements admin_interface
 		{
 			$moved = $this->rule_operator->move($rule_id, $direction, $amount);
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\OutOfBoundsException $e)
 		{
-			$this->display_rule_error($e);
-			return;
+			trigger_error($this->get_rule_error_message($e) . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 		catch (\Exception $e)
 		{
@@ -880,7 +903,7 @@ class admin_controller implements admin_interface
 		{
 			$entity = $this->load_rule($rule_id);
 		}
-		catch (\phpbb\boardrules\exception\base $e)
+		catch (\OutOfBoundsException|\InvalidArgumentException $e)
 		{
 			$this->display_rule_error($e);
 			return;
@@ -945,7 +968,8 @@ class admin_controller implements admin_interface
 	 *
 	 * @param int $rule_id Rule identifier
 	 * @return \phpbb\boardrules\entity\rule_interface
-	 * @throws \phpbb\boardrules\exception\base If the rule is missing or stored data is invalid
+	 * @throws \OutOfBoundsException If the rule is missing
+	 * @throws \InvalidArgumentException If stored rule data is invalid
 	 */
 	protected function load_rule($rule_id)
 	{
@@ -955,12 +979,31 @@ class admin_controller implements admin_interface
 	/**
 	 * Display a translated entity or operator failure in the ACP.
 	 *
-	 * @param \phpbb\boardrules\exception\base $exception
+	 * @param \Throwable $exception
 	 * @return void
 	 */
-	protected function display_rule_error(\phpbb\boardrules\exception\base $exception)
+	protected function display_rule_error(\Throwable $exception)
 	{
-		trigger_error($exception->get_message($this->lang) . adm_back_link($this->u_action), E_USER_WARNING);
+		$message = $exception instanceof \OutOfBoundsException
+			? $this->get_rule_error_message($exception)
+			: $this->lang->lang('RULES_NESTEDSET_INVALID_ITEM');
+
+		trigger_error($message . adm_back_link($this->u_action), E_USER_WARNING);
+	}
+
+	/**
+	 * Translate a rule lookup or parent validation failure for ACP output.
+	 *
+	 * @param \OutOfBoundsException $exception
+	 * @return string
+	 */
+	protected function get_rule_error_message(\OutOfBoundsException $exception)
+	{
+		$key = $exception->getMessage() === 'RULE_PARENT_INVALID'
+			? 'RULES_NESTEDSET_INVALID_PARENT'
+			: 'RULES_NESTEDSET_INVALID_ITEM';
+
+		return $this->lang->lang($key);
 	}
 
 	/**
@@ -1040,7 +1083,7 @@ class admin_controller implements admin_interface
 	 * @param int $parent_id Category to display rules from; default: 0
 	 * @return void
 	 * @access protected
-	 * @throws \phpbb\boardrules\exception\base If stored rule data is invalid
+	 * @throws \InvalidArgumentException If stored rule data is invalid
 	 */
 	protected function build_parent_select_menu($entity, $parent_id = 0)
 	{

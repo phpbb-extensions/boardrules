@@ -116,6 +116,8 @@ $lang = array_merge($lang, array(
 		2 => '%d ankare med konflikter döptes om med numeriska suffix.',
 	),
 	'ACP_BOARDRULES_INVALID_LANGUAGE'		=> 'Det valda språket är inte installerat.',
+	'ACP_BOARDRULES_VALIDATION_INVALID_CHARACTERS' => 'Inmatningen innehöll otillåtna tecken.',
+	'ACP_BOARDRULES_VALIDATION_NOT_UNIQUE'	=> 'Inmatningen var ej unik.',
 	'ACP_BOARDRULES_STATUS_CHANGE_EMPTY'	=> 'En tom regeluppsättning kan inte publiceras eller anges som utkast.',
 	'ACP_BOARDRULES_PUBLISH_CONFIRM'		=> 'Publicera hela denna regeluppsättning? Användare av detta språk ser den omedelbart.',
 	'ACP_BOARDRULES_DRAFT_CONFIRM'			=> 'Ändra hela denna regeluppsättning till utkast? Användare av detta språk ser i stället reglerna på forumets standardspråk.',
