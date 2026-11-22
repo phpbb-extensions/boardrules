@@ -12,13 +12,15 @@
 
 {% if S_ADD_RULE %}
 	<h1>{{ lang('ACP_BOARDRULES_CREATE_RULE') }}{% if RULE_TITLE %} :: {{ RULE_TITLE }}{% endif %}</h1>
-
-	<p>{{ lang('ACP_BOARDRULES_CREATE_RULE_EXPLAIN') }}</p>
 {% else %}
 	<h1>{{ lang('ACP_BOARDRULES_EDIT_RULE') }} :: {{ RULE_TITLE }}</h1>
-
-	<p>{{ lang('ACP_BOARDRULES_EDIT_RULE_EXPLAIN') }}</p>
 {% endif %}
+
+{% if CURRENT_LANGUAGE %}
+	<p id="boardrules-current-language"><strong>{{ lang('ACP_BOARDRULES_LANGUAGE') ~ lang('COLON') }}</strong> <bdi>{{ CURRENT_LANGUAGE }}</bdi></p>
+{% endif %}
+
+<p>{{ lang(S_ADD_RULE ? 'ACP_BOARDRULES_CREATE_RULE_EXPLAIN' : 'ACP_BOARDRULES_EDIT_RULE_EXPLAIN') }}</p>
 
 {% if S_ERROR %}
 <div class="errorbox">
