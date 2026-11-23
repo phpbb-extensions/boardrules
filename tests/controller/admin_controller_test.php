@@ -889,11 +889,11 @@ class admin_controller_test extends \phpbb_database_test_case
 	public function test_move_rule_returns_success_for_ajax_request(): void
 	{
 		$this->ajax = true;
-		\phpbb\json_response::$data = null;
+		json_response_test_double::reset();
 
 		$this->controller->move_rule(2, 'down');
 
-		self::assertSame(array('success' => true), \phpbb\json_response::$data);
+		self::assertSame(array('success' => true), json_response_test_double::get_data());
 	}
 
 	public function test_move_rule_reports_operator_failure(): void
