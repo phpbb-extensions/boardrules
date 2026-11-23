@@ -135,7 +135,16 @@ class admin_controller_test extends boardrules_functional_base
 		// Jump to the create page
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 		$crawler = self::submit($form);
-		$this->assertContainsLang('ACP_BOARDRULES_CREATE_RULE', $crawler->filter('#main h1')->text());
+		self::assertSame($this->lang('ACP_BOARDRULES_CREATE_RULE'), $crawler->filter('#main h1')->text());
+		self::assertSame('Language: British English', $crawler->filter('#main h1 + #boardrules-current-language')->text());
+
+		$form = $crawler->selectButton($this->lang('PREVIEW'))->form(array(
+			'rule_title'	=> 'Preview Rule',
+			'rule_message'	=> 'Rule preview text',
+		));
+		$crawler = self::submit($form);
+		self::assertSame($this->lang('ACP_BOARDRULES_CREATE_RULE') . ' :: Preview Rule', $crawler->filter('#main h1')->text());
+		self::assertSame('Language: British English', $crawler->filter('#main h1 + #boardrules-current-language')->text());
 
 		// Reject an anchor containing a four-byte character without reaching SQL
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form(array(
@@ -146,6 +155,8 @@ class admin_controller_test extends boardrules_functional_base
 		$crawler = self::submit($form);
 		self::assertCount(1, $crawler->filter('.errorbox'));
 		self::assertCount(0, $crawler->filter('.successbox'));
+		self::assertSame($this->lang('ACP_BOARDRULES_CREATE_RULE') . ' :: Invalid Anchor Rule', $crawler->filter('#main h1')->text());
+		self::assertSame('Language: British English', $crawler->filter('#main h1 + #boardrules-current-language')->text());
 
 		// Submit valid rule data
 		$rule_title = 'Test 😀 中文 Кириллица Rule';
@@ -186,7 +197,9 @@ class admin_controller_test extends boardrules_functional_base
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=en&action=edit&rule_id=3&sid={$this->sid}");
 
 		// Assert edit page is displayed
-		$this->assertContainsLang('ACP_BOARDRULES_EDIT_RULE', $crawler->filter('#main')->text());
+		$rule_title = $crawler->filter('#rule_title')->attr('value');
+		self::assertSame($this->lang('ACP_BOARDRULES_EDIT_RULE') . ' :: ' . $rule_title, $crawler->filter('#main h1')->text());
+		self::assertSame('Language: British English', $crawler->filter('#main h1 + #boardrules-current-language')->text());
 		$this->assertContainsLang('ACP_BOARDRULES_EDIT_RULE_EXPLAIN', $crawler->filter('#main')->text());
 	}
 
@@ -439,6 +452,15 @@ class admin_controller_test extends boardrules_functional_base
 		$copied_category_id = (int) $this->db->sql_fetchfield('rule_id');
 		$this->db->sql_freeresult($result);
 		self::assertGreaterThan(0, $copied_category_id);
+
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=fr&action=add&parent_id={$copied_category_id}&sid={$this->sid}");
+		self::assertSame($this->lang('ACP_BOARDRULES_CREATE_RULE'), $crawler->filter('#main h1')->text());
+		self::assertSame('Language: Français', $crawler->filter('#main h1 + #boardrules-current-language')->text());
+
+		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&action=edit&rule_id={$copied_category_id}&sid={$this->sid}");
+		$category_title = $crawler->filter('#rule_title')->attr('value');
+		self::assertSame($this->lang('ACP_BOARDRULES_EDIT_RULE') . ' :: ' . $category_title, $crawler->filter('#main h1')->text());
+		self::assertSame('Language: Français', $crawler->filter('#main h1 + #boardrules-current-language')->text());
 
 		$crawler = self::request('GET', "adm/index.php?i=\\phpbb\\boardrules\\acp\\boardrules_module&mode=manage&language=fr&action=delete&rule_id={$copied_category_id}&sid={$this->sid}");
 		$form = $crawler->selectButton('confirm')->form();

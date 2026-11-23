@@ -746,6 +746,7 @@ class admin_controller implements admin_interface
 		$this->build_parent_select_menu($entity, $data['rule_parent_id']);
 
 		$s_errors = (bool) count($errors);
+		$current_language = $this->find_language($this->ruleset_operator->get_languages(), $data['rule_language']);
 
 		// Set output vars for display in the template
 		$this->template->assign_vars(array(
@@ -755,6 +756,8 @@ class admin_controller implements admin_interface
 			'RULE_TITLE'		=> $entity->get_title(),
 			'RULE_ANCHOR'		=> $entity->get_anchor(),
 			'RULE_MESSAGE'		=> $entity->get_message_for_edit(),
+
+			'CURRENT_LANGUAGE'	=> htmlspecialchars($current_language['lang_local_name'] ?? $data['rule_language'], ENT_QUOTES, 'UTF-8', false),
 
 			'S_BBCODE_DISABLE_CHECKED'		=> !$entity->message_bbcode_enabled(),
 			'S_SMILIES_DISABLE_CHECKED'		=> !$entity->message_smilies_enabled(),
